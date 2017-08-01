@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="yanjiadong|http://yanjiadong.net">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="renderer" content="webkit">
+    <!--[if gt IE 8]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <![endif]-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <title>{{ config('app.name') }}</title>
+    <link rel="icon" type="image/ico" href="/admin/assets/img/favicon.ico"/>
+    <link href="/admin/assets/css/stylesheets.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 8]>
+    <link href="/admin/assets/css/ie7.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <link href="/admin/assets/css/impromptu.css" rel="stylesheet" type="text/css" />
+    <link href="/admin/assets/css/sticky.full.css" rel="stylesheet" type="text/css" />
+
+    <script type='text/javascript' src="/admin/assets/js/plugins/jquery/jquery-1.10.2.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/jquery/jquery-ui-1.10.1.custom.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/jquery/jquery.mousewheel.min.js"></script>
+
+    <script type='text/javascript' src="/admin/assets/js/plugins/cookie/jquery.cookies.2.2.0.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/bootstrap.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/sparklines/jquery.sparkline.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/select2/select2.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/uniform/uniform.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/maskedinput/jquery.maskedinput-1.3.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/validation/languages/jquery.validationEngine-zh_CN.js" charset='utf-8'></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/validation/jquery.validationEngine.js" charset='utf-8'></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/animatedprogressbar/animated_progressbar.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/cleditor/jquery.cleditor.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/dataTables/jquery.dataTables.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/fancybox/jquery.fancybox.pack.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/pnotify/jquery.pnotify.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/ibutton/jquery.ibutton.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins/scrollup/jquery.scrollUp.min.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/jquery.confirm.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/impromptu.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/sticky.full.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/cookies.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/actions.js"></script>
+    <script type='text/javascript' src="/admin/assets/js/plugins.js"></script>
+    <script type='text/javascript' src='/admin/assets/js/jquery.tagsinput.min.js'></script>
+    <script src="/admin/assets/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    {{--@include('admin.shared.message')--}}
+    <div class="header">
+        <a class="logo" href=""><img src="/admin/assets/img/logozi.png" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"/></a>
+        <ul class="header_menu">
+            <li class="list_icon"><a href="#">&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+
+        <div class="breadLine">
+            <div class="arrow"></div>
+            <div class="adminControl active">
+                您好，{{ $username }}
+            </div>
+        </div>
+
+        <div class="admin" style="display: block;">
+            <div class="image">
+                <img src="/admin/assets/img/logo2.png" class="img-polaroid"/>
+            </div>
+            <ul class="control">
+                <li><span class="icon-cog"></span><a href="{{ url('admin/setting') }}">设置</a></li>
+                <li><span class="icon-share-alt"></span><a href="javascript:;" id="logout">退出</a></li>
+                <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </ul>
+            <!--
+            <div class="info">
+                <span>欢迎回来! 你最后一次访问时间: 2014-12-14 19:55:55</span>
+            </div>
+            -->
+        </div>
+
+        <ul class="navigation">
+
+            <li class="<?php echo (isset($menu) && ($menu == 'main')) ? 'active' : '';?>">
+                <a href="/admin/main">
+                    <span class="isw-user"></span><span class="text">欢迎界面</span>
+                </a>
+            </li>
+
+            <li class="openable <?php echo (isset($menu) && ($menu == 'user')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">用户管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/admin/user/daiyanList">
+                            <span class="icon-th-list"></span><span class="text">代言人列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </div>
+
+    <div class="content">
+        @yield('content')
+    </div>
+</div>
+<script type="text/javascript" src="/admin/assets/js/tip.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#logout").click(function (e) {
+            e.preventDefault();
+
+            $("#logout-form").submit();
+        });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script>
+</body>
+</html>
