@@ -30,6 +30,14 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::get('setting','IndexController@setting')->name('admin.index.setting');
     Route::post('setting','IndexController@update_setting');
 
+    Route::resource('categorys', 'CategoryController');
+
+    Route::resource('tags', 'TagController');
+    Route::resource('goods', 'GoodController');
+    Route::resource('category_tags', 'CategoryTagController');
+    Route::post('category_tags/get_tags_by_id','CategoryTagController@get_tags_by_id');
+
+    Route::post('upload/{size?}','CommonController@upload');
     //test
     Route::get('test','LoginController@test');
 });

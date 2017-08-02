@@ -50,12 +50,18 @@
     <script type='text/javascript' src="/admin/assets/js/plugins.js"></script>
     <script type='text/javascript' src='/admin/assets/js/jquery.tagsinput.min.js'></script>
     <script src="/admin/assets/My97DatePicker/WdatePicker.js"></script>
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 </head>
 <body>
 <div class="wrapper">
     {{--@include('admin.shared.message')--}}
     <div class="header">
-        <a class="logo" href=""><img src="/admin/assets/img/logozi.png" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"/></a>
+        <a class="logo" href=""><img src="/admin/assets/img/logo.jpg" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"/></a>
         <ul class="header_menu">
             <li class="list_icon"><a href="#">&nbsp;</a></li>
         </ul>
@@ -96,19 +102,49 @@
                 </a>
             </li>
 
-            <li class="openable <?php echo (isset($menu) && ($menu == 'user')) ? 'active' : '';?>">
+            <li class="openable <?php echo (isset($menu) && ($menu == 'category')) ? 'active' : '';?>">
                 <a href="javascript:;">
-                    <span class="isw-list"></span><span class="text">用户管理</span>
+                    <span class="isw-list"></span><span class="text">分类管理</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="/admin/user/daiyanList">
-                            <span class="icon-th-list"></span><span class="text">代言人列表</span>
+                        <a href="{{ route('categorys.index') }}">
+                            <span class="icon-th-list"></span><span class="text">分类列表</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'tag')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">标签管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('category_tags.index') }}">
+                            <span class="icon-th-list"></span><span class="text">适合年龄列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('tags.index') }}">
+                            <span class="icon-th-list"></span><span class="text">商品标签列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="openable <?php echo (isset($menu) && ($menu == 'good')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">商品管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('goods.index') }}">
+                            <span class="icon-th-list"></span><span class="text">商品列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
         </ul>
     </div>
