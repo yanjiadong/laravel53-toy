@@ -31,6 +31,7 @@ class CreateGoodsTable extends Migration
             $table->tinyInteger('is_new')->default(0)->comment('是否新品');
             $table->tinyInteger('is_hot')->default(0)->comment('是否热门');
             $table->tinyInteger('status')->default(1)->comment('1=上架 2=下架');
+            $table->integer('sort')->default(100)->comment('排序编号');
             $table->timestamps();
         });
     }

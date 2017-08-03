@@ -102,6 +102,19 @@
                 </a>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'banner')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">Banner管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('banners.index') }}">
+                            <span class="icon-th-list"></span><span class="text">Banner列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="openable <?php echo (isset($menu) && ($menu == 'category')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">分类管理</span>
@@ -135,12 +148,12 @@
 
             <li class="openable <?php echo (isset($menu) && ($menu == 'good')) ? 'active' : '';?>">
                 <a href="javascript:;">
-                    <span class="isw-list"></span><span class="text">商品管理</span>
+                    <span class="isw-list"></span><span class="text">玩具管理</span>
                 </a>
                 <ul>
                     <li>
                         <a href="{{ route('goods.index') }}">
-                            <span class="icon-th-list"></span><span class="text">商品列表</span>
+                            <span class="icon-th-list"></span><span class="text">玩具列表</span>
                         </a>
                     </li>
                 </ul>

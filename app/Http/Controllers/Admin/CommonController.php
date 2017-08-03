@@ -44,6 +44,6 @@ class CommonController extends BaseController
         }
 
         $img_url= 'http://'.config('filesystems.disks.qiniu.domain').'/'.$filename_qiniu;
-        echo json_encode(array('success'=>1,'url'=>$img_url,'path'=>$img_url));
+        echo json_encode(array('success'=>1,'url'=>$img_url,'path'=>$img_url,'status'=>1));
     }
 }

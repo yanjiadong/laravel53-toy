@@ -33,9 +33,14 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::resource('categorys', 'CategoryController');
 
     Route::resource('tags', 'TagController');
+
     Route::resource('goods', 'GoodController');
+    Route::post('goods/action','GoodController@action')->name('goods.action');
+
     Route::resource('category_tags', 'CategoryTagController');
     Route::post('category_tags/get_tags_by_id','CategoryTagController@get_tags_by_id');
+
+    Route::resource('banners', 'BannerController');
 
     Route::post('upload/{size?}','CommonController@upload');
     //test

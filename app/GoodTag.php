@@ -8,4 +8,6 @@ class GoodTag extends Model
 {
     protected $table = 'good_tags';
     protected $fillable = ['good_id','tag_id'];
+
+    public $timestamps = false;
 }
