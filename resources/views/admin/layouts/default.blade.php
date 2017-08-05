@@ -159,6 +159,19 @@
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'dictionary')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">字典管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('admin.areas.province') }}">
+                            <span class="icon-th-list"></span><span class="text">区域列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
     </div>
 

@@ -1,7 +1,7 @@
 <?php
 if(!function_exists('alert'))
 {
-    function alert($params, $status)
+    function alert($params, $status = 0)
     {
         if($status)
         {
@@ -31,6 +31,8 @@ if(!function_exists('alert'))
             }
         }
 
-        return response()->json($data);
+        echo json_encode($data);
+        exit;
+        //return response()->json($data);
     }
 }
