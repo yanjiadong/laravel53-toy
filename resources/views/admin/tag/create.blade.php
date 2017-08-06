@@ -4,8 +4,8 @@
     <div class="breadLine">
         <ul class="breadcrumb">
             <li><a href="javascript:;">标签管理</a> <span class="divider">></span></li>
-            <li><a href="{{ route('tags.index') }}">商品标签列表</a> <span class="divider">></span></li>
-            <li class="active">添加商品标签</li>
+            <li><a href="{{ route('tags.index') }}">玩具标签列表</a> <span class="divider">></span></li>
+            <li class="active">添加玩具标签</li>
         </ul>
     </div>
 

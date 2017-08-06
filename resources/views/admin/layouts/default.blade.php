@@ -140,7 +140,7 @@
                     </li>
                     <li>
                         <a href="{{ route('tags.index') }}">
-                            <span class="icon-th-list"></span><span class="text">商品标签列表</span>
+                            <span class="icon-th-list"></span><span class="text">玩具标签列表</span>
                         </a>
                     </li>
                 </ul>
@@ -154,6 +154,19 @@
                     <li>
                         <a href="{{ route('goods.index') }}">
                             <span class="icon-th-list"></span><span class="text">玩具列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="openable <?php echo (isset($menu) && ($menu == 'activity')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">活动管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('activitys.index') }}">
+                            <span class="icon-th-list"></span><span class="text">活动列表</span>
                         </a>
                     </li>
                 </ul>
