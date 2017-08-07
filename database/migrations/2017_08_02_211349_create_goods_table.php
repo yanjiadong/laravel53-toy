@@ -28,6 +28,7 @@ class CreateGoodsTable extends Migration
             $table->text('desc')->comment('商品描述');
             $table->integer('store')->default(0)->comment('库存');
             $table->string('picture',255)->default('')->comment('封面图');
+            $table->string('video',255)->default('')->comment('视频地址');
             $table->tinyInteger('is_new')->default(0)->comment('是否新品');
             $table->tinyInteger('is_hot')->default(0)->comment('是否热门');
             $table->tinyInteger('status')->default(1)->comment('1=上架 2=下架');

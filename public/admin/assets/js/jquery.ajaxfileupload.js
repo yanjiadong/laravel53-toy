@@ -32,7 +32,7 @@
           onStart: function() { console.log('starting upload'); console.log(this); },
           onComplete: function(response) { console.log('got response: '); console.log(response); console.log(this); },
           onCancel: function() { console.log('cancelling: '); console.log(this); },
-          valid_extensions : ['gif','png','jpg','jpeg','zip','pdf','rar','doc','docx'],
+          valid_extensions : ['gif','png','jpg','jpeg','zip','pdf','rar','doc','docx','mp4'],
           submit_button : null
         };
         var uploading_file = false;

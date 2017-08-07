@@ -62,6 +62,24 @@
                         </div>
 
                         <div class="row-form clearfix">
+                            <div class="span3">视频地址：</div>
+                            <div class="span9">
+                                <input type="file" class="userfile" id="video-upload" value="上传视频" name="userfile" accept="video/mp4">
+                                <br/>
+                                <img src="/admin/assets/img/loading.gif"  id="loading" style="display:none;margin-top:10px;height: 150px;width:150px;" />
+                                <input type="text" value="{{$good->video}}"  id="video" readonly>
+                                <br/>
+                                <span>仅支持MP4格式的视频文件</span>
+                                <br/>
+                                <div id="video-show">
+                                    <video width="320" height="240" controls id="video-play">
+                                        <source src="{{$good->video}}" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-form clearfix">
                             <div class="span3">封面图：</div>
                             <div class="span9">
                                 <input type="file" class="userfile" id="upload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
@@ -249,6 +267,29 @@
                 });
             });
 
+            $("#video-upload").uniform();
+            $("#video-upload").ajaxfileupload({
+                'action': '{{ url('admin/upload') }}',
+                'params': {
+                    '_token': Laravel.csrfToken
+                },
+                'onComplete': function(data) {
+                    if (data.success == 1) {
+                        $("#video-show").show();
+                        $('#video').val(data.path);
+                        $('#video-play').attr('src',data.path);
+                    } else {
+
+                    }
+                    $("#loading").hide();
+                },
+                'onStart': function() {
+                    $("#loading").show();
+                },
+                'onCancel': function() {
+                }
+            });
+
             $("#upload").uniform();
             $("#upload").ajaxfileupload({
                 'action': '{{ url('admin/upload',['size'=>'160,160']) }}',
@@ -291,6 +332,7 @@
                     var category_tag_id = $("#category_tag_id").val();
                     var price = $("#price").val();
                     var picture = $("#uploadPath").val();
+                    var video = $("#video").val();
                     var brand = $("#brand").val();
                     var brand_country = $("#brand_country").val();
                     var material = $("#material").val();
@@ -306,7 +348,7 @@
                     var _method = 'PUT';
 
                     $.post(url,
-                        {_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,category_tag_id:category_tag_id,price:price,picture:picture,brand:brand,
+                        {video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,category_tag_id:category_tag_id,price:price,picture:picture,brand:brand,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc},
                         function(data){
                             cTip(data);
