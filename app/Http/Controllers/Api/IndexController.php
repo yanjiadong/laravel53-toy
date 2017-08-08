@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Area;
 use App\Banner;
 use App\Category;
 use App\Good;
@@ -108,4 +109,12 @@ class IndexController extends BaseController
         $this->ret = ['code'=>300,'msg'=>'请输入正确的手机号或验证码'];
         return $this->ret;
     }
+
+    public function get_area($fid = 0)
+    {
+        $areas = Area::where(['fid'=>$fid])->get();
+        $this->ret['info'] = $areas;
+        return $this->ret;
+    }
+
 }

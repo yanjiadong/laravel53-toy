@@ -24,4 +24,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/index/get_telephone_code','IndexController@get_telephone_code');
     //验证手机验证码
     Route::post('/index/bind_telephone','IndexController@bind_telephone');
+
+    //获取省市区
+    Route::get('/index/get_area/{fid?}','IndexController@get_area');
 });

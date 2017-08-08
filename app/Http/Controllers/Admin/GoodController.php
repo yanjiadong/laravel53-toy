@@ -166,7 +166,7 @@ class GoodController extends BaseController
             $pics_arr = explode(',',$pics);
             foreach ($pics_arr as $picture)
             {
-                GoodPicture::create(['good_id'=>$good->id,'picture'=>$picture]);
+                GoodPicture::create(['good_id'=>$id,'picture'=>$picture]);
             }
         }
 
@@ -175,7 +175,7 @@ class GoodController extends BaseController
         {
             foreach ($tags as $tag)
             {
-                GoodTag::create(['good_id'=>$good->id,'tag_id'=>$tag]);
+                GoodTag::create(['good_id'=>$id,'tag_id'=>$tag]);
             }
         }
 

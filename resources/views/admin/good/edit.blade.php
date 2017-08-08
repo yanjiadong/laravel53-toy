@@ -66,7 +66,7 @@
                             <div class="span9">
                                 <input type="file" class="userfile" id="video-upload" value="上传视频" name="userfile" accept="video/mp4">
                                 <br/>
-                                <img src="/admin/assets/img/loading.gif"  id="loading" style="display:none;margin-top:10px;height: 150px;width:150px;" />
+                                <img src="/admin/assets/img/loading.gif"  id="loading2" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <input type="text" value="{{$good->video}}"  id="video" readonly>
                                 <br/>
                                 <span>仅支持MP4格式的视频文件</span>
@@ -281,10 +281,10 @@
                     } else {
 
                     }
-                    $("#loading").hide();
+                    $("#loading2").hide();
                 },
                 'onStart': function() {
-                    $("#loading").show();
+                    $("#loading2").show();
                 },
                 'onCancel': function() {
                 }
