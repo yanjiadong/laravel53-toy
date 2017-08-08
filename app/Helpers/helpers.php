@@ -36,3 +36,17 @@ if(!function_exists('alert'))
         //return response()->json($data);
     }
 }
+
+if(!function_exists('isMobile'))
+{
+    function isMobile($telephone)
+    {
+        $pattern = "/^[0-9]{11,12}$/";
+
+        if (!empty($telephone) && preg_match($pattern, $telephone))
+        {
+            return true;
+        }
+        return false;
+    }
+}

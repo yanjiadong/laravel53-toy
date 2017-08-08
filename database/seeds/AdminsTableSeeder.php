@@ -12,7 +12,7 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'name'=>'admin',
+            'username'=>'admin',
             'password'=>Crypt::encrypt('111111'),
             'salt'=>'',
             'status'=>1

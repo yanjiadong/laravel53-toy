@@ -18,6 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('telephone',11)->default('')->comment('手机号');
+            $table->tinyInteger('status')->default(1)->comment('状态 1=激活 2=禁用');
+            $table->tinyInteger('is_vip')->default(0)->comment('状态 1=是 0=否');
+            $table->string('wechat_openid',255)->default('')->comment('微信openid');
+            $table->string('wechat_nickname',255)->default('')->comment('微信nickname');
+            $table->string('wechat_avatar',512)->default('')->comment('微信avatar');
+            $table->text('wechat_original',512)->comment('微信原始数据');
+            $table->integer('recommend_id')->default(0)->comment('推荐人id');
             $table->rememberToken();
             $table->timestamps();
         });
