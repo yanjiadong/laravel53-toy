@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Activity;
 use App\Area;
 use App\Banner;
 use App\Category;
+use App\CategoryTag;
 use App\Good;
 use App\TelephoneCode;
 use App\User;
@@ -24,8 +26,27 @@ class IndexController extends BaseController
         $banners = Banner::all();
         $new_goods = Good::with(['category_tag'])->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->first();
         $goods = Good::with(['category_tag'])->limit(4)->get();
+        $activities = Activity::where('type',1)->get();
 
-        return ['code'=>200,'msg'=>['categorys'=>$categorys,'banners'=>$banners,'new_goods'=>$new_goods,'goods'=>$goods]];
+        $this->ret['info'] = ['categorys'=>$categorys,'banners'=>$banners,'new_goods'=>$new_goods,'goods'=>$goods,'activities'=>$activities];
+        return $this->ret;
+    }
+
+    public function category($category_id,$tag_id)
+    {
+        $category = Category::find($category_id);
+        $categorys = Category::all();
+        $category_tags = CategoryTag::where('category_id',$category_id)->get();
+
+        if(!empty($tag_id))
+        {
+            $where['category_tag_id'] = $tag_id;
+        }
+        $where['category_id'] = $category_id;
+
+        $goods = Good::where($where)->get();
+        $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'category_tags'=>$category_tags,'goods'=>$goods];
+        return $this->ret;
     }
 
     public function get_telephone_code(Request $request)
@@ -41,7 +62,7 @@ class IndexController extends BaseController
         $end_time = date('Y-m-d 23:59:59');
 
         $count = TelephoneCode::where('created_at','>=',$start_time)->where('created_at','<=',$end_time)->where('telephone',$telephone)->count();
-        if($count>=env('DAY_SMS_COUNT'))
+        if($count>=config('day_sms_count'))
         {
             $this->ret = ['code'=>300,'msg'=>'今日获取验证码次数已达上限,请明日再试'];
             return $this->ret;
@@ -115,6 +136,12 @@ class IndexController extends BaseController
         $areas = Area::where(['fid'=>$fid])->get();
         $this->ret['info'] = $areas;
         return $this->ret;
+    }
+
+    public function test()
+    {
+        $result = get_express_info('yunda','3805420027268');
+        echo $result;
     }
 
 }

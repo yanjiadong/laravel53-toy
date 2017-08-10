@@ -93,6 +93,19 @@
                         </div>
 
                         <div class="row-form clearfix">
+                            <div class="span3">分类页封面图：</div>
+                            <div class="span9">
+                                <input type="file" class="userfile" id="categoryUpload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
+                                <input type="hidden" id="categoryPicture" name="categoryPicture" value="{{$picture->category_picture}}" />
+                                <br/>
+                                <img src="{{$picture->category_picture}}" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic3"/>
+                                <img src="/admin/assets/img/loading.gif"  id="loading3" style="display:none;margin-top:10px;height: 150px;width:150px;" />
+                                <br/>
+                                <span>建议图片尺寸标准为320x160</span>
+                            </div>
+                        </div>
+
+                        <div class="row-form clearfix">
                             <div class="span3">图片：</div>
                             <div class="span9">
                                 <input type="file" id="J_UploaderBtn" value="上传图片" name="userfile" accept="image/*">
@@ -313,6 +326,29 @@
                 }
             });
 
+            $("#categoryUpload").uniform();
+            $("#categoryUpload").ajaxfileupload({
+                'action': '{{ url('admin/upload',['size'=>'320,160']) }}',
+                'params': {
+                    '_token': Laravel.csrfToken
+                },
+                'onComplete': function(data) {
+                    if (data.success == 1) {
+                        $('#categoryPicture').val(data.path);
+                        $('#showPic3').attr('src', data.url).show();
+                    } else {
+
+                    }
+                    $("#loading3").hide();
+                },
+                'onStart': function() {
+                    $("#loading3").show();
+                    $("#showPic3").hide();
+                },
+                'onCancel': function() {
+                }
+            });
+
             $("#category_id").change(function(){
                 var category_id = $(this).val();
 
@@ -332,6 +368,7 @@
                     var category_tag_id = $("#category_tag_id").val();
                     var price = $("#price").val();
                     var picture = $("#uploadPath").val();
+                    var category_picture = $("#categoryPicture").val();
                     var video = $("#video").val();
                     var brand = $("#brand").val();
                     var brand_country = $("#brand_country").val();
@@ -348,7 +385,7 @@
                     var _method = 'PUT';
 
                     $.post(url,
-                        {video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,category_tag_id:category_tag_id,price:price,picture:picture,brand:brand,
+                        {category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,category_tag_id:category_tag_id,price:price,picture:picture,brand:brand,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc},
                         function(data){
                             cTip(data);

@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('area/del','AreaController@del_area')->name('admin.areas.del_area');
 
     Route::resource('activitys', 'ActivityController');
+    Route::resource('expresses', 'ExpressController');
 
     Route::post('upload/{size?}','CommonController@upload');
     //test
