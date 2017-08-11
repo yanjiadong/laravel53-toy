@@ -12,6 +12,7 @@ use App\TelephoneCode;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Overtrue\EasySms\EasySms;
 
 class IndexController extends BaseController
 {
@@ -75,7 +76,7 @@ class IndexController extends BaseController
             return $this->ret;
         }
 
-        $data['code'] = mt_rand(100000,999999);
+        $data['code'] = mt_rand(1000,9999);
         $data['telephone'] = $telephone;
         $data['is_used'] = 1;
         TelephoneCode::create($data);
@@ -85,6 +86,52 @@ class IndexController extends BaseController
 
         $this->ret['msg'] = '验证码发送成功';
         return $this->ret;
+    }
+
+    private function send_sms($telephone,$code)
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'yunpian', 'aliyun', 'alidayu',
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'yunpian' => [
+                    'api_key' => '',
+                ],
+                'aliyun' => [
+                    'access_key_id' => 'jlU7IQOybzkAXInb',
+                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'sign_name' => '',
+                ],
+                'alidayu' => [
+                    //...
+                ],
+            ],
+        ];
+
+        $easySms = new EasySms($config);
+
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_001',
+            'data' => [
+                'code' => $code
+            ],
+        ]);
     }
 
     public function bind_telephone(Request $request)
