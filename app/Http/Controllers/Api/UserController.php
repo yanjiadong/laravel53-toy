@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\UserAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
 class UserController extends BaseController
 {
@@ -83,7 +84,13 @@ class UserController extends BaseController
 
     public function get_address($id)
     {
-        $address = UserAddress::find($id);
+        $address = DB::table('user_addresses')
+            ->select('user_addresses.*','p.name as province_name','c.name as city_name','a.name as area_name')
+            ->leftJoin('areas as p', 'p.id', '=', 'user_addresses.province_id')
+            ->leftJoin('areas as c', 'c.id', '=', 'user_addresses.city_id')
+            ->leftJoin('areas as a', 'a.id', '=', 'user_addresses.area_id')
+            ->first();
+
         $this->ret['info'] = ['address'=>$address];
         return $this->ret;
     }

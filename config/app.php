@@ -26,7 +26,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-    'day_sms_count'=>env('DAY_SMS_COUNT',10),
+    'day_sms_count' => env('DAY_SMS_COUNT',10),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

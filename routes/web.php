@@ -66,6 +66,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::resource('activitys', 'ActivityController');
     Route::resource('expresses', 'ExpressController');
 
+    Route::get('system_config','SystemConfigController@index')->name('admin.system_config');
+    Route::post('system_config/store','SystemConfigController@store')->name('admin.system_config.store');
+
     Route::post('upload/{size?}','CommonController@upload');
     //test
     Route::get('test','LoginController@test');

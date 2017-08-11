@@ -22,10 +22,14 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/category/{category_id}/{tag_id}','IndexController@category');
     Route::get('/good/{good_id}','GoodController@info');
 
+    //客户收货地址
     Route::post('/address/add','UserController@add_address');
     Route::post('/address/edit','UserController@edit_address');
     Route::post('/address/info/{id}','UserController@get_address');
     Route::delete('/address/delete','UserController@delete_address');
+
+    //获取快递公司列表
+    Route::get('/express/list','IndexController@get_express_list');
 
     //获取手机验证码
     Route::post('/index/get_telephone_code','IndexController@get_telephone_code');

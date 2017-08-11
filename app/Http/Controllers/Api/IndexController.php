@@ -7,6 +7,7 @@ use App\Area;
 use App\Banner;
 use App\Category;
 use App\CategoryTag;
+use App\Express;
 use App\Good;
 use App\TelephoneCode;
 use App\User;
@@ -63,7 +64,8 @@ class IndexController extends BaseController
         $end_time = date('Y-m-d 23:59:59');
 
         $count = TelephoneCode::where('created_at','>=',$start_time)->where('created_at','<=',$end_time)->where('telephone',$telephone)->count();
-        if($count>=config('day_sms_count'))
+
+        if($count>=config('app.day_sms_count'))
         {
             $this->ret = ['code'=>300,'msg'=>'今日获取验证码次数已达上限,请明日再试'];
             return $this->ret;
@@ -82,7 +84,7 @@ class IndexController extends BaseController
         TelephoneCode::create($data);
 
         //todo 接入短信接口发送
-        //$this->send_sms($telephone,$data['code']);
+        $this->send_sms($telephone,$data['code']);
 
         $this->ret['msg'] = '验证码发送成功';
         return $this->ret;
@@ -101,7 +103,7 @@ class IndexController extends BaseController
 
                 // 默认可用的发送网关
                 'gateways' => [
-                    'yunpian', 'aliyun', 'alidayu',
+                     'aliyun'
                 ],
             ],
             // 可用的网关配置
@@ -109,16 +111,10 @@ class IndexController extends BaseController
                 'errorlog' => [
                     'file' => '/tmp/easy-sms.log',
                 ],
-                'yunpian' => [
-                    'api_key' => '',
-                ],
                 'aliyun' => [
                     'access_key_id' => 'jlU7IQOybzkAXInb',
                     'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '',
-                ],
-                'alidayu' => [
-                    //...
+                    'sign_name' => '玩具小叮当',
                 ],
             ],
         ];
@@ -127,9 +123,9 @@ class IndexController extends BaseController
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_001',
+            'template' => 'SMS_85380002',
             'data' => [
-                'code' => $code
+                'number' => $code
             ],
         ]);
     }
@@ -185,10 +181,16 @@ class IndexController extends BaseController
         return $this->ret;
     }
 
+    public function get_express_list()
+    {
+        $expresses = Express::all();
+        $this->ret['info'] = $expresses;
+        return $this->ret;
+    }
+
     public function test()
     {
         $result = get_express_info('yunda','3805420027268');
         echo $result;
     }
-
 }

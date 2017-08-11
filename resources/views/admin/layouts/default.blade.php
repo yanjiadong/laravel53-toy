@@ -187,6 +187,11 @@
                             <span class="icon-th-list"></span><span class="text">快递公司列表</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.system_config') }}">
+                            <span class="icon-th-list"></span><span class="text">系统设置</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
