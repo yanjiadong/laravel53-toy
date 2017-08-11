@@ -17,6 +17,7 @@ class CreateExpressInfosTable extends Migration
             $table->increments('id');
             $table->string('nu',64)->default('')->comment('快递单号');
             $table->text('content');
+            $table->tinyInteger('state')->default(0)->comment('快递状态');
             $table->timestamps();
         });
     }
