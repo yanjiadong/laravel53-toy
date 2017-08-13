@@ -19,13 +19,32 @@
                     <div class="block-fluid">
                         <div class="row-form clearfix">
                             <div class="span3">每个自然月内前几次免邮费：</div>
-                            <div class="span9"><input type="text" value="{{$content[0]?$content[0]:2}}" class="validate[required,custom[integer]]" id="1"/></div>
+                            <div class="span9"><input type="text" value="{{isset($content[0])?$content[0]:2}}" class="validate[required,custom[integer]]" id="1"/></div>
                         </div>
                         <div class="row-form clearfix">
                             <div class="span3">超过之后的邮费：</div>
-                            <div class="span9"><input type="text" value="{{$content[1]?$content[1]:0}}" class="validate[required,custom[price]]" id="2"/></div>
+                            <div class="span9"><input type="text" value="{{isset($content[1])?$content[1]:0}}" class="validate[required,custom[price]]" id="2"/></div>
                         </div>
-
+                        <div class="row-form clearfix">
+                            <div class="span3">寄回地址收件人：</div>
+                            <div class="span9"><input type="text" value="{{isset($content[2])?$content[2]:''}}" class="validate[required]" id="3"/></div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">寄回地址电话：</div>
+                            <div class="span9"><input type="text" value="{{isset($content[3])?$content[3]:''}}" class="validate[required,custom[phone]]" id="4"/></div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">寄回地址：</div>
+                            <div class="span9"><input type="text" value="{{isset($content[4])?$content[4]:''}}" class="validate[required]" id="5"/></div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">寄回温馨提示：</div>
+                            <div class="span9">
+                                <textarea class="validate[required]" id="6">
+                                    {{isset($content[5])?$content[5]:''}}
+                                </textarea>
+                            </div>
+                        </div>
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -41,7 +60,7 @@
 
                 if ($("#validation").validationEngine('validate')) {
                     var config = [];
-                    for (var i=1;i<3;i++)
+                    for (var i=1;i<7;i++)
                     {
                         config.push($("#"+i).val());
                     }

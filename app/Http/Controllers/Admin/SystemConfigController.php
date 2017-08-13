@@ -28,7 +28,17 @@ class SystemConfigController extends BaseController
     public function store(Request $request)
     {
         $config = $request->get('config');
-        SystemConfig::create(['type'=>1,'content'=>json_encode($config)]);
+
+        $info = SystemConfig::where('type',1)->first();
+        if(!empty($info))
+        {
+            SystemConfig::where('type',1)->update(['content'=>json_encode($config)]);
+        }
+        else
+        {
+            SystemConfig::create(['type'=>1,'content'=>json_encode($config)]);
+        }
+
         alert('',1);
     }
 }

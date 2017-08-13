@@ -27,13 +27,30 @@ class IndexController extends BaseController
         $categorys = Category::all();
         $banners = Banner::all();
         $new_goods = Good::with(['category_tag'])->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->first();
-        $goods = Good::with(['category_tag'])->limit(4)->get();
+        $goods = Good::with(['category_tag'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->limit(4)->get();
         $activities = Activity::where('type',1)->get();
 
         $this->ret['info'] = ['categorys'=>$categorys,'banners'=>$banners,'new_goods'=>$new_goods,'goods'=>$goods,'activities'=>$activities];
         return $this->ret;
     }
 
+    public function goods(Request $request)
+    {
+        $page = $request->get('page');
+        $limit = $request->get('limit');
+
+        $offset = ($page-1)*$limit;
+        $goods = Good::with(['category_tag'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->skip($offset)->take($limit)->get();
+        $this->ret['info'] = ['goods'=>$goods];
+        return $this->ret;
+    }
+
+    /**
+     * 获取分类页信息
+     * @param $category_id
+     * @param $tag_id
+     * @return array
+     */
     public function category($category_id,$tag_id)
     {
         $category = Category::find($category_id);
@@ -45,9 +62,36 @@ class IndexController extends BaseController
             $where['category_tag_id'] = $tag_id;
         }
         $where['category_id'] = $category_id;
+        $where['status'] = Good::STATUS_ON_SALE;
 
-        $goods = Good::where($where)->get();
+        $goods = Good::with(['category_tag'])->where($where)->get();
         $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'category_tags'=>$category_tags,'goods'=>$goods];
+        return $this->ret;
+    }
+
+    /**
+     * 获取分类页商品列表分页
+     * @param Request $request
+     * @return array
+     */
+    public function category_goods(Request $request)
+    {
+        $page = $request->get('page');
+        $limit = $request->get('limit');
+        $category_id = $request->get('category_id');
+        $tag_id = $request->get('tag_id');
+
+        $offset = ($page-1)*$limit;
+
+        if(!empty($tag_id))
+        {
+            $where['category_tag_id'] = $tag_id;
+        }
+        $where['category_id'] = $category_id;
+        $where['status'] = Good::STATUS_ON_SALE;
+
+        $goods = Good::with(['category_tag'])->where($where)->skip($offset)->take($limit)->get();
+        $this->ret['info'] = ['goods'=>$goods];
         return $this->ret;
     }
 

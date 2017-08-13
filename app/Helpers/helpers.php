@@ -79,11 +79,18 @@ if(!function_exists('get_express_info'))
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
         $result = curl_exec($ch);
-        echo $result;
-        die;
         $data = str_replace("\&quot;",'"',$result );
         $data = json_decode($data,true);
         //return $data;
+    }
+}
+
+if(!function_exists('get_order_code'))
+{
+    function get_order_code($user_id = 0)
+    {
+        $order_code = date('YmdHis').$user_id.mt_rand(100000,999999);
+        return $order_code;
     }
 }
 

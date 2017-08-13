@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function carts()
+    {
+        return $this->belongsToMany(Good::class,'carts','user_id','good_id');
+    }
+
+    public function addCart($good_id)
+    {
+        return $this->carts()->toggle($good_id);
+    }
 }

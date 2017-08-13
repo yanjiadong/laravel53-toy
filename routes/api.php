@@ -19,8 +19,18 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'Api'], function () {
     Route::get('/index','IndexController@index');
+    Route::post('/index/goods','IndexController@goods');
+
     Route::get('/category/{category_id}/{tag_id}','IndexController@category');
+    Route::post('/category/goods','IndexController@category_goods');
+
     Route::get('/good/{good_id}','GoodController@info');
+
+    //加入玩具箱
+    Route::post('/cart/add','CartController@add');
+    Route::delete('/cart/delete','CartController@delete');
+    //获取玩具箱
+    Route::post('cart/index','CartController@index');
 
     //客户收货地址
     Route::post('/address/add','UserController@add_address');
