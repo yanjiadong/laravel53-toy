@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Cart;
+use App\Good;
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +16,25 @@ class CartController extends BaseController
         $user_id = $request->get('user_id');
         $user = User::find($user_id);
         $carts = $user->carts()->get();
-        $this->ret['info'] = ['carts'=>$carts];
+
+        if($user->is_vip==1)
+        {
+            //判断是否租用中的玩具
+            $order = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get();
+            if(!empty($order))
+            {
+                $type = 3;
+            }
+            else
+            {
+                $type = 2;
+            }
+        }
+        else
+        {
+            $type = 1;
+        }
+        $this->ret['info'] = ['carts'=>$carts,'type'=>$type];
         return $this->ret;
     }
 
@@ -45,6 +65,14 @@ class CartController extends BaseController
 
         $user = User::find($user_id);
         $user->addCart($good_id);
+        return $this->ret;
+    }
+
+    public function select_good(Request $request)
+    {
+        $good_id = $request->get('good_id');
+        $good = Good::find($good_id);
+        $this->ret['info'] = ['good_store'=>$good->store];
         return $this->ret;
     }
 }

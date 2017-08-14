@@ -30,7 +30,14 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/cart/add','CartController@add');
     Route::delete('/cart/delete','CartController@delete');
     //获取玩具箱
-    Route::post('cart/index','CartController@index');
+    Route::post('/cart/index','CartController@index');
+    //选中时判断玩具的库存
+    Route::post('/cart/select_good','CartController@select_good');
+
+    //点击寄这个玩具给我
+    Route::post('/order/add_order','OrderController@add_order');
+    //提交订单
+    Route::post('/order/submit_order','OrderController@submit_order');
 
     //客户收货地址
     Route::post('/address/add','UserController@add_address');

@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::get('system_config','SystemConfigController@index')->name('admin.system_config');
     Route::post('system_config/store','SystemConfigController@store')->name('admin.system_config.store');
 
+    //订单管理
+    Route::get('order/index','OrderController@index')->name('admin.order.index');
+
     Route::post('upload/{size?}','CommonController@upload');
     //test
     Route::get('test','LoginController@test');

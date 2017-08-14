@@ -102,6 +102,19 @@
                 </a>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'order')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">订单管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('admin.order.index') }}">
+                            <span class="icon-th-list"></span><span class="text">订单列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="openable <?php echo (isset($menu) && ($menu == 'banner')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">Banner管理</span>
