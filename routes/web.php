@@ -71,6 +71,12 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
 
     //订单管理
     Route::get('order/index','OrderController@index')->name('admin.order.index');
+    Route::post('order/send','OrderController@send')->name('admin.order.send');
+    Route::post('order/verify','OrderController@verify')->name('admin.order.verify');
+
+    //用户管理
+    Route::get('user/index','UserController@index')->name('admin.user.index');
+    Route::post('user/action','UserController@action')->name('admin.user.action');
 
     Route::post('upload/{size?}','CommonController@upload');
     //test

@@ -6,6 +6,7 @@ use App\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Hash;
 use Illuminate\Support\Facades\Validator;
 use Crypt;
 
@@ -59,6 +60,8 @@ class IndexController extends BaseController
 
         $admin = Admin::where('id',$admin_info['admin_id'])->first();
         $password = Crypt::decrypt($admin->password);  //解密
+
+
         if($password !== $request->get('old_password'))
         {
             return response()->json(['code'=>300,'message'=>'原始密码错误']);

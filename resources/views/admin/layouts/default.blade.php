@@ -115,6 +115,19 @@
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'user')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">用户管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('admin.user.index') }}">
+                            <span class="icon-th-list"></span><span class="text">用户列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="openable <?php echo (isset($menu) && ($menu == 'banner')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">Banner管理</span>

@@ -8,6 +8,7 @@ use App\Admin;
 use Crypt;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use Hash;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -46,8 +47,6 @@ class LoginController extends Controller
         {
             return response()->json(['code'=>300,'message'=>'请输入正确的验证码']);
         }
-
-        $password = Crypt::encrypt($request->get('password'));
 
         $admin_info = Admin::where('username',$request->get('username'))->first();
 

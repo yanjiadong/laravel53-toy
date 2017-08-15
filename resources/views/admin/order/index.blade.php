@@ -54,7 +54,13 @@
                                     <td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>
+                                        @if($order->status=='待发货')
+                                            <a href="javascript:;" data-id="{{$order->id}}" title="发货" class="tip send"><span class="btn btn-mini btn-warning">发货</span></a>
+                                        @endif
 
+                                        @if($order->status=='已归还' && $order->back_status=='待验证')
+                                                <a href="javascript:;" data-id="{{$order->id}}" title="验证寄回" class="tip verifyAction"><span class="btn btn-mini">验证寄回</span></a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -74,17 +80,68 @@
         </div>
     </div>
 
+    <div class="span6" id="dialog" style="display:none;">
+        <div class="block messaging">
+            <div class="controls">
+                <div class="control">
+                    <input type="hidden" value="" id="id" />
+
+                    <input type="text" value="" class="" id="express_no" placeholder="输入快递单号..." style="width: 100%;"/>
+
+                        <select name="select" class="" id="express_id" style="width: 100%;">
+                            <option value="0">--请选择--</option>
+                            @if(count($express)>0)
+                                @foreach($express as $v)
+                                    <option value="{{$v->id}}">{{$v->title}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                </div>
+                <button class="btn sendSubmit">确定发货</button>
+                <button class="btn closed">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <link href="/admin/assets/css/easydialog.css" rel="stylesheet" type="text/css" />
+    <script src="/admin/assets/js/easydialog.js" charset="utf-8"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.del').click(function(){
+            $(".send").click(function(){
                 var id = $(this).attr('data-id');
-                var _method = 'DELETE';
-                var url = '{{url('admin/categorys')}}' + '/' + id;
+                $("#id").val(id);
+                easyDialog.open({
+                    container : 'dialog',
+                    fixed : false
+                });
+            });
 
+            $(".closed").click(function(){
+                easyDialog.close();
+            });
+
+            $(".sendSubmit").click(function(){
+                var id = $("#id").val();
+                var express_no = $("#express_no").val();
+                var express_id = $("#express_id").val();
+                if (!express_no) {
+                    eAlert('请输入快递单号');
+                    return false;
+                }
+
+                $.post("{{route('admin.order.send')}}", {id:id,express_no:express_no,express_id:express_id}, function(data){
+                    easyDialog.close();
+                    cTip(data);
+                }, "json");
+            });
+
+            $('.verifyAction').click(function(){
+                var id = $(this).attr('data-id');
                 $.confirm({
-                    text: "确认删除？",
+                    text: "确认寄回？",
                     confirm: function(button) {
-                        $.post(url,{_method:_method},function(data){
+                        $.post("{{route('admin.order.verify')}}",{id:id},function(data){
                             cTip(data);
                         }, "json");
                     },
