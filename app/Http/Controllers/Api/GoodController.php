@@ -11,7 +11,7 @@ class GoodController extends BaseController
 {
     public function info($good_id)
     {
-        $good = Good::with(['tags','pictures'])->where('id',$good_id)->first();
+        $good = Good::with(['tags','pictures','brand'])->where('id',$good_id)->first();
 
         $tags = [];
         if(!empty($good->tags))

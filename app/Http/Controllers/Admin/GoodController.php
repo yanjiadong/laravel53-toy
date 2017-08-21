@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Brand;
 use App\Category;
 use App\CategoryTag;
 use App\Good;
@@ -28,8 +29,9 @@ class GoodController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $goods = Good::with(['category','category_tag'])->get();
+        $goods = Good::with(['category','brand'])->get();
         $menu = 'good';
+        //dd($goods);
         return view('admin.good.index',compact('goods','username','menu'));
     }
 
@@ -116,7 +118,8 @@ class GoodController extends BaseController
         $tags = Tag::all();
 
         //获取已选分类的标签列表
-        $category_tags = CategoryTag::where('category_id',$good->category_id)->get();
+        $brands = Brand::where('category_id',$good->category_id)->get();
+
         //获取商品的已选标签
         $tags_seleted = GoodTag::where('good_id',$good->id)->get();
         $tags_arr = [];
@@ -138,7 +141,7 @@ class GoodController extends BaseController
             $picJson = chop($picJson,',') . "]";
         }
 
-        return view('admin.good.edit',compact('username','menu','good','tags','categorys','category_tags','tags_arr','picJson'));
+        return view('admin.good.edit',compact('username','menu','good','tags','categorys','brands','tags_arr','picJson'));
     }
 
     /**

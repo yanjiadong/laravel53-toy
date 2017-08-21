@@ -26,6 +26,16 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function category_tag()
+    {
+        return $this->belongsTo(CategoryTag::class);
+    }
+
     public function getStatusAttribute($value)
     {
         switch ($value)

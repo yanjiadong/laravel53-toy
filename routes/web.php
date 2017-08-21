@@ -32,6 +32,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
 
     Route::resource('categorys', 'CategoryController');
 
+    Route::resource('brands', 'BrandController');
+    Route::post('brands/get_brands_by_id','BrandController@get_brands_by_id');
+
     Route::resource('tags', 'TagController');
 
     Route::resource('goods', 'GoodController');
@@ -73,6 +76,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::get('order/index','OrderController@index')->name('admin.order.index');
     Route::post('order/send','OrderController@send')->name('admin.order.send');
     Route::post('order/verify','OrderController@verify')->name('admin.order.verify');
+    Route::get('order/show/{id}','OrderController@show')->name('admin.order.show');
+
 
     //用户管理
     Route::get('user/index','UserController@index')->name('admin.user.index');

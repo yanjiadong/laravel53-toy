@@ -21,7 +21,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/index','IndexController@index');
     Route::post('/index/goods','IndexController@goods');
 
-    Route::get('/category/{category_id}/{tag_id}','IndexController@category');
+    Route::get('/category/{category_id}/{brand_id}','IndexController@category');
     Route::post('/category/goods','IndexController@category_goods');
 
     Route::get('/good/{good_id}','GoodController@info');
@@ -38,6 +38,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/order/add_order','OrderController@add_order');
     //提交订单
     Route::post('/order/submit_order','OrderController@submit_order');
+    //进行中的订单
+    Route::post('/order/order_list_do','OrderController@order_list_do');
 
     //客户收货地址
     Route::post('/address/add','UserController@add_address');

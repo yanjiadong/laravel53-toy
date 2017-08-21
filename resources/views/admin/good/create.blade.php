@@ -40,9 +40,9 @@
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">适合年龄：</div>
+                            <div class="span3">所属品牌：</div>
                             <div class="span9">
-                                <select name="select" class="validate[required]" id="category_tag_id">
+                                <select name="select" class="validate[required]" id="brand_id">
                                     <option value="0">--请选择--</option>
                                 </select>
                             </div>
@@ -111,12 +111,12 @@
                             </div>
                         </div>
 
-                        <div class="row-form clearfix">
+                        {{--<div class="row-form clearfix">
                             <div class="span3">玩具品牌：</div>
                             <div class="span9">
                                 <input type="text" value="" class="validate[required]" id="brand" name="brand"/>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="row-form clearfix">
                             <div class="span3">品牌所属：</div>
                             <div class="span9">
@@ -337,8 +337,8 @@
             $("#category_id").change(function(){
                 var category_id = $(this).val();
 
-                $.post("{{url('admin/category_tags/get_tags_by_id')}}",{category_id:category_id},function(data){
-                    $("#category_tag_id").html(data.html);
+                $.post("{{url('admin/brands/get_brands_by_id')}}",{category_id:category_id},function(data){
+                    $("#brand_id").html(data.html);
                 },'json');
             });
 
@@ -350,12 +350,12 @@
                     var pics = $("#J_Urls").val();
                     var tags = $("#chooseArea").val();
                     var category_id = $("#category_id").val();
-                    var category_tag_id = $("#category_tag_id").val();
+                    //var category_tag_id = $("#category_tag_id").val();
                     var price = $("#price").val();
                     var picture = $("#uploadPath").val();
                     var category_picture = $("#categoryPicture").val();
                     var video = $("#video").val();
-                    var brand = $("#brand").val();
+                    var brand_id = $("#brand_id").val();
                     var brand_country = $("#brand_country").val();
                     var material = $("#material").val();
                     var weight = $("#weight").val();
@@ -367,7 +367,7 @@
                     var desc = ue.getContent();
 
                     $.post("{{ route('goods.store') }}",
-                        {category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,category_tag_id:category_tag_id,price:price,picture:picture,brand:brand,
+                        {category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc},
                         function(data){
                             cTip(data);

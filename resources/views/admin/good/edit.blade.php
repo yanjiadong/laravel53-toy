@@ -40,13 +40,13 @@
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">适合年龄：</div>
+                            <div class="span3">所属品牌：</div>
                             <div class="span9">
-                                <select name="select" class="validate[required]" id="category_tag_id">
+                                <select name="select" class="validate[required]" id="brand_id">
                                     <option value="0">--请选择--</option>
-                                    @if(count($category_tags))
-                                        @foreach($category_tags as $category_tag)
-                                            <option value="{{$category_tag->id}}" {{ $category_tag->id == $good->category_tag_id ? 'selected':'' }}>{{$category_tag->title}}</option>
+                                    @if(count($brands))
+                                        @foreach($brands as $brand)
+                                            <option value="{{$brand->id}}" {{ $brand->id == $good->brand_id ? 'selected':'' }}>{{$brand->title}}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -96,9 +96,9 @@
                             <div class="span3">分类页封面图：</div>
                             <div class="span9">
                                 <input type="file" class="userfile" id="categoryUpload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
-                                <input type="hidden" id="categoryPicture" name="categoryPicture" value="{{$picture->category_picture}}" />
+                                <input type="hidden" id="categoryPicture" name="categoryPicture" value="{{$good->category_picture}}" />
                                 <br/>
-                                <img src="{{$picture->category_picture}}" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic3"/>
+                                <img src="{{$good->category_picture}}" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic3"/>
                                 <img src="/admin/assets/img/loading.gif"  id="loading3" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <br/>
                                 <span>建议图片尺寸标准为320x160</span>
@@ -120,12 +120,12 @@
                             </div>
                         </div>
 
-                        <div class="row-form clearfix">
+                        {{--<div class="row-form clearfix">
                             <div class="span3">玩具品牌：</div>
                             <div class="span9">
                                 <input type="text" value="{{$good->brand}}" class="validate[required]" id="brand" name="brand"/>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="row-form clearfix">
                             <div class="span3">品牌所属：</div>
                             <div class="span9">
@@ -352,8 +352,8 @@
             $("#category_id").change(function(){
                 var category_id = $(this).val();
 
-                $.post("{{url('admin/category_tags/get_tags_by_id')}}",{category_id:category_id},function(data){
-                    $("#category_tag_id").html(data.html);
+                $.post("{{url('admin/brands/get_brands_by_id')}}",{category_id:category_id},function(data){
+                    $("#brand_id").html(data.html);
                 },'json');
             });
 
@@ -365,12 +365,12 @@
                     var pics = $("#J_Urls").val();
                     var tags = $("#chooseArea").val();
                     var category_id = $("#category_id").val();
-                    var category_tag_id = $("#category_tag_id").val();
+                    //var category_tag_id = $("#category_tag_id").val();
                     var price = $("#price").val();
                     var picture = $("#uploadPath").val();
                     var category_picture = $("#categoryPicture").val();
                     var video = $("#video").val();
-                    var brand = $("#brand").val();
+                    var brand_id = $("#brand_id").val();
                     var brand_country = $("#brand_country").val();
                     var material = $("#material").val();
                     var weight = $("#weight").val();
@@ -385,7 +385,7 @@
                     var _method = 'PUT';
 
                     $.post(url,
-                        {category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,category_tag_id:category_tag_id,price:price,picture:picture,brand:brand,
+                        {category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc},
                         function(data){
                             cTip(data);

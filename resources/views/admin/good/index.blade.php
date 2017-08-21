@@ -31,7 +31,7 @@
                                 <th>序号</th>
                                 <th>玩具名称</th>
                                 <th>分类名称</th>
-                                <th>适合年龄</th>
+                                <th>所属品牌</th>
                                 <th>库存</th>
                                 <th>新品抢先</th>
                                 <th>热门推荐</th>
@@ -46,7 +46,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $good->title }}</td>
                                     <td>{{ $good->category->title }}</td>
-                                    <td>{{ $good->category_tag->title }}</td>
+                                    <td>{{ $good->brand->title }}</td>
                                     <td>{{ $good->store }}</td>
                                     <td>{{ $good->is_new==1?'是':'否' }}</td>
                                     <td>{{ $good->is_hot==1?'是':'否' }}</td>

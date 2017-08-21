@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Activity;
 use App\Area;
 use App\Banner;
+use App\Brand;
 use App\Category;
 use App\CategoryTag;
 use App\Express;
@@ -51,21 +52,21 @@ class IndexController extends BaseController
      * @param $tag_id
      * @return array
      */
-    public function category($category_id,$tag_id)
+    public function category($category_id,$brand_id)
     {
         $category = Category::find($category_id);
         $categorys = Category::all();
-        $category_tags = CategoryTag::where('category_id',$category_id)->get();
+        $brands = Brand::where('category_id',$category_id)->get();
 
-        if(!empty($tag_id))
+        if(!empty($brand_id))
         {
-            $where['category_tag_id'] = $tag_id;
+            $where['brand_id'] = $brand_id;
         }
         $where['category_id'] = $category_id;
         $where['status'] = Good::STATUS_ON_SALE;
 
-        $goods = Good::with(['category_tag'])->where($where)->get();
-        $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'category_tags'=>$category_tags,'goods'=>$goods];
+        $goods = Good::with(['brand'])->where($where)->get();
+        $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'brands'=>$brands,'goods'=>$goods];
         return $this->ret;
     }
 
@@ -79,18 +80,18 @@ class IndexController extends BaseController
         $page = $request->get('page');
         $limit = $request->get('limit');
         $category_id = $request->get('category_id');
-        $tag_id = $request->get('tag_id');
+        $brand_id = $request->get('brand_id');
 
         $offset = ($page-1)*$limit;
 
         if(!empty($tag_id))
         {
-            $where['category_tag_id'] = $tag_id;
+            $where['brand_id'] = $brand_id;
         }
         $where['category_id'] = $category_id;
         $where['status'] = Good::STATUS_ON_SALE;
 
-        $goods = Good::with(['category_tag'])->where($where)->skip($offset)->take($limit)->get();
+        $goods = Good::with(['brand'])->where($where)->skip($offset)->take($limit)->get();
         $this->ret['info'] = ['goods'=>$goods];
         return $this->ret;
     }

@@ -19,7 +19,7 @@ class CreateGoodsTable extends Migration
             $table->decimal('price', 10, 2)->default(0.00)->comment('市场价');
             $table->integer('category_id')->default(0)->comment('分类id');
             $table->integer('category_tag_id')->default(0)->comment('分类标签id');
-            $table->string('brand',64)->default('')->comment('品牌');
+            $table->integer('brand_id')->default(0)->comment('品牌id');
             $table->string('brand_country',64)->default('')->comment('品牌所属');
             $table->string('material',64)->default('')->comment('材质');
             $table->string('weight',64)->default('')->comment('重量');

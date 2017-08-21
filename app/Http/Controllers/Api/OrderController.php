@@ -118,4 +118,14 @@ class OrderController extends BaseController
 
         return $this->ret;
     }
+
+    public function order_list_do(Request $request)
+    {
+        $page = $request->get('page');
+        $limit = $request->get('limit');
+
+        $offset = ($page-1)*$limit;
+        $list = Order::with(['user','category','category_tag'])->skip($offset)->take($limit)->get()->toArray();
+        print_r($list);
+    }
 }

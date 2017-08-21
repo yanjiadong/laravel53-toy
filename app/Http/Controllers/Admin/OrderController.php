@@ -51,4 +51,14 @@ class OrderController extends BaseController
         }
         alert('验证寄回失败');
     }
+
+    public function show($id)
+    {
+        $admin_info = $this->get_session_info();
+        $username = $admin_info['username'];
+
+        $order = Order::with(['user','category_tag','category'])->find($id);
+        $menu = 'order';
+        return view('admin.order.show',compact('order','username','menu'));
+    }
 }

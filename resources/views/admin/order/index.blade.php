@@ -54,6 +54,7 @@
                                     <td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>
+                                        <a href="{{route('admin.order.show',['id'=>$order->id])}}" title="查看" class="tip"><span class="btn btn-mini">查看</span></a>
                                         @if($order->status=='待发货')
                                             <a href="javascript:;" data-id="{{$order->id}}" title="发货" class="tip send"><span class="btn btn-mini btn-warning">发货</span></a>
                                         @endif

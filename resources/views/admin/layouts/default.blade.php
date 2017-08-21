@@ -154,16 +154,29 @@
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'brand')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">品牌管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('brands.index') }}">
+                            <span class="icon-th-list"></span><span class="text">品牌列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="openable <?php echo (isset($menu) && ($menu == 'tag')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">标签管理</span>
                 </a>
                 <ul>
-                    <li>
+                    {{--<li>
                         <a href="{{ route('category_tags.index') }}">
                             <span class="icon-th-list"></span><span class="text">适合年龄列表</span>
                         </a>
-                    </li>
+                    </li>--}}
                     <li>
                         <a href="{{ route('tags.index') }}">
                             <span class="icon-th-list"></span><span class="text">玩具标签列表</span>
