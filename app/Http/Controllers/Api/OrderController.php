@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Express;
 use App\Good;
 use App\Order;
 use App\SystemConfig;
@@ -119,13 +120,136 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
-    public function order_list_do(Request $request)
+    public function order_list(Request $request)
     {
-        $page = $request->get('page');
-        $limit = $request->get('limit');
+        $page = $request->get('page')?$request->get('page'):1;
+        $limit = $request->get('limit')?$request->get('limit'):10;
+        $type = $request->get('type')?$request->get('type'):1;  //1进行中的  2已归还的
 
         $offset = ($page-1)*$limit;
-        $list = Order::with(['user','category','category_tag'])->skip($offset)->take($limit)->get()->toArray();
-        print_r($list);
+
+        if($type == 1)
+        {
+            $where = [Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING];
+        }
+        else
+        {
+            $where = [Order::STATUS_BACK];
+        }
+
+        $list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
+        //print_r($list);
+        if(!empty($list))
+        {
+            foreach ($list as &$v)
+            {
+                $v['days'] = 0;
+                if($v['status']==Order::STATUS_BACK)
+                {
+                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['confirm_time']))/(3600*24));
+                }
+                elseif($v['status']==Order::STATUS_DOING)
+                {
+                    $v['days'] = ceil((time()- strtotime($v['confirm_time']))/(3600*24));
+                }
+            }
+        }
+
+        $this->ret['info'] = ['list'=>$list];
+        return $this->ret;
     }
+
+    public function order_info(Request $request)
+    {
+        $code = $request->get('code');
+        $info = Order::with(['user','category','good_brand'])->where('code',$code)->first();
+
+        $this->ret['info'] = ['order'=>$info];
+        return $this->ret;
+    }
+
+    public function order_can_back(Request $request)
+    {
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        //print_r($content);
+        $info['tip'] = $content[5];
+        $info['address'] = $content[4];
+        $info['telephone'] = $content[3];
+        $info['name'] = $content[2];
+
+        $where = [Order::STATUS_DOING];
+        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->get()->toArray();
+        //print_r($list);
+        if(!empty($list))
+        {
+            foreach ($list as &$v)
+            {
+                $v['days'] = ceil((time() - strtotime($v['confirm_time']))/(3600*24));
+            }
+        }
+
+        $info['list'] = $list;
+        $this->ret['info'] = $info;
+        return $this->ret;
+    }
+
+
+    public function order_back(Request $request)
+    {
+        $code = $request->get('code');
+        $express_id = $request->get('express_id');
+        $back_express_no = $request->get('back_express_no');
+
+        $order = Order::where('code',$code)->first();
+
+        if($order->status == Order::STATUS_DOING_STR)
+        {
+            $express = Express::find($express_id);
+
+            $data['back_express_title'] = $express->title;
+            $data['back_express_com'] = $express->com;
+            $data['back_express_no'] = $back_express_no;
+            $data['status'] = Order::STATUS_BACK;
+            $data['back_status'] = Order::BACK_STATUS_WAITING;
+            $data['back_time'] = $this->datetime;
+
+            Order::where('code',$code)->update($data);
+            return $this->ret;
+        }
+        else
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '操作失败';
+            return $this->ret;
+        }
+    }
+
+    public function order_back_list(Request $request)
+    {
+        $page = $request->get('page')?$request->get('page'):1;
+        $limit = $request->get('limit')?$request->get('limit'):10;
+
+        $offset = ($page-1)*$limit;
+
+
+        $where = [Order::STATUS_BACK];
+        $list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
+        //print_r($list);
+        if(!empty($list))
+        {
+            foreach ($list as &$v)
+            {
+                $v['days'] = 0;
+                if($v['status']==Order::STATUS_BACK)
+                {
+                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['confirm_time']))/(3600*24));
+                }
+            }
+        }
+
+        $this->ret['info'] = ['list'=>$list];
+        return $this->ret;
+    }
+
 }

@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('wechat_avatar',512)->default('')->comment('微信avatar');
             $table->text('wechat_original',512)->comment('微信原始数据');
             $table->integer('recommend_id')->default(0)->comment('推荐人id');
+            $table->decimal('can_use_money',10,2)->default(0.00)->comment('可提现押金');
+            $table->decimal('not_can_use_money',10,2)->default(0.00)->comment('冻结的押金');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,6 +17,8 @@ class Order extends Model
     const STATUS_DOING = 3;
     const STATUS_BACK = 4;
 
+    const STATUS_DOING_STR = '租用中';
+
     //back_status   0待验证  1已验证
     const BACK_STATUS_WAITING = 0;
     const BACK_STATUS_DOING = 1;
@@ -34,6 +36,11 @@ class Order extends Model
     public function category_tag()
     {
         return $this->belongsTo(CategoryTag::class);
+    }
+
+    public function good_brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     public function getStatusAttribute($value)

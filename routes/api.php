@@ -38,8 +38,15 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/order/add_order','OrderController@add_order');
     //提交订单
     Route::post('/order/submit_order','OrderController@submit_order');
-    //进行中的订单
-    Route::post('/order/order_list_do','OrderController@order_list_do');
+    //订单列表
+    Route::post('/order/order_list','OrderController@order_list');
+    //订单详情
+    Route::post('/order/order_info','OrderController@order_info');
+    //可寄回更换详情
+    Route::post('/order/order_can_back','OrderController@order_can_back');
+    Route::post('/order/order_back','OrderController@order_back');
+    //归还详情
+    Route::post('/order/order_back_list','OrderController@order_back_list');
 
     //客户收货地址
     Route::post('/address/add','UserController@add_address');

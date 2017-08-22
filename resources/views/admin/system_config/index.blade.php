@@ -45,6 +45,10 @@
                                 </textarea>
                             </div>
                         </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">非会员状态提示框：</div>
+                            <div class="span9"><input type="text" value="{{isset($content[6])?$content[6]:''}}" class="validate[required]" id="7"/></div>
+                        </div>
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -60,7 +64,7 @@
 
                 if ($("#validation").validationEngine('validate')) {
                     var config = [];
-                    for (var i=1;i<7;i++)
+                    for (var i=1;i<8;i++)
                     {
                         config.push($("#"+i).val());
                     }
