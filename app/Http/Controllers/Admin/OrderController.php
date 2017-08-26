@@ -19,7 +19,7 @@ class OrderController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $orders = Order::with(['user'])->paginate(5);
+        $orders = Order::with(['user'])->paginate(20);
         $menu = 'order';
         //print_r($orders);
 

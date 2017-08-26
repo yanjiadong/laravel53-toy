@@ -211,6 +211,32 @@
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'vip_card')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">会员卡管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('vip_cards.index') }}">
+                            <span class="icon-th-list"></span><span class="text">会员卡列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="openable <?php echo (isset($menu) && ($menu == 'coupon')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">优惠券管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('coupons.index') }}">
+                            <span class="icon-th-list"></span><span class="text">优惠券列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="openable <?php echo (isset($menu) && ($menu == 'dictionary')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">字典管理</span>

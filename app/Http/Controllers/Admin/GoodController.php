@@ -29,7 +29,7 @@ class GoodController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $goods = Good::with(['category','brand'])->get();
+        $goods = Good::with(['category','brand'])->paginate(20);
         $menu = 'good';
         //dd($goods);
         return view('admin.good.index',compact('goods','username','menu'));
