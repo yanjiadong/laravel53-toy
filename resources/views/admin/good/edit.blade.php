@@ -78,7 +78,12 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row-form clearfix stock">
+                            <div class="span3">视频长度：</div>
+                            <div class="span9"><input type="text" value="{{ $good->video_second }}" class="validate[required,custom[stock]]" id="video_second" name="video_second"/>
+                                <span>单位：(秒) </span>
+                            </div>
+                        </div>
                         <div class="row-form clearfix">
                             <div class="span3">封面图：</div>
                             <div class="span9">
@@ -380,13 +385,14 @@
                     var is_hot = $('input[name="is_hot"]:checked').val();
                     var is_new = $('input[name="is_new"]:checked').val();
                     var desc = ue.getContent();
+                    var video_second = $("#video_second").val();
 
                     var url = "{{route('goods.update',['id'=>$good->id])}}";
                     var _method = 'PUT';
 
                     $.post(url,
                         {category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
-                            brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc},
+                            brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);
                         }, "json");
