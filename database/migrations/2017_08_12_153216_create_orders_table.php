@@ -40,8 +40,8 @@ class CreateOrdersTable extends Migration
             $table->string('back_express_title',32)->default('')->comment('回寄快递公司名称');
             $table->string('back_express_com',32)->default('')->comment('回寄快递100编码');
             $table->string('back_express_no',64)->default('')->comment('回寄运单号');
-            $table->timestamp('confirm_time')->default('0000-00-00 00:00:00')->comment('确认收货时间');
-            $table->timestamp('back_time')->default('0000-00-00 00:00:00')->comment('提交完成寄回物流信息时间');
+            $table->dateTime('confirm_time')->comment('确认收货时间');
+            $table->dateTime('back_time')->comment('提交完成寄回物流信息时间');
             $table->string('month','32')->default('')->comment('下单的年月');
             $table->tinyInteger('pay_type')->default(1)->comment('支付方式 1微信');
             $table->string('out_trade_no',32)->default('')->comment('支付订单号');
