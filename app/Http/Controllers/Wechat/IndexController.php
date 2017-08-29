@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\WechatAccessToken;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IndexController extends BaseController
 {
+    /**
+     * 验证服务器配置
+     * @param Request $request
+     * @return bool
+     */
     public function valid(Request $request)
     {
         $echoStr = $request->get('echostr');
@@ -30,28 +36,19 @@ class IndexController extends BaseController
         }
     }
 
-    private function checkSignature()
+    public function menu()
     {
-        // you must define TOKEN by yourself
-        if (!defined("TOKEN")) {
-            throw new Exception('TOKEN is not defined!');
+        $info = WechatAccessToken::orderBy('id','desc')->first();
+        if(!empty($info->access_token) && $this->time < $info->expires_in)
+        {
+
         }
-
-        $signature = $_GET["signature"];
-        $timestamp = $_GET["timestamp"];
-        $nonce = $_GET["nonce"];
-
-        $token = $this->wechat_token;
-        $tmpArr = array($token, $timestamp, $nonce);
-        // use SORT_STRING rule
-        sort($tmpArr, SORT_STRING);
-        $tmpStr = implode( $tmpArr );
-        $tmpStr = sha1( $tmpStr );
-
-        if( $tmpStr == $signature ){
-            return true;
-        }else{
-            return false;
+        else
+        {
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$this->wechat_appid."&secret=".$this->wechat_appsecret;
+            echo $url;
+            $result = weixinCurl($url);
+            print_r($result);
         }
     }
 }

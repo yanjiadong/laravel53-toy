@@ -94,3 +94,31 @@ if(!function_exists('get_order_code'))
     }
 }
 
+if(!function_exists('weixinCurl'))
+{
+    function weixinCurl($url, $type = 'GET', $param = array())
+    {
+        $type = strtoupper($type);
+
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 500);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+        if(!empty($param) && $type == 'POST')
+        {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        }
+        curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, $type);
+        $result = curl_exec($ch);
+        //print_r($result);
+        if ($ch != null) curl_close($ch);
+
+        $result = json_decode($result,true);
+        return $result;
+    }
+}
+
+

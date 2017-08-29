@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index');
 //微信路由管理
 Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/valid','IndexController@valid');
+    Route::any('/index/menu','IndexController@menu');
 });
 
 //后台路由管理
