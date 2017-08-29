@@ -36,19 +36,82 @@ class IndexController extends BaseController
         }
     }
 
+    /**
+     * 创建公众号菜单栏
+     */
     public function menu()
     {
         $info = WechatAccessToken::orderBy('id','desc')->first();
+        $access_token = '';
         if(!empty($info->access_token) && $this->time < $info->expires_in)
         {
-
+            $access_token = $info->access_token;
         }
         else
         {
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$this->wechat_appid."&secret=".$this->wechat_appsecret;
-            echo $url;
             $result = weixinCurl($url);
-            print_r($result);
+            if(!empty($result))
+            {
+                WechatAccessToken::create(['access_token'=>$result['access_token'],'expires_in'=>$result['expires_in']+$this->time]);
+                $access_token = $result['access_token'];
+            }
+        }
+
+        if(!empty($access_token))
+        {
+            $data = <<<EOF
+        {
+         "button":[
+            {
+                "name":"租编程玩具",
+                "type":"view",
+                "url":"http://toy.yanjiadong.net"
+            },
+          {
+               "name":"我的订单",
+                "type":"view",
+                "url":"http://toy.yanjiadong.net"
+           },
+           {
+                "name":"服务",
+               "sub_button":[
+                    {
+                       "type":"view",
+                       "name":"返程寄件地址",
+                       "url":"http://toy.yanjiadong.net"
+                    },
+                     {
+                       "type":"view",
+                       "name":"使用说明",
+                       "url":"http://toy.yanjiadong.net"
+                    }, 
+                    {
+                       "type":"view",
+                       "name":"我的账户",
+                       "url":"http://toy.yanjiadong.net"
+                    },
+                    {
+                       "type":"view",
+                       "name":"联系客服",
+                       "url":"http://toy.yanjiadong.net"
+                    }
+                ]
+           }
+       ]
+    }
+EOF;
+            $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$access_token;
+
+            $result = weixinCurl($url,'post',$data);
+            if($result && $result['errcode']==0)
+            {
+                echo 'ok';
+            }
+            else
+            {
+                print_r($result);
+            }
         }
     }
 }

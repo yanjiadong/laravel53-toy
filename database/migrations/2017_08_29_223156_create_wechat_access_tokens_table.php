@@ -15,7 +15,7 @@ class CreateWechatAccessTokensTable extends Migration
     {
         Schema::create('wechat_access_tokens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('access_token',255)->default('')->comment('微信access_token');
+            $table->string('access_token',512)->default('')->comment('微信access_token');
             $table->integer('expires_in')->default(0)->comment('过期时间');
             $table->timestamps();
         });
