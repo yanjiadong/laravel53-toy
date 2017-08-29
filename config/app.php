@@ -29,7 +29,7 @@ return [
     'day_sms_count' => env('DAY_SMS_COUNT',10),
     'wechat_appid' => env('WECHAT_APPID','wxdd1dd7306d6662cf'),
     'wechat_appsecret' => env('WECHAT_APPID','a16015c011af53215d2a885d1c1400af'),
-    'wechat_token' => env('WECHAT_TOKEN','0nX8%GHHU2w8Xpq&'),
+    'wechat_token' => env('WECHAT_TOKEN','ZuZhUsk6zE3cjNdwXRP6t1bKogOa5WGh'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
