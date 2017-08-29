@@ -7,13 +7,26 @@ use App\Http\Controllers\Controller;
 
 class IndexController extends BaseController
 {
-    public function valid()
+    public function valid(Request $request)
     {
-        $echoStr = $_GET["echostr"];
+        $echoStr = $request->get('echostr');
 
-        if($this->checkSignature()){
+        $signature = $request->get('signature');
+        $timestamp = $request->get('timestamp');
+        $nonce = $request->get('nonce');
+
+        $token = $this->wechat_token;
+        $tmpArr = array($token, $timestamp, $nonce);
+        // use SORT_STRING rule
+        sort($tmpArr, SORT_STRING);
+        $tmpStr = implode( $tmpArr );
+        $tmpStr = sha1( $tmpStr );
+
+        if( $tmpStr == $signature ){
             echo $echoStr;
             exit;
+        }else{
+            return false;
         }
     }
 
