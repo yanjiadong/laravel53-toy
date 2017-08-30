@@ -74,16 +74,16 @@ class IndexController extends BaseController
                 "url":"http://toy.yanjiadong.net"
            },
            {
-                "name":"服务",
+                "name":"更多",
                "sub_button":[
                     {
                        "type":"view",
-                       "name":"返程寄件地址",
+                       "name":"寄回地址",
                        "url":"http://toy.yanjiadong.net"
                     },
                      {
                        "type":"view",
-                       "name":"使用说明",
+                       "name":"新手指南",
                        "url":"http://toy.yanjiadong.net"
                     }, 
                     {
