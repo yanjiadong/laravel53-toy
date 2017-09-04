@@ -286,5 +286,39 @@ footer table td.active a .icon-footer-user-center {
     left:50%;
     transform: translateX(-50%);
 }
+/*------------------分类样式----------------------*/
+.index-nav{
+    background-color: #fff;
+    height: 44px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 10px #ddd;
+    overflow-x: auto;
+}
+.index-nav .nav{
+    width: 500px;
+    height:100%;
+}
+.index-nav .nav li {
+    float: left;
+    padding: 0 10px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+}
+.index-nav .nav li a {
+    display: inline-block;
+    height: 44px;
+    color: #323232;
+    overflow-y: auto;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+}
+.index-nav .nav li.active a {
+    color: #6885EA;
+    border-bottom: 2px solid #6885EA ;
+}
 
 

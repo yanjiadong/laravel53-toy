@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>玩具小叮当</title>
+    <!--下拉刷新-->
+    <link rel="stylesheet" href="/wechat/style/weui.min.css">
+    <link rel="stylesheet" href="/wechat/style/jquery-weui.min.css">
+
+    <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
+    <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
+    <!--轮播样式-->
+    <link rel="stylesheet" href="/wechat/style/swiper.min.css">
+    <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<!-- body 顶部加上如下代码 -->
+<div class="weui-pull-to-refresh__layer">
+    <div class='weui-pull-to-refresh__arrow'></div>
+    <div class='weui-pull-to-refresh__preloader'></div>
+    <div class="down">下拉刷新</div>
+    <div class="up">释放刷新</div>
+    <div class="refresh">正在刷新</div>
+</div>
+<div class="index-wrap">
+    <nav>
+        <ul class="nav">
+            <li class="active" data-tab="0">
+                <a href="javascript:;">推荐</a>
+            </li>
+            @foreach($result['info']['categorys'] as $category)
+                <li  data-tab="{{ $category['id'] }}">
+                    <a href="javascript:;">{{ $category['title'] }}</a>
+                </li>
+            @endforeach
+        </ul>
+    </nav>
+    <div class="content clear" id="content">
+        <div class="content-out">
+            <div class="recommend part fl">
+                <div class="lunbo">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="top-cont">
+                    <div class="top-title">
+                        <i class="icon-big icon-big-home-label"></i>
+                        <span class="dot"></span>
+                        <span>品牌高端玩具</span>
+                        <span class="dot"></span>
+                        <span>无限次更换</span>
+                        <span class="dot"></span>
+                        <span>医疗消毒</span>
+                        <span class="dot"></span>
+                        <span>往返包邮</span>
+                    </div>
+                </div>
+                <div class="new-arrivals">
+                    <div class="top-left-title">
+                        <i class="icon icon-blue-rect"></i>
+                        新品抢先
+                    </div>
+                    <div class="recommend-cont clear">
+                        <!--<div class="fl">
+                            <img src="" alt="">
+                        </div>
+                        <div class="fr">
+                            <h3>WewWee Miposaur恐龙机器osaur恐龙机器osaur恐龙机器osaur恐龙机器osaur恐龙机器人</h3>
+                            <p>市场参考价¥2500.00</p>
+                            <h4>适合年龄1-12岁</h4>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="join-member clear">
+                    <a href="">
+                        <div class="fl">
+                            <i class="icon icon_diamond"></i>
+                        </div>
+                        <div class="fl">
+                            <h3>立即成为会员</h3>
+                            <p>陪让孩子一起畅玩全世界最好玩的智能玩具</p>
+                        </div>
+                        <div class="fr">
+                            <i class="icon icon_circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="hot">
+                    <div class="top-left-title">
+                        <span class="icon icon-blue-rect"></span>
+                        热门推荐
+                    </div>
+                    <div class="hot-list clear">
+                        <ul>
+                            <!--  <li class="fl">
+                                  <a href="">
+                                      <img src="../image/other/3.png">
+                                      <span>暂无库存</span>
+                                  </a>
+                                  <h3>
+                                      WewWee Miposaur恐龙机器机器机器机器机器人
+                                  </h3>
+                                  <p>市场参考价¥2500.00</p>
+                                  <h4>适用年龄1-12岁</h4>
+                              </li>
+                           -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grow-up part fl clear">
+                <div class="top">
+                    <div class="top-img">
+                        <img src=""><!--示意图-->
+                    </div>
+                    <div class="describe">
+                        <!--示意图描述-->
+                    </div>
+                </div>
+                <div class="all">
+                    <div class="top-title">
+                        <span>—</span>全部商品<span>—</span>
+                    </div>
+                    <div class="year-select">
+                        <div class="scroll">
+                            <!-- <button class="active">全部年龄</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>
+                             <button>1-2岁</button>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="list">
+                    <ul>
+                        <!--      商品列表-->
+                        <!-- <li class="clear">
+                             <div class="fl">
+                                 <a href="">
+                                     <img src="../image/other/3.png">
+                                 </a>
+                                 <span>暂无库存</span>
+                             </div>
+                             <div class="fr">
+                                 <h3>
+                                     <a href="">
+                                         WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
+                                     </a>
+                                 </h3>
+                                 <h4>适用年龄1-12岁</h4>
+                                 <p>市场参考价¥2500.00</p>
+                             </div>
+                         </li>
+                         <li class="clear">
+                             <div class="fl">
+                                 <a href="">
+                                     <img src="../image/other/3.png">
+                                 </a>
+                             </div>
+                             <div class="fr">
+                                 <h3>
+                                     <a href="">
+                                         WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
+                                     </a>
+                                 </h3>
+                                 <h4>适用年龄1-12岁</h4>
+                                 <p>市场参考价¥2500.00</p>
+                             </div>
+                         </li>
+                         <li class="clear">
+                             <div class="fl">
+                                 <a href="">
+                                     <img src="../image/other/3.png">
+                                 </a>
+                             </div>
+                             <div class="fr">
+                                 <h3>
+                                     <a href="">
+                                         WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
+                                     </a>
+                                 </h3>
+                                 <h4>适用年龄1-12岁</h4>
+                                 <p>市场参考价¥2500.00</p>
+                             </div>
+                         </li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="part fl">
+                早教学习
+            </div>
+            <div class="part fl">
+                智力开发
+            </div>
+            <div class="part fl">
+                智力开发1
+            </div>
+            <div class="part fl">
+                智力开发2
+            </div>
+        </div>
+    </div>
+    <!-- <footer>
+         <table>
+             <tr>
+                 <td class="active">
+                     <a href="/view/index.html">
+                         <div><i class="icon-footer-home"></i></div>
+                         <div class="font">首页</div>
+                     </a>
+                 </td>
+                 <td>
+                     <a href="">
+                         <div><i class="icon-footer-order"></i></div>
+                         <div class="font">订单</div>
+                     </a>
+                 </td>
+                 <td>
+                     <a href="">
+                         <div><i class="icon-footer-shop-car"><span>3</span></i></div>
+                         <div class="font">玩具箱 </div>
+                     </a>
+                 </td>
+                 <td>
+                     <a href="">
+                         <div><i class="icon-footer-user-center"></i></div>
+                         <div class="font">我的</div>
+                     </a>
+                 </td>
+             </tr>
+         </table>
+     </footer>-->
+</div>
+<div class="index-wrap-cover">
+    <div class="index-main-cover">
+        <ul class="clear swiper-container1">
+            <li class="fl swiper-slide">
+                <a href="children_interesting_compilation.html">
+                    <img src="/wechat/image/common/img_dialog_4.png">
+                </a>
+            </li>
+            <li class="fl swiper-slide">
+                <a href="children_interesting_compilation.html">
+                    <img src="/wechat/image/common/img_dialog_1.png">
+                </a>
+            </li>
+            <li class="fl swiper-slide">
+                <a href="children_interesting_compilation.html">
+                    <img src="/wechat/image/common/img_dialog_2.png">
+                </a>
+            </li>
+            <li class="fl swiper-slide">
+                <a href="children_interesting_compilation.html">
+                    <img src="/wechat/image/common/img_dialog_3.png">
+                </a>
+            </li>
+            <li class="fl swiper-slide">
+                <a href="children_interesting_compilation.html">
+                    <img src="/wechat/image/common/img_dialog_4.png">
+                </a>
+            </li>
+            <li class="fl swiper-slide">
+                <a href="children_interesting_compilation.html">
+                    <img src="/wechat/image/common/img_dialog_1.png">
+                </a>
+            </li>
+        </ul>
+        <img class="close" src="/wechat/image/common/icon_dialog_close_bottom.png">
+    </div>
+
+</div>
+<script src="/wechat/js/jquery-1.11.1.min.js"></script>
+<!-- 下拉刷新 -->
+<script src="/wechat/js/jquery-weui.min.js"></script>
+
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<!--轮播图-->
+<script type="text/javascript" src="/wechat/js/swiper.min.js"></script>
+
+<script src="/wechat/js/main.js"></script>
+<script src="/wechat/js/common.js"></script>
+<script>
+    var index_obj = {
+        data:{
+            lunboData:[],     //首页轮播数据
+            vipData:{},       //首页成为会员数据
+            grown_up_top:{},   //成长陪伴示意图数据
+            grown_up_list:{},   //成长陪伴商品列表
+            first_open:false  //是否首次打开
+        },
+        //首页 - 是否首次打开
+        isfirst:function () {
+            common.httpRequest('/wechat/js/test.json','get',null,function (res) {
+                //假数据
+                index_obj.data.first_open = false;
+                if(index_obj.data.first_open){
+                    $(".index-wrap-cover").fadeIn(500);
+                    //弹框轮播
+                    index_obj.cover_banner();
+                }
+            })
+        },
+        //首页-轮播数据获取
+        lunbo_init:function () {
+            common.httpRequest('{{url('api/index')}}','get',null,function (res) {
+                var lunbo_content="";
+                console.log(res.info.banners);
+                if(res.info.banners.length>0){
+                    index_obj.data.lunboData = res.info.banners;
+                    for(var i=0;i<res.info.banners.length;i++){
+                        lunbo_content +='<div class="swiper-slide"><a href="'+index_obj.data.lunboData[i].url +'"><img class="banner-img" src="'+ index_obj.data.lunboData[i].picture+'"></a></div>';
+                    }
+                    $(".lunbo .swiper-wrapper").html(lunbo_content);
+
+                    //轮播图
+                    index_obj.banner();
+                }
+            })
+        },
+        //首页-新品 热门数据
+        hot_new:function () {
+            common.httpRequest('{{url('api/index')}}','get',null,function (res) {
+                var newData="";
+                var hotData="";
+                //console.log(res.info.new_goods);
+                if(res.info.new_goods)
+                {
+                    //新品
+                    newData ='<div class="fl"><a href="'+res.info.new_goods.href+'"><img src="'+res.info.new_goods.picture+'"></a></div><div class="fr"><a href="'+res.info.new_goods.href+'"><h3>'+
+                        res.info.new_goods.title+'</h3><p>市场参考价¥'+res.info.new_goods.price+'</p><h4>'+res.info.new_goods.brand.title+'</h4></a></div>';
+                    $(".recommend-cont").html(newData);
+                }
+
+                if(res.info.goods.length>0){
+                    //console.log(res.info.goods);
+                    //热门
+                    for(var i=0;i<res.info.goods.length;i++){
+                        //判断是否有库存
+                        if(res.info.goods[i].store <= 0){
+                            hotData +='<li class="fl"><a href="'+res.info.goods[i].href+'"><img src="'+ res.info.goods[i].picture+'"><span class="active">'+
+                                '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+res.info.goods[i].price+'</p><h4>'+res.info.goods[i].brand.title+
+                                '</h4></li>';
+                        }else{
+                            hotData +='<li class="fl"><a href="'+res.info.goods[i].href+'"><img src="'+ res.info.goods[i].picture+'">'+'<h3>'
+                                +res.info.goods[i].title+'</h3><p>市场价¥'+res.info.goods[i].price+'</p><h4>'+res.info.goods[i].brand.title+
+                                '</h4></li>';
+                        }
+                    }
+                    $(".hot-list ul").html(hotData);
+
+                }
+            })
+        },
+        //首页 - 成为会员
+        vip_create:function () {
+            common.httpRequest('/wechat/js/test.json','get',null,function (res) {
+                index_obj.data.vipData = res;
+                index_obj.data.vipData ={url:"../image/other/vip-bg.jpg",time:5};   //假数据
+                $(".join-member").css({"background-image":index_obj.data.vipData.url,"background-size":index_obj.cont_width});
+                $(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
+            });
+        },
+        //成长陪伴
+        grown_up:function (small,big,selectCont) {
+            //成长陪伴-示意图、描述文字
+            common.httpRequest('/wechat/js/test.json','get',null,function (res) {
+                index_obj.data.grown_up_top = res;
+                index_obj.data.grown_up_top ={url:"../image/other/5.png",title:"智能宠物有着不通过感应系统和多种游戏玩法，让孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。"};   //假数据
+                $(".grow-up .top .top-img img").attr("src",index_obj.data.grown_up_top.url);
+                $(".grow-up .top .describe").text(index_obj.data.grown_up_top.title);
+
+                var img_width =parseInt($(".grow-up .top .top-img img").width()*9/20);
+                $(".grow-up .top .top-img img").css("height",img_width+"px");
+                index_obj.getShopList("","",0);
+                setTimeout(index_obj.slide_up,2000);
+            });
+        },
+        //成长陪伴-商品列表
+        getShopList:function(small,big,selectCont){
+            selectCont = selectCont?selectCont:0;
+            small =small?small:"";
+            common.httpRequest('/wechat/js/test.json','get',{small:small,big:big},function (res) {
+                index_obj.data.grown_up_list = res;
+                index_obj.data.grown_up_list = {
+                    year: ["全部品牌", "品牌1", "品牌2", "品牌3", "品牌4", "品牌5", "品牌6", "品牌7", "品牌8", "品牌9", "品牌10"],
+                    list: [
+                        {
+                            url: "../image/other/3.png",
+                            title: "智能宠物有着不通过感应系统和多种游戏玩法，让" +
+                            "孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。",
+                            href:"/view/good_detail.html",
+                            money:2700,
+                            year:"1-12岁"
+                        },
+                        {
+                            url: "../image/other/3.png",
+                            title: "智能宠物有着不通过感应系统和多种游戏玩法，让" +
+                            "孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。",
+                            href:"/view/good_detail.html",
+                            money:2700,
+                            year:"1-12岁"
+                        },
+                        {
+                            url: "../image/other/3.png",
+                            title: "智能宠物有着不通过感应系统和多种游戏玩法，让" +
+                            "孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。",
+                            href:"/view/good_detail.html",
+                            money:2700,
+                            year:"1-12岁"
+                        },
+                        {
+                            url: "../image/other/3.png",
+                            title: "智能宠物有着不通过感应系统和多种游戏玩法，让" +
+                            "孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。",
+                            href:"/view/good_detail.html",
+                            money:2700,
+                            year:"1-12岁"
+                        },
+                        {
+                            url: "../image/other/3.png",
+                            title: "智能宠物有着不通过感应系统和多种游戏玩法，让" +
+                            "孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。",
+                            href:"/view/good_detail.html",
+                            money:2700,
+                            year:"1-12岁"
+                        },
+                        {
+                            url: "../image/other/3.png",
+                            title: "智能宠物有着不通过感应系统和多种游戏玩法，让" +
+                            "孩子可以以尽情探索多种玩法以及更有趣的互动方式，宝贝在其他小伙伴面前会瞬间成为焦点。",
+                            href:"/view/good_detail.html",
+                            money:2700,
+                            year:"1-12岁"
+                        }
+                    ]
+                };   //假数据
+
+                //年龄选择
+                var yearlist ="";
+                var scroll_wid=0;
+                for(var i=0;i<index_obj.data.grown_up_list.year.length;i++){
+                    if(i==selectCont){
+                        yearlist += '<button class="active">'+index_obj.data.grown_up_list.year[i]+'</button>';
+                    }else{
+                        yearlist += '<button>'+index_obj.data.grown_up_list.year[i]+'</button>';
+                    }
+                }
+                $(".year-select .scroll").html(yearlist);
+                for(var i=0;i< $(".year-select .scroll button").length;i++){
+                    scroll_wid+=$($(".year-select .scroll button")[i]).outerWidth()+10;
+                }
+                $(".year-select .scroll").width(scroll_wid+'px');
+                //商品列表
+                var shopList = "";
+                for(var i=0;i<index_obj.data.grown_up_list.list.length;i++){
+                    shopList +='<li class="clear"><div class="fl"><a href="'+index_obj.data.grown_up_list.list[i].href +'"><img src="'+ index_obj.data.grown_up_list.list[i].url+
+                        '"></a> </div> <div class="fr"><h3><a href="'+index_obj.data.grown_up_list.list[i].href +'">'+index_obj.data.grown_up_list.list[i].title+'</a></h3><h4>'+ index_obj.data.grown_up_list.list[i].year+'</h4><p>市场参考价¥'+
+                        index_obj.data.grown_up_list.list[i].money+'</p></div></li>';
+                }
+                $(".grow-up .list ul").html(shopList);
+                $(".grow-up .list ul li .fl img").css("height", $(".grow-up .list ul li .fl img").width()+"px");
+                index_obj.choose_year();
+            })
+        },
+        //成长陪伴 - 选择品牌
+        choose_year:function () {
+            $(".year-select .scroll button").click(function () {
+                var index = $(this).index( ".year-select .scroll button");
+                var year_range = $(this).text();
+                if (year_range == "全部品牌") {
+                    index_obj.getShopList("","",0);
+                }else if(year_range.indexOf("-")==-1){
+                    index_obj.getShopList(parseInt(year_range),"",index);
+                }else{
+                    index_obj.getShopList(year_range.slice(0,year_range.indexOf("-")),parseInt(year_range.slice(year_range.indexOf("-")+1)),index);
+                }
+            })
+        },
+        cont_width:$(".content").width(),
+        //轮播图设置
+        banner:function () {
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                loop:true,
+                autoplay:3000
+            });
+        },
+        //弹框轮播
+        cover_banner:function(){
+            var cont=1;
+            var $swiperCont =  $(".index-wrap-cover .swiper-container1");
+            //滑动
+            function slide(direction){
+                if(!direction){
+                    if(cont==5){
+                        cont=1;
+                        $swiperCont.css('marginLeft','-100%');
+                    }
+                    cont++;
+                    $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},1000)
+                }else{
+                    if(cont==1){
+                        cont=5;
+                        $swiperCont.css('marginLeft','-500%');
+                    }
+                    cont--;
+                    $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},1000)
+                }
+            }
+            var h = setInterval(slide,3000);
+            //向左右滑动
+            var x,x1;
+            $swiperCont[0].addEventListener('touchstart',function (e) {
+                x = e.touches[0].pageX;
+                clearInterval(h);
+            });
+            $swiperCont[0].addEventListener('touchend',function (e) {
+                x1 = e.changedTouches[0].pageX;
+                if(x-x1>50){
+                    slide();
+                }
+                if(x1-x>50){
+                    slide('right');
+                }
+                h = setInterval(slide,3000);
+            })
+
+            //关闭
+            $(".index-wrap-cover .close").click(function () {
+                $(".index-wrap-cover").fadeOut(500);
+            })
+        },
+        //成长陪伴-上滑效果
+        slide_up:function () {
+            var outheight = $(".grow-up .top").outerHeight();
+            $(".grow-up .top").animate({"margin-top":-1*outheight+"px"},2000);
+        },
+        //导航切换
+        tab_change:function(){
+            $(".index-wrap .content").height($(window).height());
+            var ul_wid =0;
+            for(var i=0; i<$(".index-wrap>nav>ul>li").length;i++){
+                ul_wid +=$($(".index-wrap>nav>ul>li")[i]).outerWidth();
+            }
+            $(".index-wrap>nav>ul").width(ul_wid);
+            $(" .index-wrap .content .content-out").width($(".index-wrap>nav>ul>li").length*100+'%');
+            $(" .index-wrap .content .content-out .part").width(100/($(".index-wrap>nav>ul>li").length)+'%');
+
+            $(".index-wrap>nav>ul>li").click(function (event) {
+                $("body").scrollTop("0");
+                $(".index-wrap .content .content-out .part").height($(window).height());
+                var num = $(this).attr("data-tab");
+                $(".index-wrap>nav>ul>li").removeClass("active");
+                $(this).addClass("active");
+                $(".content .content-out").animate({left:-num*index_obj.cont_width+"px"},1000);
+                //成长陪伴的top位置重置
+                setTimeout(function () {
+                    $(".grow-up .top").css({"margin-top":"0px"});
+                },1000);
+                if(num==1){
+                    index_obj.grown_up();
+                }
+            })
+        },
+    };
+
+    $(function () {
+        //导航切换
+        index_obj.tab_change();
+        index_obj.isfirst();         //首页 --是否首次打开
+        index_obj.lunbo_init();  //首页 - 轮播数据初始化
+        index_obj.hot_new();    //首页 - 新品推荐初始化
+        index_obj.vip_create();    //首页 - 成为会员_
+
+
+        //下拉刷新
+        $(document.body).pullToRefresh();
+        $(document.body).on("pull-to-refresh", function() {
+            var refreshClose = $(this);
+
+            /*-------下拉刷新的内容-------------------*/
+            index_obj.hot_new();    //首页 - 新品推荐初始化
+            /*-------下拉刷新的内容结束-------------------*/
+            setTimeout(function () {
+                refreshClose.pullToRefreshDone();
+            },500);
+        });
+        $(document.body).pullToRefreshDone();
+
+        //底部菜单
+        //第一个为要加入的类名 第二个表示第几个样式为红色 第三个参数表示购物车数量
+        common.footer("index-wrap",1,3);
+    })
+</script>
+</body>
+</html>

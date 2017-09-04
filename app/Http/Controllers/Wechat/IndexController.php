@@ -9,6 +9,15 @@ use App\Http\Controllers\Controller;
 class IndexController extends BaseController
 {
     /**
+     * 首页面
+     */
+    public function index()
+    {
+        $url = url('api/index');
+        $result = weixinCurl($url);
+        return view('wechat.index.index',compact('result'));
+    }
+    /**
      * 验证服务器配置
      * @param Request $request
      * @return bool

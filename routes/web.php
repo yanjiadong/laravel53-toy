@@ -23,6 +23,11 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/valid','IndexController@valid');
     Route::any('/index/menu','IndexController@menu');
+    Route::any('/index/index','IndexController@index')->name('wechat.index.index');
+
+
+    Route::get('/user/center','UserController@center')->name('wechat.user.center');
+    Route::get('/user/help','UserController@help')->name('wechat.user.help');
 });
 
 //后台路由管理

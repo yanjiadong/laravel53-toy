@@ -75,7 +75,7 @@ var common = {
     },
 
     /*底部菜单*/
-    footer:function (parentClass,num,shop_num) {
+   /* footer:function (parentClass,num,shop_num) {
         if(shop_num){
             var footcont ='<footer><table><tr><td class="active"><a href="/view/index.html"><div>' +
                 '<i class="icon-footer-home"></i></div><div class="font">首页</div></a></td><td> ' +
@@ -96,7 +96,7 @@ var common = {
             $("."+parentClass+" footer td").removeClass('active');
             $("."+parentClass+" footer td").eq(num-1).addClass('active');
         }
-    },
+    },*/
     setCookie: function (name, value, minutes) {
         //var Days = 30;
         minutes = minutes || 43200;
@@ -142,4 +142,4 @@ var checkInput = {
         var regex = /^1[3|4|5|7|8]\d{9}$/;
         return regex.test(phone);
     }
-}
+};

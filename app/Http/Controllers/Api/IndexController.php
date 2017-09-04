@@ -27,8 +27,8 @@ class IndexController extends BaseController
     {
         $categorys = Category::all();
         $banners = Banner::all();
-        $new_goods = Good::with(['category_tag'])->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->first();
-        $goods = Good::with(['category_tag'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->limit(4)->get();
+        $new_goods = Good::with(['brand'])->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->first();
+        $goods = Good::with(['brand'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->get();
         $activities = Activity::where('type',1)->get();
 
         $this->ret['info'] = ['categorys'=>$categorys,'banners'=>$banners,'new_goods'=>$new_goods,'goods'=>$goods,'activities'=>$activities];
