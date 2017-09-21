@@ -24,6 +24,13 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/valid','IndexController@valid');
     Route::any('/index/menu','IndexController@menu');
     Route::any('/index/index','IndexController@index')->name('wechat.index.index');
+    Route::any('/index/category/{category_id?}/{brand_id?}','IndexController@category')->name('wechat.index.category');
+    Route::any('/index/good/{good_id}','IndexController@good')->name('wechat.index.good');
+
+    //查看购物车
+    Route::any('/index/cart','IndexController@cart')->name('wechat.index.cart');
+
+    Route::any('/index/getOpenId','IndexController@getOpenId');
 
 
     Route::get('/user/center','UserController@center')->name('wechat.user.center');
