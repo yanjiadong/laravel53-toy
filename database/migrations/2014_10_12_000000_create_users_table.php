@@ -15,9 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->default('');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->default('');
             $table->string('telephone',11)->default('')->comment('手机号');
             $table->tinyInteger('status')->default(1)->comment('状态 1=激活 2=禁用');
             $table->tinyInteger('is_vip')->default(0)->comment('状态 1=是 0=否');
