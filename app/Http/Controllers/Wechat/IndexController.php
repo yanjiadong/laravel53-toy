@@ -29,6 +29,8 @@ class IndexController extends BaseController
         {
             $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->wechat_appid."&secret=".$this->wechat_appsecret."&code={$code}&grant_type=authorization_code";
             $result = weixinCurl($url);
+            print_r($result);
+            die;
             if(isset($result['openid']))
             {
                 session(['open_id'=>$result['openid']]);
