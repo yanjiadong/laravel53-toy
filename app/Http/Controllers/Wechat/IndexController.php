@@ -32,7 +32,7 @@ class IndexController extends BaseController
 
             if(isset($result['openid']))
             {
-                //session(['open_id'=>$result['openid']]);
+                session(['open_id'=>$result['openid']]);
 
                 $info = User::where('wechat_openid',$result['openid'])->first();
                 if(empty($info))
