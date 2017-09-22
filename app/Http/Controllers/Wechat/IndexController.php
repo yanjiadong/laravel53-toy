@@ -74,6 +74,8 @@ class IndexController extends BaseController
     public function index()
     {
         $this->check_user();
+        $openid = session('open_id');
+        echo $openid;
         $url = url('api/index');
         $result = weixinCurl($url);
         return view('wechat.index.index',compact('result'));
