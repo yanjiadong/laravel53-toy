@@ -40,8 +40,6 @@ class IndexController extends BaseController
                     $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$result['access_token']}&openid={$result['openid']}&lang=zh_CN";
                     $info = weixinCurl($url);
 
-                    print_r($info);
-                    die;
                     $data = array(
                         'name'=>$info['nickname'],
                         'email'=>'',
