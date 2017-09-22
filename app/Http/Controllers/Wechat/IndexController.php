@@ -29,17 +29,19 @@ class IndexController extends BaseController
         {
             $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->wechat_appid."&secret=".$this->wechat_appsecret."&code={$code}&grant_type=authorization_code";
             $result = weixinCurl($url);
-            print_r($result);
-            die;
+
             if(isset($result['openid']))
             {
-                session(['open_id'=>$result['openid']]);
+                //session(['open_id'=>$result['openid']]);
 
                 $info = User::where('wechat_openid',$result['openid'])->first();
                 if(empty($info))
                 {
                     $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$result['access_token']}&openid={$result['openid']}&lang=zh_CN";
                     $info = weixinCurl($url);
+
+                    print_r($info);
+                    die;
                     $data = array(
                         'name'=>$info['nickname'],
                         'email'=>'',
