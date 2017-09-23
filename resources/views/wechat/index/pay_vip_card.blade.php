@@ -32,15 +32,16 @@
                 //alert(res.err_code+res.err_desc+res.err_msg);
                 if(res.err_msg === "get_brand_wcpay_request:ok") {
                     //支付成功
-                    var url = '<?php echo site_url('wap/index/orderList');?>';
-                    layer_alert_url('支付成功',url);
-                    //window.location.href = url;
+                    var url = '{{url('wechat/user/center')}}';
+                    common.alert_tip("支付成功",'#323232','支付成功',function () {
+                        location.href=url;
+                    });
                 }
                 else
                 {
                     //alert(res.err_code);
-                    //alert('支付失败');
-                    layer_btn_msg('支付失败');
+                    alert('支付失败');
+                    //layer_btn_msg('支付失败');
                 }
             }
         );
