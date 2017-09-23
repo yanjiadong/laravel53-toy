@@ -5,8 +5,8 @@ require_once(__DIR__ . '/lib/WxPay.Notify.php');
 require_once(__DIR__ . '/log.php');
 
 //初始化日志
-//$logHandler= new CLogFileHandler(FCPATH."logs/".date('Y-m-d').'.log');
-//$log = Log::Init($logHandler, 15);
+$logHandler= new CLogFileHandler(public_path()."/logs/".date('Y-m-d').'.log');
+$log = Log::Init($logHandler, 15);
 
 class Notify extends WxPayNotify
 {
@@ -16,7 +16,7 @@ class Notify extends WxPayNotify
         $input = new WxPayOrderQuery();
         $input->SetTransaction_id($transaction_id);
         $result = WxPayApi::orderQuery($input);
-        //Log::DEBUG("query:" . json_encode($result));
+        Log::DEBUG("query:" . json_encode($result));
         if(array_key_exists("return_code", $result)
             && array_key_exists("result_code", $result)
             && $result["return_code"] == "SUCCESS"
