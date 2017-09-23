@@ -189,7 +189,7 @@ if(!function_exists('WxJsPayCallback'))
                 }
 
                 //押金明细
-                DB::table('user_pay_record')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$order_info->money]);
+                DB::table('user_pay_records')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$order_info->money]);
             }
         }
         //include_once __DIR__ . "/wx_js_pay/Notify.php";
