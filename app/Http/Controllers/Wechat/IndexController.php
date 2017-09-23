@@ -58,6 +58,8 @@ class IndexController extends BaseController
                     //dd($success);
                     session(['user_id'=>$success->id]);
 
+                    return redirect()->route('wechat.index.index');
+
                     $to_url = url('wechat/index/index');
                     Header("Location: $to_url");
                     exit();
