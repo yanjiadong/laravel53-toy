@@ -170,11 +170,28 @@ if(!function_exists('WxJsPay'))
 
 if(!function_exists('WxJsPayCallback'))
 {
-    function WxJsPayCallback()
+    function WxJsPayCallback($out_trade_no)
     {
-        include_once __DIR__ . "/wx_js_pay/Notify.php";
-        $notify = new Notify();
-        $notify->Handle(false);
+        $type = substr($out_trade_no, 0, 1);
+        if($type == 'v')
+        {
+            //会员支付
+            $order_info = DB::table('vip_card_pays')->where('order_code',$out_trade_no)->first();
+            if($order_info)
+            {
+                DB::table('vip_card_pays')->where('order_code',$out_trade_no)->update(['pay_status'=>1]);
+
+                $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
+                if($user_info && $user_info->is_vip==0)
+                {
+                    $not_can_use_money = $user_info->not_can_use_money + $order_info['money'];
+                    DB::table('users')->where('id',$order_info->user_id)->update(['is_vip'=>1,'not_can_use_money'=>$not_can_use_money]);
+                }
+            }
+        }
+        //include_once __DIR__ . "/wx_js_pay/Notify.php";
+        //$notify = new Notify();
+        //$notify->Handle(false);
     }
 }
 
