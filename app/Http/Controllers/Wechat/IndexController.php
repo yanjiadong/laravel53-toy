@@ -159,10 +159,12 @@ class IndexController extends BaseController
 
         $data['user_id'] = $user_id;
         $data['price'] = $total_fee;
+        $data['money'] = $info->money;
         $data['vip_card_id'] = $vip_card_id;
         $data['pay_status'] = 0;
         $data['status'] = 1;
         $data['days'] = $days;
+        $data['order_code'] = $out_trade_no;
 
         VipCardPay::create($data);
 
@@ -172,7 +174,7 @@ class IndexController extends BaseController
 
     public function pay_vip_card_callback()
     {
-
+        WxJsPayCallback();
     }
     /**
      * 验证服务器配置

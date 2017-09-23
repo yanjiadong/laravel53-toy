@@ -20,7 +20,9 @@ class CreateVipCardPaysTable extends Migration
             $table->tinyInteger('pay_status')->default(0)->comment('0未支付 1支付成功');
             $table->tinyInteger('status')->default(1)->comment('1正常 -1过期');
             $table->integer('days')->default(0)->comment('天数');
-            $table->decimal('price',10,2)->default(0.00)->comment('价格');
+            $table->decimal('price',10,2)->default(0.00)->comment('订单总价');
+            $table->decimal('money',10,2)->default(0.00)->comment('押金');
+            $table->string('order_code',64)->default('')->comment('订单编号');
             $table->timestamps();
         });
     }

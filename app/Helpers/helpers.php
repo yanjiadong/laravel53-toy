@@ -168,4 +168,14 @@ if(!function_exists('WxJsPay'))
     }
 }
 
+if(!function_exists('WxJsPayCallback'))
+{
+    function WxJsPayCallback()
+    {
+        include_once __DIR__ . "/wx_js_pay/notify.php";
+        $notify = new Notify();
+        $notify->Handle(false);
+    }
+}
+
 
