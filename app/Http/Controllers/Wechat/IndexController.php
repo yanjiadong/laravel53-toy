@@ -17,7 +17,7 @@ class IndexController extends BaseController
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        if(empty($openid))
+        if(empty($openid) || empty($user_id))
         {
             $url = url('wechat/index/getOpenId');
             Header("Location: $url");
@@ -61,6 +61,10 @@ class IndexController extends BaseController
                     /*$to_url = url('wechat/index/index');
                     Header("Location: $to_url");
                     exit();*/
+                }
+                else
+                {
+                    session(['user_id'=>$info->id]);
                 }
             }
 
@@ -127,6 +131,7 @@ class IndexController extends BaseController
      */
     public function choose_vip()
     {
+        $this->check_user();
         $user_id = session('user_id');
         return view('wechat.index.choose_vip',compact('user_id'));
     }
