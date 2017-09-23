@@ -184,11 +184,13 @@
         },
         //续费
         renew:function(){
-            if(user_center.data.userInfo.isVip){
+            var href = '{{url('wechat/index/choose_vip')}}';
+            location.href = href;
+            /*if(user_center.data.userInfo.isVip){
                 location.href='choose_vip.html?time='+user_center.data.userInfo.num;
             }else{
                 location.href='choose_vip.html?time=0';
-            }
+            }*/
         },
         //分享给朋友
         share:function () {

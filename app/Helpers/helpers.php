@@ -187,6 +187,9 @@ if(!function_exists('WxJsPayCallback'))
                     $not_can_use_money = $user_info->not_can_use_money + $order_info->money;
                     DB::table('users')->where('id',$order_info->user_id)->update(['is_vip'=>1,'not_can_use_money'=>$not_can_use_money]);
                 }
+
+                //押金明细
+                DB::table('user_pay_record')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$order_info->money]);
             }
         }
         //include_once __DIR__ . "/wx_js_pay/Notify.php";
