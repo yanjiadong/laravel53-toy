@@ -172,7 +172,7 @@ if(!function_exists('WxJsPayCallback'))
 {
     function WxJsPayCallback()
     {
-        include_once __DIR__ . "/wx_js_pay/notify.php";
+        include_once __DIR__ . "/wx_js_pay/Notify.php";
         $notify = new Notify();
         $notify->Handle(false);
     }
