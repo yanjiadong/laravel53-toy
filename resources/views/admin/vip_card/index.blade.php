@@ -31,7 +31,7 @@
                                 <th>序号</th>
                                 <th>会员卡名称</th>
                                 <th>金额</th>
-                                <th>有效天数</th>
+                                {{--<th>有效天数</th>--}}
                                 <th>押金</th>
                                 <th>操作</th>
                             </tr>
@@ -42,7 +42,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $card->title }}</td>
                                     <td>{{ $card->price }}</td>
-                                    <td>{{ $card->days }}</td>
+                                    {{--<td>{{ $card->days }}</td>--}}
                                     <td>{{ $card->money }}</td>
                                     <td>
                                         <a href="{{ url("admin/vip_cards/$card->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini">修改</span></a>

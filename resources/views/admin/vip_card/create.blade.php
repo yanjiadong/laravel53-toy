@@ -30,16 +30,26 @@
                                 <input type="text" value="" class="validate[required,custom[stock]]" id="price" name="price"/>
                             </div>
                         </div>
-                        <div class="row-form clearfix">
+                        {{--<div class="row-form clearfix">
                             <div class="span3">有效天数：</div>
                             <div class="span9">
                                 <input type="text" value="" class="validate[required,custom[stock]]" id="days" name="days"/>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="row-form clearfix">
                             <div class="span3">押金：</div>
                             <div class="span9">
                                 <input type="text" value="" class="validate[required,custom[stock]]" id="money" name="money"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">类型：</div>
+                            <div class="span9">
+                                <select name="select" class="validate[required]" id="type">
+                                    <option value="1">月卡</option>
+                                    <option value="2">季度卡</option>
+                                    <option value="3">半年卡</option>
+                                </select>
                             </div>
                         </div>
                         <div class="footer tar">
@@ -59,11 +69,12 @@
                 if ($("#validation").validationEngine('validate')) {
                     var title = $("#title").val();
                     var price = $("#price").val();
-                    var days = $("#days").val();
+                    //var days = $("#days").val();
                     var money = $("#money").val();
+                    var type = $("#type").val();
 
                     $.post("{{ route('vip_cards.store') }}",
-                        {title:title,price:price,days:days,money:money},
+                        {title:title,price:price,money:money,type:type},
                         function(data){
                             cTip(data);
                         }, "json");

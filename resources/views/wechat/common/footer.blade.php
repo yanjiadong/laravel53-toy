@@ -15,7 +15,7 @@
                 </a>
             </td>
             <td>
-                <a href="/view/toys_car.html">
+                <a href="{{url('wechat/index/cart')}}">
                     <div><i class="icon-footer-shop-car"><span>3</span></i></div>
                     <div class="font">玩具箱 </div>
                 </a>

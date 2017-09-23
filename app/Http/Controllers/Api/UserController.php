@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\UserAddress;
+use App\VipCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
@@ -99,6 +100,13 @@ class UserController extends BaseController
     {
         UserAddress::destroy($request->get('address_id'));
         $this->ret['msg'] = '删除成功';
+        return $this->ret;
+    }
+
+    public function vip_cards()
+    {
+        $list = VipCard::all();
+        $this->ret['info'] = ['list'=>$list];
         return $this->ret;
     }
 }

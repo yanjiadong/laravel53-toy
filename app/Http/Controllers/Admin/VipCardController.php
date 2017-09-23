@@ -52,9 +52,10 @@ class VipCardController extends BaseController
     public function store(Request $request)
     {
         $data['title'] = $request->get('title');
-        $data['days'] = $request->get('days');
+        //$data['days'] = $request->get('days');
         $data['price'] = $request->get('price');
         $data['money'] = $request->get('money');
+        $data['type'] = $request->get('type');
 
         VipCard::create($data);
         return alert(route('vip_cards.index'),1);
@@ -97,9 +98,10 @@ class VipCardController extends BaseController
     public function update(Request $request, $id)
     {
         $data['title'] = $request->get('title');
-        $data['days'] = $request->get('days');
+        //$data['days'] = $request->get('days');
         $data['price'] = $request->get('price');
         $data['money'] = $request->get('money');
+        $data['type'] = $request->get('type');
 
         VipCard::where('id',$id)->update($data);
         return alert(route('vip_cards.index'),1);

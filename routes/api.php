@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     //加入玩具箱
     Route::post('/cart/add','CartController@add');
-    Route::delete('/cart/delete','CartController@delete');
+    Route::post('/cart/delete','CartController@delete');
     //获取玩具箱
     Route::post('/cart/index','CartController@index');
     //选中时判断玩具的库存
@@ -53,6 +53,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/address/edit','UserController@edit_address');
     Route::post('/address/info/{id}','UserController@get_address');
     Route::delete('/address/delete','UserController@delete_address');
+
+    //获取会员卡列表
+    Route::post('/user/vip_cards','UserController@vip_cards');
 
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');

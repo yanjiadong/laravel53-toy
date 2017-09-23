@@ -121,4 +121,51 @@ if(!function_exists('weixinCurl'))
     }
 }
 
+if(!function_exists('WxJsPay'))
+{
+    function WxJsPay($out_trade_no, $total_fee)
+    {
+        header("content-type:text/html;charset=utf-8");
+        $total_fee = doubleval($total_fee*100);
+
+        include_once __DIR__ . "/wx_js_pay/JsApiPay.php";
+        include_once __DIR__ . "/wx_js_pay/log.php";
+        include_once __DIR__ . "/wx_js_pay/lib/WxPayApi.php";
+
+        //初始化日志
+        //$logHandler= new CLogFileHandler("/logs/".date('Y-m-d').'.log');
+        //$log = Log::Init($logHandler, 15);
+
+
+        $input = new WxPayUnifiedOrder();
+
+        //①、获取用户openid
+        $tools = new JsApiPay();
+        $openId = $tools->GetOpenid();
+
+        //echo $openId;
+        //②、统一下单
+        $input = new WxPayUnifiedOrder();
+        $input->SetBody("订单支付".$out_trade_no);
+        //$input->SetAttach("test");
+        $input->SetOut_trade_no($out_trade_no);
+        $input->SetTotal_fee($total_fee);
+        //$input->SetTime_start(date("YmdHis"));
+        //$input->SetTime_expire(date("YmdHis", time() + 600));
+        //$input->SetGoods_tag("test");
+        $input->SetNotify_url(url('wechat/index/pay_vip_card_callback'));
+        $input->SetTrade_type("JSAPI");
+        $input->SetOpenid($openId);
+        //Log::DEBUG("openid:" . $openId);
+        $order = WxPayApi::unifiedOrder($input);
+//echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
+        //print_r($order);
+        Log::DEBUG("apiorder:" . implode(' ',$order));
+        $jsApiParameters = $tools->GetJsApiParameters($order);
+
+        Log::DEBUG("apiparam:" . $jsApiParameters);
+        return $jsApiParameters;
+    }
+}
+
 

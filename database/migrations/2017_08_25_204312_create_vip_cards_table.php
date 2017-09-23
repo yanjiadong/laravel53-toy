@@ -19,6 +19,7 @@ class CreateVipCardsTable extends Migration
             $table->integer('price')->default(0)->comment('押金');
             $table->integer('days')->default(0)->comment('有效天数');
             $table->integer('money')->default(0)->comment('所需押金');
+            $table->tinyInteger('type')->default(0)->comment('类型 1月卡 2季度卡  3半年卡');
             $table->timestamps();
         });
     }

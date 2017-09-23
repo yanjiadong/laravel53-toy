@@ -32,6 +32,11 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
 
     Route::any('/index/getOpenId','IndexController@getOpenId');
 
+    //成为会员
+    Route::any('/index/choose_vip','IndexController@choose_vip');
+    Route::any('/index/pay_vip_card/{vip_card_id}','IndexController@pay_vip_card');
+    Route::any('/index/pay_vip_card_callback','IndexController@pay_vip_card_callback');
+
 
     Route::get('/user/center','UserController@center')->name('wechat.user.center');
     Route::get('/user/help','UserController@help')->name('wechat.user.help');

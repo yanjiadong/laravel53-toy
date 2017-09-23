@@ -119,27 +119,27 @@
         <ul class="clear swiper-container1">
             <li class="fl swiper-slide">
                 <a href="children_interesting_compilation.html">
-                    <img src="../image/common/img_dialog_4.png">
+                    <img src="/wechat/image/common/img_dialog_4.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
                 <a href="children_interesting_compilation.html">
-                    <img src="../image/common/img_dialog_1.png">
+                    <img src="/wechat/image/common/img_dialog_1.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
                 <a href="children_interesting_compilation.html">
-                    <img src="../image/common/img_dialog_2.png">
+                    <img src="/wechat/image/common/img_dialog_2.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
                 <a href="children_interesting_compilation.html">
-                    <img src="../image/common/img_dialog_3.png">
+                    <img src="/wechat/image/common/img_dialog_3.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
                 <a href="children_interesting_compilation.html">
-                    <img src="../image/common/img_dialog_4.png">
+                    <img src="/wechat/image/common/img_dialog_4.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
@@ -198,7 +198,8 @@
                 if(res.info.new_goods)
                 {
                     //新品
-                    newData ='<div class="fl"><a href="'+res.info.new_goods.href+'"><img src="'+res.info.new_goods.picture+'"></a></div><div class="fr"><a href="'+res.info.new_goods.href+'"><h3>'+
+                    var href = "{{url('wechat/index/good')}}"+'/'+res.info.new_goods.id;
+                    newData ='<div class="fl"><a href="'+href+'"><img src="'+res.info.new_goods.picture+'"></a></div><div class="fr"><a href="'+href+'"><h3>'+
                         res.info.new_goods.title+'</h3><p>市场参考价¥'+res.info.new_goods.price+'</p><h4>'+res.info.new_goods.brand.title+'</h4></a></div>';
                     $(".recommend-cont").html(newData);
                 }
@@ -208,13 +209,14 @@
                     //console.log(res.info.goods);
                     //热门
                     for(var i=0;i<res.info.goods.length;i++){
+                        var href = "{{url('wechat/index/good')}}"+'/'+res.info.goods[i].id;
                         //判断是否有库存
                         if(res.info.goods[i].store <= 0){
-                            hotData +='<li class="fl"><a href="'+res.info.goods[i].href+'"><img src="'+ res.info.goods[i].picture+'"><span class="active">'+
+                            hotData +='<li class="fl"><a href="'+href+'"><img src="'+ res.info.goods[i].picture+'"><span class="active">'+
                                 '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+res.info.goods[i].price+'</p><h4>'+res.info.goods[i].brand.title+
                                 '</h4></li>';
                         }else{
-                            hotData +='<li class="fl"><a href="'+res.info.goods[i].href+'"><img src="'+ res.info.goods[i].picture+'">'+'<h3>'
+                            hotData +='<li class="fl"><a href="'+href+'"><img src="'+ res.info.goods[i].picture+'">'+'<h3>'
                                 +res.info.goods[i].title+'</h3><p>市场价¥'+res.info.goods[i].price+'</p><h4>'+res.info.goods[i].brand.title+
                                 '</h4></li>';
                         }
@@ -229,9 +231,10 @@
         vip_create:function () {
             common.httpRequest('/wechat/js/test.json','get',null,function (res) {
                 index_obj.data.vipData = res;
-                index_obj.data.vipData ={url:"../image/other/vip-bg.jpg",time:5};   //假数据
+                index_obj.data.vipData ={url:"/wechat/image/other/vip-bg.jpg",time:5};   //假数据
                 $(".join-member").css({"background-image":index_obj.data.vipData.url,"background-size":index_obj.cont_width});
-                $(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
+                //$(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
+                $(".join-member a").attr("href",'{{url('wechat/index/choose_vip')}}');
             });
         },
         cont_width:$(".content").width(),

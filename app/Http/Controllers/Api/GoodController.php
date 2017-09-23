@@ -23,6 +23,7 @@ class GoodController extends BaseController
                 $tags[]= ['title'=>$tag->title,'desc'=>$tag->desc];
             }
         }
+
         $this->ret['info'] = ['good'=>$good,'tags'=>$tags];
         return $this->ret;
     }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\Cart;
 use App\User;
+use App\VipCard;
+use App\VipCardPay;
 use App\WechatAccessToken;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -50,7 +53,8 @@ class IndexController extends BaseController
                         'wechat_avatar'=>$info['headimgurl'],
                     );
 
-                    User::create($data);
+                    $success = User::create($data);
+                    session(['user_id'=>$success->id]);
 
                     $to_url = url('wechat/index/index');
                     Header("Location: $to_url");
@@ -73,9 +77,10 @@ class IndexController extends BaseController
      */
     public function index()
     {
+        //session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+        //session(['user_id'=>1]);
         $this->check_user();
         $openid = session('open_id');
-        echo $openid;
         $url = url('api/index');
         $result = weixinCurl($url);
         return view('wechat.index.index',compact('result'));
@@ -97,7 +102,11 @@ class IndexController extends BaseController
      */
     public function good(Request $request, $good_id)
     {
-        return view('wechat.index.good',compact('good_id'));
+        $user_id = session('user_id');
+
+        //购物车数量
+        $cart_num = Cart::where('user_id',$user_id)->count();
+        return view('wechat.index.good',compact('good_id','user_id','cart_num'));
     }
 
     /**
@@ -105,10 +114,57 @@ class IndexController extends BaseController
      */
     public function cart(Request $request)
     {
-        $user_id = 1;
+        $user_id = session('user_id');
+
         return view('wechat.index.cart',compact('user_id'));
     }
 
+    /**
+     * 成为会员
+     */
+    public function choose_vip()
+    {
+        $user_id = session('user_id');
+        return view('wechat.index.choose_vip',compact('user_id'));
+    }
+
+    public function pay_vip_card($vip_card_id)
+    {
+        $user_id = session('user_id');
+        $info = VipCard::find($vip_card_id);
+
+        switch ($info->type)
+        {
+            case 1:
+                $days = 30;
+                break;
+            case 2:
+                $days = 90;
+                break;
+            case 3:
+                $days = 180;
+                break;
+        }
+        $out_trade_no = 'v'.get_order_code($user_id);
+        $total_fee = 0.01;
+
+        $data['user_id'] = $user_id;
+        $data['price'] = $total_fee;
+        $data['vip_card_id'] = $vip_card_id;
+        $data['pay_status'] = 0;
+        $data['status'] = 1;
+        $data['days'] = $days;
+
+        VipCardPay::create($data);
+
+        $jsApiParameters = WxJsPay($out_trade_no, $total_fee);
+        return view('wechat.index.pay_vip_card',compact('user_id','jsApiParameters'));
+    }
+
+    public function pay_vip_card_callback()
+    {
+
+    }
     /**
      * 验证服务器配置
      * @param Request $request

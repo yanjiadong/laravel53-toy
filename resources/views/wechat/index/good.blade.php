@@ -171,7 +171,7 @@
                     year:res.info.good.brand.title,
                     params:[{name:"品牌所属",cont:res.info.good.brand_country},{name:"材质",cont:res.info.good.material},{name:"重量",cont:res.info.good.weight},{name:"作用",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
-                    car_num:{num:3}
+                    car_num:{num:'{{$cart_num}}'}
 
                 };   //假数据
 
@@ -179,6 +179,7 @@
                 if(goodDetail_obj .detail_data.lunbo.length>0){
                     var lunbo_content="";
                     $(".lunbo .swiper-wrapper").html("");
+
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo.length;i++){
                         if(goodDetail_obj .detail_data.lunbo[i].state==0){
                             lunbo_content ='<div class="swiper-slide video"><video width="100%" height="280"><source src="'+goodDetail_obj .detail_data.lunbo[i].url+
@@ -285,7 +286,9 @@
         },
         //加入购物车
         join:function () {
-            common.httpRequest('../js/test.json','get',null,function (res) {
+            var good_id = '{{$good_id}}';
+            var user_id = '{{$user_id}}';
+            common.httpRequest('{{url('api/cart/add')}}','post',{good_id:good_id,user_id:user_id},function (res) {
                 goodDetail_obj.init();
                 common.success_tip("添加成功！")
             })
