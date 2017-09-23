@@ -54,6 +54,8 @@ class IndexController extends BaseController
                     );
 
                     $success = User::create($data);
+                    echo $success->id;
+                    dd($success);
                     session(['user_id'=>$success->id]);
 
                     $to_url = url('wechat/index/index');
@@ -223,7 +225,7 @@ class IndexController extends BaseController
             {
                 "name":"租编程玩具",
                 "type":"view",
-                "url":"http://toy.yanjiadong.net"
+                "url":"http://toy.yanjiadong.net/wechat/index/index"
             },
           {
                "name":"我的订单",
