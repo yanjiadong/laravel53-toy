@@ -54,8 +54,8 @@ class IndexController extends BaseController
                     );
 
                     $success = User::create($data);
-                    echo $success->id;
-                    dd($success);
+                    //echo $success->id;
+                    //dd($success);
                     session(['user_id'=>$success->id]);
 
                     $to_url = url('wechat/index/index');
