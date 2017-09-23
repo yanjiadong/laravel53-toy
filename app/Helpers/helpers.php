@@ -123,7 +123,7 @@ if(!function_exists('weixinCurl'))
 
 if(!function_exists('WxJsPay'))
 {
-    function WxJsPay($out_trade_no, $total_fee)
+    function WxJsPay($out_trade_no, $total_fee, $openid)
     {
         header("content-type:text/html;charset=utf-8");
         $total_fee = doubleval($total_fee*100);
@@ -141,7 +141,7 @@ if(!function_exists('WxJsPay'))
 
         //①、获取用户openid
         $tools = new JsApiPay();
-        $openId = $tools->GetOpenid();
+        //$openId = $tools->GetOpenid();
 
         //echo $openId;
         //②、统一下单
@@ -155,7 +155,7 @@ if(!function_exists('WxJsPay'))
         //$input->SetGoods_tag("test");
         $input->SetNotify_url(url('wechat/index/pay_vip_card_callback'));
         $input->SetTrade_type("JSAPI");
-        $input->SetOpenid($openId);
+        $input->SetOpenid($openid);
         //Log::DEBUG("openid:" . $openId);
         $order = WxPayApi::unifiedOrder($input);
 //echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';

@@ -139,6 +139,7 @@ class IndexController extends BaseController
     public function pay_vip_card($vip_card_id)
     {
         $user_id = session('user_id');
+        $openid = session('open_id');
         $info = VipCard::find($vip_card_id);
 
         switch ($info->type)
@@ -165,7 +166,7 @@ class IndexController extends BaseController
 
         VipCardPay::create($data);
 
-        $jsApiParameters = WxJsPay($out_trade_no, $total_fee);
+        $jsApiParameters = WxJsPay($out_trade_no, $total_fee, $openid);
         return view('wechat.index.pay_vip_card',compact('user_id','jsApiParameters'));
     }
 
