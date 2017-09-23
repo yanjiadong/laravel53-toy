@@ -160,10 +160,10 @@ if(!function_exists('WxJsPay'))
         $order = WxPayApi::unifiedOrder($input);
 //echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
         //print_r($order);
-        Log::DEBUG("apiorder:" . implode(' ',$order));
+        //Log::DEBUG("apiorder:" . implode(' ',$order));
         $jsApiParameters = $tools->GetJsApiParameters($order);
 
-        Log::DEBUG("apiparam:" . $jsApiParameters);
+        //Log::DEBUG("apiparam:" . $jsApiParameters);
         return $jsApiParameters;
     }
 }
