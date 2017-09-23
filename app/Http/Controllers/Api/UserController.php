@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\UserAddress;
+use App\UserPayRecord;
 use App\VipCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,28 @@ use DB;
 
 class UserController extends BaseController
 {
+    public function deposit_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $list = UserPayRecord::where(['user_id'=>$user_id,'type'=>1])->get()->toArray();
+        if(!empty($list))
+        {
+            foreach ($list as &$v)
+            {
+                $v['pay_type_status'] = '提现';
+                if($v['pay_type']==1)
+                {
+                    $v['pay_type_status'] = '充值';
+                }
+            }
+        }
+        $this->ret['info'] = ['list'=>$list];
+        return $this->ret;
+    }
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function add_address(Request $request)
     {
         $data['user_id'] = $request->get('user_id');

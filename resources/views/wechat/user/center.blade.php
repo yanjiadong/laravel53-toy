@@ -220,7 +220,8 @@
         },
         //会员押金
         goDdeposit:function () {
-            location.href='deposit.html?yajin='+user_center.data.userInfo.money+'&id='+user_center.data.userInfo.id+'&cashState='+user_center.data.userInfo.cash;
+            //location.href='deposit.html?yajin='+user_center.data.userInfo.money+'&id='+user_center.data.userInfo.id+'&cashState='+user_center.data.userInfo.cash;
+            location.href="{{url('wechat/user/deposit')}}";
         },
         //优惠抵用券
         goChooseVoucher:function () {

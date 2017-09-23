@@ -57,6 +57,9 @@ Route::group(['namespace' => 'Api'], function () {
     //获取会员卡列表
     Route::post('/user/vip_cards','UserController@vip_cards');
 
+    //获取押金明细
+    Route::post('/user/deposit_list','UserController@deposit_list');
+
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');
 

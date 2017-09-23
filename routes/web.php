@@ -40,6 +40,8 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
 
     Route::get('/user/center','UserController@center')->name('wechat.user.center');
     Route::get('/user/help','UserController@help')->name('wechat.user.help');
+    Route::get('/user/deposit','UserController@deposit')->name('wechat.user.deposit');
+    Route::get('/user/deposit_list','UserController@deposit_list')->name('wechat.user.deposit_list');
 });
 
 //后台路由管理
