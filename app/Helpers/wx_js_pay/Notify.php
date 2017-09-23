@@ -40,7 +40,7 @@ class Notify extends WxPayNotify
                         $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
                         if($user_info && $user_info->is_vip==0)
                         {
-                            $not_can_use_money = $user_info->not_can_use_money + $order_info['money'];
+                            $not_can_use_money = $user_info->not_can_use_money + $order_info->money;
                             DB::table('users')->where('id',$order_info->user_id)->update(['is_vip'=>1,'not_can_use_money'=>$not_can_use_money]);
                         }
                     }

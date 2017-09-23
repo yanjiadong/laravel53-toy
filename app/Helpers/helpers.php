@@ -170,9 +170,9 @@ if(!function_exists('WxJsPay'))
 
 if(!function_exists('WxJsPayCallback'))
 {
-    function WxJsPayCallback($out_trade_no)
+    function WxJsPayCallback()
     {
-        $type = substr($out_trade_no, 0, 1);
+        /*$type = substr($out_trade_no, 0, 1);
         if($type == 'v')
         {
             //会员支付
@@ -188,10 +188,10 @@ if(!function_exists('WxJsPayCallback'))
                     DB::table('users')->where('id',$order_info->user_id)->update(['is_vip'=>1,'not_can_use_money'=>$not_can_use_money]);
                 }
             }
-        }
-        //include_once __DIR__ . "/wx_js_pay/Notify.php";
-        //$notify = new Notify();
-        //$notify->Handle(false);
+        }*/
+        include_once __DIR__ . "/wx_js_pay/Notify.php";
+        $notify = new Notify();
+        $notify->Handle(false);
     }
 }
 
