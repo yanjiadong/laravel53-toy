@@ -9,7 +9,7 @@
                 </a>
             </td>
             <td>
-                <a href="/view/lease_order.html">
+                <a href="{{url('wechat/index/order_list')}}">
                     <div><i class="icon-footer-order"></i></div>
                     <div class="font">订单</div>
                 </a>

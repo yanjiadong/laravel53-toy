@@ -51,6 +51,7 @@
     </div>
     <div class="btn">
         <button onclick="toys_car.goSubmitOrder()"> <!--class="active"-->寄这个玩具给我</button>
+        <input type="hidden" value="" id="good_id">
     </div>
 
     @include('wechat.common.footer')
@@ -142,6 +143,8 @@
                 $(".toys-car .btn button").addClass('active');
                 $(".top-tips").html("同一时间内只能持有一件玩具，待归还后才能再次租用");
             }
+
+            $("#good_id").val(toys_car.data.info.list[index].id);
         },
         delGood:function (index) {
             console.log($(".toys-car ul li:eq("+index+") input")[0]);
@@ -164,7 +167,8 @@
         },
         goSubmitOrder:function () {
             if($(".toys-car .btn button").hasClass('active')){
-                location.href="/view/submit_order.html";
+                var good_id = $("#good_id").val();
+                location.href="{{url('wechat/index/submit_order')}}"+'/'+good_id;
             }
         }
     };

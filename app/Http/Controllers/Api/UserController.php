@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Area;
 use App\UserAddress;
 use App\UserPayRecord;
 use App\VipCard;
@@ -36,12 +37,22 @@ class UserController extends BaseController
     public function add_address(Request $request)
     {
         $data['user_id'] = $request->get('user_id');
-        $data['province_id'] = $request->get('province_id');
-        $data['city_id'] = $request->get('city_id');
-        $data['area_id'] = $request->get('area_id');
-        $data['address'] = $request->get('address');
-        $data['receiver'] = $request->get('receiver');
-        $data['receiver_telephone'] = $request->get('receiver_telephone');
+        $province = $request->get('c');
+        $city = $request->get('d');
+        $area = $request->get('e');
+
+        $province_info = Area::where('name',$province)->first();
+        $data['province_id'] = $province_info->id;
+
+        $city_info = Area::where('name',$city)->first();
+        $data['city_id'] = $city_info->id;
+
+        $area_info = Area::where('name',$area)->first();
+        $data['area_id'] = $area_info->id;
+
+        $data['address'] = $request->get('f');
+        $data['receiver'] = $request->get('a');
+        $data['receiver_telephone'] = $request->get('b');
 
         if(empty($data['address']))
         {
@@ -67,7 +78,7 @@ class UserController extends BaseController
 
     public function edit_address(Request $request)
     {
-        $address_id = $request->get('address_id');
+        $address_id = $request->get('g');
 
         $address = UserAddress::find($address_id);
         if(empty($address))
@@ -80,9 +91,9 @@ class UserController extends BaseController
         $data['province_id'] = $request->get('province_id');
         $data['city_id'] = $request->get('city_id');
         $data['area_id'] = $request->get('area_id');
-        $data['address'] = $request->get('address');
-        $data['receiver'] = $request->get('receiver');
-        $data['receiver_telephone'] = $request->get('receiver_telephone');
+        $data['address'] = $request->get('f');
+        $data['receiver'] = $request->get('a');
+        $data['receiver_telephone'] = $request->get('b');
 
         if(empty($data['address']))
         {
@@ -109,11 +120,27 @@ class UserController extends BaseController
     public function get_address($id)
     {
         $address = DB::table('user_addresses')
-            ->select('user_addresses.*','p.name as province_name','c.name as city_name','a.name as area_name')
+            ->select('user_addresses.receiver as a','user_addresses.receiver_telephone as b','p.name as c','c.name as d','a.name as e','user_addresses.address as f')
             ->leftJoin('areas as p', 'p.id', '=', 'user_addresses.province_id')
             ->leftJoin('areas as c', 'c.id', '=', 'user_addresses.city_id')
             ->leftJoin('areas as a', 'a.id', '=', 'user_addresses.area_id')
             ->first();
+
+        $this->ret['info'] = ['address'=>$address];
+        return $this->ret;
+    }
+
+    public function address_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $address = DB::table('user_addresses')
+            ->select('user_addresses.receiver as a','user_addresses.receiver_telephone as b','p.name as c','c.name as d','a.name as e','user_addresses.address as f','user_addresses.id as g','user_addresses.province_id','user_addresses.city_id','user_addresses.area_id')
+            ->leftJoin('areas as p', 'p.id', '=', 'user_addresses.province_id')
+            ->leftJoin('areas as c', 'c.id', '=', 'user_addresses.city_id')
+            ->leftJoin('areas as a', 'a.id', '=', 'user_addresses.area_id')
+            ->where('user_id',$user_id)
+            ->get();
 
         $this->ret['info'] = ['address'=>$address];
         return $this->ret;

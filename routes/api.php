@@ -49,10 +49,11 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/order/order_back_list','OrderController@order_back_list');
 
     //客户收货地址
+    Route::post('/address/index','UserController@address_list');
     Route::post('/address/add','UserController@add_address');
     Route::post('/address/edit','UserController@edit_address');
     Route::post('/address/info/{id}','UserController@get_address');
-    Route::delete('/address/delete','UserController@delete_address');
+    Route::post('/address/delete','UserController@delete_address');
 
     //获取会员卡列表
     Route::post('/user/vip_cards','UserController@vip_cards');

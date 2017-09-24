@@ -32,6 +32,9 @@ class CreateOrdersTable extends Migration
             $table->string('receiver',64)->default('')->comment('收货人');
             $table->string('receiver_telephone',11)->default('')->comment('收货人电话');
             $table->string('receiver_address',255)->default('')->comment('收货人地址');
+            $table->string('receiver_province',255)->default('')->comment('收货人地址省');
+            $table->string('receiver_city',255)->default('')->comment('收货人地址市');
+            $table->string('receiver_area',255)->default('')->comment('收货人地址区');
             $table->string('express_title',32)->default('')->comment('快递公司名称');
             $table->string('express_com',32)->default('')->comment('快递100编码');
             $table->string('express_no',64)->default('')->comment('运单号');
@@ -40,12 +43,12 @@ class CreateOrdersTable extends Migration
             $table->string('back_express_title',32)->default('')->comment('回寄快递公司名称');
             $table->string('back_express_com',32)->default('')->comment('回寄快递100编码');
             $table->string('back_express_no',64)->default('')->comment('回寄运单号');
-            $table->dateTime('confirm_time')->comment('确认收货时间');
-            $table->dateTime('back_time')->comment('提交完成寄回物流信息时间');
+            $table->dateTime('confirm_time')->comment('确认收货时间')->nullable();
+            $table->dateTime('back_time')->comment('提交完成寄回物流信息时间')->nullable();
             $table->string('month','32')->default('')->comment('下单的年月');
             $table->tinyInteger('pay_type')->default(1)->comment('支付方式 1微信');
             $table->string('out_trade_no',32)->default('')->comment('支付订单号');
-            $table->dateTime('pay_success_time')->comment('支付成功时间');
+            $table->dateTime('pay_success_time')->comment('支付成功时间')->nullable();
             $table->timestamps();
         });
     }

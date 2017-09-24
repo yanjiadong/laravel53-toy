@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Cart;
+use App\Order;
 use App\User;
 use App\VipCard;
 use App\VipCardPay;
@@ -176,6 +177,49 @@ class IndexController extends BaseController
     {
         WxJsPayCallback();
     }
+
+    public function submit_order($good_id)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        //判断是否绑定手机号
+        $user_info = User::find($user_id);
+
+        $bind_telephone = 0;
+        if(!empty($user_info->telephone))
+        {
+            $bind_telephone = 1;
+        }
+
+        return view('wechat.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
+    }
+
+    public function order_list()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.index.order_list',compact('user_id','openid'));
+    }
+
+    public function order_success($order_code)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $order = Order::where('code',$order_code)->first();
+        return view('wechat.index.order_success',compact('user_id','openid','order_code','order'));
+    }
+
+    public function order_detail($order_code)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.index.order_detail',compact('user_id','openid','order_code'));
+    }
+
     /**
      * 验证服务器配置
      * @param Request $request

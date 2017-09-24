@@ -112,7 +112,7 @@ class IndexController extends BaseController
 
         if($count>=config('app.day_sms_count'))
         {
-            $this->ret = ['code'=>300,'msg'=>'今日获取验证码次数已达上限,请明日再试'];
+            $this->ret = ['code'=>400,'msg'=>'今日获取验证码次数已达上限,请明日再试'];
             return $this->ret;
         }
 
@@ -187,7 +187,7 @@ class IndexController extends BaseController
             return $this->ret;
         }
 
-        $pattern = "/^[0-9]{6}$/";
+        $pattern = "/^[0-9]{4}$/";
         if(empty($code) || !preg_match($pattern,$code))
         {
             $this->ret = ['code'=>300,'msg'=>'输入的短信验证码有误'];
@@ -221,7 +221,18 @@ class IndexController extends BaseController
 
     public function get_area($fid = 0)
     {
-        $areas = Area::where(['fid'=>$fid])->get();
+        $areas = Area::where(['fid'=>$fid])->get()->toArray();
+
+        array_unshift($areas,['id'=>0,'name'=>'请选择']);
+
+        if(!empty($areas))
+        {
+            foreach ($areas as &$v)
+            {
+                $v['value'] = $v['id'];
+                $v['text'] = $v['name'];
+            }
+        }
         $this->ret['info'] = $areas;
         return $this->ret;
     }

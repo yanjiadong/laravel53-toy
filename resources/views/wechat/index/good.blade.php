@@ -135,7 +135,7 @@
                 <div class="font" onclick="goodDetail_obj.goToysCar()">玩具箱</div>
             </li>
             <li class="fl">
-                <button class="join-car" onclick="goodDetail_obj.join()">加入购物车 <span>暂无库存</span></button>
+                <button class="join-car" onclick="goodDetail_obj.join()">加入购物车</button>
             </li>
         </ul>
     </div>
@@ -236,10 +236,9 @@
                 //购物车
                 if(goodDetail_obj.detail_data.car_num.num>0){
                     $(".icon-footer-shop-car").append('<span>'+goodDetail_obj.detail_data.car_num.num+'</span>');
-                    $(".footer ul li:last").removeClass('disable');
+                    //$(".footer ul li:last").removeClass('disable');
                 }else{
-                    $(".footer ul li:last").addClass('disable');
-
+                    //$(".footer ul li:last").addClass('disable');
                 }
 
             });

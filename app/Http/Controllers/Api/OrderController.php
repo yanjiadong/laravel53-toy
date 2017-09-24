@@ -20,19 +20,20 @@ class OrderController extends BaseController
         //判断是否租用中的玩具
         $order = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get()->toArray();
         //print_r($order);
-        if(!empty($order))
+        if(count($order) > 0)
         {
             $this->ret['code'] = 300;
             $this->ret['msg'] = '当前账户已有正在租用物品,归还后才能再次下单';
             return $this->ret;
         }
 
-        $good = Good::with(['category_tag'])->find($good_id);
+        $good = Good::with(['category_tag','brand'])->find($good_id);
 
         $info['good_title'] = $good->title;
         $info['good_picture'] = $good->picture;
         $info['good_price'] = $good->price;
-        $info['good_category_tag'] = $good->category_tag->title;
+        $info['good_brand'] = $good->brand->title;
+        //$info['good_category_tag'] = $good->category_tag->title;
 
         //计算邮费
         $config = SystemConfig::where('type',1)->first();
@@ -57,6 +58,7 @@ class OrderController extends BaseController
             $express_price = $price;
         }
 
+
         $result['good'] = $info;
         $result['express_price'] = $express_price;
         $result['clean_price'] = 0.00;
@@ -78,6 +80,9 @@ class OrderController extends BaseController
         $receiver = $request->get('receiver');
         $receiver_telephone = $request->get('receiver_telephone');
         $receiver_address = $request->get('receiver_address');
+        $receiver_province = $request->get('receiver_province');
+        $receiver_city = $request->get('receiver_city');
+        $receiver_area = $request->get('receiver_area');
 
 
 
@@ -89,7 +94,7 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
-        $good = $good = Good::with(['category_tag','category'])->where(['id'=>$good_id,'status'=>Good::STATUS_ON_SALE])->first();
+        $good = $good = Good::with(['category_tag','category','brand'])->where(['id'=>$good_id,'status'=>Good::STATUS_ON_SALE])->first();
         if(empty($good->id))
         {
             $this->ret['code'] = 300;
@@ -113,10 +118,20 @@ class OrderController extends BaseController
         $order_data['receiver'] = $receiver;
         $order_data['receiver_telephone'] = $receiver_telephone;
         $order_data['receiver_address'] = $receiver_address;
-        $order_data['out_trade_no'] = 'P'.$order_data['code'];
+        $order_data['receiver_province'] = $receiver_province;
+        $order_data['receiver_city'] = $receiver_city;
+        $order_data['receiver_area'] = $receiver_area;
+        $order_data['out_trade_no'] = 'p'.$order_data['code'];
 
+        if($order_data['price']<=0)
+        {
+            $order_data['status'] = Order::STATUS_WAITING_SEND;
+            $order_data['pay_success_time'] = $this->datetime;
+            $order_data['good_brand_id'] = $good->brand_id;
+        }
         Order::create($order_data);
 
+        $this->ret['info'] = ['order_code'=>$order_data['code']];
         return $this->ret;
     }
 

@@ -21,7 +21,7 @@ class CartController extends BaseController
         {
             //判断是否租用中的玩具
             $order = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get();
-            if(!empty($order))
+            if(count($order) > 0)
             {
                 $type = 3;
             }
