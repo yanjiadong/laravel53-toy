@@ -24,6 +24,14 @@ class IndexController extends BaseController
             Header("Location: $url");
             exit();
         }
+
+        $user_info = User::find($user_id);
+        if(empty($user_info))
+        {
+            $url = url('wechat/index/getOpenId');
+            Header("Location: $url");
+            exit();
+        }
     }
 
     public function getOpenId(Request $request)
