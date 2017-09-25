@@ -30,6 +30,7 @@ class GoodController extends BaseController
         $username = $admin_info['username'];
 
         $goods = Good::with(['category','brand'])->paginate(20);
+        dd($goods);
         $menu = 'good';
         //dd($goods);
         return view('admin.good.index',compact('goods','username','menu'));
