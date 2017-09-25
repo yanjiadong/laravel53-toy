@@ -44,10 +44,17 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/order_success/{order_code}','IndexController@order_success');
     Route::any('/index/order_detail/{order_code}','IndexController@order_detail');
 
+    Route::any('/index/order_return_detail','IndexController@order_return_detail');
+    Route::any('/index/fill_logistics/{order_code?}','IndexController@fill_logistics');
+
     Route::get('/user/center','UserController@center')->name('wechat.user.center');
     Route::get('/user/help','UserController@help')->name('wechat.user.help');
     Route::get('/user/deposit','UserController@deposit')->name('wechat.user.deposit');
     Route::get('/user/deposit_list','UserController@deposit_list')->name('wechat.user.deposit_list');
+    Route::any('/user/share_open','UserController@share_open');
+
+    //脚本
+    Route::any('/crontab/index','CrontabController@index');
 });
 
 //后台路由管理

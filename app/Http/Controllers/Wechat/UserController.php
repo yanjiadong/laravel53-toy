@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,8 +12,17 @@ class UserController extends BaseController
     {
         $user_id = session('user_id');
         $openid = session('open_id');
+        $menu = 'center';
 
-        return view('wechat.user.center',compact('user_id'));
+        //计算玩具箱数量
+        $cart_num = Cart::where('user_id',$user_id)->count();
+
+        return view('wechat.user.center',compact('user_id','menu','cart_num'));
+    }
+
+    public function share_open()
+    {
+        return view('wechat.user.share_open');
     }
 
     public function help()

@@ -110,7 +110,7 @@
 <script>
     var choose_vip={
         data:{
-            time:common.getParam('time'),
+            time:'{{$days}}',
             sortList:[]
         },
         init:function () {

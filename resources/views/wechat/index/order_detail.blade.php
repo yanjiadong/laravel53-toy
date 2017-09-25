@@ -168,7 +168,7 @@
                     租赁订单编号
                 </div>
                 <div class="fr">
-                    <input type="text" id="copy" value="" readonly>
+                    <input type="text" id="copy" value="{{$order_code}}" readonly>
                     <button id="copy_btn" onclick="order_detail.copy()">复制</button>
                 </div>
             </div>
@@ -192,52 +192,52 @@
         },
         init:function () {
             //获取物流状态信息
-            common.httpRequest('/wechat/js/test.json', 'get', null, function (res) {
-                res = [];
+            common.httpRequest('{{url('api/order/order_info')}}', 'post', {code:'{{$order_code}}'}, function (res) {
+                //res = [];
 //              order_detail.data.logistics_state = res;
                 //假数据
                 //state 1为待发货 2 已发货 3租用中 4已归还
                 order_detail.data.logistics_state = {
-                    state: 4,
+                    state: res.info.order.status,
                     address: {
-                        a: "张三丰1",
-                        b: "1804544653",
-                        c: "江苏省",
-                        d: "苏州市",
-                        e: "工业园区",
-                        f: '启月街1号工寓1',
-                        g: '13243431314dsff',
-                        h: '1492744860000'
+                        a: res.info.order.receiver,
+                        b: res.info.order.receiver_telephone,
+                        c: res.info.order.receiver_province,
+                        d: res.info.order.receiver_city,
+                        e: res.info.order.receiver_area,
+                        f: res.info.order.receiver_address,
+                        g: res.info.order.express_no,
+                        h: res.info.order.created_at
                     },
                     logistics:{cont:"快件已经在海口中转处，准备发往北京",time:"1492744860000"},
                     good: {
-                        a: '../image/other/3.png',
-                        b: ' WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人',
-                        c: '1-12岁',
-                        d: 2500.00,
-                        e: 100.00,
-                        f: 100.00,
-                        g: 100.00,
-                        h: '#',
+                        a: res.info.order.good_picture,
+                        b: res.info.order.good_title,
+                        c: res.info.order.good_brand.title,
+                        d: res.info.order.good_price,
+                        e: res.info.order.money,
+                        f: res.info.order.clean_price,
+                        g: res.info.order.express_price,
+                        h: '{{url('wechat/index/good')}}'+'/'+res.info.order.good_id,
                         total_num: 1,
-                        allPrice: 300
+                        allPrice: res.info.order.price
                     }
                 };
                 var logistics_cont = "", logistics_info = "";
                 switch (order_detail.data.logistics_state.state) {
-                    case 1:
+                    case '待发货':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-daifahuo"></i>' +
                             '<h2>待发货</h2><h4>平台将在24小时内发货，请耐心等待</h4></div>';
                         break;
-                    case 2:
+                    case '已发货':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-daishouhuo"></i>' +
                             '<h2>已发货</h2><h4>确认收货后，即可享受玩具随意更换服务</h4></div>';
 
                         logistics_info = '<div class="logistics-info clear" onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_car"></i></div>' +
                             '<div class="fl"><h3>' + order_detail.data.logistics_state.logistics.cont + '</h3><p>' + common.dateFormat(order_detail.data.logistics_state.logistics.time) + '</p></div>' +
-                            '<div class="fr"><i class="icon icon_arrowRight_bold"></i></div></div><div class="operate-btn"><button onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.receipt()">确认收获</button></div>';
+                            '<div class="fr"><i class="icon icon_arrowRight_bold"></i></div></div><div class="operate-btn"><button onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.receipt()">确认收货</button></div>';
                         break;
-                    case 3:
+                    case '租用中':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-zuyongzhong"></i><h2>租用中</h2>' +
                             '<h4>如需要换玩具，请点击“归还玩具”，上传寄回的物流单号，即可再次下单</h4></div>';
                         logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
@@ -245,7 +245,7 @@
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
                             '<button  onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.goOrderReturn()">归还玩具</button></div>';
                         break;
-                    case 4:
+                    case '已归还':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-yiguihuan"></i><h2>已归还</h2><div class="btn">' +
                             '<button onclick="order_detail.lookReturn()"><span>查看归还详情</span><i class="icon icon_arrowRight_white"></i></button></div>' +
                             '<h4>玩具已归还，感谢您的使用</h4></div>';
@@ -283,7 +283,7 @@
                     $(".detail-list .good_show .fl img").attr('src', order_detail.data.logistics_state.good.a);
                     $(".detail-list .good_show .fr h3 a").text(order_detail.data.logistics_state.good.b);
                     $(".detail-list .good_show .fr h4").text('市场参考价¥' + order_detail.data.logistics_state.good.d);
-                    $(".detail-list .good_show .fr p").text('适用年龄' + order_detail.data.logistics_state.good.c);
+                    $(".detail-list .good_show .fr p").text(order_detail.data.logistics_state.good.c);
                     $(".detail-list .money-detail .fr:eq(0)").text('+¥' + order_detail.data.logistics_state.good.e);
                     $(".detail-list .money-detail .fr:eq(1)").text('+¥' + order_detail.data.logistics_state.good.f);
                     $(".detail-list .money-detail .fr:eq(2)").text('+¥' + order_detail.data.logistics_state.good.g);
@@ -293,8 +293,8 @@
                 }
                 //物流编号 下单时间
                 $(".order-info .number .fr input").val(order_detail.data.logistics_state.address.g);
-                $(".order-info .time .fr span").text(common.dateFormat(order_detail.data.logistics_state.address.h));
-
+                //$(".order-info .time .fr span").text(common.dateFormat(order_detail.data.logistics_state.address.h));
+                $(".order-info .time .fr span").text(order_detail.data.logistics_state.address.h);
             })
         },
         //复制
@@ -308,8 +308,10 @@
         receipt:function () {
             common.confirm_tip("确认收货","确定已经收到寄出的玩具？",null,function () {
                 //order_detail.data.logistics_state
-                common.httpRequest('../js/test.json', 'get', null, function (res) {
+                var code = '{{$order_code}}';
+                common.httpRequest('{{url('api/order/confirm_order')}}', 'post', {code:code}, function (res) {
                     $(".confirm-alert-wrap").remove();
+                    location.reload();
                 })
             })
         },
@@ -319,7 +321,7 @@
         },
         //归还玩具
         goOrderReturn:function () {
-            location.href="/view/order_return_detail.html?page=1";
+            location.href="{{url('wechat/index/order_return_detail')}}";
         },
         //查看归还详情
         lookReturn:function () {

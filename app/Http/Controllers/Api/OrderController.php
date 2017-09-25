@@ -110,6 +110,7 @@ class OrderController extends BaseController
         $order_data['good_price'] = $good->price;
         $order_data['category_id'] = $good->category_id;
         $order_data['category_tag_id'] = $good->category_tag_id;
+        $order_data['good_brand_id'] = $good->brand_id;
         $order_data['express_price'] = $express_price;
         $order_data['clean_price'] = $clean_price;
         $order_data['price'] = $price;
@@ -127,7 +128,6 @@ class OrderController extends BaseController
         {
             $order_data['status'] = Order::STATUS_WAITING_SEND;
             $order_data['pay_success_time'] = $this->datetime;
-            $order_data['good_brand_id'] = $good->brand_id;
         }
         Order::create($order_data);
 
@@ -137,6 +137,7 @@ class OrderController extends BaseController
 
     public function order_list(Request $request)
     {
+        $user_id = $request->get('user_id');
         $page = $request->get('page')?$request->get('page'):1;
         $limit = $request->get('limit')?$request->get('limit'):10;
         $type = $request->get('type')?$request->get('type'):1;  //1进行中的  2已归还的
@@ -152,7 +153,8 @@ class OrderController extends BaseController
             $where = [Order::STATUS_BACK];
         }
 
-        $list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
+        //$list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
+        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
         //print_r($list);
         if(!empty($list))
         {
@@ -185,6 +187,8 @@ class OrderController extends BaseController
 
     public function order_can_back(Request $request)
     {
+        $user_id = $request->get('user_id');
+
         $config = SystemConfig::where('type',1)->first();
         $content = json_decode($config->content,true);
         //print_r($content);
@@ -194,7 +198,7 @@ class OrderController extends BaseController
         $info['name'] = $content[2];
 
         $where = [Order::STATUS_DOING];
-        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->get()->toArray();
+        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
         //print_r($list);
         if(!empty($list))
         {
@@ -209,6 +213,17 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
+    /**
+     * 确认收货
+     * @param Request $request
+     */
+    public function confirm_order(Request $request)
+    {
+        $order_code = $request->get('code');
+
+        Order::where('code',$order_code)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
+        return $this->ret;
+    }
 
     public function order_back(Request $request)
     {
@@ -242,6 +257,7 @@ class OrderController extends BaseController
 
     public function order_back_list(Request $request)
     {
+        $user_id = $request->get('user_id');
         $page = $request->get('page')?$request->get('page'):1;
         $limit = $request->get('limit')?$request->get('limit'):10;
 
@@ -249,7 +265,8 @@ class OrderController extends BaseController
 
 
         $where = [Order::STATUS_BACK];
-        $list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
+        //$list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
+        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
         //print_r($list);
         if(!empty($list))
         {

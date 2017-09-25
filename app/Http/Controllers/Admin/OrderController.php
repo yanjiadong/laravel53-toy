@@ -35,6 +35,12 @@ class OrderController extends BaseController
 
         $express = Express::find($express_id);
 
+        $param = [
+            'number'=>$express_no,
+            'company'=>$express->com
+        ];
+        weixinCurl(url('api/express_info/index'),'post', $param);
+
         Order::where('id',$id)->update(['status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
         alert('',1);
     }

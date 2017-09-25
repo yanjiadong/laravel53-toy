@@ -42,6 +42,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/order/order_list','OrderController@order_list');
     //订单详情
     Route::post('/order/order_info','OrderController@order_info');
+
+    //确认收货
+    Route::post('/order/confirm_order','OrderController@confirm_order');
     //可寄回更换详情
     Route::post('/order/order_can_back','OrderController@order_can_back');
     Route::post('/order/order_back','OrderController@order_back');
@@ -60,6 +63,8 @@ Route::group(['namespace' => 'Api'], function () {
 
     //获取押金明细
     Route::post('/user/deposit_list','UserController@deposit_list');
+    //用户中心
+    Route::post('/user/center','UserController@center');
 
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');
@@ -80,4 +85,6 @@ Route::group(['namespace' => 'Api'], function () {
     //快递100回调请求
     Route::post('/express_info/callback','ExpressInfoController@callback')->name('api.express_info.callback');
 
+    //获取物流公司
+    Route::post('/index/get_express_list','IndexController@get_express_list');
 });

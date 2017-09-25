@@ -102,24 +102,7 @@
     @include('wechat.common.footer')
 
 </div>
-<div class="cover-user-center">
-    <div class="cover-user-main">
-        <div class="title">
-            <h3>微信授权</h3>
-        </div>
-        <div class="tip">
-            <div class="icon-tip"><i class="icon icon_bind_weixin"></i></div>
-            <div class="cont">书香月亮湾微前台申请获得以下权限：</div>
-        </div>
-        <div class="info">
-            <p><span></span><span>获得你的公开信息（昵称、头像等）</span></p>
-        </div>
-        <div class="btn">
-            <button onclick="user_center.colseAuthorizeAlert()">拒绝</button>
-            <button onclick="user_center.agreeAuthorize()">允许</button>
-        </div>
-    </div>
-</div>
+
 
 <script>
     var user_center ={
@@ -127,22 +110,22 @@
             userInfo:{}           //会员信息
         },
         init:function () {
-            common.httpRequest('../js/test.json','get',null,function (res) {
+            common.httpRequest('{{url('api/user/center')}}','post',{user_id:'{{$user_id}}'},function (res) {
                 //假数据
                 //isAuthorize false为未登录  isVip false为不是会员 isOutTime 为true为会员失效
                 user_center.data.userInfo = {
                     id:1,
                     isAuthorize:true,
-                    isVip:true,
-                    isOutTime:false,
-                    img:'/wechat/image/other/3.png',
-                    name:'WeChat Name',
-                    num:3,           //正在玩的件数
-                    money:500.00,  //押金
+                    isVip:res.info.user.is_vip,
+                    isOutTime:res.info.card.isOutTime,
+                    img:res.info.user.wechat_avatar,
+                    name:res.info.user.wechat_nickname,
+                    num:res.info.count,           //正在玩的件数
+                    money:res.info.user.can_use_money+res.info.user.not_can_use_money,  //押金
                     cash:true,    //是否可以提现
-                    cars:3,         //优惠卡劵
-                    carSort:'季度卡',   //卡的类型
-                    time:5
+                    cars:0,         //优惠卡劵
+                    carSort:res.info.card.vip_card_type_str,   //卡的类型
+                    time:res.info.days
 
                 };
                 //判断是否登录
@@ -151,7 +134,7 @@
                     if( user_center.data.userInfo.isVip){
                         $(".photo .fl img").attr('src',user_center.data.userInfo.img);
                         $(".items-mid table tr:eq(2) td:first").text('正在玩'+user_center.data.userInfo.num+'件');
-                        $(".items-mid table tr:eq(2) td:eq(1)").text('¥'+user_center.data.userInfo.money.toFixed(2));
+                        $(".items-mid table tr:eq(2) td:eq(1)").text('¥'+user_center.data.userInfo.money);
                         $(".items-mid table tr:eq(2) td:eq(2)").text(user_center.data.userInfo.cars+'张');
                         $(".renew").show();
                         $(".renew h3 span").text('('+user_center.data.userInfo.carSort+')');
@@ -194,7 +177,7 @@
         },
         //分享给朋友
         share:function () {
-            location.href='share.html?name='+user_center.data.userInfo.name+'&num='+user_center.data.userInfo.num;
+            location.href='';
         },
         //使用帮助
         help:function () {
@@ -216,7 +199,7 @@
         },
         //快速换玩具
         exchangeToy:function () {
-            location.href='order_return_detail.html?page=1';
+            location.href='{{url('wechat/index/order_return_detail')}}';
         },
         //会员押金
         goDdeposit:function () {

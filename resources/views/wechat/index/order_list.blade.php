@@ -174,7 +174,7 @@
         },
         //进行中 --数据加载
         getList:function () {
-            common.httpRequest('{{url('api/order/order_list')}}','post',{type:1},function (res) {
+            common.httpRequest('{{url('api/order/order_list')}}','post',{type:1,user_id:'{{$user_id}}'},function (res) {
                 if(true){
 
                     //  orderDtail.data.returnList = res;
@@ -189,32 +189,33 @@
                     ];*/
 
                     orderDtail.data.list = res.info.list;
+                    console.log(res.info.list);
                     var dataList ='';
                     for(var i=0;i<orderDtail.data.list.length;i++){
                         switch(orderDtail.data.list[i].status){
-                            case 1:
-                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].a+'天</div>' +
+                            case '待发货':
+                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
                                     '<div class="fr">待发货</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].c+'"/></a></div><div class="fr"><h3><a href="'+orderDtail.data.list[i].e+'">'+orderDtail.data.list[i].d+'</a>' +
-                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].f+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].h+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
-                                    '<div class="fr">'+orderDtail.data.list[i].g+'</div></div><div class="total clear"><div class="fl"><p>共'+orderDtail.data.list[i].i+'件商品</p>' +
-                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].j+'</span></h3></div></div></li>';
+                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
+                                    '</h3><h4>'+orderDtail.data.list[i].good_brand.title+'</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
+                                    '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
+                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div></div></li>';
                                 break;
-                            case 2:
-                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].a+'天</div>' +
+                            case '已发货':
+                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
                                     '<div class="fr">已发货</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].c+'"/></a></div><div class="fr"><h3><a href="'+orderDtail.data.list[i].e+'">'+orderDtail.data.list[i].d+'</a>' +
-                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].f+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].h+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
-                                    '<div class="fr">'+orderDtail.data.list[i].g+'</div></div><div class="total clear"><div class="fl"><p>共'+orderDtail.data.list[i].i+'件商品</p>' +
-                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].j+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].id+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
+                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
+                                    '</h3><h4>'+orderDtail.data.list[i].good_brand.title+'</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
+                                    '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
+                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].id+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
                                 break;
-                            case 3:
-                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].a+'天</div>' +
+                            case '租用中':
+                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
                                     '<div class="fr">租用中</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].c+'"/></a></div><div class="fr"><h3><a href="'+orderDtail.data.list[i].e+'">'+orderDtail.data.list[i].d+'</a>' +
-                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].f+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].h+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
-                                    '<div class="fr">'+orderDtail.data.list[i].g+'</div></div><div class="total clear"><div class="fl"><p>共'+orderDtail.data.list[i].i+'件商品</p>' +
-                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].j+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.goReturn()">归还玩具</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
+                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
+                                    '</h3><h4>'+orderDtail.data.list[i].good_brand.title+'</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
+                                    '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
+                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.goReturn()">归还玩具</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
                                 break;
                             default:
                                 break;
@@ -228,8 +229,8 @@
         },
         //已归还 --数据加载
         getReturnList:function(){
-            common.httpRequest('{{url('api/order/order_list')}}','post',{type:2},function (res) {
-                if(res.length){
+            common.httpRequest('{{url('api/order/order_list')}}','post',{type:2,user_id:'{{$user_id}}'},function (res) {
+                if(true){
                     //  orderDtail.data.returnList = res;
                     //假数据
                     /*orderDtail.data.returnList = [
@@ -273,11 +274,11 @@
         },
         //归还玩具
         goReturn:function () {
-            location.href="/view/order_return_detail.html?page=1";
+            location.href="{{url('wechat/index/order_return_detail')}}";
         },
         //查看归还详情
         goReturned:function () {
-            location.href="/view/order_return_detail.html?page=2";
+            location.href="index/order_return_detail";
         }
     };
     $(function () {

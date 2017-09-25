@@ -17,6 +17,7 @@ class CreateVipCardPaysTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->default(0);
             $table->integer('vip_card_id')->default(0);
+            $table->tinyInteger('vip_card_type')->default(0)->comment('会员卡类型');
             $table->tinyInteger('pay_status')->default(0)->comment('0未支付 1支付成功');
             $table->tinyInteger('status')->default(1)->comment('1正常 -1过期');
             $table->integer('days')->default(0)->comment('天数');

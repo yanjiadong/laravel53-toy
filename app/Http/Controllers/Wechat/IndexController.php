@@ -93,13 +93,20 @@ class IndexController extends BaseController
      */
     public function index()
     {
-        //session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
-        //session(['user_id'=>3]);
-        $this->check_user();
+        session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+        session(['user_id'=>3]);
+        //$this->check_user();
         $openid = session('open_id');
+        $user_id = session('user_id');
         $url = url('api/index');
         $result = weixinCurl($url);
-        return view('wechat.index.index',compact('result'));
+
+        $menu = 'index';
+
+        //计算玩具箱数量
+        $cart_num = Cart::where('user_id',$user_id)->count();
+
+        return view('wechat.index.index',compact('result','menu','user_id','cart_num'));
     }
 
     /**
@@ -110,7 +117,10 @@ class IndexController extends BaseController
         //$url = url("api/category/$category_id/$brand_id");
         //$result = weixinCurl($url);
         //print_r($result);
-        return view('wechat.index.category',compact('category_id','brand_id'));
+        $user_id = session('user_id');
+        $cart_num = Cart::where('user_id',$user_id)->count();
+        $menu = 'index';
+        return view('wechat.index.category',compact('category_id','brand_id','user_id','menu','cart_num'));
     }
 
     /**
@@ -131,8 +141,11 @@ class IndexController extends BaseController
     public function cart(Request $request)
     {
         $user_id = session('user_id');
+        $menu = 'cart';
+        //计算玩具箱数量
+        $cart_num = Cart::where('user_id',$user_id)->count();
 
-        return view('wechat.index.cart',compact('user_id'));
+        return view('wechat.index.cart',compact('user_id','menu','cart_num'));
     }
 
     /**
@@ -142,7 +155,11 @@ class IndexController extends BaseController
     {
         $this->check_user();
         $user_id = session('user_id');
-        return view('wechat.index.choose_vip',compact('user_id'));
+
+        //获取剩余天数
+        $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
+
+        return view('wechat.index.choose_vip',compact('user_id','days'));
     }
 
     public function pay_vip_card($vip_card_id)
@@ -170,6 +187,7 @@ class IndexController extends BaseController
         $data['price'] = $total_fee;
         $data['money'] = $info->money;
         $data['vip_card_id'] = $vip_card_id;
+        $data['vip_card_type'] = $info->type;
         $data['pay_status'] = 0;
         $data['status'] = 1;
         $data['days'] = $days;
@@ -207,8 +225,12 @@ class IndexController extends BaseController
     {
         $user_id = session('user_id');
         $openid = session('open_id');
+        $menu = 'order_list';
 
-        return view('wechat.index.order_list',compact('user_id','openid'));
+        //计算玩具箱数量
+        $cart_num = Cart::where('user_id',$user_id)->count();
+
+        return view('wechat.index.order_list',compact('user_id','openid','menu','cart_num'));
     }
 
     public function order_success($order_code)
@@ -226,6 +248,22 @@ class IndexController extends BaseController
         $openid = session('open_id');
 
         return view('wechat.index.order_detail',compact('user_id','openid','order_code'));
+    }
+
+    public function order_return_detail()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.index.order_return_detail',compact('user_id','openid'));
+    }
+
+    public function fill_logistics()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.index.fill_logistics',compact('user_id','openid','order_code'));
     }
 
     /**

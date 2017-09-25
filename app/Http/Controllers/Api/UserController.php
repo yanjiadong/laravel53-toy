@@ -3,15 +3,56 @@
 namespace App\Http\Controllers\Api;
 
 use App\Area;
+use App\Order;
+use App\User;
 use App\UserAddress;
 use App\UserPayRecord;
 use App\VipCard;
+use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 
 class UserController extends BaseController
 {
+    public function center(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $user = User::find($user_id);
+
+        $where = [Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING];
+        $count = Order::whereIn('status',$where)->where('user_id',$user_id)->count();
+
+        //会员卡
+        $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->first()->toArray();
+        if(!empty($card))
+        {
+            $card['isOutTime'] = 1;
+            if($card['days']>0)
+            {
+                $card['isOutTime'] = 0;
+            }
+            switch ($card['vip_card_type'])
+            {
+                case 1:
+                    $card['vip_card_type_str'] = '月卡';
+                    break;
+                case 2:
+                    $card['vip_card_type_str'] = '季度卡';
+                    break;
+                case 3:
+                    $card['vip_card_type_str'] = '半年卡';
+                    break;
+            }
+        }
+
+        $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
+
+        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days];
+        return $this->ret;
+    }
+
     public function deposit_list(Request $request)
     {
         $user_id = $request->get('user_id');
