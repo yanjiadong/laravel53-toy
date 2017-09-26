@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->carts()->toggle($good_id);
     }
+
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class,'user_coupons','user_id','coupon_id');
+    }
 }

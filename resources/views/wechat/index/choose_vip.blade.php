@@ -191,7 +191,7 @@
         //选择优惠卷
         //选择优惠卷
         chooseCars:function () {
-            location.href='#';
+            location.href='{{url('wechat/user/choose_coupon')}}';
         },
         //微信支付
         pay:function () {

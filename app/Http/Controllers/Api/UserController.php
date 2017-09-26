@@ -205,4 +205,14 @@ class UserController extends BaseController
         $this->ret['info'] = ['list'=>$list];
         return $this->ret;
     }
+
+    public function coupon_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $user = User::find($user_id);
+        $coupons = $user->coupons()->get();
+
+        $this->ret['info'] = ['coupons'=>$coupons];
+        return $this->ret;
+    }
 }

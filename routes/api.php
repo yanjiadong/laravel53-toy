@@ -65,6 +65,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/user/deposit_list','UserController@deposit_list');
     //用户中心
     Route::post('/user/center','UserController@center');
+    //获取用户优惠券列表
+    Route::post('/user/coupon_list','UserController@coupon_list');
 
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');

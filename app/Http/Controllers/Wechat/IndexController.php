@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Cart;
+use App\Coupon;
 use App\Order;
 use App\User;
+use App\UserCoupon;
 use App\VipCard;
 use App\VipCardPay;
 use App\WechatAccessToken;
@@ -100,9 +102,9 @@ class IndexController extends BaseController
      */
     public function index()
     {
-        //session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
-        //session(['user_id'=>3]);
-        $this->check_user();
+        session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+        session(['user_id'=>3]);
+        //$this->check_user();
         $openid = session('open_id');
         $user_id = session('user_id');
         $url = url('api/index');
@@ -113,6 +115,16 @@ class IndexController extends BaseController
         //计算玩具箱数量
         $cart_num = Cart::where('user_id',$user_id)->count();
 
+        //领取新人优惠券
+        $coupon = UserCoupon::where('user_id',$user_id)->first();
+        if(empty($coupon))
+        {
+            $coupon_info = Coupon::where('type',1)->first();
+            if(!empty($coupon_info))
+            {
+                UserCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon_info->id]);
+            }
+        }
         return view('wechat.index.index',compact('result','menu','user_id','cart_num'));
     }
 
@@ -299,6 +311,10 @@ class IndexController extends BaseController
         return view('wechat.index.children_interesting_compilation',compact('user_id','openid','order_code'));
     }
 
+    public function test()
+    {
+        return view('wechat.index.test');
+    }
 
     /**
      * 验证服务器配置
@@ -406,4 +422,6 @@ EOF;
             }
         }
     }
+
+
 }

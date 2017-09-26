@@ -66,10 +66,18 @@
         </div>
     </div>
     <div class="footer bg-white">
-        <button>领取新人包月199优惠特权</button>
+        <button onclick="order_obj.sendCode()">领取新人包月199优惠特权</button>
     </div>
 </div>
 
-
+<script>
+    var order_obj = {
+        sendCode:function () {
+            //alert(1);
+            var href = '{{url('wechat/index/choose_vip')}}';
+            location.href = href;
+        }
+    };
+</script>
 </body>
 </html>

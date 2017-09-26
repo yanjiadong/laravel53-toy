@@ -52,4 +52,12 @@ class UserController extends BaseController
 
         return view('wechat.user.deposit_list',compact('user_id'));
     }
+
+    public function choose_coupon()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.user.choose_coupon',compact('user_id'));
+    }
 }
