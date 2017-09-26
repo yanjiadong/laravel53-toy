@@ -25,26 +25,31 @@ class UserController extends BaseController
         $count = Order::whereIn('status',$where)->where('user_id',$user_id)->count();
 
         //会员卡
-        $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->first()->toArray();
+        $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->first();
         if(!empty($card))
         {
-            $card['isOutTime'] = 1;
-            if($card['days']>0)
+            $card->isOutTime = 1;
+            if($card->days>0)
             {
-                $card['isOutTime'] = 0;
+                $card->isOutTime = 0;
             }
-            switch ($card['vip_card_type'])
+            switch ($card->vip_card_type)
             {
                 case 1:
-                    $card['vip_card_type_str'] = '月卡';
+                    $card->vip_card_type_str = '月卡';
                     break;
                 case 2:
-                    $card['vip_card_type_str'] = '季度卡';
+                    $card->vip_card_type_str = '季度卡';
                     break;
                 case 3:
-                    $card['vip_card_type_str'] = '半年卡';
+                    $card->vip_card_type_str = '半年卡';
                     break;
             }
+        }
+        else
+        {
+            $card['isOutTime'] = 1;
+            $card['vip_card_type_str'] = '';
         }
 
         $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
