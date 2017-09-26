@@ -192,12 +192,13 @@ if(!function_exists('WxJsPayCallback'))
                 DB::table('user_pay_records')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$order_info->money,'created_at'=>date('Y-m-d H:i:s')]);
             }
         }
-        else
+        elseif($type == 'p')
         {
-            $order_info = DB::table('orders')->where('code',$out_trade_no)->first();
+            $order_info = DB::table('orders')->where('out_trade_no',$out_trade_no)->first();
+            print_r($order_info);
             if($order_info)
             {
-                DB::table('orders')->where('code',$out_trade_no)->update(['status'=>\App\Order::STATUS_WAITING_SEND,'pay_success_time'=>date('Y-m-d H:i:s')]);
+                DB::table('orders')->where('out_trade_no',$out_trade_no)->update(['status'=>\App\Order::STATUS_WAITING_SEND,'pay_success_time'=>date('Y-m-d H:i:s')]);
             }
         }
         //include_once __DIR__ . "/wx_js_pay/Notify.php";

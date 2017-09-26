@@ -32,6 +32,13 @@ class IndexController extends BaseController
             Header("Location: $url");
             exit();
         }
+
+        if($user_info->id != $user_id)
+        {
+            $url = url('wechat/index/getOpenId');
+            Header("Location: $url");
+            exit();
+        }
     }
 
     public function getOpenId(Request $request)
@@ -216,10 +223,6 @@ class IndexController extends BaseController
         return view('wechat.index.pay_order',compact('user_id','jsApiParameters','out_trade_no','order_code'));
     }
 
-    public function pay_order_callback()
-    {
-        WxJsPayCallback();
-    }
 
     public function pay_vip_card_callback()
     {
