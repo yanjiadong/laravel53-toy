@@ -195,7 +195,6 @@ if(!function_exists('WxJsPayCallback'))
         elseif($type == 'p')
         {
             $order_info = DB::table('orders')->where('out_trade_no',$out_trade_no)->first();
-            print_r($order_info);
             if($order_info)
             {
                 DB::table('orders')->where('out_trade_no',$out_trade_no)->update(['status'=>\App\Order::STATUS_WAITING_SEND,'pay_success_time'=>date('Y-m-d H:i:s')]);
