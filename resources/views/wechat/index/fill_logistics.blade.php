@@ -74,6 +74,7 @@
             item:JSON.parse(localStorage.order_fill_logistics)
         },
         init:function () {
+            console.log(fill_logistics.data.item);
             $(".fill-logistics .good-show .fl a").attr('href','#');
             $(".fill-logistics .good-show .fl img").attr('src',fill_logistics.data.item.good_picture);
             $(".fill-logistics .good-show .fr h3 a").text(fill_logistics.data.item.good_title);
@@ -110,13 +111,16 @@
         },
         submit:function () {
             var submitData = {};
-            submitData.id = fill_logistics.id;
-            submitData.number =$(".number input").val();
+            //submitData.id = fill_logistics.id;
+            submitData.back_express_no =$(".number input").val();
+            submitData.order_id = fill_logistics.data.item.id;
+            submitData.express_id = 3;
+
             if($(".btn button").hasClass('active')){
                 common.confirm_tip("提交物流单号","提交后快递单号不可修改，确定提交？",null,function () {
-                    common.httpRequest('../js/test.json','get',null,function (res) {
+                    common.httpRequest('{{url('api/order/order_back')}}','post',submitData,function (res) {
                         if(res){
-                            location.href="#";
+                            location.href="{{url('wechat/index/order_return_detail')}}";
                             $(".confirm-alert-wrap").remove();
                         }
                     })

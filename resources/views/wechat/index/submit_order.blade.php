@@ -693,11 +693,65 @@
             }
         },
         submitConfirm:function () {
-            if(parseFloat($(".detail-list .total .money").text().substr(2))>0){
+            common.confirm_tip('提交订单','提交后订单信息将无法更改，确定提交吗？',null,function () {
+                order_obj.data.submitOrderData = order_obj.data.address[order_obj.data.addressIndex];
+                order_obj.data.submitOrderData.orderList = order_obj.data.orderDataList;
+
+                var user_id = '{{$user_id}}';
+                var good_id = '{{$good_id}}';
+                var clean_price = $("#clean_price").val();
+                var express_price = $("#express_price").val();
+                var price = $("#price").val();
+                var money = $("#money").val();
+                var address_id = $("#address_id").val();
+                var receiver = $("#receiver").val();
+                var receiver_telephone = $("#receiver_telephone").val();
+                var receiver_address = $("#receiver_address").val();
+                var receiver_province = $("#receiver_province").val();
+                var receiver_city = $("#receiver_city").val();
+                var receiver_area = $("#receiver_area").val();
+
+                var submit_data = {
+                    user_id:user_id,
+                    good_id:good_id,
+                    clean_price:clean_price,
+                    express_price:express_price,
+                    price:price,
+                    money:money,
+                    address_id:address_id,
+                    receiver:receiver,
+                    receiver_telephone:receiver_telephone,
+                    receiver_address:receiver_address,
+                    receiver_province:receiver_province,
+                    receiver_city:receiver_city,
+                    receiver_area:receiver_area
+                };
+                common.httpRequest('{{url('api/order/submit_order')}}','post',submit_data,function (res) {
+                    if(res.code==200){
+                        common.alert_tip('提交成功');
+                        $(".confirm-alert-wrap").remove();
+                        if(price<=0)
+                        {
+                            location.href = "{{url('wechat/index/order_success')}}"+'/'+res.info.order_code;
+                        }
+                        else
+                        {
+                            location.href = "{{url('wechat/index/pay_order')}}"+'/'+res.info.order_code;
+                        }
+                    }
+                    else
+                    {
+                        common.alert_tip(res.msg);
+                        return false;
+                    }
+                });
+            })
+
+            /*if(parseFloat($(".detail-list .total .money").text().substr(2))>0){
 
                 //微信支付流程
                 $(".cover-phone-bind").hide();
-                /* wx.chooseWXPay({
+                /!* wx.chooseWXPay({
                  timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                  nonceStr: '', // 支付签名随机串，不长于 32 位
                  package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
@@ -706,7 +760,7 @@
                  success: function (res) {
                  // 支付成功后的回调函数
                  }
-                 });*/
+                 });*!/
                 location.href = "/view/pay_success.html";
             }else{
                 common.confirm_tip('提交订单','提交后订单信息将无法更改，确定提交吗？',null,function () {
@@ -746,6 +800,7 @@
                          if(res.code==200){
                              common.alert_tip('提交成功');
                              $(".confirm-alert-wrap").remove();
+
                              location.href = "{{url('wechat/index/order_success')}}"+'/'+res.info.order_code;
                          }
                          else
@@ -755,7 +810,7 @@
                          }
                      });
                 })
-            }
+            }*/
         },
         //发送验证码
         sendCode:function () {

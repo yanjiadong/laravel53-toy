@@ -39,6 +39,10 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
 
     //提交订单
     Route::any('/index/submit_order/{good_id}','IndexController@submit_order');
+    Route::any('/index/children_interesting_compilation','IndexController@children_interesting_compilation');
+
+    //支付订单
+    Route::any('/index/pay_order/{order_code}','IndexController@pay_order');
 
     Route::any('/index/order_list','IndexController@order_list');
     Route::any('/index/order_success/{order_code}','IndexController@order_success');

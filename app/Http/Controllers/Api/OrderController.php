@@ -227,11 +227,11 @@ class OrderController extends BaseController
 
     public function order_back(Request $request)
     {
-        $code = $request->get('code');
+        $order_id = $request->get('order_id');
         $express_id = $request->get('express_id');
         $back_express_no = $request->get('back_express_no');
 
-        $order = Order::where('code',$code)->first();
+        $order = Order::where('id',$order_id)->first();
 
         if($order->status == Order::STATUS_DOING_STR)
         {
@@ -244,7 +244,7 @@ class OrderController extends BaseController
             $data['back_status'] = Order::BACK_STATUS_WAITING;
             $data['back_time'] = $this->datetime;
 
-            Order::where('code',$code)->update($data);
+            Order::where('id',$order_id)->update($data);
             return $this->ret;
         }
         else
@@ -273,9 +273,18 @@ class OrderController extends BaseController
             foreach ($list as &$v)
             {
                 $v['days'] = 0;
-                if($v['status']==Order::STATUS_BACK)
+                if($v['status']=='已归还')
                 {
                     $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['confirm_time']))/(3600*24));
+                }
+
+                if($v['back_time'])
+                {
+                    $v['back_time_new'] = date('Y-m-d',(strtotime($v['back_time'])));
+                }
+                if($v['confirm_time'])
+                {
+                    $v['confirm_time_new'] = date('Y-m-d',(strtotime($v['confirm_time'])));
                 }
             }
         }

@@ -18,6 +18,9 @@
 }
 .index-wrap .content {
     margin-bottom: 50px;
+    padding-top: 44px;
+    height:500px;
+    overflow-y: auto;
 }
 .index-wrap .content .recommend .lunbo {
     width: 100%;
@@ -57,7 +60,10 @@
 .index-wrap .content .recommend .top-cont .top-title {
     text-align: center;
 }
-.index-wrap .content .recommend .top-cont .top-title .dot {
+.index-wrap .content .recommend .top-cont .top-title span{
+    display: inline-block;
+}
+.index-wrap .content .recommend .top-cont .top-title span.dot {
     display: inline-block;
     width: 4px;
     height: 4px;
@@ -584,8 +590,12 @@
     font-size: 15px;
     margin-bottom: 10px;
 }
+.good-detail-wrap .good-detail-content .good-detail-pic ul{
+    width: 100%;
+}
 .good-detail-wrap .good-detail-content .good-detail-pic ul li {
     margin-bottom: 10px;
+    width: 100%;
 }
 .good-detail-wrap .good-detail-content .good-detail-pic ul li img {
     width: 100%;
@@ -1061,7 +1071,7 @@
     display: none;
 }
 .cover-phone-bind{
-   display: none;
+    display: none;
     position: fixed;
     height: 100%;
     width: 100%;
@@ -2472,10 +2482,10 @@
 }
 .child-interesting-wrap .child-interesting-main .cont {
     margin-top: 10px;
+    margin-bottom: 68px;
 }
 .child-interesting-wrap .child-interesting-main .cont ul li {
     padding: 10px;
-    height: 110px;
     border-bottom: 1px solid #e3e3e3;
 }
 .child-interesting-wrap .child-interesting-main .cont ul li .fl {
@@ -2498,7 +2508,7 @@
     text-align: right;
 }
 .child-interesting-wrap .child-interesting-main .cont ul li .fr img {
-    height: 100%;
+    height: 90px;
 }
 .child-interesting-wrap .footer {
     height: 68px;
@@ -2689,6 +2699,7 @@
     color: #26325C;
     font-size: 12px;
     padding: 10px;
+    text-align: left;
 }
 .deposit-wrap .deposit-main .cont {
     background-color: #4990E2;
@@ -3353,7 +3364,6 @@
     color: #323232;
 }
 .share-wrap .share-main .btn1 {
-    width: 80%;
     margin: 10px auto;
     text-align: center;
 }
@@ -3372,7 +3382,6 @@
     color: #323232;
     text-align: center;
     font-weight: bold;
-    margin-top: 30px;
 }
 .share-wrap .invitation h2 {
     color: #FF3574;
@@ -3384,7 +3393,6 @@
     font-size: 13px;
     color: #8d8d8d;
     text-align: center;
-    margin-top: 10px;
 }
 .share-wrap .footer {
     height: 68px;
@@ -3500,7 +3508,6 @@
     color: #323232;
 }
 .share-wrap .share-main .btn1 {
-    width: 80%;
     margin: 10px auto;
     text-align: center;
 }
@@ -3533,13 +3540,13 @@
     color: #8d8d8d;
     text-align: center;
     margin-top: 5px;
-    padding: 0 10px;
 }
 .share-wrap .invitation h4 {
     font-size: 12px;
     color: #FF3574;
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 textarea {
     width: 400px;

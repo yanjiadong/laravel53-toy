@@ -239,7 +239,7 @@
                         break;
                     case '租用中':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-zuyongzhong"></i><h2>租用中</h2>' +
-                            '<h4>如需要换玩具，请点击“归还玩具”，上传寄回的物流单号，即可再次下单</h4></div>';
+                            '<h4>将租用中的玩具归还后，才能重新选择玩具再次下单</h4></div>';
                         logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
                             '</div><div class="fl"><h3>快件已签收</h3><p>' + common.dateFormat(order_detail.data.logistics_state.logistics.time) + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
@@ -325,7 +325,7 @@
         },
         //查看归还详情
         lookReturn:function () {
-            location.href="/view/order_return_detail.html?page=2";
+            location.href="{{url('wechat/index/order_return_detail')}}";
         }
     };
 

@@ -55,15 +55,16 @@
                 <div class="top-title">
                     <i class="icon-big icon-big-home-label"></i>
                     <span class="dot"></span>
-                    <span>品牌高端玩具</span>
+                    <span style="width: 23%">可编程机器人</span>
                     <span class="dot"></span>
-                    <span>无限次更换</span>
+                    <span style="width: 19%">无限次更换</span>
                     <span class="dot"></span>
-                    <span>医疗消毒</span>
+                    <span style="width: 15%">医疗消毒</span>
                     <span class="dot"></span>
-                    <span>往返包邮</span>
+                    <span style="width: 15%">往返包邮</span>
                 </div>
             </div>
+
             <div class="new-arrivals">
                 <div class="top-left-title">
                     <i class="icon icon-blue-rect"></i>
@@ -302,6 +303,7 @@
         index_obj.vip_create();    //首页 - 成为会员_
 
         //下拉刷新
+        $(".content").css({height:$(window).outerHeight()+'px'});
         $(".content").pullToRefresh();
         $(".content").on("pull-to-refresh", function() {
             var refreshClose = $(this);

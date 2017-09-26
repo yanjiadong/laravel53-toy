@@ -199,6 +199,28 @@ class IndexController extends BaseController
         return view('wechat.index.pay_vip_card',compact('user_id','jsApiParameters','out_trade_no'));
     }
 
+    /**
+     * 支付订单
+     * @param $order_code
+     */
+    public function pay_order($order_code)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $order = Order::where('code',$order_code)->first();
+
+        $out_trade_no = $order->out_trade_no;
+        $total_fee = 0.01;
+        $jsApiParameters = WxJsPay($out_trade_no, $total_fee, $openid);
+        return view('wechat.index.pay_order',compact('user_id','jsApiParameters','out_trade_no','order_code'));
+    }
+
+    public function pay_order_callback()
+    {
+        WxJsPayCallback();
+    }
+
     public function pay_vip_card_callback()
     {
         WxJsPayCallback();
@@ -265,6 +287,15 @@ class IndexController extends BaseController
 
         return view('wechat.index.fill_logistics',compact('user_id','openid','order_code'));
     }
+
+    public function children_interesting_compilation()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.index.children_interesting_compilation',compact('user_id','openid','order_code'));
+    }
+
 
     /**
      * 验证服务器配置

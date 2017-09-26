@@ -23,7 +23,7 @@
     <p>平台将在24小时内发货，请耐心等待</p>
     <div class="tips">
         <i class="icon-attetion">!</i>
-        <span>玩具在邮寄途中，会员有效期计时自动暂停</span>
+        <span>物品在邮寄途中，会员有效期计时自动暂停</span>
     </div>
     <div class="btn">
         <button onclick="goodDetail()">查看订单详情</button>

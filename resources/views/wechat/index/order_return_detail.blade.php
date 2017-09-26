@@ -302,34 +302,36 @@
         },
         getDetailList:function () {
             //列表
-            common.httpRequest('../js/test.json','get',null,function (res) {
-                if(res.length>0){
+            common.httpRequest('{{url('api/order/order_back_list')}}','post',{'user_id':'{{$user_id}}'},function (res) {
+                console.log(res);
+                if(true){
                     //  good_return.data.detailList = res;
-                    good_return.data.detailList = [
+                    /*good_return.data.detailList = [
                         {a:15,b:1,c:'../image/other/3.png',d:' WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人',
                             e:'#',f:'1-12岁',h:2500.00,g:131452365895,i:1,j:300.00,k:'2017.8.12',l:'2017.8.12',m:'fsaf465465745145',id:0},
                         {a:15,b:2,c:'../image/other/3.png',d:' WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人',
                             e:'#',f:'1-12岁',h:2500.00,g:131452365895,i:1,j:300.00,k:'2017.8.12',l:'2017.8.12',m:'fsaf465465745145',id:0},
-                    ];
+                    ];*/
+                    good_return.data.detailList = res.info.list;
                     var dataList ='';
                     for(var i=0;i<good_return.data.detailList.length;i++){
-                        switch (good_return.data.detailList[i].b){
-                            case 1:
+                        switch (good_return.data.detailList[i].back_status){
+                            case '待验证':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">' +
-                                    '<p>租期：'+good_return.data.detailList[i].k+'-'+good_return.data.detailList[i].l+'<span>共'+good_return.data.detailList[i].a+'天</span></p><p>租赁订单编号：'+good_return.data.detailList[i].g+'</p>' +
+                                    '<p>租期：'+good_return.data.detailList[i].confirm_time_new+'-'+good_return.data.detailList[i].back_time_new+'<span>共'+good_return.data.detailList[i].days+'天</span></p><p>租赁订单编号：'+good_return.data.detailList[i].code+'</p>' +
                                     '</div><div class="fr">待平台验货确认</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+good_return.data.detailList[i].e+'"><img src="'+good_return.data.detailList[i].c+'"></a></div><div class="fr"><h3>' +
-                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].d+'</a></h3><h4>适用年龄'+good_return.data.detailList[i].f+'岁</h4><p>市场参考价¥'+good_return.data.detailList[i].h+'</p></div></div>' +
-                                    '<div class="return-info clear"><div class="fl"><p>寄回物流信息</p><h4>物流单号：'+good_return.data.detailList[i].m+'（顺丰）</h4>' +
+                                    '<a href="'+'#'+'"><img src="'+good_return.data.detailList[i].good_picture+'"></a></div><div class="fr"><h3>' +
+                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].good_title+'</a></h3><h4>'+good_return.data.detailList[i].good_brand.title+'</h4><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p></div></div>' +
+                                    '<div class="return-info clear"><div class="fl"><p>寄回物流信息</p><h4>物流单号：'+good_return.data.detailList[i].back_express_no+'（'+good_return.data.detailList[i].back_express_title+'）</h4>' +
                                     '</div><div class="fr"><i class="icon icon_arrowRight_grey"></i></div></div> </li>';
                                 break;
-                            case 2:
+                            case '已验证':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">' +
-                                    '<p>租期：'+good_return.data.detailList[i].k+'-'+good_return.data.detailList[i].l+'<span>共'+good_return.data.detailList[i].a+'天</span></p><p>租赁订单编号：'+good_return.data.detailList[i].g+'</p>' +
+                                    '<p>租期：'+good_return.data.detailList[i].confirm_time_new+'-'+good_return.data.detailList[i].back_time_new+'<span>共'+good_return.data.detailList[i].days+'天</span></p><p>租赁订单编号：'+good_return.data.detailList[i].code+'</p>' +
                                     '</div><div class="fr done">已验货确认</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+good_return.data.detailList[i].e+'"><img src="'+good_return.data.detailList[i].c+'"></a></div><div class="fr"><h3>' +
-                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].d+'</a></h3><h4>适用年龄'+good_return.data.detailList[i].f+'岁</h4><p>市场参考价¥'+good_return.data.detailList[i].h+'</p></div></div>' +
-                                    '<div class="return-info clear"><div class="fl"><p>寄回物流信息</p><h4>物流单号：'+good_return.data.detailList[i].m+'（顺丰）</h4>' +
+                                    '<a href="'+'#'+'"><img src="'+good_return.data.detailList[i].good_picture+'"></a></div><div class="fr"><h3>' +
+                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].good_title+'</a></h3><h4>'+good_return.data.detailList[i].good_brand.title+'</h4><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p></div></div>' +
+                                    '<div class="return-info clear"><div class="fl"><p>寄回物流信息</p><h4>物流单号：'+good_return.data.detailList[i].back_express_no+'（'+good_return.data.detailList[i].back_express_title+'）</h4>' +
                                     '</div><div class="fr"><i class="icon icon_arrowRight_grey"></i></div></div> </li>';
                                 break;
                             default:

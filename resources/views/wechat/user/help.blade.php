@@ -9,7 +9,6 @@
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
-
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
@@ -72,7 +71,7 @@
                 </ul>
             </div>
             <div class="toys-clear fl tab-page">
-                <h3>专业消毒流程、保障宝贝的玩具卫生</h3>
+                <h3>专业消毒流程，保障孩子的使用卫生</h3>
                 <ul>
                     <li>
                         <div class="flag num1">
@@ -130,7 +129,7 @@
                                 <span></span>
                             </div>
                             <div class="fl">
-                                小叮当的玩具价格均上千元到几千元不等，出现严重
+                                趣编程的玩具价格均上千元到几千元不等，出现严重
                                 损坏或丢失无法使用的情况，你需要负一定赔偿责任，
                                 为了让给用户提供更标准的服务，在您选择相应的会员
                                 套餐时，需要一次性支付一定额度押金
@@ -224,15 +223,15 @@
                     </tr>
                     <tr>
                         <td>严重磨损，污渍严重无法清除，玩具表面裂痕凹痕无法修护</td>
-                        <td>按照小叮当玩具表示市场价的30%赔偿</td>
+                        <td>按照平台商品标示市场价的30%赔偿</td>
                     </tr>
                     <tr>
                         <td>重要功能损坏，无法再进行出租</td>
-                        <td>按照小叮当玩具表示市场价的70%赔偿</td>
+                        <td>按照平台商品标示市场价的70%赔偿</td>
                     </tr>
                     <tr>
                         <td>关键零件丢失，无法购买补充</td>
-                        <td>按照小叮当玩具表示市场价的50%赔偿</td>
+                        <td>按照平台商品标示市场价的50%赔偿</td>
                     </tr>
                     <tr>
                         <td>零件配件丢失</td>
@@ -244,6 +243,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     var help={
