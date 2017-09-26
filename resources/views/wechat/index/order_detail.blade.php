@@ -195,6 +195,7 @@
             common.httpRequest('{{url('api/order/order_info')}}', 'post', {code:'{{$order_code}}'}, function (res) {
                 //res = [];
 //              order_detail.data.logistics_state = res;
+                //console.log(res);
                 //假数据
                 //state 1为待发货 2 已发货 3租用中 4已归还
                 order_detail.data.logistics_state = {

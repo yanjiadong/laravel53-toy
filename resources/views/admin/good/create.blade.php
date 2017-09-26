@@ -57,6 +57,13 @@
                         </div>
 
                         <div class="row-form clearfix">
+                            <div class="span3">适用年龄：</div>
+                            <div class="span9">
+                                <input type="text" value="" class="validate[required]]" id="old"/>
+                            </div>
+                        </div>
+
+                        <div class="row-form clearfix">
                             <div class="span3">视频地址：</div>
                             <div class="span9">
                                 <input type="file" class="userfile" id="video-upload" value="上传视频" name="userfile" accept="video/mp4">
@@ -368,12 +375,13 @@
                     var way = $("#way").val();
                     var store = $("#store").val();
                     var video_second = $("#video_second").val();
+                    var old = $("#old").val();
                     var is_hot = $('input[name="is_hot"]:checked').val();
                     var is_new = $('input[name="is_new"]:checked').val();
                     var desc = ue.getContent();
 
                     $.post("{{ route('goods.store') }}",
-                        {category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

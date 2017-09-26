@@ -89,13 +89,14 @@
                             $(".no-goods").hide();
                             if(toys_car.data.info.list[i].store <=0){
                                 list +='<li class="clear"><div class="fl"><input type="radio" name="toys" onclick="toys_car.choose('+i+')"></div><div class="fl">' +
-                                    '<a href="'+'#'+'"><img src="'+toys_car.data.info.list[i].picture+'"></a><span>暂无库存</span></div>'+'<div class="fl"><h3><a href="' +toys_car.data.info.list[i].e+
-                                    '">'+toys_car.data.info.list[i].title+'</a></h3> <h4>市场参考价¥'+toys_car.data.info.list[i].price+'</h4><p></p>' +
+                                    '<a href="'+'#'+'"><img src="'+toys_car.data.info.list[i].picture+'"></a><span>暂无库存</span></div>'+'<div class="fl"><h3><a href="' +'#'+
+                                    '">'+toys_car.data.info.list[i].title+'</a></h3> <h4>市场参考价¥'+toys_car.data.info.list[i].price+'</h4><p>适用年龄'+toys_car.data.info.list[i].old+'岁</p>' +
                                     '</div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
+
                             }else{
                                 list +='<li class="clear"><div class="fl"><input type="radio" name="toys" onclick="toys_car.choose('+i+')"></div><div class="fl">' +
-                                    '<a href="'+'#'+'"><img src="'+toys_car.data.info.list[i].picture+'"></a></div>'+'<div class="fl"><h3><a href="' +toys_car.data.info.list[i].e+
-                                    '">'+toys_car.data.info.list[i].title+'</a></h3> <h4>市场参考价¥'+toys_car.data.info.list[i].price+'</h4><p></p>' +
+                                    '<a href="'+'#'+'"><img src="'+toys_car.data.info.list[i].picture+'"></a></div>'+'<div class="fl"><h3><a href="' +'#'+
+                                    '">'+toys_car.data.info.list[i].title+'</a></h3> <h4>市场参考价¥'+toys_car.data.info.list[i].price+'</h4><p>适用年龄'+toys_car.data.info.list[i].old+'岁</p>' +
                                     '</div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
                             }
                         }

@@ -111,6 +111,7 @@ class OrderController extends BaseController
         $order_data['category_id'] = $good->category_id;
         $order_data['category_tag_id'] = $good->category_tag_id;
         $order_data['good_brand_id'] = $good->brand_id;
+        $order_data['good_old'] = $good->old;
         $order_data['express_price'] = $express_price;
         $order_data['clean_price'] = $clean_price;
         $order_data['price'] = $price;
