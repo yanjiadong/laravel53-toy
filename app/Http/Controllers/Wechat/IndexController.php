@@ -181,11 +181,32 @@ class IndexController extends BaseController
         return view('wechat.index.choose_vip',compact('user_id','days'));
     }
 
-    public function pay_vip_card($vip_card_id)
+    public function pay_vip_card($vip_card_id,$coupon_id)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
         $info = VipCard::find($vip_card_id);
+
+        $total_fee = $info->money+$info->price;
+        if($coupon_id > 0)
+        {
+            $user_coupon = UserCoupon::where('user_id',$user_id)->where('coupon_id',$coupon_id)->first();
+            if(!empty($user_coupon))
+            {
+                $coupon = Coupon::find($coupon_id);
+
+
+                $data['coupon_price'] = $coupon->price;
+                $data['user_coupon_id'] = $user_coupon->id;
+
+                $total_fee = ($info->money+$info->price)-$coupon->price;
+            }
+        }
+
+        if($total_fee<=0)
+        {
+            $total_fee = 0;
+        }
 
         switch ($info->type)
         {

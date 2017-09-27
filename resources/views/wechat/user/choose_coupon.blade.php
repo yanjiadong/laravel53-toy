@@ -19,7 +19,7 @@
         <input type="text" placeholder="请输入兑换码">
     </div>
     <div class="btn">
-        <button onclick="vip_voucher.exchange()">兑换</button>
+        <button onclick="vip_voucher.exchange()" disabled>兑换</button>
     </div>
     <div class="list">
         <ul>
@@ -87,22 +87,18 @@
             $item.click(function () {
                 $item.removeClass('active');
                 $(this).addClass('active');
-                $(".vip-voucher-wrap .footer").show();
+
                 var index = $(this).index(".vip-voucher-wrap .list ul li");
                 //提交选择
-                var submitData = vip_voucher.data.list[index].id;
-                common.httpRequest('../js/test.json','get',null,function (res) {
-                    common.success_tip('选择成功！')
-                })
+                localStorage.vip_discount = JSON.stringify(vip_voucher.data.list[index]);
+                location.href="{{url('wechat/index/choose_vip')}}";
             })
         },
         //不使用优惠劵
         noUser:function () {
             var submitData ="";
-            common.httpRequest('../js/test.json','get',null,function (res) {
-                $item.removeClass('active');
-                common.success_tip('不使用优惠劵已设置成功！')
-            })
+            localStorage.vip_discount="";
+            location.href="{{url('wechat/index/choose_vip')}}";
         },
         //兑换
         exchange:function () {

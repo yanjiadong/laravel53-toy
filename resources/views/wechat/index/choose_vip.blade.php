@@ -111,12 +111,14 @@
     var choose_vip={
         data:{
             time:'{{$days}}',
-            sortList:[]
+            sortList:[],
+            discount:localStorage.vip_discount?JSON.parse(localStorage.vip_discount):""       //优惠券卡
         },
         init:function () {
             if(eval(choose_vip.data.time)){
                 $(".choose-vip-wrap>p").text('您的会员有效期剩余：'+choose_vip.data.time+'天');
             }
+            console.log(choose_vip.data.discount);
             //获取会员卡数据
             common.httpRequest('{{url('api/user/vip_cards')}}','post',null,function (res) {
                 /*choose_vip.data.sortList =[
@@ -181,8 +183,17 @@
                 $(".info .select .fr").text($(this).find(".fr").text());
                 var index =$(this).index(".choose-vip-wrap .sort ul li");
                 $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[index].money);
-                $(".info .coupon .fr span").text('-¥'+0);
-                $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-0));
+
+                if(!choose_vip.data.discount){
+                    $(".info .coupon .fr span").text('请选择');
+                    $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money));
+                }else{
+                    $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
+                    $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-choose_vip.data.discount.price));
+                }
+                console.log(choose_vip.data.discount);
+                //$(".info .coupon .fr span").text('-¥'+0);
+                //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-0));
 
                 $("#vip_card_id").val(choose_vip.data.sortList[index].id);
                 $("#submit").attr("disabled", false);
@@ -196,7 +207,13 @@
         //微信支付
         pay:function () {
             var vip_card_id = $("#vip_card_id").val();
-            location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id;
+            if(!choose_vip.data.discount){
+                var coupon_id = 0;
+            }else{
+                var coupon_id = choose_vip.data.discount.id
+            }
+
+            location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id+'/'+coupon_id;
             /*common.alert_tip("请前往个人中心查看会员详情",'#323232','支付成功',function () {
                 location.href="user_center.html";
             });*/
