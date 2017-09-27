@@ -333,7 +333,9 @@ class IndexController extends BaseController
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.index.fill_logistics',compact('user_id','openid','order_code'));
+        $signPackage = getJssdk();
+
+        return view('wechat.index.fill_logistics',compact('user_id','openid','order_code','signPackage'));
     }
 
     public function children_interesting_compilation()

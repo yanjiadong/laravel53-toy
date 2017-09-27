@@ -69,8 +69,8 @@ class ExpressInfoController extends BaseController
 
     public function com(Request $request)
     {
-        $num = '450909000804';
-        //$num = $request->get('num');
+        //$num = '450909000804';
+        $num = $request->get('num');
         $url = "http://www.kuaidi100.com/autonumber/auto?num={$num}&key=dLSbEmyh1644";
         $result = weixinCurl($url);
 

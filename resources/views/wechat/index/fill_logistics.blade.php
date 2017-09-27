@@ -13,7 +13,7 @@
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
 </head>
 <body>
 <div class="fill-logistics">
@@ -55,7 +55,8 @@
         <div class="company clear" onclick="fill_logistics.getCompany()">
             <div class="fl">
                 <h5>快递公司</h5>
-                <input type="text" placeholder="点击匹配物流公司名称" disabled>
+                <input type="text" placeholder="点击匹配物流公司名称" disabled id="express_title">
+                <input type="hidden" value="" id="express_com">
             </div>
             <div class="fr">
                 <i class="icon icon_arrowRight_bold"></i>
@@ -67,7 +68,7 @@
     </div>
 </div>
 
-
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
     var fill_logistics  ={
         data:{
@@ -87,13 +88,15 @@
             if(!number.replace(/(^\s*)|(\s*$)/g, "")){
                 common.alert_tip("快递单号不能为空！");
             }else{
-                common.httpRequest('{{url('api/index/get_express_list')}}','post',{number:number},function (res) {
+                common.httpRequest('{{url('api/express_info/com')}}','post',{num:number},function (res) {
                     //假数据
-                    if(res){
-                        $(".company input").val("顺丰物流公司");
+                    if(res.code==200){
+                        $(".company input").val(res.info.title);
+                        $("#express_com").val(res.info.com);
+
                         $(".btn button").addClass('active');
                     }else{
-                        common.alert_tip("无法匹配到物流公司，请坚持快递单号是否正确！");
+                        common.alert_tip("无法匹配到物流公司，请检查快递单号是否正确！");
                         return false;
                     }
                 })
@@ -114,7 +117,9 @@
             //submitData.id = fill_logistics.id;
             submitData.back_express_no =$(".number input").val();
             submitData.order_id = fill_logistics.data.item.id;
-            submitData.express_id = 3;
+            submitData.back_express_title = $("#express_title").val();
+            submitData.back_express_com = $("#express_com").val();
+            //submitData.express_id = 3;
 
             if($(".btn button").hasClass('active')){
                 common.confirm_tip("提交物流单号","提交后快递单号不可修改，确定提交？",null,function () {
@@ -133,13 +138,18 @@
 
         //通过config接口注入权限验证配置
         wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: '', // 必填，公众号的唯一标识
-            timestamp:'' , // 必填，生成签名的时间戳
-            nonceStr: '', // 必填，生成签名的随机串
-            signature: '',// 必填，签名，见附录1
-            jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            debug: false,
+            appId: '{{$signPackage["appId"]}}',
+            timestamp: '{{$signPackage["timestamp"]}}',
+            nonceStr: '{{$signPackage["nonceStr"]}}',
+            signature: '{{$signPackage["signature"]}}',
+            jsApiList: [
+                'onMenuShareAppMessage',
+                'onMenuShareTimeline',
+                'scanQRCode'
+            ]
         });
+
         wx.error(function(res) {
             alert("出错了：" + res.errMsg);
         });
@@ -151,6 +161,13 @@
                 scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                 success: function (res) {
                     var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    var start = result.indexOf("CODE_128,");
+                    if(start>-1){
+                        fill_logistics.data.logistics_num =  result.slice(start+9);
+                    }else{
+                        fill_logistics.data.logistics_num = result;
+                    }
+                    $(".number input").val( fill_logistics.data.logistics_num);
                 }
             });
         })

@@ -590,14 +590,14 @@
     font-size: 15px;
     margin-bottom: 10px;
 }
-.good-detail-wrap .good-detail-content .good-detail-pic ul{
+.good-detail-wrap .good-detail-content .good-detail-pic>div{
     width: 100%;
 }
-.good-detail-wrap .good-detail-content .good-detail-pic ul li {
+.good-detail-wrap .good-detail-content .good-detail-pic>div>p{
     margin-bottom: 10px;
     width: 100%;
 }
-.good-detail-wrap .good-detail-content .good-detail-pic ul li img {
+.good-detail-wrap .good-detail-content .good-detail-pic>div>p>img {
     width: 100%;
     border-radius: 4px;
 }

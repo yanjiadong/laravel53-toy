@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Cart;
+use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,6 +20,19 @@ class UserController extends BaseController
         $cart_num = Cart::where('user_id',$user_id)->count();
 
         return view('wechat.user.center',compact('user_id','menu','cart_num'));
+    }
+
+    public function share()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $user = User::find($user_id);
+        $count = Order::where('user_id',$user_id)->count();
+
+        $signPackage = getJssdk();
+
+        return view('wechat.user.share',compact('user_id','user','count','signPackage'));
     }
 
     public function share_open()

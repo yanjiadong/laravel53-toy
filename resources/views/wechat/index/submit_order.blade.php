@@ -665,14 +665,25 @@
 
             common.httpRequest('{{url('api/address/add')}}','post',data,function (res) {
                  if(res.code==200){
-                    alert("保存成功")
+                    alert("保存成功");
+                     var user_id = '{{$user_id}}';
+                     common.httpRequest('{{url('api/address/index')}}','post',{user_id:user_id},function (res) {
+                         //res=[];
+                         order_obj.data.address = res.info.address;
+                         //假数据
+                         /*  order_obj.data.address =[
+                          {a:"张三丰",b:"1804544654",c:"江苏省",d:"苏州市",e:"工业园区",f:'启月街1号工寓'},
+                          {a:"张三丰1",b:"1804544653",c:"江苏省1",d:"苏州市1",e:"工业园区1",f:'启月街1号工寓1'}
+                          ];*/
+
+                         order_obj.address_rander();
+                         order_obj.addAddress();
+                         $(".order-cover-wrap .order-edit-address-main").hide();
+                     });
                  }
              })
             //order_obj.data.address.push(data);
-            order_obj.address();
-            order_obj.address_rander();
-            order_obj.addAddress();
-            $(".order-cover-wrap .order-edit-address-main").hide();
+
         },
         hideNewAddress:function () {
             $(".order-cover-wrap .order-edit-address-main").hide();
