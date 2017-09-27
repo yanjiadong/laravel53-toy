@@ -6,6 +6,7 @@ use App\Area;
 use App\Order;
 use App\User;
 use App\UserAddress;
+use App\UserChooseCoupon;
 use App\UserPayRecord;
 use App\VipCard;
 use App\VipCardPay;
@@ -213,6 +214,16 @@ class UserController extends BaseController
         $coupons = $user->coupons()->get();
 
         $this->ret['info'] = ['coupons'=>$coupons];
+        return $this->ret;
+    }
+
+    public function choose_coupon(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $coupon_id = $request->get('coupon_id');
+
+        UserChooseCoupon::where('user_id',$user_id)->delete();
+        UserChooseCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon_id]);
         return $this->ret;
     }
 }

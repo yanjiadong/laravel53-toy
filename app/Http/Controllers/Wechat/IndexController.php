@@ -6,6 +6,7 @@ use App\Cart;
 use App\Coupon;
 use App\Order;
 use App\User;
+use App\UserChooseCoupon;
 use App\UserCoupon;
 use App\VipCard;
 use App\VipCardPay;
@@ -181,15 +182,25 @@ class IndexController extends BaseController
         return view('wechat.index.choose_vip',compact('user_id','days'));
     }
 
-    public function pay_vip_card($vip_card_id,$coupon_id)
+    public function pay_vip_card($vip_card_id)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
+
+        //$coupon_id = session('coupon_id');
+
+        $choose = UserChooseCoupon::where('user_id',$user_id)->orderBy('id', 'desc')->first();
+        $coupon_id = 0;
+        if(!empty($choose))
+        {
+            $coupon_id = $choose->coupon_id;
+        }
+
         $info = VipCard::find($vip_card_id);
 
         //$total_fee = $info->money+$info->price;
         $total_fee = 1.01;
-        if($coupon_id > 0)
+        if(!empty($coupon_id))
         {
             $user_coupon = UserCoupon::where('user_id',$user_id)->where('coupon_id',$coupon_id)->first();
             if(!empty($user_coupon))

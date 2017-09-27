@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Express;
 use App\ExpressInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,5 +65,29 @@ class ExpressInfoController extends BaseController
             echo  '{"result":"false","returnCode":"500","message":"失败"}';
             //保存失败，返回失败信息，30分钟以后会重推
         }
+    }
+
+    public function com(Request $request)
+    {
+        $num = '450909000804';
+        //$num = $request->get('num');
+        $url = "http://www.kuaidi100.com/autonumber/auto?num={$num}&key=dLSbEmyh1644";
+        $result = weixinCurl($url);
+
+        $com = '';
+        $title = '';
+        if(!empty($request) && !empty($result[0]))
+        {
+            $com = $result[0]['comCode'];
+            $express = Express::where('com',$com)->first();
+            if(!empty($express))
+            {
+                $title = $express->title;
+            }
+        }
+        //print_r($result);
+        $this->ret['info'] = ['com'=>$com,'title'=>$title];
+        return $this->ret;
+
     }
 }

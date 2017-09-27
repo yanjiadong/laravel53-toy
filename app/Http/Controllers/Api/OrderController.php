@@ -229,17 +229,19 @@ class OrderController extends BaseController
     public function order_back(Request $request)
     {
         $order_id = $request->get('order_id');
-        $express_id = $request->get('express_id');
+        //$express_id = $request->get('express_id');
+        $back_express_com = $request->get('back_express_com');
+        $back_express_title = $request->get('back_express_title');
         $back_express_no = $request->get('back_express_no');
 
         $order = Order::where('id',$order_id)->first();
 
         if($order->status == Order::STATUS_DOING_STR)
         {
-            $express = Express::find($express_id);
+            //$express = Express::find($express_id);
 
-            $data['back_express_title'] = $express->title;
-            $data['back_express_com'] = $express->com;
+            $data['back_express_title'] = $back_express_title;
+            $data['back_express_com'] = $back_express_com;
             $data['back_express_no'] = $back_express_no;
             $data['status'] = Order::STATUS_BACK;
             $data['back_status'] = Order::BACK_STATUS_WAITING;

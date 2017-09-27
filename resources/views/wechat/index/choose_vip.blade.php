@@ -213,7 +213,7 @@
                 var coupon_id = choose_vip.data.discount.id
             }
 
-            location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id+'/'+coupon_id;
+            location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id;
             /*common.alert_tip("请前往个人中心查看会员详情",'#323232','支付成功',function () {
                 location.href="user_center.html";
             });*/

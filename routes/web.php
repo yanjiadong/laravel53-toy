@@ -34,7 +34,7 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
 
     //成为会员
     Route::any('/index/choose_vip','IndexController@choose_vip');
-    Route::any('/index/pay_vip_card/{vip_card_id}/{coupon_id}','IndexController@pay_vip_card');
+    Route::any('/index/pay_vip_card/{vip_card_id}','IndexController@pay_vip_card');
     Route::any('/index/pay_vip_card_callback','IndexController@pay_vip_card_callback');
 
     //提交订单

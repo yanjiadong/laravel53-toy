@@ -91,6 +91,11 @@
                 var index = $(this).index(".vip-voucher-wrap .list ul li");
                 //提交选择
                 localStorage.vip_discount = JSON.stringify(vip_voucher.data.list[index]);
+
+                common.httpRequest('{{url('api/user/choose_coupon')}}','post',{user_id:'{{$user_id}}','coupon_id':vip_voucher.data.list[index].id},function (res) {
+
+                });
+
                 location.href="{{url('wechat/index/choose_vip')}}";
             })
         },

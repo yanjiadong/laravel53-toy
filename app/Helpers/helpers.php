@@ -195,6 +195,7 @@ if(!function_exists('WxJsPayCallback'))
                 if(isset($order_info->user_coupon_id) && $order_info->user_coupon_id > 0)
                 {
                     DB::table('user_coupons')->where('id',$order_info->user_coupon_id)->update(['status'=>1]);
+                    DB::table('user_choose_coupons')->where('user_id',$order_info->user_id)->delete();
                 }
             }
         }

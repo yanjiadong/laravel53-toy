@@ -68,6 +68,8 @@ Route::group(['namespace' => 'Api'], function () {
     //获取用户优惠券列表
     Route::post('/user/coupon_list','UserController@coupon_list');
 
+    Route::post('/user/choose_coupon','UserController@choose_coupon');
+
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');
 
@@ -86,6 +88,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/express_info/index','ExpressInfoController@index');
     //快递100回调请求
     Route::post('/express_info/callback','ExpressInfoController@callback')->name('api.express_info.callback');
+    //根据单号查询物流公司
+    Route::post('/express_info/com','ExpressInfoController@com');
 
     //获取物流公司
     Route::post('/index/get_express_list','IndexController@get_express_list');
