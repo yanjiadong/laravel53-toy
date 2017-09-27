@@ -102,9 +102,9 @@ class IndexController extends BaseController
      */
     public function index()
     {
-        session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
-        session(['user_id'=>3]);
-        //$this->check_user();
+        //session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+        //session(['user_id'=>3]);
+        $this->check_user();
         $openid = session('open_id');
         $user_id = session('user_id');
         $url = url('api/index');
@@ -313,7 +313,8 @@ class IndexController extends BaseController
 
     public function test()
     {
-        return view('wechat.index.test');
+        $signPackage = getJssdk();
+        return view('wechat.index.test',compact('signPackage'));
     }
 
     /**

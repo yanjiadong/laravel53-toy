@@ -1833,9 +1833,7 @@
     width: 10%;
     text-align: center;
     height: 71px;
-}
-.toys-car .list ul li .fr .icon_del {
-    margin-top: 43px;
+    line-height: 71px;
 }
 .toys-car .btn {
     position: fixed;
@@ -3901,7 +3899,6 @@ textarea {
     bottom: 0;
     padding: 12px 10px;
     box-shadow: 0 -1px 10px #dddddd;
-    display: none;
 }
 .vip-voucher-wrap .footer button {
     height: 100%;

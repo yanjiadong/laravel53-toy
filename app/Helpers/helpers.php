@@ -206,4 +206,15 @@ if(!function_exists('WxJsPayCallback'))
     }
 }
 
+if(!function_exists('getJssdk'))
+{
+    function getJssdk()
+    {
+        include_once __DIR__ . "/Jssdk.php";
+        $sdk = new Jssdk();
+        return $sdk->getSignPackage();
+    }
+}
+
+
 

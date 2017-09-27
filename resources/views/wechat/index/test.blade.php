@@ -13,7 +13,7 @@
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
 </head>
 <body>
 <div class="fill-logistics">
@@ -47,8 +47,21 @@
     </div>
 </div>
 
-
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
+    wx.config({
+        debug: false,
+        appId: '{{$signPackage["appId"]}}',
+        timestamp: '{{$signPackage["timestamp"]}}',
+        nonceStr: '{{$signPackage["nonceStr"]}}',
+        signature: '{{$signPackage["signature"]}}',
+        jsApiList: [
+            'onMenuShareAppMessage',
+            'onMenuShareTimeline',
+            'scanQRCode'
+        ]
+    });
+
     $(function () {
         //调用扫一扫
         $(".icon_code").click(function (event) {
