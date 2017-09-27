@@ -192,9 +192,9 @@ if(!function_exists('WxJsPayCallback'))
                 DB::table('user_pay_records')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$order_info->money,'created_at'=>date('Y-m-d H:i:s')]);
 
                 //如果使用了优惠券
-                if(isset($order_info['user_coupon_id']) && $order_info['user_coupon_id'] > 0)
+                if(isset($order_info->user_coupon_id) && $order_info->user_coupon_id > 0)
                 {
-                    DB::table('user_coupons')->where('id',$order_info['user_coupon_id'])->update(['status'=>1]);
+                    DB::table('user_coupons')->where('id',$order_info->user_coupon_id)->update(['status'=>1]);
                 }
             }
         }
