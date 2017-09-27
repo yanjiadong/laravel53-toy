@@ -188,7 +188,7 @@ class IndexController extends BaseController
         $info = VipCard::find($vip_card_id);
 
         //$total_fee = $info->money+$info->price;
-        $total_fee = 0.02;
+        $total_fee = 1.01;
         if($coupon_id > 0)
         {
             $user_coupon = UserCoupon::where('user_id',$user_id)->where('coupon_id',$coupon_id)->first();
