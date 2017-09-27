@@ -187,7 +187,8 @@ class IndexController extends BaseController
         $openid = session('open_id');
         $info = VipCard::find($vip_card_id);
 
-        $total_fee = $info->money+$info->price;
+        //$total_fee = $info->money+$info->price;
+        $total_fee = 0.02;
         if($coupon_id > 0)
         {
             $user_coupon = UserCoupon::where('user_id',$user_id)->where('coupon_id',$coupon_id)->first();
@@ -199,7 +200,7 @@ class IndexController extends BaseController
                 $data['coupon_price'] = $coupon->price;
                 $data['user_coupon_id'] = $user_coupon->id;
 
-                $total_fee = ($info->money+$info->price)-$coupon->price;
+                $total_fee = $total_fee - $coupon->price;
             }
         }
 
@@ -221,7 +222,7 @@ class IndexController extends BaseController
                 break;
         }
         $out_trade_no = 'v'.get_order_code($user_id);
-        $total_fee = 0.01;
+        //$total_fee = 0.01;
 
         $data['user_id'] = $user_id;
         $data['price'] = $total_fee;
