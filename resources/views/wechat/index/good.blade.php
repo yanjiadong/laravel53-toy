@@ -121,11 +121,11 @@
         </div>
         <div class="good-detail-pic">
             <h3 class="title">商品详情</h3>
-            <ul>
+            <div>
                 <!--<li>
                     <img src="../image/other/lunbo1.gif">
                 </li>-->
-            </ul>
+            </div>
         </div>
     </div>
     <div class="footer">
@@ -187,10 +187,6 @@
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
                             $('.lunbo .swiper-wrapper .swiper-slide:eq('+i+') .play-box').text(time);
-                            lunbo_content="";
-                        }else{
-                            lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo[i].url+'"></div>';
-                            $(".lunbo .swiper-wrapper").append(lunbo_content);
                             lunbo_content="";
                         }
                     }

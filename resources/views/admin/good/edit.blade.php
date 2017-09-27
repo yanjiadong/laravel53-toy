@@ -100,7 +100,7 @@
                                 <img src="{{ $good->picture }}" style="margin-top: 10px;height: 160px;width:160px;" class="showimg" id="showPic"/>
                                 <img src="/admin/assets/img/loading.gif"  id="loading" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <br/>
-                                <span>建议图片尺寸标准为160x160</span>
+                                <span>建议图片尺寸标准为800x800</span>
                             </div>
                         </div>
 
@@ -317,7 +317,7 @@
 
             $("#upload").uniform();
             $("#upload").ajaxfileupload({
-                'action': '{{ url('admin/upload',['size'=>'160,160']) }}',
+                'action': '{{ url('admin/upload',['size'=>'800,800']) }}',
                 'params': {
                     '_token': Laravel.csrfToken
                 },

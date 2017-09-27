@@ -177,7 +177,7 @@
         },
         //分享给朋友
         share:function () {
-            location.href='';
+            location.href='{{url('wechat/user/share')}}';
         },
         //使用帮助
         help:function () {
