@@ -221,7 +221,7 @@
                     $(".good-detail-param table").append(shop_params);
                 }
                 //商品详情
-                $(".good-detail-pic ul").html(res.info.good.desc);
+                $(".good-detail-pic>div").html(res.info.good.desc);
                 /*if(goodDetail_obj.detail_data.detail.length>0){
                     var details ="";
                     for(var i=0;i<goodDetail_obj.detail_data.detail.length;i++){

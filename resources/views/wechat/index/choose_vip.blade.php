@@ -138,7 +138,7 @@
                             break;
                         case 2:
                             cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>季卡</span></div>'+
-                                '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span> <span class="check">√</span></li>';
+                                '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
                             //$(".info .select .fl span").text("季卡（+90天）");
                             //$(".info .select .fr").text('¥'+choose_vip.data.sortList[i].price);
                             //$(".info .deposit .fr").text('¥'+choose_vip.data.sortList[i].money);
@@ -146,7 +146,7 @@
                             //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money));
                             break;
                         case 3:
-                            cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                            cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><!--<i class="icon-big icon-big-label-yajin"></i>--></div>'+
                                 '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
                             //$(".info .deposit .fr").text('0.00');
                             break;

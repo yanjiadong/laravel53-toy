@@ -208,7 +208,8 @@ footer table td a div span {
 footer table td a .icon-footer-home {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -5px 0 no-repeat;
+    background: url(../image/common/wx_footer.png) 1px 0 no-repeat;
+    background-size: 117px 48px;
     width: 23px;
     height: 24px;
     position: relative;
@@ -216,7 +217,8 @@ footer table td a .icon-footer-home {
 footer table td a .icon-footer-order {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -38px 0 no-repeat;
+    background: url(../image/common/wx_footer.png) -31px 0 no-repeat;
+    background-size: 117px 48px;
     width: 23px;
     height: 24px;
     position: relative;
@@ -224,7 +226,8 @@ footer table td a .icon-footer-order {
 footer table td a .icon-footer-shop-car {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -71px 0 no-repeat;
+    background: url(../image/common/wx_footer.png) -63px 0 no-repeat;
+    background-size: 117px 48px;
     width: 23px;
     height: 24px;
     position: relative;
@@ -232,7 +235,8 @@ footer table td a .icon-footer-shop-car {
 footer table td a .icon-footer-user-center {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -106px 0 no-repeat;
+    background: url(../image/common/wx_footer.png) -96px 0 no-repeat;
+    background-size: 117px 48px;
     width: 23px;
     height: 24px;
     position: relative;
@@ -243,34 +247,38 @@ footer table td.active a {
 footer table td.active a .icon-footer-home {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -5px -36px no-repeat;
+    background: url(../image/common/wx_footer.png) 2px -25px no-repeat;
     width: 23px;
     height: 24px;
     position: relative;
+    background-size: 117px 48px;
 }
 footer table td.active a .icon-footer-order {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -38px -36px no-repeat;
+    background: url(../image/common/wx_footer.png) -31px -25px no-repeat;
     width: 23px;
     height: 24px;
     position: relative;
+    background-size: 117px 48px;
 }
 footer table td.active a .icon-footer-shop-car {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -71px -36px no-repeat;
+    background: url(../image/common/wx_footer.png) -63px -25px no-repeat;
     width: 23px;
     height: 24px;
     position: relative;
+    background-size: 117px 48px;
 }
 footer table td.active a .icon-footer-user-center {
     display: inline-block;
     vertical-align: middle;
-    background: url("../image/common/icon_footer.png") -106px -36px no-repeat;
+    background: url(../image/common/wx_footer.png) -92px -24px no-repeat;
     width: 23px;
     height: 24px;
     position: relative;
+    background-size: 113px 48px;
 }
 /*---------------成功提示----------------------*/
 .success-tip-wrap{

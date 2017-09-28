@@ -25,7 +25,7 @@
 .index-wrap .content .recommend .lunbo {
     width: 100%;
     background-color: #fff;
-    padding: 10px 12px 0 12px;
+    padding: 10px 10px 0 10px;
 }
 .index-wrap .content .recommend .lunbo .swiper-container {
     width: 100%;
@@ -53,17 +53,34 @@
 .index-wrap .content .recommend .top-cont {
     background-color: #fff;
     height: 60px;
-    padding: 20px 0;
+    padding: 20px 10px;
     color: #939393;
     font-size: 12px;
 }
-.index-wrap .content .recommend .top-cont .top-title {
+.index-wrap .content .recommend .top-cont .top-title table{
+    width: 100%;
+}
+.index-wrap .content .recommend .top-cont .top-title table td{
     text-align: center;
 }
-.index-wrap .content .recommend .top-cont .top-title span{
-    display: inline-block;
+.index-wrap .content .recommend .top-cont .top-title table td:first-child{
+    width:43px;
 }
-.index-wrap .content .recommend .top-cont .top-title span.dot {
+.index-wrap .content .recommend .top-cont .top-title table td:nth-child(2n){
+    width: 5%;
+    text-align: center;
+}
+.index-wrap .content .recommend .top-cont .top-title table td:nth-child(3){
+    width:75px;
+}
+.index-wrap .content .recommend .top-cont .top-title table td:nth-child(5){
+    width:63px;
+}
+.index-wrap .content .recommend .top-cont .top-title table td:nth-child(7),
+.index-wrap .content .recommend .top-cont .top-title table td:nth-child(9){
+    width:49px;
+}
+.index-wrap .content .recommend .top-cont .top-title table td .dot {
     display: inline-block;
     width: 4px;
     height: 4px;
