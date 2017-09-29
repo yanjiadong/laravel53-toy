@@ -207,7 +207,7 @@
                                     '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
                                     '</h3><h4>'+orderDtail.data.list[i].good_brand.title+'</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
                                     '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
-                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].id+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
+                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].code+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
                                 break;
                             case '租用中':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
@@ -258,11 +258,12 @@
             })
         },
         //确认收货
-        receipt:function (id) {
+        receipt:function (code) {
             common.confirm_tip("提示","确定已经收货完成？",null,function () {
-                common.httpRequest('../js/test.json?','post',{id:id},function (res) {
+                common.httpRequest('{{url('api/order/confirm_order')}}','post',{code:code},function (res) {
                     if(res.length){
                         $(".confirm-alert-wrap").remove();
+                        location.reload();
                     }
                 })
             });
