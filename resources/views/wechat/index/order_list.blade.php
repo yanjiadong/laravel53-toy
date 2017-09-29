@@ -259,7 +259,6 @@
         },
         //确认收货
         receipt:function (id) {
-            alert(id);
             common.confirm_tip("提示","确定已经收货完成？",null,function () {
                 common.httpRequest('{{url('api/order/confirm_order')}}','post',{id:id},function (res) {
                     if(res.code==200){
