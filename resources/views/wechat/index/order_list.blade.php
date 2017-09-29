@@ -263,7 +263,7 @@
                 common.httpRequest('{{url('api/order/confirm_order')}}','post',{code:code},function (res) {
                     if(res.code==200){
                         $(".confirm-alert-wrap").remove();
-                        location.reload();
+                        //location.reload();
                     }else{
 
                     }
