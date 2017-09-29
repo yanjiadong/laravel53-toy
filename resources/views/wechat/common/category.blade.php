@@ -46,8 +46,9 @@
             {id:6,name:'早教学习1'}
         ];*/
         var sortList = res.info.categorys;
+        var category_id = '{{isset($category_id)?$category_id:0}}';
         for(var i=0;i<sortList.length;i++){
-            if(sortList[i].id == '{{$category_id}}')
+            if(sortList[i].id == category_id)
             {
                 cont += '<li class="active"><a href="{{route('wechat.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
             }
