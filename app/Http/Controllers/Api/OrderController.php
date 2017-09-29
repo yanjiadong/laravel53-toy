@@ -221,8 +221,17 @@ class OrderController extends BaseController
     public function confirm_order(Request $request)
     {
         $order_code = $request->get('code');
+        $id = $request->get('id');
 
-        Order::where('code',$order_code)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
+        if(!empty($id))
+        {
+            $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
+        }
+        else
+        {
+            $ret = Order::where('code',$order_code)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
+        }
+
         return $this->ret;
     }
 
