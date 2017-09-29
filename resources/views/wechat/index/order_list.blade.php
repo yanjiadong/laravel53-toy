@@ -261,9 +261,11 @@
         receipt:function (code) {
             common.confirm_tip("提示","确定已经收货完成？",null,function () {
                 common.httpRequest('{{url('api/order/confirm_order')}}','post',{code:code},function (res) {
-                    if(res.length){
+                    if(res.code==200){
                         $(".confirm-alert-wrap").remove();
                         location.reload();
+                    }else{
+
                     }
                 })
             });
