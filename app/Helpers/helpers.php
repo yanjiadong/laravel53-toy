@@ -197,6 +197,11 @@ if(!function_exists('WxJsPayCallback'))
                     DB::table('user_coupons')->where('id',$order_info->user_coupon_id)->update(['status'=>1]);
                     DB::table('user_choose_coupons')->where('user_id',$order_info->user_id)->delete();
                 }
+
+                if(!empty($user_info->telephone))
+                {
+                    vip_card_pay_success_send_sms($user_info->telephone,$user_info->name);
+                }
             }
         }
         elseif($type == 'p')
@@ -206,10 +211,102 @@ if(!function_exists('WxJsPayCallback'))
             {
                 DB::table('orders')->where('out_trade_no',$out_trade_no)->update(['status'=>\App\Order::STATUS_WAITING_SEND,'pay_success_time'=>date('Y-m-d H:i:s')]);
             }
+
+            $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
+            if(!empty($user_info->telephone))
+            {
+                order_pay_success_send_sms($user_info->telephone);
+            }
         }
         //include_once __DIR__ . "/wx_js_pay/Notify.php";
         //$notify = new Notify();
         //$notify->Handle(false);
+    }
+}
+
+if(!function_exists('order_pay_success_send_sms'))
+{
+    function order_pay_success_send_sms($telephone)
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun'
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => 'jlU7IQOybzkAXInb',
+                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'sign_name' => '玩具小叮当',
+                ],
+            ],
+        ];
+
+        $easySms = new \Overtrue\EasySms\EasySms($config);
+
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_85355007',
+            'data' => [
+
+            ],
+        ]);
+    }
+}
+
+if(!function_exists('vip_card_pay_success_send_sms'))
+{
+    function vip_card_pay_success_send_sms($telephone,$name)
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun'
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => 'jlU7IQOybzkAXInb',
+                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'sign_name' => '玩具小叮当',
+                ],
+            ],
+        ];
+
+        $easySms = new \Overtrue\EasySms\EasySms($config);
+
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_85355004',
+            'data' => [
+                'name'=>$name
+            ],
+        ]);
     }
 }
 

@@ -6,6 +6,7 @@ use App\Express;
 use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Overtrue\EasySms\EasySms;
 
 class OrderController extends BaseController
 {
@@ -33,6 +34,7 @@ class OrderController extends BaseController
         $express_no = $request->get('express_no');
         $express_id = $request->get('express_id');
 
+        $order = Order::find($id);
         $express = Express::find($express_id);
 
         $param = [
@@ -41,8 +43,54 @@ class OrderController extends BaseController
         ];
         weixinCurl(url('api/express_info/index'),'post', $param);
 
+        $this->send_sms($order->receiver_telephone,$order->receiver);
         Order::where('id',$id)->update(['status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
         alert('',1);
+    }
+
+    /**
+     * 发货短信通知
+     * @param $telephone
+     * @param $name
+     */
+    private function send_sms($telephone,$name)
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun'
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => 'jlU7IQOybzkAXInb',
+                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'sign_name' => '玩具小叮当',
+                ],
+            ],
+        ];
+
+        $easySms = new EasySms($config);
+
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_100765112',
+            'data' => [
+                'name' => $name
+            ],
+        ]);
     }
 
     public function verify(Request $request)
@@ -63,7 +111,7 @@ class OrderController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $order = Order::with(['user','category_tag','category'])->find($id);
+        $order = Order::with(['user','category'])->find($id);
         $menu = 'order';
         return view('admin.order.show',compact('order','username','menu'));
     }

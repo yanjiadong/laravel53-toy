@@ -140,6 +140,7 @@ class IndexController extends BaseController
         $user_id = session('user_id');
         $cart_num = Cart::where('user_id',$user_id)->count();
         $menu = 'index';
+
         return view('wechat.index.category',compact('category_id','brand_id','user_id','menu','cart_num'));
     }
 

@@ -207,7 +207,7 @@
 
                 //标题
                 $(".good-detail-content>.top>h3").text(goodDetail_obj .detail_data.title);
-                $(".good-detail-content>.top>p").text("市场参考价"+goodDetail_obj.detail_data .money);
+                $(".good-detail-content>.top>p").text("市场参考价¥"+goodDetail_obj.detail_data .money);
                 $(".good-detail-content>.top>h4").text(""+goodDetail_obj.detail_data .year);
 
 

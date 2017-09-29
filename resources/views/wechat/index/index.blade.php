@@ -53,17 +53,22 @@
 
             <div class="top-cont">
                 <div class="top-title">
-                    <i class="icon-big icon-big-home-label"></i>
-                    <span class="dot"></span>
-                    <span style="width: 23%">可编程机器人</span>
-                    <span class="dot"></span>
-                    <span style="width: 19%">无限次更换</span>
-                    <span class="dot"></span>
-                    <span style="width: 15%">医疗消毒</span>
-                    <span class="dot"></span>
-                    <span style="width: 15%">往返包邮</span>
+                    <table>
+                        <tr>
+                            <td><i class="icon-big icon-big-home-label"></i></td>
+                            <td><span class="dot"></span></td>
+                            <td>可编程机器人</td>
+                            <td><span class="dot"></span></td>
+                            <td>无限次更换</td>
+                            <td><span class="dot"></span></td>
+                            <td>医疗消毒</td>
+                            <td><span class="dot"></span></td>
+                            <td>往返包邮</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+
 
             <div class="new-arrivals">
                 <div class="top-left-title">

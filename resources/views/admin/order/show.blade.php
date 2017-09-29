@@ -48,10 +48,6 @@
                             <td>{{$order->category->title}}</td>
                         </tr>
                         <tr>
-                            <td>玩具分类标签：</td>
-                            <td>{{$order->category_tag->title}}</td>
-                        </tr>
-                        <tr>
                             <td>会员手机号：</td>
                             <td>{{$order->user->telephone}}</td>
                         </tr>

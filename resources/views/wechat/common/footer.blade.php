@@ -36,7 +36,15 @@
     common.httpRequest('/wechat/js/test.json','get',null,function (res) {
         //假数据
         num = '{{$cart_num>0?$cart_num:''}}';
-        $('.icon-footer-shop-car>span').text(num);
+        if(num > 0)
+        {
+            $('.icon-footer-shop-car>span').text(num);
+        }
+        else
+        {
+            $('.icon-footer-shop-car').html('');
+        }
+
 
         //确定ul的长度
         var wid=0;

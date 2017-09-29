@@ -91,7 +91,7 @@
                         <span>联系客服</span>
                     </div>
                     <div class="fr">
-                        <span>400-212-23121</span>
+                        <span>{{$phone}}</span>
                         <i class="icon icon_arrowRight_bold"></i>
                     </div>
                 </a>

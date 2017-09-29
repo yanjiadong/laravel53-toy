@@ -30,7 +30,6 @@
                                 <th>微信昵称</th>
                                 <th>是否会员</th>
                                 <th>创建时间</th>
-                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -42,12 +41,11 @@
                                     <td>{{$user->wechat_nickname}}</td>
                                     <td>{{$user->is_vip==1?"是":'否'}}</td>
                                     <td>{{$user->created_at}}</td>
-                                    <td>{{$user->status==1?"启用":'禁用'}}</td>
                                     <td>
-                                        @if($user->status==1)
-                                            <a href="javascript:;" data-id="{{$user->id}}" title="禁用" class="tip doAction" data-status="2"><span class="btn btn-mini btn-warning">禁用</span></a>
+                                        @if($user->is_vip==1)
+                                            <a href="javascript:;" data-id="{{$user->id}}" title="关闭会员" class="tip doAction" data-status="0"><span class="btn btn-mini btn-warning">关闭会员</span></a>
                                         @else
-                                            <a href="javascript:;" data-id="{{$user->id}}" title="启用" class="tip doAction" data-status="1"><span class="btn btn-mini">启用</span></a>
+                                            <a href="javascript:;" data-id="{{$user->id}}" title="开启会员" class="tip doAction" data-status="1"><span class="btn btn-mini">开启会员</span></a>
                                         @endif
                                     </td>
                                 </tr>

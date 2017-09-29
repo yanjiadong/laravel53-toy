@@ -25,8 +25,16 @@
     //加载分类
     var sortList = [],cont='';
     common.httpRequest('{{url('api/index')}}','get',null,function (res) {
+        var category_menu = '{{isset($category_id)?$category_id:'index'}}';
 
-        cont = '<li class="active"><a href="{{ route('wechat.index.index') }}">推荐</a></li>'
+        if(category_menu == 'index')
+        {
+            cont = '<li class="active"><a href="{{ route('wechat.index.index') }}">推荐</a></li>';
+        }
+        else
+        {
+            cont = '<li class=""><a href="{{ route('wechat.index.index') }}">推荐</a></li>';
+        }
 
         //假数据
         /*sortList = [
@@ -39,7 +47,15 @@
         ];*/
         var sortList = res.info.categorys;
         for(var i=0;i<sortList.length;i++){
-            cont += '<li><a href="{{route('wechat.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>'
+            if(sortList[i].id == '{{$category_id}}')
+            {
+                cont += '<li class="active"><a href="{{route('wechat.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
+            }
+            else
+            {
+                cont += '<li><a href="{{route('wechat.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
+            }
+
         }
         $('.index-nav .nav').html(cont);
 

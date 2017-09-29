@@ -9,6 +9,7 @@ use App\SystemConfig;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Overtrue\EasySms\EasySms;
 
 class OrderController extends BaseController
 {
@@ -245,6 +246,8 @@ class OrderController extends BaseController
 
         $order = Order::where('id',$order_id)->first();
 
+        $user = User::find($order->user_id);
+
         if($order->status == Order::STATUS_DOING_STR)
         {
             //$express = Express::find($express_id);
@@ -257,6 +260,9 @@ class OrderController extends BaseController
             $data['back_time'] = $this->datetime;
 
             Order::where('id',$order_id)->update($data);
+
+            $this->send_sms($user->telephone,$user->name);
+
             return $this->ret;
         }
         else
@@ -265,6 +271,51 @@ class OrderController extends BaseController
             $this->ret['msg'] = '操作失败';
             return $this->ret;
         }
+    }
+
+    /**
+     * 用户已提交归还的物流单号
+     * @param $telephone
+     * @param $name
+     */
+    private function send_sms($telephone,$name)
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun'
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => 'jlU7IQOybzkAXInb',
+                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'sign_name' => '玩具小叮当',
+                ],
+            ],
+        ];
+
+        $easySms = new EasySms($config);
+
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_85485003',
+            'data' => [
+                'name' => $name
+            ],
+        ]);
     }
 
     public function order_back_list(Request $request)

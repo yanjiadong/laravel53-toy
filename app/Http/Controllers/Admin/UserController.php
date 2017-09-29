@@ -30,7 +30,7 @@ class UserController extends BaseController
         $id = $request->get('id');
         $status = $request->get('status');
 
-        User::where('id',$id)->update(['status'=>$status]);
+        User::where('id',$id)->update(['is_vip'=>$status]);
         alert('',1);
     }
 }

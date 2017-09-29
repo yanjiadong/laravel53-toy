@@ -148,7 +148,7 @@
                 for(var i=0;i<sort_detail.data.grown_up_list.list.length;i++){
                     var href = "{{url('wechat/index/good')}}"+'/'+sort_detail.data.grown_up_list.list[i].id;
                     shopList +='<li class="clear"><div class="fl"><a href="'+href +'"><img src="'+ sort_detail.data.grown_up_list.list[i].picture+
-                        '"></a> </div> <div class="fr"><h3><a href="'+href +'">'+sort_detail.data.grown_up_list.list[i].title+'</a></h3><h4>'+ sort_detail.data.grown_up_list.list[i].old+'</h4><p>市场参考价¥'+
+                        '"></a> </div> <div class="fr"><h3><a href="'+href +'">'+sort_detail.data.grown_up_list.list[i].title+'</a></h3><h4>适用年龄'+ sort_detail.data.grown_up_list.list[i].old+'岁</h4><p>市场参考价¥'+
                         sort_detail.data.grown_up_list.list[i].price+'</p></div></li>';
                 }
                 $(".grow-up .list ul").html(shopList);
