@@ -35,7 +35,10 @@ class CommonController extends BaseController
         if(!empty($size))
         {
             $filename = 'storage/'.md5(time().str_random(16)).'.'.$file->getClientOriginalExtension();
-            Image::make($file)->resize(320, 160)->save($filename);
+
+            $size_arr = explode(',',$size);
+            //Image::make($file)->resize(320, 160)->save($filename);
+            Image::make($file)->resize($size_arr[0], $size_arr[1])->save($filename);
             $disk->writeStream($filename_qiniu,fopen($filename,'r'));
         }
         else
