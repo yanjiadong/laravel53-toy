@@ -2,11 +2,11 @@
 
 require_once(__DIR__ . '/lib/WxPayApi.php');
 require_once(__DIR__ . '/lib/WxPay.Notify.php');
-require_once(__DIR__ . '/log.php');
+//require_once(__DIR__ . '/log.php');
 
 //初始化日志
-$logHandler= new CLogFileHandler(public_path()."/logs/".date('Y-m-d').'.log');
-$log = Log::Init($logHandler, 15);
+//$logHandler= new CLogFileHandler(public_path()."/logs/".date('Y-m-d').'.log');
+//$log = Log::Init($logHandler, 15);
 
 class Notify extends WxPayNotify
 {
@@ -87,7 +87,7 @@ class Notify extends WxPayNotify
     //重写回调处理函数
     public function NotifyProcess($data, &$msg)
     {
-        Log::DEBUG("call back:" . json_encode($data));
+        //Log::DEBUG("call back:" . json_encode($data));
         $notfiyOutput = array();
 
         if(!array_key_exists("transaction_id", $data)){
@@ -103,5 +103,5 @@ class Notify extends WxPayNotify
     }
 }
 
-Log::DEBUG("begin notify");
+//Log::DEBUG("begin notify");
 
