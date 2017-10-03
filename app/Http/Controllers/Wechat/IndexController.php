@@ -281,12 +281,17 @@ class IndexController extends BaseController
     }
 
 
-    public function pay_vip_card_callback()
+    public function pay_vip_card_callback(Request $request)
     {
-        include_once __DIR__ . "/wx_js_pay/Notify.php";
+        $out_trade_no = $request->get('out_trade_no');
+        WxJsPayCallback($out_trade_no);
 
-        $notify = new \Notify();
-        $notify->Handle(false);
+        $ret = ['code'=>200,'msg'=>'操作成功','info'=>[]];
+        return $ret;
+        //include_once __DIR__ . "/wx_js_pay/Notify.php";
+
+        //$notify = new \Notify();
+        //$notify->Handle(false);
     }
 
     public function submit_order($good_id)

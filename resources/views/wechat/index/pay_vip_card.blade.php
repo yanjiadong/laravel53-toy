@@ -31,12 +31,17 @@
                 alert(res.err_msg);
                 //alert(res.err_code+res.err_desc+res.err_msg);
                 if(res.err_msg === "get_brand_wcpay_request:ok") {
-                    //支付成功
-                    var url = '{{url('wechat/user/center')}}';
-                    common.alert_tip("支付成功",'#323232','支付成功',function () {
-                        {{ WxJsPayCallback($out_trade_no) }}
-                        location.href=url;
+                    var out_trade_no = '{{$out_trade_no}}';
+
+                    common.httpRequest('{{url('wechat/index/pay_vip_card_callback')}}','post',{out_trade_no:out_trade_no},function (res) {
+                        //支付成功
+                        var url = '{{url('wechat/user/center')}}';
+                        common.alert_tip("支付成功",'#323232','支付成功',function () {
+                            {{--{{ WxJsPayCallback($out_trade_no) }}--}}
+                                location.href=url;
+                        });
                     });
+
                 }
                 else
                 {
