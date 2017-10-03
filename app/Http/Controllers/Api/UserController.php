@@ -27,7 +27,7 @@ class UserController extends BaseController
         $count = Order::whereIn('status',$where)->where('user_id',$user_id)->count();
 
         //会员卡
-        $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->first();
+        $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->orderBy('id','desc')->first();
         if(!empty($card))
         {
             $card->isOutTime = 1;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Cart;
 use App\Express;
 use App\Good;
 use App\Order;
@@ -132,6 +133,9 @@ class OrderController extends BaseController
             $order_data['pay_success_time'] = $this->datetime;
         }
         Order::create($order_data);
+
+        //从玩具箱中去除
+        Cart::where(['user_id'=>$user_id,'good_id'=>$good_id])->delete();
 
         $this->ret['info'] = ['order_code'=>$order_data['code']];
         return $this->ret;

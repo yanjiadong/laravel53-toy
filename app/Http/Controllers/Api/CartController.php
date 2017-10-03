@@ -47,7 +47,7 @@ class CartController extends BaseController
         if(!empty($cart))
         {
             $this->ret['code'] = 300;
-            $this->ret['msg'] = '该玩具已经在玩具箱,不能重复添加';
+            $this->ret['msg'] = '该商品已经在玩具箱，不能重复添加';
             return $this->ret;
         }
         $user = User::find($user_id);

@@ -35,7 +35,7 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     //成为会员
     Route::any('/index/choose_vip','IndexController@choose_vip');
     Route::any('/index/pay_vip_card/{vip_card_id}','IndexController@pay_vip_card');
-    Route::any('/index/pay_vip_card_callback','IndexController@pay_vip_card_callback');
+    Route::post('/index/pay_vip_card_callback','IndexController@pay_vip_card_callback');
 
     //提交订单
     Route::any('/index/submit_order/{good_id}','IndexController@submit_order');
@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
 
     Route::resource('tags', 'TagController');
 
+
     Route::resource('goods', 'GoodController');
     Route::post('goods/action','GoodController@action')->name('goods.action');
 
@@ -127,6 +128,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('order/verify','OrderController@verify')->name('admin.order.verify');
     Route::get('order/show/{id}','OrderController@show')->name('admin.order.show');
 
+    //押金模块
+    Route::resource('vip_card_pays', 'VipCardPayController');
+    Route::post('vip_card_pay/action','VipCardPayController@action')->name('admin.vip_card_pay.action');
 
     //用户管理
     Route::get('user/index','UserController@index')->name('admin.user.index');

@@ -17,7 +17,7 @@
 <div class="share-wrap">
     <div class="share-main">
         <div class="photo">
-            <img src="/wechat/image/other/3.png" alt="">
+            <img src="{{ isset($user->wechat_avatar) && !empty($user->wechat_avatar) ? $user->wechat_avatar : '' }}" alt="">
         </div>
         <h3 class="name"></h3>
         <p></p>
@@ -100,7 +100,7 @@
 
         wx.onMenuShareTimeline({
 
-            title: '少儿编程教育机器人会员制租赁平台', // 分享标题
+            title: '玩玩具趣编程', // 分享标题
 
             link: '{{url('wechat/user/share_open')}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 
@@ -122,9 +122,9 @@
 
         wx.onMenuShareAppMessage({
 
-            title: '少儿编程教育机器人会员制租赁平台', // 分享标题
+            title: '玩玩具趣编程', // 分享标题
 
-            desc: '少儿编程教育机器人会员制租赁平台', // 分享描述
+            desc: '可编程教育机器人包月玩，乐高、能力风暴、优必选等大牌全都有', // 分享描述
 
             link: '{{url('wechat/user/share_open')}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 

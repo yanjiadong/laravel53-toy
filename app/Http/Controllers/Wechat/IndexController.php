@@ -70,6 +70,7 @@ class IndexController extends BaseController
                         'wechat_original'=>json_encode($info),
                         'wechat_nickname'=>$info['nickname'],
                         'wechat_avatar'=>$info['headimgurl'],
+                        'open_num'=>0
                     );
 
                     $success = User::create($data);
@@ -126,7 +127,17 @@ class IndexController extends BaseController
                 UserCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon_info->id]);
             }
         }
-        return view('wechat.index.index',compact('result','menu','user_id','cart_num'));
+
+        $user = User::find($user_id);
+        $is_first = 0;
+        if($user->open_num == 0)
+        {
+            $is_first = 1;
+        }
+        $open_num = $user->open_num + 1;
+
+        User::where('id',$user_id)->update(['open_num'=>$open_num]);
+        return view('wechat.index.index',compact('result','menu','user_id','cart_num','is_first'));
     }
 
     /**
@@ -272,7 +283,10 @@ class IndexController extends BaseController
 
     public function pay_vip_card_callback()
     {
-        WxJsPayCallback();
+        include_once __DIR__ . "/wx_js_pay/Notify.php";
+
+        $notify = new \Notify();
+        $notify->Handle(false);
     }
 
     public function submit_order($good_id)

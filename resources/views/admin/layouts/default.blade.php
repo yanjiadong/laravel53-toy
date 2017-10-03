@@ -128,6 +128,19 @@
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'vip_card_pay')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">押金管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('vip_card_pays.index') }}">
+                            <span class="icon-th-list"></span><span class="text">押金列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="openable <?php echo (isset($menu) && ($menu == 'banner')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">Banner管理</span>

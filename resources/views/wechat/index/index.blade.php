@@ -166,14 +166,14 @@
             vipData:{},       //首页成为会员数据
             grown_up_top:{},   //成长陪伴示意图数据
             grown_up_list:{},   //成长陪伴商品列表
-            first_open:false  //是否首次打开
+            first_open:'{{$is_first}}'  //是否首次打开
         },
         //首页 - 是否首次打开
         isfirst:function () {
             common.httpRequest('/wechat/js/test.json','get',null,function (res) {
                 //假数据
-                index_obj.data.first_open = false;
-                if(index_obj.data.first_open){
+                //index_obj.data.first_open = false;
+                if(index_obj.data.first_open == '1'){
                     $(".index-wrap-cover").fadeIn(500);
                     //弹框轮播
                     index_obj.cover_banner();

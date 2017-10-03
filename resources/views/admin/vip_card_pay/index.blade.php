@@ -3,8 +3,8 @@
 @section('content')
     <div class="breadLine">
         <ul class="breadcrumb">
-            <li><a href="javascript:;">用户管理</a> <span class="divider">></span></li>
-            <li class="active"><a href="{{ route('admin.user.index') }}">用户列表</a></li>
+            <li><a href="javascript:;">押金管理</a> <span class="divider">></span></li>
+            <li class="active"><a href="{{ route('vip_card_pays.index') }}">押金列表</a></li>
         </ul>
     </div>
 
@@ -13,7 +13,7 @@
             <div class="span12">
                 <div class="head clearfix">
                     <div class="isw-list"></div>
-                    <h1>用户列表</h1>
+                    <h1>押金列表</h1>
                     <ul class="buttons">
                         <li>
                             <a href="javascript:;" class="isw-settings"></a>
@@ -26,10 +26,13 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>手机号</th>
-                                <th>微信昵称</th>
-                                <th>是否会员</th>
-                                <th>会员总天数</th>
+                                <th>支付订单号</th>
+                                <th>会员昵称</th>
+                                <th>押金</th>
+                                <th>剩余天数</th>
+                                <th>优惠金额</th>
+                                <th>会员卡类型</th>
+                                <th>状态</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
@@ -38,16 +41,33 @@
                             @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{$user->telephone}}</td>
-                                    <td>{{$user->wechat_nickname}}</td>
-                                    <td>{{$user->is_vip==1?"是":'否'}}</td>
+                                    <td>{{$user->order_code}}</td>
+                                    <td>{{$user->user->wechat_nickname}}</td>
+                                    <td>{{$user->money}}</td>
                                     <td>{{$user->days}}</td>
+                                    <td>{{$user->coupon_price}}</td>
+                                    <td>
+                                        @if($user->vip_card_type == 1)
+                                            月卡
+                                        @elseif($user->vip_card_type == 1)
+                                            季度卡
+                                        @else
+                                            半年卡
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($user->status == 1)
+                                            正常
+                                        @elseif($user->status == -1)
+                                            可退押金
+                                        @else
+                                            已退押金
+                                        @endif
+                                    </td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
-                                        @if($user->is_vip==1)
-                                            <a href="javascript:;" data-id="{{$user->id}}" title="关闭会员" class="tip doAction" data-status="0"><span class="btn btn-mini btn-warning">关闭会员</span></a>
-                                        @else
-                                            <a href="javascript:;" data-id="{{$user->id}}" title="开启会员" class="tip doAction" data-status="1"><span class="btn btn-mini">开启会员</span></a>
+                                        @if($user->status==-1)
+                                            <a href="javascript:;" data-id="{{$user->id}}" title="退还押金" class="tip doAction" data-status="-2"><span class="btn btn-mini btn-warning">退还押金</span></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -59,7 +79,7 @@
                     @else
                         <div class="toolbar bottom-toolbar clearfix">
                             <div class="tac" style="margin: 10px 0px;">
-                                亲~，暂无用户列表哦~
+                                亲~，暂无押金列表哦~
                             </div>
                         </div>
                     @endif
@@ -76,7 +96,7 @@
                 $.confirm({
                     text: "确认操作？",
                     confirm: function(button) {
-                        $.post("{{route('admin.user.action')}}",{id:id,status:status},function(data){
+                        $.post("{{route('admin.vip_card_pay.action')}}",{id:id,status:status},function(data){
                             cTip(data);
                         }, "json");
                     },

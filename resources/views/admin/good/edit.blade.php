@@ -139,25 +139,26 @@
                             </div>
                         </div>--}}
                         <div class="row-form clearfix">
-                            <div class="span3">品牌所属：</div>
+                            <div class="span3">品牌及所属：</div>
                             <div class="span9">
                                 <input type="text" value="{{$good->brand_country}}" class="validate[required]" id="brand_country" name="brand_country"/>
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">玩具材质：</div>
-                            <div class="span9">
-                                <input type="text" value="{{$good->material}}" class="validate[required]" id="material" name="material"/>
-                            </div>
-                        </div>
-                        <div class="row-form clearfix">
-                            <div class="span3">玩具重量：</div>
+                            <div class="span3">产品类型：</div>
                             <div class="span9">
                                 <input type="text" value="{{$good->weight}}" class="validate[required]" id="weight" name="weight"/>
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">玩具作用：</div>
+                            <div class="span3">材质：</div>
+                            <div class="span9">
+                                <input type="text" value="{{$good->material}}" class="validate[required]" id="material" name="material"/>
+                            </div>
+                        </div>
+
+                        <div class="row-form clearfix">
+                            <div class="span3">操作方式：</div>
                             <div class="span9">
                                 <input type="text" value="{{$good->effect}}" class="validate[required]" id="effect" name="effect"/>
                             </div>

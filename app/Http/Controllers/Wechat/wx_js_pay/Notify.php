@@ -29,7 +29,6 @@ class Notify extends WxPayNotify
                 $money = $total_fee * 1.0 / 100;
 
                 $type = substr($out_trade_no, 0, 1);
-
                 if($type == 'v')
                 {
                     //会员支付

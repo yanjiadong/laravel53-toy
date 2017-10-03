@@ -135,7 +135,7 @@
                 <div class="font" onclick="goodDetail_obj.goToysCar()">玩具箱</div>
             </li>
             <li class="fl">
-                <button class="join-car" onclick="goodDetail_obj.join()">加入购物车</button>
+                <button class="join-car" onclick="goodDetail_obj.join()">加入玩具箱</button>
             </li>
         </ul>
     </div>
@@ -168,8 +168,8 @@
                     lunbo2:res.info.good.pictures,
                     title:res.info.good.title,
                     money:res.info.good.price,
-                    year:res.info.good.brand.title,
-                    params:[{name:"品牌所属",cont:res.info.good.brand_country},{name:"材质",cont:res.info.good.material},{name:"重量",cont:res.info.good.weight},{name:"作用",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
+                    year:res.info.good.old,
+                    params:[{name:"品牌及所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
                     car_num:{num:'{{$cart_num}}'}
 
@@ -208,8 +208,7 @@
                 //标题
                 $(".good-detail-content>.top>h3").text(goodDetail_obj .detail_data.title);
                 $(".good-detail-content>.top>p").text("市场参考价¥"+goodDetail_obj.detail_data .money);
-                $(".good-detail-content>.top>h4").text(""+goodDetail_obj.detail_data .year);
-
+                $(".good-detail-content>.top>h4").text("适用年龄"+goodDetail_obj.detail_data .year);
 
                 //商品参数
                 if(goodDetail_obj .detail_data.params.length>0){
@@ -284,8 +283,17 @@
             var good_id = '{{$good_id}}';
             var user_id = '{{$user_id}}';
             common.httpRequest('{{url('api/cart/add')}}','post',{good_id:good_id,user_id:user_id},function (res) {
-                goodDetail_obj.init();
-                common.success_tip("添加成功！")
+                if(res.code == 300)
+                {
+                    common.alert_tip(res.msg);
+                    return false;
+                }
+                else
+                {
+                    goodDetail_obj.init();
+                    $(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
+                    common.success_tip("添加成功！");
+                }
             })
         },
         //进入购物车
