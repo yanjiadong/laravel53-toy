@@ -161,10 +161,11 @@
             var url = "{{url('api/good')}}"+'/'+"{{$good_id}}";
             common.httpRequest(url,'get',null,function (res) {
                 console.log(res);
+                console.log(res.info.good.pictures[0].picture);
                 goodDetail_obj .detail_data = res;
                 goodDetail_obj .detail_data ={
                     url:"/wechat/image/other/5.png",
-                    lunbo:[{url:res.info.good.video,state:0,poster:"/wechat/image/other/2.gif",time:res.info.good.video_second}],
+                    lunbo:[{url:res.info.good.video,state:0,poster:res.info.good.pictures[0].picture,time:res.info.good.video_second}],
                     lunbo2:res.info.good.pictures,
                     title:res.info.good.title,
                     money:res.info.good.price,
@@ -182,7 +183,7 @@
 
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo.length;i++){
                         if(goodDetail_obj .detail_data.lunbo[i].state==0){
-                            lunbo_content ='<div class="swiper-slide video"><video width="100%" height="280"><source src="'+goodDetail_obj .detail_data.lunbo[i].url+
+                            lunbo_content ='<div class="swiper-slide video"><video width="100%" height="280" poster="'+goodDetail_obj .detail_data.lunbo[i].poster+'"><source src="'+goodDetail_obj .detail_data.lunbo[i].url+
                                 '"></video><div class="play-box"></div></div></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
