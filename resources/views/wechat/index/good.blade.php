@@ -213,11 +213,11 @@
                 //商品参数
                 if(goodDetail_obj .detail_data.params.length>0){
                     var shop_params = "";
-                    for(var i=0;i<goodDetail_obj .detail_data.params.length;i++){
+                    for(var i=0;i<goodDetail_obj.detail_data.params.length;i++){
                         shop_params +='<tr><td>'+goodDetail_obj .detail_data.params[i].name+'</td><td>'+
                             goodDetail_obj .detail_data.params[i].cont +'</td></tr>';
                     }
-                    $(".good-detail-param table").append(shop_params);
+                    $(".good-detail-param table").html(shop_params);
                 }
                 //商品详情
                 $(".good-detail-pic>div").html(res.info.good.desc);
@@ -230,10 +230,12 @@
                 }*/
                 //购物车
                 if(goodDetail_obj.detail_data.car_num.num>0){
-                    $(".icon-footer-shop-car").append('<span>'+goodDetail_obj.detail_data.car_num.num+'</span>');
-                    //$(".footer ul li:last").removeClass('disable');
+                    $(".icon-footer-shop-car").html('<span>'+goodDetail_obj.detail_data.car_num.num+'</span>');
+                    $(".footer ul li:last .join-car").addClass('active');
+                    $(".footer ul li:last .join-car span").hide();
                 }else{
-                    //$(".footer ul li:last").addClass('disable');
+                    $(".footer ul li:last .join-car").removeClass('active');
+                    $(".footer ul li:last .join-car span").show();
                 }
 
             });
@@ -276,6 +278,7 @@
         detail_describe_toggle:function () {
             $(".good-tips table tr").click(function () {
                 $(".good-tips .tips-detail").slideToggle();
+                $(".good-tips table tr td .caret").toggleClass('active');
             })
         },
         //加入购物车

@@ -264,7 +264,7 @@
                 $(".use-help-main").scrollTop("0");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".use-help-main .parent-box").animate({left:-num*help.cont_width+"px"},1000);
+                $(".use-help-main .parent-box").css({left:-num*help.cont_width+"px"});
             });
         }
     };

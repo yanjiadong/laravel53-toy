@@ -19,7 +19,7 @@
     <div class="no-goods">
         <div class="tips">
             <i class="icon-big icon-big-blankPage"></i>
-            <h4>没有归还的玩具</h4>
+            <h4>玩具箱是空的</h4>
         </div>
     </div>
     <div class="top-tips"><!--<i class="icon-attion">!</i>--><!--同一时间内只能持有一件玩具，待归还后才能再次租用--></div>
@@ -88,14 +88,14 @@
                         for(var i = 0;i<toys_car.data.info.list.length;i++){
                             $(".no-goods").hide();
                             var url = "{{url('wechat/index/good')}}"+'/'+toys_car.data.info.list[i].id;
-                            if(toys_car.data.info.list[i].store <=0){
-                                list +='<li class="clear"><div class="fl"><input type="radio" name="toys" onclick="toys_car.choose('+i+')"></div><div class="fl">' +
+                            if(toys_car.data.info.list[i].store <= 0){
+                                list +='<li class="clear"><div class="fl"><div class="radio" onclick="toys_car.choose('+i+')"><input type="radio" name="toys"></div></div><div class="fl">' +
                                     '<a href="'+url+'"><img src="'+toys_car.data.info.list[i].picture+'"></a><span>暂无库存</span></div>'+'<div class="fl"><h3><a href="' +'#'+
                                     '">'+toys_car.data.info.list[i].title+'</a></h3> <h4>市场参考价¥'+toys_car.data.info.list[i].price+'</h4><p>适用年龄'+toys_car.data.info.list[i].old+'</p>' +
                                     '</div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
 
                             }else{
-                                list +='<li class="clear"><div class="fl"><input type="radio" name="toys" onclick="toys_car.choose('+i+')"></div><div class="fl">' +
+                                list +='<li class="clear"><div class="fl"><div class="radio" onclick="toys_car.choose('+i+')"><input type="radio" name="toys"></div></div><div class="fl">' +
                                     '<a href="'+url+'"><img src="'+toys_car.data.info.list[i].picture+'"></a></div>'+'<div class="fl"><h3><a href="' +'#'+
                                     '">'+toys_car.data.info.list[i].title+'</a></h3> <h4>市场参考价¥'+toys_car.data.info.list[i].price+'</h4><p>适用年龄'+toys_car.data.info.list[i].old+'</p>' +
                                     '</div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
@@ -112,6 +112,7 @@
                     case 1:   //为非会员 提示
                         $(".top-tips").addClass('red');
                         $(".top-tips").html('<i class="icon-attion">!</i>成功办理任意一种会员后，才可下单，享受免费租、随意更换服务');
+                        $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
                         break;
                     case 2: //会员 提示
                         $(".top-tips").removeClass('red');
@@ -123,6 +124,8 @@
             })
         },
         choose:function (index) {
+            $(".toys-car .list .fl .radio").removeClass('active');
+            $(".toys-car .list .fl .radio").eq(index).addClass('active');
             if(toys_car.data.info.state==1){
                 $(".top-tips").addClass('red');
                 $(".toys-car .btn button").removeClass('active');
@@ -131,15 +134,6 @@
                 $(".top-tips").addClass('red');
                 $(".toys-car .btn button").removeClass('active');
                 $(".top-tips").html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单');
-                /*if(toys_car.data.info.list[index].store<=0){
-                    $(".top-tips").addClass('red');
-                    $(".toys-car .btn button").removeClass('active');
-                    $(".top-tips").html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单');
-                }else{
-                    $(".top-tips").removeClass('red');
-                    $(".toys-car .btn button").addClass('active');
-                    $(".top-tips").html("同一时间内只能持有一件玩具，待归还后才能再次租用");
-                }*/
             }else{
                 $(".top-tips").removeClass('red');
                 $(".toys-car .btn button").addClass('active');
@@ -153,7 +147,17 @@
             /* if($(".toys-car ul li:eq(index) input")){
 
              }*/
-            if($(".toys-car ul li:eq("+index+") input").prop("checked")){
+            common.confirm_tip("亲爱的用户","确定将选中的商品从玩具箱删除吗？",null,function () {
+                //删除商品
+                data = {good_id:toys_car.data.info.list[index].id,user_id:'{{$user_id}}'};
+                common.httpRequest('{{url('api/cart/delete')}}','post',data,function (res) {
+                    $(".confirm-alert-wrap").remove();
+                    toys_car.get_data();
+                    location.reload();
+                })
+            });
+
+            /*if($(".toys-car ul li:eq("+index+") input").prop("checked")){
                 common.confirm_tip("亲爱的用户","确定将选中的商品从玩具箱删除吗？",null,function () {
                     //删除商品
                     data = {good_id:toys_car.data.info.list[index].id,user_id:'{{$user_id}}'};
@@ -165,12 +169,15 @@
             }else{
                 common.alert_tip("请选择您要删除的商品？");
                 return false;
-            }
+            }*/
         },
         goSubmitOrder:function () {
             if($(".toys-car .btn button").hasClass('active')){
-                var good_id = $("#good_id").val();
-                location.href="{{url('wechat/index/submit_order')}}"+'/'+good_id;
+                if(toys_car.data.info.state==1){
+                    location.href="{{url('wechat/index/choose_vip')}}";
+                }else{
+                    location.href="{{url('wechat/index/submit_order')}}"+'/'+good_id;
+                }
             }
         }
     };

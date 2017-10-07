@@ -96,7 +96,7 @@
 
                         $(".btn button").addClass('active');
                     }else{
-                        common.alert_tip("无法匹配到物流公司，请检查快递单号是否正确！");
+                        common.alert_tip("无匹配结果，请检查快递单号是否正确！");
                         return false;
                     }
                 })
@@ -124,9 +124,11 @@
             if($(".btn button").hasClass('active')){
                 common.confirm_tip("提交物流单号","提交后快递单号不可修改，确定提交？",null,function () {
                     common.httpRequest('{{url('api/order/order_back')}}','post',submitData,function (res) {
-                        if(res){
+                        if(res.code == 200){
                             location.href="{{url('wechat/index/order_return_detail')}}";
                             $(".confirm-alert-wrap").remove();
+                        } else {
+                            common.alert_tip(res.msg);
                         }
                     })
                 })

@@ -45,7 +45,7 @@
     </div>
     <div class="invitation">
         <h3>邀请好友</h3>
-        <h2>邀请好友注册并成为会员即可获得20元现金红包</h2>
+        <h2>邀请好友注册并成为会员即可领取20元现金红包</h2>
         <p>把邀请好友的微信号截图发给公众号，即可领取</p>
     </div>
     <div class="footer bg-white">
@@ -79,10 +79,16 @@
         //立即分享
         immediately:function () {
             $(".share-wrap-cover-wrap").fadeIn(500);
+            $cove_wrap.click(function (event) {
+                if(event.target.className.toLowerCase() =="share-wrap-cover-wrap"){
+                    $cove_wrap.hide();
+                }
+            })
         }
     };
     $(function () {
         share.init();
+        $(".invitation").css('marginTop',($(window).outerHeight()-20-$(".share-main").outerHeight()-$(".footer").outerHeight()-$(".invitation").height())/2+'px') ;
 
         //通过config接口注入权限验证配置
         wx.config({

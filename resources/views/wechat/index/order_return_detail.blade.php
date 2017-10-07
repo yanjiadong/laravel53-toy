@@ -42,7 +42,7 @@
                     </div>
                     <div class="fr"></div>
                 </div>
-                <dov class="detail-list">
+                <div class="detail-list">
                     <div class="no-good">
                         <div class="tips">
                             <i class="icon-big icon-big-blankPage"></i>
@@ -90,7 +90,10 @@
                         </div>
                     </li>-->
                     </ul>
-                </dov>
+                    <div class="tips-bottom">
+                        点击“确认归还”，上传寄回的物流单号后，即可再次下单
+                    </div>
+                </div>
             </div>
             <div class="detail-cont fl tab-page">
                 <div class="top-tips">
@@ -238,7 +241,7 @@
                 $(".order-return-main").height($($(".tab-page")[num]).height()+"px");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".order-return-main .parent-box").animate({left:-num*good_return.cont_width+"px"},1000);
+                $(".order-return-main .parent-box").css({left:-num*good_return.cont_width+"px"});
             });
         },
         //可寄回更换 --数据加载
@@ -248,7 +251,7 @@
                 // good_return.returnInfo = res;
                 //假数据
                 good_return.returnInfo ={
-                    a:'请优先通过顺丰快递将玩具寄回，选择到付方式（可以直接用收到的快递单）',
+                    a:'将租用中玩具通过以下地址寄回，优先使用顺丰快递（或圆通、中通、韵达），选择货到付款方式即可。',
                     b:'顺丰预约寄件电话：95338',
                     c:res.info.name,
                     d:'',
@@ -257,7 +260,8 @@
                     g:res.info.address,
                     h:res.info.telephone
                 };
-                $(".return .top-tips p").text(good_return.returnInfo.a);
+                $(".return .top-tips").text(good_return.returnInfo.a);
+                //$(".return .top-tips p").text(good_return.returnInfo.a);
                 $(".return .top-tips h4").text(good_return.returnInfo.b);
                 $(".return .info .name").text(good_return.returnInfo.c);
                 $(".return .info .address span:eq(0)").text(good_return.returnInfo.d);
@@ -268,7 +272,6 @@
             });
             //列表
             common.httpRequest('{{url('api/order/order_can_back')}}','post',{user_id:'{{$user_id}}'},function (res) {
-                if(true){
                     //  good_return.data.returnList = res;
                     /*good_return.data.list = [
                         {a:1,b:1,c:'../image/other/3.png',d:' WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人',
@@ -278,26 +281,28 @@
                         {a:1,b:3,c:'../image/other/3.png',d:' WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人',
                             e:'#',f:'1-12岁',h:2500.00,g:131452365895,i:1,j:300.00,id:2}
                     ];*/
-                    good_return.data.list = res.info.list;
 
-                    var dataList ='';
-                    for(var i=0;i<good_return.data.list.length;i++){
-                        dataList +='<li><div class="top"><div class="cont bg-white"><div class="title">' +
-                            '<i class="icon icon_bear"></i>租用中的玩具</div><div class="good-time">' +
-                            '<h5>已租用'+good_return.data.list[i].days+'天</h5><div class="number">租赁订单编号：'+good_return.data.list[i].code+'</div></div>' +
-                            '<div class="good-detail clear"><div class="fl"><a href="'+'#'+'"><img src="'+good_return.data.list[i].good_picture+'">' +
-                            '</a></div><div class="fr"><h3><a href="'+good_return.data.list[i].e+'">'+good_return.data.list[i].good_title+'</a></h3><p>市场参考价¥'+good_return.data.list[i].good_price+'</p>' +
-                            '<h4>'+good_return.data.list[i].good_brand.title+'</h4></div></div><div class="btn clear"><div class="tips fl">将该玩具寄回后，点击' +
-                            '“确认已归还”上传寄回的物流单号，即可再次下单</div><div class="fr"><button onclick="good_return.goFillLogistics('+i+')">确认已归还</button></div></div></div> </li>';
+                    if(res.info.list.length > 0)
+                    {
+                        good_return.data.list = res.info.list;
+                        var dataList ='';
+                        for(var i=0;i<good_return.data.list.length;i++){
+                            dataList +='<li><div class="top"><div class="cont bg-white"><div class="good-time">' +
+                                '<h5>已租用'+good_return.data.list[i].days+'天</h5><div class="number">租赁订单编号：'+good_return.data.list[i].code+'</div></div>' +
+                                '<div class="good-detail clear"><div class="fl"><a href="'+'#'+'"><img src="'+good_return.data.list[i].good_picture+'">' +
+                                '</a></div><div class="fr"><h3><a href="'+'#'+'">'+good_return.data.list[i].good_title+'</a></h3><p>市场参考价¥'+good_return.data.list[i].good_price+'</p>' +
+                                '<h4>适用年龄'+good_return.data.list[i].good_old+'岁</h4></div></div><div class="btn clear"><button onclick="good_return.goFillLogistics('+i+')">确认已归还</button></div></div> </li>';
+                        }
+                        $(".return .detail-list ul").html(dataList).show();
                     }
-                    $(".return .detail-list ul").html(dataList).show();
-
-                }else{
-                    $(".return .detail-list ul").hide();
-                    $(".return .no-good").height($(window).height()-$(".return .top-tips").outerHeight()
-                        -$(".return .title").height()-$(".return .info").height()-88+'px').show();
-                }
-                $(".order-return-main").height($(".tab-page").eq(0).height()+"px");
+                    else
+                    {
+                        $(".tips-bottom").hide();
+                        $(".return .detail-list ul").hide();
+                        $(".return .no-good").height($(window).height()-$(".return .top-tips").outerHeight()
+                            -$(".return .title").height()-$(".return .info").height()-88-44+'px').show();
+                        $(".order-return-main").height($(".tab-page").eq(0).height()+"px");
+                    }
             })
         },
         getDetailList:function () {

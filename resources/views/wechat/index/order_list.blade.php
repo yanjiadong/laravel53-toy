@@ -67,6 +67,12 @@
                           </div>
                       </li>-->
                 </ul>
+                <div class="no-good">
+                    <div class="tips">
+                        <i class="icon-big icon-big-blankPage"></i>
+                        <h4>空空如也</h4>
+                    </div>
+                </div>
             </div>
             <div class="return tab-page fl">
                 <ul class="detail-list">
@@ -139,6 +145,12 @@
                           </div>
                       </li>-->
                 </ul>
+                <div class="no-good">
+                    <div class="tips">
+                        <i class="icon-big icon-big-blankPage"></i>
+                        <h4>空空如也</h4>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -169,13 +181,13 @@
                 $(".order-detail-main").height($($(".tab-page")[num]).height()+"px");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".order-detail-main .parent-box").animate({left:-num*orderDtail.cont_width+"px"},1000);
+                $(".order-detail-main .parent-box").css({left:-num*orderDtail.cont_width+"px"});
             })
         },
         //进行中 --数据加载
         getList:function () {
             common.httpRequest('{{url('api/order/order_list')}}','post',{type:1,user_id:'{{$user_id}}'},function (res) {
-                if(true){
+                if(res.info.list.length > 0){
 
                     //  orderDtail.data.returnList = res;
                     //b为发货状态  1为待发货 2是已发货 3.租用中
@@ -224,6 +236,13 @@
                     $(".detail-cont .detail-list").html(dataList).show();
                     $(".order-detail-main").height($(".tab-page").eq(0).height()+"px");
 
+                }
+                else
+                {
+                    $(".order-detail-main .detail-cont .detail-list").hide();
+                    $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight());
+                    $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()-
+                        $(".order-detail-main .detail-cont .top-tips").outerHeight()- $(".order-detail-wrap footer").outerHeight()).show();
                 }
             })
         },

@@ -246,12 +246,14 @@
         cont_width:$(".content").width(),
         //轮播图设置
         banner:function () {
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true,
-                loop:true,
-                autoplay:3000
-            });
+            if($(".lunbo .swiper-wrapper .swiper-slide").length>1){
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: true,
+                    loop:true,
+                    autoplay:3000
+                });
+            }
         },
         //弹框轮播
         cover_banner:function(){

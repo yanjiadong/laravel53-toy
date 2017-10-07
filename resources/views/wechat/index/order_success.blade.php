@@ -27,12 +27,16 @@
     </div>
     <div class="btn">
         <button onclick="goodDetail()">查看订单详情</button>
+        <button onclick="goIndex()">返回首页</button>
     </div>
 </div>
 
 <script>
     function goodDetail() {
         location.href="{{url('wechat/index/order_detail')}}"+'/'+'{{$order->code}}';
+    }
+    function goIndex() {
+        location.href="{{url('/wechat/index/index')}}";
     }
     $(function () {
         $(".toys-car").height($(window).height());

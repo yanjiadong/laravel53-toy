@@ -27,7 +27,7 @@ var common = {
     },
 
     //提示框
-    alert_tip:function (msg,color,title,call) {
+    alert_tip:function (msg,color,title,call){
         if(!title){
             title = "提示：";
         }
@@ -53,10 +53,10 @@ var common = {
     success_tip:function (msg) {
        var tip_content='<div class="success-tip-wrap">'+msg+'</div>';
        $('body').append(tip_content);
-        $(".success-tip-wrap").animate({'bottom':'20px'},500);
+        $(".success-tip-wrap").animate({'bottom':'50%'},500);
         setTimeout(function () {
-            $(".success-tip-wrap").remove();
-        },500)
+            $(".success-tip-wrap").fadeOut().remove();
+        },1000)
     },
     
     /*请求数据url 接口  type为请求类型 data向后端数据 successCall请求后回调*/
