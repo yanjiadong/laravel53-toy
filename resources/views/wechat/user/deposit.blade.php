@@ -38,13 +38,13 @@
 <script>
     var deposit={
         data:{
-            money:common.getParam('yajin'),
+            money:'{{$user->can_use_money + $user->not_can_use_money}}',
             id:common.getParam('id'),
-            cashState:common.getParam('cashState')
+            cashState:"{{$user->can_use_money}}"
         },
         init:function () {
-            $(".deposit-main h1").text("￥" + parseFloat(deposit.data.money).toFixed(2));
-            $(".deposit-main .extract").text("可提现金额：￥" + parseFloat(deposit.data.money).toFixed(2));
+            $(".deposit-main h1").text("￥" + parseFloat(deposit.data.money));
+            $(".deposit-main .extract").text("可提现金额：￥" + parseFloat(deposit.data.money));
             if(!eval(deposit.data.cashState)){
                 $('.deposit-wrap .footer button').removeClass('active');
             }else{
@@ -58,7 +58,7 @@
         //提现
         getCash:function () {
             if($('.deposit-wrap .footer button').hasClass('active')){
-                location.href='cash.html?money='+deposit.data.money;
+                location.href="{{url('wechat/user/cash')}}";
             }
         }
     };

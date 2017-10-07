@@ -70,6 +70,9 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::post('/user/choose_coupon','UserController@choose_coupon');
 
+    Route::post('/user/cash','UserController@cash');
+    Route::post('/user/cash_list','UserController@cash_list');
+
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');
 

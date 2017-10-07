@@ -64,9 +64,18 @@ class UserController extends BaseController
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.user.deposit',compact('user_id'));
+        $user = User::find($user_id);
+        return view('wechat.user.deposit1',compact('user_id','user'));
     }
 
+    public function cash()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $user = User::find($user_id);
+        return view('wechat.user.cash',compact('user_id','user'));
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

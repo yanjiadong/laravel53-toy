@@ -59,15 +59,17 @@
                                         @if($user->status == 1)
                                             正常
                                         @elseif($user->status == -1)
-                                            可退押金
+                                            已过期
+                                        @elseif($user->status == -2)
+                                            申请提现
                                         @else
-                                            已退押金
+                                            提现成功
                                         @endif
                                     </td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
-                                        @if($user->status==-1)
-                                            <a href="javascript:;" data-id="{{$user->id}}" title="退还押金" class="tip doAction" data-status="-2"><span class="btn btn-mini btn-warning">退还押金</span></a>
+                                        @if($user->status==-2)
+                                            <a href="javascript:;" data-id="{{$user->id}}" title="退还押金" class="tip doAction" data-status="-3"><span class="btn btn-mini btn-warning">退还押金</span></a>
                                         @endif
                                     </td>
                                 </tr>

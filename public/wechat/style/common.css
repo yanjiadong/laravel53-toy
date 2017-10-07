@@ -201,7 +201,7 @@ footer table td a div span {
     height: 16px;
     text-align: center;
     border-radius: 16px;
-    line-height: 18px;
+    line-height: 16px;
     right: -7px;
     top: -3px;
 }
@@ -247,7 +247,7 @@ footer table td.active a {
 footer table td.active a .icon-footer-home {
     display: inline-block;
     vertical-align: middle;
-    background: url(../image/common/wx_footer.png) 2px -25px no-repeat;
+    background: url(../image/common/wx_footer.png) 2px -24px no-repeat;
     width: 23px;
     height: 24px;
     position: relative;
@@ -265,7 +265,7 @@ footer table td.active a .icon-footer-order {
 footer table td.active a .icon-footer-shop-car {
     display: inline-block;
     vertical-align: middle;
-    background: url(../image/common/wx_footer.png) -63px -25px no-repeat;
+    background: url(../image/common/wx_footer.png) -63px -24px no-repeat;
     width: 23px;
     height: 24px;
     position: relative;
@@ -284,15 +284,18 @@ footer table td.active a .icon-footer-user-center {
 .success-tip-wrap{
     position: fixed;
     width: 150px;
-    height: 40px;
+    margin: 0 auto;
     line-height: 40px;
     color: #fff;
     background-color: rgba(0,0,0,0.7);
     text-align: center;
-    bottom: 0;
+    bottom: 40%;
     border-radius: 4px;
-    left:50%;
+    left: 50%;
     transform: translateX(-50%);
+    padding: 20px;
+    font-size: 16px;
+  //  z-index: 999999;
 }
 /*------------------分类样式----------------------*/
 .index-nav{

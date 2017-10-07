@@ -227,4 +227,29 @@ class UserController extends BaseController
         UserChooseCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon_id]);
         return $this->ret;
     }
+
+    /**
+     * @param Request $request
+     */
+    public function cash(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $vip_card_pay_id = $request->get('vip_card_pay_id');
+
+        $info = VipCardPay::find($vip_card_pay_id);
+        //押金明细
+        DB::table('user_pay_records')->insert(['user_id'=>$user_id,'type'=>1,'pay_type'=>2,'price'=>$info->money,'created_at'=>date('Y-m-d H:i:s')]);
+
+        VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2]);
+        return $this->ret;
+    }
+
+    public function cash_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $list = VipCardPay::with(['user','vip_card'])->where('user_id',$user_id)->get();
+        $this->ret['info'] = ['list'=>$list];
+        return $this->ret;
+    }
 }
