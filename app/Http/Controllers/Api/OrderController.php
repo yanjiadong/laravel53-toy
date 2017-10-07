@@ -104,6 +104,17 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
+        //如果有租用中的订单 那就无法重复下单
+        //判断是否租用中的玩具
+        $orders = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get()->toArray();
+        //print_r($order);
+        if(count($orders) > 0)
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '当前账户已有正在租用物品,归还后才能再次下单';
+            return $this->ret;
+        }
+
         $order_data['code'] = get_order_code($user_id);
         $order_data['user_id'] = $user_id;
         $order_data['good_id'] = $good_id;
