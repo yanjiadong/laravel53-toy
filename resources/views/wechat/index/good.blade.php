@@ -197,8 +197,8 @@
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo2.length;i++){
                         lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo2[i].picture+'"></div>';
                         $(".lunbo .swiper-wrapper").append(lunbo_content);
+                        $(".swiper-slide video").height($(".swiper-slide video").width());
                         lunbo_content="";
-
                     }
 
                     //轮播图
