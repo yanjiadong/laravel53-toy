@@ -188,6 +188,7 @@
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
                             $('.lunbo .swiper-wrapper .swiper-slide:eq('+i+') .play-box').text(time);
+                            $(".swiper-slide video").height($(".swiper-slide video").width());
                             lunbo_content="";
                         }
                     }

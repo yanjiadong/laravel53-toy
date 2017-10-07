@@ -116,7 +116,7 @@
                             <div class="span9">
                                 <input type="file" id="J_UploaderBtn" value="上传图片" name="userfile" accept="image/*">
                                 <input type="hidden" id="J_Urls" name="urls" value="" />
-                                <span>还可以上传<span id="J_UploadCount">5</span>张图片,  (建议图片尺寸标准为320x160, png、jpg格式)</span>
+                                <span>还可以上传<span id="J_UploadCount">5</span>张图片,  (建议图片尺寸标准为800x800, png、jpg格式)</span>
                                 <br/>
                                 <ul id="J_UploaderQueue" class="grid">
                                 </ul>
@@ -252,7 +252,7 @@
                 S.use(plugins,function(S,Auth,UrlsInput,ProBars,Filedrop,Preview){
                     var uploader = new Uploader('#J_UploaderBtn',{
                         //处理上传的服务器端脚本路径
-                        action:"{{ url('admin/upload',['size'=>'320,160']) }}",
+                        action:"{{ url('admin/upload',['size'=>'800,800']) }}",
                         multiple:true,
                         multipleLen:5
                     });
