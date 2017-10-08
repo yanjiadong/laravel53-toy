@@ -85,7 +85,7 @@
                 </div>
             </li>
             <li class="clear">
-                <a href="tel:40021223121">
+                <a href="tel:{{$phone}}}">
                     <div class="fl">
                         <div class="icon-box"><i class="icon icon-ic-face"></i></div>
                         <span>联系客服</span>
