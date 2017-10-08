@@ -173,6 +173,7 @@
         },
         goSubmitOrder:function () {
             if($(".toys-car .btn button").hasClass('active')){
+                var good_id = $("#good_id").val();
                 if(toys_car.data.info.state==1){
                     location.href="{{url('wechat/index/choose_vip')}}";
                 }else{
