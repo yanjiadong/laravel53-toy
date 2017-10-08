@@ -110,7 +110,7 @@ class CrontabController extends BaseController
                 'aliyun' => [
                     'access_key_id' => 'jlU7IQOybzkAXInb',
                     'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩具小叮当',
+                    'sign_name' => '玩玩具趣编程',
                 ],
             ],
         ];

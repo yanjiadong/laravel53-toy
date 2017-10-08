@@ -251,7 +251,7 @@ if(!function_exists('order_pay_success_send_sms'))
                 'aliyun' => [
                     'access_key_id' => 'jlU7IQOybzkAXInb',
                     'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩具小叮当',
+                    'sign_name' => '玩玩具趣编程',
                 ],
             ],
         ];
@@ -294,7 +294,7 @@ if(!function_exists('vip_card_pay_success_send_sms'))
                 'aliyun' => [
                     'access_key_id' => 'jlU7IQOybzkAXInb',
                     'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩具小叮当',
+                    'sign_name' => '玩玩具趣编程',
                 ],
             ],
         ];
@@ -303,7 +303,7 @@ if(!function_exists('vip_card_pay_success_send_sms'))
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_85355004',
+            'template' => 'SMS_101075059',
             'data' => [
                 'name'=>$name
             ],

@@ -887,7 +887,7 @@
 
         //是否为会员
         isVip:function () {
-            common.httpRequest('../js/test.json','get',order_obj.data.submitOrderData,function (res) {
+            common.httpRequest('/wechat/js/test.json','get',order_obj.data.submitOrderData,function (res) {
                 //假数据  false 非会员  true 会员
                 order_obj.data.vip_state = {state:false,times:0};
             })
