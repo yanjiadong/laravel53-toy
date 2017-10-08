@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Cart;
 use App\Express;
+use App\ExpressInfo;
 use App\Good;
 use App\Order;
 use App\SystemConfig;
@@ -198,7 +199,43 @@ class OrderController extends BaseController
         $code = $request->get('code');
         $info = Order::with(['user','category','good_brand'])->where('code',$code)->first();
 
-        $this->ret['info'] = ['order'=>$info];
+        $express_info = ExpressInfo::where('nu',$info->express_no)->orderBy('id','desc')->first();
+
+        $logistics = array('time'=>'','context'=>'暂无物流信息');
+        if(isset($express_info->content) && !empty($express_info->content))
+        {
+            $content = json_decode($express_info->content,true);
+            if(isset($content['lastResult']['data'][0]))
+            {
+                $logistics = $content['lastResult']['data'][0];
+                //print_r($logistics);
+            }
+            //print_r($content);
+        }
+
+        $this->ret['info'] = ['logistics'=>$logistics,'order'=>$info];
+        return $this->ret;
+    }
+
+    public function logistics_detail(Request $request)
+    {
+        $nu = $request->get('nu');
+
+        $express_info = ExpressInfo::where('nu',$nu)->orderBy('id','desc')->first();
+
+        $logistics = array();
+        if(isset($express_info->content) && !empty($express_info->content))
+        {
+            $content = json_decode($express_info->content,true);
+            if(isset($content['lastResult']['data']))
+            {
+                $logistics = $content['lastResult']['data'];
+                //print_r($logistics);
+            }
+            //print_r($content);
+        }
+
+        $this->ret['info'] = ['logistics'=>$logistics];
         return $this->ret;
     }
 

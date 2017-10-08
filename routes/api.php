@@ -43,6 +43,9 @@ Route::group(['namespace' => 'Api'], function () {
     //订单详情
     Route::post('/order/order_info','OrderController@order_info');
 
+    //查看订单物流信息
+    Route::post('/order/logistics_detail','OrderController@logistics_detail');
+
     //确认收货
     Route::post('/order/confirm_order','OrderController@confirm_order');
     //可寄回更换详情

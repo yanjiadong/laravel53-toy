@@ -355,7 +355,7 @@ class IndexController extends BaseController
 
         $signPackage = getJssdk();
 
-        return view('wechat.index.fill_logistics',compact('user_id','openid','order_code','signPackage'));
+        return view('wechat.index.fill_logistics',compact('user_id','openid','signPackage'));
     }
 
     public function children_interesting_compilation()
@@ -363,7 +363,16 @@ class IndexController extends BaseController
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.index.children_interesting_compilation',compact('user_id','openid','order_code'));
+        return view('wechat.index.children_interesting_compilation',compact('user_id','openid'));
+    }
+
+    public function logistics_detail($order_code)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $order = Order::where('code',$order_code)->first();
+        return view('wechat.index.logistics_detail',compact('user_id','openid','order','order_code'));
     }
 
     public function test()

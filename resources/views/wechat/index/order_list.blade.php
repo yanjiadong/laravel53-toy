@@ -201,7 +201,7 @@
                     ];*/
 
                     orderDtail.data.list = res.info.list;
-                    //console.log(res.info.list);
+                    console.log(res.info.list);
                     var dataList ='';
                     for(var i=0;i<orderDtail.data.list.length;i++){
                         switch(orderDtail.data.list[i].status){
@@ -219,7 +219,7 @@
                                     '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
                                     '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
                                     '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
-                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].id+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
+                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].id+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button></div></div></li>';
                                 break;
                             case '租用中':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
@@ -227,7 +227,7 @@
                                     '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
                                     '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
                                     '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
-                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.goReturn()">归还玩具</button><button class="logistics" onclick="orderDtail.goLogisticsDetail()">查看物流</button></div></div></li>';
+                                    '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.goReturn()">归还玩具</button><button class="logistics" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button></div></div></li>';
                                 break;
                             default:
                                 break;
@@ -260,7 +260,7 @@
                         {a:1,b:3,c:'../image/other/3.png',d:' WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人',
                             e:'#',f:'1-12岁',h:2500.00,g:131452365895,i:1,j:300.00}
                     ];*/
-                    console.log(res.info.list);
+                    //console.log(res.info.list);
                     orderDtail.data.returnList = res.info.list;
                     var dataList ='';
                     for(var i=0;i<orderDtail.data.returnList.length;i++){
@@ -291,8 +291,8 @@
             //debugger;
         },
         //查看物流
-        goLogisticsDetail:function () {
-            location.href="/view/logistics_detail.html";
+        goLogisticsDetail:function (code) {
+            location.href="{{url('wechat/index/logistics_detail')}}"+'/'+code;
         },
         //归还玩具
         goReturn:function () {

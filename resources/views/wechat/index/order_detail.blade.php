@@ -168,7 +168,8 @@
                     租赁订单编号
                 </div>
                 <div class="fr">
-                    <input type="text" id="copy" value="{{$order_code}}" readonly>
+                    <span>{{$order_code}}</span>
+                    <input type="hidden" id="copy" value="{{$order_code}}" readonly>
                     <button id="copy_btn" onclick="order_detail.copy()">复制</button>
                 </div>
             </div>
@@ -195,7 +196,7 @@
             common.httpRequest('{{url('api/order/order_info')}}', 'post', {code:'{{$order_code}}'}, function (res) {
                 //res = [];
 //              order_detail.data.logistics_state = res;
-                //console.log(res);
+                console.log(res.info);
                 //假数据
                 //state 1为待发货 2 已发货 3租用中 4已归还
                 order_detail.data.logistics_state = {
@@ -210,7 +211,7 @@
                         g: res.info.order.express_no,
                         h: res.info.order.created_at
                     },
-                    logistics:{cont:"快件已经在海口中转处，准备发往北京",time:"1492744860000"},
+                    logistics:{cont:res.info.logistics.context,time:res.info.logistics.time},
                     good: {
                         a: res.info.order.good_picture,
                         b: res.info.order.good_title,
@@ -235,14 +236,14 @@
                             '<h2>已发货</h2><h4>确认收货后，即可享受玩具随意更换服务</h4></div>';
 
                         logistics_info = '<div class="logistics-info clear" onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_car"></i></div>' +
-                            '<div class="fl"><h3>' + order_detail.data.logistics_state.logistics.cont + '</h3><p>' + common.dateFormat(order_detail.data.logistics_state.logistics.time) + '</p></div>' +
+                            '<div class="fl"><h3>' + order_detail.data.logistics_state.logistics.cont + '</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_bold"></i></div></div><div class="operate-btn"><button onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.receipt()">确认收货</button></div>';
                         break;
                     case '租用中':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-zuyongzhong"></i><h2>租用中</h2>' +
                             '<h4>将租用中的玩具归还后，才能重新选择玩具再次下单</h4></div>';
                         logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
-                            '</div><div class="fl"><h3>快件已签收</h3><p>' + common.dateFormat(order_detail.data.logistics_state.logistics.time) + '</p></div>' +
+                            '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
                             '<button  onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.goOrderReturn()">归还玩具</button></div>';
                         break;
@@ -318,7 +319,7 @@
         },
         //查看物流
         goLogisticsDetail:function () {
-            location.href="/view/logistics_detail.html";
+            location.href="{{url('wechat/index/logistics_detail')}}"+'/'+'{{$order_code}}';
         },
         //归还玩具
         goOrderReturn:function () {
