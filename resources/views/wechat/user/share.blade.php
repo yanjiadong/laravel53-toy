@@ -78,7 +78,8 @@
         },
         //立即分享
         immediately:function () {
-            $(".share-wrap-cover-wrap").fadeIn(500);
+            var $cove_wrap = $(".share-wrap-cover-wrap");
+            $cove_wrap.fadeIn(500);
             $cove_wrap.click(function (event) {
                 if(event.target.className.toLowerCase() =="share-wrap-cover-wrap"){
                     $cove_wrap.hide();
