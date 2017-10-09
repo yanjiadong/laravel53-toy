@@ -119,7 +119,7 @@ class IndexController extends BaseController
         $user = User::where(['telephone'=>$telephone,'status'=>1])->first();
         if(!empty($user))
         {
-            $this->ret = ['code'=>300,'msg'=>'输入的手机号已存在'];
+            $this->ret = ['code'=>300,'msg'=>'手机号已被绑定'];
             return $this->ret;
         }
 
@@ -197,7 +197,7 @@ class IndexController extends BaseController
         $user = User::where(['telephone'=>$telephone,'status'=>1])->first();
         if(!empty($user))
         {
-            $this->ret = ['code'=>300,'msg'=>'输入的手机号已存在'];
+            $this->ret = ['code'=>300,'msg'=>'手机号已被绑定'];
             return $this->ret;
         }
 

@@ -119,14 +119,14 @@
                     </div>
                     <div class="money-detail">
                         <ul>
-                            <li class="clear">
+                            {{--<li class="clear">
                                 <div class="fl">
                                     <i class="icon_order2"></i>
                                     <span>押金</span>
                                 </div>
                                 <div class="fr">
                                 </div>
-                            </li>
+                            </li>--}}
                             <li  class="clear">
                                 <div class="fl">
                                     <i class="icon_order3"></i>
@@ -286,7 +286,7 @@
                     $(".detail-list .good_show .fr h3 a").text(order_detail.data.logistics_state.good.b);
                     $(".detail-list .good_show .fr h4").text('市场参考价¥' + order_detail.data.logistics_state.good.d);
                     $(".detail-list .good_show .fr p").text(order_detail.data.logistics_state.good.c);
-                    $(".detail-list .money-detail .fr:eq(0)").text('+¥' + order_detail.data.logistics_state.good.e);
+                    //$(".detail-list .money-detail .fr:eq(0)").text('+¥' + order_detail.data.logistics_state.good.e);
                     $(".detail-list .money-detail .fr:eq(1)").text('+¥' + order_detail.data.logistics_state.good.f);
                     $(".detail-list .money-detail .fr:eq(2)").text('+¥' + order_detail.data.logistics_state.good.g);
                     $(".detail-list .total .num").text(order_detail.data.logistics_state.good.total_num);

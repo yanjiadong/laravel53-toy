@@ -381,7 +381,7 @@ class OrderController extends BaseController
 
         $where = [Order::STATUS_BACK];
         //$list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
-        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
+        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->orderBy('back_time','desc')->get()->toArray();
         //print_r($list);
         if(!empty($list))
         {

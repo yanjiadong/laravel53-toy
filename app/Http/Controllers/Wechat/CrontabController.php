@@ -82,6 +82,7 @@ class CrontabController extends BaseController
                 {
                     $this->send_sms($user->telephone,$user->name);
                 }
+                User::where('id',$user->id)->update(['days'=>$days]);
             }
         }
     }

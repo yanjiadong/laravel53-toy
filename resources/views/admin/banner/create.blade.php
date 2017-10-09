@@ -38,6 +38,13 @@
                             </div>
                         </div>
 
+                        <div class="row-form clearfix">
+                            <div class="span3">链接：</div>
+                            <div class="span9">
+                                <input type="text" value="" class="validate[required]" id="url" name="url"/>
+                            </div>
+                        </div>
+
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -79,6 +86,7 @@
                 if ($("#validation").validationEngine('validate')) {
                     var intro = $("#intro").val();
                     var picture = $("#uploadPath").val();
+                    var url = $("#url").val();
 
                     if(picture == '')
                     {
@@ -89,7 +97,7 @@
                     }
 
                     $.post("{{ route('banners.store') }}",
-                        {intro:intro,picture:picture},
+                        {intro:intro,picture:picture,url:url},
                         function(data){
                             cTip(data);
                         }, "json");

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +19,7 @@ class UserController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $users = User::paginate(5);
+        $users = User::paginate(30);
         $menu = 'user';
         //print_r($orders);
 
@@ -30,7 +31,11 @@ class UserController extends BaseController
         $id = $request->get('id');
         $status = $request->get('status');
 
-        User::where('id',$id)->update(['is_vip'=>$status]);
+        $ret = User::where('id',$id)->update(['is_vip'=>$status]);
+        if($ret)
+        {
+            VipCardPay::where('user_id',$id)->where('status',1)->where('pay_status',1)->update(['status'=>-1]);
+        }
         alert('',1);
     }
 }

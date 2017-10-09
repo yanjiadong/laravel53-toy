@@ -38,6 +38,13 @@
                             </div>
                         </div>
 
+                        <div class="row-form clearfix">
+                            <div class="span3">链接：</div>
+                            <div class="span9">
+                                <input type="text" value="{{ $banner->url }}" class="validate[required]" id="url" name="url"/>
+                            </div>
+                        </div>
+
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -77,10 +84,11 @@
                 e.preventDefault();
 
                 if ($("#validation").validationEngine('validate')) {
-                    var url = "{{route('banners.update',['id'=>$banner->id])}}";
+                    var submit_url = "{{route('banners.update',['id'=>$banner->id])}}";
                     var intro = $("#intro").val();
                     var picture = $("#uploadPath").val();
                     var _method = 'PUT';
+                    var url = $("#url").val();
 
                     if(picture == '')
                     {
@@ -90,8 +98,8 @@
                         return;
                     }
 
-                    $.post(url,
-                        {intro:intro,picture:picture,_method:_method},
+                    $.post(submit_url,
+                        {intro:intro,picture:picture,_method:_method,url:url},
                         function(data){
                             cTip(data);
                         }, "json");

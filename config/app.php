@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => '玩具小叮当后台管理系统',
+    'name' => '玩玩具趣编程后台管理系统',
 
     /*
     |--------------------------------------------------------------------------

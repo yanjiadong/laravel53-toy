@@ -49,7 +49,7 @@ class BannerController extends BaseController
      */
     public function store(Request $request)
     {
-        Banner::create(['intro'=>$request->get('intro'),'picture'=>$request->get('picture')]);
+        Banner::create(['intro'=>$request->get('intro'),'picture'=>$request->get('picture'),'url'=>$request->get('url')]);
         return alert(route('banners.index'),1);
     }
 
@@ -89,7 +89,7 @@ class BannerController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        Banner::where('id',$id)->update(['intro'=>$request->get('intro'),'picture'=>$request->get('picture')]);
+        Banner::where('id',$id)->update(['intro'=>$request->get('intro'),'picture'=>$request->get('picture'),'url'=>$request->get('url')]);
         return alert(route('banners.index'),1);
     }
 

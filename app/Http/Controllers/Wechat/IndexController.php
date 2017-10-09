@@ -85,6 +85,19 @@ class IndexController extends BaseController
                 else
                 {
                     session(['user_id'=>$info->id]);
+
+                    $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$result['access_token']}&openid={$result['openid']}&lang=zh_CN";
+                    $info = weixinCurl($url);
+
+                    $data = array(
+                        'name'=>$info['nickname'],
+                        'wechat_openid'=>$result['openid'],
+                        'wechat_original'=>json_encode($info),
+                        'wechat_nickname'=>$info['nickname'],
+                        'wechat_avatar'=>$info['headimgurl'],
+                    );
+
+                    User::where('id',$info->id)->update($data);
                 }
             }
 

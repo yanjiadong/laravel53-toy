@@ -27,7 +27,7 @@
         <div class="parent-box clear">
             <div class="detail-cont tab-page fl">
                 <div class="top-tips">
-                    同一时间内只能持有一件玩具，待归还后才能再次租用，如需归还租用中的玩具，请点击“归还玩具”并上传物流单号，即可再次下单
+                    同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
                 </div>
                 <ul class="detail-list">
                     <!--  <li class="bg-white">
