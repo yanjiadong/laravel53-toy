@@ -70,11 +70,22 @@
                         </tr>
                         <tr>
                             <td>快递公司：</td>
-                            <td>{{$order->express_title}}</td>
+                            <td>
+                                <select name="select" class="" id="express_id">
+                                    <option value="0">--请选择--</option>
+                                    @if(count($express)>0)
+                                        @foreach($express as $v)
+                                            <option value="{{$v->id}}" {{$v->com==$order->express_com?'selected':''}}>{{$v->title}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>快递单号：</td>
-                            <td>{{$order->express_no}}</td>
+                            <td>
+                                <input type="text" value="{{$order->express_no}}" class="validate[required]" id="express_no" name="express_no"/>
+                            </td>
                         </tr>
                         <tr>
                             <td>邮费：</td>
@@ -85,11 +96,14 @@
                             <td>会员手机号：</td>
                             <td>{{$order->user->telephone}}</td>
                         </tr>
-
-
-
                         </tbody>
                     </table>
+
+                    <div class="footer tar">
+                        @if($order->status == '已发货')
+                            <a href="javascript:;" title="修改物流" class="tip sendEdit"><span class="btn btn-warning">修改物流</span></a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,6 +169,21 @@
                     cancelButton: "取消"
                 });
             });
+
+            $(".sendEdit").click(function(){
+                var id = '{{$order->id}}';
+                var express_no = $("#express_no").val();
+                var express_id = $("#express_id").val();
+                if (!express_no) {
+                    eAlert('请输入快递单号');
+                    return false;
+                }
+
+                $.post("{{route('admin.order.send')}}", {id:id,express_no:express_no,express_id:express_id}, function(data){
+                    cTip(data);
+                }, "json");
+            });
+
         });
     </script>
 @endsection

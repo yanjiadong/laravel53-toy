@@ -8,6 +8,7 @@ use App\SystemConfig;
 use App\User;
 use App\UserAddress;
 use App\UserChooseCoupon;
+use App\UserCoupon;
 use App\UserPayRecord;
 use App\VipCard;
 use App\VipCardPay;
@@ -56,7 +57,10 @@ class UserController extends BaseController
 
         $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
 
-        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days];
+        //优惠券数量
+        $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
+
+        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days,'coupon_nums'=>$coupon_nums];
         return $this->ret;
     }
 

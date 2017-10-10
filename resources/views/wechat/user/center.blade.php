@@ -113,6 +113,7 @@
             common.httpRequest('{{url('api/user/center')}}','post',{user_id:'{{$user_id}}'},function (res) {
                 //假数据
                 //isAuthorize false为未登录  isVip false为不是会员 isOutTime 为true为会员失效
+                console.log(res);
                 user_center.data.userInfo = {
                     id:1,
                     isAuthorize:true,
@@ -123,7 +124,7 @@
                     num:res.info.count,           //正在玩的件数
                     money:res.info.user.can_use_money+res.info.user.not_can_use_money,  //押金
                     cash:true,    //是否可以提现
-                    cars:0,         //优惠卡劵
+                    cars:res.info.coupon_nums,         //优惠卡劵
                     carSort:res.info.card.vip_card_type_str,   //卡的类型
                     time:res.info.days
 
@@ -208,7 +209,7 @@
         },
         //优惠抵用券
         goChooseVoucher:function () {
-            location.href='vip_voucher.html';
+            location.href='{{url('wechat/user/choose_coupon')}}';
         }
     };
     $(function () {

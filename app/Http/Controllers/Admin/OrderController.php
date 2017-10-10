@@ -112,7 +112,10 @@ class OrderController extends BaseController
         $username = $admin_info['username'];
 
         $order = Order::with(['user','category'])->find($id);
+
+        $express = Express::all();
+
         $menu = 'order';
-        return view('admin.order.show',compact('order','username','menu'));
+        return view('admin.order.show',compact('order','username','menu','express'));
     }
 }

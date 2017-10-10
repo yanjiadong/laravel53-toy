@@ -39,7 +39,7 @@
                                 <input type="text" value="{{ $coupon->price }}" class="validate[required,custom[stock]]" id="price" name="price"/>
                             </div>
                         </div>
-                        <div class="row-form clearfix condition" style="display: {{$coupon->type==2?'':'none'}};">
+                        <div class="row-form clearfix condition">
                             <div class="span3">满多少能减：</div>
                             <div class="span9">
                                 <input type="text" value="{{ $coupon->condition }}" class="validate[required,custom[stock]]" id="condition" name="condition"/>
@@ -68,7 +68,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#type").change(function(){
+            /*$("#type").change(function(){
                 var type = $(this).val();
                 if(type == 2)
                 {
@@ -78,7 +78,7 @@
                 {
                     $(".condition").hide();
                 }
-            });
+            });*/
 
             $('#submit').click(function(e) {
                 e.preventDefault();

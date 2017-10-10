@@ -72,9 +72,17 @@
                 if(vip_voucher.data.list.length>0){
                     var cont='';
                     for(var i=0;i<vip_voucher.data.list.length;i++){
+                        if(vip_voucher.data.list[i].condition == 0)
+                        {
+                            var fanwei = '任意金额可用';
+                        }
+                        else
+                        {
+                            var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
+                        }
                         cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
                             +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                            '<p>有效期：<span>'+vip_voucher.data.list[i].start_time+'-'+vip_voucher.data.list[i].end_time+'</span></p><h5>'+''+'</h5></div></li>';
+                            '<p>有效期：<span>'+vip_voucher.data.list[i].start_time+'-'+vip_voucher.data.list[i].end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                     }
                     $(".vip-voucher-wrap .list ul").html(cont);
                     vip_voucher.choose();
