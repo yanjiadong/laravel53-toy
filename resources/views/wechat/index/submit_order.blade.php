@@ -660,16 +660,18 @@
         },
         submitOrder:function (goal) {
             if(!$(goal).hasClass("disable")){
+                console.log(order_obj.data.vip_state);
                 if(order_obj.data.vip_state=='1'){
                     order_obj.submitConfirm();
                 }else{
                     $(".cover-phone-bind").fadeIn(500);
-                    if(order_obj.data.vip_state.times>3){
+                    $(".phone-bind-main .tip").html('<div class="tip1">为了更好的为您服务，请绑定手机号码</div>');
+                    /*if(order_obj.data.vip_state.times>3){
                         $(".phone-bind-main .tip").html('<div class="tip3 clear"><div class="fl"><i class="icon-attion">!</i></div>' +
                             '<div class="fl">今日获取验证码次数已达上限，请明天再尝试</div></div>')
                     }else{
-                        $(".phone-bind-main .tip").html('<div class="tip1">为了更好的为您服务，请绑定手机号码</div>')
-                    }
+                        $(".phone-bind-main .tip").html('<div class="tip1">为了更好的为您服务，请绑定手机号码</div>');
+                    }*/
                 }
             }
         },
@@ -803,18 +805,18 @@
         },
 
         //是否为会员
-        isVip:function () {
+        /*isVip:function () {
             common.httpRequest('/wechat/js/test.json','get',order_obj.data.submitOrderData,function (res) {
                 //假数据  false 非会员  true 会员
                 order_obj.data.vip_state = {state:false,times:0};
             })
-        }
+        }*/
     };
 
     $(function () {
         order_obj.init();
         order_obj.selectAddress();
-        order_obj.isVip();
+        //order_obj.isVip();
 
         /* wx.config({
          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
