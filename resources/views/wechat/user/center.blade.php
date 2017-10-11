@@ -71,7 +71,7 @@
                     <span>我要分享</span>
                 </div>
                 <div class="fr">
-                    <span>觉得不错，就分享给好友吧</span>
+                    <span>领取20元现金红包</span>
                     <i class="icon icon_arrowRight_bold"></i>
                 </div>
             </li>
@@ -122,7 +122,7 @@
                     img:res.info.user.wechat_avatar,
                     name:res.info.user.wechat_nickname,
                     num:res.info.count,           //正在玩的件数
-                    money:res.info.user.can_use_money+res.info.user.not_can_use_money,  //押金
+                    money:Number(res.info.user.can_use_money)+Number(res.info.user.not_can_use_money),  //押金
                     cash:true,    //是否可以提现
                     cars:res.info.coupon_nums,         //优惠卡劵
                     carSort:res.info.card.vip_card_type_str,   //卡的类型

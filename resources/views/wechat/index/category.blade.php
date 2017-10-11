@@ -117,12 +117,12 @@
                 }
                 $(".year-select .scroll").html(cont);
 
-                //计算列表宽度
+                /*//计算列表宽度
                 var scroll_wid=0;
                 for(var i=0;i< $(".year-select .scroll button").length;i++){
                     scroll_wid+=$($(".year-select .scroll button")[i]).outerWidth()+10;
                 }
-                $(".year-select .scroll").width(scroll_wid+'px');
+                $(".year-select .scroll").width(scroll_wid+'px');*/
                 sort_detail.choose_sort();   //分类选择
             })
         },
@@ -175,6 +175,18 @@
         //分类详情 - 选择品牌
         choose_sort:function () {
             $(".year-select .scroll button").click(function () {
+                var moveX = $(this).position().left+$(this).closest('.year-select .scroll').scrollLeft();
+                var pageX = document.documentElement.clientWidth;
+                var blockWidth = $(this).width();
+                var left = moveX-(pageX/2)+(blockWidth/2);
+                $(".year-select .scroll").scrollLeft(left);
+                $(".year-select .scroll button").removeClass('active');
+                $(this).addClass('active');
+            })
+        },
+        //分类详情 - 选择品牌
+        choose_sort:function () {
+            $(".year-select .scroll button").click(function () {
                 var moveX = $(this).position().left+$(this).closest('.year-select').scrollLeft();
                 var pageX = document.documentElement.clientWidth;
                 var blockWidth = $(this).width();
@@ -196,6 +208,17 @@
 
     $(function () {
         sort_detail.init();        //初始化
+
+        //顶部导航选择
+        $(".index-nav .nav li").click(function () {
+            var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
+            var pageX = document.documentElement.clientWidth;
+            var blockWidth = $(this).width();
+            var left = moveX-(pageX/2)+(blockWidth/2);
+            $(".index-nav .nav").scrollLeft(left);
+            $(".index-nav .nav li").removeClass('active');
+            $(this).addClass('active');
+        });
     })
 </script>
 </body>

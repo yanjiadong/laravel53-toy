@@ -395,11 +395,11 @@ class OrderController extends BaseController
 
                 if($v['back_time'])
                 {
-                    $v['back_time_new'] = date('Y-m-d',(strtotime($v['back_time'])));
+                    $v['back_time_new'] = date('Y.m.d',(strtotime($v['back_time'])));
                 }
                 if($v['confirm_time'])
                 {
-                    $v['confirm_time_new'] = date('Y-m-d',(strtotime($v['confirm_time'])));
+                    $v['confirm_time_new'] = date('Y.m.d',(strtotime($v['confirm_time'])));
                 }
             }
         }

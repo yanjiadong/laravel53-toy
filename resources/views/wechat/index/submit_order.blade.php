@@ -358,23 +358,18 @@
         },
         addAddress:function () {
             $(".order-cover-wrap").fadeIn(500);
-            $(".order-cover-main").fadeIn(500);
-            if(order_obj.data.address.length>0){
-                var cont ="";
-                for(var i=0;i<order_obj.data.address.length;i++){
-                    cont +='<li class="clear"><div class="fl"><h4><b class="name">'+
-                        order_obj.data.address[i].a+'</b><span class="phone">'+order_obj.data.address[i].b+
-                        '</span></h4><p><span>'+order_obj.data.address[i].c +'</span><span>'+
-                        order_obj.data.address[i].d+'</span><span>'+order_obj.data.address[i].e+'</span></p>' +
-                        '<h6>'+order_obj.data.address[i].f+'</h6></div><div class="fr"><i class="icon icon_edit"></i></div></li>'
-                }
-                $(".order-cover-main .address-list ul").html(cont).fadeIn(500);
-                order_obj.editAddress();
-                order_obj.checkAddress();
-            }else{
-                $(".order-cover-main .address-list ul").hide();
+            var cont ="";
+            for(var i=0;i<order_obj.data.address.length;i++){
+                cont +='<li class="clear"><div class="fl"><h4><b class="name">'+
+                    order_obj.data.address[i].a+'</b><span class="phone">'+order_obj.data.address[i].b+
+                    '</span></h4><p><span>'+order_obj.data.address[i].c +'</span><span>'+
+                    order_obj.data.address[i].d+'</span><span>'+order_obj.data.address[i].e+'</span></p>' +
+                    '<h6>'+order_obj.data.address[i].f+'</h6></div><div class="fr"><i class="icon icon_edit"></i></div></li>'
             }
-
+            $(".order-cover-main .address-list ul").html(cont).show();
+            $(".order-cover-main").fadeIn(500);
+            order_obj.editAddress();
+            order_obj.checkAddress();
         },
         closeAddress:function () {
             $(".order-cover-wrap").hide();
@@ -487,29 +482,6 @@
                 var selectedIndex = [0, 0, 0]; /* 默认选中的地区 */
                 var checked = [0, 0, 0]; /* 已选选项 */
 
-
-
-                /*  function creatList(obj, list){
-                 obj.forEach(function(item, index, arr){
-                 var temp = new Object();
-                 temp.text = item.name;
-                 temp.value = index;
-                 list.push(temp);
-                 })
-                 }
-                 creatList(city, first);
-                 if (city[selectedIndex[0]].hasOwnProperty('sub')) {
-                 creatList(city[selectedIndex[0]].sub, second);
-                 } else {
-                 second = [{text: '', value: 0}];
-                 }
-
-                 if (city[selectedIndex[0]].sub[selectedIndex[1]].hasOwnProperty('sub')) {
-                 creatList(city[selectedIndex[0]].sub[selectedIndex[1]].sub, third);
-                 } else {
-                 third = [{text: '', value: 0}];
-                 }
-                 console.log(first,second,third);*/
                 var picker = new Picker({
                     data: [first, second, third],
                     selectedIndex: selectedIndex,
@@ -520,6 +492,12 @@
                     var text1 = first[selectedIndex[0]].text;
                     var text2 = second[selectedIndex[1]].text;
                     var text3 = third[selectedIndex[2]] ? third[selectedIndex[2]].text : '';
+
+                    if(text1=="请选择"||!text1||text2=="请选择"||!text2||text3=="请选择"||!text3){
+                        common.alert_tip("请将地址选择完整!");
+                        return false;
+                    }
+
                     $(".order-edit-address-main .province").text(text1);
                     $(".order-edit-address-main .city").text(text2);
                     $(".order-edit-address-main .area").text(text3);
@@ -571,20 +549,6 @@
                             picker.refillColumn(2, third);
                             picker.scrollColumn(2, 0)
                         });
-                        /*   third = [];
-                         checked[1] = selectedIndex;
-                         var first_index = checked[0];
-                         if (city[first_index].sub[selectedIndex].hasOwnProperty('sub')) {
-                         var secondCity = city[first_index].sub[selectedIndex];
-                         creatList(secondCity.sub, third);
-                         picker.refillColumn(2, third);
-                         picker.scrollColumn(2, 0)
-                         } else {
-                         third = [{text: '', value: 0}];
-                         checked[2] = 0;
-                         picker.refillColumn(2, third);
-                         picker.scrollColumn(2, 0)
-                         }*/
                     }
 
                 });
@@ -597,6 +561,9 @@
 
                 nameEl.addEventListener('click', function () {
                     picker.show();
+                    $(".picker").click(function (ev) {
+                        picker.hide();
+                    })
                 });
             });
         },
@@ -661,6 +628,8 @@
                 return false;
             }
 
+            var state = order_obj.data.address.length;
+
             common.httpRequest('{{url('api/address/add')}}','post',data,function (res) {
                  if(res.code==200){
                     alert("保存成功");
@@ -676,6 +645,9 @@
 
                          order_obj.address_rander();
                          order_obj.addAddress();
+                         if(state==0){
+                             $(".order-cover-wrap").hide();
+                         }
                          $(".order-cover-wrap .order-edit-address-main").hide();
                      });
                  }

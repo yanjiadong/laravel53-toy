@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow: hidden">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
@@ -205,8 +205,18 @@
                 {
                     //新品
                     var href = "{{url('wechat/index/good')}}"+'/'+res.info.new_goods.id;
-                    newData ='<div class="fl"><a href="'+href+'"><img src="'+res.info.new_goods.picture+'"></a></div><div class="fr"><a href="'+href+'"><h3>'+
-                        res.info.new_goods.title+'</h3><p>市场参考价¥'+res.info.new_goods.price+'</p><h4>适用年龄'+res.info.new_goods.old+'</h4></a></div>';
+
+                    if(res.info.new_goods.store <=0 ){
+                        newData ='<div class="fl"><a href="'+href+'"><img src="'+res.info.new_goods.picture+'"><span class="active">'+
+                            '暂无库存</span></a></div><div class="fr"><a href="'+href+'"><h3>'+
+                            res.info.new_goods.title+'</h3><p>市场参考价¥'+res.info.new_goods.price+'</p><h4>适用年龄'+res.info.new_goods.old+'</h4></a></div>';
+                        $(".recommend-cont").html(newData);
+                    }else{
+                        newData ='<div class="fl"><a href="'+href+'"><img src="'+res.info.new_goods.picture+'"></a></div><div class="fr"><a href="'+href+'"><h3>'+
+                            res.info.new_goods.title+'</h3><p>市场参考价¥'+res.info.new_goods.price+'</p><h4>适用年龄'+res.info.new_goods.old+'</h4></a></div>';
+                        $(".recommend-cont").html(newData);
+                    }
+
                     $(".recommend-cont").html(newData);
                 }
 
@@ -267,14 +277,14 @@
                         $swiperCont.css('marginLeft','-100%');
                     }
                     cont++;
-                    $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},1000)
+                    $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},500);
                 }else{
                     if(cont==1){
                         cont=5;
                         $swiperCont.css('marginLeft','-500%');
                     }
                     cont--;
-                    $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},1000)
+                    $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},500);
                 }
             }
             var h = setInterval(slide,3000);
@@ -322,6 +332,17 @@
             },500);
         });
         $(".content").pullToRefreshDone();
+
+        //顶部导航选择
+        $(".index-nav .nav li").click(function () {
+            var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
+            var pageX = document.documentElement.clientWidth;
+            var blockWidth = $(this).width();
+            var left = moveX-(pageX/2)+(blockWidth/2);
+            $(".index-nav .nav").scrollLeft(left);
+            $(".index-nav .nav li").removeClass('active');
+            $(this).addClass('active');
+        });
     })
 </script>
 </body>

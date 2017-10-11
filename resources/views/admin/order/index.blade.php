@@ -6,6 +6,39 @@
             <li><a href="javascript:;">订单管理</a> <span class="divider">></span></li>
             <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a></li>
         </ul>
+        <ul class="buttons">
+            <li>
+                <a href="javascript:;" class="link_bcPopupSearch"><span class="icon-search"></span><span class="text">订单查询</span></a>
+                <form action="{{route('admin.order.index')}}" method="get">
+                    <div id="bcPopupSearch" class="popup">
+                        <div class="head clearfix">
+                            <div class="arrow"></div>
+                            <span class="isw-zoom"></span>
+                            <span class="name">订单查询</span>
+                        </div>
+                        <div class="body search row-form">
+                            <span>订单编号</span>
+                            <input type="text" placeholder="订单编号" id="code" name="code" value="<?php echo (isset($code))?$code:'';?>"/>
+                        </div>
+                        <div class="body search row-form">
+                            <span>状态</span>
+                            <select name="status">
+                                <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部</option>
+                                <option value="1" <?php echo (isset($status)&&$status==1)?'selected':'';?>>待发货</option>
+                                <option value="2" <?php echo (isset($status)&&$status==2)?'selected':'';?>>已发货</option>
+                                <option value="3" <?php echo (isset($status)&&$status==3)?'selected':'';?>>租用中</option>
+                                <option value="4" <?php echo (isset($status)&&$status==4)?'selected':'';?>>已归还</option>
+                            </select>
+                        </div>
+
+                        <div class="footer">
+                            <button class="btn" type="submit">查询</button>
+                            <button class="btn btn-danger link_bcPopupSearch" type="button">关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
     </div>
 
     <div class="workplace">

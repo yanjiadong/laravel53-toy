@@ -218,13 +218,15 @@
             //var page = common.getParam('page');
             var page = 1;
             if(page==1){
-                $(".parent-box").css('left',0);
                 $(".order-return-wrap nav ul li").removeClass("active");
                 $(".order-return-wrap nav ul li:eq(0)").addClass("active");
+                $(".order-return-main .parent-box .tab-page").hide();
+                $(".order-return-main .parent-box .tab-page").eq(0).show();
             }else{
                 $(".order-return-wrap nav ul li").removeClass("active");
                 $(".order-return-wrap nav ul li:eq(1)").addClass("active");
-                $(".parent-box").css('left',-good_return.cont_width+'px');
+                $(".order-return-main .parent-box .tab-page").hide();
+                $(".order-return-main .parent-box .tab-page").eq(1).show();
             }
             good_return.getList();
             good_return.getDetailList();
@@ -233,15 +235,14 @@
         //导航切换
         tab_change:function () {
             $(".order-return-wrap").height($(window).height());
-            $(".order-return-main").height($(".tab-page").eq(0).height()+"px");
             var tab_btn = $(".order-return-wrap nav ul li");
             tab_btn.click(function () {
                 var num = $(this).attr("data-tab");
                 $("body").scrollTop("0");
-                $(".order-return-main").height($($(".tab-page")[num]).height()+"px");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".order-return-main .parent-box").css({left:-num*good_return.cont_width+"px"});
+                $(".order-return-main .parent-box .tab-page").hide();
+                $(".order-return-main .parent-box .tab-page").eq(num).show()
             });
         },
         //可寄回更换 --数据加载
@@ -301,7 +302,6 @@
                         $(".return .detail-list ul").hide();
                         $(".return .no-good").height($(window).height()-$(".return .top-tips").outerHeight()
                             -$(".return .title").height()-$(".return .info").height()-88-44+'px').show();
-                        $(".order-return-main").height($(".tab-page").eq(0).height()+"px");
                     }
             })
         },
@@ -326,18 +326,18 @@
                                     '<p>租期：'+good_return.data.detailList[i].confirm_time_new+'-'+good_return.data.detailList[i].back_time_new+'<span>共'+good_return.data.detailList[i].days+'天</span></p><p>租赁订单编号：'+good_return.data.detailList[i].code+'</p>' +
                                     '</div><div class="fr">待平台验货确认</div></div><div class="good-detail clear"><div class="fl">' +
                                     '<a href="'+'#'+'"><img src="'+good_return.data.detailList[i].good_picture+'"></a></div><div class="fr"><h3>' +
-                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].good_title+'</a></h3><h4>'+good_return.data.detailList[i].good_brand.title+'</h4><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p></div></div>' +
+                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].good_title+'</a></h3><h4>适用年龄'+good_return.data.detailList[i].good_old+'</h4><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p></div></div>' +
                                     '<div class="return-info clear"><div class="fl"><p>寄回物流信息</p><h4>物流单号：'+good_return.data.detailList[i].back_express_no+'（'+good_return.data.detailList[i].back_express_title+'）</h4>' +
-                                    '</div><div class="fr"><i class="icon icon_arrowRight_grey"></i></div></div> </li>';
+                                    '</div><div class="fr"></div></div></li>';
                                 break;
                             case '已验证':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">' +
                                     '<p>租期：'+good_return.data.detailList[i].confirm_time_new+'-'+good_return.data.detailList[i].back_time_new+'<span>共'+good_return.data.detailList[i].days+'天</span></p><p>租赁订单编号：'+good_return.data.detailList[i].code+'</p>' +
                                     '</div><div class="fr done">已验货确认</div></div><div class="good-detail clear"><div class="fl">' +
                                     '<a href="'+'#'+'"><img src="'+good_return.data.detailList[i].good_picture+'"></a></div><div class="fr"><h3>' +
-                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].good_title+'</a></h3><h4>'+good_return.data.detailList[i].good_brand.title+'</h4><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p></div></div>' +
+                                    '<a href="'+good_return.data.detailList[i].e+'">'+good_return.data.detailList[i].good_title+'</a></h3><h4>适用年龄'+good_return.data.detailList[i].good_old+'</h4><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p></div></div>' +
                                     '<div class="return-info clear"><div class="fl"><p>寄回物流信息</p><h4>物流单号：'+good_return.data.detailList[i].back_express_no+'（'+good_return.data.detailList[i].back_express_title+'）</h4>' +
-                                    '</div><div class="fr"><i class="icon icon_arrowRight_grey"></i></div></div> </li>';
+                                    '</div><div class="fr"></div></div></li>';
                                 break;
                             default:
                                 break;
@@ -353,7 +353,6 @@
                     $(".detail-cont .no-good").height(no_good_height).show();
                     $(".detail-cont .no-good").css('line-height',no_good_height);
                 }
-                $(".order-return-main").height($(".tab-page").eq(0).height()+"px");
             })
         },
         //确认已归还

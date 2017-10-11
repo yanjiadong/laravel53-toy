@@ -15,17 +15,35 @@ class OrderController extends BaseController
         parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $orders = Order::with(['user'])->paginate(20);
+        $status = $request->get('status');
+        $code = $request->get('code');
+
+        if(empty($status) && empty($code))
+        {
+            $orders = Order::with(['user'])->paginate(20);
+        }
+        else
+        {
+            if(!empty($status))
+            {
+                $where['status'] = $status;
+            }
+            if(!empty($code))
+            {
+                $where['code'] = $code;
+            }
+            $orders = Order::with(['user'])->where($where)->paginate(20);
+        }
         $menu = 'order';
         //print_r($orders);
 
         $express = Express::all();
-        return view('admin.order.index',compact('orders','username','menu','express'));
+        return view('admin.order.index',compact('orders','username','menu','express','status','code'));
     }
 
     public function send(Request $request)

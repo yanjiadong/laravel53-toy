@@ -204,28 +204,29 @@
                     console.log(res.info.list);
                     var dataList ='';
                     for(var i=0;i<orderDtail.data.list.length;i++){
+                        var href = "{{url('wechat/index/order_detail')}}"+'/'+orderDtail.data.list[i].code;
                         switch(orderDtail.data.list[i].status){
                             case '待发货':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
-                                    '<div class="fr">待发货</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
-                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
+                                    '<div class="fr">待发货</div></div><div class="good-detail clear">' +
+                                    '<a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'"/></div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'' +
+                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></a></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
                                     '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
                                     '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div></div></li>';
                                 break;
                             case '已发货':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
-                                    '<div class="fr">已发货</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
-                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
+                                    '<div class="fr">已发货</div></div><div class="good-detail clear">' +
+                                    '<a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'"/></div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'' +
+                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></a></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
                                     '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
                                     '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.receipt('+orderDtail.data.list[i].id+')">确认收货</button><button class="logistics" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button></div></div></li>';
                                 break;
                             case '租用中':
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
-                                    '<div class="fr">租用中</div></div><div class="good-detail clear"><div class="fl">' +
-                                    '<a href="'+orderDtail.data.list[i].e+'"><img src="'+orderDtail.data.list[i].good_picture+'"/></a></div><div class="fr"><h3><a href="'+'{{url('wechat/index/good')}}'+'/'+orderDtail.data.list[i].id+'">'+orderDtail.data.list[i].good_title+'</a>' +
-                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
+                                    '<div class="fr">租用中</div></div><div class="good-detail clear">' +
+                                    '<a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'"/></div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'' +
+                                    '</h3><h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.list[i].good_price+'</p></div></a></div><div class="order-number clear"><div class="fl">租赁订单编号</div>' +
                                     '<div class="fr">'+orderDtail.data.list[i].code+'</div></div><div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p>' +
                                     '<h3>合计：<span>+¥'+orderDtail.data.list[i].price+'</span></h3></div><div class="fr"><button class="confirm-receipt" onclick="orderDtail.goReturn()">归还玩具</button><button class="logistics" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button></div></div></li>';
                                 break;
@@ -264,9 +265,11 @@
                     orderDtail.data.returnList = res.info.list;
                     var dataList ='';
                     for(var i=0;i<orderDtail.data.returnList.length;i++){
+                        var href = "{{url('wechat/index/order_detail')}}"+'/'+orderDtail.data.returnList[i].code;
+
                         dataList +='<li class="bg-white"><div class="top clear"><div class="fl">共租用'+orderDtail.data.returnList[i].days+'天</div><div class="fr" onclick="orderDtail.goReturned()">' +
-                            '<a href="javascript:;">已归还，查看归还详情</a><i class="icon icon_arrowRight_red"></i></div></div>' +
-                            '<div class="good-detail clear"><div class="fl"> <a href="'+'#'+'"><img src="'+orderDtail.data.returnList[i].good_picture+'"></a></div>' +
+                            '<a href="'+href+'">已归还，查看归还详情</a><i class="icon icon_arrowRight_red"></i></div></div>' +
+                            '<div class="good-detail clear"><div class="fl"> <a href="'+href+'"><img src="'+orderDtail.data.returnList[i].good_picture+'"></a></div>' +
                             '<div class="fr"><h3><a href="'+'#'+'">'+orderDtail.data.returnList[i].good_title+'</a></h3><h4>适用年龄'+orderDtail.data.returnList[i].good_old+'岁</h4><p>市场参考价¥'+orderDtail.data.returnList[i].good_price+'</p></div></div>' +
                             '<div class="order-number clear"><div class="fl">租赁订单编号</div><div class="fr">'+orderDtail.data.returnList[i].code+'</div></div>' +
                             '<div class="total clear"><div class="fl"><p>共'+'1'+'件商品</p><h3>合计：<span>+¥'+orderDtail.data.returnList[i].price+'</span></h3></div>' +

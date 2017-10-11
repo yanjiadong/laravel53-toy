@@ -54,6 +54,7 @@
                              </a>
                          </div>-->
                     </div>
+                    <div class="play-box"></div>
                     <!-- Add Pagination -->
                     <div class="swiper-pagination"></div>
                 </div>
@@ -172,8 +173,8 @@
                     year:res.info.good.old,
                     params:[{name:"品牌及所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
-                    car_num:{num:'{{$cart_num}}'}
-
+                    car_num:{num:'{{$cart_num}}'},
+                    store:res.info.good.store
                 };   //假数据
 
                 //轮播图
@@ -184,10 +185,11 @@
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo.length;i++){
                         if(goodDetail_obj .detail_data.lunbo[i].state==0){
                             lunbo_content ='<div class="swiper-slide video"><video width="100%" poster="'+goodDetail_obj .detail_data.lunbo[i].poster+'"><source src="'+goodDetail_obj .detail_data.lunbo[i].url+
-                                '"></video><div class="play-box"></div></div></div>';
+                                '"></video></div></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
-                            $('.lunbo .swiper-wrapper .swiper-slide:eq('+i+') .play-box').text(time);
+                            //$('.lunbo .swiper-wrapper .swiper-slide:eq('+i+') .play-box').text(time);
+                            $('.lunbo .swiper-container .play-box').show().text(time);
                             $(".swiper-slide video").height($(".swiper-slide video").width());
                             lunbo_content="";
                         }
@@ -229,36 +231,39 @@
                     }
                     $(".good-detail-pic ul").html(details);
                 }*/
+
                 //购物车
                 if(goodDetail_obj.detail_data.car_num.num>0){
                     $(".icon-footer-shop-car").html('<span>'+goodDetail_obj.detail_data.car_num.num+'</span>');
+                }else{
+                    $(".icon-footer-shop-car").html('');
+                }
+                //是否有库存
+                if(goodDetail_obj.detail_data.store>0){
                     $(".footer ul li:last .join-car").addClass('active');
                     $(".footer ul li:last .join-car span").hide();
                 }else{
                     $(".footer ul li:last .join-car").removeClass('active');
                     $(".footer ul li:last .join-car span").show();
                 }
-
             });
         },
         //轮播图视频播放
         lunbo_video:function () {
             var h;
-            $(".swiper-slide.video .play-box").click(function () {
+            $('.lunbo .swiper-container .play-box').click(function () {
                 var minites =  parseInt($(this).text().slice(0,$(this).text().indexOf('\'')));
                 var seconds = parseInt($(this).text().slice($(this).text().indexOf('\'')+1));
                 var total = minites*60+seconds;
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
-                    $(this).siblings("video")[0].pause();
+                    $(".swiper-slide video")[0].pause();
                     clearInterval(h);
                 }else{
                     $(this).addClass("active");
-                    $(this).siblings("video")[0].play();
+                    $(".swiper-slide video")[0].play();
                     var cont =0;
-                    console.log(minites);
-                    console.log(seconds);
-                    var h = setInterval(function () {
+                    h = setInterval(function () {
                         if( total  >0){
                             total --;
                             cont++;
@@ -273,7 +278,6 @@
                     },1000);
                 }
             });
-
         },
         //正品保证 往返包邮   微损免赔  往返包邮
         detail_describe_toggle:function () {

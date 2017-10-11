@@ -34,7 +34,15 @@ class CartController extends BaseController
         {
             $type = 1;
         }
-        $this->ret['info'] = ['carts'=>$carts,'type'=>$type];
+
+        $rent = false;
+        if($type == 3)
+        {
+            //true为该账户有租用商品
+            $rent = true;
+        }
+
+        $this->ret['info'] = ['carts'=>$carts,'type'=>$type,'rent'=>$rent];
         return $this->ret;
     }
 
