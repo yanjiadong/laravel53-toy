@@ -301,7 +301,7 @@
                 {
 
                     //$(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
-
+                    goodDetail_obj.data.car_num = res.info.count;
                     common.success_tip("添加成功！");
                     goodDetail_obj.init();
                 }
