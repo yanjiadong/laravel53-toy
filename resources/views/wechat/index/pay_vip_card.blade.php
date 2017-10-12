@@ -46,8 +46,9 @@
                 else
                 {
                     //alert(res.err_code);
-                    alert('支付失败');
+                    //alert('支付失败');
                     //layer_btn_msg('支付失败');
+                    window.history.back(-1);
                 }
             }
         );

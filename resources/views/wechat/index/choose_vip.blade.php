@@ -300,7 +300,7 @@
                     $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
                     $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-choose_vip.data.discount.price));
                 }
-                console.log(choose_vip.data.discount);
+                //console.log(choose_vip.data.discount);
                 //$(".info .coupon .fr span").text('-¥'+0);
                 //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-0));
 
