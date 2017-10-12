@@ -287,6 +287,8 @@
                 choose_vip.data.vip_id = choose_vip.data.sortList[index].id;
                 localStorage.vip_id = choose_vip.data.vip_id;
 
+                console.log(localStorage.vip_id);
+
                 if(!choose_vip.data.discount){
                     $(".info .coupon .fr span").text('请选择');
                     $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money));
