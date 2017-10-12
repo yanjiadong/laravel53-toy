@@ -52,9 +52,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($coupon->type==2)
-                                            {{$coupon->condition}}
-                                        @endif
+                                        {{$coupon->condition}}
                                     </td>
                                     <td>
                                         <a href="{{ url("admin/coupons/$coupon->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini">修改</span></a>

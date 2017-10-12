@@ -215,12 +215,22 @@ class UserController extends BaseController
     public function coupon_list(Request $request)
     {
         $user_id = $request->get('user_id');
+        $vip_card_id = $request->get('vip_card_id');
+
+        $vip_card_info = VipCard::find($vip_card_id);
+        $condition = $vip_card_info->price + $vip_card_info->money;
+
         $user = User::find($user_id);
         $coupons = $user->coupons()->get()->toArray();
         if(!empty($coupons))
         {
             foreach ($coupons as &$v)
             {
+                $v['can_use'] = 1;
+                if($v['condition'] > $condition)
+                {
+                    $v['can_use'] = 0;
+                }
                 $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
                 $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
             }

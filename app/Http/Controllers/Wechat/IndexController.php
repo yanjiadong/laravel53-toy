@@ -134,10 +134,13 @@ class IndexController extends BaseController
         $coupon = UserCoupon::where('user_id',$user_id)->first();
         if(empty($coupon))
         {
-            $coupon_info = Coupon::where('type',1)->first();
-            if(!empty($coupon_info))
+            $coupon_info = Coupon::where('type',1)->get();
+            if(count($coupon_info) > 0)
             {
-                UserCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon_info->id]);
+                foreach ($coupon_info as $coupon)
+                {
+                    UserCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon->id]);
+                }
             }
         }
 
