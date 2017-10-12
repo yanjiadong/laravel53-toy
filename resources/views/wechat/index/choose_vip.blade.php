@@ -139,6 +139,7 @@
                 });
 
                 localStorage.vip_id = choose_vip.data.vip_id;
+                $("#vip_card_id").val(choose_vip.data.vip_id);
 
                 console.log(choose_vip.data.vip_id);
 
