@@ -78,7 +78,7 @@ class CrontabController extends BaseController
             foreach ($users as $user)
             {
                 $days = VipCardPay::where('user_id',$user->id)->where('pay_status',1)->where('status',1)->sum('days');
-                if($days<=5)
+                if($days == 5)
                 {
                     $this->send_sms($user->telephone,$user->name);
                 }
