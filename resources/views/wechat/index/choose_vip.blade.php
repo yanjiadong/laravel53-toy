@@ -130,13 +130,15 @@
                 ];*/
 
                 choose_vip.data.sortList = res.info.list;
-                console.log(choose_vip.data.sortList);
+                //console.log(choose_vip.data.sortList);
 
                 choose_vip.data.sortList.forEach(function (item,index) {
                     if(item.type==1){
                         choose_vip.data.vip_id = localStorage.vip_id?localStorage.vip_id:item.id;
                     }
                 });
+                
+                console.log(choose_vip.data.vip_id);
 
                 var cont='';
                 for(var i=0;i<choose_vip.data.sortList.length;i++){
