@@ -128,6 +128,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::get('order/index','OrderController@index')->name('admin.order.index');
     Route::post('order/send','OrderController@send')->name('admin.order.send');
     Route::post('order/verify','OrderController@verify')->name('admin.order.verify');
+    Route::post('order/action','OrderController@action')->name('admin.order.action');
     Route::get('order/show/{id}','OrderController@show')->name('admin.order.show');
 
     //押金模块

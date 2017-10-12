@@ -10,12 +10,13 @@ class Order extends Model
     protected $fillable = ['code','user_id','good_id','good_title','good_picture','good_price','category_id','category_tag_id','express_price','clean_price',
     'price','money','address_id','receiver','receiver_telephone','receiver_address','express_title','express_com','express_no','status','back_status',
         'back_express_title','back_express_com','back_express_no','confirm_time','back_time','month','pay_type','out_trade_no','pay_success_time','receiver_province','receiver_city','receiver_area','good_brand_id','good_old'];
-    //status   0未支付 1待发货  2已发货  3租用中 4已归还
+    //status   0未支付 1待发货  2已发货  3租用中 4已归还 -1已取消
     const STATUS_UNPAY = 0;
     const STATUS_WAITING_SEND = 1;
     const STATUS_SEND = 2;
     const STATUS_DOING = 3;
     const STATUS_BACK = 4;
+    const STATUS_CANCEL = -1;
 
     const STATUS_DOING_STR = '租用中';
 
@@ -47,6 +48,9 @@ class Order extends Model
     {
         switch ($value)
         {
+            case -1:
+                $str = '已取消';
+                break;
             case 0:
                 $str = '未支付';
                 break;

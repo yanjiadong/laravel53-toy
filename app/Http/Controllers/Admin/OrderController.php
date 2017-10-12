@@ -124,6 +124,17 @@ class OrderController extends BaseController
         alert('验证寄回失败');
     }
 
+    public function action(Request $request)
+    {
+        $id = $request->get('id');
+        $status = $request->get('status');
+
+        $order = Order::find($id);
+
+        Order::where('id',$id)->update(['status'=>$status]);
+        alert('',1);
+    }
+
     public function show($id)
     {
         $admin_info = $this->get_session_info();

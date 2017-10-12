@@ -28,6 +28,7 @@
                                 <option value="2" <?php echo (isset($status)&&$status==2)?'selected':'';?>>已发货</option>
                                 <option value="3" <?php echo (isset($status)&&$status==3)?'selected':'';?>>租用中</option>
                                 <option value="4" <?php echo (isset($status)&&$status==4)?'selected':'';?>>已归还</option>
+                                <option value="-1" <?php echo (isset($status)&&$status==-1)?'selected':'';?>>已取消</option>
                             </select>
                         </div>
 
@@ -90,6 +91,7 @@
                                         <a href="{{route('admin.order.show',['id'=>$order->id])}}" title="查看" class="tip"><span class="btn btn-mini">查看</span></a>
                                         @if($order->status=='待发货')
                                             <a href="javascript:;" data-id="{{$order->id}}" title="发货" class="tip send"><span class="btn btn-mini btn-warning">发货</span></a>
+                                            <a href="javascript:;" data-id="{{$order->id}}" title="取消订单" class="tip cancelAction"><span class="btn btn-mini btn-danger">取消订单</span></a>
                                         @endif
 
                                         @if($order->status=='已归还' && $order->back_status=='待验证')
@@ -177,6 +179,20 @@
                     text: "确认寄回？",
                     confirm: function(button) {
                         $.post("{{route('admin.order.verify')}}",{id:id},function(data){
+                            cTip(data);
+                        }, "json");
+                    },
+                    confirmButton: "确认",
+                    cancelButton: "取消"
+                });
+            });
+
+            $('.cancelAction').click(function(){
+                var id = $(this).attr('data-id');
+                $.confirm({
+                    text: "确认取消？",
+                    confirm: function(button) {
+                        $.post("{{route('admin.order.action')}}",{id:id,status:-1},function(data){
                             cTip(data);
                         }, "json");
                     },
