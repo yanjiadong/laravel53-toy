@@ -63,12 +63,12 @@ class IndexController extends BaseController
                     $info = weixinCurl($url);
 
                     $data = array(
-                        'name'=>$info['nickname'],
+                        'name'=>filterEmoji($info['nickname']),
                         'email'=>'',
                         'password'=>'',
                         'wechat_openid'=>$result['openid'],
                         'wechat_original'=>json_encode($info),
-                        'wechat_nickname'=>$info['nickname'],
+                        'wechat_nickname'=>filterEmoji($info['nickname']),
                         'wechat_avatar'=>$info['headimgurl'],
                         'open_num'=>0
                     );
@@ -91,10 +91,10 @@ class IndexController extends BaseController
                     $info = weixinCurl($url);
 
                     $data = array(
-                        'name'=>$info['nickname'],
+                        'name'=>filterEmoji($info['nickname']),
                         'wechat_openid'=>$result['openid'],
                         'wechat_original'=>json_encode($info),
-                        'wechat_nickname'=>$info['nickname'],
+                        'wechat_nickname'=>filterEmoji($info['nickname']),
                         'wechat_avatar'=>$info['headimgurl'],
                     );
 
