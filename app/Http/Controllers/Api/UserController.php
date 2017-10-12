@@ -274,7 +274,7 @@ class UserController extends BaseController
     {
         $user_id = $request->get('user_id');
 
-        $list = VipCardPay::with(['user','vip_card'])->where('user_id',$user_id)->get();
+        $list = VipCardPay::with(['user','vip_card'])->where('user_id',$user_id)->where('pay_status',1)->get();
         $this->ret['info'] = ['list'=>$list];
         return $this->ret;
     }
