@@ -146,7 +146,8 @@
     var goodDetail_obj = {
         data:{
             detail_data:{},           //商品详情数据
-            paly_time:0
+            paly_time:0,
+            car_num:'{{$cart_num}}'
         },
         //轮播图设置
         banner:function () {
@@ -173,7 +174,7 @@
                     year:res.info.good.old,
                     params:[{name:"品牌及所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
-                    car_num:{num:'{{$cart_num}}'},
+                    car_num:{num:goodDetail_obj.data.car_num},
                     store:res.info.good.store
                 };   //假数据
 
@@ -298,9 +299,11 @@
                 }
                 else
                 {
-                    goodDetail_obj.init();
-                    $(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
+
+                    //$(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
+
                     common.success_tip("添加成功！");
+                    goodDetail_obj.init();
                 }
             })
         },
