@@ -16,17 +16,18 @@
 </head>
 <body>
 <div class="pay-success bg-white">
-    <div class="tips-top">
-        <i>!</i>物品在邮寄途中时，会员有效期计时自动暂停
-    </div>
     <div class="sign">
         <i class="icon-big icon-big-paySuccess"></i>
     </div>
     <div class="money">¥{{$order->price}}</div>
     <p>平台将在24小时内发货，请耐心等待</p>
+    <div class="tips">
+        <i class="icon-attetion">!</i>
+        <span>物品在邮寄途中，会员有效期计时自动暂停</span>
+    </div>
     <div class="btn">
-        <button class="fl" onclick="goIndex()">返回首页</button>
-        <button class="fr" onclick="goodDetail()">查看订单</button>
+        <button onclick="goodDetail()">查看订单详情</button>
+        <button onclick="goIndex()">返回首页</button>
     </div>
 </div>
 
@@ -39,18 +40,7 @@
     }
     $(function () {
         $(".toys-car").height($(window).height());
-        pushHistory();
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            location.href='{{url('/wechat/index/index')}}';  //在这里指定其返回的地址
-        }, false);
     })
-    function pushHistory() {
-        var state = {
-            title: "title",
-            url: "/view/pay_success.html"
-        };
-        window.history.pushState(state, state.title, state.url);
-    }
 </script>
 </body>
 </html>

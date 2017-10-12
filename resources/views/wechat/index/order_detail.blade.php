@@ -327,7 +327,7 @@
         },
         //查看归还详情
         lookReturn:function () {
-            location.href="{{url('wechat/index/order_return_detail')}}";
+            location.href="{{url('wechat/index/order_return_detail')}}"+'/2';
         }
     };
 

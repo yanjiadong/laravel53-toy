@@ -68,6 +68,7 @@
                     {id:0,money:100,cont:'新人专享优惠卷',time:'2017.8.27-2017.8.31',fanwei:'任意金额可用'},
                     {id:1,money:200,cont:'满减优惠卷',time:'2017.8.27-2017.8.31',fanwei:'满一千元可用'}
                 ];*/
+                console.log(res.info.coupons);
                 vip_voucher.data.list=res.info.coupons;
                 if(vip_voucher.data.list.length>0){
                     var cont='';
@@ -82,7 +83,7 @@
                         }
                         cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
                             +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                            '<p>有效期：<span>'+vip_voucher.data.list[i].start_time+'-'+vip_voucher.data.list[i].end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                     }
                     $(".vip-voucher-wrap .list ul").html(cont);
                     vip_voucher.choose();

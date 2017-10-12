@@ -216,8 +216,15 @@ class UserController extends BaseController
     {
         $user_id = $request->get('user_id');
         $user = User::find($user_id);
-        $coupons = $user->coupons()->get();
-
+        $coupons = $user->coupons()->get()->toArray();
+        if(!empty($coupons))
+        {
+            foreach ($coupons as &$v)
+            {
+                $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
+                $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
+            }
+        }
         $this->ret['info'] = ['coupons'=>$coupons];
         return $this->ret;
     }
@@ -233,6 +240,7 @@ class UserController extends BaseController
     }
 
     /**
+     * 提现操作
      * @param Request $request
      */
     public function cash(Request $request)
@@ -243,6 +251,10 @@ class UserController extends BaseController
         $info = VipCardPay::find($vip_card_pay_id);
         //押金明细
         DB::table('user_pay_records')->insert(['user_id'=>$user_id,'type'=>1,'pay_type'=>2,'price'=>$info->money,'created_at'=>date('Y-m-d H:i:s')]);
+
+        $user = User::find($user_id);
+        $can_use_money = $user->can_use_money - $info->money;
+        User::where('id',$user_id)->update(['can_use_money'=>$can_use_money]);
 
         VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2]);
         return $this->ret;

@@ -54,6 +54,7 @@
     <div class="help bg-white clear">
         <div class="fl">
             <i class="icon icon_attention"></i>
+            <p>会员特权</p>
         </div>
         <div class="fr">
             <ul>
@@ -80,7 +81,7 @@
         <div class="deposit clear">
             <div class="fl">
                 <h3>押金</h3>
-                <p>会员有效期活动后，可在“我的押金”提现退还</p>
+                <p>会员有效期活动后，可在“会员押金”提现退还</p>
             </div>
             <div class="fr">
             </div>
@@ -143,19 +144,46 @@
                     {
                         switch(choose_vip.data.sortList[i].type){
                             case 1:
-                                cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>月卡</span></div>'+
-                                    '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                $(".info .select .fl span").text("月卡（+30天）");
-                                break;
-                            case 2:
-                                cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>季卡</span></div>'+
-                                    '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                $(".info .select .fl span").text("季卡（+90天）");
+                                if(choose_vip.data.sortList[i].money <= 0)
+                                {
+                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>月卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                    $(".info .select .fl span").text("月卡（+30天）");
+                                }
+                                else
+                                {
+                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>月卡</span></div>'+
+                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                    $(".info .select .fl span").text("月卡（+30天）");
+                                }
 
                                 break;
+                            case 2:
+                                if(choose_vip.data.sortList[i].money <= 0)
+                                {
+                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>季卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                    $(".info .select .fl span").text("季卡（+90天）");
+                                }
+                                else
+                                {
+                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>季卡</span></div>'+
+                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                    $(".info .select .fl span").text("季卡（+90天）");
+                                }
+                                break;
                             case 3:
-                                cont+='<li class="clear bg-white active"><div class="name fl"><div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                    '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                if(choose_vip.data.sortList[i].money <= 0)
+                                {
+                                    cont+='<li class="clear bg-white active"><div class="name fl"><div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                }
+                                else
+                                {
+                                    cont+='<li class="clear bg-white active"><div class="name fl"><div class="time"><span>半年卡</span></div>'+
+                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                }
+
                                 $(".info .deposit .fr").text('0.00');
                                 $(".info .select .fl span").text("半年卡（+180天）");
                                 break;
@@ -176,12 +204,30 @@
                     {
                         switch(choose_vip.data.sortList[i].type){
                             case 1:
-                                cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>月卡</span></div>'+
-                                    '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
+                                if(choose_vip.data.sortList[i].money <= 0)
+                                {
+                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>月卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
+                                }
+                                else
+                                {
+                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>月卡</span></div>'+
+                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
+                                }
+
                                 break;
                             case 2:
-                                cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>季卡</span></div>'+
-                                    '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                if(choose_vip.data.sortList[i].money <= 0)
+                                {
+                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>季卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                }
+                                else
+                                {
+                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>季卡</span></div>'+
+                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
+                                }
+
                                 //$(".info .select .fl span").text("季卡（+90天）");
                                 //$(".info .select .fr").text('¥'+choose_vip.data.sortList[i].price);
                                 //$(".info .deposit .fr").text('¥'+choose_vip.data.sortList[i].money);
@@ -189,8 +235,17 @@
                                 //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money));
                                 break;
                             case 3:
-                                cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><!--<i class="icon-big icon-big-label-yajin"></i>--></div>'+
-                                    '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
+                                if(choose_vip.data.sortList[i].money <= 0)
+                                {
+                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
+                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
+                                }
+                                else
+                                {
+                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><!--<i class="icon-big icon-big-label-yajin"></i>--></div>'+
+                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
+                                }
+
                                 //$(".info .deposit .fr").text('0.00');
                                 break;
                             default:
@@ -211,7 +266,7 @@
                 $item.find(".check-bg").remove();
                 $item.find(".check").remove();
                 $(this).addClass("active");
-                $(this).append('<span class="check-bg"></span><span class="check">√</span>');
+                $(this).append('<span class="check-bg"></span>');
                 var time =parseInt($(this).find("p").text().substr(6));
                 var cont='';
                 switch(time){

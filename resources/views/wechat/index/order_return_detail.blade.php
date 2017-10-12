@@ -216,8 +216,8 @@
         },
         init:function () {
             //var page = common.getParam('page');
-            var page = 1;
-            if(page==1){
+            var page = '{{$page}}';
+            if(page=='1'){
                 $(".order-return-wrap nav ul li").removeClass("active");
                 $(".order-return-wrap nav ul li:eq(0)").addClass("active");
                 $(".order-return-main .parent-box .tab-page").hide();

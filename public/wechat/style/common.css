@@ -312,7 +312,7 @@ footer table td.active a .icon-footer-user-center {
     overflow-x: scroll;
     white-space: nowrap;
     overflow-y: hidden;
-    width: 100%;
+    width: 100% !important;
 }
 .index-nav .nav li {
     display: inline-block;

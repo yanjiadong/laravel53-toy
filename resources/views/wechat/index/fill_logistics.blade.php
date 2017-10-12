@@ -19,7 +19,7 @@
 <div class="fill-logistics">
     <div class="top">
         <div class="title">
-            寄回物品
+            寄回的物品
         </div>
         <div class="good-show clear">
             <div class="fl">

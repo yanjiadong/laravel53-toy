@@ -89,7 +89,7 @@ if(!function_exists('get_order_code'))
 {
     function get_order_code($user_id = 0)
     {
-        $order_code = date('YmdHis').$user_id.mt_rand(100000,999999);
+        $order_code = date('Ymd').mt_rand(1000000000,9999999999);
         return $order_code;
     }
 }
@@ -182,7 +182,7 @@ if(!function_exists('WxJsPayCallback'))
                 DB::table('vip_card_pays')->where('order_code',$out_trade_no)->update(['pay_status'=>1]);
 
                 $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
-                if($user_info && $user_info->is_vip==0)
+                if($user_info)
                 {
                     $not_can_use_money = $user_info->not_can_use_money + $order_info->money;
                     $days = $user_info->days + $order_info->days;

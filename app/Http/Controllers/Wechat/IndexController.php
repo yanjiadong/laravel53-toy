@@ -353,12 +353,12 @@ class IndexController extends BaseController
         return view('wechat.index.order_detail',compact('user_id','openid','order_code'));
     }
 
-    public function order_return_detail()
+    public function order_return_detail($page = 1)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.index.order_return_detail',compact('user_id','openid'));
+        return view('wechat.index.order_return_detail',compact('user_id','openid','page'));
     }
 
     public function fill_logistics()

@@ -118,10 +118,12 @@
                     case 2: //会员 提示
                         $(".top-tips").hide();
                         $(".toys-car .btn button").removeClass('active');
+                        break;
                     case 3:
                         $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单').show();
                         $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
                         $(".toys-car .btn button").removeClass('active');
+                        break;
                 }
             })
         },
