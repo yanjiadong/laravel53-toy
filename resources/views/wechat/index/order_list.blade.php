@@ -30,42 +30,7 @@
                     同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
                 </div>
                 <ul class="detail-list">
-                    <!--  <li class="bg-white">
-                          <div class="top clear">
-                              <div class="fl">已租用1天</div>
-                              <div class="fr">待发货</div>
-                          </div>
-                          <div class="good-detail clear">
-                              <div class="fl">
-                                  <a href="">
-                                      <img src="../image/other/3.png">
-                                  </a>
-                              </div>
-                              <div class="fr">
-                                  <h3>
-                                      <a href="">
-                                          WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                      </a>
-                                  </h3>
-                                  <h4>适用年龄1-12岁</h4>
-                                  <p>市场参考价¥2500.00</p>
-                              </div>
-                          </div>
-                          <div class="order-number clear">
-                              <div class="fl">租赁订单编号</div>
-                              <div class="fr">13243213435</div>
-                          </div>
-                          <div class="total clear">
-                              <div class="fl">
-                                  <p>共1件商品</p>
-                                  <h3>合计：<span>+¥300.00</span></h3>
-                              </div>
-                              <div class="fr">
-                                  <button>确认收货</button>
-                                  <button>查看物流</button>
-                              </div>
-                          </div>
-                      </li>-->
+
                 </ul>
                 <div class="no-good">
                     <div class="tips">
@@ -76,74 +41,7 @@
             </div>
             <div class="return tab-page fl">
                 <ul class="detail-list">
-                    <!--  <li class="bg-white">
-                          <div class="top clear">
-                              <div class="fl">共租用1天</div>
-                              <div class="fr"><a href="">已归还，查看归还详情</a><i class="icon icon_arrowRight_red"></i></div>
-                          </div>
-                          <div class="good-detail clear">
-                              <div class="fl">
-                                  <a href="">
-                                      <img src="../image/other/3.png">
-                                  </a>
-                              </div>
-                              <div class="fr">
-                                  <h3>
-                                      <a href="">
-                                          WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                      </a>
-                                  </h3>
-                                  <h4>适用年龄1-12岁</h4>
-                                  <p>市场参考价¥2500.00</p>
-                              </div>
-                          </div>
-                          <div class="order-number clear">
-                              <div class="fl">租赁订单编号</div>
-                              <div class="fr">13243213435</div>
-                          </div>
-                          <div class="total clear">
-                              <div class="fl">
-                                  <p>共1件商品</p>
-                                  <h3>合计：<span>+¥300.00</span></h3>
-                              </div>
-                              <div class="fr">
-                                  <button>确认收货</button>
-                                  <button>查看物流</button>
-                              </div>
-                          </div>
-                      </li>
-                      <li class="bg-white">
-                          <div class="top clear">
-                              <div class="fl">共租用1天</div>
-                              <div class="fr"><a href="">已归还，查看归还详情</a><i class="icon icon_arrowRight_red"></i></div>
-                          </div>
-                          <div class="good-detail clear">
-                              <div class="fl">
-                                  <a href="">
-                                      <img src="../image/other/3.png">
-                                  </a>
-                              </div>
-                              <div class="fr">
-                                  <h3>
-                                      <a href="">
-                                          WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                      </a>
-                                  </h3>
-                                  <h4>适用年龄1-12岁</h4>
-                                  <p>市场参考价¥2500.00</p>
-                              </div>
-                          </div>
-                          <div class="order-number clear">
-                              <div class="fl">租赁订单编号</div>
-                              <div class="fr">13243213435</div>
-                          </div>
-                          <div class="total clear">
-                              <div class="fl">
-                                  <p>共1件商品</p>
-                                  <h3>合计：<span>+¥300.00</span></h3>
-                              </div>
-                          </div>
-                      </li>-->
+
                 </ul>
                 <div class="no-good">
                     <div class="tips">
@@ -188,7 +86,7 @@
         getList:function () {
             common.httpRequest('{{url('api/order/order_list')}}','post',{type:1,user_id:'{{$user_id}}'},function (res) {
                 if(res.info.list.length > 0){
-
+                    $(".detail-cont .no-good").hide();
                     //  orderDtail.data.returnList = res;
                     //b为发货状态  1为待发货 2是已发货 3.租用中
                     /*orderDtail.data.list = [
@@ -250,7 +148,7 @@
         //已归还 --数据加载
         getReturnList:function(){
             common.httpRequest('{{url('api/order/order_list')}}','post',{type:2,user_id:'{{$user_id}}'},function (res) {
-                if(true){
+                if(res.info.list.length > 0){
                     //  orderDtail.data.returnList = res;
                     //假数据
                     /*orderDtail.data.returnList = [
@@ -277,6 +175,12 @@
                             '</div></li>';
                     }
                     $(".return .detail-list").html(dataList).show();
+                }
+                else
+                {
+                    $(".order-detail-main .return .detail-list").hide();
+                    $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight());
+                    $(".order-detail-main .return .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight()).show();
                 }
             })
         },

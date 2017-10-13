@@ -27,7 +27,7 @@
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
 </head>
-<body>
+<body style="overflow-x: hidden">
 <!-- body 顶部加上如下代码 -->
 <div class="index-wrap">
     @include('wechat.common.category')

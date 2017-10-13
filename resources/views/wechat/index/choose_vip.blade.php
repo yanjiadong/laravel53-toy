@@ -81,7 +81,7 @@
         <div class="deposit clear">
             <div class="fl">
                 <h3>押金</h3>
-                <p>会员有效期活动后，可在“会员押金”提现退还</p>
+                <p>会员有效期结束后，可在“会员押金”提现退还</p>
             </div>
             <div class="fr">
             </div>

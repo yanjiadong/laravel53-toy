@@ -19,7 +19,7 @@
     <script src="/wechat/js/common.js"></script>
 
 </head>
-<body>
+<body style="overflow-x: hidden">
 <div class="sort-detail">
     @include('wechat.common.category')
 

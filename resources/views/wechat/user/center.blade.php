@@ -126,13 +126,13 @@
                     cash:true,    //是否可以提现
                     cars:res.info.coupon_nums,         //优惠卡劵
                     carSort:res.info.card.vip_card_type_str,   //卡的类型
-                    time:res.info.days
-
+                    time:res.info.days,
+                    phone:res.info.user.telephone
                 };
                 //判断是否登录
                 if(user_center.data.userInfo.isAuthorize){
                     //是否为会员
-                    if( user_center.data.userInfo.isVip){
+                    if(user_center.data.userInfo.isVip){
                         $(".photo .fl img").attr('src',user_center.data.userInfo.img);
                         $(".items-mid table tr:eq(2) td:first").text('正在玩'+user_center.data.userInfo.num+'件');
                         $(".items-mid table tr:eq(2) td:eq(1)").text('¥'+user_center.data.userInfo.money);
@@ -143,12 +143,14 @@
                         //会员是否到期
                         if(user_center.data.userInfo.isOutTime){
                             $(".photo .vip").empty();
-                            $(".photo .vip").append('<h3>'+user_center.data.userInfo.name+'</h3><div class="state-icon"><i class="icon-big icon-big-not-vip"></i></div>')
+                            $(".photo .vip").append('<h3>'+user_center.data.userInfo.name+'</h3><div class="state-icon"><i class="icon-big icon-big-not-vip"></i></div>');
                             $(".renew").show();
                             $(".renew h3 span").text('('+user_center.data.userInfo.carSort+')');
                         }else{
                             $(".photo .vip").empty();
-                            $(".photo .vip").append('<h3>'+user_center.data.userInfo.name+'</h3><div class="state-icon"><i class="icon-big icon-big-vip"></i></div>')
+                            //$(".photo .vip").append('<h3>'+user_center.data.userInfo.name+'</h3><div class="state-icon"><i class="icon-big icon-big-vip"></i></div>');
+                            $(".photo .vip").append('<h3>'+user_center.data.userInfo.name+'</h3><div class="state-icon">' +
+                                '<p>绑定手机号：'+user_center.data.userInfo.phone+'</p><i class="icon-big icon-big-vip"></i></div>')
                             $(".renew .fr span").text(user_center.data.userInfo.time+'天后到期');
                         }
                     }else{

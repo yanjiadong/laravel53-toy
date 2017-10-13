@@ -34,169 +34,47 @@
                     <i class="icon icon_position"></i>
                     <p>寄回地址</p>
                 </div>
+
+
                 <div class="info clear bg-white">
-                    <div class="fl">
-                        <div>收件人： <span class="name"></span></div>
-                        <h3 class="address"><span></span><span></span><span></span></h3>
-                        <h4></h4>
-                    </div>
-                    <div class="fr"></div>
+                    <table>
+                        <tr>
+                            <td>收件人：</td>
+                            <td class="name"></td>
+                        </tr>
+                        <tr>
+                            <td>电&nbsp;&nbsp;&nbsp;&nbsp;话：</td>
+                            <td class="cell"></td>
+                        </tr>
+                        <tr>
+                            <td>地&nbsp;&nbsp;&nbsp;&nbsp;址：</td>
+                            <td class="address"></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="detail-list">
+                    <div class="title bg-white">
+                        <i class="icon icon_bear"></i>租用中的玩具
+                    </div>
                     <div class="no-good">
                         <div class="tips">
                             <i class="icon-big icon-big-blankPage"></i>
-                            <h4>没有归还的玩具</h4>
+                            <h4>没有可归还的玩具</h4>
                         </div>
                     </div>
                     <ul>
-                        <!-- <li>
-                        <div class="top">
-                            <div class="cont bg-white">
-                                <div class="title">
-                                    <i class="icon icon_bear"></i>租用中的玩具
-                                </div>
-                                <div class="good-time">
-                                    <h5>以租用26天</h5>
-                                    <div class="number">
-                                        租赁订单编号：13256468953
-                                    </div>
-                                </div>
-                                <div class="good-detail clear">
-                                    <div class="fl">
-                                        <a href="">
-                                            <img src="../image/other/3.png">
-                                        </a>
-                                    </div>
-                                    <div class="fr">
-                                        <h3>
-                                            <a href="">
-                                                WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                            </a>
-                                        </h3>
-                                        <p>市场参考价¥2500.00</p>
-                                        <h4>适用年龄1-12岁</h4>
-                                    </div>
-                                </div>
-                                <div class="btn clear">
-                                    <div class="tips fl">
-                                        将该玩具寄回后，点击“确认已归还”并上传寄回的物流单号，即可再次下单
-                                    </div>
-                                    <div class="fr">
-                                        <button>确认已归还</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>-->
+
                     </ul>
-                    <div class="tips-bottom">
-                        点击“确认归还”，上传寄回的物流单号后，即可再次下单
-                    </div>
                 </div>
             </div>
+
             <div class="detail-cont fl tab-page">
                 <div class="top-tips">
                     请完整的寄回租用的玩具，若玩具损坏或零件丢失请提前联系客服，否则将会影响下一次快速换玩具功能
                 </div>
                 <div class="detail-list">
                     <ul>
-                        <!-- <li class="bg-white">
-                      <div class="top clear">
-                          <div class="fl">
-                              <p>租期：2017.8.12-2017.8.16 <span>共15天</span></p>
-                              <p>租赁订单编号：13243562514</p>
-                          </div>
-                          <div class="fr">待平台验货确认</div>
-                      </div>
-                      <div class="good-detail clear">
-                          <div class="fl">
-                              <a href="">
-                                  <img src="../image/other/3.png">
-                              </a>
-                          </div>
-                          <div class="fr">
-                              <h3>
-                                  <a href="">
-                                      WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                  </a>
-                              </h3>
-                              <h4>适用年龄1-12岁</h4>
-                              <p>市场参考价¥2500.00</p>
-                          </div>
-                      </div>
-                      <div class="return-info clear">
-                          <div class="fl">
-                              <p>寄回物流信息</p>
-                              <h4>物流单号：13242536985（顺丰）</h4>
-                          </div>
-                          <div class="fr"><i class="icon icon_arrowRight_grey"></i></div>
-                      </div>
-                  </li>
-                  <li class="bg-white">
-                      <div class="top clear">
-                          <div class="fl">
-                              <p>租期：2017.8.12-2017.8.16 <span>共15天</span></p>
-                              <p>租赁订单编号：13243562514</p>
-                          </div>
-                          <div class="fr">待平台验货确认</div>
-                      </div>
-                      <div class="good-detail clear">
-                          <div class="fl">
-                              <a href="">
-                                  <img src="../image/other/3.png">
-                              </a>
-                          </div>
-                          <div class="fr">
-                              <h3>
-                                  <a href="">
-                                      WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                  </a>
-                              </h3>
-                              <h4>适用年龄1-12岁</h4>
-                              <p>市场参考价¥2500.00</p>
-                          </div>
-                      </div>
-                      <div class="return-info clear">
-                          <div class="fl">
-                              <p>寄回物流信息</p>
-                              <h4>物流单号：13242536985（顺丰）</h4>
-                          </div>
-                          <div class="fr"><i class="icon icon_arrowRight_grey"></i></div>
-                      </div>
-                  </li>
-                  <li class="bg-white">
-                      <div class="top clear">
-                          <div class="fl">
-                              <p>租期：2017.8.12-2017.8.16 <span>共15天</span></p>
-                              <p>租赁订单编号：13243562514</p>
-                          </div>
-                          <div class="fr">待平台验货确认</div>
-                      </div>
-                      <div class="good-detail clear">
-                          <div class="fl">
-                              <a href="">
-                                  <img src="../image/other/3.png">
-                              </a>
-                          </div>
-                          <div class="fr">
-                              <h3>
-                                  <a href="">
-                                      WewWee Miposaur恐龙机器机龙机器机龙机器机龙机器机龙机器机器机器机器机器机器机器机器人
-                                  </a>
-                              </h3>
-                              <h4>适用年龄1-12岁</h4>
-                              <p>市场参考价¥2500.00</p>
-                          </div>
-                      </div>
-                      <div class="return-info clear">
-                          <div class="fl">
-                              <p>寄回物流信息</p>
-                              <h4>物流单号：13242536985（顺丰）</h4>
-                          </div>
-                          <div class="fr"><i class="icon icon_arrowRight_grey"></i></div>
-                      </div>
-                  </li>-->
+
                     </ul>
                     <div class="no-good">
                         暂无归还玩具！
@@ -253,23 +131,15 @@
                 //假数据
                 good_return.returnInfo ={
                     a:'将租用中玩具通过以下地址寄回，优先使用顺丰快递（或圆通、中通、韵达），选择货到付款方式即可。',
-                    b:'顺丰预约寄件电话：95338',
                     c:res.info.name,
-                    d:'',
-                    e:'',
-                    f:'',
-                    g:res.info.address,
+                    d:res.info.address,
                     h:res.info.telephone
                 };
                 $(".return .top-tips").text(good_return.returnInfo.a);
-                //$(".return .top-tips p").text(good_return.returnInfo.a);
-                $(".return .top-tips h4").text(good_return.returnInfo.b);
-                $(".return .info .name").text(good_return.returnInfo.c);
-                $(".return .info .address span:eq(0)").text(good_return.returnInfo.d);
-                $(".return .info .address span:eq(1)").text(good_return.returnInfo.e);
-                $(".return .info .address span:eq(2)").text(good_return.returnInfo.f);
-                $(".return .info h4").text(good_return.returnInfo.g);
-                $(".return .info .fr").text(good_return.returnInfo.h);
+                $(".return .info table tr td.name").text(good_return.returnInfo.c);
+                $(".return .info table tr td.cell").text(good_return.returnInfo.h);
+                $(".return .info table tr td.address").text(good_return.returnInfo.d);
+
             });
             //列表
             common.httpRequest('{{url('api/order/order_can_back')}}','post',{user_id:'{{$user_id}}'},function (res) {
@@ -292,7 +162,7 @@
                                 '<h5>已租用'+good_return.data.list[i].days+'天</h5><div class="number">租赁订单编号：'+good_return.data.list[i].code+'</div></div>' +
                                 '<div class="good-detail clear"><div class="fl"><a href="'+'#'+'"><img src="'+good_return.data.list[i].good_picture+'">' +
                                 '</a></div><div class="fr"><h3><a href="'+'#'+'">'+good_return.data.list[i].good_title+'</a></h3><p>市场参考价¥'+good_return.data.list[i].good_price+'</p>' +
-                                '<h4>适用年龄'+good_return.data.list[i].good_old+'岁</h4></div></div><div class="btn clear"><button onclick="good_return.goFillLogistics('+i+')">确认已归还</button></div></div> </li>';
+                                '<h4>适用年龄'+good_return.data.list[i].good_old+'岁</h4></div></div><div class="btn clear"><button onclick="good_return.goFillLogistics('+i+')">玩具已寄回，上传物流单号</button></div></div> </li>';
                         }
                         $(".return .detail-list ul").html(dataList).show();
                     }

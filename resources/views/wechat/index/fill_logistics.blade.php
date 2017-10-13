@@ -125,7 +125,7 @@
                 common.confirm_tip("提交物流单号","提交后快递单号不可修改，确定提交？",null,function () {
                     common.httpRequest('{{url('api/order/order_back')}}','post',submitData,function (res) {
                         if(res.code == 200){
-                            location.href="{{url('wechat/index/order_return_detail')}}";
+                            location.href="{{url('wechat/index/order_return_detail')}}"+'/2';
                             $(".confirm-alert-wrap").remove();
                         } else {
                             common.alert_tip(res.msg);

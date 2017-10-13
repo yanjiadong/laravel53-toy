@@ -326,16 +326,16 @@
                             orderDataList+='<li><div class="good_show clear"><div class="fl"><a href="'+order_obj.data.orderDataList[i].h +'"><img src="'+
                                 order_obj.data.orderDataList[i].a+'"></a></div><div class="fr"><h3><a href="'+order_obj.data.orderDataList[i].h+'">'+
                                 order_obj.data.orderDataList[i].b  +'</a></h3><h4>适用年龄'+order_obj.data.orderDataList[i].c+'</h4><p>市场参考价¥'+
-                                order_obj.data.orderDataList[i].d+'</p></div></div><div class="money-detail"><ul>' +
-                                '<li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
+                                order_obj.data.orderDataList[i].d+'</p></div></div><div class="money-detail"><ul><li class="clear"><div class="fl">' +
+                                '<i class="icon_order2""></i><span>押金</span></div><div class="fr">+¥'+order_obj.data.orderDataList[i].e+'</div></li><li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
                                 ' <div class="fr">+¥'+order_obj.data.orderDataList[0].f+'</div></li><li  class="clear"><div class="fl"><i class="icon_order1"></i>' +
                                 '<div><h3>邮费</h3><p>每个自然月内提供2次往返免邮服务</p></div></div><div class="fr big"><span>快递</span><span>免邮费</span></div></li></ul></div></li>';
                         }else{
                             orderDataList+='<li><div class="good_show clear"><div class="fl"><a href="'+order_obj.data.orderDataList[i].h +'"><img src="'+
                                 order_obj.data.orderDataList[i].a+'"></a></div><div class="fr"><h3><a href="'+order_obj.data.orderDataList[i].h+'">'+
                                 order_obj.data.orderDataList[i].b  +'</a></h3><h4>适用年龄'+order_obj.data.orderDataList[i].c+'</h4><p>市场参考价¥'+
-                                order_obj.data.orderDataList[i].d+'</p></div></div><div class="money-detail"><ul>' +
-                                '<li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
+                                order_obj.data.orderDataList[i].d+'</p></div></div><div class="money-detail"><ul><li class="clear"><div class="fl">' +
+                                '<i class="icon_order2""></i><span>押金</span></div><div class="fr">+¥'+order_obj.data.orderDataList[i].e+'<li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
                                 ' <div class="fr">+¥'+order_obj.data.orderDataList[0].f+'</div></li><li  class="clear"><div class="fl"><i class="icon_order1"></i>' +
                                 '<div><h3>邮费</h3><p>每个自然月内提供2次往返免邮服务</p></div></div><div class="fr">+¥'+order_obj.data.orderDataList[i].g+'</div></li></ul></div></li>';
                         }
@@ -447,10 +447,10 @@
             }
             //编辑提交
             common.httpRequest('{{url('api/address/edit')}}','post',data,function (res) {
-             if(res.state){
-             common.alert_tip("编辑成功!","#333");
-             }
-             })
+                 if(res.code == 200){
+                    common.alert_tip("编辑成功!","#333");
+                 }
+             });
             order_obj.data.address[order_obj.data.addressIndex] = data;
             $(".order-cover-wrap .order-edit-address-main").hide();
             order_obj.address_rander();
@@ -458,17 +458,19 @@
             order_obj.resetAddress();
         },
         delEditAddress:function () {
-            var address_id = $(".edit_address_id").val();
-            //删除地址
-            common.httpRequest('{{url('api/address/delete')}}','post',{address_id:address_id},function (res) {
-             if(res.state){
-                common.alert_tip("删除成功!","#333");
-             }
-             })
-            order_obj.data.address.splice(order_obj.data.addressIndex,1);
-            order_obj.address_rander();
-            order_obj.addAddress();
-            $(".order-cover-wrap .order-edit-address-main").hide();
+            common.confirm_tip('提示','是否删除地址？',null,function () {
+                var address_id = $(".edit_address_id").val();
+                //删除地址
+                common.httpRequest('{{url('api/address/delete')}}','post',{address_id:address_id},function (res) {
+                    if(res.state){
+                        common.alert_tip("删除成功!","#333");
+                    }
+                })
+                order_obj.data.address.splice(order_obj.data.addressIndex,1);
+                order_obj.address_rander();
+                order_obj.addAddress();
+                $(".order-cover-wrap .order-edit-address-main").hide();
+            });
         },
         selectAddress:function () {
             var nameEl = document.getElementById('sel_city');
@@ -632,7 +634,7 @@
 
             common.httpRequest('{{url('api/address/add')}}','post',data,function (res) {
                  if(res.code==200){
-                    alert("保存成功");
+                    alert("收货地址保存成功");
                      var user_id = '{{$user_id}}';
                      common.httpRequest('{{url('api/address/index')}}','post',{user_id:user_id},function (res) {
                          //res=[];
@@ -756,8 +758,8 @@
                         return false;
                     }
 
-                    $(".form-code button").text("30秒后可获取");
-                    var time=30;
+                    $(".form-code button").text("60秒后可获取");
+                    var time=60;
                     var h =  setInterval(function () {
                         if(time>0){
                             time--;
@@ -799,7 +801,7 @@
 
                 order_obj.data.vip_state = '1';
                 $(".cover-phone-bind").hide();
-                common.alert_tip('绑定成功');
+                common.alert_tip('手机号绑定成功!');
                 //order_obj.submitConfirm();
             })
         },

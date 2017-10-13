@@ -83,7 +83,6 @@
                         <div class="font">医疗消毒</div>
                     </td>
                     <td>
-                        <div></div>
                         <span class="caret"></span>
                     </td>
                 </tr>

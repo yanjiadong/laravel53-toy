@@ -29,7 +29,7 @@ var common = {
     //提示框
     alert_tip:function (msg,color,title,call){
         if(!title){
-            title = "提示：";
+            title = "提示";
         }
         var tip_content = '<div class="tips-alert-wrap"><div class="tips-alert-main"> <div class="confirm-content"><h4 class="title">'+
             title+ '</h4>'+'<div class="cont">'+msg+'</div></div><div class="confirm-btn-wrap clear">' +

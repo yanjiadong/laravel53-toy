@@ -36,10 +36,14 @@
                     common.httpRequest('{{url('wechat/index/pay_vip_card_callback')}}','post',{out_trade_no:out_trade_no},function (res) {
                         //支付成功
                         var url = '{{url('wechat/user/center')}}';
-                        common.alert_tip("支付成功",'#323232','支付成功',function () {
-                            {{--{{ WxJsPayCallback($out_trade_no) }}--}}
-                                location.href=url;
+
+                        common.alert_tip("请前往个人中心查看会员详情",'#323232','支付成功',function () {
+                            location.href = url;
                         });
+
+                        /*common.alert_tip("支付成功",'#323232','支付成功',function () {
+                                location.href=url;
+                        });*/
                     });
 
                 }
