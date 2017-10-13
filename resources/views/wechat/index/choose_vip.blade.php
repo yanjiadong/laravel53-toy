@@ -102,7 +102,7 @@
             <span>¥0</span>
         </div>
         <div class="fr">
-            <button onclick="choose_vip.pay()" disabled="" id="submit">去支付 <span>（微信支付）</span></button>
+            <button onclick="choose_vip.pay()" id="submit">去支付 <span>（微信支付）</span></button>
             <input type="hidden" value="" id="vip_card_id">
         </div>
     </div>
@@ -306,7 +306,7 @@
                 //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-0));
 
                 $("#vip_card_id").val(choose_vip.data.sortList[index].id);
-                $("#submit").attr("disabled", false);
+                //$("#submit").attr("disabled", false);
             })
         },
         //选择优惠卷
