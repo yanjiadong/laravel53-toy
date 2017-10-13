@@ -25,7 +25,7 @@ class OrderController extends BaseController
 
         if(empty($status) && empty($code))
         {
-            $orders = Order::with(['user'])->paginate(20);
+            $orders = Order::with(['user'])->orderBy('id','desc')->paginate(20);
         }
         else
         {
@@ -37,7 +37,7 @@ class OrderController extends BaseController
             {
                 $where['code'] = $code;
             }
-            $orders = Order::with(['user'])->where($where)->paginate(20);
+            $orders = Order::with(['user'])->where($where)->orderBy('id','desc')->paginate(20);
         }
         $menu = 'order';
         //print_r($orders);

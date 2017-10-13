@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\ExpressInfo;
 use App\Order;
 use App\User;
 use App\VipCardPay;
@@ -18,6 +19,42 @@ class CrontabController extends BaseController
     {
         $this->process_order();
         $this->process_users();
+        $this->check_order();
+    }
+
+    /**
+     * 物流已经签收的订单 签收24小时后自动变为确认收货
+     */
+    private function check_order()
+    {
+        $orders = Order::whereIn('status',[Order::STATUS_SEND])->get();
+        if(count($orders) > 0)
+        {
+            foreach ($orders as $order)
+            {
+                $express = ExpressInfo::where('nu',$order->express_no)->orderBy('id','desc')->first();
+                if(isset($express->state) && $express->state==3)
+                {
+                    //已签收
+                    if(isset($express->content) && !empty($express->content))
+                    {
+                        $content = json_decode($express->content,true);
+                        if(isset($content['lastResult']['data']))
+                        {
+                            $logistics = $content['lastResult']['data'];
+                            $time = $logistics[0]['time'];  //签收时间
+                            if( ($this->time - strtotime($time)) - 24*3600)
+                            {
+                                Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
+                            }
+                            //print_r($logistics);
+                        }
+                    }
+                }
+
+            }
+        }
+
     }
 
     /**

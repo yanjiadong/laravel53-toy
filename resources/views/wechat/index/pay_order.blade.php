@@ -38,9 +38,10 @@
                     common.httpRequest('{{url('wechat/index/pay_vip_card_callback')}}','post',{out_trade_no:out_trade_no},function (res) {
                         //支付成功
                         var url = '{{url('wechat/index/order_success')}}'+'/'+'{{$order_code}}';
-                        common.alert_tip("支付成功",'#323232','支付成功',function () {
+                        location.href=url;
+                        /*common.alert_tip("支付成功",'#323232','支付成功',function () {
                             location.href=url;
-                        });
+                        });*/
                     });
 
 

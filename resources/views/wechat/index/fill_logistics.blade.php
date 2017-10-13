@@ -80,7 +80,7 @@
             $(".fill-logistics .good-show .fl img").attr('src',fill_logistics.data.item.good_picture);
             $(".fill-logistics .good-show .fr h3 a").text(fill_logistics.data.item.good_title);
             $(".fill-logistics .good-show .fr h4").text('市场参考价¥'+fill_logistics.data.item.good_price);
-            $(".fill-logistics .good-show .fr p").text(''+fill_logistics.data.item.good_brand.title);
+            $(".fill-logistics .good-show .fr p").text('适用年龄'+fill_logistics.data.item.good_old);
         },
         //获取物流公司
         getCompany:function(){

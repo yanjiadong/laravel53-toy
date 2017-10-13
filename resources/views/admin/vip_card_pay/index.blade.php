@@ -61,9 +61,9 @@
                                         @elseif($user->status == -1)
                                             已过期
                                         @elseif($user->status == -2)
-                                            申请提现
+                                            <span style="color: red;">申请提现</span>
                                         @else
-                                            提现成功
+                                            <span style="color: blue;">提现成功</span>
                                         @endif
                                     </td>
                                     <td>{{$user->created_at}}</td>

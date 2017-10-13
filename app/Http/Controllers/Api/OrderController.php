@@ -41,20 +41,20 @@ class OrderController extends BaseController
         //计算邮费
         $config = SystemConfig::where('type',1)->first();
         $num = 0;
-        $price = 0;
+        $price = '0.00';
 
         if(!empty($config->content))
         {
             $config_array = json_decode($config->content,true);
             $num = isset($config_array[0])?$config_array[0]:0;
-            $price = isset($config_array[1])?$config_array[1]:0;
+            $price = isset($config_array[1])?$config_array[1]:'0.00';
         }
 
         $count = Order::where('month',date('Y-m'))->where('user_id',$user_id)->where('status','>',0)->count();
         if($count < $num)
         {
             //免邮
-            $express_price = 0;
+            $express_price = '0.00';
         }
         else
         {
@@ -64,8 +64,8 @@ class OrderController extends BaseController
 
         $result['good'] = $info;
         $result['express_price'] = $express_price;
-        $result['clean_price'] = 0.00;
-        $result['money'] = 0.00;
+        $result['clean_price'] = '0.00';
+        $result['money'] = '0.00';
         $result['price'] = $result['express_price']+$result['clean_price']+$result['money'];
         $this->ret['info'] = $result;
         return $this->ret;

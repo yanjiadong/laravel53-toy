@@ -214,7 +214,7 @@ if(!function_exists('WxJsPayCallback'))
             }
 
             $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
-            if(!empty($user_info->telephone))
+            if(!empty($user_info->telephone) && $order_info->price > 0)
             {
                 order_pay_success_send_sms($user_info->telephone);
             }

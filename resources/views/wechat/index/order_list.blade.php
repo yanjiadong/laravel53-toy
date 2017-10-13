@@ -134,7 +134,6 @@
                     }
                     $(".detail-cont .detail-list").html(dataList).show();
                     $(".order-detail-main").height($(".tab-page").eq(0).height()+"px");
-
                 }
                 else
                 {
