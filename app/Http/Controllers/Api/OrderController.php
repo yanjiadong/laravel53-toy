@@ -50,7 +50,7 @@ class OrderController extends BaseController
             $price = isset($config_array[1])?$config_array[1]:0;
         }
 
-        $count = Order::where('month',date('Y-m'))->count();
+        $count = Order::where('month',date('Y-m'))->where('user_id',$user_id)->where('status','>',0)->count();
         if($count < $num)
         {
             //免邮
@@ -137,6 +137,7 @@ class OrderController extends BaseController
         $order_data['receiver_province'] = $receiver_province;
         $order_data['receiver_city'] = $receiver_city;
         $order_data['receiver_area'] = $receiver_area;
+        $order_data['month'] = date('Y-m');
         $order_data['out_trade_no'] = 'p'.$order_data['code'];
 
         if($order_data['price']<=0)
