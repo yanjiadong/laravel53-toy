@@ -94,7 +94,28 @@ i{
 .icon-big-label-yajin{width:47px;height:20px;background-position: -937px -35px}
 .icon-big-vip{width:71px;height:18px;background-position: -1004px -59px}
 .icon-big-not-vip{width:51px;height:18px;background-position: -1004px -37px}
-
+.icon-logo{
+    display: inline-block;
+    background-image: url(../image/common/icon_logo.png);
+    background-size: 25px 25px;
+    background-position: 0 0;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.icon-phone{
+    display: inline-block;
+    background-image: url(../image/common/icon_phone.png);
+    background-size: 17px 17px;
+    background-position: 0 0;
+    width: 17px;
+    height: 17px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 5px;
+}
 
 /*确认框样式*/
 .confirm-alert-wrap,.tips-alert-wrap{
@@ -283,17 +304,16 @@ footer table td.active a .icon-footer-user-center {
 /*---------------成功提示----------------------*/
 .success-tip-wrap{
     position: fixed;
-    width: 150px;
+    max-width: 80%;
     margin: 0 auto;
-    line-height: 40px;
+    padding: 10px;
     color: #fff;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(96,95,95,1);
     text-align: center;
     bottom: 40%;
     border-radius: 4px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 20px;
     font-size: 16px;
     z-index: 999999;
 }

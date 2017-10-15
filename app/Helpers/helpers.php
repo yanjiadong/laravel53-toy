@@ -216,7 +216,7 @@ if(!function_exists('WxJsPayCallback'))
             $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
             if(!empty($user_info->telephone) && $order_info->price > 0)
             {
-                order_pay_success_send_sms($user_info->telephone);
+                order_pay_success_send_sms($user_info->telephone,$user_info->name);
             }
         }
         //include_once __DIR__ . "/wx_js_pay/Notify.php";
@@ -227,7 +227,7 @@ if(!function_exists('WxJsPayCallback'))
 
 if(!function_exists('order_pay_success_send_sms'))
 {
-    function order_pay_success_send_sms($telephone)
+    function order_pay_success_send_sms($telephone,$name)
     {
         $config = [
             // HTTP 请求的超时时间（秒）
@@ -260,9 +260,9 @@ if(!function_exists('order_pay_success_send_sms'))
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_85355007',
+            'template' => 'SMS_103795027',
             'data' => [
-
+                'name'=>$name
             ],
         ]);
     }
@@ -303,7 +303,7 @@ if(!function_exists('vip_card_pay_success_send_sms'))
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_101075059',
+            'template' => 'SMS_103895011',
             'data' => [
                 'name'=>$name
             ],

@@ -86,6 +86,7 @@
         getList:function () {
             common.httpRequest('{{url('api/order/order_list')}}','post',{type:1,user_id:'{{$user_id}}'},function (res) {
                 if(res.info.list.length > 0){
+                    $(".detail-cont .top-tips").show();
                     $(".detail-cont .no-good").hide();
                     //  orderDtail.data.returnList = res;
                     //b为发货状态  1为待发货 2是已发货 3.租用中
@@ -137,6 +138,7 @@
                 }
                 else
                 {
+                    $(".detail-cont .top-tips").hide();
                     $(".order-detail-main .detail-cont .detail-list").hide();
                     $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight());
                     $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()-

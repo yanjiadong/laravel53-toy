@@ -62,7 +62,7 @@ class CrontabController extends BaseController
      */
     private function process_order()
     {
-        $orders = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->get()->toArray();
+        $orders = Order::whereIn('status',[Order::STATUS_DOING])->get()->toArray();
         if(!empty($orders))
         {
             foreach ($orders as $order)
@@ -157,7 +157,7 @@ class CrontabController extends BaseController
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_85400005',
+            'template' => 'SMS_103815012',
             'data' => [
                 'name'=>$name
             ],

@@ -97,6 +97,13 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
+        if(!$user->is_vip)
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '请先充值成为会员再下单';
+            return $this->ret;
+        }
+
         $good = $good = Good::with(['category_tag','category','brand'])->where(['id'=>$good_id,'status'=>Good::STATUS_ON_SALE])->first();
         if(empty($good->id))
         {
@@ -144,6 +151,9 @@ class OrderController extends BaseController
         {
             $order_data['status'] = Order::STATUS_WAITING_SEND;
             $order_data['pay_success_time'] = $this->datetime;
+
+            //发送短信通知
+            $this->send_order_sms($user->telephone,$user->name);
         }
         Order::create($order_data);
 
@@ -152,6 +162,45 @@ class OrderController extends BaseController
 
         $this->ret['info'] = ['order_code'=>$order_data['code']];
         return $this->ret;
+    }
+
+    private function send_order_sms($telephone,$name)
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun'
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => 'jlU7IQOybzkAXInb',
+                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'sign_name' => '玩玩具趣编程',
+                ],
+            ],
+        ];
+
+        $easySms = new EasySms($config);
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_103795027',
+            'data' => [
+                'name'=>$name
+            ],
+        ]);
     }
 
     public function order_list(Request $request)
@@ -364,7 +413,7 @@ class OrderController extends BaseController
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_85485003',
+            'template' => 'SMS_103910010',
             'data' => [
                 'name' => $name
             ],

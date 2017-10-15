@@ -344,18 +344,21 @@
     line-height: 20px;
     font-size: 13px;
     color: #959DB9;
+    margin-top: 10px;
 }
 .sort-detail .content .grow-up .all {
     background-color: #fff;
+    margin-top: 10px;
 }
 .sort-detail .content .grow-up .all .top-title {
     height: 45px;
-    background-color: #f7f7f7;
+    background-color: #f4f4f4;
     line-height: 45px;
     text-align: center;
     color: #323232;
     font-size: 15px;
     font-weight: bold;
+    display: none;
 }
 .sort-detail .content .grow-up .all .top-title span{
     font-weight: normal;
@@ -370,6 +373,7 @@
     width: 100%;
     height: 54px;
     padding: 12px 0 12px 10px;
+    border-bottom: 1px solid #f3f3f3;
 }
 .sort-detail .content .grow-up .all .year-select .scroll {
     width: 100%;
@@ -383,7 +387,7 @@
     color: #6885EA;
     font-size: 14px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 15px;
     margin-right: 10px;
     height: 30px;
 }
@@ -594,7 +598,7 @@
     padding: 10px 0;
 }
 .good-detail-wrap .good-detail-content .good-tips .tips-detail li:first-child {
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid #f4f4f4;
 }
 .good-detail-wrap .good-detail-content .good-tips .tips-detail li h3 {
     color: #323232;
@@ -1225,7 +1229,7 @@
 .cover-phone-bind .phone-bind-main .input .form-phone input{
     width: 100%;
     height: 44px;
-    background-color: #F7F7F7;
+    background-color: #f4f4f4;
     border-radius: 4px;
     padding: 0 10px;
     font-size: 14px;
@@ -1238,7 +1242,7 @@
 .cover-phone-bind .phone-bind-main .input .form-code input{
     width: 60%;
     height: 44px;
-    background-color: #F7F7F7;
+    background-color: #f4f4f4;
     border-radius:4px 0 0 4px;
     padding: 0 10px;
     font-size: 14px;
@@ -1250,7 +1254,7 @@
     height: 44px;
     color: #FF3574;
     font-size: 15px;
-    background-color: #F7F7F7;
+    background-color: #f4f4f4;
     border-radius:0 4px 4px 0;
     vertical-align: middle;
 }
@@ -1352,29 +1356,35 @@
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top {
     font-size: 14px;
-    height: 48px;
-    line-height: 48px;
+    height: 44px;
+    line-height: 44px;
     padding: 0 10px;
-    border-bottom: 1px solid #e3e3e3;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top .fl {
-    color: #8D8D8D;
+    color: #323232;
+    width: 70%;
+    height: 100%;
+    font-size: 0;
+}
+.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top .fl span{
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top .fr {
     color: #FF3574;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail {
     padding: 10px;
-    border-bottom: 1px solid #e3e3e3;
+    background-color: #fafafa;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fl {
     width: 25%;
-    text-align: center;
     height: 100%;
+    padding: 0 10px 0 0;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fl img {
-    margin: 10%;
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
@@ -1384,6 +1394,7 @@
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 {
     font-size: 14px;
+    min-height:40px;
     color: #323232;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 a {
@@ -1392,7 +1403,6 @@
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
-    margin-top: 5px;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr p {
     color: #8d8d8d;
@@ -1405,14 +1415,17 @@
     border-bottom: 1px solid #e3e3e3;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .order-number .fl {
-    color: #8D8D8D ;
+    color: #8D8D8D;
+    font-size: 13px;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .order-number .fr {
-    color: #323232 ;
+    color: #8D8D8D;
     text-align: right;
+    font-size: 13px;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total {
     padding: 10px;
+    text-align: right;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fl {
     width: 30%;
@@ -1430,18 +1443,30 @@
     font-size: 13px;
     color: #FF3574;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fr button {
+.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .contact{
+    display: inline-block;
+    font-size: 13px;
+    color: #8d8d8d;
+}
+.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .contact span{
+    display: inline-block;
+    vertical-align: middle;
+    color: #8d8d8d;
+}
+.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total button {
     padding: 6px 12px;
     font-size: 14px;
     border-radius: 4px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fr button:first-child {
-    color: #fff;
-    margin-right: 10px;
-    background-color: #6885EA;
+.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total button.logistics-btn{
+    color: #8d8d8d;
+    border: 1px solid #c1c1c1;
+    margin-left: 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fr button:last-child {
-    color: #6885EA;
+.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total  button.confirm-btn{
+    color: #fff;
+    margin-left: 10px;
+    background-color: #6885EA;
     border: 1px solid #6885EA;
 }
 .order-detail-wrap .order-detail-main .parent-box .return {
@@ -1466,13 +1491,18 @@
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top {
     font-size: 14px;
-    height: 48px;
-    line-height: 48px;
+    height: 44px;
+    line-height: 44px;
     padding: 0 10px;
-    border-bottom: 1px solid #e3e3e3;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fl {
-    color: #8D8D8D;
+    color: #323232;
+    font-size: 0;
+}
+.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fl span{
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fr a {
     color: #FF3574;
@@ -1480,16 +1510,15 @@
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail {
     padding: 10px;
-    border-bottom: 1px solid #e3e3e3;
+    background-color: #fafafa;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fl {
     width: 25%;
-    text-align: center;
     height: 100%;
+    padding: 0 10px 0 0;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fl img {
-    margin: 10%;
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
@@ -1499,6 +1528,7 @@
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr h3 {
     font-size: 14px;
+    min-height: 40px;
     color: #323232;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr h3 a {
@@ -1507,7 +1537,6 @@
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
-    margin-top: 5px;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr p {
     color: #8d8d8d;
@@ -1517,13 +1546,15 @@
     height: 48px;
     line-height: 48px;
     padding: 0 10px;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid #f6f6f6;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .order-number .fl {
     color: #8D8D8D ;
+    font-size: 13px;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .order-number .fr {
-    color: #323232 ;
+    color: #8D8D8D;
+    font-size: 13px;
     text-align: right;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .total {
@@ -1759,52 +1790,55 @@
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top {
     font-size: 14px;
-    padding: 10px;
-    border-bottom: 1px solid #e3e3e3;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fl {
-    color: #8D8D8D;
+    color: #323232;
     width: 70%;
+    height: 100%;
+    font-size: 0;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fl p{
     word-break: break-all;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fl span {
-    font-size: 12px;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fr {
     color: #FF3574;
     height: 100%;
-    line-height: 40px;
     width: 30%;
+    text-align: right;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fr.done {
     color: #6885EA ;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail {
-    border-bottom: 1px solid #e3e3e3;
-    padding: 10px 0;
+    background-color: #fafafa;
+    padding: 10px;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fl {
     width: 25%;
-    text-align: center;
     height: 100%;
+    padding: 0 10px 0 0;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fl img {
-    margin: 10%;
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr {
     width: 75%;
-    padding-right: 10px;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 {
     font-size: 14px;
-    min-height: 38px;
-    margin-top: 10px;
+    min-height: 40px;
+    color: #323232;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 a {
     color: #323232;
@@ -1812,27 +1846,30 @@
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
-    margin-top: 5px;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr p {
     color: #8d8d8d;
     font-size: 13px;
 }
+.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .days-monny{
+    font-size: 14px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
+    border-bottom: 1px solid #e3e3e3;
+    color: #8d8d8d;
+}
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info {
-    height: 55px;
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info .fl p {
+.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info  p {
     color: #8D8D8D ;
-}
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info .fl h4 {
     font-size: 14px;
-    color: #323232;
+    margin-bottom: 5px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info .fr {
-    line-height: 35px;
-    height: 100%;
+.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info  p:last-child{
+    margin-bottom: 0;
 }
 .order-return-wrap .order-return-main .parent-box .detail-cont .detail-list .no-good {
     text-align: center;
@@ -2240,6 +2277,7 @@
     z-index: 999;
     box-shadow: 0 2px 10px #ddd;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .use-help-wrap nav ul {
     width: 1000px;
@@ -2265,6 +2303,7 @@
     margin-bottom: 50px;
     overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .use-help-wrap .use-help-main .parent-box {
     width: 500%;
@@ -2513,7 +2552,7 @@
 }
 .use-help-wrap .use-help-main .parent-box .compensation-rules table thead th {
     border: 1px solid #e3e3e3;
-    background-color: #f7f7f7;
+    background-color: #f4f4f4;
     height: 44px;
     text-align: center;
     font-size: 15px;
@@ -2528,7 +2567,7 @@
 }
 /*---------------------------------------------押金提现---------------------------------*/
 .cash-wrap .top {
-    background-color: #F7F7F7;
+    background-color: #f4f4f4;
     color: #8D8D8D;
     font-size: 12px;
     padding: 10px 10%;
@@ -2809,6 +2848,11 @@
 .choose-vip-wrap .info .coupon .fl h3 {
     font-size: 14px;
     color: #323232;
+}
+.choose-vip-wrap .info .coupon .fl p{
+    color: #8D8D8D;
+    font-size: 12px;
+    margin-top: 5px;
 }
 .choose-vip-wrap .info .coupon .fr span {
     font-size: 14px;
@@ -3122,7 +3166,7 @@
     height: 32px;
     border-radius: 3px;
     color: #323232 ;
-    font-size: 13px;
+    font-size: 14px;
 }
 .fill-logistics .info .number .fr {
     text-align: center;
@@ -3148,7 +3192,7 @@
     height: 32px;
     border-radius: 3px;
     color: #323232 ;
-    font-size: 13px;
+    font-size: 14px;
 }
 .fill-logistics .info .company .fl input:focus {
     border: 1px solid #6885EA ;
@@ -4102,6 +4146,18 @@ textarea {
     margin-top: 10px;
     border-bottom: 2px solid transparent;
     border-top: 2px solid transparent;
+}
+.vip-voucher-wrap .list ul li.disable .fl span{
+    color: #c3c1c1;
+}
+.vip-voucher-wrap .list ul li.disable .fr h3 {
+    color: #c3c1c1;
+}
+.vip-voucher-wrap .list ul li.disable .fr p {
+    color: #c3c1c1;
+}
+.vip-voucher-wrap .list ul li.disable .fr h5 {
+    color: #c3c1c1;
 }
 .vip-voucher-wrap .list ul li .fl {
     width: 25%;

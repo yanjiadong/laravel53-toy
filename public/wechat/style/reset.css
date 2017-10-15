@@ -4,6 +4,10 @@
     -webkit-box-sizing:border-box;
     outline: none;
 }
+::-webkit-scrollbar{
+    display:none;
+    display:none !important;
+}
 
 html, body, div, span, applet, object, iframe, h1, h2, h3,
 h4, h5, h6, p, blockquote, pre, a, abbr, acronym,
@@ -27,7 +31,7 @@ html,body{
     font-size: 12px;
     min-height: 100%;
     width: 100%;
-    background-color: #f7f7f7;
+    background-color: #f4f4f4;
 }
 input[type=checkbox],input[type=radio]{
     vertical-align: baseline;

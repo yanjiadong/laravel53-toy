@@ -103,28 +103,31 @@
                             }
                         }
                         $(".toys-car ul").html(list);
+
+                        switch(toys_car.data.info.state){
+                            case 1:   //为非会员 提示
+                                $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>办理任意一种会员后即可下单，享受免费租、随意换。').show();
+                                $(".toys-car .list").css({'padding-top':$(".top-tips").outerHeight()+'px'});
+                                $(".toys-car .btn button").addClass('active');
+                                break;
+                            case 2: //会员 提示
+                                $(".top-tips").hide();
+                                $(".toys-car .btn button").removeClass('active');
+                                break;
+                            case 3:
+                                $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单').show();
+                                $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
+                                $(".toys-car .btn button").removeClass('active');
+                                break;
+                        }
+
                     }else{
                         $(".no-goods").show();
                         $(".top-tips").hide();
                         $(".btn").hide();
                     }
                 }
-                switch(toys_car.data.info.state){
-                    case 1:   //为非会员 提示
-                        $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>办理任意一种会员后即可下单，享受免费租、随意换。').show();
-                        $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
-                        $(".toys-car .btn button").addClass('active');
-                        break;
-                    case 2: //会员 提示
-                        $(".top-tips").hide();
-                        $(".toys-car .btn button").removeClass('active');
-                        break;
-                    case 3:
-                        $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单').show();
-                        $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
-                        $(".toys-car .btn button").removeClass('active');
-                        break;
-                }
+
             })
         },
         choose:function (index) {
@@ -192,7 +195,7 @@
         }
     };
     $(function () {
-        $(".toys-car").height($(window).height());
+        $(".toys-car").height($(window).height()-50);
         toys_car.get_data();
     })
 </script>

@@ -184,37 +184,19 @@
                 $(this).addClass('active');
             })
         },
-        //分类详情 - 选择品牌
-        choose_sort:function () {
-            $(".year-select .scroll button").click(function () {
-                var moveX = $(this).position().left+$(this).closest('.year-select').scrollLeft();
-                var pageX = document.documentElement.clientWidth;
-                var blockWidth = $(this).width();
-                var left = moveX-(pageX/2)+(blockWidth/2);
-                $(".year-select").scrollLeft(left);
-                $(".year-select .scroll button").removeClass('active');
-                $(this).addClass('active');
-            })
-        },
-        //分类详情-上滑效果
-        /*slide_up:function () {
-            var outheight = $(".grow-up .top").outerHeight();
-            $(".grow-up .top").animate({"margin-top":-1*outheight+"px"},2000);
-            setTimeout(function () {
-                $(".grow-up .top").remove();
-            },2000);
-        }*/
     };
 
     $(function () {
         sort_detail.init();        //初始化
 
         //顶部导航选择
+        (".index-nav .nav").scrollLeft(localStorage.index_nav_left?localStorage.index_nav_left:0);
         $(".index-nav .nav li").click(function () {
             var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
             var pageX = document.documentElement.clientWidth;
             var blockWidth = $(this).width();
             var left = moveX-(pageX/2)+(blockWidth/2);
+            localStorage.index_nav_left = left;
             $(".index-nav .nav").scrollLeft(left);
             $(".index-nav .nav li").removeClass('active');
             $(this).addClass('active');

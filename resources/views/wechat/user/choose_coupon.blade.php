@@ -15,12 +15,12 @@
 </head>
 <body>
 <div class="vip-voucher-wrap bg-white">
-    <div class="input">
+    {{--<div class="input">
         <input type="text" placeholder="请输入兑换码">
     </div>
     <div class="btn">
         <button onclick="vip_voucher.exchange()" disabled>兑换</button>
-    </div>
+    </div>--}}
     <div class="list">
         <ul>
             <!-- <li class="clear active">
@@ -75,6 +75,7 @@
                 vip_voucher.data.list=res.info.coupons;
                 if(vip_voucher.data.list.length>0){
                     var cont='';
+                    var max=0,max_index;
                     for(var i=0;i<vip_voucher.data.list.length;i++){
                         if(vip_voucher.data.list[i].condition == 0)
                         {
@@ -84,18 +85,34 @@
                         {
                             var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
                         }
-                        cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
-                            +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                            '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+
+                        if(vip_voucher.data.list[i].can_use)
+                        {
+                            cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            //筛选最大金额
+                            if(max < vip_voucher.data.list[i].price){
+                                max = vip_voucher.data.list[i].price;
+                                max_index = i;
+                            }
+                        }
+                        else
+                        {
+                            cont+='<li class="clear disable"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                        }
                     }
                     $(".vip-voucher-wrap .list ul").html(cont);
+                    $(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
                     vip_voucher.choose();
                 }
             })
         },
         //选择优惠劵
         choose:function () {
-            $item = $(".vip-voucher-wrap .list ul li");
+            $item = $(".vip-voucher-wrap .list ul li").not(".disable");
             $item.click(function () {
                 $item.removeClass('active');
                 $(this).addClass('active');

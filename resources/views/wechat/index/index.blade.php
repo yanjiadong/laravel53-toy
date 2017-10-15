@@ -287,7 +287,7 @@
                     $swiperCont.animate({'margin-left':-cont*index_obj.cont_width*0.9+'px'},500);
                 }
             }
-            var h = setInterval(slide,3000);
+            //var h = setInterval(slide,3000);
             //向左右滑动
             var x,x1;
             $swiperCont[0].addEventListener('touchstart',function (e) {
@@ -302,8 +302,8 @@
                 if(x1-x>50){
                     slide('right');
                 }
-                h = setInterval(slide,3000);
-            })
+                //h = setInterval(slide,3000);
+            });
 
             //关闭
             $(".index-wrap-cover .close").click(function () {
@@ -334,11 +334,13 @@
         $(".content").pullToRefreshDone();
 
         //顶部导航选择
+        $(".index-nav .nav").scrollLeft(localStorage.index_nav_left?localStorage.index_nav_left:0);
         $(".index-nav .nav li").click(function () {
             var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
             var pageX = document.documentElement.clientWidth;
             var blockWidth = $(this).width();
             var left = moveX-(pageX/2)+(blockWidth/2);
+            localStorage.index_nav_left = left;
             $(".index-nav .nav").scrollLeft(left);
             $(".index-nav .nav li").removeClass('active');
             $(this).addClass('active');
