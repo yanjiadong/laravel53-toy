@@ -6,6 +6,7 @@ use App\Cart;
 use App\Order;
 use App\SystemConfig;
 use App\User;
+use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -66,6 +67,15 @@ class UserController extends BaseController
 
         $user = User::find($user_id);
         return view('wechat.user.deposit1',compact('user_id','user'));
+    }
+
+    public function deposit_success($vip_card_pay_id)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $vip_card_pay = VipCardPay::find($vip_card_pay_id);
+        return view('wechat.user.deposit_success',compact('user_id','user','vip_card_pay'));
     }
 
     public function cash()

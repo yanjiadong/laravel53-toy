@@ -103,18 +103,23 @@
         getCash:function (id,money) {
             console.log(id);
             console.log(money);
-            //location.href='cash.html?money='+money+'&id='+id;
-            common.httpRequest('{{url('api/user/cash')}}','post',{user_id:'{{$user_id}}','vip_card_pay_id':id},function (res) {
-                if(res.code==200)
-                {
-                    common.success_tip(res.msg);
-                    location.reload();
-                }
-                else
-                {
-                    common.alert_tip(res.msg);
-                }
+            common.confirm_tip("确认提现","确认申请这张会员卡押金的提现吗？",null,function () {
+                common.httpRequest('{{url('api/user/cash')}}','post',{user_id:'{{$user_id}}','vip_card_pay_id':id},function (res) {
+                    if(res.code==200)
+                    {
+                        common.success_tip(res.msg);
+                        location.href = '{{url('wechat/user/deposit_success')}}'+'/'+id;
+                        //location.reload();
+                    }
+                    else
+                    {
+                        common.alert_tip(res.msg);
+                    }
+                });
             });
+
+            //location.href='cash.html?money='+money+'&id='+id;
+
         }
     };
     $(function () {

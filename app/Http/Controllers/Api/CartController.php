@@ -15,7 +15,7 @@ class CartController extends BaseController
     {
         $user_id = $request->get('user_id');
         $user = User::find($user_id);
-        $carts = $user->carts()->get();
+        $carts = $user->carts()->orderBy('id','desc')->get();
 
         if($user->is_vip==1)
         {
