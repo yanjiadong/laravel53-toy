@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wechat;
 use App\Cart;
 use App\Coupon;
 use App\Order;
+use App\SystemConfig;
 use App\User;
 use App\UserChooseCoupon;
 use App\UserCoupon;
@@ -337,7 +338,16 @@ class IndexController extends BaseController
         //计算玩具箱数量
         $cart_num = Cart::where('user_id',$user_id)->count();
 
-        return view('wechat.index.order_list',compact('user_id','openid','menu','cart_num'));
+        //客服电话
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $phone = '';
+        if(isset($content[7]))
+        {
+            $phone = $content[7];
+        }
+
+        return view('wechat.index.order_list',compact('user_id','openid','menu','cart_num','phone'));
     }
 
     public function order_success($order_code)
