@@ -72,6 +72,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/user/coupon_list','UserController@coupon_list');
 
     Route::post('/user/choose_coupon','UserController@choose_coupon');
+    Route::post('/user/del_choose_coupon','UserController@del_choose_coupon');
 
     Route::post('/user/cash','UserController@cash');
     Route::post('/user/cash_list','UserController@cash_list');

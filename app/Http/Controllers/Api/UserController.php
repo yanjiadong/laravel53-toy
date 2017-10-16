@@ -260,6 +260,13 @@ class UserController extends BaseController
         return $this->ret;
     }
 
+    public function del_choose_coupon(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        UserChooseCoupon::where('user_id',$user_id)->delete();
+        return $this->ret;
+    }
+
     /**
      * 提现操作
      * @param Request $request

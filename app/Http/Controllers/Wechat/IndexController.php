@@ -228,8 +228,8 @@ class IndexController extends BaseController
 
         $info = VipCard::find($vip_card_id);
 
-        //$total_fee = $info->money+$info->price;
-        $total_fee = 1.01;
+        $total_fee = $info->money+$info->price;
+        //$total_fee = 1.01;
         if(!empty($coupon_id))
         {
             $user_coupon = UserCoupon::where('user_id',$user_id)->where('coupon_id',$coupon_id)->first();
@@ -293,7 +293,8 @@ class IndexController extends BaseController
         $order = Order::where('code',$order_code)->first();
 
         $out_trade_no = $order->out_trade_no;
-        $total_fee = 0.01;
+        //$total_fee = 0.01;
+        $total_fee = $order->price;
         $jsApiParameters = WxJsPay($out_trade_no, $total_fee, $openid);
         return view('wechat.index.pay_order',compact('user_id','jsApiParameters','out_trade_no','order_code'));
     }

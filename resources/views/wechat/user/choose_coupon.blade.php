@@ -132,6 +132,9 @@
         noUser:function () {
             var submitData ="";
             localStorage.vip_discount="";
+            common.httpRequest('{{url('api/user/del_choose_coupon')}}','post',{user_id:'{{$user_id}}'},function (res) {
+
+            });
             location.href="{{url('wechat/index/choose_vip')}}";
         },
         //兑换
