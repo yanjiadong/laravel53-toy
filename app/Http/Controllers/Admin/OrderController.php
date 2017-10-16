@@ -22,8 +22,9 @@ class OrderController extends BaseController
 
         $status = $request->get('status');
         $code = $request->get('code');
+        $telephone = $request->get('telephone');
 
-        if(empty($status) && empty($code))
+        if(empty($status) && empty($code) && empty($telephone))
         {
             $orders = Order::with(['user'])->orderBy('id','desc')->paginate(20);
         }
@@ -37,13 +38,17 @@ class OrderController extends BaseController
             {
                 $where['code'] = $code;
             }
+            if(!empty($telephone))
+            {
+                $where['user_telephone'] = $telephone;
+            }
             $orders = Order::with(['user'])->where($where)->orderBy('id','desc')->paginate(20);
         }
         $menu = 'order';
         //print_r($orders);
 
         $express = Express::all();
-        return view('admin.order.index',compact('orders','username','menu','express','status','code'));
+        return view('admin.order.index',compact('orders','username','menu','express','status','code','telephone'));
     }
 
     public function send(Request $request)
@@ -62,7 +67,7 @@ class OrderController extends BaseController
         weixinCurl(url('api/express_info/index'),'post', $param);
 
         $this->send_sms($order->receiver_telephone,$order->receiver);
-        Order::where('id',$id)->update(['status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
+        Order::where('id',$id)->update(['send_time'=>$this->datetime,'status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
         alert('',1);
     }
 

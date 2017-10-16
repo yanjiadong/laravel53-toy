@@ -211,7 +211,7 @@
         },
         //优惠抵用券
         goChooseVoucher:function () {
-            location.href='{{url('wechat/user/choose_coupon')}}';
+            location.href='{{url('wechat/user/user_coupon')}}';
         }
     };
     $(function () {

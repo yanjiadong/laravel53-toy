@@ -24,6 +24,7 @@ class GoodController extends BaseController
             }
         }
 
+        $good->desc_new = filterHtmlTag($good->desc);
         $this->ret['info'] = ['good'=>$good,'tags'=>$tags];
         return $this->ret;
     }

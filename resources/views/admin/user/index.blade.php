@@ -6,6 +6,37 @@
             <li><a href="javascript:;">用户管理</a> <span class="divider">></span></li>
             <li class="active"><a href="{{ route('admin.user.index') }}">用户列表</a></li>
         </ul>
+
+        <ul class="buttons">
+            <li>
+                <a href="javascript:;" class="link_bcPopupSearch"><span class="icon-search"></span><span class="text">用户查询</span></a>
+                <form action="{{route('admin.user.index')}}" method="get">
+                    <div id="bcPopupSearch" class="popup">
+                        <div class="head clearfix">
+                            <div class="arrow"></div>
+                            <span class="isw-zoom"></span>
+                            <span class="name">用户查询</span>
+                        </div>
+
+                        <div class="body search row-form">
+                            <span>是否会员</span>
+                            <select name="is_vip">
+                                <option value="0" <?php echo (isset($is_vip)&&$is_vip==0)?'selected':'';?>>全部</option>
+                                <option value="1" <?php echo (isset($is_vip)&&$is_vip==1)?'selected':'';?>>非会员</option>
+                                <option value="2" <?php echo (isset($is_vip)&&$is_vip==2)?'selected':'';?>>会员</option>
+
+                            </select>
+                        </div>
+
+                        <div class="footer">
+                            <button class="btn" type="submit">查询</button>
+                            <button class="btn btn-danger link_bcPopupSearch" type="button">关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
+
     </div>
 
     <div class="workplace">

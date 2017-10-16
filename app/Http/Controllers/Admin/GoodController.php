@@ -162,6 +162,7 @@ class GoodController extends BaseController
         unset($data['_method']);
         $data['status'] = Good::STATUS_ON_SALE;
 
+
         $good = Good::where('id',$id)->update($data);
 
         GoodPicture::where('good_id',$id)->delete();

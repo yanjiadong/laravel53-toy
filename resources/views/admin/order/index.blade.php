@@ -21,6 +21,10 @@
                             <input type="text" placeholder="订单编号" id="code" name="code" value="<?php echo (isset($code))?$code:'';?>"/>
                         </div>
                         <div class="body search row-form">
+                            <span>用户手机号</span>
+                            <input type="text" placeholder="用户手机号" id="telephone" name="telephone" value="<?php echo (isset($telephone))?$telephone:'';?>"/>
+                        </div>
+                        <div class="body search row-form">
                             <span>状态</span>
                             <select name="status">
                                 <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部</option>

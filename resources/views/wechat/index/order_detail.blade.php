@@ -119,14 +119,14 @@
                     </div>
                     <div class="money-detail">
                         <ul>
-                            {{--<li class="clear">
+                            <li class="clear">
                                 <div class="fl">
                                     <i class="icon_order2"></i>
                                     <span>押金</span>
                                 </div>
                                 <div class="fr">
                                 </div>
-                            </li>--}}
+                            </li>
                             <li  class="clear">
                                 <div class="fl">
                                     <i class="icon_order3"></i>
@@ -215,7 +215,7 @@
                     good: {
                         a: res.info.order.good_picture,
                         b: res.info.order.good_title,
-                        c: res.info.order.good_brand.title,
+                        c: res.info.order.good_old,
                         d: res.info.order.good_price,
                         e: res.info.order.money,
                         f: res.info.order.clean_price,
@@ -286,10 +286,10 @@
                     $(".detail-list .good_show .fl img").attr('src', order_detail.data.logistics_state.good.a);
                     $(".detail-list .good_show .fr h3 a").text(order_detail.data.logistics_state.good.b);
                     $(".detail-list .good_show .fr h4").text('市场参考价¥' + order_detail.data.logistics_state.good.d);
-                    $(".detail-list .good_show .fr p").text(order_detail.data.logistics_state.good.c);
-                    //$(".detail-list .money-detail .fr:eq(0)").text('+¥' + order_detail.data.logistics_state.good.e);
-                    $(".detail-list .money-detail .fr:eq(0)").text('+¥' + order_detail.data.logistics_state.good.f);
-                    $(".detail-list .money-detail .fr:eq(1)").text('+¥' + order_detail.data.logistics_state.good.g);
+                    $(".detail-list .good_show .fr p").text('适用年龄'+order_detail.data.logistics_state.good.c);
+                    $(".detail-list .money-detail .fr:eq(0)").text('会员卡押金抵扣');
+                    $(".detail-list .money-detail .fr:eq(1)").text('+¥' + order_detail.data.logistics_state.good.f);
+                    $(".detail-list .money-detail .fr:eq(2)").text('+¥' + order_detail.data.logistics_state.good.g);
                     $(".detail-list .total .num").text(order_detail.data.logistics_state.good.total_num);
                     $(".detail-list .total .money").text('+¥' + order_detail.data.logistics_state.good.allPrice);
 

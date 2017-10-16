@@ -14,16 +14,30 @@ class UserController extends BaseController
         parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $users = User::paginate(30);
+        $is_vip = $request->get('is_vip');
+        if(empty($is_vip))
+        {
+            $users = User::paginate(30);
+        }
+        else
+        {
+            if(!empty($is_vip))
+            {
+                $where['is_vip'] = $is_vip - 1;
+            }
+            $users = User::where($where)->paginate(30);
+        }
+
+
         $menu = 'user';
         //print_r($orders);
 
-        return view('admin.user.index',compact('users','username','menu'));
+        return view('admin.user.index',compact('users','username','menu','is_vip'));
     }
 
     public function action(Request $request)

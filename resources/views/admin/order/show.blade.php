@@ -88,6 +88,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>发货时间：</td>
+                            <td>
+                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2})" placeholder="发货时间" class="form-control validate[required,custom[date]]" id="send_time" name="send_time"  value="{{$order->send_time?$order->send_time:''}}">
+                            </td>
+                        </tr>
+                        <tr>
                             <td>邮费：</td>
                             <td>{{$order->express_price}}元</td>
                         </tr>
@@ -174,12 +180,13 @@
                 var id = '{{$order->id}}';
                 var express_no = $("#express_no").val();
                 var express_id = $("#express_id").val();
+                var send_time = $("#send_time").val();
                 if (!express_no) {
                     eAlert('请输入快递单号');
                     return false;
                 }
 
-                $.post("{{route('admin.order.send')}}", {id:id,express_no:express_no,express_id:express_id}, function(data){
+                $.post("{{route('admin.order.send')}}", {id:id,express_no:express_no,express_id:express_id,send_time:send_time}, function(data){
                     cTip(data);
                 }, "json");
             });

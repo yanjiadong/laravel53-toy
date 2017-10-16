@@ -222,10 +222,19 @@ class UserController extends BaseController
 
         $user = User::find($user_id);
         $coupons = $user->coupons()->get()->toArray();
+
+        //print_r($coupons);
+        $result = [];
         if(!empty($coupons))
         {
             foreach ($coupons as &$v)
             {
+                $info = UserCoupon::where('user_id',$user_id)->where('coupon_id',$v['id'])->first();
+                if($info->status == 1)
+                {
+                    continue;
+                }
+
                 $v['can_use'] = 1;
                 if($v['condition'] > $condition)
                 {
@@ -233,9 +242,11 @@ class UserController extends BaseController
                 }
                 $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
                 $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
+
+                $result[] = $v;
             }
         }
-        $this->ret['info'] = ['coupons'=>$coupons];
+        $this->ret['info'] = ['coupons'=>$result];
         return $this->ret;
     }
 

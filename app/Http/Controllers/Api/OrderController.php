@@ -36,6 +36,7 @@ class OrderController extends BaseController
         $info['good_picture'] = $good->picture;
         $info['good_price'] = $good->price;
         $info['good_brand'] = $good->brand->title;
+        $info['good_old'] = $good->old;
         //$info['good_category_tag'] = $good->category_tag->title;
 
         //计算邮费
@@ -112,6 +113,13 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
+        if($good->store <= 0)
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '玩具库存不足';
+            return $this->ret;
+        }
+
         //如果有租用中的订单 那就无法重复下单
         //判断是否租用中的玩具
         $orders = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get()->toArray();
@@ -146,6 +154,7 @@ class OrderController extends BaseController
         $order_data['receiver_area'] = $receiver_area;
         $order_data['month'] = date('Y-m');
         $order_data['out_trade_no'] = 'p'.$order_data['code'];
+        $order_data['user_telephone'] = $user->telephone;
 
         if($order_data['price']<=0)
         {
@@ -159,6 +168,14 @@ class OrderController extends BaseController
 
         //从玩具箱中去除
         Cart::where(['user_id'=>$user_id,'good_id'=>$good_id])->delete();
+
+        //扣除库存
+        $store = $good->store - 1;
+        if($store <=0 )
+        {
+            $store = 0;
+        }
+        Good::where('id',$good_id)->update(['store'=>$store]);
 
         $this->ret['info'] = ['order_code'=>$order_data['code']];
         return $this->ret;

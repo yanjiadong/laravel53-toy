@@ -310,7 +310,7 @@
                     //order_obj.data.orderDataList = res;
                     //假数据
                     order_obj.data.orderDataList = [
-                        {a:res.info.good.good_picture,b:res.info.good.good_title,c:res.info.good.good_brand,d:res.info.good.good_price,e:'0.00',f:res.info.clean_price,g:res.info.express_price,h:'#'},
+                        {a:res.info.good.good_picture,b:res.info.good.good_title,c:res.info.good.good_old,d:res.info.good.good_price,e:'0.00',f:res.info.clean_price,g:res.info.express_price,h:'#'},
                     ];
 
                     $("#clean_price").val(res.info.clean_price);
@@ -327,7 +327,7 @@
                                 order_obj.data.orderDataList[i].a+'"></a></div><div class="fr"><h3><a href="'+order_obj.data.orderDataList[i].h+'">'+
                                 order_obj.data.orderDataList[i].b  +'</a></h3><h4>适用年龄'+order_obj.data.orderDataList[i].c+'</h4><p>市场参考价¥'+
                                 order_obj.data.orderDataList[i].d+'</p></div></div><div class="money-detail"><ul><li class="clear"><div class="fl">' +
-                                '<i class="icon_order2""></i><span>押金</span></div><div class="fr">+¥'+order_obj.data.orderDataList[i].e+'</div></li><li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
+                                '<i class="icon_order2""></i><span>押金</span></div><div class="fr">'+'会员卡押金抵扣'+'</div></li><li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
                                 ' <div class="fr">+¥'+order_obj.data.orderDataList[0].f+'</div></li><li  class="clear"><div class="fl"><i class="icon_order1"></i>' +
                                 '<div><h3>邮费</h3><p>每个自然月内提供2次往返免邮服务</p></div></div><div class="fr big"><span>+¥0.00</span></div></li></ul></div></li>';
                         }else{
@@ -335,7 +335,7 @@
                                 order_obj.data.orderDataList[i].a+'"></a></div><div class="fr"><h3><a href="'+order_obj.data.orderDataList[i].h+'">'+
                                 order_obj.data.orderDataList[i].b  +'</a></h3><h4>适用年龄'+order_obj.data.orderDataList[i].c+'</h4><p>市场参考价¥'+
                                 order_obj.data.orderDataList[i].d+'</p></div></div><div class="money-detail"><ul><li class="clear"><div class="fl">' +
-                                '<i class="icon_order2""></i><span>押金</span></div><div class="fr">+¥'+order_obj.data.orderDataList[i].e+'<li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
+                                '<i class="icon_order2""></i><span>押金</span></div><div class="fr">'+'会员卡押金抵扣'+'<li  class="clear"><div class="fl"><i class="icon_order3"></i><span>包装清理费</span></div>' +
                                 ' <div class="fr">+¥'+order_obj.data.orderDataList[0].f+'</div></li><li  class="clear"><div class="fl"><i class="icon_order1"></i>' +
                                 '<div><h3>邮费</h3><p>每个自然月内提供2次往返免邮服务</p></div></div><div class="fr">+¥'+order_obj.data.orderDataList[i].g+'</div></li></ul></div></li>';
                         }
@@ -711,7 +711,7 @@
                 };
                 common.httpRequest('{{url('api/order/submit_order')}}','post',submit_data,function (res) {
                     if(res.code==200){
-                        common.alert_tip('提交成功');
+                        //common.alert_tip('提交成功');
                         $(".confirm-alert-wrap").remove();
                         if(price<=0)
                         {

@@ -162,7 +162,7 @@
             var url = "{{url('api/good')}}"+'/'+"{{$good_id}}";
             common.httpRequest(url,'get',null,function (res) {
                 console.log(res);
-                console.log(res.info.good.pictures[0].picture);
+                //console.log(res.info.good.pictures[0].picture);
                 goodDetail_obj .detail_data = res;
                 goodDetail_obj .detail_data ={
                     url:"/wechat/image/other/5.png",
@@ -223,7 +223,7 @@
                     $(".good-detail-param table").html(shop_params);
                 }
                 //商品详情
-                $(".good-detail-pic>div").html(res.info.good.desc);
+                $(".good-detail-pic>div").html(res.info.good.desc_new);
                 /*if(goodDetail_obj.detail_data.detail.length>0){
                     var details ="";
                     for(var i=0;i<goodDetail_obj.detail_data.detail.length;i++){

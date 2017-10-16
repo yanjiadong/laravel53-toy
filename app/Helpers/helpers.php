@@ -322,18 +322,43 @@ if(!function_exists('getJssdk'))
 }
 
 
-// 过滤掉emoji表情
-function filterEmoji($str)
+if(!function_exists('filterEmoji'))
 {
-    $str = preg_replace_callback(
-        '/./u',
-        function (array $match) {
-            return strlen($match[0]) >= 4 ? '?' : $match[0];
-        },
-        $str);
+    // 过滤掉emoji表情
+    function filterEmoji($str)
+    {
+        $str = preg_replace_callback(
+            '/./u',
+            function (array $match) {
+                return strlen($match[0]) >= 4 ? '?' : $match[0];
+            },
+            $str);
 
-    return $str;
+        return $str;
+    }
 }
+
+
+if(!function_exists('filterHtmlTag'))
+{
+    function filterHtmlTag($content)
+    {
+        $result = strip_tags($content, "<img><br><a>");
+        //$result = preg_replace('/<p[^>]*>/', "&nbsp;&nbsp;&nbsp;&nbsp;", $result);
+        //$result = preg_replace('/<\/p[^>]*>/', "<br />", $result);
+        //$result = preg_replace('/<\?p[^>]*>/', "", $result);
+
+        $result = preg_replace('/><br><img/i', "><img", $result);
+        $result = preg_replace("/style=\"[^\"]*width:\s*(\d+)px;[^\"]*\"/i", "", $result);
+        $result = preg_replace("/style=\"width:(\d+)px;height:(\d+)px;\"/i", "", $result);
+        $result = preg_replace("/style=\"width:\s*(\d+)px;\"/i", "", $result);
+        $result = preg_replace("/width=\"(\d+)\" height=\"(\d+)\"/i", "", $result);
+        $result = preg_replace("/height=\"(\d+)\" width=\"(\d+)\"/i", "", $result);
+
+        return $result;
+    }
+}
+
 
 
 

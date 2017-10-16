@@ -61,7 +61,9 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::get('/user/deposit_list','UserController@deposit_list')->name('wechat.user.deposit_list');
     Route::any('/user/share_open','UserController@share_open');
     Route::any('/user/share','UserController@share');
+
     Route::any('/user/choose_coupon','UserController@choose_coupon');
+    Route::any('/user/user_coupon','UserController@user_coupon');
 
     //脚本
     Route::any('/crontab/index','CrontabController@index');
