@@ -273,6 +273,19 @@
                 </ul>
             </li>
 
+            <li class="openable <?php echo (isset($menu) && ($menu == 'crontab')) ? 'active' : '';?>">
+                <a href="javascript:;">
+                    <span class="isw-list"></span><span class="text">数据管理</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('admin.crontabs.index') }}">
+                            <span class="icon-th-list"></span><span class="text">脚本列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
     </div>
 

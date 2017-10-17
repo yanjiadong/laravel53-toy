@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\Crontab;
 use App\ExpressInfo;
 use App\Order;
 use App\User;
@@ -20,6 +21,8 @@ class CrontabController extends BaseController
         $this->process_order();
         $this->process_users();
         $this->check_order();
+
+        Crontab::create();
     }
 
     /**
