@@ -15,7 +15,7 @@ class AddSendTimeToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->dateTime('send_time')->nullable()->comment('平台发货时间');
-            $table->string('user_telephone',11)->comment('会员手机号');
+            $table->string('user_telephone',11)->default('')->comment('会员手机号');
         });
     }
 
