@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,28 @@ class VipCardPayController extends BaseController
         $id = $request->get('id');
         $status = $request->get('status');
 
-        VipCardPay::where('id',$id)->update(['status'=>$status]);
+        $info = VipCardPay::find($id);
+
+        $user_info = User::find($info->user_id);
+
+        if($info->days > 0)
+        {
+            $user_days = $user_info->days - $info->days;
+            User::where('id',$info->user_id)->update(['days'=>$user_days]);
+
+            VipCardPay::where('id',$id)->update(['status'=>$status,'days'=>0]);
+
+            $vip_card_count = VipCardPay::where(['user_id'=>$info->user_id,'pay_status'=>1,'status'=>1])->count();
+            if($vip_card_count <= 0)
+            {
+                User::where('id',$info->user_id)->update(['is_vip'=>0]);
+            }
+        }
+        else
+        {
+            VipCardPay::where('id',$id)->update(['status'=>$status]);
+        }
+
         alert('',1);
     }
 
