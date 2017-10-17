@@ -218,7 +218,7 @@ class UserController extends BaseController
         $vip_card_id = $request->get('vip_card_id');
 
         $vip_card_info = VipCard::find($vip_card_id);
-        $condition = $vip_card_info->price + $vip_card_info->money;
+        $condition = $vip_card_info->price;
 
         $user = User::find($user_id);
         $coupons = $user->coupons()->get()->toArray();
@@ -292,7 +292,7 @@ class UserController extends BaseController
     {
         $user_id = $request->get('user_id');
 
-        $list = VipCardPay::with(['user','vip_card'])->where('user_id',$user_id)->where('pay_status',1)->orderBy('id','desc')->get();
+        $list = VipCardPay::with(['user','vip_card'])->where('money','>',0)->where('user_id',$user_id)->where('pay_status',1)->orderBy('id','desc')->get();
         $this->ret['info'] = ['list'=>$list];
         return $this->ret;
     }

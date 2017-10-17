@@ -218,6 +218,19 @@ if(!function_exists('WxJsPayCallback'))
             {
                 order_pay_success_send_sms($user_info->telephone,$user_info->name);
             }
+
+            $good = \App\Good::where(['id'=>$order_info->good_id])->first();
+
+            //从玩具箱中去除
+            \App\Cart::where(['user_id'=>$order_info->user_id,'good_id'=>$order_info->good_id])->delete();
+
+            //扣除库存
+            $store = $good->store - 1;
+            if($store <=0 )
+            {
+                $store = 0;
+            }
+            \App\Good::where('id',$order_info->good_id)->update(['store'=>$store]);
         }
         //include_once __DIR__ . "/wx_js_pay/Notify.php";
         //$notify = new Notify();

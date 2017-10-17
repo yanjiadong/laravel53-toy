@@ -188,14 +188,13 @@
                         var href = "{{url('wechat/index/order_detail')}}"+'/'+orderDtail.data.returnList[i].code;
                         var href2 = "{{url('wechat/index/order_return_detail')}}"+'/2';
 
-                        dataList='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
+                        dataList += '<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
                             '<div class="fr"><a href="'+href2+'">已归还，查看归还详情<i class="icon icon_arrowRight_red"></i></a></div>' +
                             '</div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                             '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3><h4>适用年龄'+orderDtail.data.returnList[i].good_old+'岁</h4><p>市场参考价' +
                             '¥'+orderDtail.data.returnList[i].good_price+'</p></div></a></div><div class="order-number clear">' +
                             '<div class="fl"><span>共租用'+orderDtail.data.returnList[i].days+'天</span></div><div class="fr">' +
                             '<span>共'+'1'+'件商品 合计：+¥'+orderDtail.data.returnList[i].price+'</span></div></div></li>';
-
                     }
                     $(".return .detail-list").html(dataList).show();
                 }

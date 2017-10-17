@@ -161,21 +161,22 @@ class OrderController extends BaseController
             $order_data['status'] = Order::STATUS_WAITING_SEND;
             $order_data['pay_success_time'] = $this->datetime;
 
+            //从玩具箱中去除
+            Cart::where(['user_id'=>$user_id,'good_id'=>$good_id])->delete();
+
+            //扣除库存
+            $store = $good->store - 1;
+            if($store <=0 )
+            {
+                $store = 0;
+            }
+            Good::where('id',$good_id)->update(['store'=>$store]);
+
             //发送短信通知
             $this->send_order_sms($user->telephone,$user->name);
         }
         Order::create($order_data);
 
-        //从玩具箱中去除
-        Cart::where(['user_id'=>$user_id,'good_id'=>$good_id])->delete();
-
-        //扣除库存
-        $store = $good->store - 1;
-        if($store <=0 )
-        {
-            $store = 0;
-        }
-        Good::where('id',$good_id)->update(['store'=>$store]);
 
         $this->ret['info'] = ['order_code'=>$order_data['code']];
         return $this->ret;
