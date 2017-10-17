@@ -43,7 +43,7 @@ class CrontabController extends BaseController
                         {
                             $logistics = $content['lastResult']['data'];
                             $time = $logistics[0]['time'];  //签收时间
-                            if( ($this->time - strtotime($time)) >= 24*3600)
+                            if( ($this->time - strtotime($time)) >= 3600)
                             {
                                 Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
                             }
