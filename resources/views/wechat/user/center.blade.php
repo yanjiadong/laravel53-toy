@@ -127,8 +127,12 @@
                     cars:res.info.coupon_nums,         //优惠卡劵
                     carSort:res.info.card.vip_card_type_str,   //卡的类型
                     time:res.info.days,
-                    phone:res.info.user.telephone
+                    phone:res.info.user.telephone,
+                    order_code:res.info.order_code
                 };
+
+                localStorage.out_trade_no = res.info.order_code;
+
                 //判断是否登录
                 if(user_center.data.userInfo.isAuthorize){
                     //是否为会员
@@ -202,7 +206,17 @@
         },
         //快速换玩具
         exchangeToy:function () {
-            location.href='{{url('wechat/index/order_return_detail')}}';
+            code = localStorage.out_trade_no;
+            if(code != '')
+            {
+                location.href="{{url('wechat/index/logistics_info')}}";
+            }
+            else
+            {
+                common.alert_tip('暂时没有可归还的玩具');
+            }
+
+            //location.href='{{url('wechat/index/order_return_detail')}}';
         },
         //会员押金
         goDdeposit:function () {

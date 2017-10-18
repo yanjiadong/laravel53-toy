@@ -17,7 +17,7 @@
 <div class="deposit1-wrap">
     <div class="deposit1-main">
         <div class="top bg-white">
-            <span style="margin-right: 5px">*</span>会员卡到期后，押金才可申请提现
+            <span style="margin-right: 5px">*</span>押金可随时提现，该卡在申请押金提现后会被注销，无法继续使用
         </div>
         <div class="cont">
             <div class="list ">

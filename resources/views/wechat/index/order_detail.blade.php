@@ -245,7 +245,7 @@
                         logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
                             '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
-                            '<button  onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.goOrderReturn()">归还玩具</button></div>';
+                            '<button  onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
                         break;
                     case '已归还':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-yiguihuan"></i><h2>已归还</h2><div class="btn">' +
@@ -323,12 +323,13 @@
             location.href="{{url('wechat/index/logistics_detail')}}"+'/'+'{{$order_code}}';
         },
         //归还玩具
-        goOrderReturn:function () {
-            location.href="{{url('wechat/index/order_return_detail')}}";
+        goOrderReturn:function (code) {
+            localStorage.out_trade_no = code;
+            location.href="{{url('wechat/index/logistics_info')}}";
         },
         //查看归还详情
         lookReturn:function () {
-            location.href="{{url('wechat/index/order_return_detail')}}"+'/2';
+            location.href="{{url('wechat/index/order_return_detail1')}}";
         }
     };
 

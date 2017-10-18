@@ -186,7 +186,7 @@
                     var dataList ='';
                     for(var i=0;i<orderDtail.data.returnList.length;i++){
                         var href = "{{url('wechat/index/order_detail')}}"+'/'+orderDtail.data.returnList[i].code;
-                        var href2 = "{{url('wechat/index/order_return_detail')}}"+'/2';
+                        var href2 = "{{url('wechat/index/order_return_detail1')}}";
 
                         dataList += '<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
                             '<div class="fr"><a href="'+href2+'">已归还，查看归还详情<i class="icon icon_arrowRight_red"></i></a></div>' +

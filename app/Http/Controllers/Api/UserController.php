@@ -27,6 +27,12 @@ class UserController extends BaseController
         $where = [Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING];
         $count = Order::whereIn('status',$where)->where('user_id',$user_id)->count();
 
+        $order_code = '';
+        if($count)
+        {
+            $order = Order::whereIn('status',$where)->where('user_id',$user_id)->first();
+            $order_code = $order->code;
+        }
         //会员卡
         $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->orderBy('id','desc')->first();
         if(!empty($card))
@@ -60,7 +66,7 @@ class UserController extends BaseController
         //优惠券数量
         $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
 
-        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days,'coupon_nums'=>$coupon_nums];
+        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days,'coupon_nums'=>$coupon_nums,'order_code'=>$order_code];
         return $this->ret;
     }
 
@@ -277,6 +283,7 @@ class UserController extends BaseController
         $vip_card_pay_id = $request->get('vip_card_pay_id');
 
         $info = VipCardPay::find($vip_card_pay_id);
+
         //押金明细
         DB::table('user_pay_records')->insert(['user_id'=>$user_id,'type'=>1,'pay_type'=>2,'price'=>$info->money,'created_at'=>date('Y-m-d H:i:s')]);
 
@@ -284,6 +291,19 @@ class UserController extends BaseController
         $can_use_money = $user->can_use_money - $info->money;
         User::where('id',$user_id)->update(['can_use_money'=>$can_use_money]);
 
+        if($info->days > 0)
+        {
+            $user_days = $user->days - $info->days;
+            User::where('id',$info->user_id)->update(['days'=>$user_days]);
+
+            VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2,'days'=>0]);
+
+            $vip_card_count = VipCardPay::where(['user_id'=>$info->user_id,'pay_status'=>1,'status'=>1])->count();
+            if($vip_card_count <= 0)
+            {
+                User::where('id',$info->user_id)->update(['is_vip'=>0]);
+            }
+        }
         VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2]);
         return $this->ret;
     }

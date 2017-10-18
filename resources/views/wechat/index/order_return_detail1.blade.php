@@ -84,7 +84,7 @@
 
                         switch (good_return.data.detailList[i].back_status){
                             case '待验证':
-                                dataList ='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
+                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
                                     '<div class="fr">待平台验货确认</div></div><div class="good-detail clear"><a href="'+href+'">' +
                                     '<div class="fl"><img src="'+good_return.data.detailList[i].good_picture+'"></div><div class="fr"><h3>' +good_return.data.detailList[i].good_title+
                                     '</h3><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p><h4>适用年龄'+good_return.data.detailList[i].good_old+'岁</h4></div></a></div>' +
@@ -95,7 +95,7 @@
                                     good_return.data.detailList[i].back_time+'</p></div></li>';
                                 break;
                             case '已验证':
-                                dataList ='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
+                                dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
                                     '<div class="fr done">已验货确认</div></div><div class="good-detail clear"><a href="'+href+'">' +
                                     '<div class="fl"><img src="'+good_return.data.detailList[i].good_picture+'"></div><div class="fr"><h3>' +good_return.data.detailList[i].good_title+
                                     '</h3><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p><h4>适用年龄'+good_return.data.detailList[i].good_old+'岁</h4></div></a></div>' +

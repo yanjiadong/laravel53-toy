@@ -19,7 +19,7 @@ class VipCardPayController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $users = VipCardPay::with(['user','vip_card'])->paginate(5);
+        $users = VipCardPay::with(['user','vip_card'])->paginate(20);
         $menu = 'vip_card_pay';
 
         return view('admin.vip_card_pay.index',compact('users','username','menu'));
@@ -34,7 +34,9 @@ class VipCardPayController extends BaseController
 
         $user_info = User::find($info->user_id);
 
-        if($info->days > 0)
+        VipCardPay::where('id',$id)->update(['status'=>$status]);
+
+        /*if($info->days > 0)
         {
             $user_days = $user_info->days - $info->days;
             User::where('id',$info->user_id)->update(['days'=>$user_days]);
@@ -50,7 +52,7 @@ class VipCardPayController extends BaseController
         else
         {
             VipCardPay::where('id',$id)->update(['status'=>$status]);
-        }
+        }*/
 
         alert('',1);
     }
