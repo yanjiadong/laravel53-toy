@@ -141,7 +141,7 @@
                                     ' <h4>适用年龄'+orderDtail.data.list[i].good_old+'岁</h4></div></a></div><div class="order-number clear"> <div class="fl"><span>' +
                                     '已租用'+orderDtail.data.list[i].days+'天</span></div> <div class="fr"><span>共'+'1'+'件商品 合计：' +
                                     ('+¥'+orderDtail.data.list[i].price)+'</span></div></div><div class="total clear"> <div class="contact"><a href="tel:'+phone+'"><i class="icon-phone"></i><span>联系客服</span></a></div>' +
-                                    '<button class="logistics-btn" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button><button class="confirm-btn" onclick="orderDtail.goReturn()">归还玩具</button></div></li>';
+                                    '<button class="logistics-btn" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button><button class="confirm-btn" onclick="orderDtail.goReturn(\''+orderDtail.data.list[i].code+'\')">归还玩具</button></div></li>';
 
                                 /*dataList +='<li class="bg-white"><div class="top clear"><div class="fl">已租用'+orderDtail.data.list[i].days+'天</div>' +
                                     '<div class="fr">租用中</div></div><div class="good-detail clear">' +
@@ -225,8 +225,10 @@
             location.href="{{url('wechat/index/logistics_detail')}}"+'/'+code;
         },
         //归还玩具
-        goReturn:function () {
-            location.href="{{url('wechat/index/order_return_detail')}}";
+        goReturn:function (code) {
+            //location.href="{{url('wechat/index/order_return_detail')}}";
+            localStorage.out_trade_no = code;
+            location.href="{{url('wechat/index/logistics_info')}}";
         },
         //查看归还详情
         goReturned:function () {

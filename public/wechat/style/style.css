@@ -663,6 +663,10 @@
 }
 .good-detail-wrap .good-detail-content .good-detail-pic>div{
     width: 100%;
+    font-size: 0;
+}
+.good-detail-wrap .good-detail-content .good-detail-pic>div img{
+    width: 100%;
 }
 .good-detail-wrap .good-detail-content .good-detail-pic>div>p{
     margin-bottom: 10px;
@@ -1619,14 +1623,8 @@
     color: #6885EA;
 }
 .order-return-wrap .order-return-main {
-    margin-top: 44px;
     width: 100%;
     position: relative;
-}
-.order-return-wrap .order-return-main .parent-box {
-    width: 100%;
-    height: 100%;
-    position: absolute;
 }
 .order-return-wrap .order-return-main .parent-box .return {
     width: 100%;
@@ -2809,6 +2807,7 @@
 }
 .choose-vip-wrap .info {
     margin-top: 10px;
+    margin-bottom: 68px;
 }
 .choose-vip-wrap .info .select {
     padding: 10px;
@@ -2855,18 +2854,32 @@
     font-size: 12px;
     margin-top: 5px;
 }
+.choose-vip-wrap .info .coupon .fr{
+    height: 100%;
+    line-height:42px;
+}
 .choose-vip-wrap .info .coupon .fr span {
     font-size: 14px;
     color: #FF3574;
     margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .choose-vip-wrap .submit {
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 68px;
-    line-height: 68px;
     padding: 0 10px;
+    display: table;
+}
+.choose-vip-wrap .submit .fl{
+    height:100%;
+    width: 40%;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    float: none;
 }
 .choose-vip-wrap .submit .fl span:first-child {
     font-size: 14px;
@@ -2876,8 +2889,19 @@
     color: #FF3574;
     font-size: 16px;
 }
+.choose-vip-wrap .submit .fl p{
+    font-size: 12px;
+    color: #8d8d8d;
+}
+.choose-vip-wrap .submit .fr{
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+    width: 60%;
+    padding-left: 10px;
+}
 .choose-vip-wrap .submit .fr button {
-    width: 234px;
+    width: 100%;
     height: 44px;
     color: #fff;
     font-size: 16px;
@@ -4250,7 +4274,182 @@ textarea {
     font-size: 16px;
     color: #6885EA;
 }
-
-
-
-
+/*----------------提交物流信息----------------------*/
+.logistics-info-wrap .logistics-info-main{
+    padding-bottom: 44px;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .top-tips{
+    width: 100%;
+    background-color: #d8def3;
+    color: #26325C;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+    position: fixed;
+    top: 0;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .detail-cont-main{
+    padding-top: 36px;
+}
+.logistics-info-wrap .detail-cont-main .cont .top,
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .title{
+    font-size: 14px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
+    color: #8d8d8d;
+    border-bottom: 1px solid #e3e3e3;
+    background-color: #fff;
+}
+.logistics-info-wrap .detail-cont-main .cont .top span,
+.logistics-info-wrap .detail-cont-main .cont .good-detail span,
+.logistics-info-wrap .detail-cont-main .cont .logistics-info span{
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail {
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 5px;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fl {
+    width: 25%;
+    height: 100%;
+    padding: 0 10px 0 0;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fl img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fr {
+    width: 75%;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fr h3 {
+    font-size: 14px;
+    min-height: 40px;
+    color: #323232;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fr h3 a {
+    color: #323232;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fr h4 {
+    color: #8d8d8d;
+    font-size: 13px;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fr p {
+    color: #8d8d8d;
+    font-size: 13px;
+}
+.logistics-info-wrap .detail-cont-main .cont .return-info .title{
+    font-size: 14px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
+    color: #8d8d8d;
+    border-bottom: 1px solid #e3e3e3;
+    background-color: #fff;
+}
+.logistics-info-wrap .detail-cont-main .cont .return-info .info {
+    padding: 5px 10px;
+    border-bottom: 1px solid #e3e3e3;
+    margin-bottom: 5px;
+}
+.logistics-info-wrap .detail-cont-main .cont .return-info table td{
+    padding: 5px 0;
+    font-size: 14px;
+    color: #8d8d8d;
+}
+.logistics-info-wrap .detail-cont-main .cont .return-info table td:nth-child(2n+1){
+    width: 20%;
+    text-align: justify;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number {
+    padding: 10px;
+    border-bottom: 1px solid #e3e3e3;
+    background-color: #fff;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fl {
+    width: 80%;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fl h5 {
+    color: #323232 ;
+    font-size: 14px;
+    font-weight: bold;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fl input {
+    border: 1px solid transparent;
+    height: 32px;
+    border-radius: 3px;
+    color: #323232 ;
+    font-size: 14px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr {
+    text-align: center;
+    width: 20%;
+    padding-top: 10px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr p {
+    color: #8D8D8D ;
+    font-size: 11px;
+    margin-top: 5px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company {
+    padding: 10px;
+    height: 70px;
+    background-color: #fff;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl h5 {
+    color: #323232;
+    font-size: 14px;
+    font-weight: bold;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input {
+    border: 1px solid transparent;
+    height: 32px;
+    border-radius: 3px;
+    color: #323232 ;
+    font-size: 14px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:focus {
+    border: 1px solid #6885EA ;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fr {
+    line-height: 50px;
+    height: 50px;
+}
+.logistics-info-wrap .logistics-info-main .no-good {
+    height: 300px;
+    position: relative;
+    display: none;
+}
+.logistics-info-wrap .logistics-info-main .no-good .tips{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #C9C8DA;
+    font-size: 15px;
+}
+.logistics-info-wrap .btn {
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    background-color: #fff;
+    width: 100%;
+}
+.logistics-info-wrap button {
+    width: 100%;
+    height: 44px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #BBB;
+}
+.logistics-info-wrap .btn button.active {
+    background-color: #6885EA;
+}

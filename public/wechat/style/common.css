@@ -116,6 +116,39 @@ i{
     vertical-align: middle;
     margin-right: 5px;
 }
+.icon-info-1{
+    display: inline-block;
+    background-image: url(../image/common/info_1.png);
+    background-size: 15px 13px;
+    background-position: 0 0;
+    width: 15px;
+    height: 13px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.icon-info-2{
+    display: inline-block;
+    background-image: url(../image/common/info_2.png);
+    background-size: 11px 15px;
+    background-position: 0 0;
+    width: 11px;
+    height: 15px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+.icon-info-3{
+    display: inline-block;
+    background-image: url(../image/common/info_3.png);
+    background-size: 15px 13px;
+    background-position: 0 0;
+    width: 15px;
+    height: 13px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 5px;
+}
 
 /*确认框样式*/
 .confirm-alert-wrap,.tips-alert-wrap{

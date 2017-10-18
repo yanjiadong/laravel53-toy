@@ -376,6 +376,14 @@ class IndexController extends BaseController
         return view('wechat.index.order_return_detail',compact('user_id','openid','page'));
     }
 
+    public function order_return_detail1()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.index.order_return_detail1',compact('user_id','openid'));
+    }
+
     public function fill_logistics()
     {
         $user_id = session('user_id');
@@ -384,6 +392,16 @@ class IndexController extends BaseController
         $signPackage = getJssdk();
 
         return view('wechat.index.fill_logistics',compact('user_id','openid','signPackage'));
+    }
+
+    public function logistics_info()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $signPackage = getJssdk();
+
+        return view('wechat.index.logistics_info',compact('user_id','openid','signPackage'));
     }
 
     public function children_interesting_compilation()

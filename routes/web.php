@@ -49,8 +49,10 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/order_detail/{order_code}','IndexController@order_detail');
 
     Route::any('/index/order_return_detail/{page?}','IndexController@order_return_detail');
+    Route::any('/index/order_return_detail1','IndexController@order_return_detail1');
     Route::any('/index/fill_logistics/{order_code?}','IndexController@fill_logistics');
     Route::any('/index/logistics_detail/{order_code?}','IndexController@logistics_detail');
+    Route::any('/index/logistics_info','IndexController@logistics_info');
 
     Route::get('/user/center','UserController@center')->name('wechat.user.center');
     Route::get('/user/help','UserController@help')->name('wechat.user.help');
