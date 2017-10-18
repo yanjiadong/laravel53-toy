@@ -69,7 +69,7 @@
                         <div class="number clear">
                             <div class="fl">
                                 <h5>快递单号</h5>
-                                <input type="text" placeholder="请输入快递单号" onblur="logisticsInfo.testNumber(this)">
+                                <input type="number" placeholder="请输入快递单号" onblur="logisticsInfo.testNumber(this)">
                             </div>
                             <div class="fr">
                                 <i class="icon icon_code"></i>
