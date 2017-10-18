@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Brand;
+use App\Cart;
 use App\Category;
 use App\CategoryTag;
 use App\Good;
@@ -196,6 +197,7 @@ class GoodController extends BaseController
     public function destroy($id)
     {
         Good::destroy($id);
+        Cart::where('good_id',$id)->delete();
         GoodTag::where('good_id',$id)->delete();
         GoodPicture::where('good_id',$id)->delete();
 
