@@ -65,7 +65,7 @@ class CrontabController extends BaseController
      */
     private function process_order()
     {
-        $orders = Order::whereIn('status',[Order::STATUS_DOING])->get()->toArray();
+        $orders = Order::whereIn('status',[Order::STATUS_DOING,Order::STATUS_SEND])->get()->toArray();
         if(!empty($orders))
         {
             foreach ($orders as $order)
