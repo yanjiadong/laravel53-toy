@@ -149,7 +149,98 @@ i{
     vertical-align: middle;
     margin-right: 5px;
 }
-
+.icon-user_center1{
+    display: inline-block;
+    background-image: url(../image/common/user_center_1.png);
+    background-size: 60px 24px;
+    background-position: 0 0;
+    width: 60px;
+    height: 24px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.icon-user_center2{
+    display: inline-block;
+    background-image: url(../image/common/user_center_2.png);
+    background-size: 60px 24px;
+    background-position: 0 0;
+    width: 60px;
+    height: 24px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.icon-user_center3{
+    display: inline-block;
+    background-image: url(../image/common/user_center_3.png);
+    background-size: 15px 15px;
+    background-position: 0 0;
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-user_center4{
+    display: inline-block;
+    background-image: url(../image/common/user_center_4.png);
+    background-size: 36px 23px;
+    background-position: 0 0;
+    width: 36px;
+    height: 23px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-user_center5{
+    display: inline-block;
+    background-image: url(../image/common/user_center_5.png);
+    background-size: 36px 21px;
+    background-position: 0 0;
+    width: 36px;
+    height: 21px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-user_center6{
+    display: inline-block;
+    background-image: url(../image/common/user_center_6.png);
+    background-size: 28px 28px;
+    background-position: 0 0;
+    width: 28px;
+    height: 28px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-user_center7{
+    display: inline-block;
+    background-image: url(../image/common/user_center_7.png);
+    background-size: 19px 22px;
+    background-position: 0 0;
+    width: 19px;
+    height: 22px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-user_center8{
+    display: inline-block;
+    background-image: url(../image/common/user_center_8.png);
+    background-size: 19px 19px;
+    background-position: 0 0;
+    width: 19px;
+    height: 19px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-user_center9{
+    display: inline-block;
+    background-image: url(../image/common/user_center_9.png);
+    background-size: 19px 19px;
+    background-position: 0 0;
+    width: 19px;
+    height: 19px;
+    overflow: hidden;
+    vertical-align: middle;
+}
 /*确认框样式*/
 .confirm-alert-wrap,.tips-alert-wrap{
     background-color: rgba(76, 75, 77, 0.5);

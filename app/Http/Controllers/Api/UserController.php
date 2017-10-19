@@ -304,7 +304,11 @@ class UserController extends BaseController
                 User::where('id',$info->user_id)->update(['is_vip'=>0]);
             }
         }
-        VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2]);
+        else
+        {
+            VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2]);
+        }
+
         return $this->ret;
     }
 

@@ -4453,3 +4453,177 @@ textarea {
 .logistics-info-wrap .btn button.active {
     background-color: #6885EA;
 }
+/*-------------------------个人中心 新 ----------------------------*/
+.user-center1-wrap{
+    padding-bottom: 50px;
+}
+.user-center1-wrap .top{
+    background-color: #5b5249;
+}
+.user-center1-wrap .top .photo{
+    padding: 20px;
+}
+.user-center1-wrap .top .photo table{
+
+}
+.user-center1-wrap .top .photo table td{
+    vertical-align: middle;
+    color: #fff;
+    font-size: 13px;
+}
+.user-center1-wrap .top .photo table td.name{
+    font-size: 17px;
+}
+.user-center1-wrap .top .photo table td:first-child{
+    width: 74px;
+    padding-right: 10px;
+}
+.user-center1-wrap .top .photo table td:first-child>img{
+    width: 64px;
+    height: 64px;
+    border-radius: 3px;
+}
+.user-center1-wrap .top .progress{
+    padding: 20px 20px 10px 20px;
+    position: relative;
+    color: #8d8d8d;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.user-center1-wrap .top .progress .grey-strip{
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #8f9090;
+    position: relative;
+}
+.user-center1-wrap .top .progress .grey-strip .day-info .info{
+    display: inline-block;
+    padding: 5px;
+    font-size: 12px;
+    color: #8d8d8d;
+    border-radius: 4px;
+    background-color: #fff;
+    position: absolute;
+    top:-46px;
+    transform: translateX(-50%);
+
+}
+.user-center1-wrap .top .progress .grey-strip .day-info .line{
+    display: block;
+    margin: 0 auto;
+    width: 1px;
+    height: 12px;
+    background-color: #fff;
+    margin-top: 2px;
+    position: absolute;
+    top:-18px;
+}
+.user-center1-wrap .top .progress .grey-strip .white-strip{
+    width: 50%;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+.user-center1-wrap .top .progress .time{
+    margin-top: 5px;
+    color: #fff;
+    font-size: 12px;
+}
+.user-center1-wrap .continue{
+    background-color: #6b625a;
+    padding: 10px 20px;
+    color: #fff;
+    border-bottom: 1px solid #f2f2f2;
+}
+.user-center1-wrap .continue td{
+    vertical-align: middle;
+}
+.user-center1-wrap .continue td:first-child{
+     width: 15px;
+ }
+.user-center1-wrap .continue td:first-child{
+    width: 25px;
+    padding-right: 5px;
+}
+.user-center1-wrap .continue td:last-child{
+    width:70px;
+    padding-left: 5px;
+}
+.user-center1-wrap .continue td:last-child button{
+    width:100%;
+    height: 30px;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 13px;
+    border-radius: 4px;
+}
+.user-center1-wrap .items-mid {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 0;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+}
+.user-center1-wrap .items-mid table tr td {
+    text-align: center;
+    vertical-align: middle;
+}
+.user-center1-wrap .items-mid table tr:first-child {
+    height: 30px;
+}
+.user-center1-wrap .items-mid table tr:nth-child(2) {
+    font-size: 12px;
+    color: #323232;
+    height: 20px;
+}
+.user-center1-wrap .items-mid table tr:nth-child(3) {
+    font-size: 13px;
+    color: #F6A623;
+}
+.user-center1-wrap .list ul li {
+    height: 50px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.user-center1-wrap .list ul li:first-child {
+    border-top: 1px solid #f2f2f2;
+}
+.user-center1-wrap .list ul li:nth-child(2) .fl span {
+    color: #000;
+}
+.user-center1-wrap .list ul li .fl {
+    height: 100%;
+    line-height: 30px;
+}
+.user-center1-wrap .list ul li .fl .icon-box {
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+}
+.user-center1-wrap .list ul li .fl span {
+    font-size: 15px;
+    color: #323232;
+    margin-left: 5px;
+}
+.user-center1-wrap .list ul li .fr {
+    height: 100%;
+    line-height: 30px;
+}
+.user-center1-wrap .list ul li .fr span {
+    font-size: 14px;
+    color: #8d8d8d;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.user-center1-wrap .vip-img {
+    display: none;
+    margin-top: 5px;
+}
+.user-center1-wrap .vip-img img {
+    width: 100%;
+}

@@ -30,7 +30,7 @@ class UserController extends BaseController
             $phone = $content[7];
         }
 
-        return view('wechat.user.center',compact('user_id','menu','cart_num','phone'));
+        return view('wechat.user.center1',compact('user_id','menu','cart_num','phone'));
     }
 
     public function share()

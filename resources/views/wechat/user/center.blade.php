@@ -127,8 +127,7 @@
                     cars:res.info.coupon_nums,         //优惠卡劵
                     carSort:res.info.card.vip_card_type_str,   //卡的类型
                     time:res.info.days,
-                    phone:res.info.user.telephone,
-                    order_code:res.info.order_code
+                    phone:res.info.user.telephone
                 };
 
                 localStorage.out_trade_no = res.info.order_code;

@@ -49,6 +49,15 @@ var common = {
         });
     },
 
+    //提示框
+    alert_tip1:function (msg,color,title,call){
+        var tip_content='<div class="success-tip-wrap">'+msg+'</div>';
+        $('body').append(tip_content);
+        $(".success-tip-wrap").css({'bottom':'50%'}).fadeIn();
+        setTimeout(function () {
+            $(".success-tip-wrap").fadeOut().remove();
+        },1000)
+    },
     //成功提示
     success_tip:function (msg) {
        var tip_content='<div class="success-tip-wrap">'+msg+'</div>';
