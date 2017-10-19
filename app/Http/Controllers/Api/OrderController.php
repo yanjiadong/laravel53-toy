@@ -240,7 +240,15 @@ class OrderController extends BaseController
         }
 
         //$list = Order::with(['user','category','good_brand'])->skip($offset)->take($limit)->whereIn('status',$where)->get()->toArray();
-        $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
+        if($type == 2)
+        {
+            $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->orderBy('back_time','desc')->get()->toArray();
+        }
+        else
+        {
+            $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
+        }
+
         //print_r($list);
         if(!empty($list))
         {
@@ -249,11 +257,11 @@ class OrderController extends BaseController
                 $v['days'] = 0;
                 if($v['status']==Order::STATUS_BACK)
                 {
-                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['confirm_time']))/(3600*24));
+                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/(3600*24));
                 }
                 elseif($v['status']==Order::STATUS_DOING)
                 {
-                    $v['days'] = ceil((time()- strtotime($v['confirm_time']))/(3600*24));
+                    $v['days'] = ceil((time()- strtotime($v['send_time']))/(3600*24));
                 }
             }
         }
@@ -326,7 +334,7 @@ class OrderController extends BaseController
         {
             foreach ($list as &$v)
             {
-                $v['days'] = ceil((time() - strtotime($v['confirm_time']))/(3600*24));
+                $v['days'] = ceil((time() - strtotime($v['send_time']))/(3600*24));
             }
         }
 
@@ -458,7 +466,7 @@ class OrderController extends BaseController
                 $v['days'] = 0;
                 if($v['status']=='已归还')
                 {
-                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['confirm_time']))/(3600*24));
+                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/(3600*24));
                 }
 
                 if($v['back_time'])
@@ -467,7 +475,7 @@ class OrderController extends BaseController
                 }
                 if($v['confirm_time'])
                 {
-                    $v['confirm_time_new'] = date('Y.m.d',(strtotime($v['confirm_time'])));
+                    $v['confirm_time_new'] = date('Y.m.d',(strtotime($v['send_time'])));
                 }
             }
         }

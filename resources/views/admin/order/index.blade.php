@@ -171,7 +171,7 @@
                     return false;
                 }
 
-                $.post("{{route('admin.order.send')}}", {id:id,express_no:express_no,express_id:express_id}, function(data){
+                $.post("{{route('admin.order.send')}}", {type:1,id:id,express_no:express_no,express_id:express_id}, function(data){
                     easyDialog.close();
                     cTip(data);
                 }, "json");

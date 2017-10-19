@@ -186,7 +186,7 @@
                     return false;
                 }
 
-                $.post("{{route('admin.order.send')}}", {id:id,express_no:express_no,express_id:express_id,send_time:send_time}, function(data){
+                $.post("{{route('admin.order.send')}}", {type:2,id:id,express_no:express_no,express_id:express_id,send_time:send_time}, function(data){
                     cTip(data);
                 }, "json");
             });

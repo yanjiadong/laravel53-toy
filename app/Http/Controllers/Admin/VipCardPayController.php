@@ -14,15 +14,24 @@ class VipCardPayController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
+        $status = $request->get('status');
 
-        $users = VipCardPay::with(['user','vip_card'])->paginate(20);
+        if($status)
+        {
+            $users = VipCardPay::with(['user','vip_card'])->where('status',$status)->paginate(20);
+        }
+        else
+        {
+            $users = VipCardPay::with(['user','vip_card'])->paginate(20);
+        }
+
         $menu = 'vip_card_pay';
 
-        return view('admin.vip_card_pay.index',compact('users','username','menu'));
+        return view('admin.vip_card_pay.index',compact('users','username','menu','status'));
     }
 
     public function action(Request $request)

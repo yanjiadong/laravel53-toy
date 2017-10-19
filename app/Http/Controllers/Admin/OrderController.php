@@ -56,6 +56,8 @@ class OrderController extends BaseController
         $id = $request->get('id');
         $express_no = $request->get('express_no');
         $express_id = $request->get('express_id');
+        $send_time = $request->get('send_time');
+        $type = $request->get('type');
 
         $order = Order::find($id);
         $express = Express::find($express_id);
@@ -66,8 +68,17 @@ class OrderController extends BaseController
         ];
         weixinCurl(url('api/express_info/index'),'post', $param);
 
-        $this->send_sms($order->receiver_telephone,$order->receiver);
-        Order::where('id',$id)->update(['send_time'=>$this->datetime,'status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
+        if($type == 1)
+        {
+            $this->send_sms($order->receiver_telephone,$order->receiver);
+            Order::where('id',$id)->update(['send_time'=>$this->datetime,'send_time2'=>$this->datetime,'status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
+        }
+        else
+        {
+            Order::where('id',$id)->update(['send_time2'=>$send_time,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
+        }
+
+
         alert('',1);
     }
 

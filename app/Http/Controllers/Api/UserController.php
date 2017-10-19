@@ -33,8 +33,29 @@ class UserController extends BaseController
             $order = Order::whereIn('status',$where)->where('user_id',$user_id)->first();
             $order_code = $order->code;
         }
-        //会员卡
-        $card = VipCardPay::where('user_id',$user_id)->where('days','>',0)->where('pay_status',1)->orderBy('id','desc')->first();
+
+
+        $is_vip = 1;
+        if($user->is_vip == 0)
+        {
+            //判断是否是过期或者本身就不是会员
+            $card_count = VipCardPay::where('user_id',$user_id)->where('status','<',1)->where('pay_status',1)->count();
+            if($card_count <= 0)
+            {
+                $is_vip = 0;
+            }
+            else
+            {
+                //会员卡
+                $card = VipCardPay::where('user_id',$user_id)->where('status','<',1)->where('pay_status',1)->orderBy('id','desc')->first();
+            }
+        }
+        else
+        {
+            //会员卡
+            $card = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->orderBy('id','desc')->first();
+        }
+
         if(!empty($card))
         {
             $card->isOutTime = 1;
@@ -66,7 +87,7 @@ class UserController extends BaseController
         //优惠券数量
         $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
 
-        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days,'coupon_nums'=>$coupon_nums,'order_code'=>$order_code];
+        $this->ret['info'] = ['user'=>$user,'count'=>$count,'card'=>$card,'days'=>$days,'coupon_nums'=>$coupon_nums,'order_code'=>$order_code,'is_vip'=>$is_vip];
         return $this->ret;
     }
 
@@ -284,6 +305,14 @@ class UserController extends BaseController
 
         $info = VipCardPay::find($vip_card_pay_id);
 
+        //判断是否有已发货或者租用中的玩具
+        $order_count = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->count();
+        if($order_count > 0)
+        {
+            $this->ret = ['code'=>300,'msg'=>'您还有未归还的玩具，将玩具归还后才能申请押金提现'];
+            return $this->ret;
+        }
+
         //押金明细
         DB::table('user_pay_records')->insert(['user_id'=>$user_id,'type'=>1,'pay_type'=>2,'price'=>$info->money,'created_at'=>date('Y-m-d H:i:s')]);
 
@@ -296,7 +325,7 @@ class UserController extends BaseController
             $user_days = $user->days - $info->days;
             User::where('id',$info->user_id)->update(['days'=>$user_days]);
 
-            VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2,'days'=>0]);
+            VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2,'days'=>0,'apply_time'=>$this->datetime]);
 
             $vip_card_count = VipCardPay::where(['user_id'=>$info->user_id,'pay_status'=>1,'status'=>1])->count();
             if($vip_card_count <= 0)
@@ -306,7 +335,7 @@ class UserController extends BaseController
         }
         else
         {
-            VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2]);
+            VipCardPay::where('id',$vip_card_pay_id)->update(['status'=>-2,'apply_time'=>$this->datetime]);
         }
 
         return $this->ret;

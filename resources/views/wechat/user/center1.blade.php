@@ -58,8 +58,8 @@
         <table>
             <tr>
                 <td onclick="user_center.exchangeToy()"><i class="icon-user_center4"></i></td>
-                <td onclick="user_center.goDdeposit()"><i class="icon-user_center5"></i></td>
-                <td onclick="user_center.goChooseVoucher()"><i class="icon-user_center6"></i></td>
+                <td onclick="user_center.goDdeposit()"><i class="icon-user_center6"></i></td>
+                <td onclick="user_center.goChooseVoucher()"><i class="icon-user_center5"></i></td>
             </tr>
             <tr>
                 <td onclick="user_center.exchangeToy()">归还玩具</td>
@@ -125,7 +125,7 @@
                 user_center.data.userInfo = {
                     id:res.info.user.id,
                     isAuthorize:true,
-                    isVip:res.info.user.is_vip,
+                    isVip:res.info.is_vip,
                     isOutTime:res.info.card.isOutTime,
                     img:res.info.user.wechat_avatar,
                     name:res.info.user.wechat_nickname,

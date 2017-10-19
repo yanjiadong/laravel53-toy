@@ -6,6 +6,36 @@
             <li><a href="javascript:;">押金管理</a> <span class="divider">></span></li>
             <li class="active"><a href="{{ route('vip_card_pays.index') }}">押金列表</a></li>
         </ul>
+        <ul class="buttons">
+            <li>
+                <a href="javascript:;" class="link_bcPopupSearch"><span class="icon-search"></span><span class="text">押金查询</span></a>
+                <form action="{{route('vip_card_pays.index')}}" method="get">
+                    <div id="bcPopupSearch" class="popup">
+                        <div class="head clearfix">
+                            <div class="arrow"></div>
+                            <span class="isw-zoom"></span>
+                            <span class="name">押金查询</span>
+                        </div>
+
+                        <div class="body search row-form">
+                            <span>状态</span>
+                            <select name="status">
+                                <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部</option>
+                                <option value="1" <?php echo (isset($status)&&$status==1)?'selected':'';?>>正常</option>
+                                <option value="-1" <?php echo (isset($status)&&$status==-1)?'selected':'';?>>已过期</option>
+                                <option value="-2" <?php echo (isset($status)&&$status==-2)?'selected':'';?>>申请提现</option>
+                                <option value="-3" <?php echo (isset($status)&&$status==-3)?'selected':'';?>>提现成功</option>
+                            </select>
+                        </div>
+
+                        <div class="footer">
+                            <button class="btn" type="submit">查询</button>
+                            <button class="btn btn-danger link_bcPopupSearch" type="button">关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
     </div>
 
     <div class="workplace">
@@ -30,9 +60,9 @@
                                 <th>会员昵称</th>
                                 <th>押金</th>
                                 <th>剩余天数</th>
-                                <th>优惠金额</th>
                                 <th>会员卡类型</th>
                                 <th>状态</th>
+                                <th>申请提现时间</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
@@ -45,7 +75,6 @@
                                     <td>{{$user->user->wechat_nickname}}</td>
                                     <td>{{$user->money}}</td>
                                     <td>{{$user->days}}</td>
-                                    <td>{{$user->coupon_price}}</td>
                                     <td>
                                         @if($user->vip_card_type == 1)
                                             月卡
@@ -66,6 +95,7 @@
                                             <span style="color: blue;">提现成功</span>
                                         @endif
                                     </td>
+                                    <td>{{ $user->apply_time }}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
                                         @if($user->status==-2)

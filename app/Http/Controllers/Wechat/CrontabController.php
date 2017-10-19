@@ -72,7 +72,7 @@ class CrontabController extends BaseController
             {
                 $user_info = User::find($order['user_id']);
 
-                $cards = VipCardPay::where('user_id',$order['user_id'])->where('pay_status',1)->where('status',1)->get()->toArray();
+                $cards = VipCardPay::where('user_id',$order['user_id'])->where('pay_status',1)->where('status',1)->orderBy('id','desc')->get()->toArray();
                 if(!empty($cards))
                 {
                     foreach ($cards as $card)
