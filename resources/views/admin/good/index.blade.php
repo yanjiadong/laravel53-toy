@@ -6,6 +6,37 @@
             <li><a href="javascript:;">玩具管理</a> <span class="divider">></span></li>
             <li class="active"><a href="{{ route('goods.index') }}">玩具列表</a></li>
         </ul>
+        <ul class="buttons">
+            <li>
+                <a href="javascript:;" class="link_bcPopupSearch"><span class="icon-search"></span><span class="text">玩具查询</span></a>
+                <form action="{{route('goods.index')}}" method="get">
+                    <div id="bcPopupSearch" class="popup">
+                        <div class="head clearfix">
+                            <div class="arrow"></div>
+                            <span class="isw-zoom"></span>
+                            <span class="name">玩具查询</span>
+                        </div>
+                        <div class="body search row-form">
+                            <span>分类</span>
+                            <select name="category_id">
+                                <option value="0" <?php echo (isset($category_id)&&$category_id==0)?'selected':'';?>>全部</option>
+
+                                @if(count($categorys)>0)
+                                    @foreach($categorys as $category)
+                                        <option value="{{ $category->id }}" <?php echo (isset($category->id)&&$category->id==$category_id)?'selected':'';?>>{{$category->title}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="footer">
+                            <button class="btn" type="submit">查询</button>
+                            <button class="btn btn-danger link_bcPopupSearch" type="button">关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
     </div>
 
     <div class="workplace">

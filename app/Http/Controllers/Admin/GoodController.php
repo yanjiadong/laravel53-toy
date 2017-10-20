@@ -25,16 +25,26 @@ class GoodController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $goods = Good::with(['category','brand'])->paginate(20);
+        $category_id = $request->get('category_id');
+        if($category_id)
+        {
+            $goods = Good::with(['category','brand'])->where('category_id',$category_id)->paginate(20);
+        }
+        else
+        {
+            $goods = Good::with(['category','brand'])->paginate(20);
+        }
+
         //dd($goods);
         $menu = 'good';
+        $categorys = Category::all();
         //dd($goods);
-        return view('admin.good.index',compact('goods','username','menu'));
+        return view('admin.good.index',compact('goods','username','menu','category_id','categorys'));
     }
 
     /**
