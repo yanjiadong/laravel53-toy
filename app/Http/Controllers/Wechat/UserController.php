@@ -46,9 +46,10 @@ class UserController extends BaseController
         return view('wechat.user.share',compact('user_id','user','count','signPackage'));
     }
 
-    public function share_open()
+    public function share_open($user_id)
     {
-        return view('wechat.user.share_open');
+        $user = User::find($user_id);
+        return view('wechat.user.share_open',compact('user_id','user'));
     }
 
     public function help()

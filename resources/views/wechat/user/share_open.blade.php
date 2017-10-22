@@ -19,7 +19,7 @@
 <div class="share-wrap">
     <div class="share-main">
         <div class="photo">
-            <img src="/wechat/image/other/3.png" alt="">
+            <img src="{{isset($user->wechat_avatar)&&!empty($user->wechat_avatar) ? $user->wechat_avatar:'/wechat/image/other/3.png'}}" alt="">
         </div>
         <h3>张三丰</h3>
         <p>宝贝在“趣编程”免费玩了5个编程机器人</p>

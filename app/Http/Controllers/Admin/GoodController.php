@@ -171,7 +171,7 @@ class GoodController extends BaseController
         unset($data['tags']);
         unset($data['pics']);
         unset($data['_method']);
-        $data['status'] = Good::STATUS_ON_SALE;
+        //$data['status'] = Good::STATUS_ON_SALE;
 
 
         $good = Good::where('id',$id)->update($data);

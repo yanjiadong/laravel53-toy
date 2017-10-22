@@ -255,11 +255,11 @@ class OrderController extends BaseController
             foreach ($list as &$v)
             {
                 $v['days'] = 0;
-                if($v['status']==Order::STATUS_BACK)
+                if($v['status']==Order::STATUS_BACK_STR)
                 {
                     $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/(3600*24));
                 }
-                elseif($v['status']==Order::STATUS_DOING)
+                elseif($v['status']==Order::STATUS_DOING_STR)
                 {
                     $v['days'] = ceil((time()- strtotime($v['send_time']))/(3600*24));
                 }
@@ -287,6 +287,16 @@ class OrderController extends BaseController
                 //print_r($logistics);
             }
             //print_r($content);
+        }
+
+        $info['days'] = 0;
+        if($info['status'] == Order::STATUS_BACK_STR)
+        {
+            $info['days'] = ceil((strtotime($info['back_time']) - strtotime($info['send_time']))/(3600*24));
+        }
+        elseif($info['status'] == Order::STATUS_DOING_STR)
+        {
+            $info['days'] = ceil(($this->time- strtotime($info['send_time']))/(3600*24));
         }
 
         $this->ret['info'] = ['logistics'=>$logistics,'order'=>$info];

@@ -108,7 +108,7 @@
         wx.ready(function(){
             wx.onMenuShareTimeline({
                 title: '玩玩具趣编程', // 分享标题
-                link: '{{url('wechat/user/share_open')}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                link: '{{url('wechat/user/share_open')}}'+'/'+'{{$user_id}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'http://toy.yanjiadong.net/wechat/image/other/3.png', // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
@@ -121,7 +121,7 @@
             wx.onMenuShareAppMessage({
                 title: '玩玩具趣编程', // 分享标题
                 desc: '可编程教育机器人包月玩，乐高、能力风暴、优必选等大牌全都有', // 分享描述
-                link: '{{url('wechat/user/share_open')}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                link: '{{url('wechat/user/share_open')}}'+'/'+'{{$user_id}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'http://toy.yanjiadong.net/wechat/image/other/3.png', // 分享图标
                 type: 'link', // 分享类型,music、video或link，不填默认为link
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
