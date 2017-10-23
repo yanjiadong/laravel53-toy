@@ -33,11 +33,11 @@ class GoodController extends BaseController
         $category_id = $request->get('category_id');
         if($category_id)
         {
-            $goods = Good::with(['category','brand'])->where('category_id',$category_id)->paginate(20);
+            $goods = Good::with(['category','brand'])->where('category_id',$category_id)->orderBy('sort','asc')->paginate(20);
         }
         else
         {
-            $goods = Good::with(['category','brand'])->paginate(20);
+            $goods = Good::with(['category','brand'])->orderBy('sort','asc')->paginate(20);
         }
 
         //dd($goods);
@@ -217,6 +217,12 @@ class GoodController extends BaseController
     public function action(Request $request)
     {
         Good::where('id',$request->get('id'))->update(['status'=>$request->get('status')]);
+        return alert('',1);
+    }
+
+    public function sort_action(Request $request)
+    {
+        Good::where('id',$request->get('id'))->update(['sort'=>$request->get('sort')]);
         return alert('',1);
     }
 }

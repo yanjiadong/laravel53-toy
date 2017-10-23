@@ -41,7 +41,7 @@ class IndexController extends BaseController
         $limit = $request->get('limit');
 
         $offset = ($page-1)*$limit;
-        $goods = Good::with(['category_tag'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->skip($offset)->take($limit)->get();
+        $goods = Good::with(['category_tag'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->orderBy('sort','asc')->skip($offset)->take($limit)->get();
         $this->ret['info'] = ['goods'=>$goods];
         return $this->ret;
     }
@@ -65,7 +65,7 @@ class IndexController extends BaseController
         $where['category_id'] = $category_id;
         $where['status'] = Good::STATUS_ON_SALE;
 
-        $goods = Good::with(['brand'])->where($where)->get();
+        $goods = Good::with(['brand'])->where($where)->orderBy('sort','asc')->get();
         $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'brands'=>$brands,'goods'=>$goods];
         return $this->ret;
     }

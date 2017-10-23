@@ -152,6 +152,7 @@
                             logisticsInfo.data.goodData =item;
                         }
                     });
+                    //console.log(logisticsInfo.data.goodData);
                     var cont ='<a href="'+logisticsInfo.data.goodData.href+'"><div class="fl"><img src="'+logisticsInfo.data.goodData.good_picture+'"></div>' +
                         '<div class="fr"><h3>'+logisticsInfo.data.goodData.good_title+'</h3>' +
                         '<p>市场参考价¥'+logisticsInfo.data.goodData.good_price+'</p><h4>适用年龄'+logisticsInfo.data.goodData.good_old+'岁</h4></div></a>';
@@ -221,10 +222,10 @@
         //通过config接口注入权限验证配置
         wx.config({
             debug: false,
-            appId: '{{$signPackage["appId"]}}',
-            timestamp: '{{$signPackage["timestamp"]}}',
-            nonceStr: '{{$signPackage["nonceStr"]}}',
-            signature: '{{$signPackage["signature"]}}',
+            appId: '{{isset($signPackage["appId"])?$signPackage["appId"]:''}}',
+            timestamp: '{{isset($signPackage["timestamp"])?$signPackage["timestamp"]:''}}',
+            nonceStr: '{{isset($signPackage["nonceStr"])?$signPackage["nonceStr"]:''}}',
+            signature: '{{isset($signPackage["signature"])?$signPackage["signature"]:''}}',
             jsApiList: [
                 'onMenuShareAppMessage',
                 'onMenuShareTimeline',

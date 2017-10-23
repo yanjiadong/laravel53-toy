@@ -58,6 +58,7 @@
                                 <th>序号</th>
                                 <th>支付订单号</th>
                                 <th>会员昵称</th>
+                                <th>会员手机号</th>
                                 <th>押金</th>
                                 <th>剩余天数</th>
                                 <th>会员卡类型</th>
@@ -73,6 +74,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{$user->order_code}}</td>
                                     <td>{{$user->user->wechat_nickname}}</td>
+                                    <td>{{$user->user->telephone}}</td>
                                     <td>{{$user->money}}</td>
                                     <td>{{$user->days}}</td>
                                     <td>

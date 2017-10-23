@@ -257,11 +257,11 @@ class OrderController extends BaseController
                 $v['days'] = 0;
                 if($v['status']==Order::STATUS_BACK_STR)
                 {
-                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/(3600*24));
+                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/86400);
                 }
                 elseif($v['status']==Order::STATUS_DOING_STR)
                 {
-                    $v['days'] = ceil((time()- strtotime($v['send_time']))/(3600*24));
+                    $v['days'] = ceil((time()- strtotime($v['send_time']))/86400);
                 }
             }
         }

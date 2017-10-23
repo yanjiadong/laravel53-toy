@@ -66,14 +66,13 @@
                                 <th>序号</th>
                                 <th>订单编号</th>
                                 <th>订单状态</th>
-                                <th>订单价格</th>
                                 <th>玩具名称</th>
                                 <th>邮费</th>
-                                <th>快递公司</th>
+                                <th>发货物流</th>
                                 <th>会员手机号</th>
                                 <th>会员微信昵称</th>
                                 <th>回寄状态</th>
-                                <th>创建时间</th>
+                                <th>下单时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -83,12 +82,11 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $order->code }}</td>
                                     <td>{{ $order->status }}</td>
-                                    <td>{{ $order->price }}</td>
                                     <td>{{ $order->good_title }}</td>
                                     <td>{{ $order->express_price }}</td>
                                     <td>{{ $order->express_title }}</td>
                                     <td>{{ $order->user->telephone }}</td>
-                                    <td>{{ $order->user->wechat_nickname }}</td>
+                                    <td>{{ $order->user->wechat_nickname }}(会员剩余天数：{{$order->user->days}})</td>
                                     <td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>

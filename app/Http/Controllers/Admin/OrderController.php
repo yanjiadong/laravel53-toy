@@ -26,7 +26,7 @@ class OrderController extends BaseController
 
         if(empty($status) && empty($code) && empty($telephone))
         {
-            $orders = Order::with(['user'])->orderBy('id','desc')->paginate(20);
+            $orders = Order::with(['user'])->where('status','!=','0')->orderBy('id','desc')->paginate(20);
         }
         else
         {

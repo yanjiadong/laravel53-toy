@@ -22,6 +22,7 @@ class Order extends Model
     const STATUS_SEND_STR = '已发货';
     const STATUS_DOING_STR = '租用中';
     const STATUS_BACK_STR = '已归还';
+    const STATUS_CANCEL_STR = '已取消';
 
     //back_status   0待验证  1已验证
     const BACK_STATUS_WAITING = 0;

@@ -24,7 +24,8 @@ class UserController extends BaseController
 
         $user = User::find($user_id);
 
-        $where = [Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING];
+        //$where = [Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING];
+        $where = [Order::STATUS_DOING];
         $count = Order::whereIn('status',$where)->where('user_id',$user_id)->count();
 
         $order_code = '';

@@ -395,12 +395,13 @@
                     var desc = ue.getContent();
                     var video_second = $("#video_second").val();
                     var old = $("#old").val();
+                    var sort = $("#sort").val();
 
                     var url = "{{route('goods.update',['id'=>$good->id])}}";
                     var _method = 'PUT';
 
                     $.post(url,
-                        {old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

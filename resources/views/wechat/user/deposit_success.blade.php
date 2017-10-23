@@ -19,8 +19,8 @@
         <i class="icon-big icon-big-paySuccess"></i>
     </div>
     <div class="money"></div>
-    <div class="tips">已提交申请</div>
-    <p>押金提现申请已提交，预计0-5个工作日退还到原支付账户，请注意查收（如租用过程中存在损毁丢失等行为将会有客服与您协商退还金额）</p>
+    <div class="tips">押金提现申请已提交</div>
+    <p>预计0-5个工作日退还到原支付账户，请注意查收</p>
 </div>
 
 <script>

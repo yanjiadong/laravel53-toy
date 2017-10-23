@@ -54,12 +54,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="block-fluid">
+                <form id="validation" method="post">
+                    <div class="block-fluid">
                     @if(count($goods)>0)
                         <table cellpadding="0" cellspacing="0" width="100%" class="table">
                             <thead>
                             <tr>
-                                <th>序号</th>
+                                <th>排序</th>
                                 <th>玩具名称</th>
                                 <th>分类名称</th>
                                 <th>所属品牌</th>
@@ -74,7 +75,8 @@
                             <tbody id="lists">
                                 @foreach ($goods as $good)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    {{--<td>{{ $loop->iteration }}</td>--}}
+                                    <td width="200px"><input style="width: 30%;" type="text" value="{{ $good->sort }}" class="validate[required,custom[number]] sortAction" data-id="{{$good->id}}"></td>
                                     <td>{{ $good->title }}</td>
                                     <td>{{ $good->category->title }}</td>
                                     <td>{{ $good->brand->title }}</td>
@@ -106,6 +108,7 @@
                         </div>
                     @endif
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -133,7 +136,6 @@
                 var id = $(this).attr('data-id');
                 var status = $(this).attr('status');
                 $.confirm({
-
                     text: status==1?"确认上架玩具?":"确认下架玩具?",
                     confirm: function(button) {
                         $.post("{{route('goods.action')}}",{id:id,status:status},function(data){
@@ -143,6 +145,17 @@
                     confirmButton: "确认",
                     cancelButton: "取消"
                 });
+            });
+
+            $('.sortAction').blur(function () {
+                if ($("#validation").validationEngine('validate')) {
+                    var sort = $(this).val();
+                    var good_id = $(this).attr('data-id');
+
+                    $.post("{{route('goods.sort_action')}}",{id:good_id,sort:sort},function(data){
+                        //cTip(data);
+                    }, "json");
+                }
             });
         });
     </script>
