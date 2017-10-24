@@ -211,7 +211,7 @@
                         g: res.info.order.express_no,
                         h: res.info.order.created_at
                     },
-                    logistics:{cont:res.info.logistics.context,time:res.info.logistics.time},
+                    logistics:{cont:res.info.logistics.context,time:res.info.logistics.time,item3:res.info.order.send_time,item4:res.info.order.days,item5:5},//item3是发货时间  item4是已租用几天  item5是共租用几天
                     good: {
                         a: res.info.order.good_picture,
                         b: res.info.order.good_title,
@@ -230,6 +230,10 @@
                     case '待发货':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-daifahuo"></i>' +
                             '<h2>待发货</h2><h4>平台将在24小时内发货，请耐心等待</h4></div>';
+
+                        logistics_info ='<div class="operate-btn"><a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a>';
+                        $(".order-info .other").hide();
+
                         break;
                     case '已发货':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-daishouhuo"></i>' +
@@ -237,26 +241,39 @@
 
                         logistics_info = '<div class="logistics-info clear" onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_car"></i></div>' +
                             '<div class="fl"><h3>' + order_detail.data.logistics_state.logistics.cont + '</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
-                            '<div class="fr"><i class="icon icon_arrowRight_bold"></i></div></div><div class="operate-btn"><button onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.receipt()">确认收货</button></div>';
+                            '<div class="fr"><i class="icon icon_arrowRight_bold"></i></div></div><div class="operate-btn"><a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a>' +
+                            '<button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.receipt()">确认收货</button></div>';
+
+                        $(".order-info .other .fl").text("平台发货时间");
+                        $(".order-info .other .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .other").show();
                         break;
                     case '租用中':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-zuyongzhong"></i><h2>租用中</h2>' +
                             '<h4>将租用中的玩具归还后，才能重新选择玩具再次下单</h4></div>';
+
                         logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
                             '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
-                            '<button  onclick="order_detail.goLogisticsDetail()">查看物流</button><button onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
+                            '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
+
+                        $(".order-info .other .fl").text("已租用天数");
+                        $(".order-info .other .fr span").text(order_detail.data.logistics_state.logistics.item4+'天');
+                        $(".order-info .other").show();
                         break;
                     case '已归还':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-yiguihuan"></i><h2>已归还</h2><div class="btn">' +
                             '<button onclick="order_detail.lookReturn()"><span>查看归还详情</span><i class="icon icon_arrowRight_white"></i></button></div>' +
                             '<h4>玩具已归还，感谢您的使用</h4></div>';
-                        logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
-                            '</div><div class="fl"><h3>快件已签收</h3><p>' + common.dateFormat(order_detail.data.logistics_state.logistics.time) + '</p></div>' +
-                            '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
-                            '<button  onclick="order_detail.goLogisticsDetail()">查看物流</button></div>';
-                        break;
 
+                        logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
+                            '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
+                            '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
+                            '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button></div>';
+                        $(".order-info .other .fl").text("共租用天数");
+                        $(".order-info .other .fr span").text(order_detail.data.logistics_state.logistics.item5+'天');
+                        $(".order-info .other").show();
+                        break;
                     default:
                         break;
                 }

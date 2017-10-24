@@ -135,7 +135,7 @@
             $(".toys-car .list .fl .radio").eq(index).addClass('active');
             if(toys_car.data.info.state==1){
                 $(".top-tips").html('<i class="icon-attion">!</i>办理任意一种会员后即可下单，享受免费租、随意换。').show();
-                $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
+                //$(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
                 $(".toys-car .btn button").addClass('active');
             }else if(toys_car.data.info.state==3){
                 $(".top-tips").html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单').show();

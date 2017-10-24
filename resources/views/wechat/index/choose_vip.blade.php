@@ -59,7 +59,7 @@
         <div class="fr">
             <ul>
                 <li>
-                    <span></span>每次可挑选任意一款玩具
+                    <span></span>所有玩具免费租，每次可挑选任意一款下单
                 </li>
                 <li>
                     <span></span>不限次数更换，每个自然月提供2次往返免邮服务
@@ -89,6 +89,7 @@
         <div class="coupon clear" onclick="choose_vip.chooseCars()">
             <div class="fl">
                 <h3>优惠券</h3>
+                <p>优惠券仅用于会员卡金额的减免</p>
             </div>
             <div class="fr">
                 <span></span>
@@ -100,6 +101,7 @@
         <div class="fl">
             <span>总价：</span>
             <span>¥0</span>
+            <p></p>
         </div>
         <div class="fr">
             <button onclick="choose_vip.pay()" id="submit">去支付 <span>（微信支付）</span></button>
@@ -195,11 +197,42 @@
                             default:
                                 break;
                         }
-                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[i].price);
-                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[i].money);
+
+                        var money = choose_vip.data.sortList[i].price;
+                        var yajin = choose_vip.data.sortList[i].money;
+                        $(".info .select .fr").text('¥'+money);
+                        $(".info .deposit .fr").text('¥'+yajin);
+                        $(".submit .fl p").text('（其中包含押金¥'+yajin+'）');
+
+                        //$(".info .select .fr").text('¥'+choose_vip.data.sortList[i].price);
+                        //$(".info .deposit .fr").text('¥'+choose_vip.data.sortList[i].money);
                         if(!choose_vip.data.discount){
-                            $(".info .coupon .fr span").text('请选择');
-                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money));
+                            //$(".info .coupon .fr span").text('请选择');
+                            //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money));
+
+                            //默认获取最大的优惠券
+                            common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.sortList[i].id},function (res) {
+                                /*res={
+                                    info:{
+                                        coupons:[
+                                            {can_use:1,condition:2,created_at:"2017-10-11 16:03:26",end_time:"2017-11-11",money:2,title:"季卡优惠券",id:2},
+                                            {can_use:1,condition:2,created_at:"2017-10-11 16:03:26",end_time:"2017-11-11",money:8,title:"季卡优惠券",id:3}
+                                        ]
+                                    }
+                                };*/
+                                if (res.info.coupons.length > 0) {
+                                    choose_vip.data.discount ={price:0};
+                                    res.info.coupons.forEach(function (item,index) {
+                                        if(item.can_use == 1 && choose_vip.data.discount.price < item.price){
+                                            choose_vip.data.discount = item
+                                        }
+                                    });
+
+                                }
+                                $(".info .coupon .fr span").text('-¥'+(choose_vip.data.discount.price==0?'0.00':choose_vip.data.discount.price));
+                                $(".submit .fl span:eq(1)").text('¥'+(money+yajin-choose_vip.data.discount.price));
+                            });
+
                         }else{
                             $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
                             $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money-choose_vip.data.discount.price));
@@ -288,22 +321,30 @@
                 $(".info .select .fr").text($(this).find(".fr").text());
                 var index =$(this).index(".choose-vip-wrap .sort ul li");
                 $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[index].money);
+                $(".submit .fl p").text('（其中包含押金¥'+choose_vip.data.sortList[index].money+'）');
 
                 choose_vip.data.vip_id = choose_vip.data.sortList[index].id;
                 localStorage.vip_id = choose_vip.data.vip_id;
 
                 console.log(localStorage.vip_id);
 
-                if(!choose_vip.data.discount){
-                    $(".info .coupon .fr span").text('请选择');
-                    $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money));
-                }else{
-                    $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
-                    $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-choose_vip.data.discount.price));
-                }
-                //console.log(choose_vip.data.discount);
-                //$(".info .coupon .fr span").text('-¥'+0);
-                //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-0));
+                //默认获取最大的优惠券
+                common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.vip_id},function (res) {
+                    if (res.info.coupons.length > 0) {
+                        choose_vip.data.discount ={price:0};
+                        res.info.coupons.forEach(function (item,index) {
+                            if(item.can_use == 1 && choose_vip.data.discount.price<item.price){
+                                choose_vip.data.discount = item
+                            }
+                        });
+                        $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
+                        if(parseFloat($(".info .coupon .fr span").text().slice(2))>0){
+                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-parseFloat($(".info .coupon .fr span").text().slice(2))));
+                        }else{
+                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money));
+                        }
+                    }
+                });
 
                 $("#vip_card_id").val(choose_vip.data.sortList[index].id);
                 //$("#submit").attr("disabled", false);

@@ -135,7 +135,7 @@
                 <div class="font" onclick="goodDetail_obj.goToysCar()">玩具箱</div>
             </li>
             <li class="fl">
-                <button class="join-car" onclick="goodDetail_obj.join()">加入玩具箱</button>
+                <button class="join-car active" onclick="goodDetail_obj.join()">加入购物车 <span>暂无库存</span></button>
             </li>
         </ul>
     </div>
@@ -171,7 +171,7 @@
                     title:res.info.good.title,
                     money:res.info.good.price,
                     year:res.info.good.old,
-                    params:[{name:"品牌及所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
+                    params:[{name:"品牌所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"玩具材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
                     car_num:{num:goodDetail_obj.data.car_num},
                     store:res.info.good.store
@@ -184,13 +184,13 @@
 
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo.length;i++){
                         if(goodDetail_obj .detail_data.lunbo[i].state==0){
-                            lunbo_content ='<div class="swiper-slide video"><video width="100%" poster="'+goodDetail_obj .detail_data.lunbo[i].poster+'"><source src="'+goodDetail_obj .detail_data.lunbo[i].url+
-                                '"></video></div></div>';
+                            lunbo_content ='<div class="swiper-slide video"><div class="video-pic" style="background-image: url('+goodDetail_obj .detail_data.lunbo[i].poster+')">' +
+                                '<video width="100%" id="video" height="280" style="display: none" src="'+goodDetail_obj .detail_data.lunbo[i].url+'"></video>' +
+                                '</div></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
-                            //$('.lunbo .swiper-wrapper .swiper-slide:eq('+i+') .play-box').text(time);
                             $('.lunbo .swiper-container .play-box').show().text(time);
-                            $(".swiper-slide video").height($(".swiper-slide video").width());
+                            $(".swiper-slide .video-pic").height($(".swiper-slide video").width());
                             lunbo_content="";
                         }
                     }
@@ -277,6 +277,11 @@
                         $(".play-box").text(minites+'\''+seconds+'"');
                     },1000);
                 }
+            });
+
+            document.getElementById("video").addEventListener("x5videoexitfullscreen", function () {
+                document.getElementById("video").style.display = 'none';
+                document.getElementById("video").pause();
             });
         },
         //正品保证 往返包邮   微损免赔  往返包邮

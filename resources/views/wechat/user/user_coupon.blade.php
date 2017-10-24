@@ -59,7 +59,8 @@
 <script>
     var vip_voucher ={
         data:{
-            list:[]
+            list:[],
+            state:true                 //是不是从个人中心进入 true是   false为不是
         },
         init:function(){
             var data_vip_id = localStorage.vip_id;
@@ -94,9 +95,28 @@
                     }
                     $(".vip-voucher-wrap .list ul").html(cont);
                     //$(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
-                    vip_voucher.choose();
+                    vip_voucher.isCenter();
+                    if(vip_voucher.data.state){
+                        $(".vip-voucher-wrap .list ul li").removeClass('disable');
+                        $(".vip-voucher-wrap .footer").hide();
+                    }else{
+                        $(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
+                        vip_voucher.choose();
+                    }
+                }
+                else
+                {
+                    $(".vip-voucher-wrap .no-good").show();
+                    $(".vip-voucher-wrap .list").hide();
+                    $(".vip-voucher-wrap .footer").hide();
                 }
             })
+        },
+        //是否为我的 页面进入
+        isCenter:function () {
+            if(document.referrer.toString().indexOf('center')>-1){
+                vip_voucher.data.state = true;
+            }
         },
         //选择优惠劵
         choose:function () {

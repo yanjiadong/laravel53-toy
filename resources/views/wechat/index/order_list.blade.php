@@ -6,11 +6,18 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>租赁订单</title>
+    <!--下拉刷新-->
+    <link rel="stylesheet" href="/wechat/style/weui.min.css">
+    <link rel="stylesheet" href="/wechat/style/jquery-weui.min.css">
+
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
 
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
+    <!-- 下拉刷新 -->
+    <script src="/wechat/js/jquery-weui.min.js"></script>
+
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
 </head>
@@ -26,6 +33,14 @@
     <div class="order-detail-main">
         <div class="parent-box clear">
             <div class="detail-cont tab-page fl">
+                <div class="weui-pull-to-refresh__layer">
+                    <div class='weui-pull-to-refresh__arrow'></div>
+                    <div class='weui-pull-to-refresh__preloader'></div>
+                    <div class="down">下拉刷新</div>
+                    <div class="up">释放刷新</div>
+                    <div class="refresh">正在刷新</div>
+                </div>
+
                 <div class="top-tips">
                     同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
                 </div>
@@ -238,6 +253,21 @@
     $(function () {
         orderDtail.tab_change();
         orderDtail.init();
+
+        //下拉刷新
+        $(".detail-cont").css({height:$(window).outerHeight()-50+'px'});
+        $(".detail-cont").pullToRefresh();
+        $(".detail-cont").on("pull-to-refresh", function() {
+            var refreshClose = $(this);
+            /*-------下拉刷新的内容-------------------*/
+            orderDtail.init();
+            /*-------下拉刷新的内容结束-------------------*/
+            setTimeout(function () {
+                refreshClose.pullToRefreshDone();
+            },500);
+        });
+        $(".detail-cont").pullToRefreshDone();
+
     })
 </script>
 

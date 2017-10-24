@@ -290,14 +290,17 @@ class OrderController extends BaseController
         }
 
         $info['days'] = 0;
+        $info['total_days'] = 0;
         if($info['status'] == Order::STATUS_BACK_STR)
         {
             $info['days'] = ceil((strtotime($info['back_time']) - strtotime($info['send_time']))/(3600*24));
+            $info['total_days'] = $info['days'];
         }
         elseif($info['status'] == Order::STATUS_DOING_STR)
         {
             $info['days'] = ceil(($this->time- strtotime($info['send_time']))/(3600*24));
         }
+
 
         $this->ret['info'] = ['logistics'=>$logistics,'order'=>$info];
         return $this->ret;

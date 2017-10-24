@@ -76,7 +76,7 @@
                                 @foreach ($goods as $good)
                                 <tr>
                                     {{--<td>{{ $loop->iteration }}</td>--}}
-                                    <td width="200px"><input style="width: 30%;" type="text" value="{{ $good->sort }}" class="validate[required,custom[number]] sortAction" data-id="{{$good->id}}"></td>
+                                    <td width="80px"><input style="width: 30%;" type="text" value="{{ $good->sort }}" class="validate[required,custom[number]] sortAction" data-id="{{$good->id}}"></td>
                                     <td>{{ $good->title }}</td>
                                     <td>{{ $good->category->title }}</td>
                                     <td>{{ $good->brand->title }}</td>

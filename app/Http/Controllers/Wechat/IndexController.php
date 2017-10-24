@@ -365,7 +365,16 @@ class IndexController extends BaseController
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.index.order_detail',compact('user_id','openid','order_code'));
+        //客服电话
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $phone = '';
+        if(isset($content[7]))
+        {
+            $phone = $content[7];
+        }
+
+        return view('wechat.index.order_detail',compact('user_id','openid','order_code','phone'));
     }
 
     public function order_return_detail($page = 1)

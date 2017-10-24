@@ -1,11 +1,18 @@
 var common = {
 
     /*确认框*/
-    confirm_tip:function (title,msg,call1,call2) {
-        var tip_content = '<div class="confirm-alert-wrap"><div class="confirm-alert-main"> <div class="confirm-content"><h4 class="title">'+
-            title+'</h4>'+'<div class="cont">'+msg+'</div></div><div class="confirm-btn-wrap clear">' +
-            '<button class="confirm-btn-cancel fl">取消</button>' +
-            '<button class="confirm-btn-ensure fr">确定</button></div> </div></div>';
+    confirm_tip:function (title,msg,call1,call2,btn2_name) {
+        if(btn2_name){
+            var tip_content = '<div class="confirm-alert-wrap"><div class="confirm-alert-main"> <div class="confirm-content"><h4 class="title">'+
+                title+'</h4>'+'<div class="cont">'+msg+'</div></div><div class="confirm-btn-wrap clear">' +
+                '<button class="confirm-btn-cancel fl">取消</button>' +
+                '<button class="confirm-btn-ensure fr">'+btn2_name+'</button></div> </div></div>';
+        }else{
+            var tip_content = '<div class="confirm-alert-wrap"><div class="confirm-alert-main"> <div class="confirm-content"><h4 class="title">'+
+                title+'</h4>'+'<div class="cont">'+msg+'</div></div><div class="confirm-btn-wrap clear">' +
+                '<button class="confirm-btn-cancel fl">取消</button>' +
+                '<button class="confirm-btn-ensure fr">确定</button></div> </div></div>';
+        }
         $("body").append(tip_content);
         $(".confirm-alert-wrap .confirm-alert-main").css({"top": "0","opacity": 0});
         $(".confirm-alert-wrap .confirm-alert-main").animate({ "opacity": 1, "top": "50%" }, 500);
@@ -62,10 +69,10 @@ var common = {
     success_tip:function (msg) {
        var tip_content='<div class="success-tip-wrap">'+msg+'</div>';
        $('body').append(tip_content);
-        $(".success-tip-wrap").animate({'bottom':'50%'},500);
-         setTimeout(function () {
-             $(".success-tip-wrap").fadeOut().remove();
-         },1000)
+        $(".success-tip-wrap").css({'bottom':'50%'}).fadeIn(1000);
+        setTimeout(function () {
+            $(".success-tip-wrap").fadeOut().remove();
+        },1000)
     },
     
     /*请求数据url 接口  type为请求类型 data向后端数据 successCall请求后回调*/
