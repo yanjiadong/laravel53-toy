@@ -30,7 +30,7 @@ class CreateGoodsTable extends Migration
             $table->string('picture',255)->default('')->comment('封面图');
             $table->string('category_picture',255)->default('')->comment('分类页封面图');
             $table->string('video',255)->default('')->comment('视频地址');
-            $table->integer('video_second')->default(0)->comment('视频长度 秒');
+            $table->string('video_second',32)->default('')->comment('视频长度 秒');
             $table->tinyInteger('is_new')->default(0)->comment('是否新品');
             $table->tinyInteger('is_hot')->default(0)->comment('是否热门');
             $table->tinyInteger('status')->default(1)->comment('1=上架 2=下架');

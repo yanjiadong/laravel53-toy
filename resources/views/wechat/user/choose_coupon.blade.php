@@ -52,6 +52,12 @@
     <div class="footer bg-white">
         <button onclick="vip_voucher.noUser()">不使用优惠劵</button>
     </div>
+    <div class="no-good">
+        <div class="tips">
+            <i class="icon-no-goods2"></i>
+            <h4>您还没有可用的会员抵用券</h4>
+        </div>
+    </div>
 </div>
 
 

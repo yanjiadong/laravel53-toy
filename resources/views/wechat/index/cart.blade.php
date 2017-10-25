@@ -18,8 +18,9 @@
 <div class="toys-car">
     <div class="no-goods">
         <div class="tips">
-            <i class="icon-big icon-big-blankPage"></i>
-            <h4>玩具箱是空的</h4>
+            <i class="icon-no-goods4"></i>
+            <h4>您的玩具箱是空的</h4>
+            <p>将想要租的玩具添加到玩具箱，就可以下单啦</p>
         </div>
     </div>
     <div class="top-tips"><!--<i class="icon-attion">!</i>--><!--同一时间内只能持有一件玩具，待归还后才能再次租用--></div>
@@ -123,8 +124,7 @@
 
                     }else{
                         $(".no-goods").show();
-                        $(".top-tips").hide();
-                        $(".btn").hide();
+                        $(".top-tips,footer,.btn").hide();
                     }
                 }
 

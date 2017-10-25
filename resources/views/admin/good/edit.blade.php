@@ -87,7 +87,7 @@
                         </div>
                         <div class="row-form clearfix stock">
                             <div class="span3">视频长度：</div>
-                            <div class="span9"><input type="text" value="{{ $good->video_second }}" class="validate[required,custom[stock]]" id="video_second" name="video_second"/>
+                            <div class="span9"><input type="text" value="{{ $good->video_second }}" class="validate[custom[stock]]" id="video_second" name="video_second"/>
                                 <span>单位：(秒) </span>
                             </div>
                         </div>

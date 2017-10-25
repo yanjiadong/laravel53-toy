@@ -29,8 +29,8 @@
                     </ul>
                     <div class="no-good">
                         <div class="tips">
-                            <i class="icon-big icon-big-blankPage"></i>
-                            <h4>暂无归还玩具！</h4>
+                            <i class="icon-no-goods1"></i>
+                            <h4>您还没有相关的订单</h4>
                         </div>
                     </div>
                 </div>
@@ -113,9 +113,9 @@
 
                 }else{
                     $(".detail-cont .detail-list ul").hide();
-                    var no_good_height = $(window).height()-$(".detail-cont .top-tips").outerHeight()
-                        -44+'px';
-                    $(".detail-cont .no-good").height(no_good_height).show();
+                    $(".detail-cont .top-tips ").hide();
+                    var no_good_height = $(window).height();
+                    $(".detail-cont .no-good").height(no_good_height).css({'background-color':'#fff'}).show();
                 }
             })
         },

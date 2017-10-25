@@ -37,6 +37,8 @@
                             @endforeach
                             </tbody>
                         </table>
+
+                        {{ $lists->links() }}
                     @else
                         <div class="toolbar bottom-toolbar clearfix">
                             <div class="tac" style="margin: 10px 0px;">

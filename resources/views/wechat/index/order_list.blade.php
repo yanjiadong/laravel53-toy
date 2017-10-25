@@ -49,8 +49,8 @@
                 </ul>
                 <div class="no-good">
                     <div class="tips">
-                        <i class="icon-big icon-big-blankPage"></i>
-                        <h4>空空如也</h4>
+                        <i class="icon-no-goods1"></i>
+                        <h4>您还没有相关的订单</h4>
                     </div>
                 </div>
             </div>
@@ -60,8 +60,8 @@
                 </ul>
                 <div class="no-good">
                     <div class="tips">
-                        <i class="icon-big icon-big-blankPage"></i>
-                        <h4>空空如也</h4>
+                        <i class="icon-no-goods1"></i>
+                        <h4>您还没有相关的订单</h4>
                     </div>
                 </div>
             </div>
@@ -176,9 +176,8 @@
                 {
                     $(".detail-cont .top-tips").hide();
                     $(".order-detail-main .detail-cont .detail-list").hide();
-                    $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight());
-                    $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()-
-                        $(".order-detail-main .detail-cont .top-tips").outerHeight()- $(".order-detail-wrap footer").outerHeight()).show();
+                    $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight()).css({'background-color':'#fff'});
+                    $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight()).show();
                 }
             })
         },

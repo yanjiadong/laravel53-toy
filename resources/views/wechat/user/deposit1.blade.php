@@ -38,6 +38,14 @@
             <a href="{{url('wechat/user/deposit_list')}}">查看押金明细>></a>
         </div>
     </div>
+
+    <div class="no-good">
+        <div class="tips">
+            <i class="icon-no-goods3"></i>
+            <h4>您还没有购买过会员卡</h4>
+        </div>
+    </div>
+
 </div>
 
 
@@ -93,7 +101,11 @@
                         }
                         $(".deposit1-wrap .deposit1-main  .cont .list").html(cont);
                     }
-
+                    else
+                    {
+                        $(".deposit1-main").hide();
+                        $(".deposit1-wrap .no-good").height($(window).height()).show();
+                    }
                 }else{
                     common.alert_tip(res.msg)
                 }

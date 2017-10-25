@@ -253,6 +253,7 @@ class UserController extends BaseController
 
         //print_r($coupons);
         $result = [];
+        $can_use_count = 0;
         if(!empty($coupons))
         {
             foreach ($coupons as &$v)
@@ -263,10 +264,15 @@ class UserController extends BaseController
                     continue;
                 }
 
-                $v['can_use'] = 1;
+
                 if($v['condition'] > $condition)
                 {
                     $v['can_use'] = 0;
+                }
+                else
+                {
+                    $v['can_use'] = 1;
+                    $can_use_count++;
                 }
                 $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
                 $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
@@ -274,7 +280,7 @@ class UserController extends BaseController
                 $result[] = $v;
             }
         }
-        $this->ret['info'] = ['coupons'=>$result];
+        $this->ret['info'] = ['coupons'=>$result,'can_use_count'=>$can_use_count];
         return $this->ret;
     }
 

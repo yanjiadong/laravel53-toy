@@ -4,7 +4,25 @@
     <div class="breadLine">
         <ul class="breadcrumb">
             <li><a href="javascript:;">订单管理</a> <span class="divider">></span></li>
-            <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a></li>
+
+            @if(isset($status) && $status==1)
+                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li>待发货列表</li>
+            @elseif(isset($status) && $status==2)
+                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li>已发货列表</li>
+            @elseif(isset($status) && $status==3)
+                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li>租用中列表</li>
+            @elseif(isset($status) && $status==4)
+                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li>已归还列表</li>
+            @elseif(isset($status) && $status==-1)
+                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li>已取消列表</li>
+            @else
+                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a></li>
+            @endif
         </ul>
         <ul class="buttons">
             <li>
