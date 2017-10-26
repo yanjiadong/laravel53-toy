@@ -479,7 +479,7 @@ class OrderController extends BaseController
                 $v['days'] = 0;
                 if($v['status']=='已归还')
                 {
-                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/(3600*24));
+                    $v['days'] = floor((strtotime($v['back_time']) - strtotime($v['send_time']))/(3600*24));
                 }
 
                 if($v['back_time'])
