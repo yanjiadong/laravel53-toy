@@ -250,7 +250,7 @@
                     }else{
                         fill_logistics.data.logistics_num = result;
                     }
-                    $(".number input").val( fill_logistics.data.logistics_num);
+                    $(".number input").val(fill_logistics.data.logistics_num);
                 }
             });
         })

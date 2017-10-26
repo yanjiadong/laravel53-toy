@@ -219,7 +219,7 @@
                         g: res.info.order.express_no,
                         h: res.info.order.created_at
                     },
-                    logistics:{cont:res.info.logistics.context,time:res.info.logistics.time,item3:res.info.order.send_time,item4:res.info.order.days,item5:5},//item3是发货时间  item4是已租用几天  item5是共租用几天
+                    logistics:{cont:res.info.logistics.context,time:res.info.logistics.time,item3:res.info.order.send_time,item4:res.info.order.days,item5:res.info.order.total_days},//item3是发货时间  item4是已租用几天  item5是共租用几天
                     good: {
                         a: res.info.order.good_picture,
                         b: res.info.order.good_title,
