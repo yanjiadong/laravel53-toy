@@ -21,8 +21,8 @@
         <div class="photo">
             <img src="{{isset($user->wechat_avatar)&&!empty($user->wechat_avatar) ? $user->wechat_avatar:'/wechat/image/other/3.png'}}" alt="">
         </div>
-        <h3>张三丰</h3>
-        <p>宝贝在“趣编程”免费玩了5个编程机器人</p>
+        <h3>{{isset($user->name)&&!empty($user->name) ? $user->name:''}}</h3>
+        <p>我在“趣编程”免费玩了5个编程机器人</p>
         <div class="separate">
             <span class="line"></span>
             <span class="dot"></span>
@@ -50,7 +50,7 @@
             <img src="/wechat/image/common/erweima.png" >
         </div>
         <h3>长按识别二维码，关注公众号</h3>
-        <p>这里有上百款全球最潮流的编程机器人，机器人教育启蒙从这里开始</p>
+        <p>这里有百款乐高、能力风暴、makeblock等国际品牌的编程教育机器人</p>
         <h4>每月只要¥299，新用户立减¥100</h4>
     </div>
 </div>

@@ -78,7 +78,7 @@
                             switch (deposit1.data.list[i].status){
                                 case 1:
                                     cont +='<div class="item bg-white clear"><div class="fl"><h3>'+deposit1.data.list[i].vip_card.title+'</h3>' +
-                                        '<p>'+deposit1.data.list[i].days+'天后到期</p></div><div class="fr"><h4>押金</h4><h2>¥' +
+                                        '<p>剩余'+deposit1.data.list[i].days+'天可用</p></div><div class="fr"><h4>押金</h4><h2>¥' +
                                         deposit1.data.list[i].money +'</h2><button class="active"  onclick="deposit1.getCash('+deposit1.data.list[i].id+','+deposit1.data.list[i].money+')">申请提现</button></div></div>';
                                     break;
                                 case -1:
@@ -115,20 +115,33 @@
         getCash:function (id,money) {
             console.log(id);
             console.log(money);
-            common.confirm_tip("确认提现","确认申请这张会员卡押金的提现吗？",null,function () {
-                common.httpRequest('{{url('api/user/cash')}}','post',{user_id:'{{$user_id}}','vip_card_pay_id':id},function (res) {
-                    if(res.code==200)
-                    {
-                        common.success_tip(res.msg);
-                        location.href = '{{url('wechat/user/deposit_success')}}'+'/'+id;
-                        //location.reload();
-                    }
-                    else
-                    {
-                        common.alert_tip(res.msg);
-                    }
-                });
+            //判断是否能提现
+            common.httpRequest('{{url('api/user/is_can_cash')}}','post',{user_id:'{{$user_id}}','vip_card_pay_id':id},function (res) {
+                if(res.code==200)
+                {
+                    common.confirm_tip("确认提现","确认申请后，这张会员卡会被自动注销，将无法继续使用，是否确认申请？",null,function () {
+                        common.httpRequest('{{url('api/user/cash')}}','post',{user_id:'{{$user_id}}','vip_card_pay_id':id},function (res) {
+                            if(res.code==200)
+                            {
+                                common.success_tip(res.msg);
+                                location.href = '{{url('wechat/user/deposit_success')}}'+'/'+id;
+                                //location.reload();
+                            }
+                            else
+                            {
+                                common.alert_tip(res.msg);
+                            }
+                        });
+                    });
+                }
+                else
+                {
+                    common.alert_tip(res.msg);
+                    return;
+                }
             });
+
+
 
             //location.href='cash.html?money='+money+'&id='+id;
 

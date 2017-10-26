@@ -57,6 +57,7 @@ class UserController extends BaseController
             $card = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->orderBy('id','desc')->first();
         }
 
+        $days = 0;
         if(!empty($card))
         {
             $card->isOutTime = 1;
@@ -76,14 +77,15 @@ class UserController extends BaseController
                     $card->vip_card_type_str = '半年卡';
                     break;
             }
+
+            //获取最后一次购买的会员卡天数
+            $days = $card->days;
         }
         else
         {
             $card['isOutTime'] = 1;
             $card['vip_card_type_str'] = '';
         }
-
-        $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
 
         //优惠券数量
         $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
@@ -302,6 +304,26 @@ class UserController extends BaseController
     }
 
     /**
+     * 判断是否进行提现操作
+     * @param Request $request
+     */
+    public function is_can_cash(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $vip_card_pay_id = $request->get('vip_card_pay_id');
+
+        //判断是否有已发货或者租用中的玩具
+        $order_count = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->count();
+        if($order_count > 0)
+        {
+            $this->ret = ['code'=>300,'msg'=>'您还有进行中的订单未处理，订单处理完成后，才能申请押金提现'];
+            return $this->ret;
+        }
+
+        return $this->ret;
+    }
+
+    /**
      * 提现操作
      * @param Request $request
      */
@@ -316,7 +338,7 @@ class UserController extends BaseController
         $order_count = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->count();
         if($order_count > 0)
         {
-            $this->ret = ['code'=>300,'msg'=>'您还有未归还的玩具，将玩具归还后才能申请押金提现'];
+            $this->ret = ['code'=>300,'msg'=>'您还有进行中的订单未处理，订单处理完成后，才能申请押金提现'];
             return $this->ret;
         }
 

@@ -37,7 +37,7 @@
                         //支付成功
                         var url = '{{url('wechat/user/center')}}';
 
-                        common.alert_tip("请前往个人中心查看会员详情",'#323232','支付成功',function () {
+                        common.alert_tip("会员特权已开通，请前往个人中心查看会员详情",'#323232','会员购买成功',function () {
                             location.href = url;
                         });
 

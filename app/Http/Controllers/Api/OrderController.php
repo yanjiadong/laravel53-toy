@@ -257,11 +257,11 @@ class OrderController extends BaseController
                 $v['days'] = 0;
                 if($v['status']==Order::STATUS_BACK_STR)
                 {
-                    $v['days'] = ceil((strtotime($v['back_time']) - strtotime($v['send_time']))/86400);
+                    $v['days'] = floor((strtotime($v['back_time']) - strtotime($v['send_time']))/86400);
                 }
                 elseif($v['status']==Order::STATUS_DOING_STR)
                 {
-                    $v['days'] = ceil((time()- strtotime($v['send_time']))/86400);
+                    $v['days'] = floor((time()- strtotime($v['send_time']))/86400);
                 }
             }
         }
@@ -293,12 +293,12 @@ class OrderController extends BaseController
         $info['total_days'] = 0;
         if($info['status'] == Order::STATUS_BACK_STR)
         {
-            $info['days'] = ceil((strtotime($info['back_time']) - strtotime($info['send_time']))/(3600*24));
+            $info['days'] = floor((strtotime($info['back_time']) - strtotime($info['send_time']))/(3600*24));
             $info['total_days'] = $info['days'];
         }
         elseif($info['status'] == Order::STATUS_DOING_STR)
         {
-            $info['days'] = ceil(($this->time- strtotime($info['send_time']))/(3600*24));
+            $info['days'] = floor(($this->time- strtotime($info['send_time']))/(3600*24));
         }
 
 
@@ -347,7 +347,7 @@ class OrderController extends BaseController
         {
             foreach ($list as &$v)
             {
-                $v['days'] = ceil((time() - strtotime($v['send_time']))/(3600*24));
+                $v['days'] = floor((time() - strtotime($v['send_time']))/(3600*24));
             }
         }
 

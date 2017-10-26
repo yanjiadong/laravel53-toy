@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>提交物流信息</title>
+    <title>归还玩具</title>
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
     <div class="logistics-info-main">
         <div class="detail-cont">
             <div class="top-tips">
-                可选顺丰（或中通、韵达、圆通）将玩具寄回，货到付款即可。
+                优先通过顺丰快递（货到付款方式）将玩具寄回，然后将寄回的快递单号提交，即可再次租用。
             </div>
             <div class="detail-cont-main">
                 <div class="cont">

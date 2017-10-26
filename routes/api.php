@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/user/del_choose_coupon','UserController@del_choose_coupon');
 
     Route::post('/user/cash','UserController@cash');
+    Route::post('/user/is_can_cash','UserController@is_can_cash');
     Route::post('/user/cash_list','UserController@cash_list');
 
     //获取快递公司列表

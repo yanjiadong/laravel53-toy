@@ -198,6 +198,7 @@
                     cont=0
                 }
                 choose_vip.slide(cont);
+                console.log(choose_vip.data.sortList);
                 $(".info .select .fr").text($(this).find(".fr").text());
                 switch(cont){
                     case 0:
