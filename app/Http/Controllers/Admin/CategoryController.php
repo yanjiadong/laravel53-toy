@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Brand;
 use App\Category;
+use App\Good;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -103,6 +105,19 @@ class CategoryController extends BaseController
      */
     public function destroy($id)
     {
+        //删除分类的时候同时也判断商品和品牌是否有相关的
+        $goods = Good::where('category_id',$id)->get();
+        if(count($goods) > 0)
+        {
+            alert('无法删除分类，由于存在商品关联该分类');
+        }
+
+        $brands = Brand::where('category_id',$id)->get();
+        if(count($brands) > 0)
+        {
+            alert('无法删除分类，由于存在品牌关联该分类');
+        }
+
         Category::destroy($id);
         return alert('',1);
     }
