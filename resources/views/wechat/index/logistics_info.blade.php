@@ -205,7 +205,7 @@
             if($(".btn button").hasClass('active')){
                 common.confirm_tip("提交物流单号","提交后快递单号不可修改，确定提交？",null,function () {
                     common.httpRequest('{{url('api/order/order_back')}}','post',submitData,function (res) {
-                        if(res){
+                        if(res.code == 200){
                             location.href="{{url('wechat/index/order_return_detail1')}}";
                             $(".confirm-alert-wrap").remove();
                         }else{
