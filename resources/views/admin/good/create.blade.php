@@ -130,7 +130,7 @@
                             </div>
                         </div>--}}
                         <div class="row-form clearfix">
-                            <div class="span3">品牌及所属：</div>
+                            <div class="span3">品牌所属：</div>
                             <div class="span9">
                                 <input type="text" value="" class="validate[required]" id="brand_country" name="brand_country"/>
                             </div>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">材质：</div>
+                            <div class="span3">玩具材质：</div>
                             <div class="span9">
                                 <input type="text" value="" class="validate[required]" id="material" name="material"/>
                             </div>
@@ -381,6 +381,17 @@
                     var is_new = $('input[name="is_new"]:checked').val();
                     var desc = ue.getContent();
 
+                    if(category_id==0)
+                    {
+                        eAlert('请选择分类');
+                        return;
+                    }
+
+                    if(brand_id==0)
+                    {
+                        eAlert('请选择品牌');
+                        return;
+                    }
                     $.post("{{ route('goods.store') }}",
                         {old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
