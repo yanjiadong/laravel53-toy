@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/index','IndexController@index');
     Route::post('/index/goods','IndexController@goods');
 
+    //首页运营活动
+    Route::post('/index/activities','IndexController@activities');
+
     Route::get('/category/{category_id}/{brand_id}','IndexController@category');
     Route::post('/category/goods','IndexController@category_goods');
 

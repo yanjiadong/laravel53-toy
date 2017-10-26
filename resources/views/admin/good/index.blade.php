@@ -18,9 +18,8 @@
                         </div>
                         <div class="body search row-form">
                             <span>分类</span>
-                            <select name="category_id">
+                            <select name="category_id" id="category_id">
                                 <option value="0" <?php echo (isset($category_id)&&$category_id==0)?'selected':'';?>>全部</option>
-
                                 @if(count($categorys)>0)
                                     @foreach($categorys as $category)
                                         <option value="{{ $category->id }}" <?php echo (isset($category->id)&&$category->id==$category_id)?'selected':'';?>>{{$category->title}}</option>
@@ -28,6 +27,26 @@
                                 @endif
                             </select>
                         </div>
+
+                        @if(count($brands)>0)
+                            <div class="body search row-form">
+                                <span>品牌</span>
+                                <select name="brand_id" id="brand_id">
+                                    <option value="0">--请选择--</option>
+                                    @foreach($brands as $brand)
+                                        <option value="{{ $brand->id }}" <?php echo (isset($brand->id)&&$brand->id==$brand_id)?'selected':'';?>>{{$brand->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @else
+                            <div class="body search row-form">
+                                <span>品牌</span>
+                                <select name="brand_id" id="brand_id">
+                                    <option value="0">--请选择--</option>
+                                </select>
+                            </div>
+                        @endif
+
 
                         <div class="footer">
                             <button class="btn" type="submit">查询</button>
@@ -157,6 +176,15 @@
                     }, "json");
                 }
             });
+
+            $("#category_id").change(function(){
+                var category_id = $(this).val();
+
+                $.post("{{url('admin/brands/get_brands_by_id')}}",{category_id:category_id},function(data){
+                    $("#brand_id").html(data.html);
+                },'json');
+            });
+
         });
     </script>
 @endsection

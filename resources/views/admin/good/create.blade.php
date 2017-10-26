@@ -374,6 +374,7 @@
                     var weight = $("#weight").val();
                     var effect = $("#effect").val();
                     var way = $("#way").val();
+                    var sort = $("#sort").val();
                     var store = $("#store").val();
                     var video_second = $("#video_second").val();
                     var old = $("#old").val();
@@ -393,7 +394,7 @@
                         return;
                     }
                     $.post("{{ route('goods.store') }}",
-                        {old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {sort:sort,old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

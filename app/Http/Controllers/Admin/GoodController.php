@@ -31,9 +31,19 @@ class GoodController extends BaseController
         $username = $admin_info['username'];
 
         $category_id = $request->get('category_id');
+        $brand_id = $request->get('brand_id');
+
+        $brands = [];
         if($category_id)
         {
-            $goods = Good::with(['category','brand'])->where('category_id',$category_id)->orderBy('sort','asc')->paginate(20);
+            $where['category_id'] = $category_id;
+            if($brand_id)
+            {
+                $where['brand_id'] = $brand_id;
+            }
+            $goods = Good::with(['category','brand'])->where($where)->orderBy('sort','asc')->paginate(20);
+
+            $brands = Brand::where('category_id',$category_id)->get();
         }
         else
         {
@@ -44,7 +54,7 @@ class GoodController extends BaseController
         $menu = 'good';
         $categorys = Category::all();
         //dd($goods);
-        return view('admin.good.index',compact('goods','username','menu','category_id','categorys'));
+        return view('admin.good.index',compact('goods','username','menu','category_id','categorys','brands','brand_id'));
     }
 
     /**

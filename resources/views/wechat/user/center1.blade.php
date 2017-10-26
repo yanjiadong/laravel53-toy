@@ -141,6 +141,8 @@
 
                 localStorage.out_trade_no = res.info.order_code;
 
+                console.log(user_center.data.userInfo);
+
                 //判断是否登录
                 if(user_center.data.userInfo.isAuthorize) {
                     //是否为会员
@@ -150,6 +152,7 @@
                         $(".photo table td.phone").text("绑定手机:" + user_center.data.userInfo.phone);
                         $(".photo table tr:first td.name i").prop("class", "icon-user_center1");
                         var day = 0;
+                        $(".progress .time .max").text(user_center.data.userInfo.carSort);
                         switch (user_center.data.userInfo.carSort) {
                             case '月卡':
                                 day = 30;

@@ -79,7 +79,8 @@ class UserController extends BaseController
             }
 
             //获取最后一次购买的会员卡天数
-            $days = $card->days;
+            //$days = $card->days;
+            $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
         }
         else
         {

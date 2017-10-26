@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>归还玩具</title>
+    <title>提交物流单号</title>
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
@@ -93,7 +93,7 @@
         <div class="no-good">
             <div class="tips">
                 <i class="icon-big icon-big-blankPage"></i>
-                <h4>暂无归还玩具！</h4>
+                <h4>暂时没有可归还的玩具</h4>
             </div>
         </div>
     </div>

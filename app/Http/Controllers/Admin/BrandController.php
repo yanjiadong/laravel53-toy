@@ -120,11 +120,14 @@ class BrandController extends BaseController
     {
         $brands = Brand::where('category_id',$request->get('category_id'))->get();
         $option = '<option value="0">--请选择--</option>';
-        foreach ($brands as $brand)
-        {
-            $option .= '<option value="'.$brand->id.'">'.$brand->title.'</option>';
-        }
 
+        if(count($brands) > 0)
+        {
+            foreach ($brands as $brand)
+            {
+                $option .= '<option value="'.$brand->id.'">'.$brand->title.'</option>';
+            }
+        }
         return alert(array('html' => $option), 1);
     }
 }

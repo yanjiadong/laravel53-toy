@@ -35,6 +35,14 @@ class IndexController extends BaseController
         return $this->ret;
     }
 
+    public function activities()
+    {
+        $activities = Activity::where('type',1)->get();
+
+        $this->ret['info'] = ['list'=>$activities];
+        return $this->ret;
+    }
+
     public function goods(Request $request)
     {
         $page = $request->get('page');
