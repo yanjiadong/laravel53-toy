@@ -10,7 +10,7 @@
             </td>
             <td class="{{isset($menu) && $menu=='order_list'?'active':''}}">
                 <a href="{{url('wechat/index/order_list')}}">
-                    <div><i class="icon-footer-order"></i></div>
+                    <div><i class="icon-footer-order"><span></span></i></div>
                     <div class="font">订单</div>
                 </a>
             </td>
@@ -45,6 +45,15 @@
             $('.icon-footer-shop-car').html('');
         }
 
+        order_num = '{{$order_num>0?$order_num:''}}';
+        if(order_num > 0)
+        {
+            $('.icon-footer-order>span').text(order_num);
+        }
+        else
+        {
+            $('.icon-footer-order').html('');
+        }
 
         //确定ul的长度
         var wid=0;

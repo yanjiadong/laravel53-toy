@@ -30,7 +30,10 @@ class UserController extends BaseController
             $phone = $content[7];
         }
 
-        return view('wechat.user.center1',compact('user_id','menu','cart_num','phone'));
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+
+        return view('wechat.user.center1',compact('user_id','menu','cart_num','phone','order_num'));
     }
 
     public function share()

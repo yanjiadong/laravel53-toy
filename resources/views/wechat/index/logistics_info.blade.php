@@ -187,6 +187,7 @@
 
                         //$(".company input").val("顺丰物流公司");
                         $(".btn button").addClass('active');
+                        common.success("匹配成功");
                     }else{
                         common.alert_tip("无匹配结果，请检查快递单号是否正确！");
                         return false;

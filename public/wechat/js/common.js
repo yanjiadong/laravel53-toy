@@ -34,13 +34,13 @@ var common = {
     },
 
     //提示框
-    alert_tip:function (msg,color,title,call){
+    alert_tip:function (msg,color,title,call,btn_name){
         if(!title){
             title = "提示";
         }
         var tip_content = '<div class="tips-alert-wrap"><div class="tips-alert-main"> <div class="confirm-content"><h4 class="title">'+
             title+ '</h4>'+'<div class="cont">'+msg+'</div></div><div class="confirm-btn-wrap clear">' +
-            '<button class="tips-btn-ensure">确定</button></div> </div></div>';
+            '<button class="tips-btn-ensure">'+(btn_name?btn_name:'确定')+'</button></div> </div></div>';
         $("body").append(tip_content);
         $(".tips-alert-wrap .tips-alert-main").css({"top": "0","opacity": 0});
         $(".tips-alert-wrap .tips-alert-main").animate({ "opacity": 1, "top": "50%" }, 500);

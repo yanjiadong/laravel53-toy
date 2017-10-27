@@ -135,7 +135,7 @@
                     cars:res.info.coupon_nums,         //优惠卡劵
                     carSort:res.info.card.vip_card_type_str,   //卡的类型
                     time:res.info.days,
-                    tel:res.info.user.telephone,
+                    tel:'{{$phone}}',
                     phone:res.info.user.telephone
                 };
 
@@ -149,7 +149,17 @@
                     if (user_center.data.userInfo.isVip) {
                         $(".photo table tr:last,.progress,.continue").show();
                         $(".user-center1-wrap .vip-img").hide();
-                        $(".photo table td.phone").text("绑定手机:" + user_center.data.userInfo.phone);
+
+                        if(!user_center.data.userInfo.phone){
+                            $(".photo table td.phone").text("");
+                        }else{
+                            $(".photo table td.phone").text("绑定手机:" + user_center.data.userInfo.phone);
+                        }
+
+                        $(".user-center1-wrap .list ul li:last .fr span").text(user_center.data.userInfo.tel);
+                        $(".user-center1-wrap .list ul li:last a").prop('href','tel:'+user_center.data.userInfo.tel);
+
+                        //$(".photo table td.phone").text("绑定手机:" + user_center.data.userInfo.phone);
                         $(".photo table tr:first td.name i").prop("class", "icon-user_center1");
                         var day = 0;
                         $(".progress .time .max").text(user_center.data.userInfo.carSort);

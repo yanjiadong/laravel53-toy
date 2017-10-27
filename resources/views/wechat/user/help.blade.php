@@ -9,6 +9,7 @@
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
+
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>

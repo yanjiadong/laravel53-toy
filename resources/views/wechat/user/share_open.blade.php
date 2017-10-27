@@ -16,12 +16,13 @@
 
 </head>
 <body class="bg-white">
+
 <div class="share-wrap">
     <div class="share-main">
         <div class="photo">
-            <img src="{{isset($user->wechat_avatar)&&!empty($user->wechat_avatar) ? $user->wechat_avatar:'/wechat/image/other/3.png'}}" alt="">
+            <img src="" alt="">
         </div>
-        <h3>{{isset($user->name)&&!empty($user->name) ? $user->name:''}}</h3>
+        <h3></h3>
         <p>我在“趣编程”免费玩了5个编程机器人</p>
         <div class="separate">
             <span class="line"></span>
@@ -54,6 +55,10 @@
         <h4>每月只要¥299，新用户立减¥100</h4>
     </div>
 </div>
+<script>
+    $(".photo img").attr('src','{{$user->wechat_avatar}}');
+    $(".share-main h3:first").text('{{$user->name}}');
 
+</script>
 </body>
 </html>

@@ -422,31 +422,31 @@
                 area_id:$(".edit_area_id").val()
             };
             if($(".order-edit-address-main .province").text() =="省"){
-                common.alert_tip("请选择地址！");
+                common.success_tip("请选择地址！");
                 return false;
             }
             if(!data.f){
-                common.alert_tip("详细地址不能为空！");
+                common.success_tip("详细地址不能为空！");
                 return false;
             }
             if(!data.a){
-                common.alert_tip("收货人姓名不能为空！");
+                common.success_tip("收货人姓名不能为空！");
                 return false;
             }
             if(!data.b){
-                common.alert_tip("手机号不能为空！");
+                common.success_tip("手机号不能为空！");
                 return false;
             }
             var phonePattern = /^0?(13|14|15|17|18)[0-9]{9}$/g;
 
             if(!phonePattern.test(data.b)){
-                common.alert_tip("请输入正确的手机号码！");
+                common.success_tip("请输入正确的手机号码！");
                 return false;
             }
             //编辑提交
             common.httpRequest('{{url('api/address/edit')}}','post',data,function (res) {
                  if(res.code == 200){
-                    common.alert_tip("编辑成功!","#333");
+                    common.success_tip("编辑成功!","#333");
                  }
              });
             order_obj.data.address[order_obj.data.addressIndex] = data;
@@ -460,10 +460,8 @@
                 var address_id = $(".edit_address_id").val();
                 //删除地址
                 common.httpRequest('{{url('api/address/delete')}}','post',{address_id:address_id},function (res) {
-                    if(res.state){
-                        common.alert_tip("删除成功!","#333");
-                    }
-                })
+
+                });
                 order_obj.data.address.splice(order_obj.data.addressIndex,1);
                 order_obj.address_rander();
                 order_obj.addAddress();
@@ -494,7 +492,7 @@
                     var text3 = third[selectedIndex[2]] ? third[selectedIndex[2]].text : '';
 
                     if(text1=="请选择"||!text1||text2=="请选择"||!text2||text3=="请选择"||!text3){
-                        common.alert_tip("请将地址选择完整!");
+                        common.success_tip("请将地址选择完整!");
                         return false;
                     }
 
@@ -606,25 +604,25 @@
                 user_id:'{{$user_id}}'
             };
             if($(".order-edit-address-main .province").text() =="省"){
-                common.alert_tip("请选择地址！");
+                common.success_tip("请选择地址！");
                 return false;
             }
             if(!data.f){
-                common.alert_tip("详细地址不能为空！");
+                common.success_tip("详细地址不能为空！");
                 return false;
             }
             if(!data.a){
-                common.alert_tip("收货人姓名不能为空！");
+                common.success_tip("收货人姓名不能为空！");
                 return false;
             }
             if(!data.b){
-                common.alert_tip("手机号不能为空！");
+                common.success_tip("手机号不能为空！");
                 return false;
             }
             var phonePattern = /^0?(13|14|15|17|18)[0-9]{9}$/g;
 
             if(!phonePattern.test(data.b)){
-                common.alert_tip("请输入正确的手机号码！");
+                common.success_tip("请输入正确的手机号码！");
                 return false;
             }
 
@@ -632,7 +630,7 @@
 
             common.httpRequest('{{url('api/address/add')}}','post',data,function (res) {
                  if(res.code==200){
-                    alert("收货地址保存成功");
+                     common.success_tip("收货地址保存成功");
                      var user_id = '{{$user_id}}';
                      common.httpRequest('{{url('api/address/index')}}','post',{user_id:user_id},function (res) {
                          //res=[];
@@ -716,7 +714,7 @@
                     }
                     else
                     {
-                        common.alert_tip(res.msg);
+                        common.success_tip(res.msg);
                         return false;
                     }
                 });
@@ -764,7 +762,7 @@
                         }
                         else
                         {
-                            common.alert_tip(res.msg);
+                            common.success_tip(res.msg);
                             return false;
                         }
                     });
@@ -775,10 +773,10 @@
         sendCode:function () {
             var phone = $(".form-phone input").val();
             if(!phone){
-                common.alert_tip('手机号不能为空！');
+                common.success_tip('手机号不能为空！');
                 return false;
             }else if(!checkInput.phone(phone)){
-                common.alert_tip('请输入正确的手机号！');
+                common.success_tip('请输入正确的手机号！');
                 return false;
             }else{
                 //发送短信
@@ -792,7 +790,7 @@
 
                     if(res.code == 300)
                     {
-                        common.alert_tip(res.msg);
+                        common.success_tip(res.msg);
                         return false;
                     }
 
@@ -821,25 +819,25 @@
                 wechat_openid:'{{$openid}}'
             };
             if(!bind_vip.telephone){
-                common.alert_tip('手机号不能为空！');
+                common.success_tip('手机号不能为空！');
                 return false;
             }else if(!checkInput.phone(bind_vip.telephone)){
-                common.alert_tip('请输入正确的手机号！');
+                common.success_tip('请输入正确的手机号！');
                 return false;
             }else if(!bind_vip.code){
-                common.alert_tip('验证码不能为空！');
+                common.success_tip('验证码不能为空！');
                 return false;
             }
             common.httpRequest('{{url('api/index/bind_telephone')}}','post',bind_vip,function (res) {
                 if(res.code != 200)
                 {
-                    common.alert_tip(res.msg);
+                    common.success_tip(res.msg);
                     return false;
                 }
 
                 order_obj.data.vip_state = '1';
                 $(".cover-phone-bind").hide();
-                common.alert_tip('手机号绑定成功!');
+                common.success_tip('手机号绑定成功!');
                 //order_obj.submitConfirm();
             })
         },

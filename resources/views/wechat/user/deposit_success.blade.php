@@ -28,5 +28,22 @@
     var cashDeposit = '{{$vip_card_pay->money}}';
     $(".cash-success .money").text('¥'+cashDeposit);
 </script>
+
+<script>
+    $(function () {
+        pushHistory();
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            location.href=document.referrer;  //在这里指定其返回的地址
+        }, false);
+    });
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: "{{url('wechat/user/deposit_success')}}"+'/'+'{{$vip_card_pay}}'
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
+</script>
+
 </body>
 </html>

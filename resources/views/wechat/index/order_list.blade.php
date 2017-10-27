@@ -31,16 +31,16 @@
         </ul>
     </nav>
     <div class="order-detail-main">
-        <div class="parent-box clear">
-            <div class="detail-cont tab-page fl">
-                <div class="weui-pull-to-refresh__layer">
-                    <div class='weui-pull-to-refresh__arrow'></div>
-                    <div class='weui-pull-to-refresh__preloader'></div>
-                    <div class="down">下拉刷新</div>
-                    <div class="up">释放刷新</div>
-                    <div class="refresh">正在刷新</div>
-                </div>
+        <div class="parent-box">
+            <div class="weui-pull-to-refresh__layer">
+                <div class='weui-pull-to-refresh__arrow'></div>
+                <div class='weui-pull-to-refresh__preloader'></div>
+                <div class="down">下拉刷新</div>
+                <div class="up">释放刷新</div>
+                <div class="refresh">正在刷新</div>
+            </div>
 
+            <div class="detail-cont tab-page">
                 <div class="top-tips">
                     同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
                 </div>
@@ -85,17 +85,15 @@
         cont_width:$(".order-detail-wrap").width(),
         //导航切换
         tab_change:function () {
-            $(".order-detail-wrap").height($(window).height());
-            $(".order-detail-main").height($(".tab-page").eq(0).height()+"px");
             var tab_btn = $(".order-detail-wrap nav ul li");
             tab_btn.click(function () {
                 var num = $(this).attr("data-tab");
                 $("body").scrollTop("0");
-                $(".order-detail-main").height($($(".tab-page")[num]).height()+"px");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".order-detail-main .parent-box").css({left:-num*orderDtail.cont_width+"px"});
-            })
+                $(".order-detail-main .parent-box .tab-page").hide();
+                $(".order-detail-main .parent-box .tab-page").eq(num).show();
+            });
         },
         //进行中 --数据加载
         getList:function () {
@@ -170,7 +168,7 @@
                         }
                     }
                     $(".detail-cont .detail-list").html(dataList).show();
-                    $(".order-detail-main").height($(".tab-page").eq(0).height()+"px");
+                    //$(".order-detail-main").height($(".tab-page").eq(0).height()+"px");
                 }
                 else
                 {
@@ -254,9 +252,9 @@
         orderDtail.init();
 
         //下拉刷新
-        $(".detail-cont").css({height:$(window).outerHeight()-50+'px'});
-        $(".detail-cont").pullToRefresh();
-        $(".detail-cont").on("pull-to-refresh", function() {
+        $(".parent-box").css({height:$(window).outerHeight()+'px'});
+        $(".parent-box").pullToRefresh();
+        $(".parent-box").on("pull-to-refresh", function() {
             var refreshClose = $(this);
             /*-------下拉刷新的内容-------------------*/
             orderDtail.init();
@@ -265,8 +263,7 @@
                 refreshClose.pullToRefreshDone();
             },500);
         });
-        $(".detail-cont").pullToRefreshDone();
-
+        $(".parent-box").pullToRefreshDone();
     })
 </script>
 

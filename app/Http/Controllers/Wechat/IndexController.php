@@ -155,7 +155,12 @@ class IndexController extends BaseController
         $open_num = $user->open_num + 1;
 
         User::where('id',$user_id)->update(['open_num'=>$open_num]);
-        return view('wechat.index.index',compact('result','menu','user_id','cart_num','is_first'));
+
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+
+
+        return view('wechat.index.index',compact('result','menu','user_id','cart_num','is_first','order_num'));
     }
 
     /**
@@ -170,7 +175,10 @@ class IndexController extends BaseController
         $cart_num = Cart::where('user_id',$user_id)->count();
         $menu = 'index';
 
-        return view('wechat.index.category',compact('category_id','brand_id','user_id','menu','cart_num'));
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+
+        return view('wechat.index.category',compact('category_id','brand_id','user_id','menu','cart_num','order_num'));
     }
 
     /**
@@ -195,7 +203,10 @@ class IndexController extends BaseController
         //计算玩具箱数量
         $cart_num = Cart::where('user_id',$user_id)->count();
 
-        return view('wechat.index.cart',compact('user_id','menu','cart_num'));
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+
+        return view('wechat.index.cart',compact('user_id','menu','cart_num','order_num'));
     }
 
     /**
@@ -347,7 +358,10 @@ class IndexController extends BaseController
             $phone = $content[7];
         }
 
-        return view('wechat.index.order_list',compact('user_id','openid','menu','cart_num','phone'));
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+
+        return view('wechat.index.order_list',compact('user_id','openid','menu','cart_num','phone','order_num'));
     }
 
     public function order_success($order_code)

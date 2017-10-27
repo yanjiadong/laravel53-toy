@@ -129,10 +129,11 @@
                             }
                             else
                             {
+                                $(".confirm-alert-wrap").remove();
                                 common.alert_tip(res.msg);
                             }
                         });
-                    });
+                    },'确认申请');
                 }
                 else
                 {

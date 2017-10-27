@@ -146,7 +146,8 @@
         data:{
             detail_data:{},           //商品详情数据
             paly_time:0,
-            car_num:'{{$cart_num}}'
+            car_num:'{{$cart_num}}',
+            join_pic:''   //加入购物车的动画图片
         },
         //轮播图设置
         banner:function () {
@@ -196,7 +197,14 @@
                     }
 
                     lunbo_content = '';
+
+
+
                     for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
+                        if(!goodDetail_obj.join_pic){
+                            goodDetail_obj.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
+                        }
+
                         lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo2[i].picture+'"></div>';
                         $(".lunbo .swiper-wrapper").append(lunbo_content);
                         lunbo_content="";
@@ -304,9 +312,17 @@
                 else
                 {
 
+
+                    var cont ='<div id="picAnimate"><img src="'+goodDetail_obj.join_pic+'"></div>';
+                    $(".footer ul li:last.fl").append(cont);
+                    setTimeout(function () {
+                        $(".footer ul li:last.fl #picAnimate").remove();
+                    },1000);
+
+                    //$(".icon-footer-shop-car").html('<span>'+res.info.count+'</span>');
                     //$(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
                     goodDetail_obj.data.car_num = res.info.count;
-                    common.success_tip("添加成功！");
+                    //common.success_tip("添加成功！");
                     goodDetail_obj.init();
                 }
             })
@@ -322,6 +338,21 @@
         goodDetail_obj.detail_describe_toggle();
 
     })
+</script>
+<script>
+    $(function () {
+        pushHistory();
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            location.href=document.referrer;  //在这里指定其返回的地址
+        }, false);
+    });
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: "{{url('wechat/index/good')}}"+'/'+'{{$good_id}}'
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
 </script>
 </body>
 </html>

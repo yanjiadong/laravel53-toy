@@ -39,7 +39,7 @@
 
                         common.alert_tip("会员特权已开通，请前往个人中心查看会员详情",'#323232','会员购买成功',function () {
                             location.href = url;
-                        });
+                        },"查看");
 
                         /*common.alert_tip("支付成功",'#323232','支付成功',function () {
                                 location.href=url;

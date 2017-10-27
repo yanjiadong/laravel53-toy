@@ -54,10 +54,11 @@
 }
 .index-wrap .content .recommend .top-cont {
     background-color: #fff;
-    height: 60px;
-    padding: 15px 10px;
+    height: 50px;
+    padding: 0 10px;
     color: #939393;
     font-size: 12px;
+    line-height: 50px;
 }
 .index-wrap .content .recommend .top-cont .top-title table{
     width: 100%;
@@ -395,6 +396,7 @@
 .sort-detail .content .grow-up .all .year-select .scroll button.active {
     background-color: #6885EA;
     color: #fff;
+    border: 1px solid #6885EA;
 }
 .sort-detail .content .grow-up .list ul {
     background-color: #f2f2f2;
@@ -636,6 +638,7 @@
 .good-detail-wrap .good-detail-content .good-detail-param table tr td:nth-child(2n+1) {
     background-color: #EBEBEB;
     color: #8D8D8D;
+    text-align: center;
     width: 30%;
 }
 .good-detail-wrap .good-detail-content .good-detail-param table tr td:nth-child(2n) {
@@ -668,10 +671,10 @@
 }
 .good-detail-wrap .good-detail-content .good-detail-pic>div{
     width: 100%;
-    font-size: 0;
 }
 .good-detail-wrap .good-detail-content .good-detail-pic>div img{
     width: 100%;
+    display: block;
 }
 .good-detail-wrap .good-detail-content .good-detail-pic>div>p{
     width: 100%;
@@ -741,6 +744,31 @@
 }
 .good-detail-wrap .footer ul li .join-car.active{
     background-color: #6885EA;
+}
+.good-detail-wrap .footer  #picAnimate{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 30px;
+    animation:myMove 1s ease;
+}
+@keyframes myMove {
+    0%{
+        bottom: 0;
+        left: 60%;
+    }
+    50%{
+        bottom: 100px;
+        left: 30%;
+    }
+    100%{
+        bottom: 10px;
+        left: 9%;
+    }
+}
+.good-detail-wrap .footer ul li #picAnimate img{
+    width: 100%;
+    position: relative;
 }
 .good-detail-wrap .footer ul li .join-car span {
     font-size: 14px;
@@ -1323,21 +1351,17 @@
     color: #6885EA;
 }
 .order-detail-wrap .order-detail-main {
-    margin-top: 44px;
     width: 100%;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    margin-bottom: 50px;
 }
 .order-detail-wrap .order-detail-main .parent-box {
-    width: 200%;
-    height: 100%;
-    position: absolute;
-    left: 0;
+    width: 100%;
+    padding-top: 44px;
+    height: 500px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont {
-    width: 50%;
+    width:100%;
     margin-bottom: 50px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -1487,7 +1511,8 @@
     border: 1px solid #6885EA;
 }
 .order-detail-wrap .order-detail-main .parent-box .return {
-    width: 50%;
+    width: 100%;
+    display: none;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .no-good{
     height: 300px;
@@ -1906,7 +1931,6 @@
 }
 .toys-car .top-tips {
     padding: 6px 10px;
-    text-align: center;
     background-color: #FFE3EC;
     color: #FF3574 ;
     position: fixed;
@@ -1935,7 +1959,7 @@
 }
 .toys-car .list {
     background-color: #fff;
-    margin-bottom: 115px;
+    padding-bottom: 115px;
 }
 .toys-car .list ul li {
     padding: 10px;
@@ -2067,6 +2091,21 @@
     margin-top: 10px;
 }
 /*--------------------------------物流状态-----------------------------------*/
+.logistics-detail-wrap{
+    display: none;
+}
+.logistics-detail-wrap-tips{
+    background-color: #fff;
+    color: #323232;
+    display: table;
+    width: 100%;
+    font-size: 14px;
+}
+.logistics-detail-wrap-tips span{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
 .logistics-detail-wrap .logistics-title {
     padding: 10px;
 }
@@ -2075,7 +2114,7 @@
     color: #323232;
 }
 .logistics-detail-wrap .logistics-title p {
-    font-size: 12px;
+    font-size: 15px;
     color: #8D8D8D;
     margin-top: 5px;
 }
@@ -3000,10 +3039,12 @@
     font-family:PingFangSC-Regular;
 }
 .deposit1-wrap .deposit1-main .top{
-    font-size: 14px;
-    color: #9f9f9f;
-    padding: 5px 15px;
-    line-height: 1.5em
+    width: 100%;
+    background-color: #d8def3;
+    color: #26325C;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 16px;
 }
 .deposit1-wrap .deposit1-main .cont{
     margin-top: 15px;
@@ -3232,8 +3273,11 @@
     border: 1px solid transparent;
     height: 32px;
     border-radius: 3px;
-    color: #323232 ;
+    color: #323232 !important;
     font-size: 14px;
+}
+.fill-logistics .info .company .fl input[disabled]{
+    color: #323232 !important;
 }
 .fill-logistics .info .company .fl input:focus {
     border: 1px solid #6885EA ;
@@ -4336,8 +4380,8 @@ textarea {
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
-    height: 36px;
-    line-height: 36px;
+    height: 40px;
+    line-height: 20px;
     padding: 0 10px;
     font-size: 12px;
     position: fixed;
@@ -4438,8 +4482,23 @@ textarea {
     border: 1px solid transparent;
     height: 32px;
     border-radius: 3px;
-    color: #323232 ;
+    color: #323232 !important;
     font-size: 14px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fl input::input-placeholder{
+    color:  #999;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #999;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr {
     text-align: center;
@@ -4465,8 +4524,23 @@ textarea {
     border: 1px solid transparent;
     height: 32px;
     border-radius: 3px;
-    color: #323232 ;
+    color: #323232 !important;
     font-size: 14px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input::input-placeholder{
+    color:  #999;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #999;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:focus {
     border: 1px solid #6885EA ;
