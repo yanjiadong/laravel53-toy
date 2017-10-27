@@ -157,7 +157,7 @@ class IndexController extends BaseController
         User::where('id',$user_id)->update(['open_num'=>$open_num]);
 
         //正在租用中的玩具数量
-        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
 
         return view('wechat.index.index',compact('result','menu','user_id','cart_num','is_first','order_num'));
@@ -176,7 +176,7 @@ class IndexController extends BaseController
         $menu = 'index';
 
         //正在租用中的玩具数量
-        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
         return view('wechat.index.category',compact('category_id','brand_id','user_id','menu','cart_num','order_num'));
     }
@@ -204,7 +204,7 @@ class IndexController extends BaseController
         $cart_num = Cart::where('user_id',$user_id)->count();
 
         //正在租用中的玩具数量
-        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
         return view('wechat.index.cart',compact('user_id','menu','cart_num','order_num'));
     }
@@ -359,7 +359,7 @@ class IndexController extends BaseController
         }
 
         //正在租用中的玩具数量
-        $order_num = Order::where('user_id',$user_id)->where('status',Order::STATUS_DOING)->count();
+        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
         return view('wechat.index.order_list',compact('user_id','openid','menu','cart_num','phone','order_num'));
     }

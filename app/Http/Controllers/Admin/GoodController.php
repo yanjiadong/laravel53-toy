@@ -50,6 +50,11 @@ class GoodController extends BaseController
             $goods = Good::with(['category','brand'])->orderBy('sort','asc')->paginate(20);
         }
 
+
+        //echo $url;
+        $current_url = url()->full();
+        session(['current_url'=>$current_url]);
+
         //dd($goods);
         $menu = 'good';
         $categorys = Category::all();
@@ -205,7 +210,16 @@ class GoodController extends BaseController
             }
         }
 
-        return alert(route('goods.index'),1);
+        if(session('current_url'))
+        {
+            $current_url = session('current_url');
+        }
+        else
+        {
+            $current_url = route('goods.index');
+        }
+        //echo $current_url;
+        return alert($current_url,1);
     }
 
     /**

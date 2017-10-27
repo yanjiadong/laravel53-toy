@@ -15,7 +15,16 @@ class CartController extends BaseController
     {
         $user_id = $request->get('user_id');
         $user = User::find($user_id);
-        $carts = $user->carts()->orderBy('id','desc')->get();
+
+        $result = [];
+        $carts = Cart::where('user_id',$user_id)->orderBy('id','desc')->get();
+        if(count($carts) > 0)
+        {
+            foreach ($carts as $cart)
+            {
+                $result[] = Good::where('id',$cart->good_id)->first()->toArray();
+            }
+        }
 
         if($user->is_vip==1)
         {
@@ -42,7 +51,7 @@ class CartController extends BaseController
             $rent = true;
         }
 
-        $this->ret['info'] = ['carts'=>$carts,'type'=>$type,'rent'=>$rent];
+        $this->ret['info'] = ['carts'=>$result,'type'=>$type,'rent'=>$rent];
         return $this->ret;
     }
 

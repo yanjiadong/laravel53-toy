@@ -466,6 +466,8 @@
                 order_obj.address_rander();
                 order_obj.addAddress();
                 $(".order-cover-wrap .order-edit-address-main").hide();
+                $(".confirm-alert-wrap").remove();
+                common.success_tip("地址删除成功");
             });
         },
         selectAddress:function () {

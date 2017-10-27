@@ -83,7 +83,7 @@
                             res.info.carts,
                         rent:res.info.rent
                     };
-                    //console.log(res.info.carts);
+                    console.log(toys_car.data.info.list);
                     //列表渲染
                     if(toys_car.data.info.list.length>0){
                         var list ='';

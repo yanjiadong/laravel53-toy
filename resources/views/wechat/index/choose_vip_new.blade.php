@@ -104,8 +104,8 @@
             count:1          //会员卡 0为月卡 1为半年卡 2为季卡
         },
         init:function () {
-            if(eval(choose_vip.data.time)){
-                $(".choose-vip-wrap-new>p").text('您的会员有效期剩余：'+choose_vip.data.time+'天');
+            if(choose_vip.data.time){
+                $(".choose-vip-wrap-new>p").text('222您的会员有效期剩余：'+choose_vip.data.time+'天');
             }
             //获取会员卡数据
             common.httpRequest('{{url('api/user/vip_cards')}}','post',null,function (res) {

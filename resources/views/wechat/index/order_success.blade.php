@@ -16,9 +16,6 @@
 </head>
 <body>
 <div class="pay-success bg-white">
-    <div class="tips-top">
-        <i>!</i>物品在邮寄途中时，会员有效期计时自动暂停
-    </div>
     <div class="sign">
         <i class="icon-big icon-big-paySuccess"></i>
     </div>
@@ -47,7 +44,7 @@
     function pushHistory() {
         var state = {
             title: "title",
-            url: "/view/pay_success.html"
+            url: "{{url('wechat/index/order_success')}}"+'/'+'{{$order_code}}'
         };
         window.history.pushState(state, state.title, state.url);
     }
