@@ -294,7 +294,7 @@
 
                     //轮播图
                     goodDetail_obj.banner();
-                    goodDetail_obj.lunbo_video();
+                    //goodDetail_obj.lunbo_video();
                 }
 
 
