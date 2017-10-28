@@ -198,7 +198,7 @@
 
 
 <script>
-    debugger;
+    //debugger;
     var goodDetail_obj = {
         data:{
             detail_data:{},           //商品详情数据
@@ -237,7 +237,7 @@
 
                 //轮播图
                 //console.log(res.info.good.video);
-                if(!res.info.good.video)
+                if(res.info.good.video)
                 {
                     var lunbo_content="";
                     $(".lunbo .swiper-wrapper").html("");
@@ -266,11 +266,11 @@
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             lunbo_content="";
                         }
-
-                        //轮播图
-                        goodDetail_obj.banner();
-                        goodDetail_obj.lunbo_video();
                     }
+
+                    //轮播图
+                    goodDetail_obj.banner();
+                    goodDetail_obj.lunbo_video();
                 }
                 else
                 {
@@ -289,10 +289,12 @@
                             lunbo_content="";
                         }
 
-                        //轮播图
-                        goodDetail_obj.banner();
-                        goodDetail_obj.lunbo_video();
+
                     }
+
+                    //轮播图
+                    goodDetail_obj.banner();
+                    goodDetail_obj.lunbo_video();
                 }
 
 
