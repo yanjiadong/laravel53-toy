@@ -169,7 +169,7 @@
                 </div>
                 <div class="fr">
                     <span>{{$order_code}}</span>
-                    <input type="hidden" id="copy" value="{{$order_code}}" readonly>
+                    <input type="hidden" id="copy" value="{{$order_code}}">
                     <button id="copy_btn" onclick="order_detail.copy()">复制</button>
                 </div>
             </div>
@@ -181,12 +181,22 @@
                     <span>2017-4-21 11:21</span>
                 </div>
             </div>
-            <div class="other clear">
-                <div class="fl">
+            <div class="other">
+                <div class="delivery clear">
+                    <div class="fl">
 
+                    </div>
+                    <div class="fr">
+                        <span></span>
+                    </div>
                 </div>
-                <div class="fr">
-                    <span></span>
+                <div class="rent clear">
+                    <div class="fl">
+
+                    </div>
+                    <div class="fr">
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,9 +262,9 @@
                             '<div class="fr"><i class="icon icon_arrowRight_bold"></i></div></div><div class="operate-btn"><a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a>' +
                             '<button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.receipt()">确认收货</button></div>';
 
-                        $(".order-info .other .fl").text("平台发货时间");
-                        $(".order-info .other .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
-                        $(".order-info .other").show();
+                        $(".order-info .delivery .fl").text("平台发货时间");
+                        $(".order-info .delivery .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .delivery").show();
                         break;
                     case '租用中':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-zuyongzhong"></i><h2>租用中</h2>' +
@@ -265,9 +275,13 @@
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
                             '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
 
-                        $(".order-info .other .fl").text("已租用天数");
-                        $(".order-info .other .fr span").text(order_detail.data.logistics_state.logistics.item4+'天');
-                        $(".order-info .other").show();
+                        $(".order-info .delivery .fl").text("平台发货时间");
+                        $(".order-info .delivery .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .delivery").show();
+
+                        $(".order-info .other .rent .fl").text("已租用天数");
+                        $(".order-info .other .rent .fr span").text(order_detail.data.logistics_state.logistics.item4+'天');
+                        $(".order-info .other .rent").show();
                         break;
                     case '已归还':
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-yiguihuan"></i><h2>已归还</h2><div class="btn">' +
@@ -278,9 +292,14 @@
                             '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
                             '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button></div>';
-                        $(".order-info .other .fl").text("共租用天数");
-                        $(".order-info .other .fr span").text(order_detail.data.logistics_state.logistics.item5+'天');
-                        $(".order-info .other").show();
+
+                        $(".order-info .delivery .fl").text("平台发货时间");
+                        $(".order-info .delivery .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .delivery").show();
+
+                        $(".order-info .other .rent .fl").text("共租用天数");
+                        $(".order-info .other .rent .fr span").text(order_detail.data.logistics_state.logistics.item5+'天');
+                        $(".order-info .other .rent").show();
                         break;
                     default:
                         break;
@@ -299,7 +318,7 @@
                 $(".address .address_detail p span:eq(2)").text(order_detail.data.logistics_state.address.e);
                 $(".address .address_detail h6").text(order_detail.data.logistics_state.address.f);
 
-                console.log(order_detail.data.logistics_state.good.g);
+                //console.log(order_detail.data.logistics_state.good.g);
                 //商品详情
                 if (!order_detail.data.logistics_state.good) {
                     $(".no-goods").show();
@@ -320,7 +339,8 @@
 
                 }
                 //物流编号 下单时间
-                $(".order-info .number .fr input").val(order_detail.data.logistics_state.address.g);
+                //$(".order-info .number .fr input").val(order_detail.data.logistics_state.address.g);
+                $(".order-info .number .fr input").val('{{$order_code}}');
                 //$(".order-info .time .fr span").text(common.dateFormat(order_detail.data.logistics_state.address.h));
                 $(".order-info .time .fr span").text(order_detail.data.logistics_state.address.h);
             })

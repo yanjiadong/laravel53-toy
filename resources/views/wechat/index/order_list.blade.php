@@ -174,7 +174,6 @@
                 {
                     $(".detail-cont .top-tips").hide();
                     $(".order-detail-main .detail-cont .detail-list").hide();
-                    $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight()).css({'background-color':'#fff'});
                     $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight()).show();
                 }
             })
@@ -213,7 +212,7 @@
                 else
                 {
                     $(".order-detail-main .return .detail-list").hide();
-                    $(".order-detail-main").height($(window).height()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight());
+                    $(".order-detail-main .return .detail-list").hide();
                     $(".order-detail-main .return .no-good").height($(window).outerHeight()-$(".order-detail-wrap nav").outerHeight()- $(".order-detail-wrap footer").outerHeight()).show();
                 }
             })

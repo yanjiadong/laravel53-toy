@@ -182,7 +182,7 @@
                             $(".day-info .info").text("会员已过期").css({'background-color': '#9a9a9a','color': '#fff'});
                             $(".photo table tr:first td.name i").prop("class", "icon-user_center2");
                             $(".white-strip").css({'width': '6px'});
-                        } else if (user_center.data.userInfo.time == day) {
+                        } else if (user_center.data.userInfo.time >= day) {
                             $(".day-info .line").css({'left': '2px'});
                             $(".day-info .info").css({'left': '0', 'transform': 'translateX(0)'});
                             $(".day-info .info").text("会员剩余" + user_center.data.userInfo.time + "天");

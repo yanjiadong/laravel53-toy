@@ -245,12 +245,23 @@
         },
         //首页 - 成为会员
         vip_create:function () {
-            common.httpRequest('/wechat/js/test.json','get',null,function (res) {
-                index_obj.data.vipData = res;
-                index_obj.data.vipData ={url:"/wechat/image/other/vip-bg.jpg",time:5};   //假数据
-                $(".join-member").css({"background-image":index_obj.data.vipData.url,"background-size":index_obj.cont_width});
-                //$(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
-                $(".join-member a").attr("href",'{{url('wechat/index/choose_vip')}}');
+            common.httpRequest('{{url('api/index/activities')}}','post',null,function (res) {
+                console.log(res);
+
+                if(res.info.list.length > 0)
+                {
+                    index_obj.data.vipData = res.info.list[0];
+                    $(".join-member").css({"background-image":"url("+index_obj.data.vipData.picture+")","background-size":index_obj.cont_width});
+                    //$(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
+                    $(".join-member a").attr("href",index_obj.data.vipData.url);
+                }
+                else
+                {
+                    index_obj.data.vipData ={url:"/wechat/image/other/vip-bg.jpg",time:5};   //假数据
+                    $(".join-member").css({"background-image":index_obj.data.vipData.url,"background-size":index_obj.cont_width});
+                    //$(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
+                    $(".join-member a").attr("href",'{{url('wechat/index/choose_vip')}}');
+                }
             });
         },
         cont_width:$(".content").width(),

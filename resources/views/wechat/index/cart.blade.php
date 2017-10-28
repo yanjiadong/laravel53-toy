@@ -123,8 +123,8 @@
                         }
 
                     }else{
-                        $(".no-goods").show();
-                        $(".top-tips,footer,.btn").hide();
+                        $(".no-goods").height($(window).height()-50).show();
+                        $(".list,.btn,.top-tips").hide();
                     }
                 }
 

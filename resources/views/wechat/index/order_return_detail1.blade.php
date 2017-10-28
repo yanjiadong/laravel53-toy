@@ -124,11 +124,12 @@
         good_return.init();
     })
 </script>
+
 <script>
     $(function () {
         pushHistory();
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            location.href=document.referrer;  //在这里指定其返回的地址
+            location.href="{{url('wechat/index/order_list')}}";  //在这里指定其返回的地址  订单列表页面
         }, false);
     });
     function pushHistory() {

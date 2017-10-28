@@ -11,14 +11,23 @@
     <!--轮播样式-->
     <link rel="stylesheet" href="/wechat/style/swiper.min.css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
-
-    <script src="/wechat/js/jquery-1.11.1.min.js"></script>
-    <!--轮播图-->
-    <script type="text/javascript" src="/wechat/js/swiper.min.js"></script>
+    <!--查看图片详情-->
+    <link rel="stylesheet prefetch" href="/wechat/style/photoswipe.css">
+    <link rel="stylesheet prefetch" href="/wechat/style/default-skin.css">
 
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
 
+    <script src="/wechat/js/jquery-1.11.1.min.js"></script>
+    <script src="/wechat/js/main.js"></script>
+    <script src="/wechat/js/common.js"></script>
+
+    <!--查看图片详情-->
+    <script src="/wechat/js/photoswipe.js"></script>
+    <script src="/wechat/js/photoswipe-ui-default.min.js"></script>
+
+    <!--轮播图-->
+    <script type="text/javascript" src="/wechat/js/swiper.min.js"></script>
 </head>
 <body>
 <div class="good-detail-wrap">
@@ -121,10 +130,9 @@
         </div>
         <div class="good-detail-pic">
             <h3 class="title">商品详情</h3>
-            <div>
-                <!--<li>
-                    <img src="../image/other/lunbo1.gif">
-                </li>-->
+            <div class="my-gallery" data-pswp-uid="1">
+                <!--  <img src="../image/other/lunbo1.gif">-->
+
             </div>
         </div>
     </div>
@@ -141,7 +149,59 @@
     </div>
 </div>
 
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
+    debugger;
     var goodDetail_obj = {
         data:{
             detail_data:{},           //商品详情数据
@@ -179,7 +239,9 @@
                 };   //假数据
 
                 //轮播图
-                if(goodDetail_obj .detail_data.lunbo.length>0){
+                //console.log(res.info.good.video);
+                if(!res.info.good.video)
+                {
                     var lunbo_content="";
                     $(".lunbo .swiper-wrapper").html("");
 
@@ -196,25 +258,49 @@
                         }
                     }
 
-                    lunbo_content = '';
+                    if(goodDetail_obj .detail_data.lunbo2.length > 0){
+                        lunbo_content = '';
+                        for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
+                            if(!goodDetail_obj.join_pic){
+                                goodDetail_obj.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
+                            }
 
-
-
-                    for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
-                        if(!goodDetail_obj.join_pic){
-                            goodDetail_obj.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
+                            lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo2[i].picture+'"></div>';
+                            $(".lunbo .swiper-wrapper").append(lunbo_content);
+                            lunbo_content="";
                         }
 
-                        lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo2[i].picture+'"></div>';
-                        $(".lunbo .swiper-wrapper").append(lunbo_content);
-                        lunbo_content="";
+                        //轮播图
+                        goodDetail_obj.banner();
+                        goodDetail_obj.lunbo_video();
                     }
-
-                    //轮播图
-                    goodDetail_obj.banner();
-
-                    goodDetail_obj.lunbo_video();
                 }
+                else
+                {
+                    var lunbo_content="";
+                    $(".lunbo .swiper-wrapper").html("");
+
+                    if(goodDetail_obj .detail_data.lunbo2.length > 0){
+                        lunbo_content = '';
+                        for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
+                            if(!goodDetail_obj.join_pic){
+                                goodDetail_obj.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
+                            }
+
+                            lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo2[i].picture+'"></div>';
+                            $(".lunbo .swiper-wrapper").append(lunbo_content);
+                            lunbo_content="";
+                        }
+
+                        //轮播图
+                        goodDetail_obj.banner();
+                        goodDetail_obj.lunbo_video();
+                    }
+                }
+
+
+
+
 
                 //标题
                 $(".good-detail-content>.top>h3").text(goodDetail_obj .detail_data.title);
@@ -232,6 +318,7 @@
                 }
                 //商品详情
                 $(".good-detail-pic>div").html(res.info.good.desc_new);
+                goodDetail_obj.getDetailBigPic();
                 /*if(goodDetail_obj.detail_data.detail.length>0){
                     var details ="";
                     for(var i=0;i<goodDetail_obj.detail_data.detail.length;i++){
@@ -260,9 +347,9 @@
         lunbo_video:function () {
             var h;
             $('.lunbo .swiper-container .play-box').click(function () {
-                var minites =  parseInt($(this).text().slice(0,$(this).text().indexOf('\'')));
-                var seconds = parseInt($(this).text().slice($(this).text().indexOf('\'')+1));
-                var total = minites*60+seconds;
+                //var minites =  parseInt($(this).text().slice(0,$(this).text().indexOf('\'')));
+                //var seconds = parseInt($(this).text().slice($(this).text().indexOf('\'')+1));
+                //var total = minites*60+seconds;
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
                     $(".swiper-slide video")[0].pause();
@@ -270,7 +357,7 @@
                 }else{
                     $(this).addClass("active");
                     $(".swiper-slide video")[0].play();
-                    var cont =0;
+                    /*var cont =0;
                     h = setInterval(function () {
                         if( total  >0){
                             total --;
@@ -283,7 +370,7 @@
                             }
                         }
                         $(".play-box").text(minites+'\''+seconds+'"');
-                    },1000);
+                    },1000);*/
                 }
             });
 
@@ -330,6 +417,225 @@
         //进入购物车
         goToysCar:function () {
             location.href="{{url('wechat/index/cart')}}";
+        },
+        //商品详情查看
+        getDetailBigPic:function() {
+            var imgList = $(".my-gallery img");
+            for(var i=0;i<imgList.length;i++){
+                var realWidth =$(imgList[i]).context.naturalWidth;//真实的宽度
+                var realHeight = $(imgList[i]).context.naturalHeight;//真实的高度
+                $(imgList[i]).wrap("<figure><a href='"+ $(imgList[i]).prop("src")+"' data-size='"+realWidth+"x"+realHeight+"'></a></figure>");
+            }
+            var initPhotoSwipeFromDOM = function(gallerySelector) {
+                // 解析来自DOM元素幻灯片数据（URL，标题，大小...）// (children of gallerySelector)
+                var parseThumbnailElements = function(el) {
+                    var thumbElements = el.getElementsByTagName("figure");
+                    debugger;
+                    var  numNodes = thumbElements.length,
+                        items = [],
+                        figureEl,
+                        linkEl,
+                        size,
+                        item;
+                    for(var i = 0; i < numNodes; i++) {
+
+                        figureEl = thumbElements[i]; // <figure> element
+
+                        // 仅包括元素节点
+                        if(figureEl.nodeType !== 1) {
+                            continue;
+                        }
+                        linkEl = figureEl.children[0]; // <a> element
+
+                        size = linkEl.getAttribute('data-size').split('x');
+
+                        // 创建幻灯片对象
+                        item = {
+                            src: linkEl.getAttribute('href'),
+                            w: parseInt(size[0], 10),
+                            h: parseInt(size[1], 10)
+                        };
+
+
+
+                        if(figureEl.children.length > 1) {
+                            // <figcaption> content
+                            item.title = figureEl.children[1].innerHTML;
+                        }
+
+                        if(linkEl.children.length > 0) {
+                            // <img> 缩略图节点, 检索缩略图网址
+                            item.msrc = linkEl.children[0].getAttribute('src');
+                        }
+
+                        item.el = figureEl; // 保存链接元素 for getThumbBoundsFn
+                        items.push(item);
+                    }
+                    return items;
+                };
+
+                // 查找最近的父节点
+                var closest = function closest(el, fn) {
+                    return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+                };
+
+                // 当用户点击缩略图触发
+                var onThumbnailsClick = function(e) {
+                    e = e || window.event;
+                    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+                    var eTarget = e.target || e.srcElement;
+
+                    // find root element of slide
+                    var clickedListItem = closest(eTarget, function(el) {
+                        return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+                    });
+
+                    if(!clickedListItem) {
+                        return;
+                    }
+
+                    // find index of clicked item by looping through all child nodes
+                    // alternatively, you may define index via data- attribute
+                    var clickedGallery = clickedListItem.parentNode,
+                        childNodes = clickedListItem.parentNode.getElementsByTagName("figure"),
+                        numChildNodes = childNodes.length,
+                        nodeIndex = 0,
+                        index;
+                    for (var i = 0; i < numChildNodes; i++) {
+                        if(childNodes[i].nodeType !== 1) {
+                            continue;
+                        }
+
+                        if(childNodes[i] === clickedListItem) {
+                            index = nodeIndex;
+                            break;
+                        }
+                        nodeIndex++;
+                    }
+
+
+
+                    if(index >= 0) {
+                        // open PhotoSwipe if valid index found
+                        openPhotoSwipe( index, clickedGallery );
+                    }
+                    return false;
+                };
+
+                // parse picture index and gallery index from URL (#&pid=1&gid=2)
+                var photoswipeParseHash = function() {
+                    var hash = window.location.hash.substring(1),
+                        params = {};
+
+                    if(hash.length < 5) {
+                        return params;
+                    }
+
+                    var vars = hash.split('&');
+                    for (var i = 0; i < vars.length; i++) {
+                        if(!vars[i]) {
+                            continue;
+                        }
+                        var pair = vars[i].split('=');
+                        if(pair.length < 2) {
+                            continue;
+                        }
+                        params[pair[0]] = pair[1];
+                    }
+
+                    if(params.gid) {
+                        params.gid = parseInt(params.gid, 10);
+                    }
+
+                    return params;
+                };
+
+                var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+                    var pswpElement = document.querySelectorAll('.pswp')[0],
+                        gallery,
+                        options,
+                        items;
+
+                    items = parseThumbnailElements(galleryElement);
+                    debugger;
+
+                    // 这里可以定义参数
+                    options = {
+                        barsSize: {
+                            top: 100,
+                            bottom: 100
+                        },
+                        fullscreenEl : false, // 是否支持全屏按钮
+                        shareButtons: [
+                            {id:'wechat', label:'分享微信', url:'#'},
+                            {id:'weibo', label:'新浪微博', url:'#'},
+                            {id:'download', label:'保存图片', url:'#', download:true}
+                        ], // 分享按钮
+
+                        // define gallery index (for URL)
+                        galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+                        getThumbBoundsFn: function(index) {
+                            // See Options -> getThumbBoundsFn section of documentation for more info
+                            var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                                pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                                rect = thumbnail.getBoundingClientRect();
+
+                            return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+                        }
+
+                    };
+
+                    // PhotoSwipe opened from URL
+                    if(fromURL) {
+                        if(options.galleryPIDs) {
+                            // parse real index when custom PIDs are used
+                            for(var j = 0; j < items.length; j++) {
+                                if(items[j].pid == index) {
+                                    options.index = j;
+                                    break;
+                                }
+                            }
+                        } else {
+                            // in URL indexes start from 1
+                            options.index = parseInt(index, 10) - 1;
+                        }
+                    } else {
+                        options.index = parseInt(index, 10);
+                    }
+
+                    // exit if index not found
+                    if( isNaN(options.index) ) {
+                        return;
+                    }
+
+                    if(disableAnimation) {
+                        options.showAnimationDuration = 0;
+                    }
+
+                    // Pass data to PhotoSwipe and initialize it
+                    gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+                    gallery.init();
+                };
+
+                // loop through all gallery elements and bind events
+                var galleryElements = document.querySelectorAll( gallerySelector );
+
+                for(var i = 0, l = galleryElements.length; i < l; i++) {
+                    galleryElements[i].setAttribute('data-pswp-uid', i+1);
+                    galleryElements[i].onclick = onThumbnailsClick;
+                }
+
+                // Parse URL and open gallery if it contains #&pid=3&gid=1
+                var hashData = photoswipeParseHash();
+                if(hashData.pid && hashData.gid) {
+                    openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+                }
+            };
+
+            // execute above function
+            initPhotoSwipeFromDOM('.my-gallery');
         }
     };
 

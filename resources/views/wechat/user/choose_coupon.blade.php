@@ -98,11 +98,6 @@
                             cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
                                 +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
                                 '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
-                            //筛选最大金额
-                            if(max < vip_voucher.data.list[i].price){
-                                max = vip_voucher.data.list[i].price;
-                                max_index = i;
-                            }
                         }
                         else
                         {
@@ -115,10 +110,10 @@
 
                     vip_voucher.isCenter();
                     if(vip_voucher.data.state){
-                        $(".vip-voucher-wrap .list ul li").removeClass('disable');
+                        //$(".vip-voucher-wrap .list ul li").removeClass('disable');
                         $(".vip-voucher-wrap .footer").hide();
                     }else{
-                        $(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
+                        //$(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
                         vip_voucher.choose();
                     }
                 }
