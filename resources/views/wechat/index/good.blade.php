@@ -419,7 +419,9 @@
         getDetailBigPic:function() {
             debugger;
             var imgList = $(".my-gallery img");
+
             for(var i=0;i<imgList.length;i++){
+                console.log(imgList[i]);
                 var realWidth =$(imgList[i]).context.naturalWidth;//真实的宽度
                 var realHeight = $(imgList[i]).context.naturalHeight;//真实的高度
                 $(imgList[i]).wrap("<figure><a href='"+ $(imgList[i]).prop("src")+"' data-size='"+realWidth+"x"+realHeight+"'></a></figure>");
