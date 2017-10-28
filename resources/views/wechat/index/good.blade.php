@@ -15,9 +15,6 @@
     <link rel="stylesheet prefetch" href="/wechat/style/photoswipe.css">
     <link rel="stylesheet prefetch" href="/wechat/style/default-skin.css">
 
-    <script src="/wechat/js/main.js"></script>
-    <script src="/wechat/js/common.js"></script>
-
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
@@ -420,6 +417,7 @@
         },
         //商品详情查看
         getDetailBigPic:function() {
+            debugger;
             var imgList = $(".my-gallery img");
             for(var i=0;i<imgList.length;i++){
                 var realWidth =$(imgList[i]).context.naturalWidth;//真实的宽度
