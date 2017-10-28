@@ -419,7 +419,7 @@
         },
         //商品详情查看
         getDetailBigPic:function() {
-            debugger;
+            //debugger;
             var imgList = $(".my-gallery img");
 
             for(var i=0;i<imgList.length;i++){
