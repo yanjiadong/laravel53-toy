@@ -31,10 +31,10 @@
                                 <input type="file" class="userfile" id="upload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
                                 <input type="hidden" id="uploadPath" name="uploadPath" value="" />
                                 <br/>
-                                <img src="/admin/assets/img/default.png" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic"/>
+                                <img src="/admin/assets/img/default.png" style="margin-top: 10px;height: 130px;width:320px;" class="showimg" id="showPic"/>
                                 <img src="/admin/assets/img/loading.gif"  id="loading" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <br/>
-                                <span>建议图片尺寸标准为1600x700</span>
+                                <span>建议图片尺寸标准为960x400</span>
                             </div>
                         </div>
 
@@ -59,7 +59,7 @@
         $(document).ready(function() {
             $("#upload").uniform();
             $("#upload").ajaxfileupload({
-                'action': '{{ url('admin/upload',['size'=>'1600,700']) }}',
+                'action': '{{ url('admin/upload',['size'=>'960,400']) }}',
                 'params': {
                     '_token': Laravel.csrfToken
                 },

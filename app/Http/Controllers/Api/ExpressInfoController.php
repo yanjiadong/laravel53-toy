@@ -85,6 +85,13 @@ class ExpressInfoController extends BaseController
                 $title = $express->title;
             }
         }
+
+        if(empty($title) || empty($com))
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '';
+            return $this->ret;
+        }
         //print_r($result);
         $this->ret['info'] = ['com'=>$com,'title'=>$title];
         return $this->ret;
