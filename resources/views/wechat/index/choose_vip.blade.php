@@ -107,6 +107,7 @@
         </div>
         <div class="fr">
             <button onclick="choose_vip.pay()">去支付 <span>（微信支付）</span></button>
+            <input type="hidden" value="" id="vip_card_id">
         </div>
     </div>
 </div>
