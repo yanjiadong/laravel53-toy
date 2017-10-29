@@ -3625,6 +3625,13 @@
     font-size: 14px;
     color: #323232;
 }
+.order-detail-wrap .order-info .order-info-cont .number .fr{
+    width: 70%;
+}
+.order-detail-wrap .order-info .order-info-cont .number .fr input{
+    width:75%;
+    text-align: right;
+}
 .order-detail-wrap .order-info .order-info-cont .number .fr span {
     vertical-align: middle;
     margin-right: 10px;
