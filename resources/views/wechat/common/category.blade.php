@@ -70,5 +70,19 @@
             }
             $('.index-nav .nav').width(wid+'px');
         }
+
+        //顶部导航选择
+        $(".index-nav .nav").scrollLeft(localStorage.index_nav_left?localStorage.index_nav_left:0);
+        $(".index-nav .nav li").click(function () {
+            var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
+            var pageX = document.documentElement.clientWidth;
+            var blockWidth = $(this).width();
+            var left = moveX-(pageX/2)+(blockWidth/2);
+            localStorage.index_nav_left = left;
+            $(".index-nav .nav").scrollLeft(left);
+            $(".index-nav .nav li").removeClass('active');
+            $(this).addClass('active');
+        });
+
     })
 </script>

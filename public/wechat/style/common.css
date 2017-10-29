@@ -549,7 +549,7 @@ footer table td.active a .icon-footer-user-center {
 }
 .index-nav .nav{
     height:100%;
-    overflow-x: scroll;
+    overflow-x: visible;
     white-space: nowrap;
     overflow-y: hidden;
     width: 100% !important;

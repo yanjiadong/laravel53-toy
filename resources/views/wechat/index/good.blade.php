@@ -423,11 +423,13 @@
             var imgList = $(".my-gallery img");
 
             for(var i=0;i<imgList.length;i++){
-                console.log(imgList[i]);
-                var realWidth =$(imgList[i]).context.naturalWidth;//真实的宽度
-                var realHeight = $(imgList[i]).context.naturalHeight;//真实的高度
-                $(imgList[i]).wrap("<figure><a href='"+ $(imgList[i]).prop("src")+"' data-size='"+realWidth+"x"+realHeight+"'></a></figure>");
+                imgList[i].onload=function () {
+                    var realWidth =this.naturalWidth;//真实的宽度
+                    var realHeight =this.naturalHeight;//真实的高度
+                    $(this).wrap("<figure><a href='"+ $(this).prop("src")+"' data-size='"+realWidth+"x"+realHeight+"'></a></figure>");
+                }
             }
+            
             var initPhotoSwipeFromDOM = function(gallerySelector) {
                 // 解析来自DOM元素幻灯片数据（URL，标题，大小...）// (children of gallerySelector)
                 var parseThumbnailElements = function(el) {

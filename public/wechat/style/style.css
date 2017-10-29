@@ -154,22 +154,12 @@
 }
 .index-wrap .content .recommend .join-member {
     width: 100%;
-    position: relative;
     margin-top: 10px;
     background-color: #fff;
-    padding: 10px;
-   // background-image: url("../image/other/vip-bg.jpg");
-   // background-size: 375px;
 }
 
 .index-wrap .content .recommend .join-member img {
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
 }
 .index-wrap .content .recommend .join-member .fl:first-child {
     width: 20%;
@@ -305,6 +295,8 @@
 }
 .index-wrap-cover .index-main-cover ul{
     width: 600%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     margin-left: -100%;
 }
 .index-wrap-cover .index-main-cover ul li{
@@ -379,7 +371,7 @@
 }
 .sort-detail .content .grow-up .all .year-select .scroll {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: visible;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
@@ -639,7 +631,7 @@
     background-color: #EBEBEB;
     color: #8D8D8D;
     text-align: center;
-    width: 30%;
+    width: 20%;
 }
 .good-detail-wrap .good-detail-content .good-detail-param table tr td:nth-child(2n) {
     color: #8d8d8d;
@@ -1355,13 +1347,13 @@
 }
 .order-detail-wrap .order-detail-main {
     width: 100%;
+    overflow-y: scroll;
+    padding-top: 44px;
+    height: 500px;
+    -webkit-overflow-scrolling: touch;
 }
 .order-detail-wrap .order-detail-main .parent-box {
     width: 100%;
-    padding-top: 44px;
-    height: 500px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 .order-detail-wrap .order-detail-main .parent-box .detail-cont {
     width:100%;
@@ -1524,7 +1516,7 @@
 }
 .order-detail-wrap .order-detail-main .parent-box .return .no-good .tips {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -4389,12 +4381,13 @@ textarea {
     color: #26325C;
     line-height: 18px;
     padding: 10px;
-    font-size: 12px;
+    font-size: 13px;
     position: fixed;
     top: 0;
 }
 .logistics-info-wrap .logistics-info-main .detail-cont .detail-cont-main{
     padding-top: 56px;
+    margin-bottom: 64px;
 }
 .logistics-info-wrap .detail-cont-main .cont .top,
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .title{
@@ -4799,51 +4792,51 @@ textarea {
     position: absolute;
     top: 15px;
     left: 20px;
-    font-size: 26px;
+    font-size: 24px;
     color: #fff;
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-price{
     position: absolute;
     top: 15px;
     right: 20px;
-    font-size: 26px;
+    font-size: 24px;
     color: #fff;
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-price span{
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-yajin{
     position: absolute;
     top: 45px;
     right: 20px;
-    font-size: 13px;
+    font-size: 12px;
     color: #fff;
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-use{
     position: absolute;
     bottom: 40px;
     left: 20px;
-    font-size: 13px;
+    font-size: 12px;
     color: #999;
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-time{
     position: absolute;
     bottom: 20px;
     left: 20px;
-    font-size: 13px;
+    font-size: 12px;
     color: #515151;
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-free{
     position: absolute;
     bottom: 20px;
     right: 20px;
-    font-size: 13px;
+    font-size:12px;
     color: #515151;
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-free span{
     color:#31aef9;
-    font-size:20px
+    font-size:16px
 }
 
 .choose-vip-wrap-new .vip-info>.sort ul li.active{

@@ -189,7 +189,7 @@
     $(function () {
         sort_detail.init();        //初始化
 
-        //顶部导航选择
+        /*//顶部导航选择
         (".index-nav .nav").scrollLeft(localStorage.index_nav_left?localStorage.index_nav_left:0);
         $(".index-nav .nav li").click(function () {
             var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
@@ -200,7 +200,7 @@
             $(".index-nav .nav").scrollLeft(left);
             $(".index-nav .nav li").removeClass('active');
             $(this).addClass('active');
-        });
+        });*/
     })
 </script>
 </body>

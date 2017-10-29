@@ -186,6 +186,7 @@
                             $(".day-info .line").css({'left': '2px'});
                             $(".day-info .info").css({'left': '0', 'transform': 'translateX(0)'});
                             $(".day-info .info").text("会员剩余" + user_center.data.userInfo.time + "天");
+                            $(".white-strip").css({'width': '100%'})
                         } else {
                             $(".day-info .info").text("会员剩余" + user_center.data.userInfo.time + "天");
                             if (Math.ceil(radio) > 88) {

@@ -168,8 +168,7 @@
                     租赁订单编号
                 </div>
                 <div class="fr">
-                    <span>{{$order_code}}</span>
-                    <input type="hidden" id="copy" value="{{$order_code}}">
+                    <input type="text" id="copy" value="{{$order_code}}">
                     <button id="copy_btn" onclick="order_detail.copy()">复制</button>
                 </div>
             </div>

@@ -141,7 +141,8 @@
                 //如果是优惠券页进来 为之前的会员，否则默认是半年卡
                 choose_vip.data.sortList.forEach(function (item,index) {
                     if(item.type==3){
-                        choose_vip.data.vip_id = localStorage.vip_id?localStorage.vip_id:item.id;
+                        //choose_vip.data.vip_id = localStorage.vip_id?localStorage.vip_id:item.id;
+                        choose_vip.data.vip_id = common.getParam('vip_id')?common.getParam('vip_id'):item.id;
                     }
                 });
 
@@ -338,7 +339,7 @@
         },
         //选择优惠券
         chooseCars:function () {
-            location.href='{{url('wechat/user/choose_coupon')}}';
+            location.href='{{url('wechat/user/choose_coupon')}}'+'?id='+choose_vip.data.vip_id;
         },
         //微信支付
         pay:function () {

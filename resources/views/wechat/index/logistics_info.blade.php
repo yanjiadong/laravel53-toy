@@ -79,7 +79,7 @@
                         <div class="company clear" onclick="logisticsInfo.getCompany()">
                             <div class="fl">
                                 <h5>快递公司</h5>
-                                <input type="text" placeholder="点击匹配物流公司名称" disabled id="express_title">
+                                <input type="text" placeholder="点击匹配物流公司名称" disabled id="express_title" readonly>
                                 <input type="hidden" value="" id="express_com">
                             </div>
                             <div class="fr">
@@ -187,7 +187,7 @@
 
                         //$(".company input").val("顺丰物流公司");
                         $(".btn button").addClass('active');
-                        common.success("匹配成功");
+                        common.success_tip("匹配成功");
                     }else{
                         common.alert_tip("无匹配结果，请检查快递单号是否正确！");
                         return false;

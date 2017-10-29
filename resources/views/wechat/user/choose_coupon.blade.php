@@ -66,6 +66,7 @@
     var vip_voucher ={
         data:{
             list:[],
+            vip_id:common.getParam('id'),
             state:false                 //是不是从个人中心进入 true是   false为不是
         },
         init:function(){
@@ -146,7 +147,7 @@
 
                 });
 
-                location.href="{{url('wechat/index/choose_vip')}}"+'?vip_discount='+JSON.stringify(vip_voucher.data.list[index].price);
+                location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price);
             })
         },
         //不使用优惠劵

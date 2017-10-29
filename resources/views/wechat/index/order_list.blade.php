@@ -31,15 +31,15 @@
         </ul>
     </nav>
     <div class="order-detail-main">
-        <div class="parent-box">
-            <div class="weui-pull-to-refresh__layer">
-                <div class='weui-pull-to-refresh__arrow'></div>
-                <div class='weui-pull-to-refresh__preloader'></div>
-                <div class="down">下拉刷新</div>
-                <div class="up">释放刷新</div>
-                <div class="refresh">正在刷新</div>
-            </div>
+        <div class="weui-pull-to-refresh__layer">
+            <div class='weui-pull-to-refresh__arrow'></div>
+            <div class='weui-pull-to-refresh__preloader'></div>
+            <div class="down">下拉刷新</div>
+            <div class="up">释放刷新</div>
+            <div class="refresh">正在刷新</div>
+        </div>
 
+        <div class="parent-box">
             <div class="detail-cont tab-page">
                 <div class="top-tips">
                     同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
@@ -251,9 +251,9 @@
         orderDtail.init();
 
         //下拉刷新
-        $(".parent-box").css({height:$(window).outerHeight()+'px'});
-        $(".parent-box").pullToRefresh();
-        $(".parent-box").on("pull-to-refresh", function() {
+        $(".order-detail-main").css({height:$(window).outerHeight()+'px'});
+        $(".order-detail-main").pullToRefresh();
+        $(".order-detail-main").on("pull-to-refresh", function() {
             var refreshClose = $(this);
             /*-------下拉刷新的内容-------------------*/
             orderDtail.init();
@@ -262,7 +262,7 @@
                 refreshClose.pullToRefreshDone();
             },500);
         });
-        $(".parent-box").pullToRefreshDone();
+        $(".order-detail-main").pullToRefreshDone();
     })
 </script>
 

@@ -42,7 +42,7 @@
     <div class="no-good">
         <div class="tips">
             <i class="icon-no-goods3"></i>
-            <h4>您还没有购买过会员卡</h4>
+            <h4>您还没有会员押金</h4>
         </div>
     </div>
 

@@ -81,7 +81,8 @@
             </div>
             <div class="join-member clear">
                 <a href="">
-                    <div class="fl">
+                    <img src="" alt="">
+                    {{--<div class="fl">
                         <i class="icon icon_diamond"></i>
                     </div>
                     <div class="fl">
@@ -90,7 +91,7 @@
                     </div>
                     <div class="fr">
                         <i class="icon icon_circle-right"></i>
-                    </div>
+                    </div>--}}
                 </a>
             </div>
             <div class="hot">
@@ -124,32 +125,32 @@
     <div class="index-main-cover">
         <ul class="clear swiper-container1">
             <li class="fl swiper-slide">
-                <a href="children_interesting_compilation.html">
+                <a href="#">
                     <img src="/wechat/image/common/img_dialog_4.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
-                <a href="children_interesting_compilation.html">
+                <a href="#">
                     <img src="/wechat/image/common/img_dialog_1.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
-                <a href="children_interesting_compilation.html">
+                <a href="#">
                     <img src="/wechat/image/common/img_dialog_2.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
-                <a href="children_interesting_compilation.html">
+                <a href="#">
                     <img src="/wechat/image/common/img_dialog_3.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
-                <a href="children_interesting_compilation.html">
+                <a href="#">
                     <img src="/wechat/image/common/img_dialog_4.png">
                 </a>
             </li>
             <li class="fl swiper-slide">
-                <a href="children_interesting_compilation.html">
+                <a href="#">
                     <img src="../image/common/img_dialog_1.png">
                 </a>
             </li>
@@ -251,9 +252,12 @@
                 if(res.info.list.length > 0)
                 {
                     index_obj.data.vipData = res.info.list[0];
-                    $(".join-member").css({"background-image":"url("+index_obj.data.vipData.picture+")","background-size":index_obj.cont_width});
-                    //$(".join-member a").attr("href",'choose_vip.html?time='+index_obj.data.vipData.time);
+
+                    $(".join-member a img").attr("src",index_obj.data.vipData.picture);
                     $(".join-member a").attr("href",index_obj.data.vipData.url);
+
+                    //$(".join-member").css({"background-image":"url("+index_obj.data.vipData.picture+")","background-size":index_obj.cont_width});
+                    //$(".join-member a").attr("href",index_obj.data.vipData.url);
                 }
                 else
                 {
@@ -343,19 +347,6 @@
             },500);
         });
         $(".content").pullToRefreshDone();
-
-        //顶部导航选择
-        $(".index-nav .nav").scrollLeft(localStorage.index_nav_left?localStorage.index_nav_left:0);
-        $(".index-nav .nav li").click(function () {
-            var moveX = $(this).position().left+$(this).closest('.index-nav .nav').scrollLeft();
-            var pageX = document.documentElement.clientWidth;
-            var blockWidth = $(this).width();
-            var left = moveX-(pageX/2)+(blockWidth/2);
-            localStorage.index_nav_left = left;
-            $(".index-nav .nav").scrollLeft(left);
-            $(".index-nav .nav li").removeClass('active');
-            $(this).addClass('active');
-        });
     })
 </script>
 </body>
