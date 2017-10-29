@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <td>收货地址：</td>
-                            <td>{{$order->receiver_address}}</td>
+                            <td>{{$order->receiver_province}}{{$order->receiver_city}}{{$order->receiver_area}}{{$order->receiver_address}}</td>
                         </tr>
                         <tr>
                             <td>快递公司：</td>

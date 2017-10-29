@@ -263,7 +263,7 @@
                             '<button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.receipt()">确认收货</button></div>';
 
                         $(".order-info .delivery .fl").text("平台发货时间");
-                        $(".order-info .delivery .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .delivery .fr span").text(order_detail.data.logistics_state.logistics.item3);
                         $(".order-info .delivery").show();
                         break;
                     case '租用中':
@@ -276,7 +276,7 @@
                             '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
 
                         $(".order-info .delivery .fl").text("平台发货时间");
-                        $(".order-info .delivery .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .delivery .fr span").text(order_detail.data.logistics_state.logistics.item3);
                         $(".order-info .delivery").show();
 
                         $(".order-info .other .rent .fl").text("已租用天数");
@@ -294,7 +294,7 @@
                             '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button></div>';
 
                         $(".order-info .delivery .fl").text("平台发货时间");
-                        $(".order-info .delivery .fr span").text(common.dateFormat(order_detail.data.logistics_state.logistics.item3));
+                        $(".order-info .delivery .fr span").text(order_detail.data.logistics_state.logistics.item3);
                         $(".order-info .delivery").show();
 
                         $(".order-info .other .rent .fl").text("共租用天数");
