@@ -219,7 +219,7 @@ class IndexController extends BaseController
 
         //获取剩余天数
         $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
-        return view('wechat.index.choose_vip_new',compact('user_id','days'));
+        return view('wechat.index.choose_vip',compact('user_id','days'));
     }
 
     public function pay_vip_card($vip_card_id)

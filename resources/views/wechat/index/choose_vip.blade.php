@@ -9,66 +9,68 @@
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
-
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
     <script src="/wechat/js/common.js"></script>
-    <!--微信js-sdk-->
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 <body>
-<div class="choose-vip-wrap">
-    <p>您的会员有效期剩余：0天</p>
-    <div class="sort">
-        <ul>
-            <!--<li class="clear bg-white">
-                <div class="name fl">
-                    <div class="time"><span>月卡</span></div>
-                    <p>会员有效期+30天</p>
-                </div>
-                <div class="fr">
-                    ¥399
-                </div>
-            </li>
-            <li class="clear bg-white">
-                <div class="name fl">
-                    <div class="time">季卡</span></div>
-                    <p>会员有效期+90天</p>
-                </div>
-                <div class="fr">
-                    ¥899
-                </div>
-
-            </li>
-            <li class="clear bg-white">
-                <div class="name fl">
-                    <div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>
-                    <p>会员有效期+180天</p>
-                </div>
-                <div class="fr">
-                    ¥1499
-                </div>
-            </li>-->
-        </ul>
-    </div>
-    <div class="help bg-white clear">
-        <div class="fl">
-            <i class="icon icon_attention"></i>
-            <p>会员特权</p>
-        </div>
-        <div class="fr">
+<div class="choose-vip-wrap-new">
+    <div class="vip-info">
+        <p>您的会员有效期剩余：0天</p>
+        <div class="sort">
             <ul>
                 <li>
-                    <span></span>所有玩具免费租，每次可挑选任意一款下单
+                    <img src="/wechat/image/common/month.png">
+                    <div class="vip-name"></div>
+                    <div class="vip-price"><span></span></div>
+                    <div class="vip-yajin"></div>
+                    <div class="vip-use">可累计使用</div>
+                    <div class="vip-time"></div>
+                    <div class="vip-free">每月<span>2</span>次往返包邮</div>
+                </li>
+                <li class="active">
+                    <img src="/wechat/image/common/half_year.png">
+                    <div class="vip-name"></div>
+                    <div class="vip-price"><span></span></div>
+                    <div class="vip-yajin"></div>
+                    <div class="vip-use">可累计使用</div>
+                    <div class="vip-time"></div>
+                    <div class="vip-free">每月<span>2</span>次往返包邮</div>
                 </li>
                 <li>
-                    <span></span>不限次数更换，每个自然月提供2次往返免邮服务
+                    <img src="/wechat/image/common/quarter.png">
+                    <div class="vip-name"></div>
+                    <div class="vip-price"><span></span></div>
+                    <div class="vip-yajin"></div>
+                    <div class="vip-use">可累计使用</div>
+                    <div class="vip-time"></div>
+                    <div class="vip-free">每月<span>2</span>次往返包邮</div>
                 </li>
-                <li>
-                    <span></span>没有租用中的玩具时，会员有效期计时自动暂停
-                </li>
+
             </ul>
         </div>
+        <div class="dot">
+            <span></span>
+            <span class="active"></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="help">
+        <i class="icon-choose-vip3"></i>
+        <table>
+            <tr>
+                <td><i class="icon-choose-vip4"></i></td>
+                <td><i class="icon-choose-vip1"></i></td>
+                <td><i class="icon-choose-vip5"></i></td>
+                <td><i class="icon-choose-vip2"></i></td>
+            </tr>
+            <tr>
+                <td>所有玩具免费租</td>
+                <td>不限次数更换</td>
+                <td>往返免邮费</td>
+                <td>不租不扣时间</td>
+            </tr>
+        </table>
     </div>
     <div class="info bg-white">
         <div class="select clear">
@@ -81,7 +83,7 @@
         <div class="deposit clear">
             <div class="fl">
                 <h3>押金</h3>
-                <p>会员有效期结束后，可在“会员押金”提现退还</p>
+                <p>押金可随时申请提现</p>
             </div>
             <div class="fr">
             </div>
@@ -100,42 +102,44 @@
     <div class="submit clear bg-white">
         <div class="fl">
             <span>总价：</span>
-            <span>¥0</span>
+            <span>¥899</span>
             <p></p>
         </div>
         <div class="fr">
-            <button onclick="choose_vip.pay()" id="submit">去支付 <span>（微信支付）</span></button>
-            <input type="hidden" value="" id="vip_card_id">
+            <button onclick="choose_vip.pay()">去支付 <span>（微信支付）</span></button>
         </div>
     </div>
 </div>
 
+
 <script>
     var choose_vip={
         data:{
-            time:'{{$days}}',
             sortList:[],
-            discount:localStorage.vip_discount?JSON.parse(localStorage.vip_discount):"",       //优惠券卡
-            vip_id:""              //会员卡id
+            discount:common.getParam('vip_discount')?common.getParam('vip_discount'):"",       //优惠券卡/**/
+            vip_id:"",             //会员卡id,
+            count:1          //会员卡动画控制  0为月卡 1为半年卡 2为季卡
         },
         init:function () {
-            if(eval(choose_vip.data.time)){
-                $(".choose-vip-wrap>p").text('您的会员有效期剩余：'+choose_vip.data.time+'天');
-            }
-            console.log(choose_vip.data.discount);
+            choose_vip.data.time = '{{$days}}';
+            $(".choose-vip-wrap-new>.vip-info>p").text('您的会员有效期剩余：'+choose_vip.data.time+'天');
+
             //获取会员卡数据
-            common.httpRequest('{{url('api/user/vip_cards')}}','post',null,function (res) {
+            common.httpRequest("{{url('api/user/vip_cards')}}",'post',null,function (res) {
                 /*choose_vip.data.sortList =[
-                    {time:30,money:399,yajin:600,cars:{money:100}},
-                    {time:90,money:899,yajin:600,cars:{money:200}},
-                    {time:120,money:1499,yajin:0,cars:{money:200}}
+                    {created_at: "2017-09-24 22:58:25",days:0,id:1,money:1,price:2,title:"月卡",type:1},
+                    {created_at: "2017-09-24 22:58:25",days:0,id:4,money:3,price:0,title:"半年卡",type:3},
+                    {created_at: "2017-09-24 22:58:25",days:0,id:3,money:1,price:2,title:"季卡",type:2}
                 ];*/
-
+                console.log(res);
                 choose_vip.data.sortList = res.info.list;
-                //console.log(choose_vip.data.sortList);
-
+                //根据type进行由小到大排序  数组为 月卡  季卡  半年卡
+                choose_vip.data.sortList.sort(function (a,b) {
+                    return a.type-b.type;
+                });
+                //如果是优惠券页进来 为之前的会员，否则默认是半年卡
                 choose_vip.data.sortList.forEach(function (item,index) {
-                    if(item.type==1){
+                    if(item.type==3){
                         choose_vip.data.vip_id = localStorage.vip_id?localStorage.vip_id:item.id;
                     }
                 });
@@ -143,251 +147,225 @@
                 localStorage.vip_id = choose_vip.data.vip_id;
                 $("#vip_card_id").val(choose_vip.data.vip_id);
 
-                console.log(choose_vip.data.vip_id);
-
                 var cont='';
                 for(var i=0;i<choose_vip.data.sortList.length;i++){
-                    if(choose_vip.data.sortList[i].id==choose_vip.data.vip_id)
-                    {
+                    //会员卡卡片遍历
+                    switch(choose_vip.data.sortList[i].type){
+                        case 1:
+                            $(".sort li:eq(0) .vip-name").text(choose_vip.data.sortList[i].title);  //卡名称
+                            $(".sort li:eq(0) .vip-price").html('<span>¥</span>'+choose_vip.data.sortList[i].price); //会员卡费用
+                            if(choose_vip.data.sortList[i].money<=0){
+                                $(".sort li:eq(0) .vip-yajin").text("免押金");  //押金
+                            }
+                            $(".sort li:eq(0) .vip-time").text(30+'天');  //使用天数
+                            $(".info .select .fl span").text("月卡（+30天）");
+                            break;
+                        case 2:
+                            $(".sort li:eq(2) .vip-name").text(choose_vip.data.sortList[i].title);  //卡名称
+                            $(".sort li:eq(2) .vip-price").html('<span>¥</span>'+choose_vip.data.sortList[i].price); //会员卡费用
+                            if(choose_vip.data.sortList[i].money<=0){
+                                $(".sort li:eq(2) .vip-yajin").text("免押金");  //押金
+                            }
+                            $(".sort li:eq(2) .vip-time").text(90+'天');  //使用天数
+                            $(".info .select .fl span").text("季卡（+90天）");
+                            break;
+                        case 3:
+                            $(".sort li:eq(1) .vip-name").text(choose_vip.data.sortList[i].title);  //卡名称
+                            $(".sort li:eq(1) .vip-price").html('<span>¥</span>'+choose_vip.data.sortList[i].price); //会员卡费用
+                            if(choose_vip.data.sortList[i].money<=0){
+                                $(".sort li:eq(1) .vip-yajin").text("免押金");  //押金
+                            }
+                            $(".sort li:eq(1) .vip-time").text(180+'天');  //使用天数
+                            $(".info .select .fl span").text("半年卡（+180天）");
+                            break;
+                        default:
+                            break;
+                    }
+                    if(choose_vip.data.sortList[i].id==choose_vip.data.vip_id){
                         switch(choose_vip.data.sortList[i].type){
                             case 1:
-                                if(choose_vip.data.sortList[i].money <= 0)
-                                {
-                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>月卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                    $(".info .select .fl span").text("月卡（+30天）");
-                                }
-                                else
-                                {
-                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>月卡</span></div>'+
-                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                    $(".info .select .fl span").text("月卡（+30天）");
-                                }
-
+                                choose_vip.data.count = 0;
                                 break;
                             case 2:
-                                if(choose_vip.data.sortList[i].money <= 0)
-                                {
-                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>季卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                    $(".info .select .fl span").text("季卡（+90天）");
-                                }
-                                else
-                                {
-                                    cont+='<li class="clear bg-white  active"><div class="name fl"><div class="time"><span>季卡</span></div>'+
-                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                    $(".info .select .fl span").text("季卡（+90天）");
-                                }
+                                choose_vip.data.count = 2;
                                 break;
                             case 3:
-                                if(choose_vip.data.sortList[i].money <= 0)
-                                {
-                                    cont+='<li class="clear bg-white active"><div class="name fl"><div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                }
-                                else
-                                {
-                                    cont+='<li class="clear bg-white active"><div class="name fl"><div class="time"><span>半年卡</span></div>'+
-                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                }
-
-                                $(".info .deposit .fr").text('0.00');
-                                $(".info .select .fl span").text("半年卡（+180天）");
+                                choose_vip.data.count=1;
                                 break;
                             default:
                                 break;
                         }
-
+                        choose_vip.slide(choose_vip.data.count);
                         var money = choose_vip.data.sortList[i].price;
                         var yajin = choose_vip.data.sortList[i].money;
+
                         $(".info .select .fr").text('¥'+money);
                         $(".info .deposit .fr").text('¥'+yajin);
-                        $(".submit .fl p").text('（其中包含押金¥'+yajin+'）');
-
-                        //$(".info .select .fr").text('¥'+choose_vip.data.sortList[i].price);
-                        //$(".info .deposit .fr").text('¥'+choose_vip.data.sortList[i].money);
+                        $(".submit .fl p").text('其中包含押金¥'+yajin);
                         if(!choose_vip.data.discount){
-                            //$(".info .coupon .fr span").text('请选择');
-                            //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money));
-
-                            //默认获取最大的优惠券
+                            /* {user_id:'34',vip_card_id:choose_vip.data.vip_id}*/
+                            //显示几张优惠券
                             common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.sortList[i].id},function (res) {
-                                /*res={
-                                    info:{
-                                        coupons:[
-                                            {can_use:1,condition:2,created_at:"2017-10-11 16:03:26",end_time:"2017-11-11",money:2,title:"季卡优惠券",id:2},
-                                            {can_use:1,condition:2,created_at:"2017-10-11 16:03:26",end_time:"2017-11-11",money:8,title:"季卡优惠券",id:3}
-                                        ]
-                                    }
-                                };*/
-                                if (res.info.coupons.length > 0) {
-                                    choose_vip.data.discount ={price:0};
-                                    res.info.coupons.forEach(function (item,index) {
-                                        if(item.can_use == 1 && choose_vip.data.discount.price < item.price){
-                                            choose_vip.data.discount = item
-                                        }
-                                    });
-
+                                if(res.info.can_use_count>0){
+                                    $(".info .coupon .fr span").text(res.info.can_use_count+'张可用');
+                                }else{
+                                    $(".info .coupon .fr span").text('无可用优惠券');
                                 }
-                                $(".info .coupon .fr span").text('-¥'+(choose_vip.data.discount.price==0?'0.00':choose_vip.data.discount.price));
-                                $(".submit .fl span:eq(1)").text('¥'+(money+yajin-choose_vip.data.discount.price));
+
+                                $(".submit .fl span:eq(1)").text('¥'+(money+yajin));
                             });
-
                         }else{
-                            $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
-                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money-choose_vip.data.discount.price));
+                            $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount);
+                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money-choose_vip.data.discount));
                         }
+
                     }
-                    else
-                    {
-                        switch(choose_vip.data.sortList[i].type){
-                            case 1:
-                                if(choose_vip.data.sortList[i].money <= 0)
-                                {
-                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>月卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
-                                }
-                                else
-                                {
-                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>月卡</span></div>'+
-                                        '<p>会员有效期+30天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
-                                }
-
-                                break;
-                            case 2:
-                                if(choose_vip.data.sortList[i].money <= 0)
-                                {
-                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>季卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                }
-                                else
-                                {
-                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>季卡</span></div>'+
-                                        '<p>会员有效期+90天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div><span class="check-bg"></span></li>';
-                                }
-
-                                //$(".info .select .fl span").text("季卡（+90天）");
-                                //$(".info .select .fr").text('¥'+choose_vip.data.sortList[i].price);
-                                //$(".info .deposit .fr").text('¥'+choose_vip.data.sortList[i].money);
-                                //$(".info .coupon .fr span").text('-¥'+0);
-                                //$(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money));
-                                break;
-                            case 3:
-                                if(choose_vip.data.sortList[i].money <= 0)
-                                {
-                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><i class="icon-big icon-big-label-yajin"></i></div>'+
-                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
-                                }
-                                else
-                                {
-                                    cont+='<li class="clear bg-white"><div class="name fl"><div class="time"><span>半年卡</span><!--<i class="icon-big icon-big-label-yajin"></i>--></div>'+
-                                        '<p>会员有效期+180天</p></div><div class="fr">¥'+choose_vip.data.sortList[i].price+'</div></li>';
-                                }
-
-                                //$(".info .deposit .fr").text('0.00');
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
                 }
-                $(".sort ul").html(cont);
-                choose_vip.choose();
             })
         },
         //选择会员卡
         choose:function () {
-            var $item =$(".choose-vip-wrap .sort ul li");
-            $item.click(function () {
-                $item.removeClass("active");
-                $item.find(".check-bg").remove();
-                $item.find(".check").remove();
-                $(this).addClass("active");
-                $(this).append('<span class="check-bg"></span>');
-                var time =parseInt($(this).find("p").text().substr(6));
-                var cont='';
-                switch(time){
-                    case 30:
+            //滑动效果
+            var $swiperCont =  $(".choose-vip-wrap-new .vip-info");
+            //滑动
+            //向左右滑动
+            var x,x1;
+            $swiperCont[0].addEventListener('touchstart',function (e) {
+                x = e.touches[0].pageX;
+            });
+            $swiperCont[0].addEventListener('touchend',function (e) {
+                x1 = e.changedTouches[0].pageX;
+                if(x-x1>100){
+                    choose_vip.data.count++;
+                }
+                if(x1-x>100){
+                    choose_vip.data.count--;
+                }
+                if(choose_vip.data.count>=2){
+                    choose_vip.data.count = 2
+                }else if(choose_vip.data.count<=0){
+                    choose_vip.data.count=0
+                }
+                // debugger;
+                choose_vip.slide(choose_vip.data.count);
+                $(".info .select .fr").text($(this).find(".fr").text());
+                switch(choose_vip.data.count){
+                    case 0:
                         $(".info .select .fl span").text("月卡（+30天）");
+                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[0].price);
+                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[0].money);
+                        $(".submit .fl p").text('其中包含押金¥'+choose_vip.data.sortList[0].money);
+                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[0].price+choose_vip.data.sortList[0].money));
+                        choose_vip.data.vip_id = choose_vip.data.sortList[0].id;
+                        localStorage.vip_id = choose_vip.data.vip_id;
                         break;
-                    case 90:
+                    case 2:
                         $(".info .select .fl span").text("季卡（+90天）");
+                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[1].price);
+                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[1].money);
+                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[1].money+choose_vip.data.sortList[1].price));
+                        $(".submit .fl p").text('其中包含押金¥'+choose_vip.data.sortList[1].money);
+                        choose_vip.data.vip_id = choose_vip.data.sortList[1].id;
+                        localStorage.vip_id = choose_vip.data.vip_id;
                         break;
-                    case 180:
+                    case 1:
                         $(".info .select .fl span").text("半年卡（+180天）");
+                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[2].price);
+                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[2].money);
+                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[2].money+choose_vip.data.sortList[2].price));
+                        $(".submit .fl p").text('其中包含押金¥'+choose_vip.data.sortList[2].money);
+                        choose_vip.data.vip_id = choose_vip.data.sortList[2].id;
+                        localStorage.vip_id = choose_vip.data.vip_id;
                         break;
                 }
-                $(".info .select .fr").text($(this).find(".fr").text());
-                var index =$(this).index(".choose-vip-wrap .sort ul li");
-                $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[index].money);
-                $(".submit .fl p").text('（其中包含押金¥'+choose_vip.data.sortList[index].money+'）');
-
-                choose_vip.data.vip_id = choose_vip.data.sortList[index].id;
-                localStorage.vip_id = choose_vip.data.vip_id;
-
-                console.log(localStorage.vip_id);
-
-                //默认获取最大的优惠券
                 common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.vip_id},function (res) {
-                    if (res.info.coupons.length > 0) {
-                        choose_vip.data.discount ={price:0};
-                        res.info.coupons.forEach(function (item,index) {
-                            if(item.can_use == 1 && choose_vip.data.discount.price<item.price){
-                                choose_vip.data.discount = item
-                            }
-                        });
-                        $(".info .coupon .fr span").text('-¥'+choose_vip.data.discount.price);
-                        if(parseFloat($(".info .coupon .fr span").text().slice(2))>0){
-                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money-parseFloat($(".info .coupon .fr span").text().slice(2))));
-                        }else{
-                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[index].price+choose_vip.data.sortList[index].money));
-                        }
+
+                    if(res.info.can_use_count>0){
+                        $(".info .coupon .fr span").text(res.info.can_use_count+'张可用');
+                    }else{
+                        $(".info .coupon .fr span").text('无可用优惠券');
+                    }
+                });
+            });
+            //点击会员卡图片选择会员卡
+            var $img =  $(".choose-vip-wrap-new .vip-info .sort ul li");
+            $img.click(function (ev) {
+                ev.preventDefault();
+                switch ($(this).find(".vip-time").text()){
+                    case "30天":
+                        choose_vip.data.count = 0;
+                        $(".info .select .fl span").text("月卡（+30天）");
+                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[0].price);
+                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[0].money);
+                        $(".submit .fl p").text('其中包含押金¥'+choose_vip.data.sortList[0].money);
+                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[0].money+choose_vip.data.sortList[0].price));
+                        choose_vip.data.vip_id = choose_vip.data.sortList[0].id;
+                        break;
+                    case "90天":
+                        choose_vip.data.count = 2;
+                        $(".info .select .fl span").text("季卡（+90天）");
+                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[2].price);
+                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[2].money);
+                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[2].money+choose_vip.data.sortList[1].price));
+                        $(".submit .fl p").text('其中包含押金¥'+choose_vip.data.sortList[2].money);
+                        choose_vip.data.vip_id = choose_vip.data.sortList[2].id;
+                        break;
+                    case "180天":
+                        choose_vip.data.count=1;
+                        $(".info .select .fl span").text("半年卡（+180天）");
+                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[2].price);
+                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[2].money);
+                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[2].money+choose_vip.data.sortList[2].price));
+                        $(".submit .fl p").text('其中包含押金¥'+choose_vip.data.sortList[2].money);
+                        choose_vip.data.vip_id = choose_vip.data.sortList[2].id;
+                        break;
+                    default:
+                        break;
+
+                }
+                choose_vip.slide(choose_vip.data.count);
+                common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.vip_id},function (res) {
+                    if(res.info.can_use_count>0){
+                        $(".info .coupon .fr span").text(res.info.can_use_count+'张可用');
+                    }else{
+                        $(".info .coupon .fr span").text('无可用优惠券');
                     }
                 });
 
-                $("#vip_card_id").val(choose_vip.data.sortList[index].id);
-                //$("#submit").attr("disabled", false);
+                $("#vip_card_id").val(choose_vip.data.vip_id);
             })
         },
-        //选择优惠卷
-        //选择优惠卷
+        //选择优惠券
         chooseCars:function () {
             location.href='{{url('wechat/user/choose_coupon')}}';
         },
         //微信支付
         pay:function () {
             var vip_card_id = $("#vip_card_id").val();
-            if(!choose_vip.data.discount){
-                var coupon_id = 0;
-            }else{
-                var coupon_id = choose_vip.data.discount.id
-            }
-
             location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id;
-            /*common.alert_tip("请前往个人中心查看会员详情",'#323232','支付成功',function () {
-                location.href="user_center.html";
-            });*/
-            /* wx.chooseWXPay({
-             timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-             nonceStr: '', // 支付签名随机串，不长于 32 位
-             package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-             signType: '', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-             paySign: '', // 支付签名
-             success: function (res) {
-             // 支付成功后的回调函数
-             common.alert_tip("请前往个人中心查看会员详情",'#323232','支付成功',function () {
-             location.href="user_center.html";
-
-             });
-             }
-             });*/
+        },
+        slide:function(cont){
+            var $swiperContItem =  $(".choose-vip-wrap-new .vip-info ul");
+            switch (cont){
+                case 0:
+                    $swiperContItem.animate({'left':'15%'},500);
+                    break;
+                case 1:
+                    $swiperContItem.animate({'left':'-50%'},500);
+                    break;
+                case 2:
+                    $swiperContItem.animate({'left':'-116%'},500);
+                    break;
+            }
+            $(".choose-vip-wrap-new .vip-info ul li").removeClass('active');
+            $(".choose-vip-wrap-new .vip-info ul li").eq(cont).addClass('active');
+            $(".choose-vip-wrap-new .dot span").removeClass('active');
+            $(".choose-vip-wrap-new .dot span").eq(cont).addClass('active');
         }
-
-
     };
     $(function () {
         choose_vip.init();
+        choose_vip.choose();
         /*wx.config({
          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
          appId: '', // 必填，公众号的唯一标识

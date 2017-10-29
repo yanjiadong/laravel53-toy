@@ -25,9 +25,9 @@
 
 <div class="order-detail-wrap">
     <nav class="bg-white">
-        <ul class="clear">
-            <li class="fl tab-btn active" data-tab="0"><span>进行中</span></li>
-            <li class="fr tab-btn" data-tab="1"><span>已归还</span></li>
+        <ul>
+            <li class="tab-btn active" data-tab="0"><span>进行中</span></li>
+            <li class="tab-btn" data-tab="1"><span>已归还</span></li>
         </ul>
     </nav>
     <div class="order-detail-main">
