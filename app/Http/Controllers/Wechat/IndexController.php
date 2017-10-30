@@ -505,7 +505,7 @@ class IndexController extends BaseController
         {
          "button":[
             {
-                "name":"租编程玩具",
+                "name":"我要租",
                 "type":"view",
                 "url":"http://toy.yanjiadong.net/wechat/index/index"
             },

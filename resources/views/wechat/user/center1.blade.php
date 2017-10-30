@@ -126,7 +126,7 @@
                     id:res.info.user.id,
                     isAuthorize:true,
                     isVip:res.info.is_vip,
-                    isOutTime:res.info.card.isOutTime,
+                    //isOutTime:res.info.card.isOutTime,
                     img:res.info.user.wechat_avatar,
                     name:res.info.user.wechat_nickname,
                     num:res.info.count,           //正在玩的件数
@@ -141,7 +141,7 @@
 
                 localStorage.out_trade_no = res.info.order_code;
 
-                console.log(user_center.data.userInfo);
+                //console.log(user_center.data.userInfo);
 
                 //判断是否登录
                 if(user_center.data.userInfo.isAuthorize) {

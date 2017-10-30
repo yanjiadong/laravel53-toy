@@ -24,7 +24,7 @@
         <div class="separate">
             <span class="line"></span>
             <span class="dot"></span>
-            <span class="text">趣编程</span>
+            <span class="text">玩玩具趣编程</span>
             <span class="dot"></span>
             <span class="line"></span>
         </div>
@@ -74,7 +74,7 @@
         },
         init:function () {
             $('.share-main>h3.name').text(share.data.name);
-            $('.share-main>p').text('宝贝在“趣编程”免费玩了'+share.data.num+'个编程机器人');
+            $('.share-main>p').text('我在“趣编程”免费玩了'+share.data.num+'个编程机器人');
         },
         //立即分享
         immediately:function () {

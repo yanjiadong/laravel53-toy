@@ -61,11 +61,6 @@ class UserController extends BaseController
         $days = 0;
         if(!empty($card))
         {
-            $card->isOutTime = 1;
-            if($card->days>0)
-            {
-                $card->isOutTime = 0;
-            }
             switch ($card->vip_card_type)
             {
                 case 1:
@@ -79,13 +74,10 @@ class UserController extends BaseController
                     break;
             }
 
-            //获取最后一次购买的会员卡天数
-            //$days = $card->days;
             $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
         }
         else
         {
-            $card['isOutTime'] = 1;
             $card['vip_card_type_str'] = '';
         }
 
