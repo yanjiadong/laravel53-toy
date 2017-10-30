@@ -196,7 +196,6 @@
     </div>
 </div>
 
-
 <script>
     //debugger;
     var goodDetail_obj = {
@@ -648,21 +647,6 @@
         goodDetail_obj.detail_describe_toggle();
 
     })
-</script>
-<script>
-    $(function () {
-        pushHistory();
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            location.href=document.referrer;  //在这里指定其返回的地址
-        }, false);
-    });
-    function pushHistory() {
-        var state = {
-            title: "title",
-            url: "{{url('wechat/index/good')}}"+'/'+'{{$good_id}}'
-        };
-        window.history.pushState(state, state.title, state.url);
-    }
 </script>
 </body>
 </html>

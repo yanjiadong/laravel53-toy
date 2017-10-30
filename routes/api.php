@@ -81,6 +81,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/user/is_can_cash','UserController@is_can_cash');
     Route::post('/user/cash_list','UserController@cash_list');
 
+    //获取购物车数量和租用中的订单数量
+    Route::post('/user/get_cart_order_num','UserController@get_cart_order_num');
+
     //获取快递公司列表
     Route::get('/express/list','IndexController@get_express_list');
 

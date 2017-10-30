@@ -30,6 +30,7 @@
     </table>
 </footer>
 
+{{--
 <script type="text/javascript">
     //获取购物车数量
     var num;
@@ -65,4 +66,39 @@
             $('.index-nav .nav').width(wid+'px');
         }
     })
+</script>--}}
+<script type="text/javascript">
+    //获取购物车数量
+    var num,order_num;
+    common.httpRequest('{{url('api/user/get_cart_order_num')}}','post',{user_id:'{{$user_id}}'},function (res) {
+        //假数据
+        console.log(res);
+        num = res.info.cart_num;
+        order_num = res.info.order_num;
+        localStorage.shop_car_num = num;
+        localStorage.order_num = order_num;
+        //确定ul的长度
+        var wid=0;
+        var $li =$('.index-nav .nav li');
+        if($li.length>0){
+            for(var i=0;i<$li.length;i++){
+                wid +=$($li[i]).outerWidth();
+            }
+            $('.index-nav .nav').width(wid+'px');
+        }
+    });
+    if( localStorage.shop_car_num > 0)
+    {
+        $('.icon-footer-shop-car>span').text( localStorage.shop_car_num);
+    }else {
+        $('.icon-footer-shop-car').html('');
+    }
+    if(localStorage.order_num > 0)
+    {
+        $('.icon-footer-order>span').text(localStorage.order_num);
+    }
+    else
+    {
+        $('.icon-footer-order').html('');
+    }
 </script>

@@ -74,7 +74,15 @@ var common = {
             $(".success-tip-wrap").fadeOut().remove();
         },1000)
     },
-    
+    //失败提示
+    fail_tip:function (msg) {
+        var tip_content='<div class="success-tip-wrap">'+msg+'</div>';
+        $('body').append(tip_content);
+        $(".success-tip-wrap").css({'bottom':'50%'}).fadeIn(1000);
+        setTimeout(function () {
+            $(".success-tip-wrap").fadeOut().remove();
+        },2000)
+    },
     /*请求数据url 接口  type为请求类型 data向后端数据 successCall请求后回调*/
     httpRequest:function (url,type,data,successCall) {
         $.ajax({

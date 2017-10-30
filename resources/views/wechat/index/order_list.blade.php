@@ -70,8 +70,6 @@
 
     @include('wechat.common.footer')
 </div>
-
-
 <script>
     var orderDtail = {
         data:{

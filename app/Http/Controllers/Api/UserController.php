@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Area;
+use App\Cart;
 use App\Order;
 use App\SystemConfig;
 use App\User;
@@ -377,6 +378,20 @@ class UserController extends BaseController
 
         $list = VipCardPay::with(['user','vip_card'])->where('money','>',0)->where('user_id',$user_id)->where('pay_status',1)->orderBy('id','desc')->get();
         $this->ret['info'] = ['list'=>$list];
+        return $this->ret;
+    }
+
+    public function get_cart_order_num(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        //计算玩具箱数量
+        $cart_num = Cart::where('user_id',$user_id)->count();
+
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
+
+        $this->ret['info'] = ['cart_num'=>$cart_num,'order_num'=>$order_num];
         return $this->ret;
     }
 }

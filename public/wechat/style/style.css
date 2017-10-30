@@ -31,13 +31,11 @@
 .index-wrap .content .recommend .lunbo .swiper-container {
     width: 100%;
     background-color: #fff;
-    height: 198px;
     overflow: hidden;
 }
 
 .index-wrap .content .recommend .lunbo .swiper-container .banner-img {
     width: 100%;
-    height: 198px;
     overflow: hidden;
     position: relative;
     border-radius: 5px;
@@ -323,8 +321,8 @@
 .sort-detail .content .grow-up .top .top-img {
     width: 100%;
     background-color: #fff;
-    height: 158px;
     margin-top: 44px;
+    font-size: 0;
 }
 .sort-detail .content .grow-up .top .top-img img {
     width: 100%;
@@ -371,10 +369,11 @@
 }
 .sort-detail .content .grow-up .all .year-select .scroll {
     width: 100%;
-    overflow-x: visible;
+    overflow-x: scroll;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
+.sort-detail .content .grow-up .all .year-select .scroll::-webkit-scrollbar {display:none}
 .sort-detail .content .grow-up .all .year-select .scroll button {
     padding: 0 12px;
     border: 1px solid #d8d8d8;
@@ -631,7 +630,7 @@
     background-color: #EBEBEB;
     color: #8D8D8D;
     text-align: center;
-    width: 20%;
+    width: 24%;
 }
 .good-detail-wrap .good-detail-content .good-detail-param table tr td:nth-child(2n) {
     color: #8d8d8d;
@@ -1302,10 +1301,6 @@
     background-color: #6885EA;
 }
 /*---------------------------------订单详情---------------------------*/
-.order-detail-wrap {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
 .order-detail-wrap nav {
     background-color: #fff;
     height: 44px;
