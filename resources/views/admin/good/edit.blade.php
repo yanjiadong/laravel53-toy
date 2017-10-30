@@ -164,7 +164,7 @@
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">适用级别：</div>
+                            <div class="span3">能力要求：</div>
                             <div class="span9">
                                 <input type="text" value="{{$good->way}}" class="validate[required]" id="way" name="way"/>
                             </div>
