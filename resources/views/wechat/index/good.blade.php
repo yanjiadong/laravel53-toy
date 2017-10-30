@@ -140,7 +140,7 @@
                 <div class="font" onclick="goodDetail_obj.goToysCar()">玩具箱</div>
             </li>
             <li class="fl">
-                <button class="join-car active" onclick="goodDetail_obj.join()">加入购物车 <span>暂无库存</span></button>
+                <button class="join-car active" onclick="goodDetail_obj.join()">加入玩具箱 <span>暂无库存</span></button>
             </li>
         </ul>
     </div>
