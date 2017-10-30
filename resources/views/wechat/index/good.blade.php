@@ -228,7 +228,7 @@
                     title:res.info.good.title,
                     money:res.info.good.price,
                     year:res.info.good.old,
-                    params:[{name:"品牌所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"玩具材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"消毒方式",cont:res.info.good.way}],
+                    params:[{name:"品牌所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"玩具材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"适用级别",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
                     car_num:{num:goodDetail_obj.data.car_num},
                     store:res.info.good.store
