@@ -451,7 +451,7 @@ if(!function_exists('TestZhimaCreditScoreGet'))
 
         $transaction_id = date('YmdHis').microtime_format('x', microtime_float()).time().mt_rand(0000,9999);;
 
-        $client = new ZmopClient($this->gatewayUrl,$this->appId,$this->charset,$this->privateKeyFile,$this->zmPublicKeyFile);
+        $client = new ZmopClient($gatewayUrl,$appId,$charset,$privateKeyFile,$zmPublicKeyFile);
         $request = new ZhimaCreditScoreGetRequest();
         $request->setChannel("apppc");
         $request->setPlatform("zmop");
