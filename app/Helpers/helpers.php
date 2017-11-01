@@ -372,6 +372,67 @@ if(!function_exists('filterHtmlTag'))
     }
 }
 
+if(!function_exists('TestZhimaAuthInfoAuthorize'))
+{
+    function TestZhimaAuthInfoAuthorize($name, $certNo)
+    {
+        include_once __DIR__."/zmop/ZmopClient.php";
+        include_once __DIR__."/zmop/request/ZhimaAuthInfoAuthorizeRequest.php";
+        //芝麻信用网关地址
+        $gatewayUrl = "https://zmopenapi.zmxy.com.cn/openapi.do";
+        //商户私钥文件
+        $privateKeyFile = public_path()."/pem/rsa_private_key.pem";
+        //芝麻公钥文件
+        $zmPublicKeyFile = public_path()."/pem/public_key.pem";
+        //数据编码格式
+        $charset = "UTF-8";
+        //芝麻分配给商户的 appId
+        $appId = "300000622";
+
+        $client = new ZmopClient($gatewayUrl,$appId,$charset,$privateKeyFile,$zmPublicKeyFile);
+        $request = new ZhimaAuthInfoAuthorizeRequest();
+        $request->setChannel("apppc");
+        $request->setPlatform("zmop");
+        $request->setIdentityType("2");// 必要参数
+        $request->setIdentityParam("{\"name\":\"{$name}\",\"certType\":\"IDENTITY_CARD\",\"certNo\":\"{$certNo}\"}");// 必要参数
+        $request->setBizParams("{\"auth_code\":\"M_H5\",\"channelType\":\"app\",\"state\":\"商户自定义\"}");//
+        $url = $client->generatePageRedirectInvokeUrl($request);
+        return $url;
+    }
+}
+
+if(!function_exists('TestZhimaGetResult'))
+{
+    function TestZhimaGetResult($params, $sign)
+    {
+        include_once __DIR__."/zmop/ZmopClient.php";
+
+        //芝麻信用网关地址
+        $gatewayUrl = "https://zmopenapi.zmxy.com.cn/openapi.do";
+        //商户私钥文件
+        $privateKeyFile = public_path()."/pem/rsa_private_key.pem";
+        //芝麻公钥文件
+        $zmPublicKeyFile = public_path()."/pem/public_key.pem";
+        //数据编码格式
+        $charset = "UTF-8";
+        //芝麻分配给商户的 appId
+        $appId = "300000622";
+
+        //$params = 'BFMqwAYz615BnJQIloDJw5h8mfLMTv%2FjvoitHU2PFu7E%2FdO1cTprm0jZ6N6V73BU9KIO5Lc43DrkyEJ9P7%2BDnjUfsFOfbIuV4rSL%2BMe8IEMHtGC3KR6lUn4PZ5qc3VDx5hgdc0D5sCy8v3KgYeEGuXNcNws7F2dL30ze45yps%2FkW1f%2BUbs%2BFcXMYpoZz1dfh7LF78NsjmD1d0D9doM9z8yydgPdZ%2F8kdszCKnLre0iuq%2Bv%2FBHHcDr0NyRvhJQotNJqm%2BA590wUfb%2BpcI168g81av5a9naQHech%2F1z5OF%2BjHADMw%2BSdR6jklASJTCPq0p8rHTLmH0QOnOm7G6ePrG9w%3D%3D';
+        //从回调URL中获取params参数，此处为示例值
+        //$sign = 'YKbTxhXrEE8VmD7cdpD9FK6Wd00WwkgLn9N2zppfukIOMzQfL4WRsKcCJgHe3YFJRZB%2FVV%2BqGk7chQF5PAaVr1iJyocxGC4cp4UB7HhDnEf01OxGLsjdtqA735Tze3dJv4qzcssBj1edSx1DWECJhthecKaevUxcf2%2BLoe0cRQI%3D';
+        //从回调URL中获取sign参数，此处为示例值
+        // 判断串中是否有%，有则需要decode
+        $params = strstr ( $params, '%' ) ? urldecode ( $params ) : $params;
+        $sign = strstr ( $sign, '%' ) ? urldecode ( $sign ) : $sign;
+
+        $client = new ZmopClient ($gatewayUrl, $appId, $charset, $privateKeyFile, $zmPublicKeyFile);
+        $result = $client->decryptAndVerifySign ( $params, $sign );
+        return $result;
+    }
+}
+
+
 
 
 
