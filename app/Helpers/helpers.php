@@ -437,6 +437,7 @@ if(!function_exists('TestZhimaCreditScoreGet'))
     function TestZhimaCreditScoreGet($open_id)
     {
         include_once __DIR__."/zmop/ZmopClient.php";
+        include_once __DIR__."/zmop/request/ZhimaCreditScoreGetRequest.php";
 
         //芝麻信用网关地址
         $gatewayUrl = "https://zmopenapi.zmxy.com.cn/openapi.do";
