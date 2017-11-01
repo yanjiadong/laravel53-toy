@@ -34,7 +34,7 @@
                                 <img src="/admin/assets/img/default.png" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic"/>
                                 <img src="/admin/assets/img/loading.gif"  id="loading" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <br/>
-                                <span>建议图片尺寸标准为960x480</span>
+                                <span>建议图片尺寸标准为1200x675</span>
                             </div>
                         </div>
 
@@ -59,7 +59,7 @@
         $(document).ready(function() {
             $("#upload").uniform();
             $("#upload").ajaxfileupload({
-                'action': '{{ url('admin/upload',['size'=>'960,480']) }}',
+                'action': '{{ url('admin/upload',['size'=>'1200,675']) }}',
                 'params': {
                     '_token': Laravel.csrfToken
                 },
