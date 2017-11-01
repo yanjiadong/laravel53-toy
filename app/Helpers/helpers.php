@@ -432,6 +432,55 @@ if(!function_exists('TestZhimaGetResult'))
     }
 }
 
+if(!function_exists('TestZhimaCreditScoreGet'))
+{
+    function TestZhimaCreditScoreGet($open_id)
+    {
+        include_once __DIR__."/zmop/ZmopClient.php";
+
+        //芝麻信用网关地址
+        $gatewayUrl = "https://zmopenapi.zmxy.com.cn/openapi.do";
+        //商户私钥文件
+        $privateKeyFile = public_path()."/pem/rsa_private_key.pem";
+        //芝麻公钥文件
+        $zmPublicKeyFile = public_path()."/pem/public_key.pem";
+        //数据编码格式
+        $charset = "UTF-8";
+        //芝麻分配给商户的 appId
+        $appId = "300000622";
+
+        $transaction_id = date('YmdHis').microtime_format('x', microtime_float()).time().mt_rand(0000,9999);;
+
+        $client = new ZmopClient($this->gatewayUrl,$this->appId,$this->charset,$this->privateKeyFile,$this->zmPublicKeyFile);
+        $request = new ZhimaCreditScoreGetRequest();
+        $request->setChannel("apppc");
+        $request->setPlatform("zmop");
+        $request->setTransactionId($transaction_id);// 必要参数
+        $request->setProductCode("w1010100100000000001");// 必要参数
+        $request->setOpenId($open_id);// 必要参数
+        $response = $client->execute($request);
+        return json_encode($response);
+    }
+}
+
+if(!function_exists('microtime_float'))
+{
+    function microtime_float()
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
+    }
+}
+
+function microtime_format($tag, $time)
+{
+    list($usec, $sec) = explode(".", $time);
+    $date = date($tag,$usec);
+    return str_replace('x', $sec, $date);
+}
+
+
+
 
 
 
