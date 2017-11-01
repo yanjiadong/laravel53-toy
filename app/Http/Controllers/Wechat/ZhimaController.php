@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\User;
 use App\Zmxy;
 use App\ZmxyScore;
 use Illuminate\Http\Request;
@@ -19,11 +20,22 @@ class ZhimaController extends BaseController
         //echo $url;
     }
 
+    //根据用户信息  获取授权页面
+    public function info(Request $request)
+    {
+        $name = $request->get('name');
+        $certNo = $request->get('certNo');
+
+        $url = TestZhimaAuthInfoAuthorize($name,$certNo);
+        Header("Location: $url");
+    }
+
     public function zmxy(Request $request)
     {
         $params = $request->get('params');
         $sign = $request->get('sign');
 
+        //授权获取芝麻信息
         $result = TestZhimaGetResult($params,$sign);
 
         $user_id = '3';
@@ -41,8 +53,16 @@ class ZhimaController extends BaseController
                 $open_id_arr = explode('=',$result_arr[0]);
                 $open_id = $open_id_arr[1];
 
+                //获取芝麻分
                 $score = TestZhimaCreditScoreGet($open_id);
                 ZmxyScore::create(['user_id'=>$user_id,'info'=>$score]);
+
+                $score_arr = json_decode($score,true);
+
+
+                //更新用户信息中的芝麻信息
+                User::where('id',$user_id)->update(['is_zhima'=>1,'zhima_time'=>$this->datetime,'zhima_score'=>$score_arr['zm_score'],'zhima_open_id'=>$open_id]);
+
             }
         }
 
