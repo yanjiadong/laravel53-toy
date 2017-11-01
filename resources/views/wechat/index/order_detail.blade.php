@@ -168,8 +168,10 @@
                     租赁订单编号
                 </div>
                 <div class="fr">
-                    <input type="text" id="copy" value="{{$order_code}}">
-                    <button id="copy_btn" onclick="order_detail.copy()">复制</button>
+                    <span></span>
+                    <div id="copy_btn" data-clipboard-text="">复制</div>
+                    {{--<input type="text" id="copy" value="{{$order_code}}">
+                    <button id="copy_btn" onclick="order_detail.copy()">复制</button>--}}
                 </div>
             </div>
             <div class="time clear">
@@ -202,7 +204,8 @@
     </div>
 </div>
 
-
+<!--复制-->
+<script src="/wechat/js/clipboard.min.js"></script>
 <script>
     var order_detail = {
         data: {
@@ -339,17 +342,26 @@
                 }
                 //物流编号 下单时间
                 //$(".order-info .number .fr input").val(order_detail.data.logistics_state.address.g);
-                $(".order-info .number .fr input").val('{{$order_code}}');
+                //$(".order-info .number .fr input").val('{{$order_code}}');
+                $(".order-info .number .fr span").text('{{$order_code}}');
+                $("#copy_btn").attr({"data-clipboard-text":'{{$order_code}}'});
                 //$(".order-info .time .fr span").text(common.dateFormat(order_detail.data.logistics_state.address.h));
                 $(".order-info .time .fr span").text(order_detail.data.logistics_state.address.h);
+                order_detail.copy()
             })
         },
         //复制
         copy:function () {
-            var Url2=document.getElementById("copy");
-            Url2.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-            common.success_tip("订单号已复制成功！");
+            var btn = document.getElementById('copy_btn');
+            var clipboard = new Clipboard(btn);
+
+            clipboard.on('success', function(e) {
+                common.success_tip("订单号已复制成功！")
+            });
+
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
         },
         //确认收货
         receipt:function () {

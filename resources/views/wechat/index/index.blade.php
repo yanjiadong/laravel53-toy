@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>玩具小叮当</title>
+    <title>玩具趣编程</title>
     <!--下拉刷新-->
     <link rel="stylesheet" href="/wechat/style/weui.min.css">
     <link rel="stylesheet" href="/wechat/style/jquery-weui.min.css">
@@ -151,11 +151,11 @@
             </li>
             <li class="fl swiper-slide">
                 <a href="#">
-                    <img src="../image/common/img_dialog_1.png">
+                    <img src="/wechat/image/common/img_dialog_1.png">
                 </a>
             </li>
         </ul>
-        <img class="close" src="../image/common/icon_dialog_close_bottom.png">
+        <img class="close" src="/wechat/image/common/icon_dialog_close_bottom.png">
     </div>
 
 </div>

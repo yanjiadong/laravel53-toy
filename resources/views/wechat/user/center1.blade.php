@@ -151,7 +151,8 @@
                         $(".user-center1-wrap .vip-img").hide();
 
                         if(!user_center.data.userInfo.phone){
-                            $(".photo table td.phone").text("");
+                            $(".photo table td.phone").remove();
+                            $(".photo table tr:first td.name").prop('rowSpan', 2).find("i").show();
                         }else{
                             $(".photo table td.phone").text("绑定手机:" + user_center.data.userInfo.phone);
                         }
@@ -168,7 +169,7 @@
                                 day = 30;
                                 break;
                             case '季度卡':
-                                day = 120;
+                                day = 90;
                                 break;
                             case '半年卡':
                                 day = 180;

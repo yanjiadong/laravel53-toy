@@ -196,6 +196,41 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    //获取购物车数量
+    var num,order_num;
+    common.httpRequest('{{url('api/user/get_cart_order_num')}}','post',{user_id:'{{$user_id}}'},function (res) {
+        //假数据
+        num = '1';
+        order_num = '1';
+        localStorage.shop_car_num = num;
+        localStorage.order_num = order_num;
+        //确定ul的长度
+        var wid=0;
+        var $li =$('.index-nav .nav li');
+        if($li.length>0){
+            for(var i=0;i<$li.length;i++){
+                wid +=$($li[i]).outerWidth();
+            }
+            $('.index-nav .nav').width(wid+'px');
+        }
+    });
+    if( localStorage.shop_car_num > 0)
+    {
+        $('.icon-footer-shop-car>span').text( localStorage.shop_car_num);
+    }else {
+        $('.icon-footer-shop-car').html('');
+    }
+    if(localStorage.order_num > 0)
+    {
+        $('.icon-footer-order>span').text(localStorage.order_num);
+    }
+    else
+    {
+        $('.icon-footer-order').html('');
+    }
+</script>
+
 <script>
     //debugger;
     var goodDetail_obj = {
@@ -248,8 +283,16 @@
                                 '</div></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
-                            $('.lunbo .swiper-container .play-box').show().text(time);
+
+                            //增加视频加载
+                            $(".lunbo .swiper-wrapper .swiper-slide video")[0].addEventListener('canplaythrough',function(e){
+                                //要执行的函数内容
+                                $('.lunbo .swiper-container .play-box').show().text(time);
+                            });
                             $(".swiper-slide .video-pic").height($(".swiper-slide video").width());
+
+                            //$('.lunbo .swiper-container .play-box').show().text(time);
+                            //$(".swiper-slide .video-pic").height($(".swiper-slide video").width());
                             lunbo_content="";
                         }
                     }
@@ -396,19 +439,24 @@
                 }
                 else
                 {
-
+                    $(".icon-footer-shop-car").html('<span>'+res.info.count+'</span>');
+                    localStorage.shop_car_num = res.info.count;     //获取最新购物车数量存储在localStorage中
 
                     var cont ='<div id="picAnimate"><img src="'+goodDetail_obj.join_pic+'"></div>';
                     $(".footer ul li:last.fl").append(cont);
-                    setTimeout(function () {
-                        $(".footer ul li:last.fl #picAnimate").remove();
-                    },1000);
+
+                    $(".footer ul li:last.fl #picAnimate img")[0].onload=function (e) {
+                        setTimeout(function () {
+                            $(".footer ul li:last.fl #picAnimate").remove();
+                        },1000);
+                        goodDetail_obj.init();
+                    };
 
                     //$(".icon-footer-shop-car").html('<span>'+res.info.count+'</span>');
                     //$(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
-                    goodDetail_obj.data.car_num = res.info.count;
+                    //goodDetail_obj.data.car_num = res.info.count;
                     //common.success_tip("添加成功！");
-                    goodDetail_obj.init();
+                    //goodDetail_obj.init();
                 }
             })
         },
@@ -649,7 +697,7 @@
     })
 </script>
 <script>
-    $(function () {
+    /*$(function () {
         pushHistory();
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             location.href=document.referrer;  //在这里指定其返回的地址  订单列表页面
@@ -661,7 +709,7 @@
             url: "{{url('wechat/index/good')}}"+'/'+'{{$good_id}}'
         };
         window.history.pushState(state, state.title, state.url);
-    }
+    }*/
 </script>
 </body>
 </html>

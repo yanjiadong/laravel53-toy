@@ -100,9 +100,8 @@
                 $(".grow-up .top .top-img img").attr("src",sort_detail.data.grown_up_top.url);
                 $(".grow-up .top .describe").text(sort_detail.data.grown_up_top.desc);
 
-                var img_width =parseInt($(".grow-up .top .top-img img").width()*4/13);
-                $(".grow-up .top .top-img img").css("height",img_width+"px");
-                //setTimeout(sort_detail.slide_up,2000);
+                //var img_width =parseInt($(".grow-up .top .top-img img").width()*4/13);
+                //$(".grow-up .top .top-img img").css("height",img_width+"px");
             });
         },
         //分类选项-商品品种

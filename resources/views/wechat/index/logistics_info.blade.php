@@ -19,7 +19,7 @@
     <div class="logistics-info-main">
         <div class="detail-cont">
             <div class="top-tips">
-                优先通过顺丰快递（货到付款方式）将玩具寄回，然后将寄回的快递单号提交，即可再次租用。
+                优先通过顺丰快递（货到付款方式）将玩具寄回，然后将寄回的快递单号提交，即可再次租用
             </div>
             <div class="detail-cont-main">
                 <div class="cont">
@@ -69,7 +69,7 @@
                         <div class="number clear">
                             <div class="fl">
                                 <h5>快递单号</h5>
-                                <input type="number" placeholder="请输入快递单号" onblur="logisticsInfo.testNumber(this)">
+                                <input type="number" placeholder="请输入快递单号" onblur="logisticsInfo.resetInput(this)" onblur="fill_logistics.testNumber(this)">
                             </div>
                             <div class="fr">
                                 <i class="icon icon_code"></i>
@@ -165,9 +165,15 @@
                 }
             })
         },
+        //清除input内容
+        resetInput:function (that) {
+            if($(that).val()=="请输入快递单号"){
+                $(that).val("");
+            }
+        },
         //是否填写快递单号
         testNumber:function (item) {
-            if(!$(item).val().replace(/(^\s*)|(\s*$)/g, "")||!$(".company input").val()){
+            if(!$(item).val().replace(/(^\s*)|(\s*$)/g, "")||!$(".company span").text()){
                 $(".btn button").removeClass('active');
             }else{
                 $(".btn button").addClass('active');

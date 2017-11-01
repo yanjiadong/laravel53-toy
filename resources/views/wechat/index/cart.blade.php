@@ -108,7 +108,7 @@
                         switch(toys_car.data.info.state){
                             case 1:   //为非会员 提示
                                 $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>办理任意一种会员后即可下单，享受免费租、随意换。').show();
-                                $(".toys-car .list").css({'padding-top':$(".top-tips").outerHeight()+'px'});
+                                $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
                                 $(".toys-car .btn button").addClass('active');
                                 break;
                             case 2: //会员 提示
@@ -122,6 +122,7 @@
                                 break;
                         }
 
+                        $(".toys-car .list").height($(window).height()-$("footer").height()-$(".btn").height()-$(".top-tips").height());
                     }else{
                         $(".no-goods").height($(window).height()-50).show();
                         $(".list,.btn,.top-tips").hide();
@@ -199,7 +200,7 @@
         toys_car.get_data();
     })
 </script>
-<script>
+{{--<script>
     $(function () {
         pushHistory();
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
@@ -213,6 +214,6 @@
         };
         window.history.pushState(state, state.title, state.url);
     }
-</script>
+</script>--}}
 </body>
 </html>

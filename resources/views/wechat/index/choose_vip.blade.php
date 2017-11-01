@@ -203,7 +203,14 @@
 
                         $(".info .select .fr").text('¥'+money);
                         $(".info .deposit .fr").text('¥'+yajin);
-                        $(".submit .fl p").text('其中包含押金¥'+yajin);
+
+                        if(yajin<=0){
+                            $(".submit .fl p").text('免押金');
+                        }else{
+                            $(".submit .fl p").text('其中包含押金¥'+yajin);
+                        }
+
+
                         if(!choose_vip.data.discount){
                             /* {user_id:'34',vip_card_id:choose_vip.data.vip_id}*/
                             //显示几张优惠券

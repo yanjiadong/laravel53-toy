@@ -39,6 +39,7 @@
     overflow: hidden;
     position: relative;
     border-radius: 5px;
+    display: block;
 }
 .index-wrap .content .recommend .lunbo .swiper-container .swiper-pagination .swiper-pagination-bullet {
     border-radius: inherit;
@@ -158,6 +159,7 @@
 
 .index-wrap .content .recommend .join-member img {
     width: 100%;
+    display: block;
 }
 .index-wrap .content .recommend .join-member .fl:first-child {
     width: 20%;
@@ -327,6 +329,7 @@
 .sort-detail .content .grow-up .top .top-img img {
     width: 100%;
     height: 100%;
+    display: block;
 }
 .sort-detail .content .grow-up .top .describe {
     width: 100%;
@@ -374,6 +377,9 @@
     -webkit-overflow-scrolling: touch;
 }
 .sort-detail .content .grow-up .all .year-select .scroll::-webkit-scrollbar {display:none}
+::-webkit-scrollbar {
+    display:none !important;
+}
 .sort-detail .content .grow-up .all .year-select .scroll button {
     padding: 0 12px;
     border: 1px solid #d8d8d8;
@@ -831,7 +837,7 @@
 }
 .order-wrap .address .address_detail .fl h6 {
     color: #8d8d8d;
-    font-size: 12px;
+    font-size: 14px;
 }
 .order-wrap .address .address_detail .fr {
     height: 100%;
@@ -918,7 +924,7 @@
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl {
     padding: 10px 0 10px 0;
-    width: 70%;
+    width: 80%;
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl > span {
     color: #323232;
@@ -940,8 +946,8 @@
     vertical-align: middle;
     background: url("../image/common/order_3.jpg");
     width: 16px;
-    height: 18px;
-    background-size: 16px 18px;
+    height: 17px;
+    background-size: 16px 17px;
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl .icon_order1 {
     display: inline-block;
@@ -959,12 +965,12 @@
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl > div p {
     color: #8D8D8D;
-    font-size: 11px;
+    font-size: 13px;
     margin-top: 5px;
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fr {
     padding: 10px 10px 0;
-    width: 30%;
+    width: 20%;
     text-align: right;
     font-size: 15px;
     color: #323232;
@@ -981,7 +987,7 @@
 .order-wrap .order-detail .detail-list .total {
     width: 100%;
     text-align: right;
-    padding: 10px;
+    padding: 10px 20px 10px 10px;
     color: #323232;
     font-size: 14px;
 }
@@ -1362,7 +1368,7 @@
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
-    padding: 10px;
+    padding: 5px 10px;
     font-size: 13px;
     line-height: 18px;
 }
@@ -1510,6 +1516,7 @@
     height: 300px;
     position: relative;
     display: none;
+    background-color: #fff;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .no-good .tips {
     position: absolute;
@@ -1541,6 +1548,10 @@
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fr a {
     color: #FF3574;
     margin-right: 5px;
+}
+.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fr a span{
+    display: inline-block;
+    vertical-align: middle;
 }
 .order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail {
     padding: 10px;
@@ -1809,7 +1820,7 @@
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
-    padding: 10px;
+    padding: 5px 10px;
     font-size: 13px;
     line-height: 18px;
 }
@@ -1952,6 +1963,9 @@
 .toys-car .list {
     background-color: #fff;
     margin-bottom: 115px;
+    height: 300px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 .toys-car .list ul li {
     padding: 10px;
@@ -2052,6 +2066,7 @@
     padding: 10px;
     background-color: #fff;
     width: 100%;
+    box-shadow: 0 -1px 10px #dddddd;
 }
 .toys-car .btn button {
     width: 100%;
@@ -3035,7 +3050,7 @@
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
-    padding: 10px;
+    padding: 5px 10px;
     font-size: 13px;
     line-height: 18px;
 }
@@ -3082,7 +3097,7 @@
     margin-top: 30px;
 }
 .deposit1-wrap .deposit1-main .cont .list .item>.fl p{
-    font-size: 14px;
+    font-size: 13px;
     margin-top: 5px;
 }
 .deposit1-wrap .deposit1-main .cont .list .item>.fr{
@@ -3243,6 +3258,7 @@
     color: #323232 ;
     font-size: 14px;
 }
+
 .fill-logistics .info .number .fr {
     text-align: center;
     width: 20%;
@@ -3262,8 +3278,10 @@
     font-size: 14px;
     font-weight: bold;
 }
-.fill-logistics .info .company .fl input {
+.fill-logistics .info .company .fl span {
     border: 1px solid transparent;
+    display: inline-block;
+    line-height: 32px;
     height: 32px;
     border-radius: 3px;
     color: #323232 !important;
@@ -3444,7 +3462,7 @@
 }
 .order-detail-wrap .address .address_detail .fl h6 {
     color: #8d8d8d;
-    font-size: 12px;
+    font-size: 14px;
 }
 .order-detail-wrap .address .address_detail .fr {
     height: 100%;
@@ -3530,7 +3548,7 @@
     padding: 5px 0;
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li .fl {
-    width: 70%;
+    width:80%;
     padding: 10px 0 10px 0;
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li:first-child .fl{
@@ -3578,12 +3596,12 @@
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li .fl > div p {
     color: #8D8D8D;
-    font-size: 11px;
+    font-size: 13px;
     margin-top: 5px;
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li .fr {
     padding: 10px 10px 0;
-    width: 30%;
+    width: 20%;
     text-align: right;
     font-size: 15px;
     color: #323232;
@@ -3624,9 +3642,6 @@
 }
 .order-detail-wrap .order-info .order-info-cont .number .fr{
     width: 70%;
-}
-.order-detail-wrap .order-info .order-info-cont .number .fr input{
-    width:75%;
     text-align: right;
 }
 .order-detail-wrap .order-info .order-info-cont .number .fr span {
@@ -3634,7 +3649,7 @@
     margin-right: 10px;
     text-align: right;
 }
-.order-detail-wrap .order-info .order-info-cont .number .fr button {
+.order-detail-wrap .order-info .order-info-cont .number .fr #copy_btn{
     width: 40px;
     height: 23px;
     color: #6885EA;
@@ -3642,6 +3657,9 @@
     border: 1px solid #6885EA ;
     border-radius: 3px;
     background-color: #E4EAFF;
+    display: inline-block;
+    text-align: center;
+    line-height: 23px;
 }
 .order-detail-wrap .order-info .order-info-cont .other .delivery,
 .order-detail-wrap .order-info .order-info-cont .other .rent,
@@ -4368,7 +4386,7 @@ textarea {
 }
 .vip-voucher-wrap .tips {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -4488,21 +4506,7 @@ textarea {
     color: #323232 !important;
     font-size: 14px;
 }
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fl input::input-placeholder{
-    color:  #999;
-}
-::-webkit-input-placeholder { /* WebKit browsers */
-    color: #999;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #999;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #999;
-}
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: #999;
-}
+
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr {
     text-align: center;
     width: 20%;
@@ -4523,8 +4527,9 @@ textarea {
     font-size: 14px;
     font-weight: bold;
 }
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input {
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl span{
     border: 1px solid transparent;
+    display:inline-block;
     height: 32px;
     border-radius: 3px;
     color: #323232 !important;
@@ -4819,7 +4824,7 @@ textarea {
 }
 .choose-vip-wrap-new .vip-info>.sort ul li .vip-use{
     position: absolute;
-    bottom: 40px;
+    bottom: 36px;
     left: 20px;
     font-size: 12px;
     color: #999;
