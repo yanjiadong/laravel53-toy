@@ -168,7 +168,7 @@
     var num,order_num;
     common.httpRequest('{{url('api/user/get_cart_order_num')}}','post',{user_id:'{{$user_id}}'},function (res) {
         //假数据
-        console.log(res);
+        //console.log(res);
         num = res.info.cart_num;
         order_num = res.info.order_num;
         localStorage.shop_car_num = num;
@@ -222,7 +222,7 @@
         },
         //首页-轮播数据获取
         lunbo_init:function () {
-            common.httpRequest('{{url('api/index')}}','get',null,function (res) {
+            common.httpRequest('{{url('api/index/banners')}}','post',null,function (res) {
                 var lunbo_content="";
                 if(res.info.banners.length>0){
                     index_obj.data.lunboData = res.info.banners;
@@ -380,8 +380,8 @@
 
     $(function () {
         //导航切换
-        index_obj.isfirst();         //首页 --是否首次打开
         index_obj.lunbo_init();  //首页 - 轮播数据初始化
+        index_obj.isfirst();         //首页 --是否首次打开
         index_obj.hot_new();    //首页 - 新品推荐初始化
         index_obj.vip_create();    //首页 - 成为会员_
 

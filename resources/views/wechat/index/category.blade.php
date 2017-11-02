@@ -90,8 +90,8 @@
             sort_list:[]     //分类的筛选列表 ---商品品种
         },
         init:function () {
-            sort_detail.grown_up();
             sort_detail.sortTab();
+            sort_detail.grown_up();
             sort_detail.getShopList(0);
         },
         //分类顶部大图和描述

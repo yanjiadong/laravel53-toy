@@ -26,12 +26,20 @@ class IndexController extends BaseController
     public function index()
     {
         $categorys = Category::all();
-        $banners = Banner::all();
+        //$banners = Banner::all();
         $new_goods = Good::with(['brand'])->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->first();
         $goods = Good::with(['brand'])->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->orderBy('sort','asc')->get();
         $activities = Activity::where('type',1)->get();
 
-        $this->ret['info'] = ['categorys'=>$categorys,'banners'=>$banners,'new_goods'=>$new_goods,'goods'=>$goods,'activities'=>$activities];
+        $this->ret['info'] = ['categorys'=>$categorys,'new_goods'=>$new_goods,'goods'=>$goods,'activities'=>$activities];
+        return $this->ret;
+    }
+
+    public function banners()
+    {
+        $banners = Banner::all();
+
+        $this->ret['info'] = ['banners'=>$banners];
         return $this->ret;
     }
 

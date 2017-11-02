@@ -20,6 +20,7 @@ Route::get('/user', function (Request $request) {
 Route::group(['namespace' => 'Api'], function () {
     Route::get('/index','IndexController@index');
     Route::post('/index/goods','IndexController@goods');
+    Route::post('/index/banners','IndexController@banners');
 
     //首页运营活动
     Route::post('/index/activities','IndexController@activities');
