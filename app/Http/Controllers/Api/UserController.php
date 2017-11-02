@@ -234,6 +234,8 @@ class UserController extends BaseController
         $user_id = $request->get('user_id');
 
         $user = User::find($user_id);
+
+        $jianmian_money = 0;
         if($user->is_zhima == 1)
         {
             $list = VipCard::all()->toArray();
@@ -241,10 +243,12 @@ class UserController extends BaseController
             {
                 if($v['money'] <= $user->zhima_money)
                 {
+                    $jianmian_money = $v['money'];
                     $v['money'] = 0;
                 }
                 else
                 {
+                    $jianmian_money = $user->zhima_money;
                     $v['money'] = $v['money'] - $user->zhima_money;
                 }
             }
@@ -254,7 +258,8 @@ class UserController extends BaseController
             $list = VipCard::all();
         }
 
-        $this->ret['info'] = ['list'=>$list];
+
+        $this->ret['info'] = ['list'=>$list,'user'=>$user,'jianmian_money'=>$jianmian_money];
         return $this->ret;
     }
 
