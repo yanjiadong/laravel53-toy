@@ -473,12 +473,67 @@ if(!function_exists('microtime_float'))
     }
 }
 
-function microtime_format($tag, $time)
+if(!function_exists('microtime_format'))
 {
-    list($usec, $sec) = explode(".", $time);
-    $date = date($tag,$usec);
-    return str_replace('x', $sec, $date);
+    function microtime_format($tag, $time)
+    {
+        list($usec, $sec) = explode(".", $time);
+        $date = date($tag,$usec);
+        return str_replace('x', $sec, $date);
+    }
 }
+
+//根据芝麻分获取减免的押金额度
+if(!function_exists('getMoneyByZhimaScore'))
+{
+    function getMoneyByZhimaScore($score)
+    {
+        $money = 0;
+        if($score >= 650 && $score <= 670)
+        {
+            $money = 600;
+        }
+        elseif($score > 670 && $score <= 690)
+        {
+            $money = 800;
+        }
+        elseif($score > 690 && $score <= 700)
+        {
+            $money = 1000;
+        }
+        elseif($score > 700 && $score <= 720)
+        {
+            $money = 1100;
+        }
+        elseif($score > 720 && $score <= 740)
+        {
+            $money = 1300;
+        }
+        elseif($score > 740 && $score <= 750)
+        {
+            $money = 1500;
+        }
+        elseif($score > 750 && $score <= 770)
+        {
+            $money = 1600;
+        }
+        elseif($score > 770 && $score <= 790)
+        {
+            $money = 1800;
+        }
+        elseif($score > 790 && $score <= 800)
+        {
+            $money = 2000;
+        }
+        elseif($score > 800)
+        {
+            $money = 3000;
+        }
+
+        return $money;
+    }
+}
+
 
 
 

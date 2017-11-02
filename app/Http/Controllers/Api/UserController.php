@@ -229,9 +229,31 @@ class UserController extends BaseController
         return $this->ret;
     }
 
-    public function vip_cards()
+    public function vip_cards(Request $request)
     {
-        $list = VipCard::all();
+        $user_id = $request->get('user_id');
+
+        $user = User::find($user_id);
+        if($user->is_zhima == 1)
+        {
+            $list = VipCard::all()->toArray();
+            foreach ($list as &$v)
+            {
+                if($v['money'] <= $user->zhima_money)
+                {
+                    $v['money'] = 0;
+                }
+                else
+                {
+                    $v['money'] = $v['money'] - $user->zhima_money;
+                }
+            }
+        }
+        else
+        {
+            $list = VipCard::all();
+        }
+
         $this->ret['info'] = ['list'=>$list];
         return $this->ret;
     }

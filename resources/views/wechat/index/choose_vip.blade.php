@@ -126,7 +126,7 @@
             $(".choose-vip-wrap-new>.vip-info>p").text('您的会员有效期剩余：'+choose_vip.data.time+'天');
 
             //获取会员卡数据
-            common.httpRequest("{{url('api/user/vip_cards')}}",'post',null,function (res) {
+            common.httpRequest("{{url('api/user/vip_cards')}}",'post',{user_id:'{{$user_id}}'},function (res) {
                 /*choose_vip.data.sortList =[
                     {created_at: "2017-09-24 22:58:25",days:0,id:1,money:1,price:2,title:"月卡",type:1},
                     {created_at: "2017-09-24 22:58:25",days:0,id:4,money:3,price:0,title:"半年卡",type:3},
