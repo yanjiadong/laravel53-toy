@@ -283,12 +283,13 @@
                                 '</div></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
-
+                            
                             //增加视频加载
-                            $(".lunbo .swiper-wrapper .swiper-slide video")[0].addEventListener('canplaythrough',function(e){
+                            $(".lunbo .swiper-wrapper .swiper-slide video")[0].oncanplay =function(){
                                 //要执行的函数内容
                                 $('.lunbo .swiper-container .play-box').show().text(time);
-                            });
+                            };
+
                             $(".swiper-slide .video-pic").height($(".swiper-slide video").width());
 
                             //$('.lunbo .swiper-container .play-box').show().text(time);
