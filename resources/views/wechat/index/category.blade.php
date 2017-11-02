@@ -77,6 +77,9 @@
     @include('wechat.common.footer')
 </div>
 
+<!--懒加载-->
+<script src="/wechat/js/jquery.lazyload.js"></script>
+
 <script>
     var url = "{{url('api/category')}}"+"/{{$category_id}}/"+"{{$brand_id}}";
 
@@ -144,20 +147,21 @@
                 console.log(res.info.goods);
                 //商品列表
                 var shopList = "";
+
                 for(var i=0;i<sort_detail.data.grown_up_list.list.length;i++){
                     var href = "{{url('wechat/index/good')}}"+'/'+sort_detail.data.grown_up_list.list[i].id;
 
                     //判断是否有库存
                     if(sort_detail.data.grown_up_list.list[i].store <= 0){
                         shopList +='<li class="clear"><a href="'+href +'"><div class="fl">' +
-                            '<img src="'+ sort_detail.data.grown_up_list.list[i].picture+
+                            '<img class="lazy" src="/wechat/image/common/default_pic.png" data-original="'+ sort_detail.data.grown_up_list.list[i].picture+
                             '"><span class="active">暂无库存</span></div> <div class="fr"><h3>'
                             +sort_detail.data.grown_up_list.list[i].title+'</h3><h4>适用年龄'+
                             sort_detail.data.grown_up_list.list[i].old+'</h4><p>市场参考价¥'+
                             sort_detail.data.grown_up_list.list[i].price+'</p></div></a></li>';
                     }else{
                         shopList +='<li class="clear"><a href="'+href +'"><div class="fl">' +
-                            '<img src="'+ sort_detail.data.grown_up_list.list[i].picture+
+                            '<img class="lazy" src="/wechat/image/common/default_pic.png" data-original="'+ sort_detail.data.grown_up_list.list[i].picture+
                             '"></div> <div class="fr"><h3>'
                             +sort_detail.data.grown_up_list.list[i].title+'</h3><h4>适用年龄'+
                             sort_detail.data.grown_up_list.list[i].old+'</h4><p>市场参考价¥'+
@@ -169,6 +173,12 @@
                 }
                 $(".grow-up .list ul").html(shopList);
                 $(".grow-up .list ul li .fl img").css("height", $(".grow-up .list ul li .fl img").width()+"px");
+
+                //懒加载
+                $("img.lazy").lazyload({
+                    threshold :0,
+                    effect : "fadeIn"
+                });
             })
         },
         //分类详情 - 选择品牌

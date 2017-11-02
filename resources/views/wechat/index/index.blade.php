@@ -160,6 +160,9 @@
 
 </div>
 
+<!--懒加载-->
+<script src="/wechat/js/jquery.lazyload.js"></script>
+
 <script type="text/javascript">
     //获取购物车数量
     var num,order_num;
@@ -263,18 +266,30 @@
                     //热门
                     for(var i=0;i<res.info.goods.length;i++){
                         var href = "{{url('wechat/index/good')}}"+'/'+res.info.goods[i].id;
+
                         //判断是否有库存
                         if(res.info.goods[i].store <= 0){
-                            hotData +='<li class="fl"><a href="'+href+'"><img src="'+ res.info.goods[i].picture+'"><span class="active">'+
+                            hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="/wechat/image/common/default_pic.png" data-original="'+ res.info.goods[i].picture+'"><span class="active">'+
                                 '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场参考价¥'+res.info.goods[i].price+'</p><h4>适用年龄'+res.info.goods[i].old+
                                 '</h4></li>';
                         }else{
-                            hotData +='<li class="fl"><a href="'+href+'"><img src="'+ res.info.goods[i].picture+'">'+'<h3>'
+                            hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="/wechat/image/common/default_pic.png" data-original="'+ res.info.goods[i].picture+'">'+'<h3>'
                                 +res.info.goods[i].title+'</h3><p>市场参考价¥'+res.info.goods[i].price+'</p><h4>适用年龄'+res.info.goods[i].old+
                                 '</h4></li>';
                         }
+
                     }
                     $(".hot-list ul").html(hotData);
+                    $(".hot-list .fl img").height($(".hot-list .fl img").width());
+
+                    //懒加载
+                    $("img.lazy").lazyload({
+                        effect : "fadeIn", //渐现，show(直接显示),fadeIn(淡入),slideDown(下拉)
+                        threshold : 20, //预加载，在图片距离屏幕180px时提前载入
+                        event: 'scroll', // 事件触发时才加载，click(点击),mouseover(鼠标划过),sporty(运动的),默认为scroll（滑动）
+                        container: '#content', // 指定对某容器中的图片实现效果
+                        failure_limit:2 //加载2张可见区域外的图片,lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况
+                    });
 
                 }
 

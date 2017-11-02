@@ -747,7 +747,11 @@
     bottom: 0;
     left: 50%;
     width: 30px;
+    display: none;
+}
+.good-detail-wrap .footer  #picAnimate.active{
     animation:myMove 1s ease;
+    display: block;
 }
 @keyframes myMove {
     0%{
@@ -1312,6 +1316,8 @@
     height: 44px;
     position: fixed;
     top: 0;
+    left:0;
+    right: 0;
     z-index: 999;
     box-shadow: 0 2px 10px #ddd;
     width: 100%;
@@ -1356,15 +1362,7 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
-.order-detail-wrap .order-detail-main .parent-box {
-    width: 100%;
-}
-.order-detail-wrap .order-detail-main .parent-box .detail-cont {
-    width:100%;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-}
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .top-tips {
+.order-detail-wrap .order-detail-main .detail-cont .top-tips {
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
@@ -1372,13 +1370,13 @@
     font-size: 13px;
     line-height: 18px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .no-good {
+.order-detail-wrap .order-detail-main  .detail-cont .no-good {
     height: 300px;
     position: relative;
     background-color: #fff;
     display: none;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .no-good .tips{
+.order-detail-wrap .order-detail-main  .detail-cont .no-good .tips{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1387,138 +1385,137 @@
     color: #C9C8DA;
     font-size: 15px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list{
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list{
 
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li {
     margin-bottom: 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .top {
     font-size: 14px;
     height: 44px;
     line-height: 44px;
     padding: 0 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top .fl {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .top .fl {
     color: #323232;
     width: 70%;
     height: 100%;
     font-size: 0;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top .fl span{
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .top .fl span{
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .top .fr {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .top .fr {
     color: #FF3574;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail {
     padding: 10px;
     background-color: #fafafa;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fl {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fl {
     width: 25%;
     height: 100%;
     padding: 0 10px 0 0;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fl img {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fl img {
     width: 100%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fr {
     width: 75%;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fr h3 {
     font-size: 14px;
     min-height:40px;
     color: #323232;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 a {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fr h3 a {
     color: #323232;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr h4 {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .good-detail .fr p {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .good-detail .fr p {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .order-number {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .order-number {
     height: 48px;
     line-height: 48px;
     padding: 0 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .order-number .fl {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .order-number .fl {
     color: #8D8D8D;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .order-number .fr {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .order-number .fr {
     color: #8D8D8D;
     text-align: right;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total {
     padding: 10px;
     text-align: right;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fl {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total .fl {
     width: 30%;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fl p {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total .fl p {
     color: #8D8D8D;
     font-size: 12px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fl h3 {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total .fl h3 {
     color: #323232;
     font-size: 12px;
     margin-top: 3px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .fl h3 span {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total .fl h3 span {
     font-size: 13px;
     color: #FF3574;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .contact{
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total .contact{
     display: inline-block;
     font-size: 13px;
     color: #8d8d8d;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total .contact span{
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total .contact span{
     display: inline-block;
     vertical-align: middle;
     color: #8d8d8d;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total button {
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total button {
     padding: 6px 12px;
     font-size: 14px;
     border-radius: 4px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total button.logistics-btn{
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total button.logistics-btn{
     color: #8d8d8d;
     border: 1px solid #c1c1c1;
     margin-left: 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .detail-cont .detail-list li .total  button.confirm-btn{
+.order-detail-wrap .order-detail-main  .detail-cont .detail-list li .total  button.confirm-btn{
     color: #fff;
     margin-left: 10px;
     background-color: #6885EA;
     border: 1px solid #6885EA;
 }
-.order-detail-wrap .order-detail-main .parent-box .return {
-    width: 100%;
+.order-detail-wrap .order-detail-main  .return {
     display: none;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .no-good{
+.order-detail-wrap .order-detail-main  .return .no-good{
     height: 300px;
     position: relative;
     display: none;
     background-color: #fff;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .no-good .tips {
+.order-detail-wrap .order-detail-main  .return .no-good .tips {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1527,97 +1524,97 @@
     color: #C9C8DA;
     font-size: 15px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li {
+.order-detail-wrap .order-detail-main  .return .detail-list li {
     margin-bottom: 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top {
+.order-detail-wrap .order-detail-main  .return .detail-list li .top {
     font-size: 14px;
     height: 44px;
     line-height: 44px;
     padding: 0 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fl {
+.order-detail-wrap .order-detail-main  .return .detail-list li .top .fl {
     color: #323232;
     font-size: 0;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fl span{
+.order-detail-wrap .order-detail-main  .return .detail-list li .top .fl span{
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fr a {
+.order-detail-wrap .order-detail-main  .return .detail-list li .top .fr a {
     color: #FF3574;
     margin-right: 5px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .top .fr a span{
+.order-detail-wrap .order-detail-main  .return .detail-list li .top .fr a span{
     display: inline-block;
     vertical-align: middle;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail {
     padding: 10px;
     background-color: #fafafa;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fl {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fl {
     width: 25%;
     height: 100%;
     padding: 0 10px 0 0;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fl img {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fl img {
     width: 100%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fr {
     width: 75%;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr h3 {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fr h3 {
     font-size: 14px;
     min-height: 40px;
     color: #323232;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr h3 a {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fr h3 a {
     color: #323232;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr h4 {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .good-detail .fr p {
+.order-detail-wrap .order-detail-main  .return .detail-list li .good-detail .fr p {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .order-number {
+.order-detail-wrap .order-detail-main  .return .detail-list li .order-number {
     height: 48px;
     line-height: 48px;
     padding: 0 10px;
     border-bottom: 1px solid #f6f6f6;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .order-number .fl {
+.order-detail-wrap .order-detail-main  .return .detail-list li .order-number .fl {
     color: #8D8D8D ;
     font-size: 13px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .order-number .fr {
+.order-detail-wrap .order-detail-main  .return .detail-list li .order-number .fr {
     color: #8D8D8D;
     font-size: 13px;
     text-align: right;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .total {
+.order-detail-wrap .order-detail-main  .return .detail-list li .total {
     padding: 10px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .total .fl {
+.order-detail-wrap .order-detail-main  .return .detail-list li .total .fl {
     width: 30%;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .total .fl p {
+.order-detail-wrap .order-detail-main  .return .detail-list li .total .fl p {
     color: #8D8D8D;
     font-size: 12px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .total .fl h3 {
+.order-detail-wrap .order-detail-main  .return .detail-list li .total .fl h3 {
     color: #323232;
     font-size: 12px;
     margin-top: 3px;
 }
-.order-detail-wrap .order-detail-main .parent-box .return .detail-list li .total .fl h3 span {
+.order-detail-wrap .order-detail-main  .return .detail-list li .total .fl h3 span {
     font-size: 13px;
     color: #FF3574;
 }
@@ -1666,10 +1663,10 @@
     width: 100%;
     position: relative;
 }
-.order-return-wrap .order-return-main .parent-box .return {
+.order-return-wrap .order-return-main  .return {
     width: 100%;
 }
-.order-return-wrap .order-return-main .parent-box .return .top-tips {
+.order-return-wrap .order-return-main  .return .top-tips {
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
@@ -1677,134 +1674,134 @@
     font-size: 13px;
     line-height: 16px;
 }
-.order-return-wrap .order-return-main .parent-box .return .top-tips h4 {
+.order-return-wrap .order-return-main  .return .top-tips h4 {
     color: #26325C;
     font-size: 14px;
     margin-top: 5px;
 }
-.order-return-wrap .order-return-main .parent-box .return .top-tips p {
+.order-return-wrap .order-return-main  .return .top-tips p {
     width: 100%;
 }
-.order-return-wrap .order-return-main .parent-box .return .title {
+.order-return-wrap .order-return-main  .return .title {
     height: 44px;
     line-height: 44px;
     padding: 0 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.order-return-wrap .order-return-main .parent-box .return .title p {
+.order-return-wrap .order-return-main  .return .title p {
     display: inline-block;
     margin-left: 5px;
     vertical-align: middle;
     color: #8d8d8d;
     font-size: 14px;
 }
-.order-return-wrap .order-return-main .parent-box .return .info {
+.order-return-wrap .order-return-main  .return .info {
     padding: 10px 10px;
     border-bottom: 1px solid #e3e3e3;
     margin-bottom: 10px;
 }
-.order-return-wrap .order-return-main .parent-box .return .info table td{
+.order-return-wrap .order-return-main  .return .info table td{
     padding: 5px 0;
     font-size: 14px;
 }
-.order-return-wrap .order-return-main .parent-box .return .info table td:nth-child(2n+1){
+.order-return-wrap .order-return-main  .return .info table td:nth-child(2n+1){
     width: 20%;
     text-align: justify;
     color: #8d8d8d;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list{
+.order-return-wrap .order-return-main  .return .detail-list{
     margin-top: 10px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list>.title{
+.order-return-wrap .order-return-main  .return .detail-list>.title{
     font-size: 14px;
     color: #8d8d8d;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list>.title>i{
+.order-return-wrap .order-return-main  .return .detail-list>.title>i{
     margin-right: 5px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .title {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .title {
     font-size: 14px;
     color: #8d8d8d;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .title i {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .title i {
     margin-right: 5px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-time {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-time {
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-time h5 {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-time h5 {
     color: #8d8d8d;
     font-size: 14px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-time .number {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-time .number {
     color: #8d8d8d;
     font-size: 14px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail {
     border-bottom: 1px solid #e3e3e3;
     padding: 10px 0;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fl {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fl {
     width: 25%;
     text-align: center;
     height: 100%;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fl img {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fl img {
     margin: 10%;
     width: 80%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fr {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fr {
     width: 75%;
     padding-right: 10px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fr h3 {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fr h3 {
     font-size: 14px;
     min-height: 38px;
     margin-top: 10px
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fr h3 a {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fr h3 a {
     color: #323232;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fr h4 {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .good-detail .fr p {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .good-detail .fr p {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .btn {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .btn {
     padding: 10px;
     text-align: center;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .btn .tips {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .btn .tips {
     width: 60%;
     font-size: 10px;
     color: #8d8d8d;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .top .cont .btn  button {
+.order-return-wrap .order-return-main  .return .detail-list .top .cont .btn  button {
     padding: 6px 12px;
     color: #6885EA;
     border: 1px solid #6885EA;
     border-radius: 4px;
     font-size: 14px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .no-good {
+.order-return-wrap .order-return-main  .return .detail-list .no-good {
     display: none;
     height: 500px;
     position: relative;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .tips-bottom{
+.order-return-wrap .order-return-main  .return .detail-list .tips-bottom{
     padding: 0 10px;
     font-size: 13px;
     color: #d68a8e;
     margin-top: 5px;
 }
-.order-return-wrap .order-return-main .parent-box .return .detail-list .no-good .tips {
+.order-return-wrap .order-return-main .return .detail-list .no-good .tips {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1813,10 +1810,10 @@
     color: #C9C8DA;
     font-size: 15px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont {
+.order-return-wrap .order-return-main .detail-cont {
     width: 100%;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .top-tips {
+.order-return-wrap .order-return-main .detail-cont .top-tips {
     width: 100%;
     background-color: #d8def3;
     color: #26325C;
@@ -1824,73 +1821,73 @@
     font-size: 13px;
     line-height: 18px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li {
+.order-return-wrap .order-return-main .detail-cont .detail-list li {
     margin-bottom: 10px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .top {
     font-size: 14px;
     height: 44px;
     line-height: 44px;
     padding: 0 10px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fl {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .top .fl {
     color: #323232;
     width: 70%;
     height: 100%;
     font-size: 0;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fl p{
+.order-return-wrap .order-return-main .detail-cont .detail-list li .top .fl p{
     word-break: break-all;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fl span {
+.order-return-wrap .order-return-main  .detail-cont .detail-list li .top .fl span {
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fr {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .top .fr {
     color: #FF3574;
     height: 100%;
     width: 30%;
     text-align: right;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .top .fr.done {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .top .fr.done {
     color: #6885EA ;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail {
     background-color: #fafafa;
     padding: 10px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fl {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fl {
     width: 25%;
     height: 100%;
     padding: 0 10px 0 0;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fl img {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fl img {
     width: 100%;
     height: auto;
     border-radius: 4px;
     vertical-align: middle;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fr {
     width: 75%;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fr h3 {
     font-size: 14px;
     min-height: 40px;
     color: #323232;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr h3 a {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fr h3 a {
     color: #323232;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr h4 {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .good-detail .fr p {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .good-detail .fr p {
     color: #8d8d8d;
     font-size: 13px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .days-monny{
+.order-return-wrap .order-return-main .detail-cont .detail-list li .days-monny{
     font-size: 14px;
     height: 44px;
     line-height: 44px;
@@ -1898,19 +1895,19 @@
     border-bottom: 1px solid #e3e3e3;
     color: #8d8d8d;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .return-info {
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info  p {
+.order-return-wrap .order-return-main .detail-cont .detail-list li .return-info  p {
     color: #8D8D8D ;
     font-size: 14px;
     margin-bottom: 5px;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list li .return-info  p:last-child{
+.order-return-wrap .order-return-main .detail-cont .detail-list li .return-info  p:last-child{
     margin-bottom: 0;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list .no-good {
+.order-return-wrap .order-return-main .detail-cont .detail-list .no-good {
     text-align: center;
     color: #C9C8DA;
     font-size: 15px;
@@ -1918,7 +1915,7 @@
     height: 500px;
     position: relative;
 }
-.order-return-wrap .order-return-main .parent-box .detail-cont .detail-list .no-good .tips{
+.order-return-wrap .order-return-main .detail-cont .detail-list .no-good .tips{
     position: absolute;
     top: 50%;
     left: 50%;

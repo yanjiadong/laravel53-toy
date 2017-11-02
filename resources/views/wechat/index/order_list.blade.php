@@ -39,33 +39,33 @@
             <div class="refresh">正在刷新</div>
         </div>
 
-        <div class="parent-box">
-            <div class="detail-cont tab-page">
-                <div class="top-tips">
-                    同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
-                </div>
-                <ul class="detail-list">
 
-                </ul>
-                <div class="no-good">
-                    <div class="tips">
-                        <i class="icon-no-goods1"></i>
-                        <h4>您还没有相关的订单</h4>
-                    </div>
-                </div>
+        <div class="detail-cont tab-page">
+            <div class="top-tips">
+                同一时间内只能租用一件玩具，将租用中的玩具归还后，即可选择其他玩具再次下单
             </div>
-            <div class="return tab-page fl">
-                <ul class="detail-list">
+            <ul class="detail-list">
 
-                </ul>
-                <div class="no-good">
-                    <div class="tips">
-                        <i class="icon-no-goods1"></i>
-                        <h4>您还没有相关的订单</h4>
-                    </div>
+            </ul>
+            <div class="no-good">
+                <div class="tips">
+                    <i class="icon-no-goods1"></i>
+                    <h4>您还没有相关的订单</h4>
                 </div>
             </div>
         </div>
+        <div class="return tab-page">
+            <ul class="detail-list">
+
+            </ul>
+            <div class="no-good">
+                <div class="tips">
+                    <i class="icon-no-goods1"></i>
+                    <h4>您还没有相关的订单</h4>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     @include('wechat.common.footer')
@@ -89,8 +89,8 @@
                 $("body").scrollTop("0");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".order-detail-main .parent-box .tab-page").hide();
-                $(".order-detail-main .parent-box .tab-page").eq(num).show();
+                $(".order-detail-main .tab-page").hide();
+                $(".order-detail-main .tab-page").eq(num).show();
             });
         },
         //进行中 --数据加载

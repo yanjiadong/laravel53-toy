@@ -444,19 +444,13 @@
 
                     var cont ='<div id="picAnimate"><img src="'+goodDetail_obj.join_pic+'"></div>';
                     $(".footer ul li:last.fl").append(cont);
-
                     $(".footer ul li:last.fl #picAnimate img")[0].onload=function (e) {
+                        $(".footer ul li:last.fl #picAnimate").addClass('active');
                         setTimeout(function () {
-                            $(".footer ul li:last.fl #picAnimate").remove();
+                            $(".footer ul li:last.fl #picAnimate").removeClass('active').remove();
                         },1000);
                         goodDetail_obj.init();
                     };
-
-                    //$(".icon-footer-shop-car").html('<span>'+res.info.count+'</span>');
-                    //$(".icon-footer-shop-car").append('<span>'+res.info.count+'</span>');
-                    //goodDetail_obj.data.car_num = res.info.count;
-                    //common.success_tip("添加成功！");
-                    //goodDetail_obj.init();
                 }
             })
         },
