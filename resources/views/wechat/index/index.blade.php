@@ -234,6 +234,7 @@
                     //轮播图
                     index_obj.banner();
                 }
+                index_obj.hot_new();    //首页 - 新品推荐初始化
             })
         },
         //首页-新品 热门数据
@@ -382,7 +383,6 @@
         //导航切换
         index_obj.lunbo_init();  //首页 - 轮播数据初始化
         index_obj.isfirst();         //首页 --是否首次打开
-        index_obj.hot_new();    //首页 - 新品推荐初始化
         index_obj.vip_create();    //首页 - 成为会员_
 
         //下拉刷新
