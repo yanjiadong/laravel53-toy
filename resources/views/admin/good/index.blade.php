@@ -80,7 +80,7 @@
                             <thead>
                             <tr>
                                 <th>排序</th>
-                                <th>玩具名称</th>
+                                <th width="200px">玩具名称</th>
                                 <th>分类名称</th>
                                 <th>所属品牌</th>
                                 <th>库存</th>
@@ -105,23 +105,23 @@
                                     <td>{{ $good->status==\App\Good::STATUS_ON_SALE?'上架':'下架' }}</td>
                                     <td>{{ $good->created_at }}</td>
                                     <td>
-                                        <a href="{{ url("admin/goods/$good->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini">修改</span></a>
+                                        <a href="{{ url("admin/goods/$good->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini btn-inverse">修改</span></a>
                                         @if($good->status==\App\Good::STATUS_ON_SALE)
                                             <a href="javascript:;" data-id="{{ $good->id }}" title="下架玩具" class="tip action" status="2"><span class="btn btn-mini">下架玩具</span></a>
                                         @else
-                                            <a href="javascript:;" data-id="{{ $good->id }}" title="上架玩具" class="tip action" status="1"><span class="btn btn-mini btn-danger">上架玩具</span></a>
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="上架玩具" class="tip action" status="1"><span class="btn btn-mini btn-inverse">上架玩具</span></a>
                                         @endif
 
                                         @if($good->is_new==1)
                                             <a href="javascript:;" data-id="{{ $good->id }}" title="取消新品" class="tip newAction" status="0"><span class="btn btn-mini">取消新品</span></a>
                                         @else
-                                            <a href="javascript:;" data-id="{{ $good->id }}" title="设置新品" class="tip newAction" status="1"><span class="btn btn-mini btn-danger">设置新品</span></a>
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="设置新品" class="tip newAction" status="1"><span class="btn btn-mini btn-inverse">设置新品</span></a>
                                         @endif
 
                                         @if($good->is_hot==1)
                                             <a href="javascript:;" data-id="{{ $good->id }}" title="取消热门" class="tip hotAction" status="0"><span class="btn btn-mini">取消热门</span></a>
                                         @else
-                                            <a href="javascript:;" data-id="{{ $good->id }}" title="设置热门" class="tip hotAction" status="1"><span class="btn btn-mini btn-danger">设置热门</span></a>
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="设置热门" class="tip hotAction" status="1"><span class="btn btn-mini btn-inverse">设置热门</span></a>
                                         @endif
 
                                         <a href="javascript:;" data-id="{{ $good->id }}" title="删除" class="tip del"><span class="btn btn-mini btn-danger">删除</span></a>
