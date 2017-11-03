@@ -118,6 +118,7 @@
         data:{
             sortList:[],
             discount:common.getParam('vip_discount')?common.getParam('vip_discount'):"",       //优惠券卡/**/
+            vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id/**/
             vip_id:"",             //会员卡id,
             count:1          //会员卡动画控制  0为月卡 1为半年卡 2为季卡
         },
@@ -351,7 +352,7 @@
         //微信支付
         pay:function () {
             var vip_card_id = $("#vip_card_id").val();
-            location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id;
+            location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id+'?vip_discount_id='+choose_vip.data.vip_discount_id;
         },
         slide:function(cont){
             var $swiperContItem =  $(".choose-vip-wrap-new .vip-info ul");

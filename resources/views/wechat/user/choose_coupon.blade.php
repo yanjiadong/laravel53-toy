@@ -70,7 +70,7 @@
             state:false                 //是不是从个人中心进入 true是   false为不是
         },
         init:function(){
-            var data_vip_id = localStorage.vip_id;
+            var data_vip_id = vip_voucher.data.vip_id;
             console.log(data_vip_id);
 
             var code = $('.vip-voucher-wrap .input input').val("");
@@ -143,11 +143,11 @@
                 //提交选择
                 //localStorage.vip_discount = JSON.stringify(vip_voucher.data.list[index]);
 
-                common.httpRequest('{{url('api/user/choose_coupon')}}','post',{user_id:'{{$user_id}}','coupon_id':vip_voucher.data.list[index].id},function (res) {
+                /*common.httpRequest('{{url('api/user/choose_coupon')}}','post',{user_id:'{{$user_id}}','coupon_id':vip_voucher.data.list[index].id},function (res) {
 
-                });
+                });*/
 
-                location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price);
+                location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price)+'&vip_discount_id='+vip_voucher.data.list[index].id;
             })
         },
         //不使用优惠劵

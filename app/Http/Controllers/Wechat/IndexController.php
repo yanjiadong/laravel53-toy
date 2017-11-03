@@ -222,19 +222,21 @@ class IndexController extends BaseController
         return view('wechat.index.choose_vip',compact('user_id','days'));
     }
 
-    public function pay_vip_card($vip_card_id)
+    public function pay_vip_card(Request $request,$vip_card_id)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
         //$coupon_id = session('coupon_id');
 
-        $choose = UserChooseCoupon::where('user_id',$user_id)->orderBy('id', 'desc')->first();
+        /*$choose = UserChooseCoupon::where('user_id',$user_id)->orderBy('id', 'desc')->first();
         $coupon_id = 0;
         if(!empty($choose))
         {
             $coupon_id = $choose->coupon_id;
-        }
+        }*/
+        $coupon_id = $request->get('vip_discount_id');
+
 
         $info = VipCard::find($vip_card_id);
 
