@@ -256,7 +256,7 @@ class IndexController extends BaseController
                 $total_fee = $total_fee - $coupon->price;
             }
         }
-        
+
         if($total_fee<=0)
         {
             $total_fee = 0;
