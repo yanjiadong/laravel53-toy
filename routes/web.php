@@ -102,6 +102,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::resource('goods', 'GoodController');
     Route::post('goods/action','GoodController@action')->name('goods.action');
     Route::post('goods/sort_action','GoodController@sort_action')->name('goods.sort_action');
+    Route::post('goods/store_action','GoodController@store_action')->name('goods.store_action');
+    Route::post('goods/new_action','GoodController@new_action')->name('goods.new_action');
+    Route::post('goods/hot_action','GoodController@hot_action')->name('goods.hot_action');
 
     Route::resource('category_tags', 'CategoryTagController');
     Route::post('category_tags/get_tags_by_id','CategoryTagController@get_tags_by_id');

@@ -99,7 +99,7 @@
                                     <td>{{ $good->title }}</td>
                                     <td>{{ $good->category->title }}</td>
                                     <td>{{ $good->brand->title }}</td>
-                                    <td>{{ $good->store }}</td>
+                                    <td width="100px"><input style="width: 40%;" type="text" value="{{ $good->store }}" class="validate[required,custom[number]] storeAction" data-id="{{$good->id}}"></td>
                                     <td>{{ $good->is_new==1?'是':'否' }}</td>
                                     <td>{{ $good->is_hot==1?'是':'否' }}</td>
                                     <td>{{ $good->status==\App\Good::STATUS_ON_SALE?'上架':'下架' }}</td>
@@ -111,6 +111,19 @@
                                         @else
                                             <a href="javascript:;" data-id="{{ $good->id }}" title="上架玩具" class="tip action" status="1"><span class="btn btn-mini btn-info">上架玩具</span></a>
                                         @endif
+
+                                        @if($good->is_new==1)
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="取消新品" class="tip newAction" status="0"><span class="btn btn-mini btn-warning">取消新品</span></a>
+                                        @else
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="设置新品" class="tip newAction" status="1"><span class="btn btn-mini btn-info">设置新品</span></a>
+                                        @endif
+
+                                        @if($good->is_hot==1)
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="取消热门" class="tip hotAction" status="0"><span class="btn btn-mini btn-warning">取消热门</span></a>
+                                        @else
+                                            <a href="javascript:;" data-id="{{ $good->id }}" title="设置热门" class="tip hotAction" status="1"><span class="btn btn-mini btn-info">设置热门</span></a>
+                                        @endif
+
                                         <a href="javascript:;" data-id="{{ $good->id }}" title="删除" class="tip del"><span class="btn btn-mini btn-danger">删除</span></a>
                                     </td>
                                 </tr>
@@ -166,12 +179,54 @@
                 });
             });
 
+            $('.newAction').click(function(){
+                var id = $(this).attr('data-id');
+                var status = $(this).attr('status');
+                $.confirm({
+                    text: status==1?"确认设置新品?":"确认取消设置新品?",
+                    confirm: function(button) {
+                        $.post("{{route('goods.new_action')}}",{id:id,status:status},function(data){
+                            cTip(data);
+                        }, "json");
+                    },
+                    confirmButton: "确认",
+                    cancelButton: "取消"
+                });
+            });
+
+
+            $('.hotAction').click(function(){
+                var id = $(this).attr('data-id');
+                var status = $(this).attr('status');
+                $.confirm({
+                    text: status==1?"确认设置热门?":"确认取消设置热门?",
+                    confirm: function(button) {
+                        $.post("{{route('goods.hot_action')}}",{id:id,status:status},function(data){
+                            cTip(data);
+                        }, "json");
+                    },
+                    confirmButton: "确认",
+                    cancelButton: "取消"
+                });
+            });
+
             $('.sortAction').blur(function () {
                 if ($("#validation").validationEngine('validate')) {
                     var sort = $(this).val();
                     var good_id = $(this).attr('data-id');
 
                     $.post("{{route('goods.sort_action')}}",{id:good_id,sort:sort},function(data){
+                        //cTip(data);
+                    }, "json");
+                }
+            });
+
+            $('.storeAction').blur(function () {
+                if ($("#validation").validationEngine('validate')) {
+                    var store = $(this).val();
+                    var good_id = $(this).attr('data-id');
+
+                    $.post("{{route('goods.store_action')}}",{id:good_id,store:store},function(data){
                         //cTip(data);
                     }, "json");
                 }

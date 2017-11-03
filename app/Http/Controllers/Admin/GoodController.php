@@ -249,4 +249,22 @@ class GoodController extends BaseController
         Good::where('id',$request->get('id'))->update(['sort'=>$request->get('sort')]);
         return alert('',1);
     }
+
+    public function store_action(Request $request)
+    {
+        Good::where('id',$request->get('id'))->update(['store'=>$request->get('store')]);
+        return alert('',1);
+    }
+
+    public function new_action(Request $request)
+    {
+        Good::where('id',$request->get('id'))->update(['is_new'=>$request->get('status')]);
+        return alert('',1);
+    }
+
+    public function hot_action(Request $request)
+    {
+        Good::where('id',$request->get('id'))->update(['is_hot'=>$request->get('status')]);
+        return alert('',1);
+    }
 }
