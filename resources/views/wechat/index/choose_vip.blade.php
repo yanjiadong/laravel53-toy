@@ -296,6 +296,9 @@
                         $(".info .coupon .fr span").text('无可用优惠券');
                     }
                 });
+
+                $("#vip_card_id").val(choose_vip.data.vip_id);
+                choose_vip.data.vip_discount_id = '';
             });
             //点击会员卡图片选择会员卡
             var $img =  $(".choose-vip-wrap-new .vip-info .sort ul li");
@@ -343,7 +346,8 @@
                 });
 
                 $("#vip_card_id").val(choose_vip.data.vip_id);
-            })
+                choose_vip.data.vip_discount_id = '';
+            });
         },
         //选择优惠券
         chooseCars:function () {

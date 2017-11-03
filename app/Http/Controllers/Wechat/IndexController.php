@@ -120,7 +120,7 @@ class IndexController extends BaseController
     public function index()
     {
         //session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
-        //session(['user_id'=>3]);
+        //session(['user_id'=>29]);
         $this->check_user();
         $openid = session('open_id');
         $user_id = session('user_id');
@@ -241,6 +241,7 @@ class IndexController extends BaseController
         $info = VipCard::find($vip_card_id);
 
         $total_fee = $info->money+$info->price;
+        echo $total_fee.'---';
         //$total_fee = 1.01;
         if(!empty($coupon_id))
         {
@@ -257,6 +258,8 @@ class IndexController extends BaseController
             }
         }
 
+        echo $total_fee;
+        die;
         if($total_fee<=0)
         {
             $total_fee = 0;
