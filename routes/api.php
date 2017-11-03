@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/index','IndexController@index');
     Route::post('/index/goods','IndexController@goods');
     Route::post('/index/banners','IndexController@banners');
+    Route::post('/index/categories','IndexController@categories');
 
     //首页运营活动
     Route::post('/index/activities','IndexController@activities');

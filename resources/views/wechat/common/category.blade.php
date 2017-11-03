@@ -24,7 +24,7 @@
 <script type="text/javascript">
     //加载分类
     var sortList = [],cont='';
-    common.httpRequest('{{url('api/index')}}','get',null,function (res) {
+    common.httpRequest('{{url('api/index/categories')}}','post',null,function (res) {
         var category_menu = '{{isset($category_id)?$category_id:'index'}}';
 
         if(category_menu == 'index')

@@ -35,6 +35,13 @@ class IndexController extends BaseController
         return $this->ret;
     }
 
+    public function categories()
+    {
+        $categorys = Category::all();
+        $this->ret['info'] = ['categorys'=>$categorys];
+        return $this->ret;
+    }
+
     public function banners()
     {
         $banners = Banner::all();
