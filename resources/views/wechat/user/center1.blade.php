@@ -186,10 +186,10 @@
                         } else if (user_center.data.userInfo.time >= day) {
                             $(".day-info .line").css({'left': '2px'});
                             $(".day-info .info").css({'left': '0', 'transform': 'translateX(0)'});
-                            $(".day-info .info").text("会员剩余" + user_center.data.userInfo.time + "天");
+                            $(".day-info .info").text("还可免费玩" + user_center.data.userInfo.time + "天");
                             $(".white-strip").css({'width': '100%'})
                         } else {
-                            $(".day-info .info").text("会员剩余" + user_center.data.userInfo.time + "天");
+                            $(".day-info .info").text("还可免费玩" + user_center.data.userInfo.time + "天");
                             if (Math.ceil(radio) > 88) {
                                 $(".day-info .info").css({'left': '12%'});
                                 $(".day-info .line").css({'right': radio + '%'});

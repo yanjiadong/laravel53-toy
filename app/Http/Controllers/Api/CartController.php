@@ -6,6 +6,7 @@ use App\Cart;
 use App\Good;
 use App\Order;
 use App\User;
+use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,15 +29,25 @@ class CartController extends BaseController
 
         if($user->is_vip==1)
         {
-            //判断是否租用中的玩具
-            $order = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get();
-            if(count($order) > 0)
+            //判断是否已过期
+            $num = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->count();
+            if($num > 0)
             {
-                $type = 3;
+                //判断是否租用中的玩具
+                $order = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('user_id',$user_id)->get();
+                if(count($order) > 0)
+                {
+                    $type = 3;
+                }
+                else
+                {
+                    $type = 2;
+                }
             }
             else
             {
-                $type = 2;
+                //已过期
+                $type = 1;
             }
         }
         else
@@ -64,7 +75,7 @@ class CartController extends BaseController
         if(!empty($cart))
         {
             $this->ret['code'] = 300;
-            $this->ret['msg'] = '该商品已经在玩具箱，不能重复添加';
+            $this->ret['msg'] = '已添加成功，请在玩具箱中查看';
             return $this->ret;
         }
         $user = User::find($user_id);

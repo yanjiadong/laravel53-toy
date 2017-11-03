@@ -78,7 +78,7 @@
                             switch (deposit1.data.list[i].status){
                                 case 1:
                                     cont +='<div class="item bg-white clear"><div class="fl"><h3>'+deposit1.data.list[i].vip_card.title+'</h3>' +
-                                        '<p>剩余'+deposit1.data.list[i].days+'天可用</p></div><div class="fr"><h4>押金</h4><h2>¥' +
+                                        '<p>剩'+deposit1.data.list[i].days+'天可用</p></div><div class="fr"><h4>押金</h4><h2>¥' +
                                         deposit1.data.list[i].money +'</h2><button class="active"  onclick="deposit1.getCash('+deposit1.data.list[i].id+','+deposit1.data.list[i].money+')">申请提现</button></div></div>';
                                     break;
                                 case -1:

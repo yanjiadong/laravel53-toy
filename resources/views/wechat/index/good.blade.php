@@ -435,7 +435,7 @@
             common.httpRequest('{{url('api/cart/add')}}','post',{good_id:good_id,user_id:user_id},function (res) {
                 if(res.code == 300)
                 {
-                    common.alert_tip(res.msg);
+                    common.fail_tip(res.msg);
                     return false;
                 }
                 else
@@ -690,21 +690,6 @@
         goodDetail_obj.detail_describe_toggle();
 
     })
-</script>
-<script>
-    /*$(function () {
-        pushHistory();
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            location.href=document.referrer;  //在这里指定其返回的地址  订单列表页面
-        }, false);
-    });
-    function pushHistory() {
-        var state = {
-            title: "title",
-            url: "{{url('wechat/index/good')}}"+'/'+'{{$good_id}}'
-        };
-        window.history.pushState(state, state.title, state.url);
-    }*/
 </script>
 </body>
 </html>
