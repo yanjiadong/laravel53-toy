@@ -244,24 +244,40 @@ class GoodController extends BaseController
         return alert('',1);
     }
 
+    /**
+     * 排序操作
+     * @param Request $request
+     */
     public function sort_action(Request $request)
     {
         Good::where('id',$request->get('id'))->update(['sort'=>$request->get('sort')]);
         return alert('',1);
     }
 
+    /**
+     * 库存操作
+     * @param Request $request
+     */
     public function store_action(Request $request)
     {
         Good::where('id',$request->get('id'))->update(['store'=>$request->get('store')]);
         return alert('',1);
     }
 
+    /**
+     * 是否设置新品操作
+     * @param Request $request
+     */
     public function new_action(Request $request)
     {
         Good::where('id',$request->get('id'))->update(['is_new'=>$request->get('status')]);
         return alert('',1);
     }
 
+    /**
+     * 是否设置热门操作
+     * @param Request $request
+     */
     public function hot_action(Request $request)
     {
         Good::where('id',$request->get('id'))->update(['is_hot'=>$request->get('status')]);
