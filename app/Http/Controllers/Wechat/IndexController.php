@@ -241,7 +241,6 @@ class IndexController extends BaseController
         $info = VipCard::find($vip_card_id);
 
         $total_fee = $info->money+$info->price;
-        echo $total_fee.'---';
         //$total_fee = 1.01;
         if(!empty($coupon_id))
         {
@@ -257,9 +256,7 @@ class IndexController extends BaseController
                 $total_fee = $total_fee - $coupon->price;
             }
         }
-
-        echo $total_fee;
-        die;
+        
         if($total_fee<=0)
         {
             $total_fee = 0;
