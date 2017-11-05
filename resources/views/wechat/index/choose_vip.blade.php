@@ -397,7 +397,7 @@
         goZmxy:function () {
             choose_vip.data.first_choose_vip = true;
             localStorage.first_choose_vip = true;
-            location.href="{{url('wechat/index/zmxy/inde')}}";
+            location.href="{{url('wechat/index/zmxy/index')}}";
             /*common.httpRequest('../js/test.json','get',null,function (res) {
                 location.href="zhimaxinyong.html";
             })*/
