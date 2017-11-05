@@ -237,7 +237,7 @@
         data:{
             detail_data:{},           //商品详情数据
             paly_time:0,
-            car_num:'{{$cart_num}}',
+            //car_num:'{{$cart_num}}',
             join_pic:''   //加入购物车的动画图片
         },
         //轮播图设置
@@ -251,6 +251,8 @@
         },
         //商品详情数据
         init:function () {
+            common.getCarAndOrder('{{$user_id}}');   //给购物车数量赋值
+
             var url = "{{url('api/good')}}"+'/'+"{{$good_id}}";
             common.httpRequest(url,'get',null,function (res) {
                 console.log(res);
@@ -265,7 +267,7 @@
                     year:res.info.good.old,
                     params:[{name:"品牌所属",cont:res.info.good.brand_country},{name:"产品类型",cont:res.info.good.weight},{name:"玩具材质",cont:res.info.good.material},{name:"操作方式",cont:res.info.good.effect},{name:"能力要求",cont:res.info.good.way}],
                     detail:["../image/other/lunbo1.gif","../image/other/lunbo1.gif"],
-                    car_num:{num:goodDetail_obj.data.car_num},
+                    //car_num:{num:goodDetail_obj.data.car_num},
                     store:res.info.good.store
                 };   //假数据
 
@@ -285,11 +287,12 @@
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
 
                             //增加视频加载
-                            $(".lunbo .swiper-wrapper .swiper-slide video")[0].oncanplay =function(){
+                            /*$(".lunbo .swiper-wrapper .swiper-slide video")[0].oncanplay =function(){
                                 //要执行的函数内容
                                 $('.lunbo .swiper-container .play-box').show().text(time);
-                            };
+                            };*/
 
+                            $('.lunbo .swiper-container .play-box').show().text(time);
                             $(".swiper-slide .video-pic").height($(".swiper-slide video").width());
 
                             //$('.lunbo .swiper-container .play-box').show().text(time);
@@ -370,11 +373,11 @@
                 }*/
 
                 //购物车
-                if(goodDetail_obj.detail_data.car_num.num>0){
+                /*if(goodDetail_obj.detail_data.car_num.num>0){
                     $(".icon-footer-shop-car").html('<span>'+goodDetail_obj.detail_data.car_num.num+'</span>');
                 }else{
                     $(".icon-footer-shop-car").html('');
-                }
+                }*/
                 //是否有库存
                 if(goodDetail_obj.detail_data.store>0){
                     $(".footer ul li:last .join-car").addClass('active');
@@ -389,31 +392,8 @@
         lunbo_video:function () {
             var h;
             $('.lunbo .swiper-container .play-box').click(function () {
-                //var minites =  parseInt($(this).text().slice(0,$(this).text().indexOf('\'')));
-                //var seconds = parseInt($(this).text().slice($(this).text().indexOf('\'')+1));
-                //var total = minites*60+seconds;
-                if($(this).hasClass("active")){
-                    $(this).removeClass("active");
-                    $(".swiper-slide video")[0].pause();
-                    clearInterval(h);
-                }else{
-                    $(this).addClass("active");
-                    $(".swiper-slide video")[0].play();
-                    /*var cont =0;
-                    h = setInterval(function () {
-                        if( total  >0){
-                            total --;
-                            cont++;
-                            if(cont ==60){
-                                minites= minites-1;
-                                cont=0;
-                            }else{
-                                seconds =seconds-1;
-                            }
-                        }
-                        $(".play-box").text(minites+'\''+seconds+'"');
-                    },1000);*/
-                }
+                $(".swiper-slide video").show();
+                $(".swiper-slide video")[0].play();
             });
 
             document.getElementById("video").addEventListener("x5videoexitfullscreen", function () {
@@ -435,13 +415,12 @@
             common.httpRequest('{{url('api/cart/add')}}','post',{good_id:good_id,user_id:user_id},function (res) {
                 if(res.code == 300)
                 {
-                    common.fail_tip(res.msg);
+                    common.alert_tip1(res.msg)
                     return false;
                 }
                 else
                 {
                     $(".icon-footer-shop-car").html('<span>'+res.info.count+'</span>');
-                    localStorage.shop_car_num = res.info.count;     //获取最新购物车数量存储在localStorage中
 
                     var cont ='<div id="picAnimate"><img src="'+goodDetail_obj.join_pic+'"></div>';
                     $(".footer ul li:last.fl").append(cont);
@@ -450,6 +429,7 @@
                         setTimeout(function () {
                             $(".footer ul li:last.fl #picAnimate").removeClass('active').remove();
                         },1000);
+                        localStorage.shop_car_num = res.info.count;     //获取最新购物车数量存储在localStorage中
                         goodDetail_obj.init();
                     };
                 }

@@ -239,8 +239,23 @@ class IndexController extends BaseController
 
 
         $info = VipCard::find($vip_card_id);
+        $user = User::find($user_id);
 
-        $total_fee = $info->money+$info->price;
+        $jianmian_money = 0;
+        if($user->is_zhima == 1)
+        {
+            if($info->money <= $user->zhima_money)
+            {
+                $jianmian_money = $info->money;
+            }
+            else
+            {
+                $jianmian_money = $user->zhima_money;
+            }
+        }
+
+        $total_fee = $info->money+$info->price-$jianmian_money;
+
         //$total_fee = 1.01;
         if(!empty($coupon_id))
         {

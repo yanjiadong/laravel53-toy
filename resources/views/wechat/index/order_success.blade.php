@@ -29,14 +29,16 @@
 
 <script>
     //获取购物车数量
-    var num,order_num;
+    /*var num,order_num;
     common.httpRequest('{{url('api/user/get_cart_order_num')}}','post',{user_id:'{{$user_id}}'},function (res) {
         //假数据
         num = res.info.cart_num;
         order_num = res.info.order_num;
         localStorage.shop_car_num = num;
         localStorage.order_num = order_num;
-    });
+    });*/
+    var user_id='{{$user_id}}';
+    common.getCarAndOrder(user_id);
 
     function goodDetail() {
         location.href="{{url('wechat/index/order_detail')}}"+'/'+'{{$order->code}}';

@@ -88,6 +88,21 @@
             <div class="fr">
             </div>
         </div>
+        <div class="deposit-discount clear">
+            <div class="fl">
+                <span>押金减免</span>
+            </div>
+            <div class="fr">
+                <div class="flag1">
+                    <span class="tip">您的押金最多可减免¥3000</span>
+                    <span>-¥600</span>
+                </div>
+                <div class="flag2" onclick="choose_vip.goZmxy()">
+                    <span>认证芝麻信用分</span>
+                    <i class="icon icon_arrowRight_bold"></i>
+                </div>
+            </div>
+        </div>
         <div class="coupon clear" onclick="choose_vip.chooseCars()">
             <div class="fl">
                 <h3>优惠券</h3>
@@ -112,6 +127,15 @@
     </div>
 </div>
 
+<div class="choose-vip-new-cover">
+    <div class="choose-vip-new-cover-main">
+        <div class="title">进行芝麻信用分认证后，可以减免会员卡押金哟~</div>
+        <div class="btn-wrap">
+            <button class="get" onclick="choose_vip.goZmxy()">芝麻信用分</button>
+            <button class="cancel" onclick="choose_vip.cancelZmxy()">不认证</button>
+        </div>
+    </div>
+</div>
 
 <script>
     var choose_vip={
@@ -120,7 +144,10 @@
             discount:common.getParam('vip_discount')?common.getParam('vip_discount'):"",       //优惠券卡/**/
             vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id/**/
             vip_id:"",             //会员卡id,
-            count:1          //会员卡动画控制  0为月卡 1为半年卡 2为季卡
+            count:1,          //会员卡动画控制  0为月卡 1为半年卡 2为季卡
+            first_choose_vip:localStorage.first_choose_vip?localStorage.first_choose_vip:false,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
+            //first_choose_vip:false,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
+            zmxy_money:0    //芝麻信用抵扣的押金
         },
         init:function () {
             choose_vip.data.time = '{{$days}}';
@@ -135,6 +162,8 @@
                 ];*/
                 console.log(res);
                 choose_vip.data.sortList = res.info.list;
+                choose_vip.data.zmxy_money = res.info.user.zhima_money;
+
                 //根据type进行由小到大排序  数组为 月卡  季卡  半年卡
                 choose_vip.data.sortList.sort(function (a,b) {
                     return a.type-b.type;
@@ -198,12 +227,25 @@
                             default:
                                 break;
                         }
-                        choose_vip.slide(choose_vip.data.count);
+                        choose_vip.slide(choose_vip.data.count,true);
                         var money = choose_vip.data.sortList[i].price;
                         var yajin = choose_vip.data.sortList[i].money;
 
                         $(".info .select .fr").text('¥'+money);
                         $(".info .deposit .fr").text('¥'+yajin);
+
+                        var free_deposit;
+
+                        //判断是否是第一次进入会员卡页面
+                        if(!choose_vip.data.first_choose_vip){
+                            $(".choose-vip-new-cover").show();
+                        }else{
+                            free_deposit =choose_vip.data.sortList[i].jianmian_money;
+                            $(".deposit-discount").show().find(".flag1").show();
+                            $(".deposit-discount .flag1 .tip").text("您的押金最多可减免¥"+res.info.user.zhima_money);
+                            var yajin=parseFloat($(".info .deposit .fr").text().slice(1));
+                            $(".deposit-discount .flag1 span:last").text("-¥"+free_deposit)
+                        }
 
                         if(yajin<=0){
                             $(".submit .fl p").text('免押金');
@@ -229,9 +271,11 @@
                             $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[i].price+choose_vip.data.sortList[i].money-choose_vip.data.discount));
                         }
 
+
                     }
                 }
-            })
+
+            });
         },
         //选择会员卡
         choose:function () {
@@ -349,27 +393,63 @@
                 choose_vip.data.vip_discount_id = '';
             });
         },
+        //跳转到芝麻信用
+        goZmxy:function () {
+            choose_vip.data.first_choose_vip = true;
+            localStorage.first_choose_vip = true;
+            location.href="zhimaxinyong.html";
+            /*common.httpRequest('../js/test.json','get',null,function (res) {
+                location.href="zhimaxinyong.html";
+            })*/
+        },
+        //不认证
+        cancelZmxy:function () {
+            choose_vip.data.first_choose_vip = true;
+            localStorage.first_choose_vip = true;
+            $(".choose-vip-new-cover").fadeOut();
+            $(".deposit-discount").show().find(".flag2").show();
+
+            /*common.httpRequest('/wechat/js/test.json','get',null,function (res) {
+                $(".choose-vip-new-cover").fadeOut();
+                $(".deposit-discount").show().find(".flag2").show();
+            })*/
+        },
         //选择优惠券
         chooseCars:function () {
-            location.href='{{url('wechat/user/choose_coupon')}}'+'?id='+choose_vip.data.vip_id;
+            location.href='{{url('wechat/user/choose_coupon')}}'+'?id='+choose_vip.data.vip_id+'&vip_discount_id='+choose_vip.data.vip_discount_id;
         },
         //微信支付
         pay:function () {
             var vip_card_id = $("#vip_card_id").val();
             location.href="{{url('wechat/index/pay_vip_card')}}"+'/'+vip_card_id+'?vip_discount_id='+choose_vip.data.vip_discount_id;
         },
-        slide:function(cont){
+        slide:function(cont,backState){  //backState 判断是不是从优惠券那页返回的或者刚进入这个页面
             var $swiperContItem =  $(".choose-vip-wrap-new .vip-info ul");
-            switch (cont){
-                case 0:
-                    $swiperContItem.animate({'left':'15%'},500);
-                    break;
-                case 1:
-                    $swiperContItem.animate({'left':'-50%'},500);
-                    break;
-                case 2:
-                    $swiperContItem.animate({'left':'-116%'},500);
-                    break;
+            if(backState){
+                switch (cont){
+                    case 0:
+                        $swiperContItem.css({'left':'15%'});
+                        break;
+                    case 1:
+                        $swiperContItem.css({'left':'-50%'});
+                        break;
+                    case 2:
+                        $swiperContItem.css({'left':'-116%'});
+                        break;
+                }
+            }else{
+                switch (cont){
+                    case 0:
+                        $swiperContItem.animate({'left':'15%'},500);
+                        break;
+                    case 1:
+                        $swiperContItem.animate({'left':'-50%'},500);
+                        break;
+                    case 2:
+                        $swiperContItem.animate({'left':'-116%'},500);
+                        break;
+                }
+                $(".choose-vip-wrap-new .vip-info ul li").css({"transition":"transform 0.6s ease"});
             }
             $(".choose-vip-wrap-new .vip-info ul li").removeClass('active');
             $(".choose-vip-wrap-new .vip-info ul li").eq(cont).addClass('active');

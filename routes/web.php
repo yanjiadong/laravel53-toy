@@ -75,6 +75,7 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
 
     //芝麻认证模块
     Route::any('/index/zmxy','ZhimaController@zmxy');
+    Route::any('/index/zmxy/index','ZhimaController@index');
     Route::any('/index/zmxy/info','ZhimaController@info');
     Route::any('/index/zmxy/test','ZhimaController@test');
 

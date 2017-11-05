@@ -372,7 +372,7 @@
 }
 .sort-detail .content .grow-up .all .year-select .scroll {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
@@ -928,7 +928,7 @@
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl {
     padding: 10px 0 10px 0;
-    width: 80%;
+    width: 77%;
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl > span {
     color: #323232;
@@ -944,6 +944,7 @@
     width: 13px;
     height: 17px;
     background-size: 13px 17px;
+    margin-right: 3px;
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fl .icon_order3 {
     display: inline-block;
@@ -973,8 +974,8 @@
     margin-top: 5px;
 }
 .order-wrap .order-detail .detail-list ul li .money-detail ul li .fr {
-    padding: 10px 10px 0;
-    width: 20%;
+    padding: 10px 10px 0 0;
+    width: 23%;
     text-align: right;
     font-size: 15px;
     color: #323232;
@@ -4399,13 +4400,13 @@ textarea {
     background-color: #d8def3;
     color: #26325C;
     line-height: 18px;
-    padding: 10px;
+    padding:8px 10px;
     font-size: 13px;
     position: fixed;
     top: 0;
 }
 .logistics-info-wrap .logistics-info-main .detail-cont .detail-cont-main{
-    padding-top: 56px;
+    padding-top: 52px;
     margin-bottom: 64px;
 }
 .logistics-info-wrap .detail-cont-main .cont .top,
@@ -4546,9 +4547,6 @@ textarea {
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #999;
-}
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:focus {
-    border: 1px solid #6885EA ;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fr {
     line-height: 50px;
@@ -4756,10 +4754,11 @@ textarea {
 }
 .user-center1-wrap .vip-img {
     display: none;
-    margin-top: 5px;
+    margin-top: 7px;
 }
 .user-center1-wrap .vip-img img {
     width: 100%;
+    display: block;
 }
 /*--------------------------选择会员卡----------------------*/
 .choose-vip-wrap-new .vip-info{
@@ -4788,7 +4787,7 @@ textarea {
     width: 30%;
     text-align: center;
     vertical-align: middle;
-    transition: transform 0.6s ease;
+    /*transition: transform 0.6s ease;*/
     padding: 10px;
     display: inline-block;
     margin-right: 2%;
@@ -4921,7 +4920,7 @@ textarea {
     width: 60%;
     text-align: right;
 }
-.choose-vip-wrap-new .info .deposit {
+.choose-vip-wrap-new .info .deposit{
     height: 62px;
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
@@ -4940,6 +4939,46 @@ textarea {
     line-height: 42px;
     font-size: 14px;
     color: #323232;
+}
+.choose-vip-wrap-new .info .deposit-discount{
+    padding:10px;
+    height: 50px;
+    line-height:30px;
+    border-bottom: 1px solid #e3e3e3;
+    display: none;
+}
+.choose-vip-wrap-new .info .deposit-discount .fl{
+    font-size: 14px;
+    color: #323232;
+    width: 30%;
+}
+.choose-vip-wrap-new .info .deposit-discount .fr{
+    width: 70%;
+    text-align: right;
+}
+.choose-vip-wrap-new .info .deposit-discount .fr .flag1,
+.choose-vip-wrap-new .info .deposit-discount .fr .flag2{
+    display: none;
+}
+.choose-vip-wrap-new .info .deposit-discount .fr .flag1 span{
+    font-size: 14px;
+    color: #323232;
+    display: inline-block;
+    vertical-align: middle;
+}
+.choose-vip-wrap-new .info .deposit-discount .fr .flag1 span.tip{
+    padding: 0 5px;
+    background-color: #e8e8e8;
+    color: #9d9d9d;
+    font-size: 12px;
+    border-radius: 4px;
+    height: 100%;
+}
+.choose-vip-wrap-new .info .deposit-discount .fr .flag2 span{
+    font-size: 14px;
+    color: #FF3574;
+    display: inline-block;
+    vertical-align: middle;
 }
 .choose-vip-wrap-new .info .coupon {
     padding: 10px;
@@ -4975,7 +5014,7 @@ textarea {
 }
 .choose-vip-wrap-new .submit .fl{
     height:100%;
-    width: 40%;
+    width: 35%;
     vertical-align: middle;
     display: table-cell;
     float: none;
@@ -4996,7 +5035,7 @@ textarea {
     display: table-cell;
     vertical-align: middle;
     float: none;
-    width: 60%;
+    width: 65%;
     padding-left: 10px;
 }
 .choose-vip-wrap-new .submit .fr button {
@@ -5009,4 +5048,212 @@ textarea {
 }
 .choose-vip-wrap-new .submit .fr button span {
     font-size: 14px;
+}
+.choose-vip-new-cover{
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(188,188,190,0.3);
+    display: none;
+}
+.choose-vip-new-cover .choose-vip-new-cover-main{
+    width: 75%;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 15px;
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.choose-vip-new-cover .choose-vip-new-cover-main .title{
+    font-size: 14px;
+    padding: 10px;
+    color: #919191;
+    line-height: 20px;
+}
+.choose-vip-new-cover .choose-vip-new-cover-main .btn-wrap button{
+    display: block;
+    height: 60px;
+    width: 100%;
+    font-size: 14px;
+    border-top: 1px solid #eee;
+}
+.choose-vip-new-cover .choose-vip-new-cover-main .btn-wrap button.get{
+    color: #6893db;
+}
+.choose-vip-new-cover .choose-vip-new-cover-main .btn-wrap button.cancel{
+    color: #919191;
+}
+/*----------------------------芝麻信用授权-----------------------*/
+.authorization{
+    display: none;
+    position: relative;
+}
+.authorization .info{
+    background-color: #f7f7f7;
+}
+.authorization .pic{
+    padding: 75px 55px;
+}
+.authorization .pic table{
+    table-layout: auto;
+}
+.authorization .pic table td{
+    vertical-align: middle;
+}
+.authorization .pic table td:nth-child(2){
+    padding: 0 10px;
+}
+.authorization .form{
+    padding: 0 20px;
+}
+.authorization .form .name,
+.authorization .form .certificates{
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #e1e1e1;
+}
+.authorization .form .name{
+    margin-bottom: 10px;
+}
+.authorization .form .name input,
+.authorization .form .certificates input{
+      width: 100%;
+      height: 100%;
+      font-size: 15px;
+}
+.authorization .form .tip{
+    font-size: 12px;
+    color: #8d8d8d;
+    position: absolute;
+    bottom:78px;
+}
+.authorization .submit{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 68px;
+    padding:12px 10px;
+    vertical-align: middle;
+    box-shadow: 0 -1px 10px #dddddd;
+    background: #fff
+}
+.authorization .submit button{
+    width: 100%;
+    height: 44px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #bbb;
+}
+.authorization .submit button.active{
+    background-color: #6885EA;
+}
+.authorization-info .top{
+    padding: 30px 50px;
+    background-color: #759cde;
+    text-align: center;
+}
+.authorization-info .top .state1{
+    display: none;
+}
+.authorization-info .top .state2{
+    color: #fff;
+}
+.authorization-info .top .state2 h3{
+     font-size: 16px;
+    margin-bottom: 15px;
+ }
+.authorization-info .top .state2 h2{
+    font-size: 28px;
+    margin-bottom: 15px
+}
+.authorization-info .top .state2 p{
+    font-size: 14px;
+}
+.authorization-info .count{
+    padding: 15px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #759cde;
+    border-bottom: 1px solid #e0e0e2;
+    display: none;
+}
+.authorization-info .count span{
+    color: #f00;
+}
+.authorization-info .top .state1 p{
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 45px;
+}
+.authorization-info .detail .part1{
+    padding: 20px 15px;
+}
+.authorization-info .detail .part1 h3,
+.authorization-info .detail .part2 h3{
+    color: #000;
+    font-size: 14px;
+}
+.authorization-info .detail .part1 p{
+    color: #8d8d8d;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 5px;
+}
+.authorization-info .detail .part2{
+    padding: 20px 15px;
+}
+.authorization-info .detail .part2 table{
+    margin-top: 5px;
+}
+.authorization-info .detail .part2 tr:nth-child(3n){
+
+}
+.authorization-info .detail .part2 td{
+    color: #8d8d8d;
+    font-size: 14px;
+    vertical-align: middle;
+    height:20px;
+}
+.authorization-info .detail .part2 td.dot-box{
+    text-align: center;
+}
+.authorization-info .detail .part2 td .dot{
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    background-color: #bebcbc;
+    vertical-align: middle;
+}
+.authorization-info .detail .part2 td[rowspan='11']{
+    width: 5px;
+    background-color: #bebcbc;
+}
+.authorization-info .detail .part2 td:nth-child(2){
+    width: 20px;
+}
+.authorization-info .submit{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 68px;
+    padding:12px 10px;
+    vertical-align: middle;
+    box-shadow: 0 -1px 10px #dddddd;
+    background: #fff;
+    display: none;
+}
+.authorization-info .submit button{
+    width: 100%;
+    height: 44px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #6885EA;
 }

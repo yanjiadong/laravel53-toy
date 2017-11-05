@@ -20,6 +20,14 @@ class ZhimaController extends BaseController
         //echo $url;
     }
 
+    public function index()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        return view('wechat.zhima.index',compact('user_id','openid'));
+    }
+
     //根据用户信息  获取授权页面
     public function info(Request $request)
     {
@@ -66,7 +74,8 @@ class ZhimaController extends BaseController
             }
         }
 
-
-        print_r($open_id);
+        $url = url('wechat/index/zmxy/index');
+        Header("Location: $url");
+        //print_r($open_id);
     }
 }

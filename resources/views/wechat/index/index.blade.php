@@ -163,7 +163,7 @@
 <!--懒加载-->
 <script src="/wechat/js/jquery.lazyload.js"></script>
 
-<script type="text/javascript">
+{{--<script type="text/javascript">
     //获取购物车数量
     var num,order_num;
     common.httpRequest('{{url('api/user/get_cart_order_num')}}','post',{user_id:'{{$user_id}}'},function (res) {
@@ -197,7 +197,7 @@
     {
         $('.icon-footer-order').html('');
     }
-</script>
+</script>--}}
 
 <script>
     var index_obj = {
@@ -231,6 +231,9 @@
                     }
                     $(".lunbo .swiper-wrapper").html(lunbo_content);
 
+                }
+                if(res.info.banners.length>1)
+                {
                     //轮播图
                     index_obj.banner();
                 }
@@ -328,7 +331,7 @@
                     pagination: '.swiper-pagination',
                     paginationClickable: true,
                     loop:true,
-                    autoplay:3000
+                    autoplay:5000
                 });
             }
         },
@@ -380,6 +383,10 @@
     };
 
     $(function () {
+        var user_id='{{$user_id}}';
+        var get_url = '{{url('api/user/get_cart_order_num')}}';
+        common.getCarAndOrder(get_url,user_id); //获取订单数量和购物车数量
+
         //导航切换
         index_obj.lunbo_init();  //首页 - 轮播数据初始化
         index_obj.isfirst();         //首页 --是否首次打开

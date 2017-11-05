@@ -36,6 +36,8 @@
                     var out_trade_no = '{{$out_trade_no}}';
 
                     common.httpRequest('{{url('wechat/index/pay_vip_card_callback')}}','post',{out_trade_no:out_trade_no},function (res) {
+                        var user_id='{{$user_id}}'; //假数据
+                        common.getCarAndOrder(user_id);
                         //支付成功
                         var url = '{{url('wechat/index/order_success')}}'+'/'+'{{$order_code}}';
                         location.href=url;

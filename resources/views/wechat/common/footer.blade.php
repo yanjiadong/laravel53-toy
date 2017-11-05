@@ -31,6 +31,7 @@
 </footer>
 
 
+{{--
 <script type="text/javascript">
     //获取购物车数量
     var num,order_num;
@@ -67,4 +68,4 @@
     {
         $('.icon-footer-order').html('');
     }
-</script>
+</script>--}}

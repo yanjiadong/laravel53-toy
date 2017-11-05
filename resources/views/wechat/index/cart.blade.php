@@ -122,7 +122,7 @@
                                 break;
                         }
 
-                        $(".toys-car .list").height($(window).height()-$("footer").height()-$(".btn").height()-$(".top-tips").height());
+                        $(".toys-car .list").height($(window).height()-$('.btn').height()-$("footer").height()-$(".btn").height()-$(".top-tips").height());
                     }else{
                         $(".no-goods").height($(window).height()-50).show();
                         $(".list,.btn,.top-tips").hide();
@@ -165,6 +165,8 @@
                 data = {good_id:toys_car.data.info.list[index].id,user_id:'{{$user_id}}'};
                 common.httpRequest('{{url('api/cart/delete')}}','post',data,function (res) {
                     $(".confirm-alert-wrap").remove();
+                    var user_id='{{$user_id}}'; //假数据
+                    common.getCarAndOrder(user_id);
                     toys_car.get_data();
                     location.reload();
                 })
@@ -196,6 +198,10 @@
         }
     };
     $(function () {
+        var user_id='{{$user_id}}';
+        var get_url = '{{url('api/user/get_cart_order_num')}}';
+        common.getCarAndOrder(get_url,user_id); //获取订单数量和购物车数量
+
         $(".toys-car").height($(window).height()-50);
         toys_car.get_data();
     })

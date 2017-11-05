@@ -196,6 +196,10 @@
     };
 
     $(function () {
+        var user_id='{{$user_id}}'; //假数据
+        var get_url = '{{url('api/user/get_cart_order_num')}}';
+        common.getCarAndOrder(get_url,user_id);
+
         sort_detail.init();        //初始化
 
         /*//顶部导航选择

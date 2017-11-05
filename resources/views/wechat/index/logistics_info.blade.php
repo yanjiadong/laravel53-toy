@@ -69,7 +69,7 @@
                         <div class="number clear">
                             <div class="fl">
                                 <h5>快递单号</h5>
-                                <input type="number" placeholder="请输入快递单号" onblur="logisticsInfo.resetInput(this)" onblur="fill_logistics.testNumber(this)">
+                                <input type="number" placeholder="请输入快递单号" onblur="logisticsInfo.resetInput(this)" onblur="logisticsInfo.testNumber(this)">
                             </div>
                             <div class="fr">
                                 <i class="icon icon_code"></i>
@@ -165,18 +165,23 @@
                 }
             })
         },
-        //清除input内容
-        resetInput:function (that) {
-            if($(that).val()=="请输入快递单号"){
-                $(that).val("");
-            }
-        },
         //是否填写快递单号
         testNumber:function (item) {
-            if(!$(item).val().replace(/(^\s*)|(\s*$)/g, "")||!$(".company span").text()){
+            if(!$(item).val()){
+                common.alert_tip1("快递单号不能为空！");
+                $(".btn button").removeClass('active');
+                $(item).val("请输入快递单号");
+                return;
+            }
+            if($(".company input").val()=="点击匹配物流公司名称"){
                 $(".btn button").removeClass('active');
             }else{
                 $(".btn button").addClass('active');
+            }
+        },
+        resetInput:function (item) {
+            if($(item).val()=="请输入快递单号"){
+                $(item).val("")
             }
         },
         //获取物流公司
@@ -213,6 +218,7 @@
                 common.confirm_tip("提交物流单号","提交后快递单号不可修改，确定提交？",null,function () {
                     common.httpRequest('{{url('api/order/order_back')}}','post',submitData,function (res) {
                         if(res.code == 200){
+                            common.getCarAndOrder('{{$user_id}}'); //更新订单数量和购物车数量
                             location.href="{{url('wechat/index/order_return_detail1')}}";
                             $(".confirm-alert-wrap").remove();
                         }else{

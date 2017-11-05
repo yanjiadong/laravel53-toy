@@ -243,23 +243,28 @@ class UserController extends BaseController
             {
                 if($v['money'] <= $user->zhima_money)
                 {
-                    $jianmian_money = $v['money'];
+                    $v['jianmian_money'] = $v['money'];
                     $v['money'] = 0;
+
                 }
                 else
                 {
-                    $jianmian_money = $user->zhima_money;
+                    $v['jianmian_money'] = $user->zhima_money;
                     $v['money'] = $v['money'] - $user->zhima_money;
                 }
             }
         }
         else
         {
-            $list = VipCard::all();
+            $list = VipCard::all()->toArray();
+            foreach ($list as &$v)
+            {
+                $v['jianmian_money'] = 0;
+            }
         }
 
 
-        $this->ret['info'] = ['list'=>$list,'user'=>$user,'jianmian_money'=>$jianmian_money];
+        $this->ret['info'] = ['list'=>$list,'user'=>$user];
         return $this->ret;
     }
 
@@ -411,6 +416,32 @@ class UserController extends BaseController
         $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
         $this->ret['info'] = ['cart_num'=>$cart_num,'order_num'=>$order_num];
+        return $this->ret;
+    }
+
+    public function zhima(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $user = User::find($user_id);
+
+        if($user->is_zhima == 0)
+        {
+            $state = 1;
+        }
+        else
+        {
+            $time = $this->time - strtotime($user->zhima_time);
+            if($time>=90*24*3600)
+            {
+                $state = 3;
+            }
+            else
+            {
+                $state = 2;
+            }
+        }
+
+        $this->ret['info'] = ['state'=>$state,'user'=>$user];
         return $this->ret;
     }
 }

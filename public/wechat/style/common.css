@@ -334,6 +334,56 @@ i{
     overflow: hidden;
     vertical-align: middle;
 }
+.icon-logo-big{
+    display: inline-block;
+    background-image: url(../image/common/icon_logo.png);
+    background-size: 48px 48px;
+    background-position: 0 0;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-return{
+    display: inline-block;
+    background-image: url(../image/common/icon_return.png);
+    background-size: 46px 49px;
+    background-position: 0 0;
+    width: 46px;
+    height: 49px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-zmxy{
+    display: inline-block;
+    background-image: url(../image/common/zmx1.png);
+    background-size: 138px 48px;
+    background-position: 0 0;
+    width: 138px;
+    height: 48px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-zmxy2{
+    display: inline-block;
+    background-image: url(../image/common/zmx2.png);
+    background-size: 181px 62px;
+    background-position: 0 0;
+    width: 181px;
+    height: 62px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.icon-zmxy3{
+    display: inline-block;
+    background-image: url(../image/common/zmxy3.png);
+    background-size: 19px 19px;
+    background-position: 0 0;
+    width: 19px;
+    height: 19px;
+    overflow: hidden;
+    vertical-align: middle;
+}
 /*确认框样式*/
 .confirm-alert-wrap,.tips-alert-wrap{
     background-color: rgba(76, 75, 77, 0.5);
@@ -524,7 +574,7 @@ footer table td.active a .icon-footer-user-center {
 /*---------------成功提示----------------------*/
 .success-tip-wrap{
     position: fixed;
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
     padding: 10px;
     color: #fff;
@@ -574,5 +624,18 @@ footer table td.active a .icon-footer-user-center {
     color: #6885EA;
     border-bottom: 2px solid #6885EA ;
 }
-
-
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #323232;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:#323232;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:#323232;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:#323232;
+}
+:window-inactive{
+    display: none !important;
+}

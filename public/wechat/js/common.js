@@ -1,4 +1,65 @@
 var common = {
+    /*获取购物车数量 订单数量*/
+    getCarAndOrder:function (url,user_id) {
+        //获取购物车数量
+        //debugger
+        var num,order_num;
+        /*common.httpRequest('http://toy.yanjiadong.net/api/user/get_cart_order_num','post',{user_id:user_id},function (res) {*/
+        common.httpRequest(url,'post',{user_id:user_id},function (res) {
+        //假数据
+            /*res={
+                info:{
+                    cart_num:3,
+                    order_num:3
+                }
+            };*/
+            num = res.info.cart_num;
+            order_num = res.info.order_num;
+            localStorage.shop_car_num = num;
+            localStorage.order_num = order_num;
+            //确定ul的长度
+            var wid=0;
+            var $li =$('.index-nav .nav li');
+            if($li.length>0){
+                for(var i=0;i<$li.length;i++){
+                    wid +=$($li[i]).outerWidth();
+                }
+                $('.index-nav .nav').width(wid+'px');
+            }
+            /*底部购物车 订单赋值*/
+            if($('.icon-footer-shop-car').length>0) {
+                if (localStorage.shop_car_num > 0) {
+                    $('.icon-footer-shop-car').html('<span>' + localStorage.shop_car_num + '</span>');
+                } else {
+                    $('.icon-footer-shop-car').html('');
+                }
+            }
+            if($(".icon-footer-order").length>0){
+                if(localStorage.order_num > 0) {
+                    $('.icon-footer-order').html('<span>'+localStorage.order_num+'</span>');
+                }else
+                {
+                    $('.icon-footer-order').html('');
+                }
+            }
+        });
+        /*底部购物车 订单赋值*/
+        if($('.icon-footer-shop-car').length>0) {
+            if (localStorage.shop_car_num > 0) {
+                $('.icon-footer-shop-car').html('<span>' + localStorage.shop_car_num + '</span>');
+            } else {
+                $('.icon-footer-shop-car').html('');
+            }
+        }
+        if($(".icon-footer-order").length>0){
+            if(localStorage.order_num > 0) {
+                $('.icon-footer-order').html('<span>'+localStorage.order_num+'</span>');
+            }else
+            {
+                $('.icon-footer-order').html('');
+            }
+        }
+    },
 
     /*确认框*/
     confirm_tip:function (title,msg,call1,call2,btn2_name) {

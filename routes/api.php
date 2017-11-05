@@ -73,6 +73,10 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/user/deposit_list','UserController@deposit_list');
     //用户中心
     Route::post('/user/center','UserController@center');
+
+    //判断用户芝麻授权情况
+    Route::post('/user/zhima','UserController@zhima');
+
     //获取用户优惠券列表
     Route::post('/user/coupon_list','UserController@coupon_list');
 

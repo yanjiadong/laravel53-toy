@@ -245,6 +245,10 @@
         }
     };
     $(function () {
+        var user_id='{{$user_id}}';
+        var get_url = '{{url('api/user/get_cart_order_num')}}';
+        common.getCarAndOrder(get_url,user_id);
+
         orderDtail.tab_change();
         orderDtail.init();
 

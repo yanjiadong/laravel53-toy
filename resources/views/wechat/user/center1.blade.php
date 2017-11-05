@@ -75,6 +75,17 @@
     </div>
     <div class="list bg-white">
         <ul>
+            <li class="clear" onclick="user_center.zhima()">
+                <div class="fl">
+                    <div class="icon-box"><i class="icon-zmxy3"></i></div>
+                    <span>免押金认证</span>
+                </div>
+                <div class="fr">
+                    <span class="authentication"></span>
+                    <i class="icon icon_arrowRight_bold"></i>
+                </div>
+            </li>
+
             <li class="clear" onclick="user_center.share()">
                 <div class="fl">
                     <div class="icon-box"><i class="icon-user_center7"></i></div>
@@ -220,6 +231,12 @@
                     $(".items-mid table tr:eq(2) td:eq(1)").text('¥'+user_center.data.userInfo.money);
                     $(".items-mid table tr:eq(2) td:eq(2)").text(user_center.data.userInfo.cars+'张');
                 }
+
+                if(res.info.user.is_zhima==1){
+                    $(".authentication").text("未认证");
+                }else{
+                    $(".authentication").text("已认证");
+                }
             })
         },
         //续费
@@ -231,6 +248,9 @@
             }else{
                 location.href='choose_vip.html?time=0';
             }*/
+        },
+        zhima:function () {
+            location.href='{{url('wechat/index/zmxy/index')}}';
         },
         //分享给朋友
         share:function () {
@@ -277,6 +297,10 @@
         }
     };
     $(function () {
+        var user_id='{{$user_id}}';
+        var get_url = '{{url('api/user/get_cart_order_num')}}';
+        common.getCarAndOrder(get_url,user_id); //获取订单数量和购物车数量
+
         user_center.init();
     })
 </script>

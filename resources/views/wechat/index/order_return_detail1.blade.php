@@ -125,7 +125,7 @@
     })
 </script>
 
-<script>
+{{--<script>
     $(function () {
         pushHistory();
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
@@ -139,6 +139,6 @@
         };
         window.history.pushState(state, state.title, state.url);
     }
-</script>
+</script>--}}
 </body>
 </html>

@@ -67,7 +67,8 @@
         data:{
             list:[],
             vip_id:common.getParam('id'),
-            state:false                 //是不是从个人中心进入 true是   false为不是
+            state:false,                 //是不是从个人中心进入 true是   false为不是
+            vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id值/**/
         },
         init:function(){
             var data_vip_id = vip_voucher.data.vip_id;
@@ -96,9 +97,16 @@
 
                         if(vip_voucher.data.list[i].can_use)
                         {
-                            cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
-                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                                '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            /*-----之前选中优惠券再进入默认是选中------*/
+                            if(vip_voucher.data.vip_discount_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.vip_discount_id){
+                                cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            }else{
+                                cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            }
                         }
                         else
                         {
