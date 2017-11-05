@@ -233,9 +233,9 @@
                 }
 
                 if(res.info.user.is_zhima==1){
-                    $(".authentication").text("未认证");
-                }else{
                     $(".authentication").text("已认证");
+                }else{
+                    $(".authentication").text("未认证");
                 }
             })
         },
