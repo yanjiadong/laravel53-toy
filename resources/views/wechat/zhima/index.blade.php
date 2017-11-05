@@ -140,7 +140,8 @@
                 };*/
                 res_data = {
                     count:res.info.user.zhima_score,
-                    name:'信用极好'
+                    name:'信用极好',
+                    zhima_money:res.info.user.zhima_money
                 }
                 zmxy.data.state=res.info.state;
                 zmxy.data.creditData=res_data;
@@ -157,19 +158,19 @@
                     case 2:
                         $(".authorization-info .top .state2").show();
                         $(".authorization-info .top .state2 h2").text(zmxy.data.creditData.count+'分');
-                        $(".authorization-info .top .state2 p").text(zmxy.data.creditData.name);
+                        $(".authorization-info .top .state2 p").text('');
                         $(".authorization-info .top .state1").hide();
                         $(".authorization-info .count").show();
-                        $(".authorization-info .count span").text(zmxy.quota(zmxy.data.creditData.count));
+                        $(".authorization-info .count span").text(zmxy.data.creditData.zhima_money);
                         $submit.hide();
                         break;
                     case 3:
                         $(".authorization-info .top .state2").show();
                         $(".authorization-info .top .state2 h2").text(zmxy.data.creditData.count+'分');
-                        $(".authorization-info .top .state2 p").text(zmxy.data.creditData.name);
+                        $(".authorization-info .top .state2 p").text('');
                         $(".authorization-info .top .state1").hide();
                         $(".authorization-info .count").show();
-                        $(".authorization-info .count span").text(zmxy.quota(zmxy.data.creditData.count));
+                        $(".authorization-info .count span").text(zmxy.data.creditData.zhima_money);
                         $submit.show();
                         $submit_btn.text("重新授权");
                         break;
