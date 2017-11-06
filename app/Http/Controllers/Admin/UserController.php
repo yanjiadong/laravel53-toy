@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\UserOpenTime;
 use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,6 +39,16 @@ class UserController extends BaseController
         //print_r($orders);
 
         return view('admin.user.index',compact('users','username','menu','is_vip'));
+    }
+
+    public function get_user_open_times()
+    {
+        $admin_info = $this->get_session_info();
+        $username = $admin_info['username'];
+
+        $list = UserOpenTime::with('user')->orderBy('id','desc')->paginate(30);
+        $menu = 'crontab';
+        return view('admin.user.user_open_times',compact('users','username','menu','list'));
     }
 
     public function action(Request $request)

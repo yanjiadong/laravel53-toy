@@ -9,6 +9,7 @@ use App\SystemConfig;
 use App\User;
 use App\UserChooseCoupon;
 use App\UserCoupon;
+use App\UserOpenTime;
 use App\VipCard;
 use App\VipCardPay;
 use App\WechatAccessToken;
@@ -159,6 +160,8 @@ class IndexController extends BaseController
         //正在租用中的玩具数量
         //$order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
+        //首页打开时间
+        UserOpenTime::create(['user_id'=>$user_id]);
 
         return view('wechat.index.index',compact('result','menu','user_id','is_first'));
     }

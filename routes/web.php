@@ -159,6 +159,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('upload/{size?}','CommonController@upload');
 
     Route::get('crontab/index','CrontabController@index')->name('admin.crontabs.index');
+    Route::get('user_open_time/index','UserController@get_user_open_times')->name('admin.user_open_times.index');
     //test
     Route::get('test','LoginController@test');
 });

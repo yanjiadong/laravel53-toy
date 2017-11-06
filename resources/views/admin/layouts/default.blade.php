@@ -283,6 +283,11 @@
                             <span class="icon-th-list"></span><span class="text">脚本列表</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.user_open_times.index') }}">
+                            <span class="icon-th-list"></span><span class="text">首页登录时间列表</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
