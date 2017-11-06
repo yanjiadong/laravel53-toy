@@ -145,8 +145,8 @@
             vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id/**/
             vip_id:"",             //会员卡id,
             count:1,          //会员卡动画控制  0为月卡 1为半年卡 2为季卡
-            first_choose_vip:localStorage.first_choose_vip?localStorage.first_choose_vip:false,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
-            //first_choose_vip:false,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
+            //first_choose_vip:localStorage.first_choose_vip?localStorage.first_choose_vip:false,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
+            first_choose_vip:true,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
             zmxy_money:0    //芝麻信用抵扣的押金
         },
         init:function () {

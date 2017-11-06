@@ -61,7 +61,9 @@ class UserController extends BaseController
         $days = 0;
         if(!empty($card))
         {
-            switch ($card->vip_card_type)
+            $card_info = VipCard::find($card->vip_card_id);
+            $card->vip_card_type_str = $card_info->title;
+            /*switch ($card->vip_card_type)
             {
                 case 1:
                     $card->vip_card_type_str = '月卡';
@@ -72,7 +74,7 @@ class UserController extends BaseController
                 case 3:
                     $card->vip_card_type_str = '半年卡';
                     break;
-            }
+            }*/
 
             $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
         }
@@ -424,6 +426,7 @@ class UserController extends BaseController
         $user_id = $request->get('user_id');
         $user = User::find($user_id);
 
+        $zhima_str = '';
         if($user->is_zhima == 0)
         {
             $state = 1;
@@ -439,9 +442,10 @@ class UserController extends BaseController
             {
                 $state = 2;
             }
+            $zhima_str = get_level_by_score($user->zhima_score);
         }
 
-        $this->ret['info'] = ['state'=>$state,'user'=>$user];
+        $this->ret['info'] = ['state'=>$state,'user'=>$user,'zhima_str'=>$zhima_str];
         return $this->ret;
     }
 }

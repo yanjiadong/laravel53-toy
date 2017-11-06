@@ -13,6 +13,7 @@ var common = {
                     order_num:3
                 }
             };*/
+            //console.log(res);
             num = res.info.cart_num;
             order_num = res.info.order_num;
             localStorage.shop_car_num = num;

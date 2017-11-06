@@ -140,7 +140,7 @@
                 };*/
                 res_data = {
                     count:res.info.user.zhima_score,
-                    name:'信用极好',
+                    name:res.info.zhima_str,
                     zhima_money:res.info.user.zhima_money
                 }
                 zmxy.data.state=res.info.state;
@@ -158,7 +158,7 @@
                     case 2:
                         $(".authorization-info .top .state2").show();
                         $(".authorization-info .top .state2 h2").text(zmxy.data.creditData.count+'分');
-                        $(".authorization-info .top .state2 p").text('');
+                        $(".authorization-info .top .state2 p").text(zmxy.data.creditData.name);
                         $(".authorization-info .top .state1").hide();
                         $(".authorization-info .count").show();
                         $(".authorization-info .count span").text(zmxy.data.creditData.zhima_money);
@@ -167,7 +167,7 @@
                     case 3:
                         $(".authorization-info .top .state2").show();
                         $(".authorization-info .top .state2 h2").text(zmxy.data.creditData.count+'分');
-                        $(".authorization-info .top .state2 p").text('');
+                        $(".authorization-info .top .state2 p").text(zmxy.data.creditData.name);
                         $(".authorization-info .top .state1").hide();
                         $(".authorization-info .count").show();
                         $(".authorization-info .count span").text(zmxy.data.creditData.zhima_money);

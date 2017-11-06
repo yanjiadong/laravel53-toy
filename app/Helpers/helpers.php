@@ -356,7 +356,8 @@ if(!function_exists('filterHtmlTag'))
 {
     function filterHtmlTag($content)
     {
-        $result = strip_tags($content, "<img><br><a>");
+        //$result = strip_tags($content, "<img><br><a>");
+        $result = $content;
         //$result = preg_replace('/<p[^>]*>/', "&nbsp;&nbsp;&nbsp;&nbsp;", $result);
         //$result = preg_replace('/<\/p[^>]*>/', "<br />", $result);
         //$result = preg_replace('/<\?p[^>]*>/', "", $result);
@@ -482,6 +483,44 @@ if(!function_exists('microtime_format'))
         return str_replace('x', $sec, $date);
     }
 }
+
+//根据芝麻分获取等级
+/**
+ * 350≤分数<550（信用较差）
+    550≤分数<600（信用中等）
+    600≤分数<650（信用良好）
+    650≤分数<700（信用优秀）
+    700≤分数<950（信用极好）
+ */
+if(!function_exists('get_level_by_score'))
+{
+    function get_level_by_score($score)
+    {
+        $str = '';
+        if($score>=350 && $score<550)
+        {
+            $str = '信用较差';
+        }
+        elseif($score>=550 && $score<600)
+        {
+            $str = '信用中等';
+        }
+        elseif($score>=600 && $score<650)
+        {
+            $str = '信用良好';
+        }
+        elseif($score>=650 && $score<700)
+        {
+            $str = '信用优秀';
+        }
+        elseif($score>=700 && $score<950)
+        {
+            $str = '信用极好';
+        }
+        return $str;
+    }
+}
+
 
 //根据芝麻分获取减免的押金额度
 if(!function_exists('getMoneyByZhimaScore'))

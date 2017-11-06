@@ -196,41 +196,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    //获取购物车数量
-    var num,order_num;
-    common.httpRequest('{{url('api/user/get_cart_order_num')}}','post',{user_id:'{{$user_id}}'},function (res) {
-        //假数据
-        num = '1';
-        order_num = '1';
-        localStorage.shop_car_num = num;
-        localStorage.order_num = order_num;
-        //确定ul的长度
-        var wid=0;
-        var $li =$('.index-nav .nav li');
-        if($li.length>0){
-            for(var i=0;i<$li.length;i++){
-                wid +=$($li[i]).outerWidth();
-            }
-            $('.index-nav .nav').width(wid+'px');
-        }
-    });
-    if( localStorage.shop_car_num > 0)
-    {
-        $('.icon-footer-shop-car>span').text( localStorage.shop_car_num);
-    }else {
-        $('.icon-footer-shop-car').html('');
-    }
-    if(localStorage.order_num > 0)
-    {
-        $('.icon-footer-order>span').text(localStorage.order_num);
-    }
-    else
-    {
-        $('.icon-footer-order').html('');
-    }
-</script>
-
 <script>
     //debugger;
     var goodDetail_obj = {
@@ -251,7 +216,9 @@
         },
         //商品详情数据
         init:function () {
-            common.getCarAndOrder('{{$user_id}}');   //给购物车数量赋值
+            var user_id='{{$user_id}}';
+            var get_url = '{{url('api/user/get_cart_order_num')}}';
+            common.getCarAndOrder(get_url,user_id); //获取订单数量和购物车数量
 
             var url = "{{url('api/good')}}"+'/'+"{{$good_id}}";
             common.httpRequest(url,'get',null,function (res) {

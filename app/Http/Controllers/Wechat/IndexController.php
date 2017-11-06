@@ -297,7 +297,7 @@ class IndexController extends BaseController
 
         $data['user_id'] = $user_id;
         $data['price'] = $total_fee;
-        $data['money'] = $info->money;
+        $data['money'] = $info->money-$jianmian_money;
         $data['vip_card_id'] = $vip_card_id;
         $data['vip_card_type'] = $info->type;
         $data['pay_status'] = 0;
