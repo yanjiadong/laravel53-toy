@@ -34,6 +34,10 @@ class ZhimaController extends BaseController
         $name = $request->get('name');
         $certNo = $request->get('certNo');
 
+        $user_id = session('user_id');
+
+        User::where('id',$user_id)->update(['real_name'=>$name,'real_cert_no'=>$certNo]);
+
         $url = TestZhimaAuthInfoAuthorize($name,$certNo);
         Header("Location: $url");
     }

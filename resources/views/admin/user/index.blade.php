@@ -61,6 +61,9 @@
                                 <th>微信昵称</th>
                                 <th>是否会员</th>
                                 <th>会员总天数</th>
+                                <th>芝麻分</th>
+                                <th>真实姓名</th>
+                                <th>身份证号</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
@@ -73,6 +76,9 @@
                                     <td>{{$user->wechat_nickname}}</td>
                                     <td>{{$user->is_vip==1?"是":'否'}}</td>
                                     <td>{{$user->days}}</td>
+                                    <td>{{$user->zhima_score}}</td>
+                                    <td>{{$user->real_name}}</td>
+                                    <td>{{$user->real_cert_no}}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
                                         @if($user->is_vip==1)
