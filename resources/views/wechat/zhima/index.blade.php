@@ -247,5 +247,20 @@
         }
     };
 </script>
+<script>
+    $(function () {
+        pushHistory();
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            location.href="{{url('wechat/user/center')}}";  //在这里指定其返回的地址
+        }, false);
+    })
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: "{{url('wechat/index/zmxy/index')}}"
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
+</script>
 </body>
 </html>
