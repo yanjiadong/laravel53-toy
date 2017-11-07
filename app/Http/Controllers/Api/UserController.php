@@ -243,6 +243,7 @@ class UserController extends BaseController
             $list = VipCard::all()->toArray();
             foreach ($list as &$v)
             {
+                $v['old_money'] = $v['money'];
                 if($v['money'] <= $user->zhima_money)
                 {
                     $v['jianmian_money'] = $v['money'];

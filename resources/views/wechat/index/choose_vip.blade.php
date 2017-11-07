@@ -186,7 +186,7 @@
                         case 1:
                             $(".sort li:eq(0) .vip-name").text(choose_vip.data.sortList[i].title);  //卡名称
                             $(".sort li:eq(0) .vip-price").html('<span>¥</span>'+choose_vip.data.sortList[i].price); //会员卡费用
-                            if(choose_vip.data.sortList[i].money<=0){
+                            if(choose_vip.data.sortList[i].old_money<=0){
                                 $(".sort li:eq(0) .vip-yajin").text("免押金");  //押金
                             }
                             $(".sort li:eq(0) .vip-time").text(30+'天');  //使用天数
@@ -195,7 +195,7 @@
                         case 2:
                             $(".sort li:eq(2) .vip-name").text(choose_vip.data.sortList[i].title);  //卡名称
                             $(".sort li:eq(2) .vip-price").html('<span>¥</span>'+choose_vip.data.sortList[i].price); //会员卡费用
-                            if(choose_vip.data.sortList[i].money<=0){
+                            if(choose_vip.data.sortList[i].old_money<=0){
                                 $(".sort li:eq(2) .vip-yajin").text("免押金");  //押金
                             }
                             $(".sort li:eq(2) .vip-time").text(90+'天');  //使用天数
@@ -204,7 +204,7 @@
                         case 3:
                             $(".sort li:eq(1) .vip-name").text(choose_vip.data.sortList[i].title);  //卡名称
                             $(".sort li:eq(1) .vip-price").html('<span>¥</span>'+choose_vip.data.sortList[i].price); //会员卡费用
-                            if(choose_vip.data.sortList[i].money<=0){
+                            if(choose_vip.data.sortList[i].old_money<=0){
                                 $(".sort li:eq(1) .vip-yajin").text("免押金");  //押金
                             }
                             $(".sort li:eq(1) .vip-time").text(180+'天');  //使用天数
@@ -230,9 +230,10 @@
                         choose_vip.slide(choose_vip.data.count,true);
                         var money = choose_vip.data.sortList[i].price;
                         var yajin = choose_vip.data.sortList[i].money;
+                        var old_yajin = choose_vip.data.sortList[i].old_money;
 
                         $(".info .select .fr").text('¥'+money);
-                        $(".info .deposit .fr").text('¥'+yajin);
+                        $(".info .deposit .fr").text('¥'+old_yajin);
 
                         var free_deposit;
 
