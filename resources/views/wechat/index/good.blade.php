@@ -221,7 +221,7 @@
             common.getCarAndOrder(get_url,user_id); //获取订单数量和购物车数量
 
             var url = "{{url('api/good')}}"+'/'+"{{$good_id}}";
-            console.log(url);
+            //console.log(url);
             common.httpRequest(url,'get',null,function (res) {
                 console.log(res);
                 //console.log(res.info.good.pictures[0].picture);
@@ -284,17 +284,15 @@
 
                     if(goodDetail_obj .detail_data.lunbo2.length > 0){
                         lunbo_content = '';
-                        for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
-                            if(!goodDetail_obj.join_pic){
-                                goodDetail_obj.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
+                        for(var i=0;i<goodDetail_obj .detail_data.lunbo2.length;i++){
+                            if(!goodDetail_obj.data.join_pic){
+                                goodDetail_obj.data.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
                             }
 
                             lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj .detail_data.lunbo2[i].picture+'"></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             lunbo_content="";
                         }
-
-
                     }
 
                     //轮播图
@@ -362,8 +360,8 @@
                 }
                 else
                 {
-
                     var cont ='<div id="picAnimate"><img src="'+goodDetail_obj.data.join_pic+'"></div>';
+                    console.log(cont);
                     $(".footer ul li:last.fl").append(cont);
                     $(".footer ul li:last.fl #picAnimate img")[0].onload=function (e) {
                         $(".footer ul li:last.fl #picAnimate").addClass('active');
