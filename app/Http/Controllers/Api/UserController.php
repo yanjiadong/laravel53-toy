@@ -262,6 +262,7 @@ class UserController extends BaseController
             $list = VipCard::all()->toArray();
             foreach ($list as &$v)
             {
+                $v['old_money'] = $v['money'];
                 $v['jianmian_money'] = 0;
             }
         }
