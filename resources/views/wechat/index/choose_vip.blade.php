@@ -230,10 +230,10 @@
                         choose_vip.slide(choose_vip.data.count,true);
                         var money = choose_vip.data.sortList[i].price;
                         var yajin = choose_vip.data.sortList[i].money;
-                        var old_yajin = choose_vip.data.sortList[i].old_money;
+                        //var old_yajin = choose_vip.data.sortList[i].old_money;
 
                         $(".info .select .fr").text('¥'+money);
-                        $(".info .deposit .fr").text('¥'+old_yajin);
+                        $(".info .deposit .fr").text('¥'+yajin);
 
                         var free_deposit;
 
