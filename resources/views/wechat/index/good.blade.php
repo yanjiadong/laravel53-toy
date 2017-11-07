@@ -224,6 +224,7 @@
             //console.log(url);
             common.httpRequest(url,'get',null,function (res) {
                 console.log(res);
+                alert(111);
                 //console.log(res.info.good.pictures[0].picture);
                 goodDetail_obj .detail_data = res;
                 goodDetail_obj .detail_data ={
