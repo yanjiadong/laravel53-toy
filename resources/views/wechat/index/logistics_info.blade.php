@@ -108,7 +108,8 @@
         data: {
             returnInfo:{},          //寄回信息
             out_trade_no:localStorage.out_trade_no,  //商品订单编码
-            goodData:{}             //商品信息
+            goodData:{},             //商品信息
+            logistics_num:""
         },
         init:function () {
             logisticsInfo.getList();
@@ -257,14 +258,16 @@
                 scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                 success: function (res) {
                     var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                    alert(result);
+                    //alert(result);
                     var start = result.indexOf("CODE_128,");
+
                     if(start>-1){
-                        fill_logistics.data.logistics_num =  result.slice(start+9);
+                        logisticsInfo.data.logistics_num =  result.slice(start+9);
                     }else{
-                        fill_logistics.data.logistics_num = result;
+                        logisticsInfo.data.logistics_num = result;
                     }
-                    $(".number input").val(fill_logistics.data.logistics_num);
+                    $(".number .fl input").val(logisticsInfo.data.logistics_num);
+                    //$(".number input").val(fill_logistics.data.logistics_num);
                 }
             });
         })

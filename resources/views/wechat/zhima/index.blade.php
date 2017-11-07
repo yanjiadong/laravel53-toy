@@ -118,8 +118,8 @@
 <script>
     $(function () {
         //设置内容高度
-        $(".authorization").height($(window).height());
-        $(".authorization-info").height($(window).height());
+        $(".authorization").css({'min-height':$(window).height()});
+        $(".authorization-info").css({'min-height':$(window).height()});
         zmxy.init();
     });
     var name,num,flag1=false,flag2=false;  //填写姓名 证件号  姓名验证标记   证件号验证标记
@@ -147,6 +147,7 @@
                 zmxy.data.creditData=res_data;
                 var $submit  =  $(".authorization-info .submit");
                 var $submit_btn  =  $(".authorization-info .submit button");
+
                 switch (zmxy.data.state){
                     case 1:
                         $submit.show();

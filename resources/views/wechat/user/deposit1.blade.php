@@ -152,7 +152,7 @@
         deposit1.init();
     })
 </script>
-<script>
+{{--<script>
     $(function () {
         $(".toys-car").height($(window).height());
         pushHistory();
@@ -167,6 +167,6 @@
         };
         window.history.pushState(state, state.title, state.url);
     }
-</script>
+</script>--}}
 </body>
 </html>
