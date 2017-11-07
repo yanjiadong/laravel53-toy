@@ -43,8 +43,8 @@ var common = {
                     $('.icon-footer-order').html('');
                 }
             }
-            alert('order_num==>'+localStorage.order_num);
-            alert('shop_car_num==>'+localStorage.shop_car_num);
+            //alert('order_num==>'+localStorage.order_num);
+            //alert('shop_car_num==>'+localStorage.shop_car_num);
         });
         /*底部购物车 订单赋值*/
         if($('.icon-footer-shop-car').length>0) {
