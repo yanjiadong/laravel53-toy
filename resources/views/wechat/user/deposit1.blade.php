@@ -152,7 +152,7 @@
         deposit1.init();
     })
 </script>
-<script>
+{{--<script>
     $(function () {
         pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
@@ -173,8 +173,8 @@
         };
         window.history.pushState(state, state.title, state.url);
     }
-</script>
-{{--<script>
+</script>--}}
+<script>
     $(function () {
         $(".toys-car").height($(window).height());
         pushHistory();
@@ -189,6 +189,6 @@
         };
         window.history.pushState(state, state.title, state.url);
     }
-</script>--}}
+</script>
 </body>
 </html>
