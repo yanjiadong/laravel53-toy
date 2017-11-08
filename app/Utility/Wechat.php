@@ -5,7 +5,9 @@ class Wechat
 {
     public function responseMsg()
     {
+        //$text = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event></xml>";
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+
         if(!empty($postStr))
         {
             libxml_disable_entity_loader(true);
@@ -15,6 +17,7 @@ class Wechat
             switch($msgType)
             {
                 case 'text':
+                    $resultStr = $this->responseText($postObj,'Welcome to wechat world!');
                     break;
                 case 'event':
                     //订阅事件或者取消订阅事件
@@ -39,7 +42,7 @@ class Wechat
         switch($postObj->Event)
         {
             case 'subscribe':
-                $contentStr .= "hi,欢迎关注趣编程<br/>这里有全球最潮流的益智类编程教育玩具，让孩子在玩乐中培养创造与逻辑分析能力，学会未来用编程与世界沟通。每月租金只需299，快来体验吧！";
+                $contentStr .= "hi,欢迎关注趣编程,这里有全球最潮流的益智类编程教育玩具，让孩子在玩乐中培养创造与逻辑分析能力，学会未来用编程与世界沟通。每月租金只需299，快来体验吧！";
                 break;
             case 'unsubscribe':
                 break;
