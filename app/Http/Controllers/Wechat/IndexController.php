@@ -122,7 +122,7 @@ class IndexController extends BaseController
     {
         //session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
         //session(['user_id'=>29]);
-        //$this->check_user();
+        $this->check_user();
         $openid = session('open_id');
         $user_id = session('user_id');
         $url = url('api/index');
