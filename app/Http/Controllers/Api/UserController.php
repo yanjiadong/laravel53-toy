@@ -81,6 +81,7 @@ class UserController extends BaseController
         else
         {
             $card['vip_card_type_str'] = '';
+            $card['vip_card_type'] = '';
         }
 
         //优惠券数量

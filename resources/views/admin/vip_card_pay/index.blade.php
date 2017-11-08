@@ -80,7 +80,7 @@
                                     <td>
                                         @if($user->vip_card_type == 1)
                                             月卡
-                                        @elseif($user->vip_card_type == 1)
+                                        @elseif($user->vip_card_type == 2)
                                             季度卡
                                         @else
                                             半年卡

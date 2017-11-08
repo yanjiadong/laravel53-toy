@@ -121,8 +121,7 @@
 
         <div class="coupon clear" onclick="choose_vip.chooseCars()">
             <div class="fl">
-                <h3>优惠券</h3>
-                <p>优惠券仅用于会员卡金额的减免</p>
+                <h3>会员卡抵用券</h3>
             </div>
             <div class="fr">
                 <span></span>

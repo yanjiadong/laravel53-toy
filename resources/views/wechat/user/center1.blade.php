@@ -147,7 +147,8 @@
                     carSort:res.info.card.vip_card_type_str,   //卡的类型
                     time:res.info.days,
                     tel:'{{$phone}}',
-                    phone:res.info.user.telephone
+                    phone:res.info.user.telephone,
+                    cardType:res.info.card.vip_card_type
                 };
 
                 localStorage.out_trade_no = res.info.order_code;
@@ -175,14 +176,14 @@
                         $(".photo table tr:first td.name i").prop("class", "icon-user_center1");
                         var day = 0;
                         $(".progress .time .max").text(user_center.data.userInfo.carSort);
-                        switch (user_center.data.userInfo.carSort) {
-                            case '月卡':
+                        switch (user_center.data.userInfo.cardType) {
+                            case 1:
                                 day = 30;
                                 break;
-                            case '季度卡':
+                            case 2:
                                 day = 90;
                                 break;
-                            case '半年卡':
+                            case 3:
                                 day = 180;
                                 break;
                         }
