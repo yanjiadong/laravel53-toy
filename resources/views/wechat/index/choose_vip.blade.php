@@ -91,7 +91,7 @@
                     <td>¥600</td>
                 </tr>
                 <tr>
-                    <td><span class="info"></span></td>
+                    <td><a href="#" class="link_info"><span class="info"></span></a></td>
                 </tr>
             </table>
         </div>
@@ -256,6 +256,7 @@
                         if(choose_vip.data.first_choose_vip != '1'){
                             // $(".choose-vip-new-cover").show();
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                             $(".deposit .info").after('<i class="icon icon_arrowRight_bold" style="margin-left: 10px"></i>');
                             $(".deposit table tr:first-child  td:nth-child(2)").hide();
                             free_deposit=0;
@@ -332,6 +333,7 @@
                         var free_deposit=0;
                         if(choose_vip.data.first_choose_vip != '1'){
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                         }else{
                             free_deposit = choose_vip.data.sortList[0].jianmian_money;
                             $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
@@ -350,6 +352,7 @@
                         var free_deposit=0;
                         if(choose_vip.data.first_choose_vip != '1'){
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                         }else{
                             free_deposit = choose_vip.data.sortList[1].jianmian_money;
                             $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
@@ -368,6 +371,7 @@
                         var free_deposit=0;
                         if(choose_vip.data.first_choose_vip != '1'){
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                         }else{
                             free_deposit = choose_vip.data.sortList[2].jianmian_money;
                             $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
@@ -407,6 +411,7 @@
                         var free_deposit=0;
                         if(choose_vip.data.first_choose_vip != '1'){
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                         }else{
                             free_deposit = choose_vip.data.sortList[0].jianmian_money;
                             $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
@@ -425,6 +430,7 @@
                         var free_deposit=0;
                         if(choose_vip.data.first_choose_vip != '1'){
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                         }else{
                             free_deposit = choose_vip.data.sortList[1].jianmian_money;
                             $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
@@ -443,6 +449,7 @@
                         var free_deposit=0;
                         if(choose_vip.data.first_choose_vip != '1'){
                             $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
                         }else{
                             free_deposit = choose_vip.data.sortList[2].jianmian_money;
                             $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
