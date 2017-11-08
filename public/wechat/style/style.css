@@ -311,6 +311,40 @@
     display: block;
     margin: 20px auto;
 }
+.index-wrap-cover1{
+    position: fixed;
+    background-color: rgba(0,0,0,0.48);
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+}
+.index-wrap-cover1 .index-main-cover1{
+    width: 90%;
+    overflow: hidden;
+    border-radius: 4px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    background-color: transparent;
+    transform: translate(-50%,-50%);
+}
+.index-wrap-cover1 .index-main-cover1 img{
+    width: 100%;
+}
+.index-wrap-cover1 .index-main-cover1 .close-btn{
+    background: url("../image/common/icon_dialog_close_bottom.png") no-repeat center;
+    background-position: 0;
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+    position: absolute;
+    top:8%;
+    right:15%;
+}
+
 /*---------------------------分类详情页-----------------------------------*/
 .sort-detail .content {
     margin-bottom: 50px;
@@ -2891,9 +2925,16 @@
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.choose-vip-wrap .info .deposit .fl h3 {
+.choose-vip-wrap .info .deposit table {
     font-size: 14px;
+    width: 100%;
     color: #323232;
+}
+.choose-vip-wrap .info .deposit table td.name{
+    text-align: left;
+}
+.choose-vip-wrap .info .deposit table td{
+    text-align: right;
 }
 .choose-vip-wrap .info .deposit .fl p {
     color: #8D8D8D;
@@ -4923,18 +4964,34 @@ textarea {
     text-align: right;
 }
 .choose-vip-wrap-new .info .deposit{
-    height: 62px;
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
 }
-.choose-vip-wrap-new .info .deposit .fl h3 {
+.choose-vip-wrap-new .info .deposit table{
     font-size: 14px;
     color: #323232;
 }
-.choose-vip-wrap-new .info .deposit .fl p {
-    color: #8D8D8D;
-    font-size: 12px;
-    margin-top: 5px;
+.choose-vip-wrap-new .info .deposit table td{
+    text-align: right;
+    padding: 5px 0;
+    vertical-align: middle;
+}
+.choose-vip-wrap-new .info .deposit table td[rowspan="3"] {
+   text-align: left;
+    vertical-align: top;
+    width: 25%;
+}
+.choose-vip-wrap-new .info .deposit table td s{
+    color: #8d8d8d;
+}
+.choose-vip-wrap-new .info .deposit table td span{
+    vertical-align: middle;
+}
+.choose-vip-wrap-new .info .deposit table td span.info{
+    color: #8d8d8d;
+}
+.choose-vip-wrap-new .info .deposit table td span.red{
+    color: #FF3574;
 }
 .choose-vip-wrap-new .info .deposit .fr {
     height: 100%;
@@ -4983,7 +5040,7 @@ textarea {
     vertical-align: middle;
 }
 .choose-vip-wrap-new .info .coupon {
-    padding: 10px;
+    padding: 15px 10px;
 }
 .choose-vip-wrap-new .info .coupon .fl h3 {
     font-size: 14px;
@@ -4996,7 +5053,6 @@ textarea {
 }
 .choose-vip-wrap-new .info .coupon .fr{
     height: 100%;
-    line-height:42px;
 }
 .choose-vip-wrap-new .info .coupon .fr span {
     font-size: 14px;

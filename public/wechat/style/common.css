@@ -586,6 +586,7 @@ footer table td.active a .icon-footer-user-center {
     transform: translateX(-50%);
     font-size: 16px;
     z-index: 999999;
+    white-space: nowrap;
 }
 /*------------------分类样式----------------------*/
 .index-nav{
@@ -596,10 +597,11 @@ footer table td.active a .icon-footer-user-center {
     z-index: 999;
     box-shadow: 0 2px 10px #ddd;
     width: 100%;
+    overflow-y:hidden;
 }
 .index-nav .nav{
-    height:100%;
-    overflow-x: visible;
+    height:120%;
+    overflow-x: auto;
     white-space: nowrap;
     overflow-y: hidden;
     width: 100% !important;

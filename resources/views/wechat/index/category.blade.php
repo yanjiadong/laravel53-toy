@@ -174,6 +174,8 @@
                 $(".grow-up .list ul").html(shopList);
                 $(".grow-up .list ul li .fl img").css("height", $(".grow-up .list ul li .fl img").width()+"px");
 
+                sort_detail.record_position();
+
                 //懒加载
                 $("img.lazy").lazyload({
                     threshold :0,
@@ -193,6 +195,15 @@
                 $(this).addClass('active');
             })
         },
+        //点击记录浏览的当前位置
+        record_position:function () {
+            if(sessionStorage.getItem('sort_scrollTop')){
+                $("body").scrollTop(sessionStorage.getItem('sort_scrollTop'));
+            }
+            $("#content .list ul").click(function () {
+                sessionStorage.setItem("sort_scrollTop",$("body").scrollTop());
+            })
+        }
     };
 
     $(function () {

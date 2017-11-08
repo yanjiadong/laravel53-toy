@@ -160,6 +160,15 @@
 
 </div>
 
+<div class="index-wrap-cover1">
+    <div class="index-main-cover1">
+        <div class="close-btn"></div>
+        <div class="pic">
+            <img src="/wechat/image/common/index_cover_1.png">
+        </div>
+    </div>
+</div>
+
 <!--懒加载-->
 <script src="/wechat/js/jquery.lazyload.js"></script>
 
@@ -286,6 +295,8 @@
                     $(".hot-list ul").html(hotData);
                     $(".hot-list .fl img").height($(".hot-list .fl img").width());
 
+                    index_obj.record_position();
+
                     //懒加载
                     $("img.lazy").lazyload({
                         effect : "fadeIn", //渐现，show(直接显示),fadeIn(淡入),slideDown(下拉)
@@ -378,8 +389,28 @@
             //关闭
             $(".index-wrap-cover .close").click(function () {
                 $(".index-wrap-cover").fadeOut(500);
-            })
+                $(".index-wrap-cover1").fadeIn(500);
+            });
+
+            //最后一张图跳转
+            $(".index-wrap-cover1 .pic").click(function () {
+                $(".index-wrap-cover1").fadeOut(500);
+            });
+            // 最后一张图关闭
+            $(".index-wrap-cover1 .index-main-cover1 .close-btn").click(function () {
+                $(".index-wrap-cover1").fadeOut(500);
+            });
         },
+
+        //点击记录浏览的当前位置
+        record_position:function () {
+            if(sessionStorage.getItem('index_scrollTop')){
+                $("#content").scrollTop(sessionStorage.getItem('index_scrollTop'));
+            }
+            $(".hot-list ul").click(function () {
+                sessionStorage.setItem("index_scrollTop",$("#content").scrollTop());
+            })
+        }
     };
 
     $(function () {

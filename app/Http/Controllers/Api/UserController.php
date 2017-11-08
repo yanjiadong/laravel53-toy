@@ -243,17 +243,17 @@ class UserController extends BaseController
             $list = VipCard::all()->toArray();
             foreach ($list as &$v)
             {
-                $v['old_money'] = $v['money'];
+                //$v['old_money'] = $v['money'];
                 if($v['money'] <= $user->zhima_money)
                 {
                     $v['jianmian_money'] = $v['money'];
-                    $v['money'] = 0;
+                    //$v['money'] = 0;
 
                 }
                 else
                 {
                     $v['jianmian_money'] = $user->zhima_money;
-                    $v['money'] = $v['money'] - $user->zhima_money;
+                    //$v['money'] = $v['money'] - $user->zhima_money;
                 }
             }
         }
@@ -262,7 +262,7 @@ class UserController extends BaseController
             $list = VipCard::all()->toArray();
             foreach ($list as &$v)
             {
-                $v['old_money'] = $v['money'];
+                //$v['old_money'] = $v['money'];
                 $v['jianmian_money'] = 0;
             }
         }
