@@ -10,6 +10,7 @@ use App\User;
 use App\UserChooseCoupon;
 use App\UserCoupon;
 use App\UserOpenTime;
+use App\Utility\Wechat;
 use App\VipCard;
 use App\VipCardPay;
 use App\WechatAccessToken;
@@ -483,7 +484,9 @@ class IndexController extends BaseController
      */
     public function valid(Request $request)
     {
-        $echoStr = $request->get('echostr');
+        $wechat = new Wechat();
+        $wechat->responseMsg();
+        /*$echoStr = $request->get('echostr');
 
         $signature = $request->get('signature');
         $timestamp = $request->get('timestamp');
@@ -501,7 +504,7 @@ class IndexController extends BaseController
             exit;
         }else{
             return false;
-        }
+        }*/
     }
 
     /**
