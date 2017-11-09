@@ -3589,7 +3589,7 @@
     padding: 5px 0;
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li .fl {
-    width:80%;
+    width: 77%;
     padding: 10px 0 10px 0;
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li:first-child .fl{
@@ -3641,8 +3641,8 @@
     margin-top: 5px;
 }
 .order-detail-wrap .order-detail .detail-list ul li .money-detail ul li .fr {
-    padding: 10px 10px 0;
-    width: 20%;
+    padding: 10px 10px 0 0;
+    width: 23%;
     text-align: right;
     font-size: 15px;
     color: #323232;
@@ -4523,6 +4523,9 @@ textarea {
     font-size: 14px;
     color: #8d8d8d;
 }
+.logistics-info-wrap .detail-cont-main .cont .return-info table tr:first-child td:first-child{
+    letter-spacing: 1px;
+}
 .logistics-info-wrap .detail-cont-main .cont .return-info table td:nth-child(2n+1){
     width: 20%;
     text-align: justify;
@@ -4647,6 +4650,10 @@ textarea {
 }
 .user-center1-wrap .top .photo table td.name{
     font-size: 17px;
+}
+.user-center1-wrap .top .photo table td.name span{
+    display: inline-block;
+    vertical-align: middle;
 }
 .user-center1-wrap .top .photo table td:first-child{
     width: 74px;
@@ -4973,7 +4980,6 @@ textarea {
 }
 .choose-vip-wrap-new .info .deposit table td{
     text-align: right;
-    padding: 5px 0;
     vertical-align: middle;
 }
 .choose-vip-wrap-new .info .deposit table td[rowspan="3"] {
@@ -5209,6 +5215,9 @@ textarea {
 }
 .authorization .submit button.active{
     background-color: #6885EA;
+}
+.authorization-info{
+    padding-bottom: 68px;
 }
 .authorization-info .top{
     padding: 30px 50px;

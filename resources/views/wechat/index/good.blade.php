@@ -330,10 +330,18 @@
         },
         //轮播图视频播放
         lunbo_video:function () {
-            var h;
-            $('.lunbo .swiper-container .play-box').click(function () {
-                $(".swiper-slide video").show();
-                $(".swiper-slide video")[0].play();
+            $('.lunbo .swiper-container .play-box').removeClass('active');
+            $('.lunbo .swiper-container .play-box').click(function (e) {
+                e.preventDefault();
+                if($(this).hasClass("active")){
+                    $(this).removeClass("active");
+                    $(".swiper-slide video").hide();
+                    $(".swiper-slide video")[0].pause();
+                }else{
+                    $(this).addClass("active");
+                    $(".swiper-slide video").show();
+                    $(".swiper-slide video")[0].play();
+                }
             });
 
             document.getElementById("video").addEventListener("x5videoexitfullscreen", function () {
@@ -635,7 +643,7 @@
             bool=true;
         },1500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            if(bool) {
+            if(bool&&window.location.href.indexOf("#")==-1) {
                 location.href = document.referrer;  //在这里指定其返回的地址  订单列表页面
             }
         }, false);
@@ -643,7 +651,7 @@
     function pushHistory() {
         var state = {
             title: "title",
-            url: "{{url('wechat/index/good')}}"+'/'+'{{$good_id}}'
+            url: "#"
         };
         window.history.pushState(state, state.title, state.url);
     }

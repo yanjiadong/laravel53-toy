@@ -69,7 +69,7 @@
                         <div class="number clear">
                             <div class="fl">
                                 <h5>快递单号</h5>
-                                <input type="number" placeholder="请输入快递单号" onblur="logisticsInfo.resetInput(this)" onblur="logisticsInfo.testNumber(this)">
+                                <input type="number" value="请输入快递单号" onclick="logisticsInfo.resetInput(this)" onblur="logisticsInfo.testNumber(this)">
                             </div>
                             <div class="fr">
                                 <i class="icon icon_code"></i>
@@ -79,7 +79,7 @@
                         <div class="company clear" onclick="logisticsInfo.getCompany()">
                             <div class="fl">
                                 <h5>快递公司</h5>
-                                <input type="text" placeholder="点击匹配物流公司名称" disabled id="express_title" readonly>
+                                <input type="text" value="点击匹配物流公司名称" disabled id="express_title" readonly>
                                 <input type="hidden" value="" id="express_com">
                             </div>
                             <div class="fr">

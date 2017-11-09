@@ -175,7 +175,7 @@
                         //$(".photo table td.phone").text("绑定手机:" + user_center.data.userInfo.phone);
                         $(".photo table tr:first td.name i").prop("class", "icon-user_center1");
                         var day = 0;
-                        $(".progress .time .max").text(user_center.data.userInfo.carSort);
+
                         switch (user_center.data.userInfo.cardType) {
                             case 1:
                                 day = 30;
@@ -226,6 +226,8 @@
                         $(".user-center1-wrap .top .photo").css({"padding-bottom": "40px", "padding-top": "40px"});
                         $(".user-center1-wrap .vip-img").show();
                     }
+                    $(".progress .time .max").text(user_center.data.userInfo.carSort);
+
                     $(".top .photo table td img").attr('src',user_center.data.userInfo.img);
                     $(".photo table tr:first td.name span").text(user_center.data.userInfo.name);
                     $(".items-mid table tr:eq(2) td:first").text('正在玩'+user_center.data.userInfo.num+'件');

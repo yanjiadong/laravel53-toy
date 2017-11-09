@@ -406,6 +406,7 @@
         record_position:function () {
             if(sessionStorage.getItem('index_scrollTop')){
                 $("#content").scrollTop(sessionStorage.getItem('index_scrollTop'));
+                sessionStorage.setItem("index_scrollTop",0);      //回到一次位置后清楚位置记录
             }
             $(".hot-list ul").click(function () {
                 sessionStorage.setItem("index_scrollTop",$("#content").scrollTop());
