@@ -21,7 +21,7 @@ class IndexController extends BaseController
 {
     public function __construct()
     {
-        include_once dirname(dirname(dirname(__DIR__))). "/Utility/socketlog/slog.function.php";
+        /*include_once dirname(dirname(dirname(__DIR__))). "/Utility/socketlog/slog.function.php";
 
         //配置
         slog(array(
@@ -38,7 +38,7 @@ class IndexController extends BaseController
                 //'client_02',
                 //'client_03',
             ),
-        ),'config');
+        ),'config');*/
     }
 
     public function check_user()
@@ -506,42 +506,6 @@ class IndexController extends BaseController
      */
     public function valid(Request $request)
     {
-        slog('hello world1111');
-        //$text = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event></xml>";
-        //$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        $postStr = file_get_contents('php://input');
-
-        if(!empty($postStr))
-        {
-            slog('success');
-            libxml_disable_entity_loader(true);
-            $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $msgType = trim($postObj->MsgType);
-
-            slog('----'.$msgType.'----');
-
-            switch($msgType)
-            {
-                case 'text':
-                    $resultStr = $this->responseText($postObj,'Welcome to wechat world!');
-                    break;
-                case 'event':
-                    //订阅事件或者取消订阅事件
-                    $resultStr = $this->handleEvent($postObj);
-                    break;
-                default:
-                    break;
-            }
-
-            echo $resultStr;
-        }
-        else
-        {
-            slog('fail');
-            echo "";
-            exit;
-        }
-        die;
         $wechat = new Wechat();
         $wechat->responseMsg();
         /*$echoStr = $request->get('echostr');
