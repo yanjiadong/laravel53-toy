@@ -24,6 +24,7 @@ class Wechat
             ),
         ),'config');
 
+        slog('hello world');
     }
 
     public function responseMsg()
