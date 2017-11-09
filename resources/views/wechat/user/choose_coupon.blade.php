@@ -199,7 +199,7 @@
         var bool=false;
         setTimeout(function(){
             bool=true;
-        },1500);
+        },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
                 location.href=document.referrer;  //在这里指定其返回的地址
