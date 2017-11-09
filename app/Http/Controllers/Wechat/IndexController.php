@@ -496,8 +496,12 @@ class IndexController extends BaseController
 
     public function test()
     {
-        $signPackage = getJssdk();
-        return view('wechat.index.test',compact('signPackage'));
+        $order_data = [
+            'user_id'=>29,
+        ];
+        $ret = Order::create($order_data);
+        print_r($ret);
+        //return view('wechat.index.test',compact('signPackage'));
     }
 
     /**

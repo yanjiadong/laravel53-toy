@@ -174,6 +174,10 @@ class OrderController extends BaseController
 
             //发送短信通知
             $this->send_order_sms($user->telephone,$user->name);
+
+            //短信通知后台管理员
+            send_order_to_admin('13366556200');
+            send_order_to_admin('15101016067');
         }
         Order::create($order_data);
 
