@@ -262,7 +262,7 @@
 
                     if(goodDetail_obj .detail_data.lunbo2.length > 0){
                         lunbo_content = '';
-                        for(var i=0;i<goodDetail_obj .detail_data.lunbo2.length;i++){
+                        for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
                             if(!goodDetail_obj.data.join_pic){
                                 goodDetail_obj.data.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
                             }
