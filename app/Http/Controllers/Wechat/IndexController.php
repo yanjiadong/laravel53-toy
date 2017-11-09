@@ -506,7 +506,7 @@ class IndexController extends BaseController
      */
     public function valid(Request $request)
     {
-        slog('hello world');
+        slog('hello world1111');
         //$text = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event></xml>";
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
