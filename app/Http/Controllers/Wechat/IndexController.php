@@ -508,7 +508,8 @@ class IndexController extends BaseController
     {
         slog('hello world1111');
         //$text = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event></xml>";
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        //$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        $postStr = file_get_contents('php://input');
 
         if(!empty($postStr))
         {
