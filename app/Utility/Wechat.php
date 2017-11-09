@@ -23,21 +23,21 @@ class Wechat
                 //'client_03',
             ),
         ),'config');
-
-        slog('hello world');
     }
 
     public function responseMsg()
     {
+        slog('hello world');
         //$text = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event></xml>";
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
-        slog('----'.$postStr.'----');
         if(!empty($postStr))
         {
             libxml_disable_entity_loader(true);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $msgType = trim($postObj->MsgType);
+
+            slog('----'.$msgType.'----');
 
             switch($msgType)
             {
