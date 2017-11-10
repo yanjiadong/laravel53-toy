@@ -79,7 +79,8 @@
                         <div class="company clear" onclick="logisticsInfo.getCompany()">
                             <div class="fl">
                                 <h5>快递公司</h5>
-                                <input type="text" value="点击匹配物流公司名称" id="express_title" disabled>
+                                <span>点击匹配物流公司名称</span>
+                                <input type="hidden" value="" id="express_title">
                                 <input type="hidden" value="" id="express_com">
                             </div>
                             <div class="fr">
@@ -174,11 +175,11 @@
                 $(item).removeClass("active").val("请输入快递单号");
                 return;
             }
-            if($(".company input").val()=="点击匹配物流公司名称"){
-                $(".company input").removeClass("active");
+            if($(".company span").val()=="点击匹配物流公司名称"){
+                $(".company span").removeClass("active");
                 $(".btn button").removeClass('active');
             }else{
-                $(".company input").addClass('active');
+                $(".company span").addClass('active');
                 $(item).addClass('active');
                 $(".btn button").addClass('active');
             }
@@ -194,16 +195,22 @@
             var number =  $(".number input").val();
             if(number=="请输入快递单号"){
                 common.alert_tip1("快递单号不能为空！");
-                $(".company input").val("点击匹配物流公司名称");
-                $(".company input").removeClass("active");
+                $(".company span").text("点击匹配物流公司名称");
+                $(".company span").removeClass("active");
+
+                //$(".company input").val("点击匹配物流公司名称");
+                //$(".company input").removeClass("active");
                 return false;
             }else{
                 common.httpRequest('{{url('api/express_info/com')}}','post',{num:number},function (res) {
                     //假数据
                     if(res.code==200){
-                        $(".company input").val(res.info.title);
+                        $(".company span").text(res.info.title);
+                        $(".company span").addClass('active');
+
+                        $("#express_title").val(res.info.title);
                         $("#express_com").val(res.info.com);
-                        $(".company input").addClass('active');
+                        //$(".company input").addClass('active');
                         //$(".company input").val("顺丰物流公司");
                         $(".btn button").addClass('active');
                         common.success_tip("匹配成功");

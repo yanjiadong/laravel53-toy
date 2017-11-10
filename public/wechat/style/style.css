@@ -331,8 +331,11 @@
     background-color: transparent;
     transform: translate(-50%,-50%);
 }
+.index-wrap-cover1 .index-main-cover1 .pic{
+    text-align: center;
+}
 .index-wrap-cover1 .index-main-cover1 img{
-    width: 100%;
+    width: 90%;
 }
 .index-wrap-cover1 .index-main-cover1 .close-btn{
     background: url("../image/common/icon_dialog_close_bottom.png") no-repeat center;
@@ -341,8 +344,8 @@
     height: 24px;
     background-size: 24px 24px;
     position: absolute;
-    top:8%;
-    right:15%;
+    top:0;
+    right:10%;
 }
 
 /*---------------------------分类详情页-----------------------------------*/
@@ -4571,30 +4574,16 @@ textarea {
     font-size: 14px;
     font-weight: bold;
 }
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input{
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl span{
     border: 1px solid transparent;
     height: 32px;
     border-radius: 3px;
     color: #8d8d8d;
     font-size: 14px;
+    line-height: 32px;
 }
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:disabled,
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input[disabled]{
-    color:#8d8d8d;
-    -webkit-text-fill-color:#8d8d8d;
-}
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input.active,
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:disabled.active,
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input[disabled].active{
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl span.active{
     color: #323232;
-}
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl span{
-    border: 1px solid transparent;
-    display:inline-block;
-    height: 32px;
-    border-radius: 3px;
-    color: #323232 !important;
-    font-size: 14px;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input::input-placeholder{
     color:  #999;
