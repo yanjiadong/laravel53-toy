@@ -65,7 +65,7 @@
                 <td><i class="icon-choose-vip2"></i></td>
             </tr>
             <tr>
-                <td>所有玩具免费租</td>
+                <td>所有器具免费租</td>
                 <td>不限次数更换</td>
                 <td>往返免邮费</td>
                 <td>不租不扣时间</td>
