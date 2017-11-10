@@ -23,7 +23,7 @@
             <img src="" alt="">
         </div>
         <h3></h3>
-        <p>我在“趣编程”免费玩了{{$count}}个编程机器人</p>
+        <p></p>
         <div class="separate">
             <span class="line"></span>
             <span class="dot"></span>
@@ -48,7 +48,7 @@
     </div>
     <div class="invitation">
         <div class="img">
-            <img src="/wechat/image/common/erweima.png" >
+            <img src="/wechat/image/common/erweima.jpg" >
         </div>
         <h3>长按识别二维码，关注公众号</h3>
         <p>这里有最专业的教育玩具品牌（乐高/能力风暴/优必选/makeblock...）</p>
@@ -58,7 +58,7 @@
 <script>
     $(".photo img").attr('src','{{$user->wechat_avatar}}');
     $(".share-main h3:first").text('{{$user->name}}');
-
+    $(".share-main>p").text("我在“趣编程”免费玩了"+'{{$count}}'+"个编程机器人");
 </script>
 </body>
 </html>

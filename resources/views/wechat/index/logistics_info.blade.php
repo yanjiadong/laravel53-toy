@@ -79,7 +79,7 @@
                         <div class="company clear" onclick="logisticsInfo.getCompany()">
                             <div class="fl">
                                 <h5>快递公司</h5>
-                                <input type="text" value="点击匹配物流公司名称" id="express_title" readonly="text">
+                                <input type="text" value="点击匹配物流公司名称" id="express_title" disabled>
                                 <input type="hidden" value="" id="express_com">
                             </div>
                             <div class="fr">

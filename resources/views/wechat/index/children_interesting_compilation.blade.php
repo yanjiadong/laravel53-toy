@@ -19,11 +19,11 @@
     <div class="child-interesting-main">
         <div class="top bg-white">
             <div class="pic">
-                <img src="/wechat/image/common/childre-interst1.png">
+                <img src="/wechat/image/common/icon_logo.png">
             </div>
-            <h1>趣编程</h1>
+            <h1>玩玩具趣编程</h1>
             <p class="info">
-                「这里有全球最潮流的教育机器人，孩子通过玩乐的方式接触编程，从中培养创造力与逻辑分析能力，未来用编程与世界沟通」
+                「趣编程是专业的编程教育玩具（机器人）租赁平台，让孩子通过玩乐的方式接触编程，未来用编程与世界沟通」
             </p>
         </div>
         <div class="cont bg-white">
@@ -32,7 +32,7 @@
                     <div class="fl">
                         <h2>玩具经过严格的筛选</h2>
                         <div class="info">
-                            在玩具的选择上精选了全球最具代表性的编程类教育机器人，通过科技让孩子在玩的同时更好的学习。
+                            在器具的选择上精选了全球最具代表性的编程类教育机器人，通过科技让孩子在玩的同时更好的学习。
                         </div>
                     </div>
                     <div class="fr">
