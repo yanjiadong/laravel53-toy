@@ -194,7 +194,7 @@
             var number =  $(".number input").val();
             if(number=="请输入快递单号"){
                 common.alert_tip1("快递单号不能为空！");
-                $(".company input").val("击匹配物流公司名称");
+                $(".company input").val("点击匹配物流公司名称");
                 $(".company input").removeClass("active");
                 return false;
             }else{
