@@ -90,7 +90,7 @@
                         }
                         else
                         {
-                            var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
+                            var fanwei = '会员卡满'+vip_voucher.data.list[i].condition+'元可用';
                         }
 
 

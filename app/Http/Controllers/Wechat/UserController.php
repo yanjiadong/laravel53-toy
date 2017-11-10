@@ -52,7 +52,8 @@ class UserController extends BaseController
     public function share_open($user_id)
     {
         $user = User::find($user_id);
-        return view('wechat.user.share_open',compact('user_id','user'));
+        $count = Order::where('user_id',$user_id)->count();
+        return view('wechat.user.share_open',compact('user_id','user','count'));
     }
 
     public function help()

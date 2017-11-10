@@ -37,6 +37,12 @@ class UserController extends BaseController
         }
 
 
+        if($user->days <= 0)
+        {
+            User::where('id',$user_id)->update(['is_vip'=>0]);
+            $user->is_vip = 0;
+        }
+
         $is_vip = 1;
         if($user->is_vip == 0)
         {

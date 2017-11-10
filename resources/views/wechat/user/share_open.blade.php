@@ -23,7 +23,7 @@
             <img src="" alt="">
         </div>
         <h3></h3>
-        <p>我在“趣编程”免费玩了5个编程机器人</p>
+        <p>我在“趣编程”免费玩了{{$count}}个编程机器人</p>
         <div class="separate">
             <span class="line"></span>
             <span class="dot"></span>
@@ -31,7 +31,7 @@
             <span class="dot"></span>
             <span class="line"></span>
         </div>
-        <h3>少儿编程教育机器人会员制租赁平台</h3>
+        <h3>专业的编程教育（玩具）机器人租赁平台</h3>
         <div class="btn1">
             <button style="margin-right: 28px">编程机器人随意挑</button>
             <button>不限次数更换</button>
@@ -51,8 +51,8 @@
             <img src="/wechat/image/common/erweima.png" >
         </div>
         <h3>长按识别二维码，关注公众号</h3>
-        <p>这里有百款乐高、能力风暴、makeblock等国际品牌的编程教育机器人</p>
-        <h4>每月只要¥299，新用户立减¥100</h4>
+        <p>这里有最专业的教育玩具品牌（乐高/能力风暴/优必选/makeblock...）</p>
+        <h4>低至每月¥299，新用户立减¥100</h4>
     </div>
 </div>
 <script>

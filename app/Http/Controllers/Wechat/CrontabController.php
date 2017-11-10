@@ -6,6 +6,7 @@ use App\Crontab;
 use App\ExpressInfo;
 use App\Order;
 use App\User;
+use App\VipCard;
 use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,11 +82,23 @@ class CrontabController extends BaseController
                         {
                             VipCardPay::where('id',$card['id'])->update(['days'=>0,'status'=>-1]);
 
-                            $not_can_use_money = $user_info->not_can_use_money - $card['money'];
-                            $can_use_money = $user_info->can_use_money + $card['money'];
 
-                            $user_days = $user_info->days - 1;
-                            User::where('id',$order['user_id'])->update(['not_can_use_money'=>$not_can_use_money,'can_use_money'=>$can_use_money,'days'=>$user_days]);
+                            $card_count = VipCardPay::where('user_id',$order['user_id'])->where('status',1)->where('pay_status',1)->count();
+
+
+                            if($card_count <= 0)
+                            {
+                                $update_data['is_vip'] = 0;
+                            }
+
+                            $update_data['not_can_use_money'] = $user_info->not_can_use_money - $card['money'];
+                            $update_data['can_use_money'] = $user_info->can_use_money + $card['money'];
+
+                            $update_data['days'] = $user_info->days - 1;
+
+
+                            //User::where('id',$order['user_id'])->update(['not_can_use_money'=>$not_can_use_money,'can_use_money'=>$can_use_money,'days'=>$user_days]);
+                            User::where('id',$order['user_id'])->update($update_data);
                         }
                         else
                         {
