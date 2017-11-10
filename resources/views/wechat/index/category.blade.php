@@ -199,6 +199,7 @@
         record_position:function () {
             if(sessionStorage.getItem('sort_scrollTop')){
                 $("body").scrollTop(sessionStorage.getItem('sort_scrollTop'));
+                sessionStorage.setItem("sort_scrollTop",0);      //回到一次位置后清楚位置记录
             }
             $("#content .list ul").click(function () {
                 sessionStorage.setItem("sort_scrollTop",$("body").scrollTop());

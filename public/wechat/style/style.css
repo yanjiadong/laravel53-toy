@@ -4578,7 +4578,14 @@ textarea {
     color: #8d8d8d;
     font-size: 14px;
 }
-.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input.active{
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:disabled,
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input[disabled]{
+    color:#8d8d8d;
+    -webkit-text-fill-color:#8d8d8d;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input.active,
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input:disabled.active,
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input[disabled].active{
     color: #323232;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl span{
