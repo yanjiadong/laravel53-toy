@@ -1022,9 +1022,6 @@
 .order-wrap .order-detail .detail-list ul li .money-detail ul li:first-child .fr{
     width:40%;
 }
-.order-wrap .order-detail .detail-list ul li .money-detail ul li .fr span:first-child{
-    margin-right: 5px;
-}
 .order-wrap .order-detail .detail-list .total {
     width: 100%;
     text-align: right;
@@ -4443,7 +4440,7 @@ textarea {
     background-color: #d8def3;
     color: #26325C;
     line-height: 18px;
-    padding:8px 10px;
+    padding:5px 10px;
     font-size: 13px;
     position: fixed;
     top: 0;
@@ -4547,8 +4544,11 @@ textarea {
     border: 1px solid transparent;
     height: 32px;
     border-radius: 3px;
-    color: #323232 !important;
+    color: #8d8d8d;
     font-size: 14px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fl input.active {
+   color: #323232;
 }
 
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr {
@@ -4570,6 +4570,16 @@ textarea {
     color: #323232;
     font-size: 14px;
     font-weight: bold;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input{
+    border: 1px solid transparent;
+    height: 32px;
+    border-radius: 3px;
+    color: #8d8d8d;
+    font-size: 14px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl input.active{
+    color: #323232;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .company .fl span{
     border: 1px solid transparent;
@@ -4971,7 +4981,7 @@ textarea {
     text-align: right;
 }
 .choose-vip-wrap-new .info .deposit{
-    padding: 10px;
+    padding:15px 10px;
     border-bottom: 1px solid #e3e3e3;
 }
 .choose-vip-wrap-new .info .deposit table{

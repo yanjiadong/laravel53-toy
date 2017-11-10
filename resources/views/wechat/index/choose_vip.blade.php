@@ -91,7 +91,7 @@
                     <td>¥600</td>
                 </tr>
                 <tr>
-                    <td><a href="#" class="link_info"><span class="info"></span></a></td>
+                    <td><a href="javascript:void(0);" class="link_info"><span class="info"></span></a></td>
                 </tr>
             </table>
         </div>
@@ -556,15 +556,21 @@
 </script>
 <script>
     $(function () {
+        //让会员卡回退到个人中心 或者首页
+        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("user/center")>-1){
+            sessionStorage.setItem("choose_vip_back_url",document.referrer)
+        }
         pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
-        var bool=false;
+        var bool=false;
         setTimeout(function(){
             bool=true;
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                location.href=document.referrer;  //在这里指定其返回的地址
+                if(bool) {
+                    location.href=sessionStorage.getItem('choose_vip_back_url')?sessionStorage.getItem('choose_vip_back_url'):document.referrer;  //在这里指定其返回的地址
+                }
             }
         }, false);
     });

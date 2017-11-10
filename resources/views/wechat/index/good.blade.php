@@ -348,6 +348,12 @@
                 document.getElementById("video").style.display = 'none';
                 document.getElementById("video").pause();
             });
+
+            //监听播放停止事件
+            document.getElementById("video").addEventListener("pause",function(){
+                //退出全屏关闭视频
+                document.getElementById("video").style.display = 'none';
+            },false);
         },
         //正品保证 往返包邮   微损免赔  往返包邮
         detail_describe_toggle:function () {

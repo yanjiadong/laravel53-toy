@@ -171,32 +171,39 @@
             if(!$(item).val()){
                 common.alert_tip1("快递单号不能为空！");
                 $(".btn button").removeClass('active');
-                $(item).val("请输入快递单号");
+                $(item).removeClass("active").val("请输入快递单号");
                 return;
             }
             if($(".company input").val()=="点击匹配物流公司名称"){
+                $(".company input").removeClass("active");
                 $(".btn button").removeClass('active');
             }else{
+                $(".company input").addClass('active');
+                $(item).addClass('active');
                 $(".btn button").addClass('active');
             }
         },
         resetInput:function (item) {
             if($(item).val()=="请输入快递单号"){
+                $(item).addClass('active');
                 $(item).val("")
             }
         },
         //获取物流公司
         getCompany:function(){
             var number =  $(".number input").val();
-            if(!number.replace(/(^\s*)|(\s*$)/g, "")){
-                common.alert_tip("快递单号不能为空！");
+            if(number=="请输入快递单号"){
+                common.alert_tip1("快递单号不能为空！");
+                $(".company input").val("击匹配物流公司名称");
+                $(".company input").removeClass("active");
+                return false;
             }else{
                 common.httpRequest('{{url('api/express_info/com')}}','post',{num:number},function (res) {
                     //假数据
                     if(res.code==200){
                         $(".company input").val(res.info.title);
                         $("#express_com").val(res.info.com);
-
+                        $(".company input").addClass('active');
                         //$(".company input").val("顺丰物流公司");
                         $(".btn button").addClass('active');
                         common.success_tip("匹配成功");
