@@ -456,7 +456,7 @@ class OrderController extends BaseController
 
         $easySms->send($telephone, [
             'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_103910010',
+            'template' => 'SMS_109410296',
             'data' => [
                 'name' => $name
             ],
