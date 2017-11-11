@@ -23,7 +23,7 @@
             </div>
             <h1>玩玩具趣编程</h1>
             <p class="info">
-                「趣编程是专业的编程教育玩具（机器人）租赁平台，让孩子通过玩乐的方式接触编程，未来用编程与世界沟通」
+                趣编程是专业的编程教育玩具（机器人）租赁平台，让孩子通过玩乐的方式接触编程，未来用编程与世界沟通
             </p>
         </div>
         <div class="cont bg-white">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="fr">
-                        <img src="../image/common/img_bannerDetail_02.png">
+                        <img src="/wechat/image/common/img_bannerDetail_02.png">
                     </div>
                 </li>
                 <li class="clear">

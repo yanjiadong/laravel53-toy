@@ -557,7 +557,7 @@
 <script>
     $(function () {
         //让会员卡回退到个人中心 或者首页
-        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("user/center")>-1||document.referrer.indexOf("index/cart")>-1){
+        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("user/center")>-1||document.referrer.indexOf("index/cart")>-1||document.referrer.indexOf("index/children_interesting_compilation")>-1){
             sessionStorage.setItem("choose_vip_back_url",document.referrer)
         }
         pushHistory();
