@@ -104,7 +104,8 @@
                 if(logistics_detail.data.logisticsList.length > 0)
                 {
                     $(".logistics-detail-wrap-tips").hide();
-                    $(".logistics-detail-wrap").show();
+                    $(".logistics-detail-wrap .logistics-cont .list").show();
+                    //$(".logistics-detail-wrap").show();
 
                     var cont='';
                     for(var i=0;i<logistics_detail.data.logisticsList.length;i++){
@@ -145,7 +146,7 @@
         }
     };
     $(function () {
-        $(".logistics-detail-wrap-tips").height($(window).height());
+        $(".logistics-detail-wrap-tips").height($(window).height()-$(".logistics-title").outerHeight()-$(".logistics-cont").outerHeight()-10);
         logistics_detail.init();
     })
 </script>

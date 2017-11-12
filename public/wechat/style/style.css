@@ -2133,9 +2133,6 @@
     margin-top: 10px;
 }
 /*--------------------------------物流状态-----------------------------------*/
-.logistics-detail-wrap{
-    display: none;
-}
 .logistics-detail-wrap-tips{
     background-color: #fff;
     color: #323232;
@@ -2176,6 +2173,9 @@
     font-size: 14px;
     color: #8D8D8D;
     margin-left: 5px;
+}
+.logistics-detail-wrap .logistics-cont .list{
+    display: none;
 }
 .logistics-detail-wrap .logistics-cont .list ul li.active {
     /* .fl{
@@ -2749,7 +2749,7 @@
     text-align: center;
 }
 .child-interesting-wrap .child-interesting-main .top .pic img {
-    width: 72px;
+    width: 60px;
 }
 .child-interesting-wrap .child-interesting-main .top h1 {
     font-size: 18px;
@@ -4449,7 +4449,7 @@ textarea {
     top: 0;
 }
 .logistics-info-wrap .logistics-info-main .detail-cont .detail-cont-main{
-    padding-top: 52px;
+    padding-top: 42px;
     margin-bottom: 64px;
 }
 .logistics-info-wrap .detail-cont-main .cont .top,

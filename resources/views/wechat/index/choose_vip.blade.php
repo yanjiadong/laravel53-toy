@@ -577,7 +577,7 @@
     function pushHistory() {
         var state = {
             title: "title",
-            url: "#"
+            url: location.href
         };
         window.history.pushState(state, state.title, state.url);
     }

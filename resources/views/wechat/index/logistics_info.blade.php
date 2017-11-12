@@ -264,28 +264,29 @@
         wx.error(function(res) {
             alert("出错了：" + res.errMsg);
         });
-        //调用扫一扫
-        $(".icon_code").click(function (event) {
-            event.preventDefault();
-            wx.scanQRCode({
-                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-                success: function (res) {
-                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                    //alert(result);
-                    var start = result.indexOf("CODE_128,");
 
-                    if(start>-1){
-                        logisticsInfo.data.logistics_num =  result.slice(start+9);
-                    }else{
-                        logisticsInfo.data.logistics_num = result;
+        wx.ready(function(){
+            //调用扫一扫
+            $(".icon_code").click(function (event) {
+                event.preventDefault();
+                wx.scanQRCode({
+                    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success: function (res) {
+                        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                        //alert(result);
+                        var start = result.indexOf("CODE_128,");
+
+                        if(start>-1){
+                            logisticsInfo.data.logistics_num =  result.slice(start+9);
+                        }else{
+                            logisticsInfo.data.logistics_num = result;
+                        }
+                        $(".number .fl input").addClass('active').val( logisticsInfo.data.logistics_num);
                     }
-                    $(".number .fl input").val(logisticsInfo.data.logistics_num);
-                    //$(".number input").val(fill_logistics.data.logistics_num);
-                }
+                });
             });
-        })
-
+        });
     })
 </script>
 {{--<script>

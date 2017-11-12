@@ -9,10 +9,7 @@
     <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
-
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
-    <script src="/wechat/js/main.js"></script>
-    <script src="/wechat/js/common.js"></script>
 </head>
 <body>
 <div class="child-interesting-wrap">
@@ -66,18 +63,16 @@
         </div>
     </div>
     <div class="footer bg-white">
-        <button onclick="order_obj.sendCode()">领取新人包月199优惠特权</button>
+        <button>领取新人包月399优惠特权</button>
     </div>
 </div>
 
+
 <script>
-    var order_obj = {
-        sendCode:function () {
-            //alert(1);
-            var href = '{{url('wechat/index/choose_vip')}}';
-            location.href = href;
-        }
-    };
+    $(".footer button").click(function () {
+        var href = '{{url('wechat/index/choose_vip')}}';
+        location.href=href;
+    })
 </script>
 </body>
 </html>
