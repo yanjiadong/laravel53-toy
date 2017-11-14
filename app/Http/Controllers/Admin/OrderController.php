@@ -160,6 +160,16 @@ class OrderController extends BaseController
 
         $express = Express::all();
 
+        $order->days = '';
+        if($order->status==Order::STATUS_BACK_STR)
+        {
+            $order->days = floor((strtotime($order->back_time) - strtotime($order->send_time))/86400);
+        }
+        elseif($order->status==Order::STATUS_DOING_STR)
+        {
+            $order->days = floor((time()- strtotime($order->send_time))/86400);
+        }
+
         $menu = 'order';
         return view('admin.order.show',compact('order','username','menu','express'));
     }

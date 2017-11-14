@@ -36,6 +36,10 @@
                             <td>{{$order->status}}</td>
                         </tr>
                         <tr>
+                            <td>租用天数：</td>
+                            <td>{{$order->days}}</td>
+                        </tr>
+                        <tr>
                             <td>玩具名称：</td>
                             <td>{{$order->good_title}}</td>
                         </tr>
