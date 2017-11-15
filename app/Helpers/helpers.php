@@ -190,8 +190,11 @@ if(!function_exists('WxJsPayCallback'))
                 }
 
                 //押金明细
-                $price = $order_info->money+$order_info->price;
-                DB::table('user_pay_records')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$price,'created_at'=>date('Y-m-d H:i:s')]);
+                if($order_info->money > 0)
+                {
+                    DB::table('user_pay_records')->insert(['user_id'=>$order_info->user_id,'type'=>1,'pay_type'=>1,'price'=>$order_info->money,'created_at'=>date('Y-m-d H:i:s')]);
+                }
+
 
                 //如果使用了优惠券
                 if(isset($order_info->user_coupon_id) && $order_info->user_coupon_id > 0)

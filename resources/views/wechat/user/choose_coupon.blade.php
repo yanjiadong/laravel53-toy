@@ -148,23 +148,21 @@
                 $(this).addClass('active');
 
                 var index = $(this).index(".vip-voucher-wrap .list ul li");
+
                 //提交选择
-                //localStorage.vip_discount = JSON.stringify(vip_voucher.data.list[index]);
+                sessionStorage.choose_vip_id = vip_voucher.data.vip_id;
+                sessionStorage.choose_vip_discount = JSON.stringify(vip_voucher.data.list[index].price);
+                sessionStorage.choose_vip_car =vip_voucher.data.list[index].id;
 
-                /*common.httpRequest('{{url('api/user/choose_coupon')}}','post',{user_id:'{{$user_id}}','coupon_id':vip_voucher.data.list[index].id},function (res) {
-
-                });*/
-
-                location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price)+'&vip_discount_id='+vip_voucher.data.list[index].id;
+                //location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price)+'&vip_discount_id='+vip_voucher.data.list[index].id;
+                location.href="{{url('wechat/index/choose_vip')}}";
             })
         },
         //不使用优惠劵
         noUser:function () {
             var submitData ="";
-            localStorage.vip_discount="";
-            common.httpRequest('{{url('api/user/del_choose_coupon')}}','post',{user_id:'{{$user_id}}'},function (res) {
-
-            });
+            sessionStorage.choose_vip_discount="";
+            sessionStorage.choose_vip_id = vip_voucher.data.vip_id;
             location.href="{{url('wechat/index/choose_vip')}}";
         },
         //兑换

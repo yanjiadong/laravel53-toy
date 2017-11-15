@@ -156,8 +156,8 @@
     var choose_vip={
         data:{
             sortList:[],
-            discount:common.getParam('vip_discount')?common.getParam('vip_discount'):"",       //优惠券卡/**/
-            vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id/**/
+            discount:"",       //优惠券卡/**/
+            vip_discount_id:"",       //优惠券卡id/**/
             vip_id:"",             //会员卡id,
             count:1,          //会员卡动画控制  0为月卡 1为半年卡 2为季卡
             //first_choose_vip:localStorage.first_choose_vip?localStorage.first_choose_vip:false,    //false代表第一次进入这个页面 true代表不是,用localStorage是为了避免下一个页面返回不请求接口问题
@@ -165,6 +165,15 @@
             zmxy_money:0    //芝麻信用抵扣的押金
         },
         init:function () {
+            if(sessionStorage.choose_vip_discount){
+                choose_vip.data.discount = sessionStorage.choose_vip_discount;
+                sessionStorage.choose_vip_discount=""
+            }
+            if(sessionStorage.choose_vip_car){
+                choose_vip.data.vip_discount_id = sessionStorage.choose_vip_car;
+                sessionStorage.choose_vip_car ="";
+            }
+
             choose_vip.data.time = '{{$days}}';
             $(".choose-vip-wrap-new>.vip-info>p").text('您的会员有效期剩余：'+choose_vip.data.time+'天');
 
@@ -186,8 +195,12 @@
                 //如果是优惠券页进来 为之前的会员，否则默认是半年卡
                 choose_vip.data.sortList.forEach(function (item,index) {
                     if(item.type==3){
-                        //choose_vip.data.vip_id = localStorage.vip_id?localStorage.vip_id:item.id;
-                        choose_vip.data.vip_id = common.getParam('vip_id')?common.getParam('vip_id'):item.id;
+                        if(sessionStorage.choose_vip_id){
+                            choose_vip.data.vip_id =sessionStorage.choose_vip_id;
+                            sessionStorage.choose_vip_id="";
+                        }else{
+                            choose_vip.data.vip_id = item.id
+                        }
                     }
                 });
 

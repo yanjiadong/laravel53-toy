@@ -74,5 +74,33 @@
         location.href=href;
     })
 </script>
+<script>
+    $(function () {
+        //让会员卡回退到个人中心 或者首页
+        if(document.referrer.indexOf("index/index")>-1){
+            sessionStorage.setItem("children_interest_back_url",document.referrer)
+        }
+        pushHistory();
+        /*----------避免下一页返回这一页调用这个函数-------------*/
+        var bool=false;
+        setTimeout(function(){
+            bool=true;
+        },500);
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            if(bool) {
+                if(bool) {
+                    location.href=sessionStorage.getItem('children_interest_back_url')?sessionStorage.getItem('children_interest_back_url'):document.referrer;  //在这里指定其返回的地址
+                }
+            }
+        }, false);
+    });
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: location.href
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
+</script>
 </body>
 </html>

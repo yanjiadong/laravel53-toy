@@ -387,9 +387,12 @@
             });
 
             //关闭
-            $(".index-wrap-cover .close").click(function () {
+            $(".index-wrap-cover .close").click(function (e) {
+                e.preventDefault();
                 $(".index-wrap-cover").fadeOut(500);
-                $(".index-wrap-cover1").fadeIn(500);
+                setTimeout(function () {
+                    $(".index-wrap-cover1").fadeIn(500);
+                },3000)
             });
 
             //最后一张图跳转

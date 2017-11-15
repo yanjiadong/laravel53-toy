@@ -44,15 +44,6 @@
                 if(deposit_list.data.list.length>0){
                     var cont='';
                     for(var i=0;i<deposit_list.data.list.length;i++){
-                        /*if(deposit_list.data.list[i].price<0){
-                            cont +=' <li class="clear"> <div class="fl"> <h3 class="item-name">'+deposit_list.data.list[i].a+'</h3>'
-                                +'<div class="means">'+deposit_list.data.list[i].b+'|'+deposit_list.data.list[i].c+'</div></div><div class="fr">' +
-                                '<span class="active">+￥'+deposit_list.data.list[i].d+' </span></div></li>';
-                        }else{
-                            cont +=' <li class="clear"> <div class="fl"> <h3 class="item-name">'+deposit_list.data.list[i].price+'</h3>'
-                                +'<div class="means">微信|2017-02-12 10:02:02</div></div><div class="fr">' +
-                                '<span>-￥'+deposit_list.data.list[i].price+'</span></div></li>';
-                        }*/
                         if(deposit_list.data.list[i].pay_type==1)
                         {
                             //充值
@@ -60,7 +51,7 @@
                                 +'<div class="means">微信|'+deposit_list.data.list[i].created_at+'</div></div><div class="fr">'+
                                 '<span>-￥'+deposit_list.data.list[i].price+'</span></div></li>';
                         }
-                        else
+                        else if(deposit_list.data.list[i].pay_type==2 && deposit_list.data.list[i].price>0)
                         {
                             //提现
                             cont +=' <li class="clear"> <div class="fl"> <h3 class="item-name">'+deposit_list.data.list[i].pay_type_status+'</h3>'

@@ -48,6 +48,10 @@
 
 
                 }
+                else if(res.err_msg === "get_brand_wcpay_request:cancel")
+                {
+                    location.href=document.referrer;
+                }
                 else
                 {
                     window.history.go(-1);
