@@ -167,11 +167,15 @@
         init:function () {
             if(sessionStorage.choose_vip_discount){
                 choose_vip.data.discount = sessionStorage.choose_vip_discount;
-                sessionStorage.choose_vip_discount=""
+                if( document.referrer.indexOf("vip_voucher")==-1){
+                    sessionStorage.choose_vip_discount=""
+                }
             }
             if(sessionStorage.choose_vip_car){
                 choose_vip.data.vip_discount_id = sessionStorage.choose_vip_car;
-                sessionStorage.choose_vip_car ="";
+                if( document.referrer.indexOf("vip_voucher")==-1){
+                    sessionStorage.choose_vip_car ="";
+                }
             }
 
             choose_vip.data.time = '{{$days}}';
@@ -197,7 +201,9 @@
                     if(item.type==3){
                         if(sessionStorage.choose_vip_id){
                             choose_vip.data.vip_id =sessionStorage.choose_vip_id;
-                            sessionStorage.choose_vip_id="";
+                            if( document.referrer.indexOf("vip_voucher")==-1){
+                                sessionStorage.choose_vip_id="";
+                            }
                         }else{
                             choose_vip.data.vip_id = item.id
                         }
@@ -321,90 +327,94 @@
             });
             $swiperCont[0].addEventListener('touchend',function (e) {
                 x1 = e.changedTouches[0].pageX;
-                if(x-x1>100){
-                    choose_vip.data.count++;
-                }
-                if(x1-x>100){
-                    choose_vip.data.count--;
-                }
-                if(choose_vip.data.count>=2){
-                    choose_vip.data.count = 2
-                }else if(choose_vip.data.count<=0){
-                    choose_vip.data.count=0
-                }
-                // debugger;
-                choose_vip.slide(choose_vip.data.count);
-                $(".info .select .fr").text($(this).find(".fr").text());
-                switch(choose_vip.data.count){
-                    case 0:
-                        $(".info .select .fl span").text("月卡（+30天）");
-                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[0].price);
-                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[0].money);
-                        choose_vip.data.vip_id = choose_vip.data.sortList[0].id;
-                        localStorage.vip_id = choose_vip.data.vip_id;
-                        var free_deposit=0;
-                        if(choose_vip.data.first_choose_vip != '1'){
-                            $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
-                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
-                        }else{
-                            free_deposit = choose_vip.data.sortList[0].jianmian_money;
-                            $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
-                        }
-                        $(".deposit table tr:first-child td:nth-child(2) span s").text('¥'+choose_vip.data.sortList[0].money);
-                        $(".deposit table tr:nth-child(2) td:nth-child(1)").text('¥'+(choose_vip.data.sortList[0].money-free_deposit));
-                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[0].money+choose_vip.data.sortList[0].price-free_deposit));
-                        $(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[0].money-free_deposit));
-                        break;
-                    case 2:
-                        $(".info .select .fl span").text("季卡（+90天）");
-                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[1].price);
-                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[1].money);
-                        choose_vip.data.vip_id = choose_vip.data.sortList[1].id;
-                        localStorage.vip_id = choose_vip.data.vip_id;
-                        var free_deposit=0;
-                        if(choose_vip.data.first_choose_vip != '1'){
-                            $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
-                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
-                        }else{
-                            free_deposit = choose_vip.data.sortList[1].jianmian_money;
-                            $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
-                        }
-                        $(".deposit table tr:first-child td:nth-child(2) span s").text('¥'+choose_vip.data.sortList[1].money);
-                        $(".deposit table tr:nth-child(2) td:nth-child(1)").text('¥'+(choose_vip.data.sortList[1].money-free_deposit));
-                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[1].money+choose_vip.data.sortList[1].price-free_deposit));
-                        $(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[1].money-free_deposit));
-                        break;
-                    case 1:
-                        $(".info .select .fl span").text("半年卡（+180天）");
-                        $(".info .select .fr").text('¥'+choose_vip.data.sortList[2].price);
-                        $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[2].money);
-                        choose_vip.data.vip_id = choose_vip.data.sortList[2].id;
-                        localStorage.vip_id = choose_vip.data.vip_id;
-                        var free_deposit=0;
-                        if(choose_vip.data.first_choose_vip != '1'){
-                            $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
-                            $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
-                        }else{
-                            free_deposit = choose_vip.data.sortList[2].jianmian_money;
-                            $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
-                        }
-                        $(".deposit table tr:first-child td:nth-child(2) span s").text('¥'+choose_vip.data.sortList[2].money);
-                        $(".deposit table tr:nth-child(2) td:nth-child(1)").text('¥'+(choose_vip.data.sortList[2].money-free_deposit));
-                        $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[2].money+choose_vip.data.sortList[2].price-free_deposit));
-                        $(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[2].money-free_deposit));
-                        break;
-                }
-                common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.vip_id},function (res) {
 
-                    if(res.info.can_use_count>0){
-                        $(".info .coupon .fr span").text(res.info.can_use_count+'张可用');
-                    }else{
-                        $(".info .coupon .fr span").text('无可用优惠券');
+                if(Math.abs(x-x1)>100){
+                    if(x-x1>100){
+                        choose_vip.data.count++;
                     }
-                });
+                    if(x1-x>100){
+                        choose_vip.data.count--;
+                    }
+                    if(choose_vip.data.count>=2){
+                        choose_vip.data.count = 2
+                    }else if(choose_vip.data.count<=0){
+                        choose_vip.data.count=0
+                    }
+                    // debugger;
+                    choose_vip.slide(choose_vip.data.count);
+                    $(".info .select .fr").text($(this).find(".fr").text());
+                    switch(choose_vip.data.count){
+                        case 0:
+                            $(".info .select .fl span").text("月卡（+30天）");
+                            $(".info .select .fr").text('¥'+choose_vip.data.sortList[0].price);
+                            $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[0].money);
+                            choose_vip.data.vip_id = choose_vip.data.sortList[0].id;
+                            localStorage.vip_id = choose_vip.data.vip_id;
+                            var free_deposit=0;
+                            if(choose_vip.data.first_choose_vip != '1'){
+                                $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                                $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
+                            }else{
+                                free_deposit = choose_vip.data.sortList[0].jianmian_money;
+                                $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
+                            }
+                            $(".deposit table tr:first-child td:nth-child(2) span s").text('¥'+choose_vip.data.sortList[0].money);
+                            $(".deposit table tr:nth-child(2) td:nth-child(1)").text('¥'+(choose_vip.data.sortList[0].money-free_deposit));
+                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[0].money+choose_vip.data.sortList[0].price-free_deposit));
+                            $(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[0].money-free_deposit));
+                            break;
+                        case 2:
+                            $(".info .select .fl span").text("季卡（+90天）");
+                            $(".info .select .fr").text('¥'+choose_vip.data.sortList[1].price);
+                            $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[1].money);
+                            choose_vip.data.vip_id = choose_vip.data.sortList[1].id;
+                            localStorage.vip_id = choose_vip.data.vip_id;
+                            var free_deposit=0;
+                            if(choose_vip.data.first_choose_vip != '1'){
+                                $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                                $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
+                            }else{
+                                free_deposit = choose_vip.data.sortList[1].jianmian_money;
+                                $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
+                            }
+                            $(".deposit table tr:first-child td:nth-child(2) span s").text('¥'+choose_vip.data.sortList[1].money);
+                            $(".deposit table tr:nth-child(2) td:nth-child(1)").text('¥'+(choose_vip.data.sortList[1].money-free_deposit));
+                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[1].money+choose_vip.data.sortList[1].price-free_deposit));
+                            $(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[1].money-free_deposit));
+                            break;
+                        case 1:
+                            $(".info .select .fl span").text("半年卡（+180天）");
+                            $(".info .select .fr").text('¥'+choose_vip.data.sortList[2].price);
+                            $(".info .deposit .fr").text('¥'+choose_vip.data.sortList[2].money);
+                            choose_vip.data.vip_id = choose_vip.data.sortList[2].id;
+                            localStorage.vip_id = choose_vip.data.vip_id;
+                            var free_deposit=0;
+                            if(choose_vip.data.first_choose_vip != '1'){
+                                $(".deposit .info").addClass("red").text("认证芝麻信用分减免押金");
+                                $(".deposit .link_info").attr('href',"{{url('wechat/index/zmxy/index')}}");
+                            }else{
+                                free_deposit = choose_vip.data.sortList[2].jianmian_money;
+                                $(".deposit table tr:nth-child(3) td:nth-child(1) .info").text('信用认证已减免'+free_deposit+"元押金");
+                            }
+                            $(".deposit table tr:first-child td:nth-child(2) span s").text('¥'+choose_vip.data.sortList[2].money);
+                            $(".deposit table tr:nth-child(2) td:nth-child(1)").text('¥'+(choose_vip.data.sortList[2].money-free_deposit));
+                            $(".submit .fl span:eq(1)").text('¥'+(choose_vip.data.sortList[2].money+choose_vip.data.sortList[2].price-free_deposit));
+                            $(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[2].money-free_deposit));
+                            break;
+                    }
+                    common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:choose_vip.data.vip_id},function (res) {
 
-                $("#vip_card_id").val(choose_vip.data.vip_id);
-                choose_vip.data.vip_discount_id = '';
+                        if(res.info.can_use_count>0){
+                            $(".info .coupon .fr span").text(res.info.can_use_count+'张可用');
+                        }else{
+                            $(".info .coupon .fr span").text('无可用优惠券');
+                        }
+                    });
+
+                    $("#vip_card_id").val(choose_vip.data.vip_id);
+                    choose_vip.data.vip_discount_id = '';
+                }
+
             });
             //点击会员卡图片选择会员卡
             var $img =  $(".choose-vip-wrap-new .vip-info .sort ul li");
