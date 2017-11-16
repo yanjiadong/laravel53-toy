@@ -261,14 +261,6 @@ class IndexController extends BaseController
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        //$coupon_id = session('coupon_id');
-
-        /*$choose = UserChooseCoupon::where('user_id',$user_id)->orderBy('id', 'desc')->first();
-        $coupon_id = 0;
-        if(!empty($choose))
-        {
-            $coupon_id = $choose->coupon_id;
-        }*/
         $coupon_id = $request->get('vip_discount_id');
 
 
