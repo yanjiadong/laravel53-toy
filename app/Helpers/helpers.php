@@ -205,7 +205,8 @@ if(!function_exists('WxJsPayCallback'))
 
                 if(!empty($user_info->telephone))
                 {
-                    vip_card_pay_success_send_sms($user_info->telephone,$user_info->name);
+                    sms_send('SMS_103895011',$user_info->telephone,$user_info->name);
+                    //vip_card_pay_success_send_sms($user_info->telephone,$user_info->name);
                 }
             }
         }
@@ -220,11 +221,14 @@ if(!function_exists('WxJsPayCallback'))
             $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
             if(!empty($user_info->telephone) && $order_info->price > 0)
             {
-                order_pay_success_send_sms($user_info->telephone,$user_info->name);
+                sms_send('SMS_103795027',$user_info->telephone,$user_info->name);
+                //order_pay_success_send_sms($user_info->telephone,$user_info->name);
 
                 //短信通知后台管理员
-                send_order_to_admin('13366556200');
-                send_order_to_admin('15101016067');
+                sms_send('SMS_109345328','13366556200');
+                sms_send('SMS_109345328','15101016067');
+                //send_order_to_admin('13366556200');
+                //send_order_to_admin('15101016067');
             }
 
             $good = \App\Good::where(['id'=>$order_info->good_id])->first();
@@ -246,7 +250,53 @@ if(!function_exists('WxJsPayCallback'))
     }
 }
 
-if(!function_exists('order_pay_success_send_sms'))
+/**
+ * 阿里短信发送函数
+ */
+if(!function_exists('sms_send'))
+{
+    function sms_send($template,$telephone,$name = '')
+    {
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun'
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => '/tmp/easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => config('app.ali_sms_access_key_id'),
+                    'access_key_secret' => config('app.ali_sms_access_key_secret'),
+                    'sign_name' => '玩玩具趣编程',
+                ],
+            ],
+        ];
+
+        $easySms = new \Overtrue\EasySms\EasySms($config);
+
+        $easySms->send($telephone, [
+            'content'  => '您的验证码为: 6379',
+            'template' => $template,
+            'data' => [
+                'name'=>$name
+            ],
+        ]);
+    }
+}
+
+/*if(!function_exists('order_pay_success_send_sms'))
 {
     function order_pay_success_send_sms($telephone,$name)
     {
@@ -287,9 +337,9 @@ if(!function_exists('order_pay_success_send_sms'))
             ],
         ]);
     }
-}
+}*/
 
-if(!function_exists('send_order_to_admin'))
+/*if(!function_exists('send_order_to_admin'))
 {
     function send_order_to_admin($telephone)
     {
@@ -329,10 +379,10 @@ if(!function_exists('send_order_to_admin'))
             ],
         ]);
     }
-}
+}*/
 
 
-if(!function_exists('vip_card_pay_success_send_sms'))
+/*if(!function_exists('vip_card_pay_success_send_sms'))
 {
     function vip_card_pay_success_send_sms($telephone,$name)
     {
@@ -373,7 +423,7 @@ if(!function_exists('vip_card_pay_success_send_sms'))
             ],
         ]);
     }
-}
+}*/
 
 if(!function_exists('getJssdk'))
 {

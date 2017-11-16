@@ -30,6 +30,8 @@ return [
     'wechat_appid' => env('WECHAT_APPID','wxdd1dd7306d6662cf'),
     'wechat_appsecret' => env('WECHAT_APPSECRET','a16015c011af53215d2a885d1c1400af'),
     'wechat_token' => env('WECHAT_TOKEN','ZuZhUsk6zE3cjNdwXRP6t1bKogOa5WGh'),
+    'ali_sms_access_key_id' => 'LTAIDbgNNYDaamoB',
+    'ali_sms_access_key_secret' => 'halUjycVpy1F2cOsN59e9xCsG4s900',
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

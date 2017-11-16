@@ -173,11 +173,14 @@ class OrderController extends BaseController
             Good::where('id',$good_id)->update(['store'=>$store]);
 
             //发送短信通知
-            $this->send_order_sms($user->telephone,$user->name);
+            //$this->send_order_sms($user->telephone,$user->name);
+            sms_send('SMS_103795027',$user->telephone,$user->name);
 
             //短信通知后台管理员
-            send_order_to_admin('13366556200');
-            send_order_to_admin('15101016067');
+            sms_send('SMS_109345328','13366556200');
+            sms_send('SMS_109345328','15101016067');
+            //send_order_to_admin('13366556200');
+            //send_order_to_admin('15101016067');
         }
         Order::create($order_data);
 
@@ -186,7 +189,7 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
-    private function send_order_sms($telephone,$name)
+    /*private function send_order_sms($telephone,$name)
     {
         $config = [
             // HTTP 请求的超时时间（秒）
@@ -223,7 +226,7 @@ class OrderController extends BaseController
                 'name'=>$name
             ],
         ]);
-    }
+    }*/
 
     public function order_list(Request $request)
     {

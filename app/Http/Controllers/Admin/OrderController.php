@@ -70,7 +70,8 @@ class OrderController extends BaseController
 
         if($type == 1)
         {
-            $this->send_sms($order->receiver_telephone,$order->receiver);
+            sms_send('SMS_109405330',$order->receiver_telephone,$order->receiver);
+            //$this->send_sms($order->receiver_telephone,$order->receiver);
             Order::where('id',$id)->update(['send_time'=>$this->datetime,'send_time2'=>$this->datetime,'status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
         }
         else
@@ -87,7 +88,7 @@ class OrderController extends BaseController
      * @param $telephone
      * @param $name
      */
-    private function send_sms($telephone,$name)
+    /*private function send_sms($telephone,$name)
     {
         $config = [
             // HTTP 请求的超时时间（秒）
@@ -125,7 +126,7 @@ class OrderController extends BaseController
                 'name' => $name
             ],
         ]);
-    }
+    }*/
 
     public function verify(Request $request)
     {

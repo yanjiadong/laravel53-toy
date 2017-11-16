@@ -151,7 +151,6 @@ class IndexController extends BaseController
         $data['is_used'] = 1;
         TelephoneCode::create($data);
 
-        //todo 接入短信接口发送
         $this->send_sms($telephone,$data['code']);
 
         $this->ret['msg'] = '验证码发送成功';
@@ -180,8 +179,8 @@ class IndexController extends BaseController
                     'file' => '/tmp/easy-sms.log',
                 ],
                 'aliyun' => [
-                    'access_key_id' => 'jlU7IQOybzkAXInb',
-                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
+                    'access_key_id' => config('app.ali_sms_access_key_id'),
+                    'access_key_secret' => config('app.ali_sms_access_key_secret'),
                     'sign_name' => '玩玩具趣编程',
                 ],
             ],
