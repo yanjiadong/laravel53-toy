@@ -95,30 +95,6 @@
                 </tr>
             </table>
         </div>
-        {{--<div class="deposit clear">
-            <div class="fl">
-                <h3>押金</h3>
-                <p>押金可随时申请提现</p>
-            </div>
-            <div class="fr">
-            </div>
-        </div>
-        <div class="deposit-discount clear">
-            <div class="fl">
-                <span>押金减免</span>
-            </div>
-            <div class="fr">
-                <div class="flag1">
-                    <span class="tip">您的押金最多可减免¥3000</span>
-                    <span>-¥600</span>
-                </div>
-                <div class="flag2" onclick="choose_vip.goZmxy()">
-                    <span>认证芝麻信用分</span>
-                    <i class="icon icon_arrowRight_bold"></i>
-                </div>
-            </div>
-        </div>--}}
-
         <div class="coupon clear" onclick="choose_vip.chooseCars()">
             <div class="fl">
                 <h3>会员卡抵用券</h3>
@@ -288,7 +264,7 @@
                         if((yajin-free_deposit) <= 0){
                             $(".submit .fl p").text('免押金');
                         }else{
-                            $(".submit .fl p").text('其中押金¥'+(yajin-free_deposit)+'随时可退');
+                            $(".submit .fl p").text('含押金¥'+(yajin-free_deposit)+'随时可退');
                         }
 
 
@@ -365,7 +341,7 @@
                             if((choose_vip.data.sortList[0].money-free_deposit) <= 0){
                                 $(".submit .fl p").text('免押金');
                             }else{
-                                $(".submit .fl p").text('其中押金¥'+(choose_vip.data.sortList[0].money-free_deposit)+'随时可退');
+                                $(".submit .fl p").text('含押金¥'+(choose_vip.data.sortList[0].money-free_deposit)+'随时可退');
                             }
 
                             //$(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[0].money-free_deposit));
@@ -391,7 +367,7 @@
                             if((choose_vip.data.sortList[1].money-free_deposit) <= 0){
                                 $(".submit .fl p").text('免押金');
                             }else{
-                                $(".submit .fl p").text('其中押金¥'+(choose_vip.data.sortList[1].money-free_deposit)+'随时可退');
+                                $(".submit .fl p").text('含押金¥'+(choose_vip.data.sortList[1].money-free_deposit)+'随时可退');
                             }
 
                             //$(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[1].money-free_deposit));
@@ -417,7 +393,7 @@
                             if((choose_vip.data.sortList[2].money-free_deposit) <= 0){
                                 $(".submit .fl p").text('免押金');
                             }else{
-                                $(".submit .fl p").text('其中押金¥'+(choose_vip.data.sortList[2].money-free_deposit)+'随时可退');
+                                $(".submit .fl p").text('含押金¥'+(choose_vip.data.sortList[2].money-free_deposit)+'随时可退');
                             }
 
                             //$(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[2].money-free_deposit));
@@ -466,7 +442,7 @@
                         if((choose_vip.data.sortList[0].money-free_deposit) <= 0){
                             $(".submit .fl p").text('免押金');
                         }else{
-                            $(".submit .fl p").text('其中押金¥'+(choose_vip.data.sortList[0].money-free_deposit)+'随时可退');
+                            $(".submit .fl p").text('含押金¥'+(choose_vip.data.sortList[0].money-free_deposit)+'随时可退');
                         }
 
                         //$(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[0].money-free_deposit));
@@ -493,7 +469,7 @@
                         if((choose_vip.data.sortList[1].money-free_deposit) <= 0){
                             $(".submit .fl p").text('免押金');
                         }else{
-                            $(".submit .fl p").text('其中押金¥'+(choose_vip.data.sortList[1].money-free_deposit)+'随时可退');
+                            $(".submit .fl p").text('含押金¥'+(choose_vip.data.sortList[1].money-free_deposit)+'随时可退');
                         }
 
                         //$(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[1].money-free_deposit));
@@ -520,7 +496,7 @@
                         if((choose_vip.data.sortList[2].money-free_deposit) <= 0){
                             $(".submit .fl p").text('免押金');
                         }else{
-                            $(".submit .fl p").text('其中押金¥'+(choose_vip.data.sortList[2].money-free_deposit)+'随时可退');
+                            $(".submit .fl p").text('含押金¥'+(choose_vip.data.sortList[2].money-free_deposit)+'随时可退');
                         }
 
                         //$(".submit .fl p").text('其中包含押金¥'+(choose_vip.data.sortList[2].money-free_deposit));
