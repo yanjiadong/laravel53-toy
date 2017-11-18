@@ -14,6 +14,16 @@ class UserController extends BaseController
 {
     public function center()
     {
+        if(config('app.env')=='local')
+        {
+            session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+            session(['user_id'=>29]);
+        }
+        else
+        {
+            $this->check_user();
+        }
+
         $user_id = session('user_id');
         $openid = session('open_id');
         $menu = 'center';
@@ -58,6 +68,16 @@ class UserController extends BaseController
 
     public function help()
     {
+        if(config('app.env')=='local')
+        {
+            session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+            session(['user_id'=>29]);
+        }
+        else
+        {
+            $this->check_user();
+        }
+
         return view('wechat.user.help');
     }
 

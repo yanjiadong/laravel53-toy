@@ -80,7 +80,8 @@
 
                     var dataList='';
                     for(var i=0;i<good_return.data.detailList.length;i++){
-                        var href = "{{url('wechat/index/order_detail')}}"+'/'+good_return.data.detailList[i].code;
+                        //var href = "{{url('wechat/index/order_detail')}}"+'/'+good_return.data.detailList[i].code;
+                        var href = "javascript:;";
 
                         switch (good_return.data.detailList[i].back_status){
                             case '待验证':

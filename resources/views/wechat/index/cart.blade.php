@@ -122,7 +122,7 @@
                                 break;
                         }
 
-                        $(".toys-car .list").height($(window).height()-$('.btn').height()-$("footer").height()-$(".btn").height()-$(".top-tips").height());
+                        $(".toys-car .list").height($(window).outerHeight()-$("footer").outerHeight()-$(".btn").outerHeight()-$(".top-tips").outerHeight());
                     }else{
                         $(".no-goods").height($(window).height()-50).show();
                         $(".list,.btn,.top-tips").hide();

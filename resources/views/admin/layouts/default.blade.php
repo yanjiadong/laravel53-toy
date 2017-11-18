@@ -270,6 +270,11 @@
                             <span class="icon-th-list"></span><span class="text">系统设置</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.wechat_config') }}">
+                            <span class="icon-th-list"></span><span class="text">微信设置</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

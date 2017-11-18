@@ -1,6 +1,8 @@
 <?php
 namespace App\Utility;
 
+use Illuminate\Support\Facades\DB;
+
 class Wechat
 {
     public function __construct()
@@ -64,13 +66,40 @@ class Wechat
 
     private function handleEvent($postObj)
     {
+        $wechat_info_setting = DB::table('system_configs')->where('type',2)->first();
+
+        $content = [];
+        if(!empty($wechat_info_setting->content))
+        {
+            $content = json_decode($wechat_info_setting->content,true);
+        }
+
+        $auto_reply = isset($content[0])?$content[0]:'';
+        $back_address = isset($content[1])?$content[1]:'';
+        $contact_us = isset($content[2])?$content[2]:'';
+
+        slog($auto_reply);
+        slog($back_address);
+        slog($contact_us);
+
         $contentStr = '';
         switch($postObj->Event)
         {
             case 'subscribe':
-                $contentStr .= "hi,欢迎关注趣编程,这里有全球最潮流的益智类编程教育玩具，让孩子在玩乐中培养创造与逻辑分析能力，学会未来用编程与世界沟通。每月租金只需299，快来体验吧！";
+                //$contentStr .= "hi,欢迎关注趣编程,这里有全球最潮流的益智类编程教育玩具，让孩子在玩乐中培养创造与逻辑分析能力，学会未来用编程与世界沟通。每月租金只需299，快来体验吧！";
+                $contentStr .= $auto_reply;
                 break;
             case 'unsubscribe':
+                break;
+            case 'CLICK':
+                if($postObj->EventKey == 'BACK_ADDRESS')
+                {
+                    $contentStr .= $back_address;
+                }
+                elseif ($postObj->EventKey == 'CONTACT_US')
+                {
+                    $contentStr .= $contact_us;
+                }
                 break;
         }
 
