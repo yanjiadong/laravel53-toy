@@ -34,7 +34,7 @@ class BaseController extends Controller
             Header("Location: $url");
             exit();
         }
-        
+
         $user_info = User::find($user_id);
         if(empty($user_info))
         {
