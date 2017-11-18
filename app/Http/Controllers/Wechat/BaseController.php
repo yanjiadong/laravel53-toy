@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -33,7 +34,7 @@ class BaseController extends Controller
             Header("Location: $url");
             exit();
         }
-
+        
         $user_info = User::find($user_id);
         if(empty($user_info))
         {
