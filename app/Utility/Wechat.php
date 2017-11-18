@@ -66,9 +66,9 @@ class Wechat
 
     private function handleEvent($postObj)
     {
-        $wechat_info_setting = DB::table('system_configs')->where('type',2)->first();
+        //$wechat_info_setting = DB::table('system_configs')->where('type',2)->first();
 
-        $content = [];
+        /*$content = [];
         if(!empty($wechat_info_setting->content))
         {
             $content = json_decode($wechat_info_setting->content,true);
@@ -80,7 +80,28 @@ class Wechat
 
         slog($auto_reply);
         slog($back_address);
-        slog($contact_us);
+        slog($contact_us);*/
+
+        $auto_reply = <<<EOT
+感谢关注玩玩具注趣编程！[亲亲]\n\n
+这里可以租到全球最潮流的可编程教育机器人（玩具），乐高、能力风暴、优必选、makeblock等品牌全都有\n\n
+成为会员即可随意玩、不限次数更换哦～[鼓掌]\n\n
+让孩子通过玩玩具接触学习编程，并激发创造能力、实践能力、分析能力\n\n
+我们致力于为少儿编程、机器人教育提供解决方案，在未来用编程与世界沟通！\n\n
+快点击底部菜单【我要租】开始体验吧～[坏笑]
+EOT;
+
+        $back_address = <<<EOT
+请将要归还的玩具通过以下地址寄回[机智]\n\n
+地址：北京市 丰台区  新宫家园北区3号楼3单元804\n\n
+收货人：郭先生\n\n
+收货人电话：13366556200
+EOT;
+
+        $contact_us = <<<EOT
+方式1:直接公众号内发送要咨询的内容，将会有工作人员回复您\n\n
+方式2:拨打客服热线 400-636-0816
+EOT;
 
         $contentStr = '';
         switch($postObj->Event)
