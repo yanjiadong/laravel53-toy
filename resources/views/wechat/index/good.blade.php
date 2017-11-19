@@ -260,8 +260,14 @@
                         }
                     }
 
+                    //console.log(goodDetail_obj.detail_data.lunbo2);
                     if(goodDetail_obj .detail_data.lunbo2.length > 0){
                         lunbo_content = '';
+
+                        if(goodDetail_obj.detail_data.lunbo2.length <= 1)
+                        {
+                            goodDetail_obj.data.join_pic = goodDetail_obj.detail_data.lunbo2[0].picture;
+                        }
                         for(var i=1;i<goodDetail_obj .detail_data.lunbo2.length;i++){
                             if(!goodDetail_obj.data.join_pic){
                                 goodDetail_obj.data.join_pic = goodDetail_obj.detail_data.lunbo2[i].picture;
@@ -273,6 +279,7 @@
                         }
                     }
 
+                    //console.log(goodDetail_obj.data.join_pic);
                     //轮播图
                     goodDetail_obj.banner();
                     goodDetail_obj.lunbo_video();
