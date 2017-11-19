@@ -243,7 +243,7 @@ class IndexController extends BaseController
 
     public function get_area($fid = 0)
     {
-        $areas = Area::where(['fid'=>$fid])->get()->toArray();
+        $areas = Area::where(['fid'=>$fid])->orderBy('first','asc')->get()->toArray();
 
         array_unshift($areas,['id'=>0,'name'=>'请选择']);
 

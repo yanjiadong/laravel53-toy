@@ -22,7 +22,10 @@
                             <div class="span3">省份名称：</div>
                             <div class="span9"><input type="text" value="{{$province->name}}" class="validate[required]" id="name"/></div>
                         </div>
-
+                        <div class="row-form clearfix">
+                            <div class="span3">首字母：</div>
+                            <div class="span9"><input type="text" value="{{$province->first}}" class="validate[required]" id="first"/></div>
+                        </div>
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -38,10 +41,11 @@
 
                 if ($("#validation").validationEngine('validate')) {
                     var name = $("#name").val();
+                    var first = $("#first").val();
                     var id = '{{$province->id}}';
 
                     $.post("{{route('admin.areas.update_province')}}",
-                        {name:name,id:id},
+                        {name:name,id:id,first:first},
                         function(data){
                             cTip(data);
                         }, "json");

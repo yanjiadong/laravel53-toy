@@ -34,7 +34,7 @@ class AreaController extends BaseController
 
     public function store_province(Request $request)
     {
-        Area::create(['name'=>$request->get('name'),'area'=>Area::TYPE_AREA_PROVINCE,'fid'=>0]);
+        Area::create(['name'=>$request->get('name'),'area'=>Area::TYPE_AREA_PROVINCE,'fid'=>0,'first'=>strtoupper($request->get('first'))]);
         return alert(route('admin.areas.province'),1);
     }
 
@@ -51,7 +51,7 @@ class AreaController extends BaseController
 
     public function update_province(Request $request)
     {
-        Area::where('id',$request->get('id'))->update(['name'=>$request->get('name')]);
+        Area::where('id',$request->get('id'))->update(['name'=>$request->get('name'),'first'=>strtoupper($request->get('first'))]);
         return alert(route('admin.areas.province'),1);
     }
 
@@ -129,8 +129,8 @@ class AreaController extends BaseController
         {
             alert('请先删除下级数据后再操作');
         }
-        print_r($info);
-        //Area::destroy($id);
+        //print_r($info);
+        Area::destroy($id);
         return alert('',1);
     }
 

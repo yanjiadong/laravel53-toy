@@ -23,6 +23,11 @@
                             <div class="span9"><input type="text" value="" class="validate[required]" id="name"/></div>
                         </div>
 
+                        <div class="row-form clearfix">
+                            <div class="span3">首字母：</div>
+                            <div class="span9"><input type="text" value="" class="validate[required]" id="first"/></div>
+                        </div>
+
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -38,9 +43,10 @@
 
                 if ($("#validation").validationEngine('validate')) {
                     var name = $("#name").val();
+                    var first = $("#first").val();
 
                     $.post("{{route('admin.areas.store_province')}}",
-                        {name:name},
+                        {name:name,first:first},
                         function(data){
                             cTip(data);
                         }, "json");

@@ -30,6 +30,7 @@
                     <tr>
                         <th>序号</th>
                         <th>省份</th>
+                        <th>首字母</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -38,6 +39,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $province->name }}</td>
+                            <td>{{ $province->first }}</td>
                             <td>
                                 <a href="{{route('admin.areas.edit_province',['id'=>$province->id])}}" title="修改" class="tip"><span class="btn btn-mini">修改</span></a>
                                 <a href="{{route('admin.areas.city',['fid'=>$province->id])}}" title="查看城市" class="tip"><span class="btn btn-mini">查看城市</span></a>

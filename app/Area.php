@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     protected $table = 'areas';
-    protected $fillable = ['name','area','fid'];
+    protected $fillable = ['name','area','fid','first'];
 
     public $timestamps = false;
 
