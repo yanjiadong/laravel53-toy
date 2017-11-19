@@ -134,7 +134,7 @@
         setTimeout(function(){
             bool=true;
         },500);
-        debugger;
+        //debugger;
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             //debugger;
             if(bool) {
