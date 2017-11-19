@@ -74,7 +74,8 @@
     var orderDtail = {
         data:{
             list:[],            //进行中列表
-            returnList:[]       //已归还列表
+            returnList:[],       //已归还列表
+            page:common.getParam("page")?common.getParam("page"):0
         },
         init:function () {
             orderDtail.getList();
@@ -84,13 +85,19 @@
         //导航切换
         tab_change:function () {
             var tab_btn = $(".order-detail-wrap nav ul li");
+            if(orderDtail.data.page==1){
+                tab_btn.removeClass("active");
+                tab_btn.eq(orderDtail.data.page).addClass("active");
+                $(".order-detail-main  .tab-page").hide();
+                $(".order-detail-main  .tab-page").eq(orderDtail.data.page).show();
+            }
             tab_btn.click(function () {
                 var num = $(this).attr("data-tab");
                 $("body").scrollTop("0");
                 tab_btn.removeClass("active");
                 $(this).addClass("active");
-                $(".order-detail-main .tab-page").hide();
-                $(".order-detail-main .tab-page").eq(num).show();
+                $(".order-detail-main  .tab-page").hide();
+                $(".order-detail-main  .tab-page").eq(num).show();
             });
         },
         //进行中 --数据加载

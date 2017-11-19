@@ -303,21 +303,6 @@
 </script>
 {{--<script>
     $(function () {
-        pushHistory();
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            location.href='{{url('wechat/index/order_list')}}';  //在这里指定其返回的地址
-        }, false);
-    })
-    function pushHistory() {
-        var state = {
-            title: "title",
-            url: "{{url('wechat/index/logistics_info')}}"
-        };
-        window.history.pushState(state, state.title, state.url);
-    }
-</script>--}}
-<script>
-    $(function () {
         //让会员卡回退到个人中心 或者首页
         pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
@@ -329,6 +314,43 @@
             if(bool) {
                 if(bool) {
                     location.href=document.referrer;  //在这里指定其返回的地址
+                }
+            }
+        }, false);
+    });
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: ''
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
+</script>--}}
+<script>
+    $(function () {
+        if(document.referrer.indexOf("user/center")>-1||document.referrer.indexOf("index/order_list")>-1||
+            document.referrer.indexOf("index/order_detail")>=-1){
+            sessionStorage.setItem("logistics_info_back_url",document.referrer)
+        }
+        //让会员卡回退到个人中心 或者首页
+        pushHistory();
+        /*----------避免下一页返回这一页调用这个函数-------------*/
+        var bool=false;
+        setTimeout(function(){
+            bool=true;
+        },500);
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            if(bool) {
+                if(bool) {
+                    if(sessionStorage.getItem('logistics_info_back_url')){
+                        if(sessionStorage.getItem('logistics_info_back_url').indexOf("/index/order_list")>-1&&sessionStorage.getItem('logistics_info_back_url').indexOf("?page=1")==-1){
+                            location.href=sessionStorage.getItem('logistics_info_back_url')+"?page=1";
+                        }else{
+                            location.href=sessionStorage.getItem('logistics_info_back_url')
+                        }
+                    }else{
+                        location.href=document.referrer;  //在这里指定其返回的地址
+                    }
                 }
             }
         }, false);

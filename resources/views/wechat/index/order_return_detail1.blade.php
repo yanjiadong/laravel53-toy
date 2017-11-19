@@ -134,6 +134,38 @@
         setTimeout(function(){
             bool=true;
         },500);
+        debugger;
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            debugger;
+            if(bool) {
+                if(bool) {
+                    if(document.referrer.indexOf("/index/order_list")>-1&&document.referrer.indexOf("?page=1")==-1){
+                        location.href=document.referrer+"?page=1";
+                    }else{
+                        location.href=document.referrer;  //在这里指定其返回的地址
+                    }
+                }
+            }
+        }, false);
+    });
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: ''
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
+</script>
+
+{{--<script>
+    $(function () {
+        //让会员卡回退到个人中心 或者首页
+        pushHistory();
+        /*----------避免下一页返回这一页调用这个函数-------------*/
+        var bool=false;
+        setTimeout(function(){
+            bool=true;
+        },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
                 if(bool) {
@@ -149,7 +181,7 @@
         };
         window.history.pushState(state, state.title, state.url);
     }
-</script>
+</script>--}}
 {{--<script>
     $(function () {
         pushHistory();
