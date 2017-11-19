@@ -344,7 +344,7 @@
                 if(bool) {
                     if(sessionStorage.getItem('logistics_info_back_url')){
                         if(sessionStorage.getItem('logistics_info_back_url').indexOf("/index/order_list")>-1&&sessionStorage.getItem('logistics_info_back_url').indexOf("?page=1")==-1){
-                            location.href=sessionStorage.getItem('logistics_info_back_url')+"?page=1";
+                            location.href=sessionStorage.getItem('logistics_info_back_url')+"?page="+localStorage.order_return_state;
                         }else{
                             location.href=sessionStorage.getItem('logistics_info_back_url')
                         }

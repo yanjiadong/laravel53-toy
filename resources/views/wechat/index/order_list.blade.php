@@ -85,11 +85,13 @@
         //导航切换
         tab_change:function () {
             var tab_btn = $(".order-detail-wrap nav ul li");
+            localStorage.order_return_state = 0;
             if(orderDtail.data.page==1){
                 tab_btn.removeClass("active");
                 tab_btn.eq(orderDtail.data.page).addClass("active");
                 $(".order-detail-main  .tab-page").hide();
                 $(".order-detail-main  .tab-page").eq(orderDtail.data.page).show();
+                localStorage.order_return_state = 1;
             }
             tab_btn.click(function () {
                 var num = $(this).attr("data-tab");
@@ -98,6 +100,7 @@
                 $(this).addClass("active");
                 $(".order-detail-main  .tab-page").hide();
                 $(".order-detail-main  .tab-page").eq(num).show();
+                localStorage.order_return_state = localStorage.order_return_state==1?0:1;
             });
         },
         //进行中 --数据加载

@@ -136,14 +136,12 @@
         },500);
         debugger;
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            debugger;
+            //debugger;
             if(bool) {
-                if(bool) {
-                    if(document.referrer.indexOf("/index/order_list")>-1&&document.referrer.indexOf("?page=1")==-1){
-                        location.href=document.referrer+"?page=1";
-                    }else{
-                        location.href=document.referrer;  //在这里指定其返回的地址
-                    }
+                if(document.referrer.indexOf("/index/order_list")>-1&&document.referrer.indexOf("?page=1")==-1){
+                    location.href=document.referrer+"?page="+localStorage.order_return_state;
+                }else{
+                    location.href=document.referrer;  //在这里指定其返回的地址
                 }
             }
         }, false);
