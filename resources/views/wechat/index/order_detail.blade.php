@@ -420,7 +420,7 @@
 <script>
     $(function () {
         if(document.referrer.indexOf("index/logistics_detail")==-1&&document.referrer.indexOf("index/good")==-1&&
-            document.referrer.indexOf("index/order_return_detail1")==-1){
+            document.referrer.indexOf("index/order_return_detail1")==-1&&document.referrer.indexOf("order_return_detail.html")==-1){
             sessionStorage.setItem("order_detail_back_url",document.referrer)
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/
@@ -431,8 +431,14 @@
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                if(bool) {
-                    location.href=sessionStorage.getItem('order_detail_back_url')||document.referrer;  //在这里指定其返回的地址
+                if(sessionStorage.getItem('order_detail_back_url')){
+                    if(sessionStorage.getItem('order_detail_back_url').indexOf("/index/order_list")>-1&&sessionStorage.getItem('order_detail_back_url').indexOf("?page")==-1){
+                        location.href=sessionStorage.getItem('order_detail_back_url')+"?page="+localStorage.order_return_state;
+                    }else{
+                        location.href=sessionStorage.getItem('order_detail_back_url')
+                    }
+                }else{
+                    location.href=document.referrer;  //在这里指定其返回的地址
                 }
             }
         }, false);
