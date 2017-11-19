@@ -419,8 +419,8 @@
 </script>--}}
 <script>
     $(function () {
-        if(document.referrer.indexOf("index/logistics_detail")==-1&&document.referrer.indexOf("index/good")==-1&&
-            document.referrer.indexOf("index/order_return_detail1")==-1&& document.referrer.indexOf("index/order_list")==-1){
+        if(document.referrer.indexOf("index/logistics_info")>-1||document.referrer.indexOf("index/order_list")>-1||
+            document.referrer.indexOf("pay_success")>-1){
             sessionStorage.setItem("order_detail_back_url",document.referrer)
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/
