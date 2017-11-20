@@ -272,15 +272,14 @@
                         logistics_cont = '<div class="stay"><i class="icon-big icon-big-state-zuyongzhong"></i><h2>租用中</h2>' +
                             '<h4>将租用中的玩具归还后，才能重新选择玩具再次下单</h4></div>';
 
-                        /*logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
-                            '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
-                            '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
-                            '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
-*/
                         logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
                             '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
                             '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
-                            '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button></div>';
+                            '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button><button class="confirm-btn" onclick="order_detail.goOrderReturn(\''+'{{$order_code}}'+'\')">归还玩具</button></div>';
+                        /*logistics_info = '<div class="logistics-info clear"  onclick="order_detail.goLogisticsDetail()"><div class="fl"><i class="icon icon_state_qianshou"></i>' +
+                            '</div><div class="fl"><h3>快件已签收</h3><p>' + order_detail.data.logistics_state.logistics.time + '</p></div>' +
+                            '<div class="fr"><i class="icon icon_arrowRight_white"></i></div></div><div class="operate-btn">' +
+                            '<a href="tel:{{$phone}}"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="order_detail.goLogisticsDetail()">查看物流</button></div>';*/
 
                         $(".order-info .delivery .fl").text("平台发货时间");
                         $(".order-info .delivery .fr span").text(order_detail.data.logistics_state.logistics.item3);
