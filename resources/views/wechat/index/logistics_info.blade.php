@@ -329,7 +329,7 @@
 <script>
     $(function () {
         if(document.referrer.indexOf("user/center")>-1||document.referrer.indexOf("index/order_list")>-1||
-            document.referrer.indexOf("index/order_detail")>=-1){
+            document.referrer.indexOf("index/order_detail")>-1||document.referrer.indexOf("order_detail")>-1){
             sessionStorage.setItem("logistics_info_back_url",document.referrer)
         }
         //让会员卡回退到个人中心 或者首页
@@ -341,16 +341,20 @@
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                if(bool) {
-                    if(sessionStorage.getItem('logistics_info_back_url')){
-                        if(sessionStorage.getItem('logistics_info_back_url').indexOf("/index/order_list")>-1&&sessionStorage.getItem('logistics_info_back_url').indexOf("?page=1")==-1){
-                            location.href=sessionStorage.getItem('logistics_info_back_url')+"?page="+localStorage.order_return_state;
+                if(sessionStorage.getItem('logistics_info_back_url')){
+                    if(sessionStorage.getItem('logistics_info_back_url').indexOf("/index/order_list")>-1){
+                        var  url_last;
+                        if(sessionStorage.getItem('logistics_info_back_url').indexOf("?page")==-1){
+                            url_last =sessionStorage.getItem('logistics_info_back_url')
                         }else{
-                            location.href=sessionStorage.getItem('logistics_info_back_url')
+                            url_last = sessionStorage.getItem('logistics_info_back_url').slice(0,sessionStorage.getItem('logistics_info_back_url').indexOf("?page"));
                         }
+                        location.href=url_last+"?page="+localStorage.order_return_state;
                     }else{
-                        location.href=document.referrer;  //在这里指定其返回的地址
+                        location.href=sessionStorage.getItem('logistics_info_back_url')
                     }
+                }else{
+                    location.href=document.referrer;  //在这里指定其返回的地址
                 }
             }
         }, false);

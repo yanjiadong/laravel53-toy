@@ -138,8 +138,14 @@
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             //debugger;
             if(bool) {
-                if(document.referrer.indexOf("/index/order_list")>-1&&document.referrer.indexOf("?page=1")==-1){
-                    location.href=document.referrer+"?page="+localStorage.order_return_state;
+                if(document.referrer.indexOf("/index/order_list")>-1){
+                    var  url_last;
+                    if(document.referrer.indexOf("?page")==-1){
+                        url_last =document.referrer
+                    }else{
+                        url_last = document.referrer.slice(0,document.referrer.indexOf("?page"));
+                    }
+                    location.href=url_last+"?page="+localStorage.order_return_state;
                 }else{
                     location.href=document.referrer;  //在这里指定其返回的地址
                 }

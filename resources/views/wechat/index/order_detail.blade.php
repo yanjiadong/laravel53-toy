@@ -432,8 +432,14 @@
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
                 if(sessionStorage.getItem('order_detail_back_url')){
-                    if(sessionStorage.getItem('order_detail_back_url').indexOf("/index/order_list")>-1&&sessionStorage.getItem('order_detail_back_url').indexOf("?page")==-1){
-                        location.href=sessionStorage.getItem('order_detail_back_url')+"?page="+localStorage.order_return_state;
+                    if(sessionStorage.getItem('order_detail_back_url').indexOf("/index/order_list")>-1){
+                        var  url_last;
+                        if(sessionStorage.getItem('order_detail_back_url').indexOf("?page")==-1){
+                            url_last =sessionStorage.getItem('order_detail_back_url')
+                        }else{
+                            url_last = sessionStorage.getItem('order_detail_back_url').slice(0,sessionStorage.getItem('order_detail_back_url').indexOf("?page"));
+                        }
+                        location.href=url_last+"?page="+localStorage.order_return_state;
                     }else{
                         location.href=sessionStorage.getItem('order_detail_back_url')
                     }
