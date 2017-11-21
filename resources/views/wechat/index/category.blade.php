@@ -119,12 +119,7 @@
                 }
                 $(".year-select .scroll").html(cont);
 
-                /*//计算列表宽度
-                var scroll_wid=0;
-                for(var i=0;i< $(".year-select .scroll button").length;i++){
-                    scroll_wid+=$($(".year-select .scroll button")[i]).outerWidth()+10;
-                }
-                $(".year-select .scroll").width(scroll_wid+'px');*/
+                $(".year-select").width($(window).width()-24);
                 sort_detail.choose_sort();   //分类选择
             })
         },

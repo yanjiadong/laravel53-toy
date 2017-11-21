@@ -351,6 +351,7 @@
 /*---------------------------分类详情页-----------------------------------*/
 .sort-detail .content {
     margin-bottom: 50px;
+    margin-top: 44px;
 }
 .sort-detail .content .grow-up .top {
     width: 100%;
@@ -360,7 +361,6 @@
 .sort-detail .content .grow-up .top .top-img {
     width: 100%;
     background-color: #fff;
-    margin-top: 44px;
     font-size: 0;
 }
 .sort-detail .content .grow-up .top .top-img img {
@@ -405,12 +405,13 @@
     width: 100%;
     height: 54px;
     overflow-y: hidden;
+    overflow-x: hidden;
     padding: 12px 0 12px 10px;
     border-bottom: 1px solid #f3f3f3;
 }
 .sort-detail .content .grow-up .all .year-select .scroll {
     width: 100%;
-    height: 140%;
+    height: 120%;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
