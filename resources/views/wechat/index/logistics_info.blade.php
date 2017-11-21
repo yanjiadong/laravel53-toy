@@ -127,7 +127,9 @@
                     h:res.info.telephone
                 };
                 $(".logistics-info-wrap .return-info .info table tr td.name").text(logisticsInfo.returnInfo.c);
-                $(".logistics-info-wrap .return-info  .info table tr td.cell").text(logisticsInfo.returnInfo.h);
+                $(".logistics-info-wrap .return-info  .info table tr td.cell").text(logisticsInfo.returnInfo.h.slice(0,3)+'-'
+                    +logisticsInfo.returnInfo.h.slice(3,7)+'-'+logisticsInfo.returnInfo.h.slice(7));
+                //$(".logistics-info-wrap .return-info  .info table tr td.cell").text(logisticsInfo.returnInfo.h);
                 $(".logistics-info-wrap .return-info .info table tr td.address").text(logisticsInfo.returnInfo.d);
             });
             //列表
