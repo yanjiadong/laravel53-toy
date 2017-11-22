@@ -528,6 +528,8 @@
 .good-detail-wrap .good-detail-content .top .lunbo .swiper-container .swiper-slide.video {
     width: 100%;
     position: relative;
+    object-fit: cover;
+    object-position: center center;
 }
 .good-detail-wrap .good-detail-content .top .lunbo .swiper-container .swiper-slide.video .video-pic{
     background-size: 100% 100%;

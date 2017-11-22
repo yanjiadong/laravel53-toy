@@ -110,19 +110,23 @@
                                 $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>办理任意一种会员后即可下单，享受免费租、随意换。').show();
                                 $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
                                 $(".toys-car .btn button").addClass('active');
+                                $(".toys-car .list").height($(window).outerHeight()-$("footer").outerHeight()-$(".btn").outerHeight()-$(".top-tips").outerHeight());
                                 break;
                             case 2: //会员 提示
                                 $(".top-tips").hide();
+                                $(".toys-car .list").css({'margin-top':0});
+                                $(".toys-car .list").height($(window).outerHeight()-$("footer").outerHeight()-$(".btn").outerHeight());
                                 $(".toys-car .btn button").removeClass('active');
                                 break;
                             case 3:
                                 $(".top-tips").addClass('red').html('<i class="icon-attion">!</i>当前账户已有正在租用的物品，归还后才能再下单').show();
                                 $(".toys-car .list").css({'margin-top':$(".top-tips").outerHeight()+'px'});
                                 $(".toys-car .btn button").removeClass('active');
+                                $(".toys-car .list").height($(window).outerHeight()-$("footer").outerHeight()-$(".btn").outerHeight()-$(".top-tips").outerHeight());
                                 break;
                         }
 
-                        $(".toys-car .list").height($(window).outerHeight()-$("footer").outerHeight()-$(".btn").outerHeight()-$(".top-tips").outerHeight());
+                        //$(".toys-car .list").height($(window).outerHeight()-$("footer").outerHeight()-$(".btn").outerHeight()-$(".top-tips").outerHeight());
                     }else{
                         $(".no-goods").height($(window).height()-50).show();
                         $(".list,.btn,.top-tips").hide();
