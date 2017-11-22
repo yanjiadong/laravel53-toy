@@ -211,8 +211,6 @@
 .index-wrap .content .recommend .hot .hot-list ul li {
     width: 50%;
     position: relative;
-    height: 250px;
-    overflow: hidden;
     margin-bottom: 10px;
 }
 .index-wrap .content .recommend .hot .hot-list ul li:nth-child(2n+1) {
