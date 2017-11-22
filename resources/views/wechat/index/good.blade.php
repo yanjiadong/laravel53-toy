@@ -249,7 +249,7 @@
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo.length;i++){
                         if(goodDetail_obj .detail_data.lunbo[i].state==0){
                             lunbo_content ='<div class="swiper-slide video"><div class="video-pic" style="background-image: url('+goodDetail_obj .detail_data.lunbo[i].poster+')">' +
-                                '<video width="100%" id="video" height="280" style="display: none;object-fit:fill"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" src="'+goodDetail_obj .detail_data.lunbo[i].url+'"></video>' +
+                                '<video width="100%" id="video" height="280" controls style="display: none;object-fit:fill"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" src="'+goodDetail_obj .detail_data.lunbo[i].url+'"></video>' +
                                 '</div></div>';
 
                             /*lunbo_content ='<div class="swiper-slide video"><div class="video-pic" style="background-image: url('+goodDetail_obj .detail_data.lunbo[i].poster+')">' +
