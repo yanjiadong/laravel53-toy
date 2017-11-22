@@ -249,9 +249,13 @@
                     for(var i=0;i<goodDetail_obj .detail_data.lunbo.length;i++){
                         if(goodDetail_obj .detail_data.lunbo[i].state==0){
                             lunbo_content ='<div class="swiper-slide video"><div class="video-pic" style="background-image: url('+goodDetail_obj .detail_data.lunbo[i].poster+')">' +
+                                '<video width="100%" id="video" height="280" style="display: none;object-fit:fill"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" src="'.goodDetail_obj .detail_data.lunbo[i].url.'"></video>' +
+                                '</div></div>';
+
+                            /*lunbo_content ='<div class="swiper-slide video"><div class="video-pic" style="background-image: url('+goodDetail_obj .detail_data.lunbo[i].poster+')">' +
                                 '<video width="100%" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true"'+
                                 ' x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-ignore-metadata="true" id="video" height="280" style="display: none" src="'+goodDetail_obj .detail_data.lunbo[i].url+'"></video>' +
-                                '</div></div>';
+                                '</div></div>';*/
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             var time = parseInt(goodDetail_obj .detail_data.lunbo[i].time/60)+'\''+(parseInt(goodDetail_obj .detail_data.lunbo[i].time%60)>=10?parseInt(goodDetail_obj .detail_data.lunbo[i].time%60):'0'+parseInt(goodDetail_obj .detail_data.lunbo[i].time%60))+'"'
 
@@ -360,6 +364,7 @@
             //监听播放停止事件
             document.getElementById("video").addEventListener("pause",function(){
                 //退出全屏关闭视频
+                this.currentTime = 0;
                 document.getElementById("video").style.display = 'none';
             },false);
         },
