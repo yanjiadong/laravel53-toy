@@ -275,6 +275,35 @@ class UserController extends BaseController
         return $this->ret;
     }
 
+    public function user_coupon_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $user = User::find($user_id);
+        $coupons = $user->coupons()->get()->toArray();
+
+        $result = [];
+        if(!empty($coupons))
+        {
+            foreach ($coupons as &$v)
+            {
+                $info = UserCoupon::where('user_id',$user_id)->where('coupon_id',$v['id'])->first();
+                if($info->status == 1)
+                {
+                    continue;
+                }
+
+
+                $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
+                $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
+
+                $result[] = $v;
+            }
+        }
+        $this->ret['info'] = ['coupons'=>$result];
+        return $this->ret;
+    }
+
     public function coupon_list(Request $request)
     {
         $user_id = $request->get('user_id');

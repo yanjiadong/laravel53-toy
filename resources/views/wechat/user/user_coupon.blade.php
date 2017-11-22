@@ -69,11 +69,8 @@
             state:true                 //是不是从个人中心进入 true是   false为不是
         },
         init:function(){
-            var data_vip_id = localStorage.vip_id;
-            console.log(data_vip_id);
-
             var code = $('.vip-voucher-wrap .input input').val("");
-            common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:data_vip_id},function (res) {
+            common.httpRequest('{{url('api/user/user_coupon_list')}}','post',{user_id:'{{$user_id}}'},function (res) {
                 /*vip_voucher.data.list=[
                     {id:0,money:100,cont:'新人专享优惠卷',time:'2017.8.27-2017.8.31',fanwei:'任意金额可用'},
                     {id:1,money:200,cont:'满减优惠卷',time:'2017.8.27-2017.8.31',fanwei:'满一千元可用'}
