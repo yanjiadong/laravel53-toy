@@ -344,7 +344,7 @@
         lunbo_video:function () {
             $('.lunbo .swiper-container .play-box').click(function (e) {
                 e.preventDefault();
-                alert($(this).hasClass("active"));
+                //alert($(this).hasClass("active"));
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
                     $(".swiper-slide video").hide();
@@ -360,7 +360,7 @@
                 document.getElementById("video").style.display = 'none';
                 document.getElementById("video").pause();
             });
-            
+
             //监听播放停止事件
             document.getElementById("video").addEventListener("pause",function(){
                 //退出全屏关闭视频
