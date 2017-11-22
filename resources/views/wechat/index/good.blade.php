@@ -342,13 +342,9 @@
         },
         //轮播图视频播放
         lunbo_video:function () {
-            $('.lunbo .swiper-container .play-box').removeClass('active');
             $('.lunbo .swiper-container .play-box').click(function (e) {
                 e.preventDefault();
-                $(".swiper-slide video").show();
-                $(".swiper-slide video")[0].play();
-
-                /*e.preventDefault();
+                alert($(this).hasClass("active"));
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
                     $(".swiper-slide video").hide();
@@ -357,20 +353,22 @@
                     $(this).addClass("active");
                     $(".swiper-slide video").show();
                     $(".swiper-slide video")[0].play();
-                }*/
+                }
             });
 
             document.getElementById("video").addEventListener("x5videoexitfullscreen", function () {
                 document.getElementById("video").style.display = 'none';
                 document.getElementById("video").pause();
             });
-
+            
             //监听播放停止事件
             document.getElementById("video").addEventListener("pause",function(){
                 //退出全屏关闭视频
                 this.currentTime = 0;
+                $('.lunbo .swiper-container .play-box').removeClass("active");
                 document.getElementById("video").style.display = 'none';
             },false);
+
         },
         //正品保证 往返包邮   微损免赔  往返包邮
         detail_describe_toggle:function () {
