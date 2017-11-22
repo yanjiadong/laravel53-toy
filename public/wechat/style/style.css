@@ -350,9 +350,6 @@
 .sort-detail .content {
     margin-bottom: 50px;
     margin-top: 44px;
-    overflow-y: scroll;
-    max-height: 300px;
-    -webkit-overflow-scrolling: touch;
 }
 .sort-detail .content .grow-up .top {
     width: 100%;

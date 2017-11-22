@@ -207,7 +207,7 @@
         var get_url = '{{url('api/user/get_cart_order_num')}}';
         common.getCarAndOrder(get_url,user_id);
 
-        $(".sort-detail .content").css('maxHeight',$(window).height()-94);
+        //$(".sort-detail .content").css('maxHeight',$(window).height()-94);
         sort_detail.init();        //初始化
 
         /*//顶部导航选择
