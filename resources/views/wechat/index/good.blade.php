@@ -345,6 +345,10 @@
             $('.lunbo .swiper-container .play-box').removeClass('active');
             $('.lunbo .swiper-container .play-box').click(function (e) {
                 e.preventDefault();
+                $(".swiper-slide video").show();
+                $(".swiper-slide video")[0].play();
+
+                /*e.preventDefault();
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
                     $(".swiper-slide video").hide();
@@ -353,7 +357,7 @@
                     $(this).addClass("active");
                     $(".swiper-slide video").show();
                     $(".swiper-slide video")[0].play();
-                }
+                }*/
             });
 
             document.getElementById("video").addEventListener("x5videoexitfullscreen", function () {
