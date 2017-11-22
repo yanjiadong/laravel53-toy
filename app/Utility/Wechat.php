@@ -45,7 +45,7 @@ class Wechat
             switch($msgType)
             {
                 case 'text':
-                    $resultStr = $this->responseText($postObj,'Welcome to wechat world!');
+                    //$resultStr = $this->responseText($postObj,'Welcome to wechat world!');
                     break;
                 case 'event':
                     //订阅事件或者取消订阅事件
