@@ -42,6 +42,7 @@ class Wechat
 
             slog('----'.$msgType.'----');
 
+            $resultStr = '';
             switch($msgType)
             {
                 case 'text':
