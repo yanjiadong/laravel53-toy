@@ -41,7 +41,7 @@ class GoodController extends BaseController
             {
                 $where['brand_id'] = $brand_id;
             }
-            $goods = Good::with(['category','brand'])->where($where)->orderBy('sort','asc')->paginate(20);
+            $goods = Good::with(['category','brand'])->where($where)->orderBy('sort','asc')->paginate();
 
             $brands = Brand::where('category_id',$category_id)->get();
         }
@@ -50,7 +50,12 @@ class GoodController extends BaseController
             $goods = Good::with(['category','brand'])->orderBy('sort','asc')->paginate(20);
         }
 
-
+        //分页需要的参数
+        $goods->appends([
+            'category_id'=>$category_id,
+            'brand_id'=>$brand_id,
+        ]);
+        //dd($goods);
         //echo $url;
         $current_url = url()->full();
         session(['current_url'=>$current_url]);

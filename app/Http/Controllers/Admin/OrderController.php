@@ -47,6 +47,12 @@ class OrderController extends BaseController
         $menu = 'order';
         //print_r($orders);
 
+        //分页需要的参数
+        $orders->appends([
+           'status'=>$status,
+            'code'=>$code,
+            'telephone'=>$telephone,
+        ]);
         $express = Express::all();
         return view('admin.order.index',compact('orders','username','menu','express','status','code','telephone'));
     }

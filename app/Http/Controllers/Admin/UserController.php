@@ -34,7 +34,10 @@ class UserController extends BaseController
             $users = User::where($where)->paginate(30);
         }
 
-
+        //分页需要的参数
+        $users->appends([
+            'is_vip'=>$is_vip
+        ]);
         $menu = 'user';
         //print_r($orders);
 
