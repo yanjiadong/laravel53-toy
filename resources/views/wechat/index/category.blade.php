@@ -112,6 +112,7 @@
             common.httpRequest(url,'get',null,function (res) {
                 //假数据
                 sort_detail.data.sort_list = res.info.brands;
+                console.log(sort_detail.data.sort_list);
                 var cont='<button class="active" onclick="sort_detail.getShopList(0)">全部品牌</button>';
                 for(var i=0;i<sort_detail.data.sort_list.length;i++){
                     cont += '<button onclick="sort_detail.getShopList('+sort_detail.data.sort_list[i].id+')">'+
@@ -135,11 +136,11 @@
             }
             //console.log(url);
             common.httpRequest(url,'get',null,function (res) {
-                console.log(res);
+                //console.log(res);
                 sort_detail.data.grown_up_list = {
                     list: res.info.goods
                 };   //假数据
-                console.log(res.info.goods);
+                //console.log(res.info.goods);
                 //商品列表
                 var shopList = "";
 

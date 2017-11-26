@@ -79,8 +79,25 @@ class IndexController extends BaseController
     {
         $category = Category::find($category_id);
         $categorys = Category::all();
-        $brands = Brand::where('category_id',$category_id)->get();
 
+
+        $brands = Brand::where('category_id',$category_id)->get()->toArray();
+
+        $brands_result = [];
+        if(count($brands) > 0)
+        {
+            foreach ($brands as &$brand)
+            {
+                $good = Good::where('brand_id',$brand['id'])->where('category_id',$category_id)->where('status',Good::STATUS_ON_SALE)->first();
+                if(!empty($good))
+                {
+                    $brands_result[] = $brand;
+                }
+            }
+
+        }
+
+        //print_r($brands_result);
         if(!empty($brand_id))
         {
             $where['brand_id'] = $brand_id;
@@ -89,7 +106,7 @@ class IndexController extends BaseController
         $where['status'] = Good::STATUS_ON_SALE;
 
         $goods = Good::with(['brand'])->where($where)->orderBy('sort','asc')->get();
-        $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'brands'=>$brands,'goods'=>$goods];
+        $this->ret['info'] = ['category'=>$category,'categorys'=>$categorys,'brands'=>$brands_result,'goods'=>$goods];
         return $this->ret;
     }
 
