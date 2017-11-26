@@ -177,7 +177,9 @@
                 </li>
                 <li class="clear">
                     <div class="fl">详细地址</div>
-                    <div class="fl"><input type="text" class="address" placeholder="如街道、楼层、门牌号"></div>
+                    <div class="fl">{{--<input type="text" class="address" placeholder="如街道、楼层、门牌号">--}}
+                        <textarea class="address" placeholder="如街道、楼层、门牌号"></textarea>
+                    </div>
                 </li>
                 <li class="clear">
                     <div class="fl">名字</div>

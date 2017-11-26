@@ -350,6 +350,9 @@
 .sort-detail .content {
     margin-bottom: 50px;
     margin-top: 44px;
+    overflow-y: scroll;
+    max-height: 300px;
+    -webkit-overflow-scrolling: touch;
 }
 .sort-detail .content .grow-up .top {
     width: 100%;
@@ -528,8 +531,6 @@
 .good-detail-wrap .good-detail-content .top .lunbo .swiper-container .swiper-slide.video {
     width: 100%;
     position: relative;
-    object-fit: cover;
-    object-position: center center;
 }
 .good-detail-wrap .good-detail-content .top .lunbo .swiper-container .swiper-slide.video .video-pic{
     background-size: 100% 100%;
@@ -864,6 +865,9 @@
     padding: 10px;
     display: none;
 }
+.order-wrap .address .address_detail .fl{
+    width: 80%;
+}
 .order-wrap .address .address_detail .fl h4 {
     color: #323232;
     font-size: 15px;
@@ -1088,9 +1092,12 @@
     margin-right: 12px;
 }
 .order-cover-wrap .order-cover-main .address-list ul li {
-    height: 80px;
+    min-height: 80px;
     padding: 10px 12px;
     border-bottom: 1px solid #e3e3e3;
+}
+.order-cover-wrap .order-cover-main .address-list ul li .fl{
+    width: 80%;
 }
 .order-cover-wrap .order-cover-main .address-list ul li .fl h4 {
     color: #323232;
@@ -1174,14 +1181,26 @@
 .order-cover-wrap .order-edit-address-main .edit-cont ul li div span {
     margin-right: 5px;
 }
-.order-cover-wrap .order-edit-address-main .edit-cont ul li div input {
+/*.order-cover-wrap .order-edit-address-main .edit-cont ul li div>div.input-box{*/
+    /*overflow-x: auto;*/
+    /*border: 1px solid red;*/
+    /*height: 30px;*/
+    /*padding: 0;*/
+    /*width: 100%;*/
+/*}*/
+.order-cover-wrap .order-edit-address-main .edit-cont ul li div textarea{
     width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
     font-size: 15px;
     color: #323232;
     height: 30px;
+    line-height: 30px;
     padding: 0 10px;
+    -webkit-user-select:auto;
+    -webkit-overflow-scrolling: touch;
 }
-.order-cover-wrap .order-edit-address-main .edit-cont ul li div input:focus {
+.order-cover-wrap .order-edit-address-main .edit-cont ul li div textarea:focus {
     border: 1px solid #6885EA;
     border-radius: 4px;
 }
