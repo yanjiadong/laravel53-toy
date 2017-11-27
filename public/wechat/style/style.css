@@ -411,7 +411,7 @@
 }
 .sort-detail .content .grow-up .all .year-select .scroll {
     width: 100%;
-    height: 120%;
+    height: 40px;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
