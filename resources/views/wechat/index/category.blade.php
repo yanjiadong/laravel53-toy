@@ -113,7 +113,7 @@
                 //假数据
                 sort_detail.data.sort_list = res.info.brands;
                 console.log(sort_detail.data.sort_list);
-                var cont='<button class="active" onclick="sort_detail.getShopList(0)">全部品牌</button>';
+                var cont='<button class="active" onclick="sort_detail.getShopList(0)">全部类型</button>';
                 for(var i=0;i<sort_detail.data.sort_list.length;i++){
                     cont += '<button onclick="sort_detail.getShopList('+sort_detail.data.sort_list[i].id+')">'+
                         sort_detail.data.sort_list[i].title+'</button>';
