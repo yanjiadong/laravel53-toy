@@ -109,7 +109,7 @@ class BrandController extends BaseController
         $brands = Good::where('brand_id',$id)->get();
         if(count($brands) > 0)
         {
-            alert('无法删除分类，由于存在商品关联该品牌');
+            alert('无法删除品牌，由于存在商品关联该品牌');
         }
 
         Brand::destroy($id);

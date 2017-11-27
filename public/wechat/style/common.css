@@ -601,6 +601,7 @@ footer table td.active a .icon-footer-user-center {
 }
 .index-nav .nav{
     height:120%;
+    padding: 0 10px;
     overflow-x: auto;
     white-space: nowrap;
     overflow-y: hidden;
@@ -609,7 +610,7 @@ footer table td.active a .icon-footer-user-center {
 }
 .index-nav .nav li {
     display: inline-block;
-    padding: 0 10px;
+    margin-right: 20px;
     height: 44px;
     line-height: 44px;
     text-align: center;
