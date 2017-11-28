@@ -704,11 +704,13 @@
 .good-detail-wrap .good-detail-content .good-detail-pic strong{
     font-weight: bold;
 }
+.good-detail-wrap .good-detail-content .good-detail-pic ul,
 .good-detail-wrap .good-detail-content .good-detail-pic ol{
-    padding-left:15px;
+    list-style: inherit;
 }
+.good-detail-wrap .good-detail-content .good-detail-pic ul li,
 .good-detail-wrap .good-detail-content .good-detail-pic ol li{
-    list-style: disc;
+    list-style: inherit;
 }
 .good-detail-wrap .good-detail-content .good-detail-pic .title {
     color: #505050;
