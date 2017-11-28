@@ -199,7 +199,7 @@
                 $(".year-select .scroll button").removeClass("active");
                 $(".year-select .scroll button").eq(sort_index).addClass("active");
                 sessionStorage.setItem("sort_scrollTop",0);      //回到一次位置后清楚位置记录
-                sort_detail.getShopList(sort_detail.data.sort_list[sort_index].id);
+                sort_detail.getShopList(sort_detail.data.sort_list[sort_index-1].id);
             }
             $("#content .list ul").click(function () {
                 sessionStorage.setItem("sort_scrollTop",$("body").scrollTop());
