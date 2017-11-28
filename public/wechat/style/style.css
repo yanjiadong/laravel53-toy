@@ -701,6 +701,15 @@
     margin-top: 10px;
     margin-bottom: 49px;
 }
+.good-detail-wrap .good-detail-content .good-detail-pic strong{
+    font-weight: bold;
+}
+.good-detail-wrap .good-detail-content .good-detail-pic ol{
+    padding-left:15px;
+}
+.good-detail-wrap .good-detail-content .good-detail-pic ol li{
+    list-style: disc;
+}
 .good-detail-wrap .good-detail-content .good-detail-pic .title {
     color: #505050;
     font-size: 15px;

@@ -193,12 +193,18 @@
         },
         //点击记录浏览的当前位置
         record_position:function () {
-            if(sessionStorage.getItem('sort_scrollTop')){
+            if(eval(sessionStorage.getItem('sort_scrollTop'))){
                 $("body").scrollTop(sessionStorage.getItem('sort_scrollTop'));
+                var sort_index =sessionStorage.getItem('sort_index');
+                $(".year-select .scroll button").removeClass("active");
+                $(".year-select .scroll button").eq(sort_index).addClass("active");
                 sessionStorage.setItem("sort_scrollTop",0);      //回到一次位置后清楚位置记录
+                sort_detail.getShopList(sort_detail.data.sort_list[sort_index].id);
             }
             $("#content .list ul").click(function () {
                 sessionStorage.setItem("sort_scrollTop",$("body").scrollTop());
+                var sort_index = $(".year-select .scroll button.active").index();
+                sessionStorage.setItem("sort_index",sort_index);      //记录选择的种类
             })
         }
     };
