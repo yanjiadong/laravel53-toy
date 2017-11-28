@@ -707,6 +707,7 @@
 .good-detail-wrap .good-detail-content .good-detail-pic ul,
 .good-detail-wrap .good-detail-content .good-detail-pic ol{
     list-style: inherit;
+    padding-left: 15px;
 }
 .good-detail-wrap .good-detail-content .good-detail-pic ul li,
 .good-detail-wrap .good-detail-content .good-detail-pic ol li{
