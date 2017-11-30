@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Express;
+use App\Good;
 use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Overtrue\EasySms\EasySms;
+use DB;
 
 class OrderController extends BaseController
 {
@@ -89,51 +91,6 @@ class OrderController extends BaseController
         alert('',1);
     }
 
-    /**
-     * 发货短信通知
-     * @param $telephone
-     * @param $name
-     */
-    /*private function send_sms($telephone,$name)
-    {
-        $config = [
-            // HTTP 请求的超时时间（秒）
-            'timeout' => 5.0,
-
-            // 默认发送配置
-            'default' => [
-                // 网关调用策略，默认：顺序调用
-                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
-
-                // 默认可用的发送网关
-                'gateways' => [
-                    'aliyun'
-                ],
-            ],
-            // 可用的网关配置
-            'gateways' => [
-                'errorlog' => [
-                    'file' => '/tmp/easy-sms.log',
-                ],
-                'aliyun' => [
-                    'access_key_id' => 'jlU7IQOybzkAXInb',
-                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩玩具趣编程',
-                ],
-            ],
-        ];
-
-        $easySms = new EasySms($config);
-
-        $easySms->send($telephone, [
-            'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_109405330',
-            'data' => [
-                'name' => $name
-            ],
-        ]);
-    }*/
-
     public function verify(Request $request)
     {
         $id = $request->get('id');
@@ -155,6 +112,13 @@ class OrderController extends BaseController
         $order = Order::find($id);
 
         Order::where('id',$id)->update(['status'=>$status]);
+
+        if($status == -1)
+        {
+            //返还库存
+            DB::table('goods')->where('id',$order->good_id)->increment('store');
+        }
+
         alert('',1);
     }
 

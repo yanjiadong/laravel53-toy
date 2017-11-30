@@ -105,7 +105,7 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
-        $good = $good = Good::with(['category_tag','category','brand'])->where(['id'=>$good_id,'status'=>Good::STATUS_ON_SALE])->first();
+        $good = Good::with(['category_tag','category','brand'])->where(['id'=>$good_id,'status'=>Good::STATUS_ON_SALE])->first();
         if(empty($good->id))
         {
             $this->ret['code'] = 300;
