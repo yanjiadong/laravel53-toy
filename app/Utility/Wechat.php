@@ -29,7 +29,7 @@ class Wechat
 
     public function responseMsg()
     {
-        slog('hello world');
+        //slog('hello world');
         //$text = "<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[FromUser]]></FromUserName><CreateTime>123456789</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event></xml>";
         //$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         $postStr = file_get_contents('php://input');
@@ -84,7 +84,7 @@ class Wechat
         slog($contact_us);*/
 
         $auto_reply = <<<EOT
-感谢关注玩玩具注趣编程！[亲亲]\n
+感谢关注玩玩具趣编程！[亲亲]\n
 这里有全球最潮流的编程教育机器人，成为会员即可免费玩、随意换～\n
 让孩子用玩玩具的方式学习编程，还可通过机器人竞赛获得升学加分、名校优先录取特权[坏笑]\n
 点击底部菜单【我要租】开始体验吧！

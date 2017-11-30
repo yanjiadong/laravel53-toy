@@ -1199,6 +1199,13 @@
     /*padding: 0;*/
     /*width: 100%;*/
 /*}*/
+.order-cover-wrap .order-edit-address-main .edit-cont ul li div input{
+    font-size: 15px;
+    color: #323232;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+}
 .order-cover-wrap .order-edit-address-main .edit-cont ul li div textarea{
     width: 100%;
     overflow-x: scroll;
