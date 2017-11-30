@@ -20,7 +20,7 @@
         <i class="icon-big icon-big-paySuccess"></i>
     </div>
     <div class="money">¥{{$order->price}}</div>
-    <p>平台将在24小时内发货，请耐心等待</p>
+    <p>平台将尽快安排发货，请耐心等待</p>
     <div class="btn">
         <button class="fl" onclick="goIndex()">返回首页</button>
         <button class="fr" onclick="goodDetail()">查看订单</button>
