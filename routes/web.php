@@ -142,7 +142,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('system_config/store','SystemConfigController@store')->name('admin.system_config.store');
 
     Route::get('wechat_config','SystemConfigController@wechat')->name('admin.wechat_config');
-    Route::post('wechat_config/store','SystemConfigController@wechat_store')->name('admin.wechat_config.store');
+    Route::post('wechat_config/store','SystemConfigController@wechat_store')->name('admin.-.store');
 
     //订单管理
     Route::get('order/index','OrderController@index')->name('admin.order.index');

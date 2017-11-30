@@ -872,22 +872,27 @@
 </script>
 <script>
     $(function () {
+        if(document.referrer.indexOf("index/pay_order")==-1){
+            sessionStorage.setItem("submit_order_url",document.referrer)
+        }
         pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
-        var bool=false;
+        var bool=false;
         setTimeout(function(){
             bool=true;
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                location.href=document.referrer;  //在这里指定其返回的地址
+                if(bool) {
+                    location.href=sessionStorage.getItem('submit_order_url')?sessionStorage.getItem('submit_order_url'):document.referrer;  //在这里指定其返回的地址
+                }
             }
         }, false);
     });
     function pushHistory() {
         var state = {
             title: "title",
-            url: "#"
+            url: location.href
         };
         window.history.pushState(state, state.title, state.url);
     }
