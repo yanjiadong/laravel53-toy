@@ -104,7 +104,7 @@
                 <input type="text" placeholder="输入真实姓名" onblur="zmxy.checkName(this)">
             </div>
             <div class="certificates">
-                <input type="number" placeholder="输入身份证号码" onblur="zmxy.checkNum(this)">
+                <input type="text" placeholder="输入身份证号码" onblur="zmxy.checkNum(this)">
             </div>
             <div class="tip">以上信息仅用于完成授权，平台不会用作任何其他用途</div>
         </div>
