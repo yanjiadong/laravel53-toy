@@ -46,7 +46,7 @@
         <table>
             <tr>
                 <td><i class="icon-user_center3"></i></td>
-                <td>每次收到玩具会员卡才开始启用计时</td>
+                <td>每次收到玩具，会员卡才启用并计时</td>
                 <td><button onclick="user_center.renew()">会员续费</button></td>
             </tr>
         </table>
