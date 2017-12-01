@@ -88,7 +88,7 @@
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
                                     '<div class="fr">待平台验货确认</div></div><div class="good-detail clear"><a href="'+href+'">' +
                                     '<div class="fl"><img src="'+good_return.data.detailList[i].good_picture+'"></div><div class="fr"><h3>' +good_return.data.detailList[i].good_title+
-                                    '</h3><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p><h4>适用年龄'+good_return.data.detailList[i].good_old+'岁</h4></div></a></div>' +
+                                    '</h3><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p><h4>适用年龄'+good_return.data.detailList[i].good_old+'</h4></div></a></div>' +
                                     '<div class="days-monny clear"><div class="fl" ><span>共租用'+good_return.data.detailList[i].days+'天</span></div><div class="fr"><span>' +
                                     '共'+'1'+'件商品合计：+¥'+good_return.data.detailList[i].money+'</span></div></div><div class="return-info">' +
                                     '<p>租期：'+good_return.data.detailList[i].confirm_time_new +'-'+good_return.data.detailList[i].back_time_new+'</p><p>寄回物流信息：' +
@@ -99,7 +99,7 @@
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="icon-logo"></i><span>玩玩具趣编程</span></div>' +
                                     '<div class="fr done">已验货确认</div></div><div class="good-detail clear"><a href="'+href+'">' +
                                     '<div class="fl"><img src="'+good_return.data.detailList[i].good_picture+'"></div><div class="fr"><h3>' +good_return.data.detailList[i].good_title+
-                                    '</h3><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p><h4>适用年龄'+good_return.data.detailList[i].good_old+'岁</h4></div></a></div>' +
+                                    '</h3><p>市场参考价¥'+good_return.data.detailList[i].good_price+'</p><h4>适用年龄'+good_return.data.detailList[i].good_old+'</h4></div></a></div>' +
                                     '<div class="days-monny clear"><div class="fl" ><span>共租用'+good_return.data.detailList[i].days+'天</span></div><div class="fr"><span>' +
                                     '共'+'1'+'件商品合计：+¥'+good_return.data.detailList[i].money+'</span></div></div><div class="return-info">' +
                                     '<p>租期：'+good_return.data.detailList[i].confirm_time_new +'-'+good_return.data.detailList[i].back_time_new+'</p><p>寄回物流信息：' +
