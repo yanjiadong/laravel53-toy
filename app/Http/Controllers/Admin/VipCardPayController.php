@@ -22,12 +22,17 @@ class VipCardPayController extends BaseController
 
         if($status)
         {
-            $users = VipCardPay::with(['user','vip_card'])->where('status',$status)->paginate(20);
+            $users = VipCardPay::with(['user','vip_card'])->where('status',$status)->where('pay_status',1)->paginate(20);
         }
         else
         {
-            $users = VipCardPay::with(['user','vip_card'])->paginate(20);
+            $users = VipCardPay::with(['user','vip_card'])->where('pay_status',1)->paginate(20);
         }
+
+        //分页需要的参数
+        $users->appends([
+            'status'=>$status,
+        ]);
 
         $menu = 'vip_card_pay';
 
