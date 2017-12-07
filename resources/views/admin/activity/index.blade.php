@@ -47,7 +47,13 @@
                                     </td>
                                     <td>{{ $activity->title }}</td>
                                     <td>{{ $activity->url }}</td>
-                                    <td>{{ $activity->type==1?'运营活动':'' }}</td>
+                                    <td>
+                                        @if($activity->type == 1)
+                                            运营活动
+                                        @else
+                                            新手指南
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ url("admin/activitys/$activity->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini">修改</span></a>
                                         <a href="javascript:;" data-id="{{ $activity->id }}" title="删除" class="tip del"><span class="btn btn-mini btn-danger">删除</span></a>

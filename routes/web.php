@@ -23,6 +23,16 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/valid','IndexController@valid');
     Route::any('/index/menu','IndexController@menu');
+
+    /**
+     * ================第二版路由==================
+     */
+
+
+    /**
+     * ===========================================
+     */
+
     Route::any('/index/index','IndexController@index')->name('wechat.index.index');
     Route::any('/index/category/{category_id?}/{brand_id?}','IndexController@category')->name('wechat.index.category');
     Route::any('/index/good/{good_id}','IndexController@good')->name('wechat.index.good');

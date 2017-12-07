@@ -622,6 +622,36 @@ if(!function_exists('get_level_by_score'))
     }
 }
 
+//根据商品租用天数来计算每日的租金
+if(!function_exists('getGoodPriceByDays'))
+{
+    function getGoodPriceByDays($price, $days)
+    {
+        if($days <= 7)
+        {
+            $result = round($price/98,1);
+        }
+        elseif($days > 7 && $days <= 14)
+        {
+            $result = round($price/128,1);
+        }
+        elseif($days > 14 && $days <= 21)
+        {
+            $result = round($price/153,1);
+        }
+        elseif($days > 21 && $days <= 30)
+        {
+            $result = round($price/165,1);
+        }
+        elseif($days > 30 && $days <= 60)
+        {
+            $result = round($price/185,1);
+        }
+
+        return $result;
+    }
+}
+
 
 //根据芝麻分获取减免的押金额度
 if(!function_exists('getMoneyByZhimaScore'))

@@ -174,6 +174,32 @@
                             <div class="span9"><input type="text" value="{{$good->store}}" class="validate[required,custom[stock]]" id="store" name="store"/></div>
                         </div>
                         <div class="row-form clearfix">
+                            <div class="span3">配送方式：</div>
+                            <div class="span9">
+                                <input type="text" value="{{$good->express}}" class="validate[required]" id="express" name="express"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix stock">
+                            <div class="span3">几天后发货：</div>
+                            <div class="span9">
+                                <input type="text" value="{{$good->days}}" class="validate[required,custom[stock]]" id="days" name="days"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">运费：</div>
+                            <div class="span9">
+                                <input type="text" value="{{$good->express_price}}" class="validate[required,custom[number]]" id="express_price"/>
+                                <span>单位：(元) </span>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">满多少减免来回运费：</div>
+                            <div class="span9">
+                                <input type="text" value="{{$good->free_price}}" class="validate[required,custom[number]]" id="free_price"/>
+                                <span>单位：(元) </span>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix">
                             <div class="span3">新品抢先：</div>
                             <div class="span9">
                                 <label class="checkbox inline">
@@ -396,6 +422,10 @@
                     var video_second = $("#video_second").val();
                     var old = $("#old").val();
                     var sort = $("#sort").val();
+                    var express = $("#express").val();
+                    var days = $("#days").val();
+                    var express_price = $("#express_price").val();
+                    var free_price = $("#free_price").val();
 
                     var url = "{{route('goods.update',['id'=>$good->id])}}";
                     var _method = 'PUT';
@@ -413,7 +443,7 @@
                     }
 
                     $.post(url,
-                        {sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

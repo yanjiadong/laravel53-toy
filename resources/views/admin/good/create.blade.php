@@ -164,6 +164,33 @@
                             <div class="span3">库存数量：</div>
                             <div class="span9"><input type="text" value="" class="validate[required,custom[stock]]" id="store" name="store"/></div>
                         </div>
+
+                        <div class="row-form clearfix">
+                            <div class="span3">配送方式：</div>
+                            <div class="span9">
+                                <input type="text" value="" class="validate[required]" id="express" name="express"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix stock">
+                            <div class="span3">几天后发货：</div>
+                            <div class="span9">
+                                <input type="text" value="" class="validate[required,custom[stock]]" id="days" name="days"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">运费：</div>
+                            <div class="span9">
+                                <input type="text" value="" class="validate[required,custom[number]]" id="express_price"/>
+                                <span>单位：(元) </span>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">满多少减免来回运费：</div>
+                            <div class="span9">
+                                <input type="text" value="" class="validate[required,custom[number]]" id="free_price"/>
+                                <span>单位：(元) </span>
+                            </div>
+                        </div>
                         <div class="row-form clearfix">
                             <div class="span3">新品抢先：</div>
                             <div class="span9">
@@ -381,6 +408,10 @@
                     var is_hot = $('input[name="is_hot"]:checked').val();
                     var is_new = $('input[name="is_new"]:checked').val();
                     var desc = ue.getContent();
+                    var express = $("#express").val();
+                    var days = $("#days").val();
+                    var express_price = $("#express_price").val();
+                    var free_price = $("#free_price").val();
 
                     if(category_id==0)
                     {
@@ -394,7 +425,7 @@
                         return;
                     }
                     $.post("{{ route('goods.store') }}",
-                        {sort:sort,old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

@@ -10,6 +10,7 @@ use App\Category;
 use App\CategoryTag;
 use App\Express;
 use App\Good;
+use App\SystemConfig;
 use App\TelephoneCode;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,6 +22,20 @@ class IndexController extends BaseController
     public function __construct()
     {
 
+    }
+
+    public function get_money_banner()
+    {
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $image = '';
+        if(isset($content[9]))
+        {
+            $image = $content[9];
+        }
+
+        $this->ret['info'] = ['image'=>$image];
+        return $this->ret;
     }
 
     public function index()
@@ -285,7 +300,8 @@ class IndexController extends BaseController
 
     public function test()
     {
-        $result = get_express_info('yunda','3805420027268');
+
+        $result = getGoodPriceByDays(156,1);
         echo $result;
     }
 }

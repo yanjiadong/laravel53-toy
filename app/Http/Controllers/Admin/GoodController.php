@@ -99,6 +99,7 @@ class GoodController extends BaseController
         unset($data['pics']);
         $data['status'] = Good::STATUS_ON_SALE;
 
+        $data['day_price'] = getGoodPriceByDays($data['price'],21);
         $good = Good::create($data);
 
         if(!empty($pics))
@@ -193,6 +194,7 @@ class GoodController extends BaseController
         unset($data['_method']);
         //$data['status'] = Good::STATUS_ON_SALE;
 
+        $data['day_price'] = getGoodPriceByDays($data['price'],21);
 
         $good = Good::where('id',$id)->update($data);
 

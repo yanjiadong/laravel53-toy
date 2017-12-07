@@ -36,6 +36,7 @@
                                 <select name="select" class="validate[required]" id="type">
                                     <option value="0">--请选择--</option>
                                     <option value="1">运营活动</option>
+                                    <option value="2">新手指南</option>
                                 </select>
                             </div>
                         </div>

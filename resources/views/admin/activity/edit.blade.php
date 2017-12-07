@@ -36,6 +36,7 @@
                                 <select name="select" class="validate[required]" id="type">
                                     <option value="0" {{$activity->type==0?'selected':''}}>--请选择--</option>
                                     <option value="1" {{$activity->type==1?'selected':''}}>运营活动</option>
+                                    <option value="2" {{$activity->type==2?'selected':''}}>新手指南</option>
                                 </select>
                             </div>
                         </div>

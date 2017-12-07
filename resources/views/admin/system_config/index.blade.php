@@ -53,6 +53,23 @@
                             <div class="span3">客服电话：</div>
                             <div class="span9"><input type="text" value="{{isset($content[7])?$content[7]:''}}" class="validate[required]" id="8"/></div>
                         </div>
+                        <div class="row-form clearfix">
+                            <div class="span3">客服时间：</div>
+                            <div class="span9"><input type="text" value="{{isset($content[8])?$content[8]:''}}" class="validate[required]" id="9"/></div>
+                        </div>
+
+                        <div class="row-form clearfix">
+                            <div class="span3">押金页面展示图片：</div>
+                            <div class="span9">
+                                <input type="file" class="userfile" id="upload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
+                                <input type="hidden" id="10" name="uploadPath" value="{{isset($content[9])?$content[9]:''}}" />
+                                <br/>
+                                <img src="{{isset($content[9])?$content[9]:'/admin/assets/img/default.png'}}" style="margin-top: 10px;height: 337.5px;width:600px;" class="showimg" id="showPic"/>
+                                <img src="/admin/assets/img/loading.gif"  id="loading" style="display:none;margin-top:10px;height: 150px;width:150px;" />
+                                <br/>
+                                <span>建议图片尺寸标准为1200x675</span>
+                            </div>
+                        </div>
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -61,14 +78,38 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="/admin/assets/js/jquery.ajaxfileupload.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#upload").uniform();
+            $("#upload").ajaxfileupload({
+                'action': '{{ url('admin/upload',['size'=>'1200,675']) }}',
+                'params': {
+                    '_token': Laravel.csrfToken
+                },
+                'onComplete': function(data) {
+                    if (data.success == 1) {
+                        $('#10').val(data.path);
+                        $('#showPic').attr('src', data.url).show();
+                    } else {
+
+                    }
+                    $("#loading").hide();
+                },
+                'onStart': function() {
+                    $("#loading").show();
+                    $("#showPic").hide();
+                },
+                'onCancel': function() {
+                }
+            });
+
             $('#submit').click(function(e) {
                 e.preventDefault();
 
                 if ($("#validation").validationEngine('validate')) {
                     var config = [];
-                    for (var i=1;i<9;i++)
+                    for (var i=1;i<11;i++)
                     {
                         config.push($("#"+i).val());
                     }

@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
-    protected $fillable = ['code','user_id','good_id','good_title','good_picture','good_price','category_id','category_tag_id','express_price','clean_price',
+
+    protected $guarded = [];
+    /*protected $fillable = ['code','user_id','good_id','good_title','good_picture','good_price','category_id','category_tag_id','express_price','clean_price',
     'price','money','address_id','receiver','receiver_telephone','receiver_address','express_title','express_com','express_no','status','back_status',
-        'back_express_title','back_express_com','back_express_no','confirm_time','back_time','month','pay_type','out_trade_no','pay_success_time','receiver_province','receiver_city','receiver_area','good_brand_id','good_old','send_time','user_telephone'];
+        'back_express_title','back_express_com','back_express_no','confirm_time','back_time','month','pay_type','out_trade_no','pay_success_time','receiver_province','receiver_city','receiver_area','good_brand_id','good_old','send_time','user_telephone'];*/
     //status   0未支付 1待发货  2已发货  3租用中 4已归还 -1已取消
     const STATUS_UNPAY = 0;
     const STATUS_WAITING_SEND = 1;

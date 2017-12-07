@@ -18,6 +18,19 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::group(['namespace' => 'Api'], function () {
+    /**
+     * ==============以下是新版接口================
+     */
+    //获取押金页面顶部图片
+    Route::post('/index/get_money_banner','IndexController@get_money_banner');
+
+    //获取玩具箱
+    Route::post('/cart/cart_list','CartController@cart_list');
+
+
+    /**
+     * ===========================================
+     */
     Route::get('/index','IndexController@index');
     Route::post('/index/goods','IndexController@goods');
     Route::post('/index/banners','IndexController@banners');

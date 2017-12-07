@@ -12,6 +12,29 @@ use App\Http\Controllers\Controller;
 
 class CartController extends BaseController
 {
+    /**
+     * 新版购物车列表接口
+     * @param Request $request
+     * @return array
+     */
+    public function cart_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $result = [];
+        $carts = Cart::where('user_id',$user_id)->orderBy('id','desc')->get();
+        if(count($carts) > 0)
+        {
+            foreach ($carts as $cart)
+            {
+                $result[] = Good::select('id','title','picture','store','price','old')->where('id',$cart->good_id)->first()->toArray();
+            }
+        }
+
+        $this->ret['info'] = ['carts'=>$result];
+        return $this->ret;
+    }
+
     public function index(Request $request)
     {
         $user_id = $request->get('user_id');
