@@ -3,18 +3,291 @@
 namespace App\Http\Controllers\Api;
 
 use App\Cart;
+use App\Coupon;
 use App\Express;
 use App\ExpressInfo;
 use App\Good;
 use App\Order;
 use App\SystemConfig;
 use App\User;
+use App\UserCoupon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Overtrue\EasySms\EasySms;
+use DB;
 
 class OrderController extends BaseController
 {
+    /**
+     * 新版订单接口
+     * @param Request $request
+     */
+    public function add_order_new(Request $request)
+    {
+        $good_id = $request->get('good_id');
+        $user_id = $request->get('user_id');
+
+        $user = User::find($user_id);
+        $good = Good::with(['category_tag','brand'])->find($good_id);
+
+        $info['good_title'] = $good->title;
+        $info['good_picture'] = $good->picture;
+        $info['good_price'] = $good->price;
+        $info['good_brand'] = $good->brand->title;
+        $info['good_old'] = $good->old;
+        $info['good_day_price'] = $good->day_price;
+        $info['good_days'] = $good->days;
+        $info['good_express_price'] = $good->express_price;
+        $info['good_free_price'] = $good->free_price;
+        $info['good_express'] = $good->express;
+        $info['good_money'] = $good->money;
+
+        //计算不同天数不同的单日价格
+        $price = [
+            'week1'=>getGoodPriceByDays($info['good_price'],7),
+            'week2'=>getGoodPriceByDays($info['good_price'],14),
+            'week3'=>getGoodPriceByDays($info['good_price'],21),
+            'month1'=>getGoodPriceByDays($info['good_price'],30),
+            'month2'=>getGoodPriceByDays($info['good_price'],60),
+        ];
+
+        //计算优惠券数量
+        $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
+
+        //计算需要支付的押金  订单中只能一个订单才能使用芝麻分减免哦
+        $order_count = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('is_use_zhima',1)->where('user_id',$user_id)->count();
+        $money = $info['good_money'];
+
+        $info['can_use_zhima'] = 0;  //需要去认证
+        if($order_count > 0 && $user->is_zhima == 1)
+        {
+            $info['can_use_zhima'] = 2;   //使用过了认证
+        }
+
+        if($order_count <= 0 && $user->is_zhima == 1)
+        {
+            //本次能够使用认证减免
+            $info['can_use_zhima'] = 1;
+            if($user->zhima_money >= $info['good_money'])
+            {
+                $money = '0.00';
+            }
+            else
+            {
+                $money = $info['good_money'] - $user->zhima_money;
+            }
+        }
+
+
+        $total_price = round($info['good_day_price']*21,2);  //租金
+
+        //计算运费
+        $express_price = $info['good_express_price'];
+        if($total_price >= $info['good_free_price'])
+        {
+            $express_price = '0.00';
+        }
+
+        //计算预计发货时间
+        $send_time = strtotime("+{$info['good_days']} days",$this->time);
+        $send_date = date('m月d日',$send_time);
+
+        $weekarray = array("日","一","二","三","四","五","六");
+        $send_week = $weekarray[date("w",$send_time)];
+
+        $result['good'] = $info;
+        $result['express_price'] = $express_price;  //运费
+        $result['total_price'] = sprintf("%.2f", $total_price);   //租金
+        $result['money'] = $money;  //押金
+        $result['price'] = sprintf("%.2f", ($money + $express_price + $total_price));
+        $result['send_time'] = ['send_week'=>$send_week,'send_date'=>$send_date];
+        $this->ret['info'] = $result;
+        //print_r($result);
+        return $this->ret;
+    }
+
+    /**
+     * 新版提交订单接口
+     * @param Request $request
+     */
+    public function submit_order_new(Request $request)
+    {
+        $good_id = $request->get('good_id');
+        $user_id = $request->get('user_id');
+
+        //$express_price = $request->get('express_price');
+        //$price = $request->get('price');
+        //$money = $request->get('money');
+        $address_id = $request->get('address_id');
+        $receiver = $request->get('receiver');
+        $receiver_telephone = $request->get('receiver_telephone');
+        $receiver_address = $request->get('receiver_address');
+        $receiver_province = $request->get('receiver_province');
+        $receiver_city = $request->get('receiver_city');
+        $receiver_area = $request->get('receiver_area');
+        $is_use_zhima = $request->get('is_use_zhima');
+        $days = $request->get('days');
+        $coupon_id = $request->get('coupon_id');
+
+        $user = User::find($user_id);
+        if(empty($user->telephone))
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '当前账户尚未绑定手机号,请先绑定手机号';
+            return $this->ret;
+        }
+
+        $good = Good::with(['category_tag','category','brand'])->where(['id'=>$good_id,'status'=>Good::STATUS_ON_SALE])->first();
+        if(empty($good->id))
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '玩具不存在';
+            return $this->ret;
+        }
+        if($good->store <= 0)
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '玩具库存不足';
+            return $this->ret;
+        }
+
+        $good_day_price = round(getGoodPriceByDays($good->price,$days),2);
+        $total_price = round($days*$good_day_price,2);
+
+        $money = $good->money;
+        $zhima_price = 0;
+        if($is_use_zhima == 1)
+        {
+            $order_count = Order::whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->where('is_use_zhima',1)->where('user_id',$user_id)->count();
+            if($order_count <= 0 && $user->is_zhima == 1)
+            {
+                if($user->zhima_money >= $good->money)
+                {
+                    $money = 0;
+                    $zhima_price = $good->money;
+                }
+                else
+                {
+                    $money = $good->money - $user->zhima_money;
+                    $zhima_price = $user->zhima_money;
+                }
+            }
+            else
+            {
+                $is_use_zhima = 0;
+            }
+        }
+
+        //计算运费
+        $express_price = $good->express_price;
+        if($total_price >= $good->free_price)
+        {
+            $express_price = 0;
+        }
+
+        //计算优惠券优惠金额
+        $coupon_price = 0;
+        if($coupon_id)
+        {
+            $coupon = Coupon::where('id',$coupon_id)->first();
+            if($total_price >= $coupon->condition)
+            {
+                $total_price = $total_price - $coupon->price;
+            }
+        }
+
+        $price = round($total_price+$express_price+$money,2);
+
+        $order_data['code'] = get_order_code($user_id);
+        $order_data['user_id'] = $user_id;
+        $order_data['good_id'] = $good_id;
+        $order_data['good_title'] = $good->title;
+        $order_data['good_picture'] = $good->picture;
+        $order_data['good_price'] = $good->price;
+        $order_data['category_id'] = $good->category_id;
+        $order_data['category_tag_id'] = $good->category_tag_id;
+        $order_data['good_brand_id'] = $good->brand_id;
+        $order_data['good_old'] = $good->old;
+        $order_data['address_id'] = $address_id;
+        $order_data['receiver'] = $receiver;
+        $order_data['receiver_telephone'] = $receiver_telephone;
+        $order_data['receiver_address'] = $receiver_address;
+        $order_data['receiver_province'] = $receiver_province;
+        $order_data['receiver_city'] = $receiver_city;
+        $order_data['receiver_area'] = $receiver_area;
+        $order_data['month'] = date('Y-m');
+        $order_data['out_trade_no'] = 'p'.$order_data['code'];
+        $order_data['user_telephone'] = $user->telephone;
+        $order_data['express_price'] = $express_price;
+        $order_data['price'] = $price;
+        $order_data['money'] = $money;
+        $order_data['days'] = $days;
+        $order_data['good_day_price'] = $good_day_price;
+        $order_data['total_price'] = $total_price;
+        $order_data['is_use_zhima'] = $is_use_zhima;
+        $order_data['coupon_id'] = $coupon_id;
+        $order_data['coupon_price'] = $coupon_price;
+        $order_data['zhima_price'] = $zhima_price;
+
+
+        Order::create($order_data);
+
+
+        $this->ret['info'] = ['order_code'=>$order_data['code']];
+        return $this->ret;
+    }
+
+    /**
+     * 确认收货
+     * @param Request $request
+     */
+    public function confirm_order(Request $request)
+    {
+        //$order_code = $request->get('code');
+        $id = $request->get('id');
+
+        $order = Order::find($id);
+        $end_time = date('Y-m-d H:i:s',strtotime("+{$order->days} days",$this->time));
+
+        $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
+        /*if(!empty($id))
+        {
+            $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
+        }
+        else
+        {
+            $ret = Order::where('code',$order_code)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
+        }*/
+
+        return $this->ret;
+    }
+
+    /**
+     * 申请提现
+     * @param Request $request
+     */
+    public function apply_money(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $code= $request->get('code');
+
+        $order = DB::table('orders')->where('code',$code)->first();
+
+        if($order->money_status == Order::MONEY_STATUS_UN && $order->status == Order::STATUS_BACK && $order->back_status == Order::BACK_STATUS_DOING)
+        {
+            Order::where('code',$code)->update(['money_status'=>1,'apply_money_time'=>$this->datetime]);
+
+            //押金提现记录
+            $price = $order->money - $order->over_days*$order->good_day_price;
+            DB::table('user_pay_records')->insert(['user_id'=>$user_id,'type'=>1,'pay_type'=>2,'price'=>$price,'created_at'=>date('Y-m-d H:i:s')]);
+            return $this->ret;
+        }
+
+        $this->ret['code'] = 300;
+        $this->ret['msg'] = '暂无法申请提现';
+        return $this->ret;
+    }
+
     public function add_order(Request $request)
     {
         $good_id = $request->get('good_id');
@@ -189,45 +462,6 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
-    /*private function send_order_sms($telephone,$name)
-    {
-        $config = [
-            // HTTP 请求的超时时间（秒）
-            'timeout' => 5.0,
-
-            // 默认发送配置
-            'default' => [
-                // 网关调用策略，默认：顺序调用
-                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
-
-                // 默认可用的发送网关
-                'gateways' => [
-                    'aliyun'
-                ],
-            ],
-            // 可用的网关配置
-            'gateways' => [
-                'errorlog' => [
-                    'file' => '/tmp/easy-sms.log',
-                ],
-                'aliyun' => [
-                    'access_key_id' => 'jlU7IQOybzkAXInb',
-                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩玩具趣编程',
-                ],
-            ],
-        ];
-
-        $easySms = new EasySms($config);
-        $easySms->send($telephone, [
-            'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_103795027',
-            'data' => [
-                'name'=>$name
-            ],
-        ]);
-    }*/
-
     public function order_list(Request $request)
     {
         $user_id = $request->get('user_id');
@@ -363,27 +597,6 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
-    /**
-     * 确认收货
-     * @param Request $request
-     */
-    public function confirm_order(Request $request)
-    {
-        $order_code = $request->get('code');
-        $id = $request->get('id');
-
-        if(!empty($id))
-        {
-            $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
-        }
-        else
-        {
-            $ret = Order::where('code',$order_code)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime]);
-        }
-
-        return $this->ret;
-    }
-
     public function order_back(Request $request)
     {
         $order_id = $request->get('order_id');
@@ -400,6 +613,13 @@ class OrderController extends BaseController
         {
             //$express = Express::find($express_id);
 
+            //计算逾期
+            if($this->time > strtotime($order->end_time))
+            {
+                $data['over_days'] = ceil(($this->time - strtotime($order->end_time))/(24*3600));
+            }
+
+
             $data['back_express_title'] = $back_express_title;
             $data['back_express_com'] = $back_express_com;
             $data['back_express_no'] = $back_express_no;
@@ -409,7 +629,8 @@ class OrderController extends BaseController
 
             Order::where('id',$order_id)->update($data);
 
-            $this->send_sms($user->telephone,$user->name);
+            //$this->send_sms($user->telephone,$user->name);
+            sms_send('SMS_109410296',$user->telephone,$user->name);
 
             return $this->ret;
         }

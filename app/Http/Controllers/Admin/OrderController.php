@@ -17,6 +17,60 @@ class OrderController extends BaseController
         parent::__construct();
     }
 
+    /**
+     * 押金列表
+     * @param Request $request
+     */
+    public function money(Request $request)
+    {
+        $admin_info = $this->get_session_info();
+        $username = $admin_info['username'];
+
+        $code = $request->get('code');
+        $status = $request->get('status');
+
+        $where['status'] = 4;
+        $where['back_status'] = 1;
+
+        if(empty($code) && !empty($status))
+        {
+            $orders = Order::with(['user'])->where($where)->paginate(20);
+        }
+        else
+        {
+            if(!empty($code))
+            {
+                $where['out_trade_no'] = $code;
+            }
+            if(!empty($status))
+            {
+                $where['money_status'] = $status - 1;
+            }
+
+            $orders = Order::with(['user'])->where($where)->paginate(20);
+        }
+        $menu = 'order';
+
+        //分页需要的参数
+        $orders->appends([
+            'code'=>$code,
+            'status'=>$status
+        ]);
+        return view('admin.order.money',compact('orders','username','menu','code','status'));
+    }
+
+    /**
+     * 押金申请操作
+     * @param Request $request
+     */
+    public function confirm_money(Request $request)
+    {
+        $id = $request->get('id');
+
+        Order::where('id',$id)->update(['money_status'=>Order::MONEY_STATUS_DONE]);
+        alert('',1);
+    }
+
     public function index(Request $request)
     {
         $admin_info = $this->get_session_info();

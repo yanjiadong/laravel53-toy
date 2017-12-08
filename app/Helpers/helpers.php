@@ -218,6 +218,11 @@ if(!function_exists('WxJsPayCallback'))
                 DB::table('orders')->where('out_trade_no',$out_trade_no)->update(['status'=>\App\Order::STATUS_WAITING_SEND,'pay_success_time'=>date('Y-m-d H:i:s')]);
             }
 
+            if(!empty($order_info->coupon_id))
+            {
+                DB::table('user_coupons')->where('user_id',$order_info->user_id)->where('coupon_id',$order_info->coupon_id)->update(['status'=>1]);
+            }
+
             $user_info = DB::table('users')->where('id',$order_info->user_id)->first();
             if(!empty($user_info->telephone) && $order_info->price > 0)
             {
@@ -227,8 +232,6 @@ if(!function_exists('WxJsPayCallback'))
                 //短信通知后台管理员
                 sms_send('SMS_109345328','13366556200');
                 sms_send('SMS_109345328','15101016067');
-                //send_order_to_admin('13366556200');
-                //send_order_to_admin('15101016067');
             }
 
             $good = \App\Good::where(['id'=>$order_info->good_id])->first();
@@ -295,135 +298,6 @@ if(!function_exists('sms_send'))
         ]);
     }
 }
-
-/*if(!function_exists('order_pay_success_send_sms'))
-{
-    function order_pay_success_send_sms($telephone,$name)
-    {
-        $config = [
-            // HTTP 请求的超时时间（秒）
-            'timeout' => 5.0,
-
-            // 默认发送配置
-            'default' => [
-                // 网关调用策略，默认：顺序调用
-                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
-
-                // 默认可用的发送网关
-                'gateways' => [
-                    'aliyun'
-                ],
-            ],
-            // 可用的网关配置
-            'gateways' => [
-                'errorlog' => [
-                    'file' => '/tmp/easy-sms.log',
-                ],
-                'aliyun' => [
-                    'access_key_id' => 'jlU7IQOybzkAXInb',
-                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩玩具趣编程',
-                ],
-            ],
-        ];
-
-        $easySms = new \Overtrue\EasySms\EasySms($config);
-
-        $easySms->send($telephone, [
-            'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_103795027',
-            'data' => [
-                'name'=>$name
-            ],
-        ]);
-    }
-}*/
-
-/*if(!function_exists('send_order_to_admin'))
-{
-    function send_order_to_admin($telephone)
-    {
-        $config = [
-            // HTTP 请求的超时时间（秒）
-            'timeout' => 5.0,
-
-            // 默认发送配置
-            'default' => [
-                // 网关调用策略，默认：顺序调用
-                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
-
-                // 默认可用的发送网关
-                'gateways' => [
-                    'aliyun'
-                ],
-            ],
-            // 可用的网关配置
-            'gateways' => [
-                'errorlog' => [
-                    'file' => '/tmp/easy-sms.log',
-                ],
-                'aliyun' => [
-                    'access_key_id' => 'jlU7IQOybzkAXInb',
-                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩玩具趣编程',
-                ],
-            ],
-        ];
-
-        $easySms = new \Overtrue\EasySms\EasySms($config);
-        $easySms->send($telephone, [
-            'content'  => '',
-            'template' => 'SMS_109345328',
-            'data' => [
-
-            ],
-        ]);
-    }
-}*/
-
-
-/*if(!function_exists('vip_card_pay_success_send_sms'))
-{
-    function vip_card_pay_success_send_sms($telephone,$name)
-    {
-        $config = [
-            // HTTP 请求的超时时间（秒）
-            'timeout' => 5.0,
-
-            // 默认发送配置
-            'default' => [
-                // 网关调用策略，默认：顺序调用
-                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
-
-                // 默认可用的发送网关
-                'gateways' => [
-                    'aliyun'
-                ],
-            ],
-            // 可用的网关配置
-            'gateways' => [
-                'errorlog' => [
-                    'file' => '/tmp/easy-sms.log',
-                ],
-                'aliyun' => [
-                    'access_key_id' => 'jlU7IQOybzkAXInb',
-                    'access_key_secret' => 'LaYx00JdDHeXFPAE3Qz1MlDvjXIc1m',
-                    'sign_name' => '玩玩具趣编程',
-                ],
-            ],
-        ];
-
-        $easySms = new \Overtrue\EasySms\EasySms($config);
-
-        $easySms->send($telephone, [
-            'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_103895011',
-            'data' => [
-                'name'=>$name
-            ],
-        ]);
-    }
-}*/
 
 if(!function_exists('getJssdk'))
 {

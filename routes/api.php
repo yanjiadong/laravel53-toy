@@ -27,7 +27,18 @@ Route::group(['namespace' => 'Api'], function () {
     //获取玩具箱
     Route::post('/cart/cart_list','CartController@cart_list');
 
+    //点击寄这个玩具给我
+    Route::post('/order/add_order_new','OrderController@add_order_new');
+    Route::post('/order/submit_order_new','OrderController@submit_order_new');
 
+    //确认收货
+    Route::post('/order/confirm_order','OrderController@confirm_order');
+
+    //申请提现
+    Route::post('/order/apply_money','OrderController@apply_money');
+
+    //计算每日价格
+    Route::post('/good/get_day_price','GoodController@get_day_price');
     /**
      * ===========================================
      */
@@ -64,8 +75,7 @@ Route::group(['namespace' => 'Api'], function () {
     //查看订单物流信息
     Route::post('/order/logistics_detail','OrderController@logistics_detail');
 
-    //确认收货
-    Route::post('/order/confirm_order','OrderController@confirm_order');
+
     //可寄回更换详情
     Route::post('/order/order_can_back','OrderController@order_can_back');
     Route::post('/order/order_back','OrderController@order_back');

@@ -15,6 +15,7 @@ class AddDayPriceToGoodsTable extends Migration
     {
         Schema::table('goods', function (Blueprint $table) {
             $table->decimal('day_price',10,2)->default(0.00)->comment('默认计算出来的每日价格');
+            $table->decimal('money',10,2)->default(0.00)->comment('押金');
         });
     }
 
@@ -27,6 +28,7 @@ class AddDayPriceToGoodsTable extends Migration
     {
         Schema::table('goods', function (Blueprint $table) {
             $table->dropColumn('day_price');
+            $table->dropColumn('money');
         });
     }
 }

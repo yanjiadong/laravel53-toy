@@ -112,6 +112,11 @@
                             <span class="icon-th-list"></span><span class="text">订单列表</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.order.money') }}">
+                            <span class="icon-th-list"></span><span class="text">押金列表</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -128,6 +133,7 @@
                 </ul>
             </li>
 
+            <!--
             <li class="openable <?php echo (isset($menu) && ($menu == 'vip_card_pay')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">押金管理</span>
@@ -140,7 +146,7 @@
                     </li>
                 </ul>
             </li>
-
+            -->
             <li class="openable <?php echo (isset($menu) && ($menu == 'banner')) ? 'active' : '';?>">
                 <a href="javascript:;">
                     <span class="isw-list"></span><span class="text">Banner管理</span>

@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+//新版微信路由管理
+Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
+    Route::any('/index/index','IndexController@index')->name('wechat2.index.index');
+
+});
+
 //微信路由管理
 Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::any('/index/valid','IndexController@valid');
@@ -27,7 +33,8 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     /**
      * ================第二版路由==================
      */
-
+    //脚本
+    Route::any('/crontab/index2','CrontabController@index2');
 
     /**
      * ===========================================
@@ -160,6 +167,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('order/verify','OrderController@verify')->name('admin.order.verify');
     Route::post('order/action','OrderController@action')->name('admin.order.action');
     Route::get('order/show/{id}','OrderController@show')->name('admin.order.show');
+
+    //押金列表
+    Route::get('order/money','OrderController@money')->name('admin.order.money');
+    //确认押金退款
+    Route::post('order/confirm_money','OrderController@confirm_money')->name('admin.order.confirm_money');
 
     //押金模块
     Route::resource('vip_card_pays', 'VipCardPayController');

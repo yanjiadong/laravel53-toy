@@ -11,9 +11,68 @@ use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Overtrue\EasySms\EasySms;
+use DB;
 
 class CrontabController extends BaseController
 {
+    /**
+     * 新版本的脚本
+     */
+    public function index2()
+    {
+        $this->check_order_new();
+        Crontab::create();
+    }
+
+    private function check_order_new()
+    {
+        //检查已发货的订单 变为确认收货
+        $orders = Order::whereIn('status',[Order::STATUS_SEND])->get();
+        if(count($orders) > 0)
+        {
+            foreach ($orders as $order)
+            {
+                $express = ExpressInfo::where('nu',$order->express_no)->orderBy('id','desc')->first();
+                if(isset($express->state) && $express->state==3)
+                {
+                    //已签收
+                    if(isset($express->content) && !empty($express->content))
+                    {
+                        $content = json_decode($express->content,true);
+                        if(isset($content['lastResult']['data']))
+                        {
+                            $logistics = $content['lastResult']['data'];
+                            $time = $logistics[0]['time'];  //签收时间
+                            if( ($this->time - strtotime($time)) >= 3600)
+                            {
+                                $end_time = date('Y-m-d H:i:s',strtotime("+{$order->days} days",$this->time));
+                                Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
+                            }
+                            //print_r($logistics);
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        //检查租用中的订单是否有逾期
+        $orders = Order::where('status',Order::STATUS_DOING)->get();
+        //print_r($orders);
+        if(count($orders) > 0)
+        {
+            foreach ($orders as $order)
+            {
+                if($this->time > strtotime($order->end_time))
+                {
+                    //已经逾期
+                    DB::table('orders')->where('id',$order->id)->increment('over_days');
+                }
+            }
+        }
+    }
+
     /**
      * 脚本 每天跑
      */

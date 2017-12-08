@@ -28,4 +28,22 @@ class GoodController extends BaseController
         $this->ret['info'] = ['good'=>$good,'tags'=>$tags];
         return $this->ret;
     }
+
+    public function get_day_price(Request $request)
+    {
+        $good_id = $request->get('good_id');
+        $days = $request->get('days');
+
+        $good = Good::select('price','day_price')->where('id',$good_id)->first();
+
+        $price = $good->day_price;
+        if($days >= 8 && $days <= 60)
+        {
+            $price = getGoodPriceByDays($good->price,$days);
+        }
+
+        $price = sprintf("%.2f", $price);
+        $this->ret['info'] = ['price'=>$price,'days'=>$days];
+        return $this->ret;
+    }
 }

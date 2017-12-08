@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Wechat;
+namespace App\Http\Controllers\Wechat2;
 
 use App\Cart;
 use App\Coupon;
@@ -25,7 +25,7 @@ class IndexController extends BaseController
     }
 
     /**
-     * 首页面
+     * 首页
      */
     public function index()
     {
@@ -45,9 +45,6 @@ class IndexController extends BaseController
         $result = weixinCurl($url);
 
         $menu = 'index';
-
-        //计算玩具箱数量
-        //$cart_num = Cart::where('user_id',$user_id)->count();
 
         //领取新人优惠券
         $coupon = UserCoupon::where('user_id',$user_id)->first();
@@ -73,13 +70,11 @@ class IndexController extends BaseController
 
         User::where('id',$user_id)->update(['open_num'=>$open_num]);
 
-        //正在租用中的玩具数量
-        //$order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
         //首页打开时间
         UserOpenTime::create(['user_id'=>$user_id]);
 
-        return view('wechat.index.index',compact('result','menu','user_id','is_first'));
+        return view('wechat2.index.index',compact('result','menu','user_id','is_first'));
     }
 
     /**
