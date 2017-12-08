@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Api'], function () {
     /**
      * ==============以下是新版接口================
      */
+    //获取接口首页
+    Route::get('/index2','IndexController@index2');
+
     //获取押金页面顶部图片
     Route::post('/index/get_money_banner','IndexController@get_money_banner');
 
@@ -33,9 +36,11 @@ Route::group(['namespace' => 'Api'], function () {
 
     //确认收货
     Route::post('/order/confirm_order','OrderController@confirm_order');
-
     //申请提现
     Route::post('/order/apply_money','OrderController@apply_money');
+    //订单列表
+    Route::post('/order/get_order_list','OrderController@get_order_list');
+
 
     //计算每日价格
     Route::post('/good/get_day_price','GoodController@get_day_price');

@@ -208,6 +208,20 @@
                                 </label>
                             </div>
                         </div>
+
+                        <div class="row-form clearfix">
+                            <div class="span3">新片推荐封面图：</div>
+                            <div class="span9">
+                                <input type="file" class="userfile" id="newUpload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
+                                <input type="hidden" id="new_picture" name="new_picture" value="" />
+                                <br/>
+                                <img src="/admin/assets/img/default.png" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic4"/>
+                                <img src="/admin/assets/img/loading.gif"  id="loading4" style="display:none;margin-top:10px;height: 150px;width:150px;" />
+                                <br/>
+                                <span>建议图片尺寸标准为320x160</span>
+                            </div>
+                        </div>
+
                         <div class="row-form clearfix">
                             <div class="span3">热门推荐：</div>
                             <div class="span9">
@@ -334,6 +348,29 @@
                 }
             });
 
+            $("#newUpload").uniform();
+            $("#newUpload").ajaxfileupload({
+                'action': '{{ url('admin/upload',['size'=>'320,160']) }}',
+                'params': {
+                    '_token': Laravel.csrfToken
+                },
+                'onComplete': function(data) {
+                    if (data.success == 1) {
+                        $('#new_picture').val(data.path);
+                        $('#showPic4').attr('src', data.url).show();
+                    } else {
+
+                    }
+                    $("#loading4").hide();
+                },
+                'onStart': function() {
+                    $("#loading4").show();
+                    $("#showPic4").hide();
+                },
+                'onCancel': function() {
+                }
+            });
+
             $("#upload").uniform();
             $("#upload").ajaxfileupload({
                 'action': '{{ url('admin/upload',['size'=>'800,800']) }}',
@@ -419,6 +456,7 @@
                     var express_price = $("#express_price").val();
                     var free_price = $("#free_price").val();
                     var money = $("#money").val();
+                    var new_picture = $("#new_picture").val();
 
                     if(category_id==0)
                     {
@@ -432,7 +470,7 @@
                         return;
                     }
                     $.post("{{ route('goods.store') }}",
-                        {money:money,express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {new_picture:new_picture,money:money,express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

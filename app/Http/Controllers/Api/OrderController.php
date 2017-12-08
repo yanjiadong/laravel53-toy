@@ -288,6 +288,69 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
+    /**
+     * 获取订单列表
+     * @param Request $request
+     * @return array
+     */
+    public function get_order_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $type = $request->get('type')?$request->get('type'):1;  //1进行中的  2已结束的
+
+        if($type == 1)
+        {
+            $where = [Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING];
+        }
+        else
+        {
+            $where = [Order::STATUS_BACK];
+        }
+
+        if($type == 2)
+        {
+            $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->orderBy('back_time','desc')->get()->toArray();
+        }
+        else
+        {
+            $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
+        }
+
+        //print_r($list);
+        if(!empty($list))
+        {
+            foreach ($list as &$v)
+            {
+                $v['days2'] = 0;  //剩余天数
+                if($v['status']==Order::STATUS_BACK_STR)
+                {
+                    //$v['days'] = floor((strtotime($v['back_time']) - strtotime($v['send_time']))/86400);
+                }
+                elseif($v['status']==Order::STATUS_DOING_STR)
+                {
+                    //计算还有几天到期
+                    $time = $this->time > strtotime($v['end_time']);
+                    if($time > 0)
+                    {
+                        $v['days2'] = 0;
+                    }
+                    else
+                    {
+                        $v['days2'] = ceil((strtotime($v['end_time']) - $this->time)/86400);
+                    }
+                }
+
+                //格式化租期
+                $v['start_time_new'] = date('Y.m.d',strtotime($v['start_time']));
+                $v['end_time_new'] = date('Y.m.d',strtotime($v['end_time']));
+            }
+        }
+
+        $this->ret['info'] = ['list'=>$list];
+        return $this->ret;
+    }
+
+
     public function add_order(Request $request)
     {
         $good_id = $request->get('good_id');
