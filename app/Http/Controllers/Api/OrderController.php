@@ -332,6 +332,7 @@ class OrderController extends BaseController
                     $time = $this->time > strtotime($v['end_time']);
                     if($time > 0)
                     {
+                        //逾期
                         $v['days2'] = 0;
                     }
                     else
@@ -350,6 +351,38 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
+    public function get_money_list(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $orders = Order::where('user_id',$user_id)->where('money','>','0')->orderBy('pay_success_time','desc')->get()->toArray();
+        if(!empty($orders))
+        {
+            foreach ($orders as &$v)
+            {
+                $v['can_apply_money'] = 0;
+
+                if($v['status'] == Order::STATUS_BACK_STR && $v['back_status'] == Order::BACK_STATUS_DOING_STR && $v['money_status'] == Order::MONEY_STATUS_UN)
+                {
+                    $v['can_apply_money'] = 1;
+                }
+                elseif($v['money_status'] == Order::MONEY_STATUS_ING)
+                {
+                    $v['can_apply_money'] = 2;
+                }
+                elseif($v['money_status'] == Order::MONEY_STATUS_DONE)
+                {
+                    $v['can_apply_money'] = 3;
+                }
+
+                //格式化时间
+                $v['start_time_new'] = date('Y.m.d',strtotime($v['start_time']));
+                $v['end_time_new'] = date('Y.m.d',strtotime($v['end_time']));
+            }
+        }
+
+        $this->ret['info'] = ['list'=>$orders];
+        return $this->ret;
+    }
 
     public function add_order(Request $request)
     {

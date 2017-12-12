@@ -64,10 +64,12 @@ class CrontabController extends BaseController
         {
             foreach ($orders as $order)
             {
-                if($this->time > strtotime($order->end_time))
+                $time = $this->time > strtotime($order->end_time);
+                if($time > 0)
                 {
                     //已经逾期
-                    DB::table('orders')->where('id',$order->id)->increment('over_days');
+                    $over_days = ceil($time/86400);
+                    DB::table('orders')->where('id',$order->id)->update(['over_days'=>$over_days]);
                 }
             }
         }

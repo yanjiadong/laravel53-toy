@@ -348,6 +348,76 @@ if(!function_exists('filterHtmlTag'))
     }
 }
 
+//第一步 芝麻认证查初始化
+if(!function_exists('TestZhimaCustomerCertificationQuery'))
+{
+    function TestZhimaCustomerCertificationQuery($certName, $certNo)
+    {
+        include_once __DIR__."/zmop/ZmopClient.php";
+        include_once __DIR__."/zmop/request/ZhimaCustomerCertificationInitializeRequest.php";
+
+        //芝麻信用网关地址
+        $gatewayUrl = "https://zmopenapi.zmxy.com.cn/openapi.do";
+        //商户私钥文件
+        $privateKeyFile = public_path()."/pem/rsa_private_key.pem";
+        //芝麻公钥文件
+        $zmPublicKeyFile = public_path()."/pem/public_key.pem";
+        //数据编码格式
+        $charset = "UTF-8";
+        //芝麻分配给商户的 appId
+        $appId = "300000622";
+
+        $transaction_id = date('YmdHis').microtime_format('x', microtime_float()).time().mt_rand(0000,9999);
+
+        $client = new ZmopClient($gatewayUrl,$appId,$charset,$privateKeyFile,$zmPublicKeyFile);
+        $request = new ZhimaCustomerCertificationInitializeRequest();
+        $request->setChannel("apppc");
+        $request->setPlatform("zmop");
+        $request->setTransactionId($transaction_id);// 必要参数
+        $request->setProductCode("w1010100000000002978");// 必要参数
+        $request->setBizCode("FACE");// 必要参数
+        $request->setIdentityParam("{\"identity_type\": \"CERT_INFO\", \"cert_type\": \"IDENTITY_CARD\", \"cert_name\": \"{$certName}\", \"cert_no\":\"{$certNo}\"}");// 必要参数
+        $request->setMerchantConfig("{\"need_user_authorization\":\"false\"}");//
+        $request->setExtBizParam("{}");// 必要参数
+        $response = $client->execute($request);
+        return json_encode($response);
+    }
+}
+
+//第二步 芝麻认证开始认证
+if(!function_exists('TestZhimaCustomerCertificationCertify'))
+{
+    function TestZhimaCustomerCertificationCertify($bizNo, $redirect_url)
+    {
+        include_once __DIR__."/zmop/ZmopClient.php";
+        include_once __DIR__."/zmop/request/ZhimaCustomerCertificationCertifyRequest.php";
+
+        //芝麻信用网关地址
+        $gatewayUrl = "https://zmopenapi.zmxy.com.cn/openapi.do";
+        //商户私钥文件
+        $privateKeyFile = public_path()."/pem/rsa_private_key.pem";
+        //芝麻公钥文件
+        $zmPublicKeyFile = public_path()."/pem/public_key.pem";
+        //数据编码格式
+        $charset = "UTF-8";
+        //芝麻分配给商户的 appId
+        $appId = "300000622";
+
+        $client = new ZmopClient($gatewayUrl,$appId,$charset,$privateKeyFile,$zmPublicKeyFile);
+        $request = new ZhimaCustomerCertificationCertifyRequest();
+        $request->setChannel("apppc");
+        $request->setPlatform("zmop");
+        $request->setBizNo($bizNo);// 必要参数  一次认证的唯一标识，在完成芝麻认证初始化后可以获取
+        $request->setReturnUrl($redirect_url);// 必要参数  商户回调地址，在用户完成认证后会调转回商户地址
+        $url = $client->generatePageRedirectInvokeUrl($request);
+        return $url;
+    }
+}
+
+
+/*
+ * 根据用户信息  获取授权页面
+ */
 if(!function_exists('TestZhimaAuthInfoAuthorize'))
 {
     function TestZhimaAuthInfoAuthorize($name, $certNo)
@@ -426,7 +496,7 @@ if(!function_exists('TestZhimaCreditScoreGet'))
         //芝麻分配给商户的 appId
         $appId = "300000622";
 
-        $transaction_id = date('YmdHis').microtime_format('x', microtime_float()).time().mt_rand(0000,9999);;
+        $transaction_id = date('YmdHis').microtime_format('x', microtime_float()).time().mt_rand(0000,9999);
 
         $client = new ZmopClient($gatewayUrl,$appId,$charset,$privateKeyFile,$zmPublicKeyFile);
         $request = new ZhimaCreditScoreGetRequest();
@@ -517,11 +587,14 @@ if(!function_exists('getGoodPriceByDays'))
         {
             $result = round($price/165,1);
         }
-        elseif($days > 30 && $days <= 60)
+        elseif($days > 30 && $days <= 45)
+        {
+            $result = round($price/175,1);
+        }
+        elseif($days > 45 && $days <= 60)
         {
             $result = round($price/185,1);
         }
-
         return $result;
     }
 }

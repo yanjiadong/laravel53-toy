@@ -40,7 +40,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/order/apply_money','OrderController@apply_money');
     //订单列表
     Route::post('/order/get_order_list','OrderController@get_order_list');
-
+    //获取押金列表
+    Route::post('/order/get_money_list','OrderController@get_money_list');
 
     //计算每日价格
     Route::post('/good/get_day_price','GoodController@get_day_price');

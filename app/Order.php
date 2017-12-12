@@ -30,6 +30,9 @@ class Order extends Model
     const BACK_STATUS_WAITING = 0;
     const BACK_STATUS_DOING = 1;
 
+    const BACK_STATUS_WAITING_STR = '待验证';
+    const BACK_STATUS_DOING_STR = '已验证';
+
     //押金状态 0未申请  1申请中  2申请完成
     const MONEY_STATUS_UN = 0;
     const MONEY_STATUS_ING = 1;

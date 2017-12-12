@@ -223,10 +223,10 @@
                                 <input type="file" class="userfile" id="newUpload" value="上传图片" name="userfile" accept="image/jpeg,image/png,image/gif,image/jpg">
                                 <input type="hidden" id="new_picture" name="new_picture" value="{{ $good->new_picture }}" />
                                 <br/>
-                                <img src="{{ !empty($good->new_picture)?$good->new_picture:'/admin/assets/img/default.png' }}" style="margin-top: 10px;height: 160px;width:320px;" class="showimg" id="showPic4"/>
+                                <img src="{{ !empty($good->new_picture)?$good->new_picture:'/admin/assets/img/default.png' }}" style="margin-top: 10px;height: 218px;width:345px;" class="showimg" id="showPic4"/>
                                 <img src="/admin/assets/img/loading.gif"  id="loading4" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <br/>
-                                <span>建议图片尺寸标准为320x160</span>
+                                <span>建议图片尺寸标准为690x435</span>
                             </div>
                         </div>
                         <div class="row-form clearfix">
@@ -363,7 +363,7 @@
 
             $("#newUpload").uniform();
             $("#newUpload").ajaxfileupload({
-                'action': '{{ url('admin/upload',['size'=>'320,160']) }}',
+                'action': '{{ url('admin/upload',['size'=>'690,435']) }}',
                 'params': {
                     '_token': Laravel.csrfToken
                 },
