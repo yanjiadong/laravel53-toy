@@ -108,8 +108,28 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{ route('admin.order.index') }}">
-                            <span class="icon-th-list"></span><span class="text">订单列表</span>
+                        <a href="{{ route('admin.order.index',['status'=>1]) }}">
+                            <span class="icon-th-list"></span><span class="text">待发货订单</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.order.index',['status'=>2]) }}">
+                            <span class="icon-th-list"></span><span class="text">已发货订单</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.order.index',['status'=>3]) }}">
+                            <span class="icon-th-list"></span><span class="text">租用中订单</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.order.index',['status'=>4]) }}">
+                            <span class="icon-th-list"></span><span class="text">已归还订单</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.order.index',['status'=>-1]) }}">
+                            <span class="icon-th-list"></span><span class="text">已取消订单</span>
                         </a>
                     </li>
                     <li>

@@ -6,19 +6,19 @@
             <li><a href="javascript:;">订单管理</a> <span class="divider">></span></li>
 
             @if(isset($status) && $status==1)
-                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>待发货列表</li>
             @elseif(isset($status) && $status==2)
-                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>已发货列表</li>
             @elseif(isset($status) && $status==3)
-                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>租用中列表</li>
             @elseif(isset($status) && $status==4)
-                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>已归还列表</li>
             @elseif(isset($status) && $status==-1)
-                <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a><span class="divider">></span></li>
+                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>已取消列表</li>
             @else
                 <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a></li>
@@ -41,17 +41,6 @@
                         <div class="body search row-form">
                             <span>用户手机号</span>
                             <input type="text" placeholder="用户手机号" id="telephone" name="telephone" value="<?php echo (isset($telephone))?$telephone:'';?>"/>
-                        </div>
-                        <div class="body search row-form">
-                            <span>状态</span>
-                            <select name="status">
-                                <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部</option>
-                                <option value="1" <?php echo (isset($status)&&$status==1)?'selected':'';?>>待发货</option>
-                                <option value="2" <?php echo (isset($status)&&$status==2)?'selected':'';?>>已发货</option>
-                                <option value="3" <?php echo (isset($status)&&$status==3)?'selected':'';?>>租用中</option>
-                                <option value="4" <?php echo (isset($status)&&$status==4)?'selected':'';?>>已归还</option>
-                                <option value="-1" <?php echo (isset($status)&&$status==-1)?'selected':'';?>>已取消</option>
-                            </select>
                         </div>
 
                         <div class="footer">
