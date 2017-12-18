@@ -93,7 +93,6 @@ class IndexController extends BaseController
                 DB::table('pay_notifies')->insert([
                     'out_trade_no'=>$out_trade_no,
                     'result_code'=>$message['result_code'],
-                    'created_at'=>$this->datetime
                 ]);
             } else { // 用户支付失败
                 //$order->status = 'paid_fail';

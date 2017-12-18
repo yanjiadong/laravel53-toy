@@ -25,8 +25,6 @@
     function jsApiCall()
     {
         var jsApiParameters = JSON.parse($("#jsApiParameters").val());
-        //console.log(jsApiParameters);
-        //{"appId":"wxdd1dd7306d6662cf","timeStamp":"1513582908","nonceStr":"5a37713cd2082","package":"prepay_id=wx201712181541489d9116c37b0143469445","signType":"MD5","paySign":"5564D5F373C592F90E485093D8C130DC"}
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', jsApiParameters,
             function(res){
