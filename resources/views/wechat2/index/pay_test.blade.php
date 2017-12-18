@@ -19,13 +19,13 @@
 <body>
 <input type="text" value="">
 <button id="submit">提交订单</button>
-<input type="hidden" id="jsApiParameters" value="">
+<input type="text" id="jsApiParameters" value="">
 <script>
     //调用微信JS api 支付
-    function jsApiCall()
+    function jsApiCall(jsApiParameters)
     {
-        var jsApiParameters = $("#jsApiParameters").val();
-        console.log(jsApiParameters);
+        //var jsApiParameters = $("#jsApiParameters").val();
+        //console.log(jsApiParameters);
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', jsApiParameters,
             function(res){
@@ -66,7 +66,7 @@
             common.httpRequest('{{url('wechat/index/pay_test')}}','post',{},function (res) {
                 //console.log(res);
                 $("#jsApiParameters").val(res.jsApiParameters);
-                callpay();
+                jsApiCall(res.jsApiParameters);
 
             });
         });
