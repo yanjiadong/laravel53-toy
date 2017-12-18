@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Overtrue\EasySms\EasySms;
 use DB;
+use EasyWeChat\Factory;
 
 class OrderController extends BaseController
 {
@@ -198,7 +199,7 @@ class OrderController extends BaseController
 
         $price = round($total_price+$express_price+$money,2);
 
-        $order_data['code'] = get_order_code($user_id);
+        $order_data['code'] = get_order_code();
         $order_data['user_id'] = $user_id;
         $order_data['good_id'] = $good_id;
         $order_data['good_title'] = $good->title;
@@ -216,7 +217,7 @@ class OrderController extends BaseController
         $order_data['receiver_city'] = $receiver_city;
         $order_data['receiver_area'] = $receiver_area;
         $order_data['month'] = date('Y-m');
-        $order_data['out_trade_no'] = 'p'.$order_data['code'];
+        $order_data['out_trade_no'] = 'T'.$order_data['code'];
         $order_data['user_telephone'] = $user->telephone;
         $order_data['express_price'] = $express_price;
         $order_data['price'] = $price;
@@ -229,11 +230,32 @@ class OrderController extends BaseController
         $order_data['coupon_price'] = $coupon_price;
         $order_data['zhima_price'] = $zhima_price;
 
+        $order = Order::create($order_data);
 
-        Order::create($order_data);
+        $total_fee = $order->price*100;  //订单需要支付的金额
+        //生成支付信息
+        $options = config('wechat.payment');
+        $app = Factory::payment($options);
 
+        $result = $app->order->unify([
+            'body' => '支付玩具：'.$good->title,
+            'out_trade_no' => $order_data['out_trade_no'],
+            'total_fee' => $total_fee,
+            //'spbill_create_ip' => '123.12.12.123', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
+            //'notify_url' => 'https://pay.weixin.qq.com/wxpay/pay.action', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'trade_type' => 'JSAPI',
+            'openid' => $user->wechat_openid,
+        ]);
 
-        $this->ret['info'] = ['order_code'=>$order_data['code']];
+        $jsApiParameters = '';
+        if($result['result_code'] === 'SUCCESS')
+        {
+            $prepayId = $result['prepay_id'];
+            $jssdk = $app->jssdk;
+            $jsApiParameters = $jssdk->bridgeConfig($prepayId);
+        }
+
+        $this->ret['info'] = ['order_code'=>$order_data['code'],'jsApiParameters'=>$jsApiParameters];
         return $this->ret;
     }
 

@@ -26,11 +26,6 @@ class IndexController extends BaseController
         parent::__construct();
     }
 
-    public function pay_test_show()
-    {
-        return view('wechat2.index.pay_test');
-    }
-
     /**
      * 测试新版支付
      * @param Request $request
@@ -72,28 +67,54 @@ class IndexController extends BaseController
 
         $response = $app->handlePaidNotify(function($message, $fail){
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
-
             $out_trade_no = $message['out_trade_no'];
 
-            /*if (!$order) { // 如果订单不存在
+            $order = DB::table('orders')->where('out_trade_no',$out_trade_no)->first();
+
+            if (!$order) { // 如果订单不存在
                 $fail('Order not exist.'); // 告诉微信，我已经处理完了，订单没找到，别再通知我了
-            }*/
+            }
+
 
             // 如果订单存在
             // 检查订单是否已经更新过支付状态
-            /*if ($order->paid_at) { // 假设订单字段“支付时间”不为空代表已经支付
+            if ($order->pay_success_time) { // 假设订单字段“支付时间”不为空代表已经支付
                 return true; // 已经支付成功了就不再更新了
-            }*/
+            }
+
+            DB::table('pay_notifies')->insert([
+                'out_trade_no'=>$out_trade_no,
+                'result_code'=>$message['result_code'],
+            ]);
 
             // 用户是否支付成功
             if ($message['result_code'] === 'SUCCESS') {
                 // 不是已经支付状态则修改为已经支付状态
                 /*$order->paid_at = time(); // 更新支付时间为当前时间
                 $order->status = 'paid';*/
-                DB::table('pay_notifies')->insert([
-                    'out_trade_no'=>$out_trade_no,
-                    'result_code'=>$message['result_code'],
-                ]);
+                DB::table('orders')->where('out_trade_no',$out_trade_no)->update(['status'=>Order::STATUS_WAITING_SEND,'pay_success_time'=>date('Y-m-d H:i:s')]);
+
+                if(!empty($order->coupon_id))
+                {
+                    DB::table('user_coupons')->where('user_id',$order->user_id)->where('coupon_id',$order->coupon_id)->update(['status'=>1]);
+                }
+
+                $user_info = DB::table('users')->where('id',$order->user_id)->first();
+                if(!empty($user_info->telephone) && $order->price > 0)
+                {
+                    sms_send('SMS_103795027',$user_info->telephone,$user_info->name);
+
+                    //短信通知后台管理员
+                    sms_send('SMS_109345328','13366556200');
+                    sms_send('SMS_109345328','15101016067');
+                }
+
+                //从玩具箱中去除
+                DB::table('carts')->where(['user_id'=>$order->user_id,'good_id'=>$order->good_id])->delete();
+
+                //去库存
+                DB::table('goods')->where('id',$order->good_id)->decrement('store');
+
             } else { // 用户支付失败
                 //$order->status = 'paid_fail';
             }
