@@ -16,12 +16,88 @@ use App\VipCardPay;
 use App\WechatAccessToken;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Factory;
+use DB;
 
 class IndexController extends BaseController
 {
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * 测试新版支付
+     * @param Request $request
+     */
+    public function pay_test(Request $request)
+    {
+        $options = config('wechat.payment');
+        $app = Factory::payment($options);
+
+        $out_trade_no = 'T'.get_order_code(29);
+        $result = $app->order->unify([
+            'body' => '支付订单',
+            'out_trade_no' => $out_trade_no,
+            'total_fee' => 1,
+            //'spbill_create_ip' => '123.12.12.123', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
+            //'notify_url' => 'https://pay.weixin.qq.com/wxpay/pay.action', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'trade_type' => 'JSAPI',
+            'openid' => 'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI',
+        ]);
+
+        if($result['result_code'] === 'SUCCESS')
+        {
+            $prepayId = $result['prepay_id'];
+            $jssdk = $app->jssdk;
+            $jsApiParameters = $jssdk->bridgeConfig($prepayId);
+            return view('wechat2.index.pay_test',compact('jsApiParameters','out_trade_no'));
+        }
+    }
+
+    /**
+     * 新版支付回调
+     * @param Request $request
+     */
+    public function pay_notify(Request $request)
+    {
+        $options = config('wechat.payment');
+        $app = Factory::payment($options);
+
+        $response = $app->handlePaidNotify(function($message, $fail){
+            // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
+
+            $out_trade_no = $message['out_trade_no'];
+
+            /*if (!$order) { // 如果订单不存在
+                $fail('Order not exist.'); // 告诉微信，我已经处理完了，订单没找到，别再通知我了
+            }*/
+
+            // 如果订单存在
+            // 检查订单是否已经更新过支付状态
+            /*if ($order->paid_at) { // 假设订单字段“支付时间”不为空代表已经支付
+                return true; // 已经支付成功了就不再更新了
+            }*/
+
+            // 用户是否支付成功
+            if ($message['result_code'] === 'SUCCESS') {
+                // 不是已经支付状态则修改为已经支付状态
+                /*$order->paid_at = time(); // 更新支付时间为当前时间
+                $order->status = 'paid';*/
+                DB::table('pay_notifies')->insert([
+                    'out_trade_no'=>$out_trade_no,
+                    'result_code'=>$message['result_code']
+                ]);
+            } else { // 用户支付失败
+                //$order->status = 'paid_fail';
+            }
+
+            //$order->save(); // 保存订单
+
+            return true; // 返回处理完成
+        });
+
+        return $response;
     }
 
     /**

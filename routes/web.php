@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+//测试新版支付
+Route::any('wechat/index/pay_test','Wechat2\IndexController@pay_test')->name('wechat2.index.pay_test');
+
+
 //新版微信路由管理
 Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::any('/index/index','IndexController@index')->name('wechat2.index.index');
