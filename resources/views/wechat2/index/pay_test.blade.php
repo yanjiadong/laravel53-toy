@@ -25,7 +25,7 @@
     function jsApiCall()
     {
         var jsApiParameters = $("#jsApiParameters").val();
-        console.log(111);
+        console.log(jsApiParameters);
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', jsApiParameters,
             function(res){
@@ -37,11 +37,11 @@
                 }
                 else if(res.err_msg === "get_brand_wcpay_request:cancel")
                 {
-                    location.href=document.referrer;
+                    //location.href=document.referrer;
                 }
                 else
                 {
-                    window.history.go(-1);
+                    //window.history.go(-1);
                 }
             }
         );
@@ -65,30 +65,8 @@
         $("#submit").click(function () {
             common.httpRequest('{{url('wechat/index/pay_test')}}','post',{},function (res) {
                 //console.log(res);
-                //$("#jsApiParameters").val(res.jsApiParameters);
-                //callpay();
-
-                var jsApiParameters = res.jsApiParameters;
-                console.log(111);
-                WeixinJSBridge.invoke(
-                    'getBrandWCPayRequest', jsApiParameters,
-                    function(res){
-                        WeixinJSBridge.log(res.err_msg);
-                        //alert(res.err_msg);
-                        //alert(res.err_code+res.err_desc+res.err_msg);
-                        if(res.err_msg === "get_brand_wcpay_request:ok") {
-
-                        }
-                        else if(res.err_msg === "get_brand_wcpay_request:cancel")
-                        {
-                            location.href=document.referrer;
-                        }
-                        else
-                        {
-                            window.history.go(-1);
-                        }
-                    }
-                );
+                $("#jsApiParameters").val(res.jsApiParameters);
+                callpay();
 
             });
         });
