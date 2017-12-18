@@ -25,9 +25,9 @@
     function jsApiCall(jsApiParameters)
     {
         //var jsApiParameters = $("#jsApiParameters").val();
-        //console.log(jsApiParameters);
+        console.log(jsApiParameters);
         WeixinJSBridge.invoke(
-            'getBrandWCPayRequest', jsApiParameters,
+            'getBrandWCPayRequest', {"appId":"wxdd1dd7306d6662cf","timeStamp":"1513581554","nonceStr":"5a376bf2c48d4","package":"prepay_id=wx20171218151914f1cbd90fd60860549446","signType":"MD5","paySign":"4A13278A55BAB2CA869CF6645530B6A5"},
             function(res){
                 WeixinJSBridge.log(res.err_msg);
                 //alert(res.err_msg);
