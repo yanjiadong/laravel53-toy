@@ -22,12 +22,13 @@
 <input type="text" id="jsApiParameters" value="">
 <script>
     //调用微信JS api 支付
-    function jsApiCall(jsApiParameters)
+    function jsApiCall()
     {
-        //var jsApiParameters = $("#jsApiParameters").val();
-        console.log(jsApiParameters);
+        var jsApiParameters = JSON.parse($("#jsApiParameters").val());
+        //console.log(jsApiParameters);
+        //{"appId":"wxdd1dd7306d6662cf","timeStamp":"1513582908","nonceStr":"5a37713cd2082","package":"prepay_id=wx201712181541489d9116c37b0143469445","signType":"MD5","paySign":"5564D5F373C592F90E485093D8C130DC"}
         WeixinJSBridge.invoke(
-            'getBrandWCPayRequest', {"appId":"wxdd1dd7306d6662cf","timeStamp":"1513581554","nonceStr":"5a376bf2c48d4","package":"prepay_id=wx20171218151914f1cbd90fd60860549446","signType":"MD5","paySign":"4A13278A55BAB2CA869CF6645530B6A5"},
+            'getBrandWCPayRequest', jsApiParameters,
             function(res){
                 WeixinJSBridge.log(res.err_msg);
                 //alert(res.err_msg);
@@ -64,10 +65,10 @@
     $(function () {
         $("#submit").click(function () {
             common.httpRequest('{{url('wechat/index/pay_test')}}','post',{},function (res) {
-                //console.log(res);
+                console.log(res.jsApiParameters);
+                //console.log(JSON.stringify(res.jsApiParameters));
                 $("#jsApiParameters").val(res.jsApiParameters);
-                jsApiCall(res.jsApiParameters);
-
+                callpay();
             });
         });
     });
