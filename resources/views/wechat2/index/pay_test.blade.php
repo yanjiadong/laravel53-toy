@@ -17,15 +17,16 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 <body>
-
+<input type="text" value="">
+<button id="submit">提交订单</button>
+<input type="hidden" id="jsApiParameters" value="">
 <script>
     //调用微信JS api 支付
     function jsApiCall()
     {
-        <?php if(isset($jsApiParameters)):?>
+        var jsApiParameters = $("#jsApiParameters").val();
         WeixinJSBridge.invoke(
-            'getBrandWCPayRequest',
-            <?= $jsApiParameters; ?>,
+            'getBrandWCPayRequest', jsApiParameters,
             function(res){
                 WeixinJSBridge.log(res.err_msg);
                 //alert(res.err_msg);
@@ -43,7 +44,6 @@
                 }
             }
         );
-        <?php endif;?>
     }
 
     function callpay()
@@ -61,8 +61,13 @@
     }
 
     $(function () {
-        callpay();
-    })
+        $("#submit").click(function () {
+            common.httpRequest('{{url('wechat/index/pay_test')}}','post',{},function (res) {
+                $("#jsApiParameters").val(res.jsApiParameters);
+            });
+            callpay();
+        });
+    });
 </script>
 </body>
 </html>

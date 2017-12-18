@@ -26,6 +26,11 @@ class IndexController extends BaseController
         parent::__construct();
     }
 
+    public function pay_test_show()
+    {
+        return view('wechat2.index.pay_test');
+    }
+
     /**
      * 测试新版支付
      * @param Request $request
@@ -51,7 +56,8 @@ class IndexController extends BaseController
             $prepayId = $result['prepay_id'];
             $jssdk = $app->jssdk;
             $jsApiParameters = $jssdk->bridgeConfig($prepayId);
-            return view('wechat2.index.pay_test',compact('jsApiParameters','out_trade_no'));
+            return ['jsApiParameters'=>$jsApiParameters,'out_trade_no'=>$out_trade_no];
+            //return view('wechat2.index.pay_test',compact('jsApiParameters','out_trade_no'));
         }
     }
 
@@ -86,7 +92,8 @@ class IndexController extends BaseController
                 $order->status = 'paid';*/
                 DB::table('pay_notifies')->insert([
                     'out_trade_no'=>$out_trade_no,
-                    'result_code'=>$message['result_code']
+                    'result_code'=>$message['result_code'],
+                    'created_at'=>$this->datetime
                 ]);
             } else { // 用户支付失败
                 //$order->status = 'paid_fail';

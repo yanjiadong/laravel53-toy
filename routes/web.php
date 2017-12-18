@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index');
 
 //测试新版支付
 Route::any('wechat/index/pay_test','Wechat2\IndexController@pay_test')->name('wechat2.index.pay_test');
+Route::any('wechat/index/pay_test_show','Wechat2\IndexController@pay_test_show')->name('wechat2.index.pay_test_show');
 
 
 //新版微信路由管理
