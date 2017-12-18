@@ -124,7 +124,12 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.order.index',['status'=>4]) }}">
-                            <span class="icon-th-list"></span><span class="text">已归还订单</span>
+                            <span class="icon-th-list"></span><span class="text">已寄回待确认订单</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.order.index',['status'=>5]) }}">
+                            <span class="icon-th-list"></span><span class="text">归还成功订单</span>
                         </a>
                     </li>
                     <li>

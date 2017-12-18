@@ -88,7 +88,20 @@ class OrderController extends BaseController
         {
             if(!empty($status))
             {
-                $where['status'] = $status;
+                if($status == 5)
+                {
+                    $where['status'] = Order::STATUS_BACK;
+                    $where['back_status'] = Order::BACK_STATUS_DOING;
+                }
+                elseif($status == 4)
+                {
+                    $where['status'] = Order::STATUS_BACK;;
+                    $where['back_status'] = Order::BACK_STATUS_WAITING;
+                }
+                else
+                {
+                    $where['status'] = $status;
+                }
             }
             if(!empty($code))
             {

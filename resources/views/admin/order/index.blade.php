@@ -6,20 +6,17 @@
             <li><a href="javascript:;">订单管理</a> <span class="divider">></span></li>
 
             @if(isset($status) && $status==1)
-                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>待发货列表</li>
             @elseif(isset($status) && $status==2)
-                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>已发货列表</li>
             @elseif(isset($status) && $status==3)
-                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>租用中列表</li>
             @elseif(isset($status) && $status==4)
-                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
-                <li>已归还列表</li>
+                <li>已寄回待确认订单列表</li>
             @elseif(isset($status) && $status==-1)
-                <li class="active"><a href="{{ route('admin.order.index',['status'=>$status]) }}">订单列表</a><span class="divider">></span></li>
                 <li>已取消列表</li>
+            @elseif(isset($status) && $status==5)
+                <li>归还成功订单</li>
             @else
                 <li class="active"><a href="{{ route('admin.order.index') }}">订单列表</a></li>
             @endif
@@ -93,7 +90,7 @@
                                     <td>{{ $order->express_price }}</td>
                                     <td>{{ $order->express_title }}</td>
                                     <td>{{ $order->user->telephone }}</td>
-                                    <td>{{ $order->user->wechat_nickname }}(会员剩余天数：{{$order->user->days}})</td>
+                                    <td>{{ $order->user->wechat_nickname }}</td>
                                     <td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>

@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::any('/index/index','IndexController@index')->name('wechat2.index.index');
 
+    //支付回调函数
+    Route::any('/pay_notify','IndexController@pay_notify');
+
     //芝麻认证
     Route::any('/index/zmxy/face','ZhimaController@face');
     Route::any('/index/zmxy/test','ZhimaController@test');

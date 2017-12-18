@@ -4,7 +4,7 @@
     <div class="breadLine">
         <ul class="breadcrumb">
             <li><a href="javascript:;">订单管理</a> <span class="divider">></span></li>
-            <li><a href="{{route('admin.order.index')}}">订单列表</a> <span class="divider">></span></li>
+            <li><a href="javascript:;" onclick="window.history.back();">订单列表</a> <span class="divider">></span></li>
             <li class="active">订单详情</li>
         </ul>
     </div>
