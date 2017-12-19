@@ -24,6 +24,9 @@ class BaseController extends Controller
         $this->datetime = date('Y-m-d H:i:s',$this->time);
     }
 
+    /**
+     * 检查是否登录以及是否授权
+     */
     public function check_oauth()
     {
         $user_id = session('user_id');
@@ -51,6 +54,10 @@ class BaseController extends Controller
         }
     }
 
+    /**
+     * 微信授权回调
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function oauth_callback()
     {
         $config = config('wechat.official_account');
@@ -102,6 +109,10 @@ class BaseController extends Controller
         return redirect()->route('wechat2.index.index');
     }
 
+    /**
+     * 微信授权
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function oauth()
     {
         $config = config('wechat.official_account');
