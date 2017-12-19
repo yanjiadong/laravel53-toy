@@ -53,7 +53,7 @@ class BaseController extends Controller
 
     public function oauth_callback()
     {
-        $config = config('wechat');
+        $config = config('wechat.official_account');
         $app = Factory::officialAccount($config);
         $oauth = $app->oauth;
 
@@ -104,7 +104,7 @@ class BaseController extends Controller
 
     public function oauth()
     {
-        $config = config('wechat');
+        $config = config('wechat.official_account');
         $app = Factory::officialAccount($config);
         $oauth = $app->oauth;
         return $oauth->redirect();
