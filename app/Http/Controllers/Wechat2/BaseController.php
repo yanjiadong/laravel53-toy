@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wechat2;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Factory;
 
 class BaseController extends Controller
 {
@@ -21,6 +22,92 @@ class BaseController extends Controller
         $this->wechat_token = config('app.wechat_token');
         $this->time = time();
         $this->datetime = date('Y-m-d H:i:s',$this->time);
+    }
+
+    public function check_oauth()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $url = route('wechat2.index.oauth');
+
+        if(empty($openid) || empty($user_id))
+        {
+            Header("Location: $url");
+            exit();
+        }
+
+        $user_info = User::find($user_id);
+        if(empty($user_info))
+        {
+            Header("Location: $url");
+            exit();
+        }
+
+        if($user_info->id != $user_id)
+        {
+            Header("Location: $url");
+            exit();
+        }
+    }
+
+    public function oauth_callback()
+    {
+        $config = config('wechat');
+        $app = Factory::officialAccount($config);
+        $oauth = $app->oauth;
+
+        // 获取 OAuth 授权结果用户信息
+        $user = $oauth->user();
+
+        $openid = $user->getId();
+
+        session(['open_id'=>$openid]);
+
+        $info = User::where('wechat_openid',$openid)->first();
+
+        if(empty($info))
+        {
+            $data = array(
+                'name'=>filterEmoji($user->getNickname()),
+                'email'=>'',
+                'password'=>'',
+                'wechat_openid'=>$openid,
+                'wechat_original'=>json_encode($user->toArray()),
+                'wechat_nickname'=>filterEmoji($user->getNickname()),
+                'wechat_avatar'=>$user->getAvatar(),
+                'open_num'=>0
+            );
+
+            $success = User::create($data);
+            //echo $success->id;
+            //dd($success);
+            session(['user_id'=>$success->id]);
+        }
+        else
+        {
+            session(['user_id'=>$info->id]);
+
+            $data = array(
+                'name'=>filterEmoji($user->getNickname()),
+                'wechat_openid'=>$openid,
+                'wechat_original'=>json_encode($user->toArray()),
+                'wechat_nickname'=>filterEmoji($user->getNickname()),
+                'wechat_avatar'=>$user->getAvatar(),
+            );
+
+            User::where('id',$info->id)->update($data);
+        }
+
+        return redirect()->route('wechat2.index.index');
+    }
+
+    public function oauth()
+    {
+        $config = config('wechat');
+        $app = Factory::officialAccount($config);
+        $oauth = $app->oauth;
+        return $oauth->redirect();
     }
 
     public function check_user()

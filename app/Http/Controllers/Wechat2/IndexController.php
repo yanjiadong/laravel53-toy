@@ -39,7 +39,7 @@ class IndexController extends BaseController
         $result = $app->order->unify([
             'body' => '支付订单',
             'out_trade_no' => $out_trade_no,
-            'total_fee' => 1,
+            'total_fee' => 1,  //单位  分
             //'spbill_create_ip' => '123.12.12.123', // 可选，如不传该参数，SDK 将会自动获取相应 IP 地址
             //'notify_url' => 'https://pay.weixin.qq.com/wxpay/pay.action', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'trade_type' => 'JSAPI',
@@ -128,7 +128,7 @@ class IndexController extends BaseController
     }
 
     /**
-     * 首页
+     * 首页页面
      */
     public function index()
     {
@@ -139,7 +139,8 @@ class IndexController extends BaseController
         }
         else
         {
-            $this->check_user();
+            //$this->check_user();
+            $this->check_oauth();
         }
 
         $openid = session('open_id');
@@ -358,6 +359,7 @@ class IndexController extends BaseController
 
     public function submit_order($good_id)
     {
+        echo 11;
         $user_id = session('user_id');
         $openid = session('open_id');
 
@@ -370,7 +372,7 @@ class IndexController extends BaseController
             $bind_telephone = 1;
         }
 
-        return view('wechat.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
+        //return view('wechat.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
     }
 
     public function order_list()
