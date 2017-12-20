@@ -260,12 +260,12 @@
 
                         if(res.info.new_goods[i].store <= 0){
                             newData+='<li class="fl"><span class="no-good-state">暂无库存</span><div>' +
-                                '<a href="'+href+'"><img src="'+res.info.new_goods[i].picture+'"></a></div>' +
+                                '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
                                 '<p>市场参考价¥'+res.info.new_goods[i].price+'</p><h4>适用年龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon_arrowRight_white"></i></div></li>';
                         }else{
                             newData+='<li class="fl">' +
-                                '<a href="'+href+'"><img src="'+res.info.new_goods[i].picture+'"></a></div>' +
+                                '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
                                 '<p>市场参考价¥'+res.info.new_goods[i].price+'</p><h4>适用年龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon icon_arrowRight_white"></i></div></li>';
                         }
