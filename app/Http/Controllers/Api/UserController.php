@@ -41,6 +41,11 @@ class UserController extends BaseController
 
         $activity = Activity::where('type',2)->first();
 
+        if(!$activity)
+        {
+            $activity['picture'] = '';
+            $activity['url'] = '';
+        }
         //客服电话  客服时间
         $config = SystemConfig::where('type',1)->first();
         $content = json_decode($config->content,true);
