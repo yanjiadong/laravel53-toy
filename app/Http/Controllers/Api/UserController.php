@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Activity;
 use App\Area;
 use App\Cart;
 use App\Order;
@@ -19,6 +20,59 @@ use DB;
 
 class UserController extends BaseController
 {
+    /**
+     * 用户中心
+     * time 2017-12-20
+     * @param Request $request
+     */
+    public function user_center(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $user = User::find($user_id);
+
+        //正在租用中的玩具数量
+        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
+
+        //优惠券数量
+        $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
+
+        //押金总额
+        $money = Order::where('user_id',$user_id)->whereIn('money_status',[Order::MONEY_STATUS_UN])->where('status','>',Order::STATUS_UNPAY)->sum('money');
+
+        $activity = Activity::where('type',2)->first();
+
+        //客服电话  客服时间
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $tel = '';
+        if(isset($content[7]))
+        {
+            $tel = $content[7];
+        }
+
+        $service_time = '';
+        if(isset($content[8]))
+        {
+            $service_time = $content[8];
+        }
+
+        $this->ret['info'] = ['user'=>$user,'activity'=>$activity,'coupon_nums'=>$coupon_nums,'order_num'=>$order_num,'money'=>$money,'tel'=>$tel,'service_time'=>$service_time];
+        return $this->ret;
+    }
+
+    /**
+     * 获取用户芝麻信息
+     * @param Request $request
+     * time 2017-12-20
+     */
+    public function zhima_info(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $info = User::select('is_zhima','zhima_score')->where('id',$user_id)->first();
+        $this->ret['info'] = $info;
+        return $this->ret;
+    }
+
     public function center(Request $request)
     {
         $user_id = $request->get('user_id');

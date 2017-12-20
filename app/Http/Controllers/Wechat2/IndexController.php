@@ -129,6 +129,7 @@ class IndexController extends BaseController
 
     /**
      * 首页页面
+     * time 2017-12-20
      */
     public function index()
     {

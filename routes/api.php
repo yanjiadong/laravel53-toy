@@ -24,8 +24,10 @@ Route::group(['namespace' => 'Api'], function () {
     //获取接口首页
     Route::get('/index2','IndexController@index2');
 
-    //获取押金页面顶部图片
-    Route::post('/index/get_money_banner','IndexController@get_money_banner');
+    //用户中心
+    Route::post('/user/user_center','UserController@user_center');
+    //获取用户芝麻信息
+    Route::post('/user/zhima_info','UserController@zhima_info');
 
     //获取玩具箱
     Route::post('/cart/cart_list','CartController@cart_list');

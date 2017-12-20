@@ -1,0 +1,101 @@
+/*盒子模型*/
+*,*:after,*:before{
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    outline: none;
+}
+::-webkit-scrollbar{
+    display:none;
+    display:none !important;
+}
+
+html, body, div, span, applet, object, iframe,figure, h1, h2, h3,
+h4, h5, h6, p, blockquote, pre, a, abbr, acronym,
+address, big, cite, code, del, dfn, em, font, img, ins,
+input,button,textarea,
+kbd, q, s, samp, small, strike, strong, sub, sup, tt,
+var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    vertical-align: baseline;
+    background-color: transparent;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+html,body{
+    font-family:"PingFangSC-Regular","PingFangSC-Medium","Microsoft Yahei",  Arial,sans-serif ;
+    font-size: 12px;
+    min-height: 100%;
+    width: 100%;
+    background-color: #f4f4f4;
+}
+input[type=checkbox],input[type=radio]{
+    vertical-align: baseline;
+    position: relative;
+    top: 2px;
+}
+*{
+    outline: 0;
+}
+a{
+    text-decoration:none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+th, td {
+    text-align: left;
+    font-weight: normal;
+}
+img, iframe,fieldset {
+    border: none;
+    text-decoration:none;
+}
+textarea{
+    resize: none;
+}
+ol, ul {
+    list-style: none;
+}
+/*input的type=number时候清除右边箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+ul,li{
+    list-style: none;
+}
+/*清除苹果系统input效果*/
+input[type=button],input[type=submit],input[type=file],input[type=date],button {
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+/*select {
+    margin: inherit;
+    appearance:none;
+    -moz-appearance:none; *//* Firefox *//*
+    -webkit-appearance:none; *//* Safari 和 Chrome *//*
+}*/
+hr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #000;
+    background-color: #000;
+    height: 1px
+}
+.bg-white{
+    background-color: #fff;
+}
+.main-color{
+    color: #6885EA;
+}

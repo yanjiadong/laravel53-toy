@@ -24,24 +24,6 @@ class IndexController extends BaseController
 
     }
 
-    /**
-     * 获取押金页面顶部图片
-     * @return array
-     */
-    public function get_money_banner()
-    {
-        $config = SystemConfig::where('type',1)->first();
-        $content = json_decode($config->content,true);
-        $image = '';
-        if(isset($content[9]))
-        {
-            $image = $content[9];
-        }
-
-        $this->ret['info'] = ['image'=>$image];
-        return $this->ret;
-    }
-
     public function index2()
     {
         $categorys = Category::all();
@@ -50,6 +32,7 @@ class IndexController extends BaseController
 
         $goods = Good::select('id','new_picture','picture','day_price','old','title','price')->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->orderBy('sort','asc')->get();
         $activities = Activity::select('url','picture','title')->where('type',1)->get();
+
 
         $this->ret['info'] = ['categorys'=>$categorys,'new_goods'=>$new_goods,'goods'=>$goods,'activities'=>$activities];
         return $this->ret;

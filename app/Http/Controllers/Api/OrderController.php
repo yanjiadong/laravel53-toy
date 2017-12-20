@@ -376,11 +376,23 @@ class OrderController extends BaseController
     public function get_money_list(Request $request)
     {
         $user_id = $request->get('user_id');
+
+        //获取押金页面顶部图片
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $image = '';
+        if(isset($content[9]))
+        {
+            $image = $content[9];
+        }
+
         $orders = Order::where('user_id',$user_id)->where('money','>','0')->orderBy('pay_success_time','desc')->get()->toArray();
         if(!empty($orders))
         {
             foreach ($orders as &$v)
             {
+                $v['num'] = 1;  //订单数量
+                $v['over_money'] = $v['over_days']*$v['good_day_price'];
                 $v['can_apply_money'] = 0;
 
                 if($v['status'] == Order::STATUS_BACK_STR && $v['back_status'] == Order::BACK_STATUS_DOING_STR && $v['money_status'] == Order::MONEY_STATUS_UN)
@@ -402,7 +414,7 @@ class OrderController extends BaseController
             }
         }
 
-        $this->ret['info'] = ['list'=>$orders];
+        $this->ret['info'] = ['list'=>$orders,'image'=>$image];
         return $this->ret;
     }
 
