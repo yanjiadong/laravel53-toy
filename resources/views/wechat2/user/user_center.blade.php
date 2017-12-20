@@ -100,8 +100,8 @@
                     tel:res.info.tel, //客服电话
                     service_time:res.info.service_time, //客服电话
                     phone:res.info.user.telephone, //用户手机
-                    active_pic:res.info.activity.picture, //活动图片，后台上传比例为960*300
-                    active_url:res.info.activity.url
+                    active_pic:res.info.activity.picture?res.info.activity.picture:"/wechat2/image/other/lunbo2.jpg", //活动图片，后台上传比例为960*300
+                    active_url:res.info.activity.url?res.info.activity.url:'#'
                 };
                 //赋值
                 //console.log(user_center.data.userInfo.isAuthorize);
