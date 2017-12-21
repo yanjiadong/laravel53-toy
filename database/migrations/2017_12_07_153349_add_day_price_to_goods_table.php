@@ -14,7 +14,7 @@ class AddDayPriceToGoodsTable extends Migration
     public function up()
     {
         Schema::table('goods', function (Blueprint $table) {
-            $table->decimal('day_price',10,2)->default(0.00)->comment('默认计算出来的每日价格');
+            $table->decimal('day_price',10,1)->default(0.0)->comment('默认计算出来的每日价格');
             $table->decimal('money',10,2)->default(0.00)->comment('押金');
         });
     }

@@ -16,6 +16,14 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     //首页
     Route::any('/index/index','IndexController@index')->name('wechat2.index.index');
 
+    //订单详情
+    Route::get('/index/order_detail/{order_code}','IndexController@order_detail')->name('wechat2.index.order_detail');
+
+    //查看物流信息
+    Route::get('/index/logistics_detail/{order_code}','IndexController@logistics_detail')->name('wechat2.index.logistics_detail');
+    //提交归还信息
+    Route::get('/index/logistics_info','IndexController@logistics_info')->name('wechat2.index.logistics_info');
+
     //用户中心
     Route::get('/user/user_center','UserController@user_center')->name('wechat2.user.user_center');
     //我的押金

@@ -119,7 +119,7 @@
                     }
                     else if(myDeposit.data.infoData.list[i].can_apply_money == 3)
                     {
-                        //已申请提现但后台还没有审核
+                        //已申请提现且提现成功
                         listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
                             '</div><div class="fr"><span>押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
                             '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
@@ -128,7 +128,7 @@
                     }
                     else if(myDeposit.data.infoData.list[i].can_apply_money == 2)
                     {
-                        //已申请提现且提现成功
+                        //已申请提现但后台还没有审核
                         listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
                             '</div><div class="fr"><span>押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
                             '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+

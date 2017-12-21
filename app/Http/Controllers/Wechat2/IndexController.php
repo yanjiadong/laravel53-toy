@@ -184,6 +184,29 @@ class IndexController extends BaseController
     }
 
     /**
+     * 订单详情
+     * @param $order_code
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * time 2017-12-21
+     */
+    public function order_detail($order_code)
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        //客服电话
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $phone = '';
+        if(isset($content[7]))
+        {
+            $phone = $content[7];
+        }
+
+        return view('wechat2.index.order_detail',compact('user_id','openid','order_code','phone'));
+    }
+
+    /**
      * 分类详情页
      */
     public function category(Request $request, $category_id, $brand_id)
@@ -420,22 +443,7 @@ class IndexController extends BaseController
         return view('wechat.index.order_success',compact('user_id','openid','order_code','order'));
     }
 
-    public function order_detail($order_code)
-    {
-        $user_id = session('user_id');
-        $openid = session('open_id');
 
-        //客服电话
-        $config = SystemConfig::where('type',1)->first();
-        $content = json_decode($config->content,true);
-        $phone = '';
-        if(isset($content[7]))
-        {
-            $phone = $content[7];
-        }
-
-        return view('wechat.index.order_detail',compact('user_id','openid','order_code','phone'));
-    }
 
     public function order_return_detail($page = 1)
     {
@@ -463,6 +471,10 @@ class IndexController extends BaseController
         return view('wechat.index.fill_logistics',compact('user_id','openid','signPackage'));
     }
 
+    /**
+     * 提交归还物流信息
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function logistics_info()
     {
         $user_id = session('user_id');
@@ -470,7 +482,7 @@ class IndexController extends BaseController
 
         $signPackage = getJssdk();
 
-        return view('wechat.index.logistics_info',compact('user_id','openid','signPackage'));
+        return view('wechat2.index.logistics_info',compact('user_id','openid','signPackage'));
     }
 
     public function children_interesting_compilation()
@@ -481,13 +493,18 @@ class IndexController extends BaseController
         return view('wechat.index.children_interesting_compilation',compact('user_id','openid'));
     }
 
+    /**
+     * 查看物流信息
+     * @param $order_code
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function logistics_detail($order_code)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
         $order = Order::where('code',$order_code)->first();
-        return view('wechat.index.logistics_detail',compact('user_id','openid','order','order_code'));
+        return view('wechat2.index.logistics_detail',compact('user_id','openid','order','order_code'));
     }
 
     public function test()

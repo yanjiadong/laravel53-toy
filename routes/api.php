@@ -24,6 +24,9 @@ Route::group(['namespace' => 'Api'], function () {
     //获取接口首页
     Route::get('/index2','IndexController@index2');
 
+    //订单详情
+    Route::post('/order/order_detail','OrderController@order_detail');
+
     //用户中心
     Route::post('/user/user_center','UserController@user_center');
     //获取用户芝麻信息

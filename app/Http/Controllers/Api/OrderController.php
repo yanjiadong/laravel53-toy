@@ -265,22 +265,12 @@ class OrderController extends BaseController
      */
     public function confirm_order(Request $request)
     {
-        //$order_code = $request->get('code');
         $id = $request->get('id');
 
         $order = Order::find($id);
         $end_time = date('Y-m-d H:i:s',strtotime("+{$order->days} days",$this->time));
 
         $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
-        /*if(!empty($id))
-        {
-            $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
-        }
-        else
-        {
-            $ret = Order::where('code',$order_code)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
-        }*/
-
         return $this->ret;
     }
 
@@ -418,6 +408,67 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
+    public function order_detail(Request $request)
+    {
+        $code = $request->get('code');
+        $info = Order::with(['user','category','good_brand'])->where('code',$code)->first();
+
+        $express_info = ExpressInfo::where('nu',$info->express_no)->orderBy('id','desc')->first();
+
+        $logistics = array('time'=>'','context'=>'暂无物流信息');
+        if(isset($express_info->content) && !empty($express_info->content))
+        {
+            $content = json_decode($express_info->content,true);
+            if(isset($content['lastResult']['data'][0]))
+            {
+                $logistics = $content['lastResult']['data'][0];
+                //print_r($logistics);
+            }
+            //print_r($content);
+        }
+
+        $info['address'] = $info['receiver_province'].$info['receiver_city'].$info['receiver_area'].$info['receiver_address'];
+
+        if($info['status'] == Order::STATUS_BACK_STR && $info['back_status'] == Order::BACK_STATUS_DOING_STR)
+        {
+            $info['status'] = '归还成功';
+        }
+
+        $info['pay_success_time_int'] = $this->time;
+        if(!empty($info['pay_success_time']))
+        {
+            $info['pay_success_time_int'] = strtotime($info['pay_success_time']);
+        }
+
+        $info['send_time_int'] = $this->time;
+        if(!empty($info['send_time']))
+        {
+            $info['send_time_int'] = strtotime($info['send_time']);
+        }
+
+        $info['start_time_int'] = $this->time;
+        $info['has_days'] = 0;
+        if(!empty($info['start_time']))
+        {
+            $info['start_time_int'] = strtotime($info['start_time']);
+
+            //计算已经租用天数
+            $info['has_days'] = ceil(($this->time - strtotime($info['start_time']))/86400);
+        }
+
+        $info['end_time_int'] = $this->time;
+        if(!empty($info['end_time']))
+        {
+            $info['end_time_int'] = strtotime($info['end_time']);
+        }
+
+        $tel = get_tel();
+        $this->ret['info'] = ['logistics'=>$logistics,'order'=>$info,'tel'=>$tel];
+        return $this->ret;
+    }
+    /*
+     * ================================
+     */
     public function add_order(Request $request)
     {
         $good_id = $request->get('good_id');
@@ -660,6 +711,7 @@ class OrderController extends BaseController
             //print_r($content);
         }
 
+        $info['address'] = $info['receiver_province'].$info['receiver_city'].$info['receiver_area'].$info['receiver_address'];
         $info['days'] = 0;
         $info['total_days'] = 0;
         if($info['status'] == Order::STATUS_BACK_STR)
@@ -727,6 +779,11 @@ class OrderController extends BaseController
         return $this->ret;
     }
 
+    /**
+     * 提交归还物流信息
+     * @param Request $request
+     * @return array
+     */
     public function order_back(Request $request)
     {
         $order_id = $request->get('order_id');

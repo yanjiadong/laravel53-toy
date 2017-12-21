@@ -652,6 +652,24 @@ if(!function_exists('getMoneyByZhimaScore'))
 }
 
 
+//获取客服电话
+if(!function_exists('get_tel'))
+{
+    function get_tel()
+    {
+        //客服电话
+        $config = DB::table('system_configs')->where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $phone = '';
+        if(isset($content[7]))
+        {
+            $phone = $content[7];
+        }
+        return $phone;
+    }
+}
+
+
 
 
 

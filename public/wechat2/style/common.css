@@ -542,13 +542,16 @@ footer table td a .icon-footer-user-center {
     display: inline-block;
     vertical-align: middle;
     background: url(../image/common/wx_footer.png) -96px 0 no-repeat;
-    background-size: 117px 48px;
+    background-size: 118px 48px;
     width: 23px;
     height: 24px;
     position: relative;
 }
 footer table td.active a {
     color: #6885EA;
+}
+footer table td.active .font{
+    color:#363636;
 }
 footer table td.active a .icon-footer-home {
     display: inline-block;
@@ -566,7 +569,7 @@ footer table td.active a .icon-footer-order {
     width: 23px;
     height: 24px;
     position: relative;
-    background-size: 117px 48px;
+    background-size: 119px 48px;
 }
 footer table td.active a .icon-footer-shop-car {
     display: inline-block;
@@ -635,7 +638,6 @@ footer table td.active a .icon-footer-user-center {
     color: #323232;
     font-size: 14px;
     border-bottom: 2px solid transparent;
-    padding: 0 4px;
 }
 .index-nav .nav li.active a {
     color: #1b1b1b;

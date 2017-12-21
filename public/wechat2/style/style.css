@@ -156,7 +156,7 @@
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent{
     position: absolute;
-    bottom:0;
+    bottom:5px;
     right: 0;
     font-size: 10px;
     color: #fff;
@@ -167,9 +167,10 @@
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent span{
     display: inline-block;
     vertical-align: middle;
+    font-size: 10px;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent span.money{
-   font-size:10px;
+   font-size:14px;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent .icon_arrowRight_white{
     background-position: -6px -71px;
@@ -194,7 +195,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-align: center;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li p{
     color: #8D8D8D;
@@ -4866,6 +4866,7 @@ textarea {
     background: rgba(249, 249, 249, 0.76);
     padding: 0 13px;
     height: 60px;
+    position: relative;
 }
 .my-deposit-wrap .list ul li .good .fl {
     height: 100%;
@@ -4879,8 +4880,7 @@ textarea {
 }
 .my-deposit-wrap .list ul li .good .fr {
     padding: 5px 0;
-    max-width: 82%;
-    position: relative;
+    width: calc(100% - 64px);
 }
 .my-deposit-wrap .list ul li .good .fr h3 {
     font-size: 14px;
@@ -4890,8 +4890,8 @@ textarea {
 }
 .my-deposit-wrap .list ul li .good .fr .num {
     position: absolute;
-    bottom: 7px;
-    right: 0;
+    bottom: 15px;
+    right: 13px;
 }
 .my-deposit-wrap .list ul li .operate {
     padding: 15px 13px;
@@ -4934,7 +4934,7 @@ textarea {
 }
 /*-------my_deposit----------*/
 .order-detail-wrap{
-    padding-bottom: 50px;
+    padding-bottom: 60px;
 }
 .order-detail-wrap .top-states {
     width: 100%;
@@ -4968,7 +4968,7 @@ textarea {
 .order-detail-wrap .top-states .stay h2 {
     font-size: 18px;
     color: #ffffff;
-    margin-top: 5px;
+    margin-top: 10px;
     padding: 0 10px;
 }
 .order-detail-wrap .top-states .stay .rest{
@@ -4983,7 +4983,7 @@ textarea {
 .order-detail-wrap .top-states .stay h4 {
     font-size: 14px;
     color: #ffffff;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .order-detail-wrap .logistics {
     margin-top: 8px;
@@ -5107,6 +5107,10 @@ textarea {
     color: #2d2d2d;
     border-top: 1px solid #efefef;
 }
+.order-detail-wrap .order-detail .list ul li .fr{
+    text-align: right;
+    letter-spacing: -0.9px;
+}
 .order-detail-wrap .detail-list {
     margin-top: 8px;
     background-color: #fff;
@@ -5202,8 +5206,24 @@ textarea {
     display: inline-block;
     vertical-align: middle;
 }
-.order-detail-wrap .order-info .order-info-cont ul li i.i-out,
-.order-detail-wrap .return-info .order-info-cont ul li i.i-out {
+.order-detail-wrap .return-info .order-info-cont ul li .delay-time{
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url("../image/common/order_detail.png");
+    background-size:120px 500px;
+    height: 23px;
+    background-position: -12px -143px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+.order-detail-wrap .return-info .order-info-cont ul li .delay-time span{
+    border: 1px solid #afafaf;
+    border-left: navajowhite;
+    font-size: 14px;
+    padding: 1px 5px;
+    margin-left: 5px;
+}
+.order-detail-wrap .order-info .order-info-cont ul li i.i-out{
     width: 65px;
     height: 23px;
     background-position: -12px -143px;
@@ -5239,9 +5259,13 @@ textarea {
     font-size: 14px;
     color: #6b6b6b;
 }
-.order-detail-wrap .footer span {
+.order-detail-wrap .footer span{
     display: inline-block;
     vertical-align: middle;
+}
+.order-detail-wrap .footer a{
+    font-size: 14px;
+    color: #6b6b6b
 }
 .order-detail-wrap .footer button {
     font-size: 14px;

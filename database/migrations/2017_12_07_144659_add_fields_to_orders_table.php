@@ -15,7 +15,7 @@ class AddFieldsToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->integer('days')->default(0)->comment('租用天数');
-            $table->decimal('good_day_price',10,2)->default(0.00)->comment('每日租金');
+            $table->decimal('good_day_price',10,1)->default(0.0)->comment('每日租金');
             $table->decimal('total_price',10,2)->default(0.00)->comment('租金');
             $table->dateTime('start_time')->nullable()->comment('租用开始时间');
             $table->dateTime('end_time')->nullable()->comment('租用结束时间');

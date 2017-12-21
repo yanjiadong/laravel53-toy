@@ -214,10 +214,14 @@ var common = {
         var date_cont =(time.getFullYear())+'-'+(time.getMonth()+1)+'-'+(time.getDate())+' '+time.getHours()+':'+time.getMinutes();
         return date_cont;
     },
-    dateFormat1:function (nS) {
+    dateFormat1:function (nS,needTime) {   //needTime为false不需要显示时分秒
         nS = parseInt(nS);
         var time = new Date(nS);
-        var date_cont =(time.getFullYear())+'-'+(time.getMonth()+1)+'-'+(time.getDate())+' '+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds();
+        if(needTime){
+            var date_cont =(time.getFullYear())+'.'+(time.getMonth()+1)+'.'+(time.getDate())+' '+time.getHours()+':'+time.getMinutes()+':'+(time.getSeconds()>10?time.getSeconds():'0'+time.getSeconds());
+        }else{
+            var date_cont =(time.getFullYear())+'.'+(time.getMonth()+1)+'.'+time.getDate();
+        }
         return date_cont;
     }
 

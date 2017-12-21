@@ -58,7 +58,7 @@ class CrontabController extends BaseController
 
 
         //检查租用中的订单是否有逾期
-        $orders = Order::where('status',Order::STATUS_DOING)->get();
+        /*$orders = Order::where('status',Order::STATUS_DOING)->get();
         //print_r($orders);
         if(count($orders) > 0)
         {
@@ -72,7 +72,7 @@ class CrontabController extends BaseController
                     DB::table('orders')->where('id',$order->id)->update(['over_days'=>$over_days]);
                 }
             }
-        }
+        }*/
     }
 
     /**
