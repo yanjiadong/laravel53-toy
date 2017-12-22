@@ -86,6 +86,7 @@
                                 <th>库存</th>
                                 <th>新品抢先</th>
                                 <th>热门推荐</th>
+                                <th>是否促销</th>
                                 <th>状态</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
@@ -102,6 +103,7 @@
                                     <td width="100px"><input style="width: 40%;" type="text" value="{{ $good->store }}" class="validate[required,custom[number]] storeAction" data-id="{{$good->id}}"></td>
                                     <td>{{ $good->is_new==1?'是':'否' }}</td>
                                     <td>{{ $good->is_hot==1?'是':'否' }}</td>
+                                    <td>{{ $good->is_discount==1?'是':'否' }}</td>
                                     <td>{{ $good->status==\App\Good::STATUS_ON_SALE?'上架':'下架' }}</td>
                                     <td>{{ $good->created_at }}</td>
                                     <td>

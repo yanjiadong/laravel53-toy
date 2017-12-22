@@ -262,6 +262,63 @@
                         </div>
 
                         <div class="row-form clearfix">
+                            <div class="span3">是否促销：</div>
+                            <div class="span9">
+                                <label class="checkbox inline">
+                                    <div class="radio"><span><input type="radio" name="is_discount" value="0" {{ $good->is_discount==0?'checked':'' }}></span></div> 否
+                                </label>
+                                <label class="checkbox inline">
+                                    <div class="radio"><span><input type="radio" name="is_discount" value="1" {{ $good->is_discount==1?'checked':'' }}></span></div> 是
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="show_dicount" style="{{ $good->is_discount==1?'':'display:none' }}">
+                            <div class="row-form clearfix">
+                                <div class="span3">7天内促销单日价格(1<=天数<=7)：</div>
+                                <div class="span9">
+                                    <input type="text" value="{{ $good->discount1 }}" class="validate[required,custom[number]]" id="discount1"/>
+                                    <span>单位：(元) 保留一位小数即可</span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3">14天内促销单日价格(7<天数<=14)：</div>
+                                <div class="span9">
+                                    <input type="text" value="{{ $good->discount2 }}" class="validate[required,custom[number]]" id="discount2"/>
+                                    <span>单位：(元) 保留一位小数即可</span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3">21天内促销单日价格(14<天数<=21)：</div>
+                                <div class="span9">
+                                    <input type="text" value="{{ $good->discount3 }}" class="validate[required,custom[number]]" id="discount3"/>
+                                    <span>单位：(元) 保留一位小数即可</span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3">30天内促销单日价格(21<天数<=30)：</div>
+                                <div class="span9">
+                                    <input type="text" value="{{ $good->discount4 }}" class="validate[required,custom[number]]" id="discount4"/>
+                                    <span>单位：(元) 保留一位小数即可</span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3">45天内促销单日价格(30<天数<=45)：</div>
+                                <div class="span9">
+                                    <input type="text" value="{{ $good->discount5 }}" class="validate[required,custom[number]]" id="discount5"/>
+                                    <span>单位：(元) 保留一位小数即可</span>
+                                </div>
+                            </div>
+                            <div class="row-form clearfix">
+                                <div class="span3">60天内促销单日价格(45<天数<=60)：</div>
+                                <div class="span9">
+                                    <input type="text" value="{{ $good->discount6 }}" class="validate[required,custom[number]]" id="discount6"/>
+                                    <span>单位：(元) 保留一位小数即可</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-form clearfix">
                             <div class="span3">玩具描述：</div>
                             <div class="span9">
                                 <!-- 编辑器容器 -->
@@ -438,6 +495,14 @@
                 },'json');
             });
 
+            $("input[name='is_discount']").click(function(){
+                if ($(this).val() == 0) {
+                    $("#show_dicount").hide();
+                } else {
+                    $("#show_dicount").show();
+                }
+            });
+
             $('#submit').click(function(e) {
                 e.preventDefault();
 
@@ -470,6 +535,13 @@
                     var free_price = $("#free_price").val();
                     var money = $("#money").val();
                     var new_picture = $("#new_picture").val();
+                    var is_discount = $('input[name="is_discount"]:checked').val();
+                    var discount1 = $("#discount1").val();
+                    var discount2 = $("#discount2").val();
+                    var discount3 = $("#discount3").val();
+                    var discount4 = $("#discount4").val();
+                    var discount5 = $("#discount5").val();
+                    var discount6 = $("#discount6").val();
 
                     var url = "{{route('goods.update',['id'=>$good->id])}}";
                     var _method = 'PUT';
@@ -487,7 +559,7 @@
                     }
 
                     $.post(url,
-                        {new_picture:new_picture,money:money,express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {is_discount:is_discount,discount1:discount1,discount2:discount2,discount3:discount3,discount4:discount4,discount5:discount5,discount6:discount6,new_picture:new_picture,money:money,express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

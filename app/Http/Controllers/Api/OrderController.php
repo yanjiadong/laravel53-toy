@@ -44,14 +44,15 @@ class OrderController extends BaseController
         $info['good_money'] = $good->money;
 
         //计算不同天数不同的单日价格
-        $price = [
-            'week1'=>getGoodPriceByDays($info['good_price'],7),
-            'week2'=>getGoodPriceByDays($info['good_price'],14),
-            'week3'=>getGoodPriceByDays($info['good_price'],21),
-            'month1'=>getGoodPriceByDays($info['good_price'],30),
-            'month2'=>getGoodPriceByDays($info['good_price'],60),
+        $price_info = [
+            'week1'=>getGoodPriceByDays($info['good_price'],7, $good->is_discount, $good_id),
+            'week2'=>getGoodPriceByDays($info['good_price'],14, $good->is_discount, $good_id),
+            'week3'=>getGoodPriceByDays($info['good_price'],21, $good->is_discount, $good_id),
+            'month1'=>getGoodPriceByDays($info['good_price'],30, $good->is_discount, $good_id),
+            'month2'=>getGoodPriceByDays($info['good_price'],60, $good->is_discount, $good_id),
         ];
 
+        //print_r($price_info);
         //计算优惠券数量
         $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
 
@@ -97,11 +98,13 @@ class OrderController extends BaseController
         $send_week = $weekarray[date("w",$send_time)];
 
         $result['good'] = $info;
+        $result['price_info'] = $price_info;
         $result['express_price'] = $express_price;  //运费
         $result['total_price'] = sprintf("%.2f", $total_price);   //租金
         $result['money'] = $money;  //押金
         $result['price'] = sprintf("%.2f", ($money + $express_price + $total_price));
         $result['send_time'] = ['send_week'=>$send_week,'send_date'=>$send_date];
+
         $this->ret['info'] = $result;
         //print_r($result);
         return $this->ret;

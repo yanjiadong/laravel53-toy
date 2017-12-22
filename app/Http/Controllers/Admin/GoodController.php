@@ -99,7 +99,19 @@ class GoodController extends BaseController
         unset($data['pics']);
         $data['status'] = Good::STATUS_ON_SALE;
 
-        $data['day_price'] = getGoodPriceByDays($data['price'],21);
+        $data['day_price'] = 0;
+        if($data['is_discount'] == 1)
+        {
+            //促销
+            $data['day_price'] = $data['discount3'];
+        }
+
+        if($data['day_price']<=0)
+        {
+            $data['day_price'] = getGoodPriceByDays($data['price'],21);
+        }
+
+
         $good = Good::create($data);
 
         if(!empty($pics))
@@ -194,7 +206,23 @@ class GoodController extends BaseController
         unset($data['_method']);
         //$data['status'] = Good::STATUS_ON_SALE;
 
-        $data['day_price'] = getGoodPriceByDays($data['price'],21);
+        $data['day_price'] = 0;
+        if($data['is_discount'] == 1)
+        {
+            //促销
+            $data['day_price'] = $data['discount3'];
+        }
+
+        if($data['day_price']<=0)
+        {
+            $data['day_price'] = getGoodPriceByDays($data['price'],21);
+            $data['discount1'] = 0;
+            $data['discount2'] = 0;
+            $data['discount3'] = 0;
+            $data['discount4'] = 0;
+            $data['discount5'] = 0;
+            $data['discount6'] = 0;
+        }
 
         $good = Good::where('id',$id)->update($data);
 

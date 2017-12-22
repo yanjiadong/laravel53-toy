@@ -569,33 +569,87 @@ if(!function_exists('get_level_by_score'))
 //根据商品租用天数来计算每日的租金
 if(!function_exists('getGoodPriceByDays'))
 {
-    function getGoodPriceByDays($price, $days)
+    function getGoodPriceByDays($price, $days, $is_discount = 0, $good_id = 0)
     {
-        if($days <= 7)
+        if(!empty($is_discount))
         {
-            $result = round($price/98,1);
+            $good = DB::table('goods')->where('id',$good_id)->first();
+        }
+
+        $result = 0;
+
+        if($days >= 1 && $days <= 7)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount1;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/98,1);
+            }
         }
         elseif($days > 7 && $days <= 14)
         {
-            $result = round($price/128,1);
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount2;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/128,1);
+            }
         }
         elseif($days > 14 && $days <= 21)
         {
-            $result = round($price/153,1);
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount3;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/153,1);
+            }
         }
         elseif($days > 21 && $days <= 30)
         {
-            $result = round($price/165,1);
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount4;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/165,1);
+            }
         }
         elseif($days > 30 && $days <= 45)
         {
-            $result = round($price/175,1);
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount5;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/175,1);
+            }
         }
         elseif($days > 45 && $days <= 60)
         {
-            $result = round($price/185,1);
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount6;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/185,1);
+            }
         }
-        return $result;
+        else
+        {
+            $result = round($price,1);
+        }
+
+        return number_format($result,1,".","");
     }
 }
 
