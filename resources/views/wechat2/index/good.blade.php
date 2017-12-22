@@ -268,7 +268,7 @@
                         {
                             lunbo_content="";
                             for(var i=1;i<goodDetail_obj.data.detail_data.lunbo2.length;i++){
-                                lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj.data.detail_data.lunbo[i].picture+'"></div>';
+                                lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj.data.detail_data.lunbo2[i].picture+'"></div>';
                                 $(".lunbo .swiper-wrapper").append(lunbo_content);
                                 lunbo_content="";
                             }
