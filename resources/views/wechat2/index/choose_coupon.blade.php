@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>会员抵用券</title>
-    <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
-    <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
-    <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
-    <script src="/wechat/js/jquery-1.11.1.min.js"></script>
-    <script src="/wechat/js/main.js"></script>
-    <script src="/wechat/js/common.js"></script>
+    <title>优惠券</title>
+    <link href="{{ asset('wechat2/style/reset.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('wechat2/style/common.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('wechat2/style/style.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('wechat2/js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ asset('wechat2/js/main.js') }}"></script>
+    <script src="{{ asset('wechat2/js/common.js') }}"></script>
 </head>
 <body>
 <div class="vip-voucher-wrap bg-white">
@@ -49,13 +49,13 @@
              </li>-->
         </ul>
     </div>
-    {{--<div class="footer bg-white">
+    <div class="footer bg-white">
         <button onclick="vip_voucher.noUser()">不使用优惠劵</button>
-    </div>--}}
+    </div>
     <div class="no-good">
         <div class="tips">
             <i class="icon-no-goods2"></i>
-            <h4>您还没有可用的会员抵用券</h4>
+            <h4>您还没有可用的优惠券</h4>
         </div>
     </div>
 </div>
@@ -66,11 +66,16 @@
     var vip_voucher ={
         data:{
             list:[],
-            state:true                 //是不是从个人中心进入 true是   false为不是
+            vip_id:common.getParam('id'),
+            state:false,                 //是不是从个人中心进入 true是   false为不是
+            vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id值/**/
         },
         init:function(){
+            var data_vip_id = vip_voucher.data.vip_id;
+            console.log(data_vip_id);
+
             var code = $('.vip-voucher-wrap .input input').val("");
-            common.httpRequest('{{url('api/user/user_coupon_list')}}','post',{user_id:'{{$user_id}}'},function (res) {
+            common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:data_vip_id},function (res) {
                 /*vip_voucher.data.list=[
                     {id:0,money:100,cont:'新人专享优惠卷',time:'2017.8.27-2017.8.31',fanwei:'任意金额可用'},
                     {id:1,money:200,cont:'满减优惠卷',time:'2017.8.27-2017.8.31',fanwei:'满一千元可用'}
@@ -87,23 +92,37 @@
                         }
                         else
                         {
-                            var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
+                            var fanwei = '会员卡满'+vip_voucher.data.list[i].condition+'元可用';
                         }
 
-
-                        cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
-                            +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                            '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
-
+                        if(vip_voucher.data.list[i].can_use)
+                        {
+                            /*-----之前选中优惠券再进入默认是选中------*/
+                            if(vip_voucher.data.vip_discount_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.vip_discount_id){
+                                cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            }else{
+                                cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            }
+                        }
+                        else
+                        {
+                            cont+='<li class="clear disable"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                        }
                     }
                     $(".vip-voucher-wrap .list ul").html(cont);
-                    //$(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
+
                     vip_voucher.isCenter();
                     if(vip_voucher.data.state){
-                        $(".vip-voucher-wrap .list ul li").removeClass('disable');
+                        //$(".vip-voucher-wrap .list ul li").removeClass('disable');
                         $(".vip-voucher-wrap .footer").hide();
                     }else{
-                        $(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
+                        //$(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
                         vip_voucher.choose();
                     }
                 }
@@ -129,20 +148,21 @@
                 $(this).addClass('active');
 
                 var index = $(this).index(".vip-voucher-wrap .list ul li");
+
                 //提交选择
-                localStorage.vip_discount = JSON.stringify(vip_voucher.data.list[index]);
+                sessionStorage.choose_vip_id = vip_voucher.data.vip_id;
+                sessionStorage.choose_vip_discount = JSON.stringify(vip_voucher.data.list[index].price);
+                sessionStorage.choose_vip_car =vip_voucher.data.list[index].id;
 
-                common.httpRequest('{{url('api/user/choose_coupon')}}','post',{user_id:'{{$user_id}}','coupon_id':vip_voucher.data.list[index].id},function (res) {
-
-                });
-
+                //location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price)+'&vip_discount_id='+vip_voucher.data.list[index].id;
                 location.href="{{url('wechat/index/choose_vip')}}";
             })
         },
         //不使用优惠劵
         noUser:function () {
             var submitData ="";
-            localStorage.vip_discount="";
+            sessionStorage.choose_vip_discount="";
+            sessionStorage.choose_vip_id = vip_voucher.data.vip_id;
             location.href="{{url('wechat/index/choose_vip')}}";
         },
         //兑换
@@ -169,6 +189,28 @@
     $(function () {
         vip_voucher.init();
     })
+</script>
+<script>
+    $(function () {
+        pushHistory();
+        /*----------避免下一页返回这一页调用这个函数-------------*/
+        var bool=false;
+        setTimeout(function(){
+            bool=true;
+        },500);
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            if(bool) {
+                location.href=document.referrer;  //在这里指定其返回的地址
+            }
+        }, false);
+    });
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: "#"
+        };
+        window.history.pushState(state, state.title, state.url);
+    }
 </script>
 </body>
 </html>

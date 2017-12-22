@@ -249,102 +249,17 @@ class IndexController extends BaseController
     }
 
     /**
-     * 成为会员
+     * 使用优惠券
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function choose_vip()
-    {
-        $this->check_user();
-        $user_id = session('user_id');
-
-        //获取剩余天数
-        $days = VipCardPay::where('user_id',$user_id)->where('status',1)->where('pay_status',1)->sum('days');
-
-        $user = User::find($user_id);
-        $first_choose_vip = 0;
-        if($user->is_zhima == 1)
-        {
-            $first_choose_vip = 1;
-        }
-        return view('wechat.index.choose_vip',compact('user_id','days','first_choose_vip'));
-    }
-
-    public function pay_vip_card(Request $request,$vip_card_id)
+    public function choose_coupon()
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        $coupon_id = $request->get('vip_discount_id');
-
-
-        $info = VipCard::find($vip_card_id);
-        $user = User::find($user_id);
-
-        $jianmian_money = 0;
-        if($user->is_zhima == 1)
-        {
-            if($info->money <= $user->zhima_money)
-            {
-                $jianmian_money = $info->money;
-            }
-            else
-            {
-                $jianmian_money = $user->zhima_money;
-            }
-        }
-
-        $total_fee = $info->money+$info->price-$jianmian_money;
-
-        //$total_fee = 1.01;
-        if(!empty($coupon_id))
-        {
-            $user_coupon = UserCoupon::where('user_id',$user_id)->where('coupon_id',$coupon_id)->first();
-            if(!empty($user_coupon))
-            {
-                $coupon = Coupon::find($coupon_id);
-
-
-                $data['coupon_price'] = $coupon->price;
-                $data['user_coupon_id'] = $user_coupon->id;
-
-                $total_fee = $total_fee - $coupon->price;
-            }
-        }
-
-        if($total_fee<=0)
-        {
-            $total_fee = 0;
-        }
-
-        switch ($info->type)
-        {
-            case 1:
-                $days = 30;
-                break;
-            case 2:
-                $days = 90;
-                break;
-            case 3:
-                $days = 180;
-                break;
-        }
-        $out_trade_no = 'v'.get_order_code($user_id);
-        //$total_fee = 0.01;
-
-        $data['user_id'] = $user_id;
-        $data['price'] = $total_fee;
-        $data['money'] = $info->money-$jianmian_money;
-        $data['vip_card_id'] = $vip_card_id;
-        $data['vip_card_type'] = $info->type;
-        $data['pay_status'] = 0;
-        $data['status'] = 1;
-        $data['days'] = $days;
-        $data['order_code'] = $out_trade_no;
-
-        VipCardPay::create($data);
-
-        $jsApiParameters = WxJsPay($out_trade_no, $total_fee, $openid);
-        return view('wechat.index.pay_vip_card',compact('user_id','jsApiParameters','out_trade_no'));
+        return view('wechat2.index.choose_coupon',compact('user_id'));
     }
+
 
     /**
      * 支付订单
@@ -362,20 +277,6 @@ class IndexController extends BaseController
         $total_fee = $order->price;
         $jsApiParameters = WxJsPay($out_trade_no, $total_fee, $openid);
         return view('wechat.index.pay_order',compact('user_id','jsApiParameters','out_trade_no','order_code'));
-    }
-
-
-    public function pay_vip_card_callback(Request $request)
-    {
-        $out_trade_no = $request->get('out_trade_no');
-        WxJsPayCallback($out_trade_no);
-
-        $ret = ['code'=>200,'msg'=>'操作成功','info'=>[]];
-        return $ret;
-        //include_once __DIR__ . "/wx_js_pay/Notify.php";
-
-        //$notify = new \Notify();
-        //$notify->Handle(false);
     }
 
     /**

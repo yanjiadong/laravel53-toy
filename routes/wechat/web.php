@@ -28,6 +28,9 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     //订单详情
     Route::get('/index/order_detail/{order_code}','IndexController@order_detail')->name('wechat2.index.order_detail');
 
+    //使用优惠券
+    Route::get('/index/choose_coupon','IndexController@choose_coupon')->name('wechat2.index.choose_coupon');
+
     //查看物流信息
     Route::get('/index/logistics_detail/{order_code}','IndexController@logistics_detail')->name('wechat2.index.logistics_detail');
     //提交归还信息
