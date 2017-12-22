@@ -635,12 +635,12 @@ footer table td.active a .icon-footer-user-center {
 .index-nav .nav li a {
     display: inline-block;
     height: 44px;
-    color: #323232;
+    color: #9c9c9c;
     font-size: 14px;
     border-bottom: 2px solid transparent;
 }
 .index-nav .nav li.active a {
-    color: #1b1b1b;
+    color: #000;
     border-bottom: 2px solid #ffaa00 ;
 }
 ::-webkit-input-placeholder { /* WebKit browsers */

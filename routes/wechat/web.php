@@ -16,6 +16,15 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     //首页
     Route::any('/index/index','IndexController@index')->name('wechat2.index.index');
 
+    //分类页面
+    Route::get('/index/category/{category_id?}/{brand_id?}','IndexController@category')->name('wechat2.index.category');
+
+    //商品详情
+    Route::get('/index/good/{good_id}','IndexController@good')->name('wechat2.index.good');
+
+    //查看购物车
+    Route::get('/index/cart','IndexController@cart')->name('wechat2.index.cart');
+
     //订单详情
     Route::get('/index/order_detail/{order_code}','IndexController@order_detail')->name('wechat2.index.order_detail');
 

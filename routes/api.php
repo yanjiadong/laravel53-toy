@@ -27,6 +27,9 @@ Route::group(['namespace' => 'Api'], function () {
     //订单详情
     Route::post('/order/order_detail','OrderController@order_detail');
 
+    //商品详情
+    Route::post('/good/detail','GoodController@detail');
+
     //用户中心
     Route::post('/user/user_center','UserController@user_center');
     //获取用户芝麻信息

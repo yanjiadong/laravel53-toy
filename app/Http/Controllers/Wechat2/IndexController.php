@@ -207,49 +207,45 @@ class IndexController extends BaseController
     }
 
     /**
-     * 分类详情页
+     *
+     * @param Request $request
+     * @param $category_id
+     * @param $brand_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function category(Request $request, $category_id, $brand_id)
     {
-        //$url = url("api/category/$category_id/$brand_id");
-        //$result = weixinCurl($url);
-        //print_r($result);
         $user_id = session('user_id');
-        //$cart_num = Cart::where('user_id',$user_id)->count();
         $menu = 'index';
-
-        //正在租用中的玩具数量
-        //$order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
-
-        return view('wechat.index.category',compact('category_id','brand_id','user_id','menu'));
+        return view('wechat2.index.category',compact('category_id','brand_id','user_id','menu'));
     }
 
     /**
      * 商品详情
+     * @param $good_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @time 2017-12-22
      */
-    public function good(Request $request, $good_id)
+    public function good($good_id)
     {
         $user_id = session('user_id');
 
         //购物车数量
         $cart_num = Cart::where('user_id',$user_id)->count();
-        return view('wechat.index.good',compact('good_id','user_id','cart_num'));
+        return view('wechat2.index.good',compact('good_id','user_id','cart_num'));
     }
 
     /**
      * 查看购物车
+     * @time 2017-12-22
      */
-    public function cart(Request $request)
+    public function cart()
     {
         $user_id = session('user_id');
+        $openid = session('open_id');
         $menu = 'cart';
-        //计算玩具箱数量
-        $cart_num = Cart::where('user_id',$user_id)->count();
 
-        //正在租用中的玩具数量
-        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
-
-        return view('wechat.index.cart',compact('user_id','menu','cart_num','order_num'));
+        return view('wechat2.index.cart',compact('user_id','menu','openid'));
     }
 
     /**
@@ -382,9 +378,13 @@ class IndexController extends BaseController
         //$notify->Handle(false);
     }
 
+    /**
+     * 提交订单页面
+     * @param $good_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function submit_order($good_id)
     {
-        echo 11;
         $user_id = session('user_id');
         $openid = session('open_id');
 
@@ -397,7 +397,7 @@ class IndexController extends BaseController
             $bind_telephone = 1;
         }
 
-        //return view('wechat.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
+        return view('wechat2.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
     }
 
     public function order_list()

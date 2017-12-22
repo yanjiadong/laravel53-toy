@@ -43,11 +43,11 @@
 
         if(category_menu == 'index')
         {
-            cont = '<li class="active"><a href="{{ route('wechat.index.index') }}">推荐</a></li>';
+            cont = '<li class="active"><a href="{{ route('wechat2.index.index') }}">推荐</a></li>';
         }
         else
         {
-            cont = '<li class=""><a href="{{ route('wechat.index.index') }}">推荐</a></li>';
+            cont = '<li class=""><a href="{{ route('wechat2.index.index') }}">推荐</a></li>';
         }
 
         var sortList = res.info.categorys;
@@ -56,11 +56,11 @@
         for(var i=0;i<sortList.length;i++){
             if(sortList[i].id == category_id)
             {
-                cont += '<li class="active"><a href="{{route('wechat.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
+                cont += '<li class="active"><a href="{{route('wechat2.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
             }
             else
             {
-                cont += '<li><a href="{{route('wechat.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
+                cont += '<li><a href="{{route('wechat2.index.category')}}'+'/'+sortList[i].id+'/0">'+sortList[i].title+'</a></li>';
             }
 
         }

@@ -15,7 +15,7 @@
                 </a>
             </td>
             <td class="{{isset($menu) && $menu=='cart'?'active':''}}">
-                <a href="">
+                <a href="{{ route('wechat2.index.cart') }}">
                     <div><i class="icon-footer-shop-car"><span></span></i></div>
                     <div class="font">玩具箱 </div>
                 </a>

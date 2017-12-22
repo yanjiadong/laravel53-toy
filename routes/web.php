@@ -47,7 +47,7 @@ Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
     Route::post('/index/pay_vip_card_callback','IndexController@pay_vip_card_callback');
 
     //提交订单
-    Route::any('/index/submit_order/{good_id}','IndexController@submit_order');
+    //Route::any('/index/submit_order/{good_id}','IndexController@submit_order');
     Route::any('/index/children_interesting_compilation','IndexController@children_interesting_compilation');
 
     //支付订单

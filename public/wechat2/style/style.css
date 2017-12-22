@@ -522,12 +522,12 @@
 }
 .sort-detail .content .grow-up .top .describe {
     width: 100%;
-    background-color: #F2F5FF;
+    background-color: #fff4df;
     border-radius: 4px;
     padding: 10px;
     line-height: 20px;
     font-size: 13px;
-    color: #959DB9;
+    color:#b5a178;
     margin-top: 10px;
 }
 .sort-detail .content .grow-up .all {
@@ -614,15 +614,15 @@
     bottom:10px;
     right: 12px;
     font-size:12px;
-    color:#ff536c;
+    color:#f00;
 }
 .sort-detail .content .grow-up .list ul li .rent span.money{
     font-size:20px;
-    color:#ff536c;
+    color:#f00;
 }
 .sort-detail .content .grow-up .list ul li .rent span.unit{
     font-size:14px;
-    color:#ff536c;
+    color:#f00;
 }
 .sort-detail .content .grow-up .list ul li .fl span {
     background-color: #D1D1D1;
@@ -654,13 +654,13 @@
 }
 .sort-detail .content .grow-up .list ul li p {
     color: #8D8D8D;
-    margin-top: 5px;
     font-size: 13px;
+    margin-top: 20px;
 }
 .sort-detail .content .grow-up .list ul li h4 {
     color: #8D8D8D;
-    margin-top: 20px;
     font-size: 13px;
+    margin-top: 5px;
 }
 
 /*---------------------------------商品详情---------------------------------------*/
@@ -1473,10 +1473,10 @@
     border-right: 1px solid #e3e3e3;
 }
 .lease-order nav ul li.active {
-    border-bottom: 2px solid #6885EA;
+    border-bottom: 2px solid #ffaa00;
 }
 .lease-order nav ul li.active span {
-    color: #6885EA;
+    color: #000;
 }
 .lease-order .order-detail-main {
     padding-top: 44px;
@@ -1526,13 +1526,23 @@
     height: 100%;
     font-size: 0;
 }
+.lease-order .order-detail-main  .detail-cont .detail-list li .top .fl .order-list-logo{
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    background: url("../image/common/order-list-logo.png");
+    background-size: 26px 26px;
+
+}
 .lease-order .order-detail-main  .detail-cont .detail-list li .top .fl span{
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .top .fr {
-    color: #FF3574;
+    color: #f00
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .good-detail {
     padding: 10px;
@@ -1562,25 +1572,32 @@
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .good-detail .fr h3 {
     font-size: 14px;
-    min-height:40px;
+    height: 40px;
     color: #323232;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 20px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .good-detail .fr h3 a {
     color: #323232;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .good-detail .fr h4 {
     color: #8d8d8d;
-    font-size: 13px;
+    font-size: 12px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .good-detail .fr p {
     color: #8d8d8d;
-    font-size: 13px;
+    font-size: 12px;
+    margin-top: 3px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number {
     height: 40px;
     line-height: 40px;
     font-size:14px;
-    color:#515151;
+    color:#505050;
     border-bottom: 1px solid #f6f6f6;
     text-align: right;
     padding: 0 10px;
@@ -1594,6 +1611,14 @@
     line-height: 23px;
     padding-right:4px;
 }
+.lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line{
+
+}
+.lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .info{
+    display: inline-block;
+    vertical-align: middle;
+    letter-spacing: -1.2px;
+}
 .lease-order .order-detail-main .detail-cont .detail-list li .order-number .top-line .i-return-show .cont{
     font-size: 12px;
     width: 100%;
@@ -1603,11 +1628,11 @@
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .i-return-show.red{
     background:url("../image/common/text-box-red.png")no-repeat right;
     background-size: auto 23px;
-    color:#ff6464;
+    color:#f00;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .i-return-show.red .cont {
-    color: #ff6464;
-    border: 1px solid #ff5a5a;
+    color: #f00;
+    border: 1px solid #f00;
     border-right: none;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .total {
@@ -1653,8 +1678,8 @@
 .lease-order .order-detail-main  .detail-cont .detail-list li .total  button.confirm-btn{
     color: #fff;
     margin-left: 10px;
-    background-color: #6885EA;
-    border: 1px solid #6885EA;
+    background-color: #ffaa00;
+    border: 1px solid #ffaa00;
 }
 .lease-order .order-detail-main  .return {
     display: none;
@@ -2195,7 +2220,7 @@
     vertical-align: middle;
 }
 .toys-car .list ul li .fl:first-child .radio.active{
-    background: url("../image/common/radio.png")0 -51px;
+    background: url("../image/common/radio2.png")0 -51px;
     width: 17px;
     height: 17px;
     background-size: 17px 34px;
@@ -2235,15 +2260,16 @@
 .toys-car .list ul li .fl:nth-child(3) {
     width: 60%;
     padding: 0 10px;
-    margin-top: 10px;
 }
 .toys-car .list ul li .fl:nth-child(3) h3 {
     width: 100%;
-    height: 18px;
+    height: 36px;
     line-height: 18px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    word-break:break-all;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
 }
 .toys-car .list ul li .fl:nth-child(3) h3 a {
     color: #323232;
@@ -2255,8 +2281,8 @@
 }
 .toys-car .list ul li .fl:nth-child(3) h4 {
     color: #8d8d8d;
-    font-size: 13px;
-    margin-top: 5px;
+    font-size: 12px;
+    margin-top: 2px;
 }
 .toys-car .list ul li .fl:nth-child(3) p {
     color: #8d8d8d;
@@ -2285,7 +2311,7 @@
     background-color: #BBB;
 }
 .toys-car .btn button.active {
-    background-color: #6885EA;
+    background-color: #ffaa00;
 }
 .no-goods {
     width: 100%;
@@ -3841,8 +3867,8 @@ textarea {
 }
 .logistics-info-wrap .logistics-info-main .detail-cont .top-tips{
     width: 100%;
-    background-color: #d8def3;
-    color: #26325C;
+    background-color: #ffedc9;
+    color: #896825;
     line-height: 18px;
     padding:5px 10px;
     font-size: 13px;
@@ -3870,6 +3896,36 @@ textarea {
     display: inline-block;
     vertical-align: middle;
 }
+.logistics-info-wrap .detail-cont-main .cont .top .return-logistics1{
+    display: inline-block;
+    vertical-align: middle;
+    width: 17px;
+    height: 17px;
+    background: url(../image/common/return_logistics.png);
+    background-size: 18px 60px;
+    background-position: 0 -20px;
+    margin-right: 5px;
+}
+.logistics-info-wrap .detail-cont-main .cont .return-info .title .return-logistics2{
+    display: inline-block;
+    vertical-align: middle;
+    width: 17px;
+    height: 17px;
+    background: url(../image/common/return_logistics.png);
+    background-size: 18px 60px;
+    background-position: 0 -1px;
+    margin-right: 5px;
+}
+.logistics-info-wrap .detail-cont-main .cont .logistics-info .title .return-logistics3{
+    display: inline-block;
+    vertical-align: middle;
+    width: 17px;
+    height: 11px;
+    background: url(../image/common/return_logistics.png);
+    background-size: 18px 60px;
+    background-position: 0 -39px;
+    margin-right: 5px;
+}
 .logistics-info-wrap .detail-cont-main .cont .good-detail {
     padding: 10px;
     background-color: #fff;
@@ -3888,22 +3944,36 @@ textarea {
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr {
     width: 75%;
+    position: relative;
+}
+.logistics-info-wrap .detail-cont-main .cont .good-detail .fr .num{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size:13px;
+    color:#8c8c8c;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr h3 {
     font-size: 14px;
     min-height: 40px;
     color: #323232;
+    word-break:break-all;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr h3 a {
     color: #323232;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr h4 {
     color: #8d8d8d;
-    font-size: 13px;
+    font-size: 12px;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr p {
     color: #8d8d8d;
-    font-size: 13px;
+    font-size: 12px;
+    margin-top: 6px;
 }
 .logistics-info-wrap .detail-cont-main .cont .return-info .title{
     font-size: 14px;
@@ -4035,7 +4105,7 @@ textarea {
     background-color: #BBB;
 }
 .logistics-info-wrap .btn button.active {
-    background-color: #6885EA;
+    background-color: #ffaa00;
 }
 /*-------------------------个人中心 ----------------------------*/
 /*-------user_center----------*/
