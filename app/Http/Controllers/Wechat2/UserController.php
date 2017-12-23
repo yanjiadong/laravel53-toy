@@ -60,60 +60,32 @@ class UserController extends BaseController
         return view('wechat2.user.deposit_list',compact('user_id','openid'));
     }
 
-
-
-    public function center()
-    {
-        if(config('app.env')=='local')
-        {
-            session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
-            session(['user_id'=>29]);
-        }
-        else
-        {
-            $this->check_user();
-        }
-
-        $user_id = session('user_id');
-        $openid = session('open_id');
-        $menu = 'center';
-
-        //计算玩具箱数量
-        $cart_num = Cart::where('user_id',$user_id)->count();
-
-        //客服电话
-        $config = SystemConfig::where('type',1)->first();
-        $content = json_decode($config->content,true);
-        $phone = '';
-        if(isset($content[7]))
-        {
-            $phone = $content[7];
-        }
-
-        //正在租用中的玩具数量
-        $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
-
-        return view('wechat.user.center1',compact('user_id','menu','cart_num','phone','order_num'));
-    }
-
+    /**
+     * 分享页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function share()
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        $user = User::find($user_id);
-        $count = Order::where('user_id',$user_id)->count();
+        $user = User::select('wechat_nickname')->first();
+        //$user = User::find($user_id);
+        $count = Order::where('user_id',$user_id)->where('status','>',Order::STATUS_UNPAY)->count();
 
         $signPackage = getJssdk();
 
-        return view('wechat.user.share',compact('user_id','user','count','signPackage'));
+        return view('wechat2.user.share',compact('user_id','user','count','signPackage','app'));
     }
 
-    public function share_open($user_id)
+    /**
+     * 分享后打开的页面
+     * @param $user_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function share_open()
     {
-        $user = User::find($user_id);
-        $count = Order::where('user_id',$user_id)->count();
-        return view('wechat.user.share_open',compact('user_id','user','count'));
+        return view('wechat2.user.share_open');
     }
 
     public function help()

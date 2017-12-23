@@ -147,8 +147,6 @@ class IndexController extends BaseController
 
         $openid = session('open_id');
         $user_id = session('user_id');
-        $url = url('api/index');
-        $result = weixinCurl($url);
 
         $menu = 'index';
 
@@ -180,7 +178,7 @@ class IndexController extends BaseController
         //首页打开时间
         UserOpenTime::create(['user_id'=>$user_id]);
 
-        return view('wechat2.index.index',compact('result','menu','user_id','is_first'));
+        return view('wechat2.index.index',compact('menu','user_id','is_first'));
     }
 
     /**
@@ -301,6 +299,10 @@ class IndexController extends BaseController
         return view('wechat2.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
     }
 
+    /**
+     * 订单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function order_list()
     {
         if(config('app.env')=='local')
@@ -317,22 +319,7 @@ class IndexController extends BaseController
         $openid = session('open_id');
         $menu = 'order_list';
 
-        //计算玩具箱数量
-        //$cart_num = Cart::where('user_id',$user_id)->count();
-
-        //客服电话
-        $config = SystemConfig::where('type',1)->first();
-        $content = json_decode($config->content,true);
-        $phone = '';
-        if(isset($content[7]))
-        {
-            $phone = $content[7];
-        }
-
-        //正在租用中的玩具数量
-        //$order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
-
-        return view('wechat.index.order_list',compact('user_id','openid','menu','phone'));
+        return view('wechat2.index.order_list',compact('user_id','openid','menu','phone'));
     }
 
     public function order_success($order_code)
@@ -345,21 +332,16 @@ class IndexController extends BaseController
     }
 
 
-
-    public function order_return_detail($page = 1)
+    /**
+     * 查看归还详情
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function order_return_detail()
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.index.order_return_detail',compact('user_id','openid','page'));
-    }
-
-    public function order_return_detail1()
-    {
-        $user_id = session('user_id');
-        $openid = session('open_id');
-
-        return view('wechat.index.order_return_detail1',compact('user_id','openid'));
+        return view('wechat2.index.order_return_detail',compact('user_id','openid'));
     }
 
     public function fill_logistics()

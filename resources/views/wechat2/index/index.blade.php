@@ -26,7 +26,6 @@
 
     <script src="{{ asset('wechat2/js/main.js') }}"></script>
     <script src="{{ asset('wechat2/js/common.js') }}"></script>
-
 </head>
 <body style="overflow-x: hidden">
 <!-- body 顶部加上如下代码 -->
@@ -262,12 +261,12 @@
                             newData+='<li class="fl"><span class="no-good-state">暂无库存</span><div>' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<p>市场价¥'+res.info.new_goods[i].price+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon_arrowRight_white"></i></div></li>';
+                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon_arrowRight_white"></i></div></li>';
                         }else{
                             newData+='<li class="fl">' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<p>市场价¥'+res.info.new_goods[i].price+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon icon_arrowRight_white"></i></div></li>';
+                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon icon_arrowRight_white"></i></div></li>';
                         }
                     }
                     $(".recommend-cont ul").html(newData).css('width', ($(".recommend-cont ul li").width()+16)*res.info.new_goods.length);
@@ -282,11 +281,11 @@
 
                         if(res.info.goods[i].store <= 0){
                             hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'"><span class="active">'+
-                                '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+res.info.goods[i].price+'</p><h4>适龄'+res.info.goods[i].old+
+                                '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
                                 '</h4></li>';
                         }else{
                             hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'">'+'<h3>'
-                                +res.info.goods[i].title+'</h3><p>市场价¥'+res.info.goods[i].price+'</p><h4>适龄'+res.info.goods[i].old+
+                                +res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
                                 '</h4></li>';
                         }
                     }

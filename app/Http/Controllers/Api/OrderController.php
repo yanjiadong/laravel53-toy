@@ -336,7 +336,22 @@ class OrderController extends BaseController
         {
             foreach ($list as &$v)
             {
+                if($type == 1)
+                {
+                    $v['over_days'] = 0;
+                    if($v['status']==Order::STATUS_DOING_STR)
+                    {
+                        $time = $this->time > strtotime($v['end_time']);
+                        if($time > 0)
+                        {
+                            $v['over_days'] = ceil($time/86400);
+                        }
+                    }
+                }
+
+                $v['good_num'] = 1;
                 $v['days2'] = 0;  //剩余天数
+
                 if($v['status']==Order::STATUS_BACK_STR)
                 {
                     //$v['days'] = floor((strtotime($v['back_time']) - strtotime($v['send_time']))/86400);
@@ -349,6 +364,7 @@ class OrderController extends BaseController
                     {
                         //逾期
                         $v['days2'] = 0;
+                        $v['over_days'] = ceil($time/86400);
                     }
                     else
                     {
@@ -362,7 +378,18 @@ class OrderController extends BaseController
             }
         }
 
-        $this->ret['info'] = ['list'=>$list];
+        //print_r($list);
+        //客服电话
+        $config = SystemConfig::where('type',1)->first();
+        $content = json_decode($config->content,true);
+        $phone = '';
+        if(isset($content[7]))
+        {
+            $phone = $content[7];
+        }
+
+
+        $this->ret['info'] = ['list'=>$list,'phone'=>$phone];
         return $this->ret;
     }
 
@@ -809,6 +836,12 @@ class OrderController extends BaseController
                 $data['over_days'] = ceil(($this->time - strtotime($order->end_time))/(24*3600));
             }
 
+            //每次提交赠送一次满减优惠券
+            $coupon = Coupon::where('type',2)->orderBy('id','desc')->first();
+            if(!empty($coupon))
+            {
+                UserCoupon::create(['user_id'=>$order->user_id,'coupon_id'=>$coupon->id]);
+            }
 
             $data['back_express_title'] = $back_express_title;
             $data['back_express_com'] = $back_express_com;

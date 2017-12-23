@@ -121,7 +121,7 @@
         },
         //分享给朋友
         share:function () {
-            location.href='share.html?name='+user_center.data.userInfo.name+'&num='+user_center.data.userInfo.num;
+            location.href="{{ route('wechat2.user.share') }}";
         },
         //判断是否绑定手机号
         loadWeixin:function(){

@@ -25,8 +25,14 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     //查看购物车
     Route::get('/index/cart','IndexController@cart')->name('wechat2.index.cart');
 
+    //订单列表
+    Route::get('/index/order_list','IndexController@order_list')->name('wechat2.index.order_list');
+
     //订单详情
     Route::get('/index/order_detail/{order_code}','IndexController@order_detail')->name('wechat2.index.order_detail');
+
+    //归还详情
+    Route::get('/index/order_return_detail','IndexController@order_return_detail')->name('wechat2.index.order_return_detail');
 
     //使用优惠券
     Route::get('/index/choose_coupon','IndexController@choose_coupon')->name('wechat2.index.choose_coupon');
@@ -42,6 +48,11 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::get('/user/my_deposit','UserController@my_deposit')->name('wechat2.user.my_deposit');
     //押金明细
     Route::get('/user/deposit_list','UserController@deposit_list')->name('wechat2.user.deposit_list');
+
+    //分享页面
+    Route::get('/user/share','UserController@share')->name('wechat2.user.share');
+    //分享后打开的页面
+    Route::get('/user/share_open','UserController@share_open')->name('wechat2.user.share_open');
 
     //微信授权 采用easywechat扩展包
     Route::any('/index/oauth','IndexController@oauth')->name('wechat2.index.oauth');

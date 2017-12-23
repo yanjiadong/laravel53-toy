@@ -9,7 +9,7 @@
                 </a>
             </td>
             <td class="{{isset($menu) && $menu=='order_list'?'active':''}}">
-                <a href="">
+                <a href="{{ route('wechat2.index.order_list') }}">
                     <div><i class="icon-footer-order"><span></span></i></div>
                     <div class="font">订单</div>
                 </a>
