@@ -340,7 +340,7 @@ class OrderController extends BaseController
         {
             foreach ($list as &$v)
             {
-                if($type == 1)
+                /*if($type == 1)
                 {
                     $v['over_days'] = 0;
                     if($v['status']==Order::STATUS_DOING_STR)
@@ -351,7 +351,7 @@ class OrderController extends BaseController
                             $v['over_days'] = ceil($time/86400);
                         }
                     }
-                }
+                }*/
 
                 $v['good_num'] = 1;
                 $v['days2'] = 0;  //剩余天数
@@ -362,11 +362,12 @@ class OrderController extends BaseController
                 }
                 elseif($v['status']==Order::STATUS_DOING_STR)
                 {
+                    $v['over_days'] = 0;
                     //计算还有几天到期
                     $time = $this->time > strtotime($v['end_time']);
                     if($time > 0)
                     {
-                        //逾期
+                        //逾期的情况下
                         $v['days2'] = 0;
                         $v['over_days'] = ceil($time/86400);
                     }
