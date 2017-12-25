@@ -145,6 +145,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('order/action','OrderController@action')->name('admin.order.action');
     Route::get('order/show/{id}','OrderController@show')->name('admin.order.show');
 
+    //修改订单
+    Route::post('order/update','OrderController@update')->name('admin.order.update');
+
     //押金列表
     Route::get('order/money','OrderController@money')->name('admin.order.money');
     //确认押金退款

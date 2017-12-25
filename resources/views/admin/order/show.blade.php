@@ -28,10 +28,6 @@
                             <td>{{$order->price}}元</td>
                         </tr>
                         <tr>
-                            <td>包装清理费：</td>
-                            <td>{{$order->clean_price}}元</td>
-                        </tr>
-                        <tr>
                             <td>订单状态：</td>
                             <td>{{$order->status}}</td>
                         </tr>
@@ -106,12 +102,28 @@
                             <td>会员手机号：</td>
                             <td>{{$order->user->telephone}}</td>
                         </tr>
+                        <tr>
+                            <td>租期开始时间：</td>
+                            <td>
+                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2})" placeholder="开始时间" class="form-control validate[required,custom[date]]" id="start_time" name="start_time"  value="{{$order->start_time?$order->start_time:''}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>租期结束时间：</td>
+                            <td>
+                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2})" placeholder="结束时间" class="form-control validate[required,custom[date]]" id="end_time" name="end_time"  value="{{$order->end_time?$order->end_time:''}}">
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
 
                     <div class="footer tar">
                         @if($order->status == '已发货')
                             <a href="javascript:;" title="修改物流" class="tip sendEdit"><span class="btn btn-warning">修改物流</span></a>
+                        @endif
+
+                        @if($order->status == '租用中')
+                            <a href="javascript:;" title="修改订单" class="tip editOrder"><span class="btn btn-warning">修改订单</span></a>
                         @endif
                     </div>
                 </div>
@@ -195,6 +207,15 @@
                 }, "json");
             });
 
+            $(".editOrder").click(function(){
+                var id = '{{$order->id}}';
+                var start_time = $("#start_time").val();
+                var end_time = $("#end_time").val();
+
+                $.post("{{route('admin.order.update')}}", {id:id,start_time:start_time,end_time:end_time}, function(data){
+                    cTip(data);
+                }, "json");
+            });
         });
     </script>
 @endsection

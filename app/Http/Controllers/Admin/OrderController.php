@@ -32,18 +32,13 @@ class OrderController extends BaseController
         $where['status'] = 4;
         $where['back_status'] = 1;
 
-        if(empty($code) && !empty($status))
-        {
+        if (empty($code) && !empty($status)) {
             $orders = Order::with(['user'])->where($where)->paginate(20);
-        }
-        else
-        {
-            if(!empty($code))
-            {
+        } else {
+            if (!empty($code)) {
                 $where['out_trade_no'] = $code;
             }
-            if(!empty($status))
-            {
+            if (!empty($status)) {
                 $where['money_status'] = $status - 1;
             }
 
@@ -53,10 +48,10 @@ class OrderController extends BaseController
 
         //分页需要的参数
         $orders->appends([
-            'code'=>$code,
-            'status'=>$status
+            'code' => $code,
+            'status' => $status
         ]);
-        return view('admin.order.money',compact('orders','username','menu','code','status'));
+        return view('admin.order.money', compact('orders', 'username', 'menu', 'code', 'status'));
     }
 
     /**
@@ -67,8 +62,8 @@ class OrderController extends BaseController
     {
         $id = $request->get('id');
 
-        Order::where('id',$id)->update(['money_status'=>Order::MONEY_STATUS_DONE]);
-        alert('',1);
+        Order::where('id', $id)->update(['money_status' => Order::MONEY_STATUS_DONE]);
+        alert('', 1);
     }
 
     public function index(Request $request)
@@ -80,50 +75,39 @@ class OrderController extends BaseController
         $code = $request->get('code');
         $telephone = $request->get('telephone');
 
-        if(empty($status) && empty($code) && empty($telephone))
-        {
-            $orders = Order::with(['user'])->where('status','!=','0')->orderBy('id','desc')->paginate(20);
-        }
-        else
-        {
-            if(!empty($status))
-            {
-                if($status == 5)
-                {
+        if (empty($status) && empty($code) && empty($telephone)) {
+            $orders = Order::with(['user'])->where('status', '!=', '0')->orderBy('id', 'desc')->paginate(20);
+        } else {
+            if (!empty($status)) {
+                if ($status == 5) {
                     $where['status'] = Order::STATUS_BACK;
                     $where['back_status'] = Order::BACK_STATUS_DOING;
-                }
-                elseif($status == 4)
-                {
+                } elseif ($status == 4) {
                     $where['status'] = Order::STATUS_BACK;;
                     $where['back_status'] = Order::BACK_STATUS_WAITING;
-                }
-                else
-                {
+                } else {
                     $where['status'] = $status;
                 }
             }
-            if(!empty($code))
-            {
+            if (!empty($code)) {
                 $where['code'] = $code;
             }
-            if(!empty($telephone))
-            {
+            if (!empty($telephone)) {
                 $where['user_telephone'] = $telephone;
             }
-            $orders = Order::with(['user'])->where($where)->orderBy('id','desc')->paginate(20);
+            $orders = Order::with(['user'])->where($where)->orderBy('id', 'desc')->paginate(20);
         }
         $menu = 'order';
         //print_r($orders);
 
         //分页需要的参数
         $orders->appends([
-           'status'=>$status,
-            'code'=>$code,
-            'telephone'=>$telephone,
+            'status' => $status,
+            'code' => $code,
+            'telephone' => $telephone,
         ]);
         $express = Express::all();
-        return view('admin.order.index',compact('orders','username','menu','express','status','code','telephone'));
+        return view('admin.order.index', compact('orders', 'username', 'menu', 'express', 'status', 'code', 'telephone'));
     }
 
     public function send(Request $request)
@@ -138,24 +122,21 @@ class OrderController extends BaseController
         $express = Express::find($express_id);
 
         $param = [
-            'number'=>$express_no,
-            'company'=>$express->com
+            'number' => $express_no,
+            'company' => $express->com
         ];
-        weixinCurl(url('api/express_info/index'),'post', $param);
+        weixinCurl(url('api/express_info/index'), 'post', $param);
 
-        if($type == 1)
-        {
-            sms_send('SMS_109405330',$order->receiver_telephone,$order->receiver);
+        if ($type == 1) {
+            sms_send('SMS_109405330', $order->receiver_telephone, $order->receiver);
             //$this->send_sms($order->receiver_telephone,$order->receiver);
-            Order::where('id',$id)->update(['send_time'=>$this->datetime,'send_time2'=>$this->datetime,'status'=>Order::STATUS_SEND,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
-        }
-        else
-        {
-            Order::where('id',$id)->update(['send_time2'=>$send_time,'express_no'=>$express_no,'express_title'=>$express->title,'express_com'=>$express->com]);
+            Order::where('id', $id)->update(['send_time' => $this->datetime, 'send_time2' => $this->datetime, 'status' => Order::STATUS_SEND, 'express_no' => $express_no, 'express_title' => $express->title, 'express_com' => $express->com]);
+        } else {
+            Order::where('id', $id)->update(['send_time2' => $send_time, 'express_no' => $express_no, 'express_title' => $express->title, 'express_com' => $express->com]);
         }
 
 
-        alert('',1);
+        alert('', 1);
     }
 
     public function verify(Request $request)
@@ -163,10 +144,9 @@ class OrderController extends BaseController
         $id = $request->get('id');
         $order = Order::find($id);
 
-        if($order->back_status == '待验证' && $order->status == '已归还')
-        {
-            Order::where('id',$id)->update(['back_status'=>Order::BACK_STATUS_DOING]);
-            alert('',1);
+        if ($order->back_status == '待验证' && $order->status == '已归还') {
+            Order::where('id', $id)->update(['back_status' => Order::BACK_STATUS_DOING]);
+            alert('', 1);
         }
         alert('验证寄回失败');
     }
@@ -178,15 +158,14 @@ class OrderController extends BaseController
 
         $order = Order::find($id);
 
-        Order::where('id',$id)->update(['status'=>$status]);
+        Order::where('id', $id)->update(['status' => $status]);
 
-        if($status == -1)
-        {
+        if ($status == -1) {
             //返还库存
-            DB::table('goods')->where('id',$order->good_id)->increment('store');
+            DB::table('goods')->where('id', $order->good_id)->increment('store');
         }
 
-        alert('',1);
+        alert('', 1);
     }
 
     public function show($id)
@@ -194,21 +173,30 @@ class OrderController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $order = Order::with(['user','category'])->find($id);
+        $order = Order::with(['user', 'category'])->find($id);
 
         $express = Express::all();
 
         $order->days = '';
-        if($order->status==Order::STATUS_BACK_STR)
-        {
-            $order->days = floor((strtotime($order->back_time) - strtotime($order->send_time))/86400);
-        }
-        elseif($order->status==Order::STATUS_DOING_STR)
-        {
-            $order->days = floor((time()- strtotime($order->send_time))/86400);
+        if ($order->status == Order::STATUS_BACK_STR) {
+            $order->days = floor((strtotime($order->back_time) - strtotime($order->send_time)) / 86400);
+        } elseif ($order->status == Order::STATUS_DOING_STR) {
+            $order->days = floor((time() - strtotime($order->send_time)) / 86400);
         }
 
         $menu = 'order';
-        return view('admin.order.show',compact('order','username','menu','express'));
+        return view('admin.order.show', compact('order', 'username', 'menu', 'express'));
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->get('id');
+        $start_time = $request->get('start_time');
+        $end_time = $request->get('end_time');
+
+        $order = Order::find($id);
+
+        Order::where('id', $id)->update(['start_time' => $start_time,'end_time'=>$end_time]);
+        alert('', 1);
     }
 }
