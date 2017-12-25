@@ -85,6 +85,7 @@ class IndexController extends BaseController
             DB::table('pay_notifies')->insert([
                 'out_trade_no'=>$out_trade_no,
                 'result_code'=>$message['result_code'],
+                'created_at'=>date('Y-m-d H:i:s')
             ]);
 
             // 用户是否支付成功
@@ -328,7 +329,7 @@ class IndexController extends BaseController
         $openid = session('open_id');
 
         $order = Order::where('code',$order_code)->first();
-        return view('wechat.index.pay_success',compact('user_id','openid','order_code','order'));
+        return view('wechat2.index.pay_success',compact('user_id','openid','order_code','order'));
     }
 
 
