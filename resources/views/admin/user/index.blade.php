@@ -81,11 +81,12 @@
                                     <td>{{$user->real_cert_no}}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
-                                        @if($user->is_vip==1)
+                                        <a href="javascript:;" data-id="{{$user->id}}" title="删除用户" class="tip delAction"><span class="btn btn-mini btn-warning">删除用户</span></a>
+                                        {{--@if($user->is_vip==1)
                                             <a href="javascript:;" data-id="{{$user->id}}" title="关闭会员" class="tip doAction" data-status="0"><span class="btn btn-mini btn-warning">关闭会员</span></a>
                                         @else
-                                            {{--<a href="javascript:;" data-id="{{$user->id}}" title="开启会员" class="tip doAction" data-status="1"><span class="btn btn-mini">开启会员</span></a>--}}
-                                        @endif
+                                            --}}{{--<a href="javascript:;" data-id="{{$user->id}}" title="开启会员" class="tip doAction" data-status="1"><span class="btn btn-mini">开启会员</span></a>--}}{{--
+                                        @endif--}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -114,6 +115,19 @@
                     text: "确认操作？",
                     confirm: function(button) {
                         $.post("{{route('admin.user.action')}}",{id:id,status:status},function(data){
+                            cTip(data);
+                        }, "json");
+                    },
+                    confirmButton: "确认",
+                    cancelButton: "取消"
+                });
+            });
+            $('.delAction').click(function(){
+                var id = $(this).attr('data-id');
+                $.confirm({
+                    text: "确认删除？",
+                    confirm: function(button) {
+                        $.post("{{route('admin.user.destroy')}}",{id:id},function(data){
                             cTip(data);
                         }, "json");
                     },

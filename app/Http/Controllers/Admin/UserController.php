@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Cart;
+use App\Order;
 use App\User;
+use App\UserAddress;
+use App\UserCoupon;
 use App\UserOpenTime;
+use App\UserPayRecord;
 use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,6 +69,18 @@ class UserController extends BaseController
         {
             VipCardPay::where('user_id',$id)->where('status',1)->where('pay_status',1)->update(['status'=>-1]);
         }
+        alert('',1);
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->get('id');
+        User::destroy($id);
+        Order::where('user_id',$id)->delete();
+        UserCoupon::where('user_id',$id)->delete();
+        Cart::where('user_id',$id)->delete();
+        UserAddress::where('user_id',$id)->delete();
+        UserPayRecord::where('user_id',$id)->delete();
         alert('',1);
     }
 }
