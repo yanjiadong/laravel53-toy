@@ -358,11 +358,6 @@
         address:function () {
             common.httpRequest("{{url('api/address/index')}}",'post',{user_id:'{{ $user_id }}'},function (res) {
                 order_obj.data.address = res.info.address;
-                //假数据
-                order_obj.data.address =[
-                    /* {a:"张三丰",b:"1804544654",c:"江苏省",d:"苏州市",e:"工业园区",f:'回复可见回复速度回家发计划开始就封号对手发顺丰的江湖上的纠纷发货速度就发货速度放缓富家大室'},
-                     {a:"张三丰1",b:"1804544653",c:"江苏省1",d:"苏州市1",e:"工业园区1",f:'回复可见回复速度回家发计划开始就封号对手发顺丰的江湖上的纠纷发货速度就发货速度放缓富家大室'}*/];
-                // order_obj.data.address=[];
                 order_obj.address_rander();
             })
         },
@@ -386,6 +381,15 @@
                         $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[0].d);
                         $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[0].e);
                         $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[0].f);
+
+                        console.log(order_obj.data.address[0]);
+                        $("#address_id").val(order_obj.data.address[0].g);
+                        $("#receiver").val(order_obj.data.address[0].a);
+                        $("#receiver_telephone").val(order_obj.data.address[0].b);
+                        $("#receiver_address").val(order_obj.data.address[0].f);
+                        $("#receiver_province").val(order_obj.data.address[0].c);
+                        $("#receiver_city").val(order_obj.data.address[0].d);
+                        $("#receiver_area").val(order_obj.data.address[0].e);
                     }
                     $(".address .address_detail").fadeIn(500);
                     $(".footer button").removeClass("disable");
@@ -969,7 +973,7 @@
         submitOrder:function (goal) {
             console.log(order_obj.data.vip_state);
             if(!$(goal).hasClass("disable")){
-                if(order_obj.data.vip_state == '1'){
+                if(order_obj.data.vip_state == '0'){
                     order_obj.submitConfirm();
                 }else{
                     $(".cover-phone-bind").fadeIn(500);
@@ -1016,6 +1020,7 @@
                 coupon_id:coupon_id
             };
 
+            console.log(submit_data);
             common.httpRequest('{{url('api/order/submit_order_new')}}','post',submit_data,function (res) {
                 if(res.code==200)
                 {
@@ -1031,11 +1036,9 @@
                     return false;
                 }
             });
-            alert("微信支付流程");
-            console.log(submit_data);
-            return;
+            //alert("微信支付流程");
 
-            if(parseFloat($(".detail-list .total .money").text().substr(2))>0){
+            /*if(parseFloat($(".detail-list .total .money").text().substr(2))>0){
                 //微信支付流程
                 $(".cover-phone-bind").hide();
 
@@ -1058,15 +1061,15 @@
                 common.confirm_tip('提交订单','提交后订单信息将无法更改，确定提交吗？',null,function () {
                     order_obj.data.submitOrderData = order_obj.data.address[order_obj.data.addressIndex];
                     order_obj.data.submitOrderData.orderList = order_obj.data.orderDataList;
-                    /*common.httpRequest('../js/test.json','post',order_obj.data.submitOrderData,function (res) {
+                    /!*common.httpRequest('../js/test.json','post',order_obj.data.submitOrderData,function (res) {
                      if(res.state){
                      alert("保存成功")
                      }
-                     })*/
+                     })*!/
                     $(".confirm-alert-wrap").remove();
                     location.href = "/view/pay_success.html";
                 })
-            }
+            }*/
         },
         //发送手机验证码
         sendCode:function () {

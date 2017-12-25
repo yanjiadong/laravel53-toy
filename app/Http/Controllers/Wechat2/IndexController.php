@@ -290,10 +290,10 @@ class IndexController extends BaseController
         //判断是否绑定手机号
         $user_info = User::find($user_id);
 
-        $bind_telephone = 0;
+        $bind_telephone = 1;
         if(!empty($user_info->telephone))
         {
-            $bind_telephone = 1;
+            $bind_telephone = 0;
         }
 
         return view('wechat2.index.submit_order',compact('user_id','openid','good_id','bind_telephone'));
