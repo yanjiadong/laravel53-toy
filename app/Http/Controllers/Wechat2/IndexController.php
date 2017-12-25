@@ -322,13 +322,13 @@ class IndexController extends BaseController
         return view('wechat2.index.order_list',compact('user_id','openid','menu','phone'));
     }
 
-    public function order_success($order_code)
+    public function pay_success($order_code)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
         $order = Order::where('code',$order_code)->first();
-        return view('wechat.index.order_success',compact('user_id','openid','order_code','order'));
+        return view('wechat.index.pay_success',compact('user_id','openid','order_code','order'));
     }
 
 
@@ -366,6 +366,17 @@ class IndexController extends BaseController
         $signPackage = getJssdk();
 
         return view('wechat2.index.logistics_info',compact('user_id','openid','signPackage'));
+    }
+
+    /**
+     * 提交归还物流成功页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function logistics_info_return()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+        return view('wechat2.index.logistics_info_return',compact('user_id','openid'));
     }
 
     public function children_interesting_compilation()

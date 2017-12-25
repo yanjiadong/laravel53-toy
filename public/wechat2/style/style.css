@@ -417,7 +417,8 @@
 .index-wrap .content .recommend .hot .hot-list ul li p {
     color: #8D8D8D;
     font-size: 13px;
-    margin-top: 15px;
+    margin-top: 10px;
+    height: 16px;
 }
 .index-wrap .content .recommend .hot .hot-list ul li h4 {
     color: #8D8D8D;
@@ -1306,14 +1307,14 @@
 }
 .order-cover-wrap .order-edit-address-main .btn button.add {
     color: #fff;
-    background-color: #6885EA;
+    background-color: #ffaa00;
 }
 .order-cover-wrap .order-edit-address-main .btn button.add.hide {
     display: none;
 }
 .order-cover-wrap .order-edit-address-main .btn button.save {
     color: #fff;
-    background-color: #6885EA;
+    background-color: #ffaa00;
 }
 .order-cover-wrap .order-edit-address-main .btn button.save.hide {
     display: none;
@@ -1509,21 +1510,6 @@
     padding: 5px 10px;
     font-size: 13px;
     line-height: 18px;
-}
-.lease-order .order-detail-main  .detail-cont .no-good {
-    height: 300px;
-    position: relative;
-    background-color: #fff;
-    display: none;
-}
-.lease-order .order-detail-main  .detail-cont .no-good .tips{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #C9C8DA;
-    font-size: 15px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list{
 
@@ -1724,6 +1710,13 @@
     color: #C9C8DA;
     font-size: 15px;
 }
+.lease-order .order-detail-main  .return .no-good .tips h4{
+    font-size:14px;
+    color:#4c3a30;
+}
+.lease-order .order-detail-main  .return .no-good .tips img{
+    width: 100px;
+}
 .lease-order .order-detail-main  .return .detail-list li {
     margin-bottom: 10px;
 }
@@ -1893,6 +1886,28 @@
 .lease-order .order-detail-main  .return .detail-list li .total .fl h3 span {
     font-size: 13px;
     color: #FF3574;
+}
+.lease-order .order-detail-main  .detail-cont .no-good {
+    height: 300px;
+    position: relative;
+    background-color: #fff;
+    display: none;
+}
+.lease-order .order-detail-main  .detail-cont .no-good .tips{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #C9C8DA;
+}
+.lease-order .order-detail-main  .detail-cont .tips img{
+    width: 100px;
+}
+.lease-order .order-detail-main  .detail-cont .no-good .tips h4{
+    font-size:14px;
+    color:#4c3a30;
+    margin-top: 20px;
 }
 
 /*-------------------------------订单归还详情-----------------------------*/
@@ -2368,8 +2383,17 @@
     font-size: 15px;
     transform: translateY(-50%);
 }
+.no-goods .tips img{
+    width: 125px;
+}
+.no-goods .tips h4{
+    font-size:14px;
+    color:#4c3a30;
+    margin-top: 10px;
+}
 .no-goods .tips p{
-    font-size: 12px;
+    font-size:12px;
+    color:#909090;
     margin-top: 10px;
 }
 /*--------------------------------物流状态-----------------------------------*/
@@ -2961,23 +2985,26 @@
     margin-top: 100px;
     text-align: center;
 }
+.cash-success .sign img{
+    width: 133px;
+}
 .cash-success .money {
-    color: #323232;
-    font-size: 24px;
+    font-size:24px;
+    color:#4c3a30;
     margin-top: 20px;
     text-align: center;
 }
 .cash-success p {
-    color: #8D8D8D;
-    font-size: 13px;
     text-align: center;
     width: 80%;
     margin: 20px auto;
     line-height: 20px;
+    font-size:12px;
+    color:#8c8c8c;
 }
 .cash-success .tips {
-    font-size: 18px;
-    color: #4FBC3D;
+    font-size:18px;
+    color:#4fbc3d;
     text-align: center;
     margin-top: 20px;
 }
@@ -3455,17 +3482,21 @@
     margin-top: 100px;
     text-align: center;
 }
+.pay-success .sign img{
+    width: 133px;
+}
 .pay-success .money {
-    color: #323232;
-    font-size: 24px;
+    font-size:24px;
+    color:#4c3a30;
     margin-top: 20px;
     text-align: center;
 }
 .pay-success p {
-    color: #8D8D8D;
-    font-size: 14px;
+    font-size:12px;
+    color:#909090;
     margin-top: 20px;
     text-align: center;
+    line-height: 20px;
 }
 .pay-success .tips {
     text-align: center;
@@ -3487,17 +3518,27 @@
 }
 .pay-success .btn {
     margin: 20px auto;
-    width: 80%;
+    width: 60%;
 }
-.pay-success .btn button {
-    width: 46%;
-    height: 40px;
+.pay-success .btn button:first-child {
+      width: 35%;
+      height: 34px;
+      border-radius: 4px;
+      background-color: transparent;
+      font-size: 16px;
+      color: #ffaa00;
+      margin-bottom: 15px;
+      border: 1px solid #ffaa00;
+  }
+.pay-success .btn button:last-child {
+    width: 35%;
+    height: 34px;
     border-radius: 4px;
-    background-color: transparent;
+    background-color: #ffaa00;
     font-size: 16px;
-    color: #8D8D8D;
+    color: #fff;
     margin-bottom: 15px;
-    border: 1px solid #8D8D8D;
+    border: 1px solid #ffaa00;
 }
 /*----------------------------------分享-------------------------------------------------*/
 .share-wrap .share-main{
@@ -3708,9 +3749,16 @@ textarea {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: #C9C8DA;
-    font-size: 15px;
+    font-size: 14px;
+    color: #4c3a30;
 }
+.vip-voucher-wrap .tips h4{
+    margin-top: 10px;
+}
+.vip-voucher-wrap .tips img{
+    width: 132px;
+}
+
 /*----------------提交物流信息----------------------*/
 .logistics-info-wrap .logistics-info-main{
     padding-bottom: 44px;
@@ -4852,6 +4900,34 @@ textarea {
     height: 17px;
     background-size: 17px 34px;
 }
+.my-deposit-wrap-no-good{
+    height: 300px;
+    position: relative;
+    display: none;
+    background-color: #fff;
+}
+.my-deposit-wrap-no-good .tips {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #C9C8DA;
+    font-size: 15px;
+}
+.my-deposit-wrap-no-good .tips h3{
+    font-size:14px;
+    color:#4c3a30;
+    margin-top: 10px;
+}
+.my-deposit-wrap-no-good .tips h4{
+    font-size:12px;
+    color:#909090;
+    margin-top: 10px;
+}
+.my-deposit-wrap-no-good .tips img{
+    width: 114px;
+}
 /*-------my_deposit----------*/
 .order-detail-wrap{
     padding-bottom: 60px;
@@ -5201,4 +5277,671 @@ textarea {
     color: #fff;
     border: 1px solid #ffaa00;
     display: none;
+}
+
+/*------------------------------------------提交订单优惠券---------------------------------*/
+.submit-voucher-wrap .input {
+    padding: 12px 12px 0;
+}
+.submit-voucher-wrap .input input {
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    height: 44px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+}
+.submit-voucher-wrap .btn {
+    padding: 0 12px;
+    margin-top: 10px;
+}
+.submit-voucher-wrap .btn button {
+    width: 100%;
+    height: 44px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 4px;
+    background-color: #6885EA;
+}
+.submit-voucher-wrap .list {
+    margin-top: 20px;
+    padding: 0 12px;
+}
+.submit-voucher-wrap .list ul li {
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px #e3e3e3;
+    margin-top: 10px;
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+}
+.submit-voucher-wrap .list ul li.disable .fl span{
+    color: #c3c1c1;
+}
+.submit-voucher-wrap .list ul li.disable .fr h3 {
+    color: #c3c1c1;
+}
+.submit-voucher-wrap .list ul li.disable .fr p {
+    color: #c3c1c1;
+}
+.submit-voucher-wrap .list ul li.disable .fr h5 {
+    color: #c3c1c1;
+}
+.submit-voucher-wrap .list ul li .fl {
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}
+.submit-voucher-wrap .list ul li .fl span {
+    height: 100%;
+    padding: 0 20px;
+    border-right: 1px dashed #e3e3e3;
+    width: 100%;
+    display: inline-block;
+    line-height: 80px;
+    color: #FF3574;
+    font-size: 18px;
+}
+.submit-voucher-wrap .list ul li .fl .icon-wave-left {
+    width: 8.5px;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    background-image: url("../image/common/wave_left.png");
+    background-size: 8.5px 100px;
+}
+.submit-voucher-wrap .list ul li .fr {
+    width: 75%;
+    padding: 20px;
+    height: 100%;
+    position: relative;
+}
+.submit-voucher-wrap .list ul li .fr h3 {
+    color: #323232;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.submit-voucher-wrap .list ul li .fr p {
+    color: #8d8d8d;
+    font-size: 12px;
+}
+.submit-voucher-wrap .list ul li .fr h5 {
+    color: #8d8d8d;
+    font-size: 12px;
+}
+.submit-voucher-wrap .list ul li .fr .icon-wave-right {
+    width: 8.5px;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    background-image: url("../image/common/wave_right.png");
+    background-size: 8.5px 100px;
+}
+.submit-voucher-wrap .list ul li.active {
+    border-bottom: 2px solid #6885EA;
+    border-top: 2px solid #6885EA;
+    box-shadow: none;
+}
+.submit-voucher-wrap .list ul li.active .fl .icon-wave-left {
+    width: 6.5px;
+    background-image: url("../image/common/wave_active_left.png");
+    background-size: 6.5px 100px;
+    background-position: 0 -2px;
+}
+.submit-voucher-wrap .list ul li.active .fr .icon-wave-right {
+    width: 6.5px;
+    background-image: url("../image/common/wave_active_right.png");
+    background-size: 6.5px 100px;
+    background-position: 0 -2px;
+}
+.submit-voucher-wrap .footer {
+    height: 68px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 12px 10px;
+    box-shadow: 0 -1px 10px #dddddd;
+}
+.submit-voucher-wrap .footer button {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #6885EA;
+    font-size: 16px;
+    color: #6885EA;
+}
+.submit-voucher-wrap .no-good{
+    background-color: rgb(255, 255, 255);
+    display: none;
+}
+.submit-voucher-wrap .tips {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 14px;
+    color: #4c3a30;
+}
+.submit-voucher-wrap .tips h4{
+    margin-top: 10px;
+}
+.submit-voucher-wrap .tips img{
+    width: 132px;
+}
+/*----------------------提交订单------------------*/
+.submit-order-wrap .address {
+    background-color: #fff;
+}
+.submit-order-wrap .address .add {
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    color: #8d8d8d;
+    font-size: 15px;
+}
+.submit-order-wrap .address .separate {
+    width: 100%;
+    height: 5px;
+    display: block;
+    background: url(../image/common/img_address_line.png) 0 0 repeat-x;
+    background-size: auto 5px;
+}
+.submit-order-wrap .address .address_detail .name-phone {
+    border-top: 1px solid #efefef;
+    padding: 10px;
+}
+.submit-order-wrap .address .address_detail .name-phone table {
+    table-layout: auto;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td {
+    font-size: 14px;
+    color: #454545;
+    height: 32px;
+    line-height: 20px;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td.icon-right {
+    vertical-align: top;
+    text-align: right;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td:first-child {
+    width: 15px;
+    vertical-align: top;
+    padding-right: 5px;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td:first-child .local {
+    width: 10px;
+    height: 16px;
+    background-position: -15px -94px;
+    vertical-align: middle;
+    margin-bottom: 4px;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td:nth-child(2) {
+    width: 30%;
+}
+.submit-order-wrap .detail-list {
+    background-color: #fff;
+    margin-top: 10px;
+}
+.submit-order-wrap .detail-list .good_show {
+    position: relative;
+    padding: 10px;
+}
+.submit-order-wrap .detail-list .good_show table tr td {
+    vertical-align: middle;
+    padding: 0;
+}
+.submit-order-wrap .detail-list .good_show table tr td[rowspan="3"] {
+    width: 25%;
+    font-size: 0;
+}
+.submit-order-wrap .detail-list .good_show table tr td[rowspan="3"] img {
+    width: 100%;
+    border-radius: 4px;
+}
+.submit-order-wrap .detail-list .good_show table tr td a h3 {
+    font-size: 14px;
+    color: #323232;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 16px;
+    height: 33px;
+}
+.submit-order-wrap .detail-list .good_show table tr td p {
+    font-size: 12px;
+    color: #8c8c8c;
+}
+.submit-order-wrap .detail-list .good_show table tr td h4 {
+    font-size: 12px;
+    color: #8c8c8c;
+}
+.submit-order-wrap .detail-list .good_show table tr td.title {
+    vertical-align: top;
+    line-height: 21px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+.submit-order-wrap .detail-list .good_show table tr td.price {
+    padding-left: 10px;
+    height: 18px;
+}
+.submit-order-wrap .detail-list .good_show table tr td.year {
+    padding-left: 10px;
+    height: 18px;
+}
+.submit-order-wrap .detail-list .good_show .num {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 13px;
+    color: #8c8c8c;
+}
+.submit-order-wrap .detail-list .rent-time {
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    margin-top: 10px;
+    padding: 0 10px 0 0;
+}
+.submit-order-wrap .detail-list .rent-time .title {
+    font-size: 14px;
+    color: #2d2d2d;
+    padding: 10px 0;
+    padding-left: 10px;
+}
+.submit-order-wrap .detail-list .rent-time .title span {
+    font-size: 12px;
+    color: #838383;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl {
+    width: calc(33.333333333333336%);
+    position: relative;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl.active .cont {
+    border: 1px solid #ffaa00;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl.active .cont .checked {
+    display: inline-block;
+    width: 28px;
+    height: 27px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 4px;
+    background: url("../image/common/checked.png");
+    background-size: 28px 27px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl.active .cont .checked i.icon-right {
+    width: 10px;
+    height: 8px;
+    display: inline-block;
+    background: url("../image/common/right.png");
+    background-size: 10px 8px;
+    margin-left: 10px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl.active .cont .checked i.icon-pencil {
+    width: 11px;
+    height: 10px;
+    display: inline-block;
+    background: url("../image/common/pencil.png");
+    background-size: 11px 10px;
+    margin-left: 14px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl.active .cont .pencil {
+    display: inline-block;
+    width: 28px;
+    height: 27px;
+    background: url("../image/common/checked.png") 0 0;
+    background-size: 28px 27px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 4px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont {
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    text-align: center;
+    height: 50px;
+    overflow: hidden;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .time {
+    font-size: 13px;
+    color: #757575;
+    height: 24px;
+    line-height: 24px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .time span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .time span.discount-flag {
+    display: none;
+    width: 12px;
+    height: 12px;
+    background-color: #ffaa00;
+    font-size: 9px;
+    color: #fff;
+    text-align: center;
+    line-height: 12px;
+    margin-left: 5px;
+    border-radius: 2px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .money {
+    font-size: 14px;
+    color: #f00;
+    height: 26px;
+    line-height: 26px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .set-time {
+    font-size: 13px;
+    color: #757575;
+    height: 24px;
+    line-height: 24px;
+    display: none;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .setting {
+    font-size: 14px;
+    color: #797979;
+    height: 26px;
+    line-height: 50px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .checked {
+    display: none;
+}
+.submit-order-wrap .detail-list .distribution {
+    padding: 10px;
+}
+.submit-order-wrap .detail-list .distribution table tr td {
+    font-size: 14px;
+    color: #303030;
+    text-align: right;
+    vertical-align: middle;
+    height: 20px;
+    line-height: 20px;
+}
+.submit-order-wrap .detail-list .distribution table tr td.name {
+    font-size: 14px;
+    color: #2e2e2e;
+    text-align: left;
+}
+.submit-order-wrap .rent-item-list {
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 0 10px;
+}
+.submit-order-wrap .rent-item-list ul li {
+    padding: 15px 0;
+    font-size: 14px;
+    color: #2d2d2d;
+    border-bottom: 1px solid #efefef;
+}
+.submit-order-wrap .rent-item-list ul li .fl span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.submit-order-wrap .rent-item-list ul li .fl span.tips {
+    font-size: 12px;
+    color: #838383;
+}
+.submit-order-wrap .rent-item-list ul li .fl i.i-rent {
+    width: 20px;
+    height: 17px;
+    background-position: -46px -397px;
+    margin-right: 5px;
+}
+.submit-order-wrap .rent-item-list ul li .fl i.i-logistics {
+    width: 20px;
+    height: 14px;
+    background-position: -47px -376px;
+    margin-right: 5px;
+}
+.submit-order-wrap .rent-item-list ul li .fl i.i-discount {
+    width: 20px;
+    height: 15px;
+    background-position: -46px -356px;
+    margin-right: 5px;
+}
+.submit-order-wrap .rent-item-list ul li .fr .no-vip span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.submit-order-wrap .rent-item-list ul li .fr .no-vip span.discount-car {
+    font-size: 14px;
+    color: #9b9b9b;
+}
+.submit-order-wrap .rent-item-list ul li .fr .no-vip .icon_arrowRight_bold {
+    margin-left: 5px;
+}
+.submit-order-wrap .rent-item-list ul li .fr .discount-fee {
+    display: inline-block;
+    vertical-align: middle;
+}
+.submit-order-wrap .rent-item-list ul li .fr .discount-fee span {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+.submit-order-wrap .rent-item-list ul li .fr .discount-fee span.red {
+    color: #f00;
+}
+.submit-order-wrap .yajin-item-list {
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 0 10px;
+    margin-bottom: 80px;
+}
+.submit-order-wrap .yajin-item-list ul li {
+    height: 50px;
+    font-size: 14px;
+    color: #2d2d2d;
+}
+.submit-order-wrap .yajin-item-list ul li .fl {
+    height: 100%;
+    line-height: 50px;
+}
+.submit-order-wrap .yajin-item-list ul li .fl span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.submit-order-wrap .yajin-item-list ul li .fl span.tips {
+    font-size: 12px;
+    color: #838383;
+    margin-left: 5px;
+}
+.submit-order-wrap .yajin-item-list ul li .fl span.tips.active {
+    color: #3da234;
+}
+.submit-order-wrap .yajin-item-list ul li .fl i.i-yajin {
+    width: 17px;
+    height: 20px;
+    background-position: -38px -269px;
+    margin-right: 5px;
+}
+.submit-order-wrap .yajin-item-list ul li .fr .part1 {
+    height: 50px;
+    line-height: 50px;
+}
+.submit-order-wrap .yajin-item-list ul li .fr .part2 {
+    display: none;
+    margin-top: 6px;
+}
+.submit-order-wrap .yajin-item-list ul li .fr .part2 .i-return-show {
+    background: url(../image/common/text-box-green.png) no-repeat right;
+    background-size: auto 23px;
+    color: #0ac443;
+    margin-right: 5px;
+    vertical-align: middle;
+    display: inline-block;
+    height: 23px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 23px;
+    padding-right: 4px;
+}
+.submit-order-wrap .yajin-item-list ul li .fr .part2 .cont {
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+    padding: 0 5px;
+    color: #0ac443;
+    border: 1px solid #0ac443;
+    border-right: none;
+}
+.submit-order-wrap .yajin-item-list ul li .fr .part2 .right {
+    display: inline-block;
+    vertical-align: middle;
+}
+.submit-order-wrap .submit-order-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 68px;
+    padding: 0 10px;
+    display: table;
+}
+.submit-order-wrap .submit-order-footer .fl {
+    height: 100%;
+    width: 40%;
+    vertical-align: middle;
+    display: table-cell;
+    float: none;
+}
+.submit-order-wrap .submit-order-footer .fl span:first-child {
+    font-size: 14px;
+    color: #f00;
+}
+.submit-order-wrap .submit-order-footer .fl span:nth-child(2) {
+    font-size: 16px;
+    color: #f00;
+}
+.submit-order-wrap .submit-order-footer .fl p {
+    font-size: 12px;
+    color: #8d8d8d;
+}
+.submit-order-wrap .submit-order-footer .fr {
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+    width: 60%;
+    padding-left: 10px;
+}
+.submit-order-wrap .submit-order-footer .fr button {
+    width: 100%;
+    height: 44px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #ffaa00;
+}
+.cover-rent-time-choose {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+.cover-rent-time-choose .rent-time-choose-main {
+    background-color: #fff;
+    position: absolute;
+    bottom: -270px;
+    width: 100%;
+    padding: 10px;
+    height: 270px;
+}
+.cover-rent-time-choose .rent-time-choose-main .title {
+    color: #878787;
+    font-size: 14px;
+}
+.cover-rent-time-choose .rent-time-choose-main .title .top {
+    font-size: 0;
+}
+.cover-rent-time-choose .rent-time-choose-main .title .top .cancel,
+.cover-rent-time-choose .rent-time-choose-main .title .top .confirm,
+.cover-rent-time-choose .rent-time-choose-main .title .top .picker-title {
+    display: inline-block;
+    width: calc(33.333333333333336%);
+}
+.cover-rent-time-choose .rent-time-choose-main .title .top .cancel {
+    color: #878787;
+    font-size: 15px;
+    text-align: left;
+}
+.cover-rent-time-choose .rent-time-choose-main .title .top .confirm {
+    color: #ffaa00;
+    font-size: 15px;
+    text-align: right;
+}
+.cover-rent-time-choose .rent-time-choose-main .title .top .picker-title {
+    font-size: 19px;
+    color: #333;
+    text-align: center;
+}
+.cover-rent-time-choose .rent-time-choose-main .choose-box {
+    margin-top: 10px;
+}
+.cover-rent-time-choose .rent-time-choose-main .choose-box .list {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+.cover-rent-time-choose .rent-time-choose-main .choose-box .list .choose-cont {
+    height: 40px;
+    margin-top: 40px;
+    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid #e3e3e3;
+}
+.cover-rent-time-choose .rent-time-choose-main .choose-box .list .choose-ul {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    transition: top 0.1s;
+}
+.cover-rent-time-choose .rent-time-choose-main .choose-box .list .choose-ul li {
+    width: 100%;
+    text-align: center;
+    color: #878787;
+    font-size: 21px;
+    height: 40px;
+    line-height: 40px;
+}
+.cover-rent-time-choose .rent-time-choose-main .choose-box .list .choose-ul li.active {
+    color: #333;
+}
+
+/*---------------------提交物流成功页---------------*/
+.return-success-wrap{
+    background-color: #fff;
+}
+.return-success-wrap .return-success-main .return-cont{
+    text-align: center;
+    position: absolute;
+    top:50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+.return-success-wrap .return-success-main .return-cont img{
+    width: 125px;
+}
+.return-success-wrap .return-success-main .return-cont .success-tip{
+    font-size:14px;
+    color:#4c3a30;
+    margin-top: 12px;
+}
+.return-success-wrap .return-success-main .return-cont .tips{
+    margin-top: 12px;
+    font-size:12px;
+    color:#909090;
 }

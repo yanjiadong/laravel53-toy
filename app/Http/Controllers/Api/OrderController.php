@@ -45,11 +45,11 @@ class OrderController extends BaseController
 
         //计算不同天数不同的单日价格
         $price_info = [
-            'week1'=>getGoodPriceByDays($info['good_price'],7, $good->is_discount, $good_id),
-            'week2'=>getGoodPriceByDays($info['good_price'],14, $good->is_discount, $good_id),
-            'week3'=>getGoodPriceByDays($info['good_price'],21, $good->is_discount, $good_id),
-            'month1'=>getGoodPriceByDays($info['good_price'],30, $good->is_discount, $good_id),
-            'month2'=>getGoodPriceByDays($info['good_price'],60, $good->is_discount, $good_id),
+            array_merge(['name'=>'1周'],getGoodPriceInfo($info['good_price'],7, $good->is_discount, $good_id)),
+            array_merge(['name'=>'2周'],getGoodPriceInfo($info['good_price'],14, $good->is_discount, $good_id)),
+            array_merge(['name'=>'3周'],getGoodPriceInfo($info['good_price'],21, $good->is_discount, $good_id)),
+            array_merge(['name'=>'1个月'],getGoodPriceInfo($info['good_price'],30, $good->is_discount, $good_id)),
+            array_merge(['name'=>'2个月'],getGoodPriceInfo($info['good_price'],60, $good->is_discount, $good_id)),
         ];
 
         //print_r($price_info);
@@ -66,6 +66,7 @@ class OrderController extends BaseController
             $info['can_use_zhima'] = 2;   //使用过了认证
         }
 
+        $info['good_money_discount'] = 0;
         if($order_count <= 0 && $user->is_zhima == 1)
         {
             //本次能够使用认证减免
@@ -73,10 +74,12 @@ class OrderController extends BaseController
             if($user->zhima_money >= $info['good_money'])
             {
                 $money = '0.00';
+                $info['good_money_discount'] = $info['good_money'];
             }
             else
             {
                 $money = $info['good_money'] - $user->zhima_money;
+                $info['good_money_discount'] = $user->zhima_money;
             }
         }
 
@@ -235,7 +238,8 @@ class OrderController extends BaseController
 
         $order = Order::create($order_data);
 
-        $total_fee = $order->price*100;  //订单需要支付的金额
+        //$total_fee = $order->price*100;  //订单需要支付的金额
+        $total_fee = 0.01*100;  //订单需要支付的金额
         //生成支付信息
         $options = config('wechat.payment');
         $app = Factory::payment($options);
@@ -796,13 +800,13 @@ class OrderController extends BaseController
         $where = [Order::STATUS_DOING];
         $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
         //print_r($list);
-        if(!empty($list))
+        /*if(!empty($list))
         {
             foreach ($list as &$v)
             {
                 $v['days'] = floor((time() - strtotime($v['send_time']))/(3600*24));
             }
-        }
+        }*/
 
         $info['list'] = $list;
         $this->ret['info'] = $info;

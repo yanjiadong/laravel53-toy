@@ -9,18 +9,16 @@
     <link href="{{ asset('wechat2/style/reset.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('wechat2/style/common.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('wechat2/style/style.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('wechat2/js/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ asset('wechat2/js/main.js') }}"></script>
-    <script src="{{ asset('wechat2/js/common.js') }}"></script>
+
 </head>
 <body>
-<div class="vip-voucher-wrap bg-white">
-    {{--<div class="input">
-        <input type="text" placeholder="请输入兑换码">
-    </div>
-    <div class="btn">
-        <button onclick="vip_voucher.exchange()" disabled>兑换</button>
-    </div>--}}
+<div class="submit-voucher-wrap bg-white">
+    <!-- <div class="input">
+         <input type="text" placeholder="请输入兑换码">
+     </div>
+     <div class="btn">
+         <button onclick="vip_voucher.exchange()">兑换</button>
+     </div>-->
     <div class="list">
         <ul>
             <!-- <li class="clear active">
@@ -54,34 +52,32 @@
     </div>
     <div class="no-good">
         <div class="tips">
-            <i class="icon-no-goods2"></i>
+            <img src="/wechat2/image/common/no-good3.png">
             <h4>您还没有可用的优惠券</h4>
         </div>
     </div>
 </div>
-
-
-
+<script src="{{ asset('wechat2/js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ asset('wechat2/js/main.js') }}"></script>
+<script src="{{ asset('wechat2/js/common.js') }}"></script>
 <script>
     var vip_voucher ={
         data:{
             list:[],
-            vip_id:common.getParam('id'),
-            state:false,                 //是不是从个人中心进入 true是   false为不是
-            vip_discount_id:common.getParam('vip_discount_id')?common.getParam('vip_discount_id'):"",       //优惠券卡id值/**/
+            state:false,                //是不是从个人中心进入 true是   false为不是
+            discount_car_id:sessionStorage.getItem('discount_car_id')?sessionStorage.getItem('discount_car_id'):"",       //优惠券卡id值/**/
+            rentMoney:!common.getParam('rentMoney')?0: common.getParam('rentMoney'),      //租金
+            good_id:common.getParam('good_id')
         },
         init:function(){
-            var data_vip_id = vip_voucher.data.vip_id;
-            console.log(data_vip_id);
-
-            var code = $('.vip-voucher-wrap .input input').val("");
-            common.httpRequest('{{url('api/user/coupon_list')}}','post',{user_id:'{{$user_id}}',vip_card_id:data_vip_id},function (res) {
+            common.httpRequest("{{ url('api/user/user_coupon_list') }}",'post',{user_id:'{{ $user_id }}'},function (res) {
                 /*vip_voucher.data.list=[
-                    {id:0,money:100,cont:'新人专享优惠卷',time:'2017.8.27-2017.8.31',fanwei:'任意金额可用'},
-                    {id:1,money:200,cont:'满减优惠卷',time:'2017.8.27-2017.8.31',fanwei:'满一千元可用'}
+                    {id:0,money:10,cont:'满减优惠券',time:'2017.8.27-2017.12.31',fanwei:'任意金额可用',rent:0},
+                    {id:1,money:20,cont:'满减优惠卷',time:'2017.8.27-2017.12.31',fanwei:'满200元可用',rent:200},
+                    {id:2,money:30,cont:'满减优惠卷',time:'2017.8.27-2017.12.31',fanwei:'满300元可用',rent:300}
                 ];*/
-                console.log(res.info.coupons);
-                vip_voucher.data.list=res.info.coupons;
+                vip_voucher.data.list = res.info.coupons;
+                console.log(vip_voucher.data);
                 if(vip_voucher.data.list.length>0){
                     var cont='';
                     var max=0,max_index;
@@ -92,98 +88,60 @@
                         }
                         else
                         {
-                            var fanwei = '会员卡满'+vip_voucher.data.list[i].condition+'元可用';
+                            var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
                         }
 
-                        if(vip_voucher.data.list[i].can_use)
-                        {
+                        if(vip_voucher.data.list[i].condition <= vip_voucher.data.rentMoney && vip_voucher.data.list[i].can_use){
                             /*-----之前选中优惠券再进入默认是选中------*/
-                            if(vip_voucher.data.vip_discount_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.vip_discount_id){
+                            if(vip_voucher.data.discount_car_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.discount_car_id){
                                 cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
                                     +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                                    '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                             }else{
                                 cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
                                     +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                                    '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                             }
-                        }
-                        else
-                        {
+                            //筛选最大金额
+                            if(max<vip_voucher.data.list[i].money){
+                                max = vip_voucher.data.list[i].money;
+                                max_index = i;
+                            }
+                        }else{
                             cont+='<li class="clear disable"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
                                 +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
-                                '<p>有效期：<span>'+vip_voucher.data.list[i].new_start_time+'-'+vip_voucher.data.list[i].new_end_time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                                '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                         }
                     }
-                    $(".vip-voucher-wrap .list ul").html(cont);
-
-                    vip_voucher.isCenter();
-                    if(vip_voucher.data.state){
-                        //$(".vip-voucher-wrap .list ul li").removeClass('disable');
-                        $(".vip-voucher-wrap .footer").hide();
-                    }else{
-                        //$(".vip-voucher-wrap .list ul li").eq(max_index).addClass('active');
-                        vip_voucher.choose();
-                    }
-                }
-                else
-                {
-                    $(".vip-voucher-wrap .no-good").show();
-                    $(".vip-voucher-wrap .list").hide();
-                    $(".vip-voucher-wrap .footer").hide();
+                    $(".submit-voucher-wrap  .list ul").html(cont);
+                    vip_voucher.choose();
+                }else{
+                    $(".submit-voucher-wrap  .no-good").show();
+                    $(".submit-voucher-wrap  .list").hide();
+                    $(".submit-voucher-wrap  .footer").hide();
                 }
             })
         },
-        //是否为我的 页面进入
-        isCenter:function () {
-            if(document.referrer.toString().indexOf('center')>-1){
-                vip_voucher.data.state = true;
-            }
-        },
         //选择优惠劵
         choose:function () {
-            $item = $(".vip-voucher-wrap .list ul li").not(".disable");
+            $item = $(".submit-voucher-wrap  .list ul li").not(".disable");
             $item.click(function () {
                 $item.removeClass('active');
                 $(this).addClass('active');
-
-                var index = $(this).index(".vip-voucher-wrap .list ul li");
-
+                var index = $(this).index(".submit-voucher-wrap  .list ul li");
                 //提交选择
-                sessionStorage.choose_vip_id = vip_voucher.data.vip_id;
-                sessionStorage.choose_vip_discount = JSON.stringify(vip_voucher.data.list[index].price);
-                sessionStorage.choose_vip_car =vip_voucher.data.list[index].id;
+                sessionStorage.discount_money = JSON.stringify(vip_voucher.data.list[index].price);
+                sessionStorage.discount_car_id =vip_voucher.data.list[index].id;
 
-                //location.href="{{url('wechat/index/choose_vip')}}"+'?vip_id='+vip_voucher.data.vip_id+'&vip_discount='+JSON.stringify(vip_voucher.data.list[index].price)+'&vip_discount_id='+vip_voucher.data.list[index].id;
-                location.href="{{url('wechat/index/choose_vip')}}";
+                location.href="{{ url('wechat/index/submit_order') }}"+'/'+vip_voucher.data.good_id;
             })
         },
         //不使用优惠劵
         noUser:function () {
             var submitData ="";
-            sessionStorage.choose_vip_discount="";
-            sessionStorage.choose_vip_id = vip_voucher.data.vip_id;
-            location.href="{{url('wechat/index/choose_vip')}}";
-        },
-        //兑换
-        exchange:function () {
-            var code = $('.vip-voucher-wrap .input input').val();
-            if(!code ){
-                common.alert_tip('兑换码不可为空！');
-                return false;
-            }
-            common.httpRequest('../js/test.json','get',null,function (res) {
-                res ={
-                    success:false,
-                    error:'兑换码输入错误！'
-                };
-                if(res.success){
-                    vip_voucher.init();
-                    common.success_tip('兑换成功');
-                }else{
-                    common.alert_tip(res.error);
-                }
-            })
+            sessionStorage.discount_money="";
+            sessionStorage.discount_car_id = "";
+            location.href="{{ url('wechat/index/submit_order') }}"+'/'+vip_voucher.data.good_id;
         }
     };
     $(function () {
@@ -194,20 +152,20 @@
     $(function () {
         pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
-        var bool=false;
+        var bool=false;
         setTimeout(function(){
             bool=true;
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                location.href=document.referrer;  //在这里指定其返回的地址
+                history.back()
             }
         }, false);
     });
     function pushHistory() {
         var state = {
             title: "title",
-            url: "#"
+            url: ""
         };
         window.history.pushState(state, state.title, state.url);
     }

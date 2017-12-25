@@ -82,7 +82,7 @@
             </ul>
             <div class="no-good">
                 <div class="tips">
-                    <i class="icon-no-goods1"></i>
+                    <img src="/wechat2/image/common/no-good1.png">
                     <h4>您还没有相关的订单</h4>
                 </div>
             </div>
@@ -127,8 +127,8 @@
             </ul>
             <div class="no-good">
                 <div class="tips">
-                    <i class="icon-big icon-big-blankPage"></i>
-                    <h4>空空如也</h4>
+                    <img src="/wechat2/image/common/no-good1.png">
+                    <h4>您还没有相关的订单</h4>
                 </div>
             </div>
         </div>
@@ -247,7 +247,7 @@
 
                 }else{
                     $(".order-detail-main .detail-cont .detail-list").hide();
-                    $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".lease-wrap nav").outerHeight()- $(".lease-wrap footer").outerHeight()).show();
+                    $(".order-detail-main .detail-cont .no-good").height($(window).outerHeight()-$(".lease-wrap nav").outerHeight()- $("footer").outerHeight()).show();
                 }
             })
         },
@@ -345,7 +345,7 @@
                 }else{
                     $(".order-detail-main .return .detail-list").hide();
                     $(".order-detail-main .return .detail-list").hide();
-                    $(".order-detail-main .return .no-good").height($(window).outerHeight()-$(".lease-wrap nav").outerHeight()- $(".lease-wrap footer").outerHeight()).show();
+                    $(".order-detail-main .return .no-good").height($(window).outerHeight()-$(".lease-wrap nav").outerHeight()- $("footer").outerHeight()).show();
                 }
             })
         },
@@ -369,7 +369,7 @@
         //
         goReturn:function (out_trade_no) {
             localStorage.out_trade_no = out_trade_no;
-            location.href="/view/logistics_info.html";
+            location.href="{{ route('wechat2.index.logistics_info') }}";
         },
         //查看归还详情
         goReturned:function () {

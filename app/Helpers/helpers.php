@@ -649,10 +649,105 @@ if(!function_exists('getGoodPriceByDays'))
             $result = round($price,1);
         }
 
+
         return number_format($result,1,".","");
     }
 }
 
+//根据商品租用天数来计算每日的租金
+if(!function_exists('getGoodPriceInfo'))
+{
+    function getGoodPriceInfo($price, $days, $is_discount = 0, $good_id = 0)
+    {
+        if(!empty($is_discount))
+        {
+            $good = DB::table('goods')->where('id',$good_id)->first();
+        }
+
+        $result = 0;
+        $isDiscount = false;
+
+        if($days >= 1 && $days <= 7)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount1;
+                $isDiscount = true;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/98,1);
+            }
+        }
+        elseif($days > 7 && $days <= 14)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount2;
+                $isDiscount = true;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/128,1);
+            }
+        }
+        elseif($days > 14 && $days <= 21)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount3;
+                $isDiscount = true;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/153,1);
+            }
+        }
+        elseif($days > 21 && $days <= 30)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount4;
+                $isDiscount = true;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/165,1);
+            }
+        }
+        elseif($days > 30 && $days <= 45)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount5;
+                $isDiscount = true;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/175,1);
+            }
+        }
+        elseif($days > 45 && $days <= 60)
+        {
+            if(!empty($good) && $is_discount)
+            {
+                $result = $good->discount6;
+                $isDiscount = true;
+            }
+            if($result <= 0)
+            {
+                $result = round($price/185,1);
+            }
+        }
+        else
+        {
+            $result = round($price,1);
+        }
+
+
+        return ['money'=>number_format($result,1,".",""),'isDiscount'=>$isDiscount];
+    }
+}
 
 //根据芝麻分获取减免的押金额度
 if(!function_exists('getMoneyByZhimaScore'))

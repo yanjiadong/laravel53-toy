@@ -277,16 +277,16 @@
                     for(var i=0;i<res.info.goods.length;i++){
                         //热门
                         //判断是否有库存
-                        var href = "{{url('wechat2/index/good')}}"+'/'+res.info.goods[i].id;
+                        var href = "{{url('wechat2/index/good')}}"+'/'+res.info.goods[i].id
 
                         if(res.info.goods[i].store <= 0){
-                            hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'"><span class="active">'+
+                            hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}v" data-original="'+res.info.goods[i].picture+'"><span class="active">'+
                                 '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
-                                '</h4></li>';
+                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'/</span><span class="unit">元</span></div></li>';
                         }else{
                             hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'">'+'<h3>'
                                 +res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
-                                '</h4></li>';
+                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'/</span><span class="unit">元</span></div></li>';
                         }
                     }
                     $(".hot-list ul").html(hotData);

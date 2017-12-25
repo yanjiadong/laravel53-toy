@@ -57,7 +57,13 @@
         </ul>
     </div>
 </div>
-
+<div class="my-deposit-wrap-no-good">
+    <div class="tips">
+        <img src="/wechat2/image/common/no-good2.png">
+        <h3>您还未缴纳过押金</h3>
+        <h4>听说认证芝麻信用分可以减免押金哦</h4>
+    </div>
+</div>
 <script>
     var myDeposit = {
         data:{
@@ -88,55 +94,63 @@
                 //赋值
                 $(".my-deposit-wrap .top-pic img").attr('src',myDeposit.data.infoData.pic);
                 var listCont='';
-                for(var i=0;i<myDeposit.data.infoData.list.length;i++){
-                    //var day = myDeposit.timeGap(myDeposit.data.infoData.list[i].start_time,myDeposit.data.infoData.list[i].end_time);
-                    var day = myDeposit.data.infoData.list[i].days;
+                if(myDeposit.data.infoData.list.length > 0)
+                {
+                    for(var i=0;i<myDeposit.data.infoData.list.length;i++){
+                        //var day = myDeposit.timeGap(myDeposit.data.infoData.list[i].start_time,myDeposit.data.infoData.list[i].end_time);
+                        var day = myDeposit.data.infoData.list[i].days;
 
-                    if(myDeposit.data.infoData.list[i].can_apply_money == 0)
-                    {
-                        //待发货  已发货 租金具体时间不显示
-                        if(myDeposit.data.infoData.list[i].status=='待发货'||myDeposit.data.infoData.list[i].status=='已发货'){
-                            listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天</span>'+
-                                '</div><div class="fr"><span class="active">押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
-                                '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
-                                '</div><div class="operate"><div class="tips">当前订单未结束，还不能进行押金提现</div></div></li>';
-                        }else if(myDeposit.data.infoData.list[i].status=='租用中'||myDeposit.data.infoData.list[i].status=='已归还'){
+                        if(myDeposit.data.infoData.list[i].can_apply_money == 0)
+                        {
+                            //待发货  已发货 租金具体时间不显示
+                            if(myDeposit.data.infoData.list[i].status=='待发货'||myDeposit.data.infoData.list[i].status=='已发货'){
+                                listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天</span>'+
+                                    '</div><div class="fr"><span class="active">押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
+                                    '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
+                                    '</div><div class="operate"><div class="tips">当前订单未结束，还不能进行押金提现</div></div></li>';
+                            }else if(myDeposit.data.infoData.list[i].status=='租用中'||myDeposit.data.infoData.list[i].status=='已归还'){
+                                listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
+                                    '</div><div class="fr"><span class="active">押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
+                                    '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
+                                    '</div><div class="operate"><div class="tips">当前订单未结束，还不能进行押金提现</div></div></li>';
+                            }
+                        }
+                        else if(myDeposit.data.infoData.list[i].can_apply_money == 1)
+                        {
+                            //归还成功 押金未提
+                            var tips_cont =myDeposit.data.infoData.list[i].over_days==0? "订单已按期归还":"已逾期"+myDeposit.data.infoData.list[i].over_days+"天，将从押金中扣除"+myDeposit.data.infoData.list[i].over_money+"元";
                             listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
                                 '</div><div class="fr"><span class="active">押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
                                 '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
-                                '</div><div class="operate"><div class="tips">当前订单未结束，还不能进行押金提现</div></div></li>';
+                                '</div><div class="operate"><div class="tips">'+tips_cont+'</div><button class="apply" onclick="myDeposit.applyCash(\''+myDeposit.data.infoData.list[i].code+'\')">申请押金提现</button>'
+                                +'</div></li>';
+                        }
+                        else if(myDeposit.data.infoData.list[i].can_apply_money == 3)
+                        {
+                            //已申请提现且提现成功
+                            listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
+                                '</div><div class="fr"><span>押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
+                                '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
+                                '</div><div class="operate"><i class="icon-success"></i><button class="success"><i></i>押金已提现成功</button>'
+                                +'</div></li>';
+                        }
+                        else if(myDeposit.data.infoData.list[i].can_apply_money == 2)
+                        {
+                            //已申请提现但后台还没有审核
+                            listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
+                                '</div><div class="fr"><span>押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
+                                '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
+                                '</div><div class="operate"><div class="tips">预计0-5个工作日退还到原支付账户</div><button class="applied">已申请押金提现</button>'
+                                +'</div></li>';
                         }
                     }
-                    else if(myDeposit.data.infoData.list[i].can_apply_money == 1)
-                    {
-                        //归还成功 押金未提
-                        var tips_cont =myDeposit.data.infoData.list[i].over_days==0? "订单已按期归还":"已逾期"+myDeposit.data.infoData.list[i].over_days+"天，将从押金中扣除"+myDeposit.data.infoData.list[i].over_money+"元";
-                        listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
-                            '</div><div class="fr"><span class="active">押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
-                            '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
-                            '</div><div class="operate"><div class="tips">'+tips_cont+'</div><button class="apply" onclick="myDeposit.applyCash(\''+myDeposit.data.infoData.list[i].code+'\')">申请押金提现</button>'
-                            +'</div></li>';
-                    }
-                    else if(myDeposit.data.infoData.list[i].can_apply_money == 3)
-                    {
-                        //已申请提现且提现成功
-                        listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
-                            '</div><div class="fr"><span>押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
-                            '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
-                            '</div><div class="operate"><i class="icon-success"></i><button class="success"><i></i>押金已提现成功</button>'
-                            +'</div></li>';
-                    }
-                    else if(myDeposit.data.infoData.list[i].can_apply_money == 2)
-                    {
-                        //已申请提现但后台还没有审核
-                        listCont +='<li><div class="time clear"><div class="fl"><span>租期'+day+'天（'+myDeposit.data.infoData.list[i].start_time_new+'-'+myDeposit.data.infoData.list[i].end_time_new+'）</span>'+
-                            '</div><div class="fr"><span>押金¥'+myDeposit.data.infoData.list[i].money+'</span></div></div><div class="good clear"><div class="fl">'+
-                            '<img src="'+myDeposit.data.infoData.list[i].good_picture+'"></div><div class="fr"><h3>'+myDeposit.data.infoData.list[i].good_title+'</h3><div class="num">x'+myDeposit.data.infoData.list[i].num+'</div></div>'+
-                            '</div><div class="operate"><div class="tips">预计0-5个工作日退还到原支付账户</div><button class="applied">已申请押金提现</button>'
-                            +'</div></li>';
-                    }
+                    $(".my-deposit-wrap .list ul").html(listCont);
                 }
-                $(".my-deposit-wrap .list ul").html(listCont);
+                else
+                {
+                    $(".my-deposit-wrap").hide();
+                    $(".my-deposit-wrap-no-good").height($(window).height()).show();
+                }
             })
         },
         //计算租期时间差

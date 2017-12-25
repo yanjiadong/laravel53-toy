@@ -334,6 +334,11 @@ class UserController extends BaseController
         return $this->ret;
     }
 
+    /**
+     * 用户全部可用的优惠券列表
+     * @param Request $request
+     * @return array
+     */
     public function user_coupon_list(Request $request)
     {
         $user_id = $request->get('user_id');
@@ -352,10 +357,14 @@ class UserController extends BaseController
                     continue;
                 }
 
-
+                $v['can_use'] = 1;
+                if($this->time >= strtotime($v['end_time']))
+                {
+                    $v['can_use'] = 0;
+                }
                 $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
                 $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
-
+                $v['time'] = $v['new_start_time'].'-'.$v['new_end_time'];
                 $result[] = $v;
             }
         }
