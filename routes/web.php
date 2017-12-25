@@ -20,18 +20,6 @@ Route::get('/home', 'HomeController@index');
 
 //旧版微信路由管理
 Route::group(['prefix' => 'wechat','namespace' => 'Wechat'], function () {
-
-
-    /**
-     * ================第二版路由==================
-     */
-    //脚本
-    Route::any('/crontab/index2','CrontabController@index2');
-
-    /**
-     * ===========================================
-     */
-
     Route::any('/index/index','IndexController@index')->name('wechat.index.index');
     Route::any('/index/category/{category_id?}/{brand_id?}','IndexController@category')->name('wechat.index.category');
     Route::any('/index/good/{good_id}','IndexController@good')->name('wechat.index.good');

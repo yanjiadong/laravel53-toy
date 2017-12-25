@@ -11,6 +11,9 @@ Route::any('wechat/index/pay_test','Wechat2\IndexController@pay_test')->name('we
 //提交订单页面
 Route::get('wechat/index/submit_order/{good_id}','Wechat2\IndexController@submit_order')->name('wechat2.index.submit_order');
 
+//每日运行的脚本
+Route::any('wechat/crontab/index','Wechat\CrontabController@index');
+
 //新版微信路由管理
 Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     //首页

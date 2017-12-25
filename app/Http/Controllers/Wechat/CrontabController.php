@@ -18,7 +18,7 @@ class CrontabController extends BaseController
     /**
      * 新版本的脚本
      */
-    public function index2()
+    public function index()
     {
         $this->check_order_new();
         Crontab::create();
@@ -78,14 +78,14 @@ class CrontabController extends BaseController
     /**
      * 脚本 每天跑
      */
-    public function index()
+    /*public function index()
     {
         $this->process_order();
         $this->process_users();
         $this->check_order();
 
         Crontab::create();
-    }
+    }*/
 
     /**
      * 物流已经签收的订单 签收24小时后自动变为确认收货
