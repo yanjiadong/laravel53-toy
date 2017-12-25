@@ -99,7 +99,7 @@
                 sort_detail.data.grown_up_top = res;
                 sort_detail.data.grown_up_top = {url:res.info.category.picture,title:res.info.category.title,desc:res.info.category.desc};   //假数据
                 $(".grow-up .top .top-img img").attr("src",sort_detail.data.grown_up_top.url);
-                $(".grow-up .top .describe").text('「'+sort_detail.data.grown_up_top.desc+'」');
+                $(".grow-up .top .describe").text(''+sort_detail.data.grown_up_top.desc+'');
 
                 var img_width =parseInt($(".grow-up .top .top-img img").width()*4/13);
                 // $(".grow-up .top .top-img img").css("height",img_width+"px");

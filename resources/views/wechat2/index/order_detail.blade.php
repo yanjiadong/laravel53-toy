@@ -217,7 +217,8 @@
                         item4:res.info.order.days,//item4是租期
                         rent_time:res.info.order.has_days,//已租用天数
                         per_price:res.info.order.good_day_price, //日租金
-                        over_days:res.info.order.over_days   //逾期天数
+                        over_days:res.info.order.over_days,   //逾期天数
+                        days2:res.info.order.days2  //剩余天数
                     },
                     return_logistics:{
                         a:res.info.order.back_express_title,
@@ -260,7 +261,15 @@
                         $(".order-detail-wrap .footer button.btn-confirm").show();
                         break;
                     case '租用中':
-                        logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>租用中</h2><button class="rest">'+(order_detail.data.logistics_state.good.item4-order_detail.data.logistics_state.good.rent_time)+'天后到期</button><h4 style="margin-top: 5px">按时归还有利信用积累，逾期按每天租金x逾期天数扣除费用</h4></div>';
+                        if(order_detail.data.logistics_state.good.over_days > 0)
+                        {
+                            logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>租用中</h2><button class="rest">已逾期：'+(order_detail.data.logistics_state.good.over_days)+'天</button><h4 style="margin-top: 5px">如逾期归还，将收取逾期费（逾期天数*日租金）</h4></div>';
+                        }
+                        else
+                        {
+                            logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>租用中</h2><button class="rest">'+order_detail.data.logistics_state.good.days2+'天后到期</button><h4 style="margin-top: 5px">如逾期归还，将收取逾期费（逾期天数*日租金）</h4></div>';
+                        }
+
                         logistics_info ='<div class="fl"><i class="icon icon_state_car"></i></div><div class="fl"><h3>'+order_detail.data.logistics_state.logistics.cont+'</h3><p>'+order_detail.data.logistics_state.logistics.time+'</p></div><div class="fr"><i class="icon icon_arrowRight_bold"></i></div>';
                         //物流信息
                         $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天）');
@@ -310,7 +319,7 @@
                 $(".order-detail-wrap .detail-list ul li .fr:eq(2) span").text('-¥'+order_detail.data.logistics_state.good.discount);
                 $(".order-detail-wrap .detail-list ul li .fr:eq(3) span").text('¥'+order_detail.data.logistics_state.good.yajin);
                 //共计
-                $(".order-detail-wrap .detail-list .total span").text('+¥'+order_detail.data.logistics_state.good.allPrice);
+                $(".order-detail-wrap .detail-list .total span").text('¥'+order_detail.data.logistics_state.good.allPrice);
 
                 //订单信息
                 console.log(order_detail.data.logistics_state.address);

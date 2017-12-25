@@ -332,7 +332,7 @@ class OrderController extends BaseController
         }
         else
         {
-            $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->get()->toArray();
+            $list = Order::with(['user','category','good_brand'])->whereIn('status',$where)->where('user_id',$user_id)->orderBy('created_at','desc')->get()->toArray();
         }
 
         //print_r($list);
@@ -352,7 +352,7 @@ class OrderController extends BaseController
                         }
                     }
                 }*/
-
+                $v['price'] = sprintf('%0.1f',$v['price']);
                 $v['good_num'] = 1;
                 $v['days2'] = 0;  //剩余天数
 
@@ -364,7 +364,7 @@ class OrderController extends BaseController
                 {
                     $v['over_days'] = 0;
                     //计算还有几天到期
-                    $time = $this->time > strtotime($v['end_time']);
+                    $time = $this->time - strtotime($v['end_time']);
                     if($time > 0)
                     {
                         //逾期的情况下
@@ -467,6 +467,20 @@ class OrderController extends BaseController
         if($info['status'] == Order::STATUS_BACK_STR && $info['back_status'] == Order::BACK_STATUS_DOING_STR)
         {
             $info['status'] = '归还成功';
+        }
+
+        //剩余天数
+        $info['days2'] = 0;
+        if($info['status'] == Order::STATUS_DOING_STR)
+        {
+            if($this->time > strtotime($info['end_time']))
+            {
+                $info['over_days'] = ceil(($this->time - strtotime($info['end_time']))/86400);
+            }
+            else
+            {
+                $info['days2'] = ceil((strtotime($info['end_time']) - $this->time)/86400);
+            }
         }
 
         $info['pay_success_time_int'] = $this->time;

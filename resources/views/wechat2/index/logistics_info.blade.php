@@ -313,7 +313,7 @@
             bool=true;
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            debugger;
+            //debugger;
             if(bool) {
                 if(sessionStorage.getItem('logistics_info_back_url')){
                     if(sessionStorage.getItem('logistics_info_back_url').indexOf("/index/order_list")>-1){

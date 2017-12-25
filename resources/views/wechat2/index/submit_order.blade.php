@@ -473,7 +473,7 @@
                             break;
                     }
                     var send_info =' <table><tr><td class="name">配送</td><td>'+order_obj.data.orderDataList.logistics.company+'</td></tr><tr><td></td>' +
-                        '<td>预计'+res.info.send_time.send_date+'['+res.info.send_time.send_week+']发货</td></tr></table>';
+                        '<td>预计'+res.info.send_time.send_date+'[周'+res.info.send_time.send_week+']发货</td></tr></table>';
                     $(".submit-order-wrap .detail-list .distribution").html(send_info);
 
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>玩具趣编程</title>
+    <title>小编程</title>
     <!--下拉刷新-->
     <link rel="stylesheet" href="{{ asset('wechat2/style/weui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('wechat2/style/jquery-weui.min.css') }}">
@@ -261,12 +261,12 @@
                             newData+='<li class="fl"><span class="no-good-state">暂无库存</span><div>' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon_arrowRight_white"></i></div></li>';
+                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先租</span><i class="icon_arrowRight_white"></i></div></li>';
                         }else{
                             newData+='<li class="fl">' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先体验</span><i class="icon icon_arrowRight_white"></i></div></li>';
+                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先租</span><i class="icon icon_arrowRight_white"></i></div></li>';
                         }
                     }
                     $(".recommend-cont ul").html(newData).css('width', ($(".recommend-cont ul li").width()+16)*res.info.new_goods.length);

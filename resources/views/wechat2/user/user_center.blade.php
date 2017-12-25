@@ -114,7 +114,8 @@
                 $(".user-center-wrap .mid .pic img").attr('src',user_center.data.userInfo.active_pic);
                 $(".user-center-wrap .mid .list ul li .fr:first span").text(!user_center.data.userInfo.isAuthorize?"免押金认证":"已认证");
                 $(".user-center-wrap .mid .contact a").prop('href','tel:'+user_center.data.userInfo.tel);
-                $(".user-center-wrap .mid .contact a").text('客服电话：'+((user_center.data.userInfo.tel).slice(0,3)+'-'+(user_center.data.userInfo.tel).slice(3,6)+'-'+(user_center.data.userInfo.tel).slice(6))+'（'+user_center.data.userInfo.service_time+'）');
+                //$(".user-center-wrap .mid .contact a").text('客服电话：'+((user_center.data.userInfo.tel).slice(0,3)+'-'+(user_center.data.userInfo.tel).slice(3,6)+'-'+(user_center.data.userInfo.tel).slice(6))+'（'+user_center.data.userInfo.service_time+'）');
+                $(".user-center-wrap .mid .contact a").text('客服电话：'+user_center.data.userInfo.tel+'（'+user_center.data.userInfo.service_time+'）');
 
                 $(".user-center-wrap .mid .pic a").attr('href',user_center.data.userInfo.active_url);
             });
@@ -146,7 +147,7 @@
                 common.alert_tip1("暂时没有可归还的玩具");
                 return false;
             }else{
-                location.href='logistics_info.html';
+                location.href="{{ route('wechat2.index.order_list') }}";
             }
         },
         //会员押金
