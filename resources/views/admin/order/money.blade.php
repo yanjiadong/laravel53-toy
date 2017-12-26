@@ -23,7 +23,7 @@
                         <div class="body search row-form">
                             <span>状态</span>
                             <select name="status">
-                                <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部</option>
+                                <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部押金</option>
                                 <option value="1" <?php echo (isset($status)&&$status==1)?'selected':'';?>>不可提现</option>
                                 <option value="2" <?php echo (isset($status)&&$status==2)?'selected':'';?>>可提现</option>
                                 <option value="3" <?php echo (isset($status)&&$status==3)?'selected':'';?>>已申请提现</option>
