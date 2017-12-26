@@ -1345,8 +1345,6 @@
             $(".submit-order-wrap").hide();
             //优惠券列表
             vip_voucher.init();
-            //location.href = "{{ route('wechat2.index.choose_coupon') }}"+'?rentMoney='+order_obj.data.actural_data.rent+'&good_id='+'{{ $good_id }}';
-            //location.href = '/view/submit_voucher.html?rentMoney='+order_obj.data.actural_data.rent;
         }
     };
 
