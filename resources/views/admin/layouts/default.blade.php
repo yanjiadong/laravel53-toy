@@ -97,7 +97,7 @@
         <ul class="navigation">
 
             <li class="<?php echo (isset($menu) && ($menu == 'main')) ? 'active' : '';?>">
-                <a href="/admin/main">
+                <a href="{{ route('admin.index.index') }}">
                     <span class="isw-user"></span><span class="text">欢迎界面</span>
                 </a>
             </li>
