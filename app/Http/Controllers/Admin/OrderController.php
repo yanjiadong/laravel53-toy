@@ -33,7 +33,7 @@ class OrderController extends BaseController
         //$where['back_status'] = 1;
 
         if (empty($code) && empty($status)) {
-            $where[] = ['status','>',Order::STATUS_WAITING_SEND];
+            $where[] = ['status','>',Order::STATUS_UNPAY];
             $orders = Order::with(['user'])->where($where)->paginate(20);
         } else {
             if (!empty($code)) {
@@ -46,7 +46,7 @@ class OrderController extends BaseController
                     case 1:
                         //不可提现
                         $where[] = ['status','<',Order::STATUS_BACK];
-                        $where[] = ['status','>',Order::STATUS_WAITING_SEND];
+                        $where[] = ['status','>',Order::STATUS_UNPAY];
                         break;
                     case 2:
                         //可提现
