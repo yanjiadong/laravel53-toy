@@ -5280,6 +5280,9 @@ textarea {
 }
 
 /*------------------------------------------提交订单优惠券---------------------------------*/
+.submit-voucher-wrap{
+    display: none;
+}
 .submit-voucher-wrap .input {
     padding: 12px 12px 0;
 }

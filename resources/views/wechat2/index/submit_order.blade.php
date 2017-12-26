@@ -334,6 +334,52 @@
     </div>
 </div>
 
+<div class="submit-voucher-wrap bg-white">
+    <!-- <div class="input">
+         <input type="text" placeholder="请输入兑换码">
+     </div>
+     <div class="btn">
+         <button onclick="vip_voucher.exchange()">兑换</button>
+     </div>-->
+    <div class="list">
+        <ul>
+            <!-- <li class="clear active">
+                 <div class="fl">
+                     <i class="icon-wave-left "></i>
+                     <span>¥100</span>
+                 </div>
+                 <div class="fr">
+                     <i class="icon-wave-right"></i>
+                     <h3>新手专享优惠卷</h3>
+                     <p>有效期：<span>2017.2.3-2017.3.3</span></p>
+                     <h5>任意金额可用</h5>
+                 </div>
+             </li>
+             <li class="clear">
+                 <div class="fl">
+                     <i class="icon-wave-left "></i>
+                     <span>¥100</span>
+                 </div>
+                 <div class="fr">
+                     <i class="icon-wave-right"></i>
+                     <h3>新手专享优惠卷</h3>
+                     <p>有效期：<span>2017.2.3-2017.3.3</span></p>
+                     <h5>任意金额可用</h5>
+                 </div>
+             </li>-->
+        </ul>
+    </div>
+    <div class="footer bg-white">
+        <button onclick="vip_voucher.noUser()">不使用优惠劵</button>
+    </div>
+    <div class="no-good">
+        <div class="tips">
+            <img src="/wechat2/image/common/no-good3.png">
+            <h4>您还没有可用的优惠券</h4>
+        </div>
+    </div>
+</div>
+
 <!--微信js-sdk-->
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
@@ -1295,8 +1341,102 @@
         },
         //跳转到优惠券页面
         goVipVoucher:function () {
-            location.href = "{{ route('wechat2.index.choose_coupon') }}"+'?rentMoney='+order_obj.data.actural_data.rent+'&good_id='+'{{ $good_id }}';
+            $(".submit-voucher-wrap").show();
+            $(".submit-order-wrap").hide();
+            //优惠券列表
+            vip_voucher.init();
+            //location.href = "{{ route('wechat2.index.choose_coupon') }}"+'?rentMoney='+order_obj.data.actural_data.rent+'&good_id='+'{{ $good_id }}';
             //location.href = '/view/submit_voucher.html?rentMoney='+order_obj.data.actural_data.rent;
+        }
+    };
+
+    var vip_voucher ={
+        data:{
+            list:[],
+            state:false,                //是不是从个人中心进入 true是   false为不是
+            discount_car_id:"",
+            rentMoney:0   //租金
+        },
+        init:function(){
+            vip_voucher.data.discount_car_id =sessionStorage.getItem('discount_car_id')?sessionStorage.getItem('discount_car_id'):"";       //优惠券卡id值/**/
+            vip_voucher.data.rentMoney =order_obj.data.actural_data.rent;
+            common.httpRequest("{{ url('api/user/user_coupon_list') }}",'post',{user_id:'{{ $user_id }}'},function (res) {
+                /*vip_voucher.data.list=[
+                    {id:0,money:10,cont:'满减优惠券',time:'2017.8.27-2017.12.31',fanwei:'任意金额可用',rent:0},
+                    {id:1,money:20,cont:'满减优惠卷',time:'2017.8.27-2017.12.31',fanwei:'满200元可用',rent:200},
+                    {id:2,money:30,cont:'满减优惠卷',time:'2017.8.27-2017.12.31',fanwei:'满300元可用',rent:300}
+                ];*/
+                vip_voucher.data.list = res.info.coupons;
+                if(vip_voucher.data.list.length>0){
+                    var cont='';
+                    var max=0,max_index;
+                    for(var i=0;i<vip_voucher.data.list.length;i++){
+                        if(vip_voucher.data.list[i].condition == 0)
+                        {
+                            var fanwei = '任意金额可用';
+                        }
+                        else
+                        {
+                            var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
+                        }
+
+                        if(vip_voucher.data.list[i].condition <= vip_voucher.data.rentMoney && vip_voucher.data.list[i].can_use){
+                            /*-----之前选中优惠券再进入默认是选中------*/
+                            if(vip_voucher.data.discount_car_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.discount_car_id){
+                                console.log(vip_voucher.data.discount_car_id);
+                                cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            }else{
+                                cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                    '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                            }
+                            //筛选最大金额
+                            if(max<vip_voucher.data.list[i].price){
+                                max = vip_voucher.data.list[i].price;
+                                max_index = i;
+                            }
+                        }else{
+                            cont+='<li class="clear disable"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
+                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
+                        }
+                    }
+                    $(".submit-voucher-wrap  .list ul").html(cont);
+                    vip_voucher.choose();
+                }else{
+                    $(".submit-voucher-wrap  .no-good").show();
+                    $(".submit-voucher-wrap  .list").hide();
+                    $(".submit-voucher-wrap  .footer").hide();
+                }
+            })
+        },
+        //选择优惠劵
+        choose:function () {
+            $item = $(".submit-voucher-wrap  .list ul li").not(".disable");
+            $item.click(function () {
+                $item.removeClass('active');
+                $(this).addClass('active');
+                var index = $(this).index(".submit-voucher-wrap  .list ul li");
+                //提交选择
+                order_obj.data.actural_data.discount =vip_voucher.data.list[index].price;
+                $(".rent-item-list ul li:eq(2) .fr .discount-fee").html('<span class="red">-¥'+order_obj.data.actural_data.discount+'</span>');
+                //总计
+                $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+
+                sessionStorage.discount_car_id = vip_voucher.data.list[index].id;
+                $("#coupon_id").val(vip_voucher.data.list[index].id);
+                $(".submit-voucher-wrap").hide();
+                $(".submit-order-wrap").show();
+            })
+        },
+        //不使用优惠劵
+        noUser:function () {
+            var submitData ="";
+            sessionStorage.discount_money="";
+            sessionStorage.discount_car_id = "";
+            location.href="submit_order.html";
         }
     };
 
