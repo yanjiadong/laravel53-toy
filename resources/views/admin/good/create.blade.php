@@ -482,10 +482,33 @@
                 },'json');
             });
 
+            function get_discount(price) {
+                var is_discount = $('input[name="is_discount"]:checked').val();
+                if(is_discount == 1)
+                {
+                    $.post("{{ route('goods.get_discount') }}",{price:price},function(res){
+                        //console.log(res.discount1);
+                        $("#discount1").val(res.discount1);
+                        $("#discount2").val(res.discount2);
+                        $("#discount3").val(res.discount3);
+                        $("#discount4").val(res.discount4);
+                        $("#discount5").val(res.discount5);
+                        $("#discount6").val(res.discount6);
+                    },'json');
+                }
+            }
+
+            $("#price").change(function () {
+                var price = $(this).val();
+                get_discount(price);
+            });
+
             $("input[name='is_discount']").click(function(){
                 if ($(this).val() == 0) {
                     $("#show_dicount").hide();
                 } else {
+                    var price = $("#price").val();
+                    get_discount(price);
                     $("#show_dicount").show();
                 }
             });

@@ -170,7 +170,7 @@
                 common.httpRequest("{{ url('api/order/apply_money') }}",'post',{user_id:'{{ $user_id }}',code:code},function (res) {
                     //res={success:true,error:'操作超时，请稍后重试！'};
                     if(res.code == 200){
-                        window.location.reload();
+                        location.href = "{{ url('wechat2/user/cash_success') }}"+'/'+code;
                     }else{
                         common.alert_tip(res.msg);
                     }

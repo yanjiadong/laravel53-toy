@@ -464,10 +464,8 @@ class OrderController extends BaseController
 
         $info['address'] = $info['receiver_province'].$info['receiver_city'].$info['receiver_area'].$info['receiver_address'];
 
-        if($info['status'] == Order::STATUS_BACK_STR && $info['back_status'] == Order::BACK_STATUS_DOING_STR)
-        {
-            $info['status'] = '归还成功';
-        }
+        //dd($info);
+
 
         //剩余天数
         $info['days2'] = 0;

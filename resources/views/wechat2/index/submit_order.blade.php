@@ -1375,7 +1375,7 @@
                         }
                         else
                         {
-                            var fanwei = '满'+vip_voucher.data.list[i].condition+'元可用';
+                            var fanwei = '租金满'+vip_voucher.data.list[i].condition+'元可用';
                         }
 
                         if(vip_voucher.data.list[i].condition <= vip_voucher.data.rentMoney && vip_voucher.data.list[i].can_use){
@@ -1434,7 +1434,9 @@
             var submitData ="";
             sessionStorage.discount_money="";
             sessionStorage.discount_car_id = "";
-            location.href="submit_order.html";
+            $("#coupon_id").val(0);
+            $(".submit-voucher-wrap").hide();
+            $(".submit-order-wrap").show();
         }
     };
 

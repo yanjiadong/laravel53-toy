@@ -300,7 +300,7 @@
                                     '<span>玩玩具趣编程</span></div><div class="fr">归还成功</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
-                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'岁</h4><span class="num">×1</span></div></a></div>' +
+                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
                                     '<div class="pay">实付款： ¥'+orderDtail.data.returnList[i].price+'（含押金¥'+Math.round(orderDtail.data.returnList[i].money)+')</div><div class="order-number"><div class="top-line">' +
                                     '<div class="i-return-show red"><div class="cont">逾期'+ orderDtail.data.returnList[i].over_days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
                             }else{ //未逾期
@@ -308,7 +308,7 @@
                                     '<span>玩玩具趣编程</span></div><div class="fr">归还成功</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
-                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'岁</h4><span class="num">×1</span></div></a></div>' +
+                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
                                     '<div class="pay">实付款： ¥'+orderDtail.data.returnList[i].price+'（含押金¥'+Math.round(orderDtail.data.returnList[i].money)+')</div><div class="order-number"><div class="top-line">' +
                                     '<div class="i-return-show green"><div class="cont">已按期归还</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
                             }
@@ -318,15 +318,15 @@
                                     '<span>玩玩具趣编程</span></div><div class="fr red">已寄回，待平台收货确认</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
-                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'岁</h4><span class="num">×1</span></div></a></div>' +
+                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
                                     '<div class="pay">实付款： ¥'+orderDtail.data.returnList[i].price+'（含押金¥'+Math.round(orderDtail.data.returnList[i].money)+')</div><div class="order-number"><div class="top-line">' +
-                                    '<div class="i-return-show red"><div class="cont">逾期'+orderDtail.data.returnList[i].days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
+                                    '<div class="i-return-show red"><div class="cont">逾期'+orderDtail.data.returnList[i].over_days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
                             }else{ //未逾期
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i>' +
                                     '<span>玩玩具趣编程</span></div><div class="fr red">已寄回，待平台收货确认</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
-                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'岁</h4><span class="num">×1</span></div></a></div>' +
+                                    '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
                                     '<div class="pay">实付款： ¥'+orderDtail.data.returnList[i].price+'（含押金¥'+Math.round(orderDtail.data.returnList[i].money)+')</div><div class="order-number"><div class="top-line">' +
                                     '<div class="i-return-show green"><div class="cont">已按期归还</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
                             }

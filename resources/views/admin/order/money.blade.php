@@ -61,8 +61,8 @@
                                 <th>支付订单号</th>
                                 <th>押金金额</th>
                                 <th>逾期天数</th>
-                                <th>逾期金额</th>
-                                <th>申请提现时间</th>
+                                <th>应退还押金金额</th>
+                                <th width="150px">申请提现时间</th>
                                 <th>押金状态</th>
                                 <th>订单状态</th>
                                 <th>操作</th>
@@ -74,16 +74,16 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $order->out_trade_no }}</td>
                                     <td>{{ $order->money }}</td>
-                                    <td>{{ $order->over_days }}</td>
-                                    <td>{{ $order->over_days*$order->good_day_price }}</td>
+                                    <td>{{ $order->over_days }}(逾期金额:{{ number_format($order->over_days*$order->good_day_price,2,".",'') }})</td>
+                                    <td>{{  number_format($order->money - $order->over_days*$order->good_day_price,2,'.','') }}</td>
                                     <td>{{ $order->apply_money_time }}</td>
                                     <td>
                                         @if($order->money_status == 0 && $order->status == '已归还' && $order->back_status == '已验证')
                                             可提现
                                         @elseif($order->money_status == 1)
-                                            已申请提现
+                                            <div style="color: red;">已申请提现</div>
                                         @elseif($order->money_status == 2)
-                                            提现成功
+                                            <div style="color: green">提现成功</div>
                                         @else
                                             不可提现
                                         @endif
@@ -117,7 +117,7 @@
             $('.doAction').click(function(){
                 var id = $(this).attr('data-id');
                 $.confirm({
-                    text: "确认寄回？",
+                    text: "确认已退还押金？",
                     confirm: function(button) {
                         $.post("{{route('admin.order.confirm_money')}}",{id:id},function(data){
                             cTip(data);

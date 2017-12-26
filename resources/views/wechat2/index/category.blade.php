@@ -214,8 +214,10 @@
     };
 
     $(function () {
-        varuser_id="16";
-        // common.getCarAndOrder(user_id); //获取订单数量和购物车数量
+        var user_id='{{ $user_id }}';  //假数据
+        var get_url = "{{url('api/user/get_cart_order_num')}}";
+
+        common.getCarAndOrder(get_url,user_id); //获取订单数量和购物车数量
         //  $(".sort-detail .content").css('maxHeight',$(window).height()-94);
         sort_detail.init();        //初始化
     })

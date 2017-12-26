@@ -116,13 +116,19 @@ class UserController extends BaseController
         return view('wechat.user.deposit1',compact('user_id','user'));
     }
 
-    public function deposit_success($vip_card_pay_id)
+    /**
+     * 提现成功页面
+     * @param $order_code
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function cash_success($order_code)
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        $vip_card_pay = VipCardPay::find($vip_card_pay_id);
-        return view('wechat.user.deposit_success',compact('user_id','user','vip_card_pay'));
+        $order = Order::where('code',$order_code)->first();
+
+        return view('wechat2.user.cash_success',compact('user_id','user','order'));
     }
 
     public function cash()

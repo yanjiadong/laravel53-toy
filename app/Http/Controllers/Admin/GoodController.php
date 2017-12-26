@@ -103,7 +103,39 @@ class GoodController extends BaseController
         if($data['is_discount'] == 1)
         {
             //促销
-            $data['day_price'] = $data['discount3'];
+            if($data['discount3'] > 0)
+            {
+                $data['day_price'] = $data['discount3'];
+            }
+            else
+            {
+                $data['discount3'] = getGoodPriceByDays($data['price'],21);
+            }
+
+            if($data['discount1'] <= 0)
+            {
+                $data['discount1'] = getGoodPriceByDays($data['price'],7);
+            }
+
+            if($data['discount2'] <= 0)
+            {
+                $data['discount2'] = getGoodPriceByDays($data['price'],14);
+            }
+
+            if($data['discount4'] <= 0)
+            {
+                $data['discount4'] = getGoodPriceByDays($data['price'],30);
+            }
+
+            if($data['discount5'] <= 0)
+            {
+                $data['discount5'] = getGoodPriceByDays($data['price'],45);
+            }
+
+            if($data['discount6'] <= 0)
+            {
+                $data['discount6'] = getGoodPriceByDays($data['price'],60);
+            }
         }
 
         if($data['day_price']<=0)
@@ -210,18 +242,53 @@ class GoodController extends BaseController
         if($data['is_discount'] == 1)
         {
             //促销
-            $data['day_price'] = $data['discount3'];
-        }
+            if($data['discount3'] > 0)
+            {
+                $data['day_price'] = $data['discount3'];
+            }
+            else
+            {
+                $data['discount3'] = getGoodPriceByDays($data['price'],21);
+            }
 
-        if($data['day_price']<=0)
+            if($data['discount1'] <= 0)
+            {
+                $data['discount1'] = getGoodPriceByDays($data['price'],7);
+            }
+
+            if($data['discount2'] <= 0)
+            {
+                $data['discount2'] = getGoodPriceByDays($data['price'],14);
+            }
+
+            if($data['discount4'] <= 0)
+            {
+                $data['discount4'] = getGoodPriceByDays($data['price'],30);
+            }
+
+            if($data['discount5'] <= 0)
+            {
+                $data['discount5'] = getGoodPriceByDays($data['price'],45);
+            }
+
+            if($data['discount6'] <= 0)
+            {
+                $data['discount6'] = getGoodPriceByDays($data['price'],60);
+            }
+        }
+        else
         {
-            $data['day_price'] = getGoodPriceByDays($data['price'],21);
             $data['discount1'] = 0;
             $data['discount2'] = 0;
             $data['discount3'] = 0;
             $data['discount4'] = 0;
             $data['discount5'] = 0;
             $data['discount6'] = 0;
+        }
+
+        if($data['day_price']<=0)
+        {
+            $data['day_price'] = getGoodPriceByDays($data['price'],21);
         }
 
         $good = Good::where('id',$id)->update($data);
@@ -317,5 +384,30 @@ class GoodController extends BaseController
     {
         Good::where('id',$request->get('id'))->update(['is_hot'=>$request->get('status')]);
         return alert('',1);
+    }
+
+    public function get_discount(Request $request)
+    {
+        $price = $request->get('price');
+        if(empty($price))
+        {
+            $data['discount1'] = '0.0';
+            $data['discount2'] = '0.0';
+            $data['discount3'] = '0.0';
+            $data['discount4'] = '0.0';
+            $data['discount5'] = '0.0';
+            $data['discount6'] = '0.0';
+        }
+        else
+        {
+            $data['discount1'] = getGoodPriceByDays($price,7);
+            $data['discount2'] = getGoodPriceByDays($price,14);
+            $data['discount3'] = getGoodPriceByDays($price,21);
+            $data['discount4'] = getGoodPriceByDays($price,30);
+            $data['discount5'] = getGoodPriceByDays($price,45);
+            $data['discount6'] = getGoodPriceByDays($price,60);
+        }
+
+        return $data;
     }
 }

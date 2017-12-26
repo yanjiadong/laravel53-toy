@@ -228,7 +228,13 @@
                         tell:res.info.tel  //联系客服电话
                     }
                 };
+
+                if(res.info.order.status=='已归还' && res.info.order.back_status=='已验证')
+                {
+                    order_detail.data.logistics_state.state = '归还成功';
+                }
                 var logistics_cont = "", logistics_info = "",logistics_address="";
+                console.log(order_detail.data.logistics_state.state);
                 switch (order_detail.data.logistics_state.state) {  //state 1为待发货 2 已发货 3租用中 4已寄回  5归还成功
                     case '待发货':
                         logistics_cont ='<div class="stay"><i class="icon-order-detail send"></i><h2>待发货</h2><h4>租期从您收到器具后的第二天才开始计算</h4></div>';
