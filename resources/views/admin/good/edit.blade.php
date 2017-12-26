@@ -248,7 +248,7 @@
                                 <span>排序越小越靠前</span>
                             </div>
                         </div>
-                        <div class="row-form clearfix">
+                        {{--<div class="row-form clearfix">
                             <div class="span3">请选择标签:</div>
                             <div class="span9">
                                 <select name="select" id="chooseArea" style="width: 100%;" multiple="multiple">
@@ -259,7 +259,7 @@
                                     @endif
                                 </select>
                             </div>
-                        </div>
+                        </div>--}}
 
                         <div class="row-form clearfix">
                             <div class="span3">是否促销：</div>
@@ -509,7 +509,7 @@
                 if ($("#validation").validationEngine('validate')) {
                     var title = $("#title").val();
                     var pics = $("#J_Urls").val();
-                    var tags = $("#chooseArea").val();
+                    //var tags = $("#chooseArea").val();
                     var category_id = $("#category_id").val();
                     //var category_tag_id = $("#category_tag_id").val();
                     var price = $("#price").val();
@@ -559,7 +559,7 @@
                     }
 
                     $.post(url,
-                        {is_discount:is_discount,discount1:discount1,discount2:discount2,discount3:discount3,discount4:discount4,discount5:discount5,discount6:discount6,new_picture:new_picture,money:money,express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,tags:tags,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
+                        {is_discount:is_discount,discount1:discount1,discount2:discount2,discount3:discount3,discount4:discount4,discount5:discount5,discount6:discount6,new_picture:new_picture,money:money,express:express,days:days,express_price:express_price,free_price:free_price,sort:sort,old:old,category_picture:category_picture,video:video,_method:_method,title:title,pics:pics,category_id:category_id,price:price,picture:picture,brand_id:brand_id,
                             brand_country:brand_country,material:material,weight:weight,effect:effect,way:way,store:store,is_hot:is_hot,is_new:is_new,desc:desc,video_second:video_second},
                         function(data){
                             cTip(data);

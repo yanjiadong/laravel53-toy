@@ -93,9 +93,9 @@ class GoodController extends BaseController
     public function store(Request $request)
     {
         $data = $request->all();
-        $tags = $data['tags'];
+        //$tags = $data['tags'];
         $pics = $data['pics'];
-        unset($data['tags']);
+        //unset($data['tags']);
         unset($data['pics']);
         $data['status'] = Good::STATUS_ON_SALE;
 
@@ -123,13 +123,13 @@ class GoodController extends BaseController
             }
         }
 
-        if(!empty($tags))
+        /*if(!empty($tags))
         {
             foreach ($tags as $tag)
             {
                 GoodTag::create(['good_id'=>$good->id,'tag_id'=>$tag]);
             }
-        }
+        }*/
 
         return alert(route('goods.index'),1);
     }
@@ -199,9 +199,9 @@ class GoodController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $tags = $data['tags'];
+        //$tags = $data['tags'];
         $pics = $data['pics'];
-        unset($data['tags']);
+        //unset($data['tags']);
         unset($data['pics']);
         unset($data['_method']);
         //$data['status'] = Good::STATUS_ON_SALE;
@@ -236,14 +236,14 @@ class GoodController extends BaseController
             }
         }
 
-        GoodTag::where('good_id',$id)->delete();
+        /*GoodTag::where('good_id',$id)->delete();
         if(!empty($tags))
         {
             foreach ($tags as $tag)
             {
                 GoodTag::create(['good_id'=>$id,'tag_id'=>$tag]);
             }
-        }
+        }*/
 
         if(session('current_url'))
         {
