@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Factory;
 use DB;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends BaseController
 {
@@ -404,6 +405,19 @@ class IndexController extends BaseController
 
     public function test()
     {
+        $config = config('wechat.official_account');
+        $redis = new \Redis();
+        $redis->connect(config('database.redis.default.host'));
+        $redis->select(config('database.redis.default.database'));
+
+        $cache = new Cache($redis);
+
+        $app = Factory::officialAccount($config);
+        $app['cache'] = $cache;
+
+        $accessToken = $app->access_token;
+        $token = $accessToken->getToken(true); // token 字符串
+        dd($token);
         $info = SystemConfig::where('type',2)->first();
 
         $content = [];

@@ -76,4 +76,7 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
 
     Route::any('/index/zmxy/face','ZhimaController@face');
     Route::any('/index/zmxy/test','ZhimaController@test');
+
+    //测试测试
+    Route::any('/index/test','IndexController@test');
 });
