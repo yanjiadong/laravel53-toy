@@ -248,7 +248,7 @@ class IndexController extends BaseController
     }
 
     /**
-     * 使用优惠券
+     * 使用优惠券  废弃
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function choose_coupon()
