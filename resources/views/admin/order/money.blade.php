@@ -24,9 +24,10 @@
                             <span>状态</span>
                             <select name="status">
                                 <option value="0" <?php echo (isset($status)&&$status==0)?'selected':'';?>>全部</option>
-                                <option value="1" <?php echo (isset($status)&&$status==1)?'selected':'';?>>未申请</option>
-                                <option value="-1" <?php echo (isset($status)&&$status==2)?'selected':'';?>>申请中</option>
-                                <option value="-3" <?php echo (isset($status)&&$status==3)?'selected':'';?>>申请成功</option>
+                                <option value="1" <?php echo (isset($status)&&$status==1)?'selected':'';?>>不可提现</option>
+                                <option value="2" <?php echo (isset($status)&&$status==2)?'selected':'';?>>可提现</option>
+                                <option value="3" <?php echo (isset($status)&&$status==3)?'selected':'';?>>已申请提现</option>
+                                <option value="4" <?php echo (isset($status)&&$status==4)?'selected':'';?>>提现成功</option>
                             </select>
                         </div>
                         <div class="footer">
@@ -62,7 +63,8 @@
                                 <th>逾期天数</th>
                                 <th>逾期金额</th>
                                 <th>申请提现时间</th>
-                                <th>状态</th>
+                                <th>押金状态</th>
+                                <th>订单状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -76,14 +78,17 @@
                                     <td>{{ $order->over_days*$order->good_day_price }}</td>
                                     <td>{{ $order->apply_money_time }}</td>
                                     <td>
-                                        @if($order->money_status == 0)
-                                            未申请
+                                        @if($order->money_status == 0 && $order->status == '已归还' && $order->back_status == '已验证')
+                                            可提现
                                         @elseif($order->money_status == 1)
-                                            申请中
+                                            已申请提现
+                                        @elseif($order->money_status == 2)
+                                            提现成功
                                         @else
-                                            申请完成
+                                            不可提现
                                         @endif
                                     </td>
+                                    <td>{{ $order->status }}</td>
                                     <td>
                                         @if($order->money_status==1)
                                             <a href="javascript:;" data-id="{{$order->id}}" title="退还押金" class="tip doAction" data-status="2"><span class="btn btn-mini btn-warning">退还押金</span></a>

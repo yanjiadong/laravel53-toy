@@ -16,6 +16,11 @@ class LoginController extends Controller
 {
     public function index()
     {
+        $admin_id = session('admin_id');
+        if(!empty($admin_id))
+        {
+            return redirect()->route('admin.index.index');
+        }
         return view('admin.login');
     }
 

@@ -29,18 +29,46 @@ class OrderController extends BaseController
         $code = $request->get('code');
         $status = $request->get('status');
 
-        $where['status'] = 4;
-        $where['back_status'] = 1;
 
-        if (empty($code) && !empty($status)) {
+        //$where['back_status'] = 1;
+        $where[] = ['status','>',Order::STATUS_WAITING_SEND];
+        if (empty($code) && empty($status)) {
+
             $orders = Order::with(['user'])->where($where)->paginate(20);
         } else {
             if (!empty($code)) {
                 $where['out_trade_no'] = $code;
             }
-            if (!empty($status)) {
-                $where['money_status'] = $status - 1;
+            if(!empty($status))
+            {
+                switch ($status)
+                {
+                    case 1:
+                        //不可提现
+                        $where[] = ['status','<',Order::STATUS_BACK];
+                        break;
+                    case 2:
+                        //可提现
+                        $where['back_status'] = Order::BACK_STATUS_DOING;
+                        $where['status'] = Order::STATUS_BACK;
+                        $where['money_status'] = Order::MONEY_STATUS_UN;
+                        break;
+                    case 3:
+                        //已申请提现
+                        $where['back_status'] = Order::BACK_STATUS_DOING;
+                        $where['status'] = Order::STATUS_BACK;
+                        $where['money_status'] = Order::MONEY_STATUS_ING;
+                        break;
+                    case 4:
+                        //提现成功
+                        $where['back_status'] = Order::BACK_STATUS_DOING;
+                        $where['status'] = Order::STATUS_BACK;
+                        $where['money_status'] = Order::MONEY_STATUS_DONE;
+                        break;
+                }
             }
+
+
 
             $orders = Order::with(['user'])->where($where)->paginate(20);
         }
