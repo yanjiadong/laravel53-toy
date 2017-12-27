@@ -72,10 +72,13 @@
                                 <th>订单状态</th>
                                 <th width="160px">玩具名称</th>
                                 <th>邮费</th>
-                                <th>发货物流</th>
+                                {{--<th>发货物流</th>--}}
                                 <th>会员手机号</th>
                                 <th>会员微信昵称</th>
-                                <th>回寄状态</th>
+                                {{--<th>回寄状态</th>--}}
+                                @if(isset($status) && $status==1)
+                                    <th>预计发货时间</th>
+                                @endif
                                 <th>下单时间</th>
                                 <th>操作</th>
                             </tr>
@@ -88,10 +91,20 @@
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->good_title }}</td>
                                     <td>{{ $order->express_price }}</td>
-                                    <td>{{ $order->express_title }}</td>
+                                    {{--<td>{{ $order->express_title }}</td>--}}
                                     <td>{{ $order->user->telephone }}</td>
                                     <td>{{ $order->user->wechat_nickname }}</td>
-                                    <td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>
+                                    {{--<td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>--}}
+                                    <td>
+                                        <?php
+                                            if(isset($status) && $status==1)
+                                                {
+                                                    $weekarray = array("日","一","二","三","四","五","六");
+                                                    $send_week = $weekarray[date("w",strtotime($order->plan_send_time))];
+                                                    echo $order->plan_send_time.'(周'.$send_week.')';
+                                                }
+                                        ?>
+                                    </td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>
                                         <a href="{{route('admin.order.show',['id'=>$order->id])}}" title="查看" class="tip"><span class="btn btn-mini">查看</span></a>

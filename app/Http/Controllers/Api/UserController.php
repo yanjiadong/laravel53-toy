@@ -73,7 +73,20 @@ class UserController extends BaseController
     public function zhima_info(Request $request)
     {
         $user_id = $request->get('user_id');
-        $info = User::select('is_zhima','zhima_score')->where('id',$user_id)->first();
+        $info = User::select('is_zhima','zhima_score','zhima_time')->where('id',$user_id)->first();
+        if($info->is_zhima == 0)
+        {
+            $info->state = 1;
+        }
+        else
+        {
+            $info->state = 2;
+            $time = $this->time - strtotime($info->zhima_time);
+            if($time >= 60*86400)
+            {
+                $info->state = 3;
+            }
+        }
         $this->ret['info'] = $info;
         return $this->ret;
     }

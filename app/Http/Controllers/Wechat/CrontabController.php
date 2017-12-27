@@ -46,8 +46,9 @@ class CrontabController extends BaseController
                             $time = $logistics[0]['time'];  //签收时间
                             if( ($this->time - strtotime($time)) >= 3600)
                             {
-                                $end_time = date('Y-m-d H:i:s',strtotime("+{$order->days} days",$this->time));
-                                Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
+                                $start_time = date('Y-m-d 00:00:01',$this->time);
+                                $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
+                                Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
                             }
                             //print_r($logistics);
                         }

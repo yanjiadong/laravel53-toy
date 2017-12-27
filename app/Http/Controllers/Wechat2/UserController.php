@@ -149,11 +149,15 @@ class UserController extends BaseController
         return view('wechat.user.choose_coupon',compact('user_id'));
     }
 
+    /**
+     * 个人中心的优惠券
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function user_coupon()
     {
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        return view('wechat.user.user_coupon',compact('user_id'));
+        return view('wechat2.user.user_coupon',compact('user_id'));
     }
 }

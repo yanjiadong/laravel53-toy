@@ -484,7 +484,7 @@
                     //商品赋值
                     var orderGoodData =' <table><tr><td rowspan="3"><a href="'+order_obj.data.orderDataList.good.e+'"><img src="'+order_obj.data.orderDataList.good.a+'"></a>' +
                         '</td><td class="title"><a href="'+order_obj.data.orderDataList.good.e+'"><h3>'+order_obj.data.orderDataList.good.b+'</h3>' +
-                        '</a></td></tr><tr><td class="price"> <h4>市场价 ¥'+order_obj.data.orderDataList.good.d+'</h4></td></tr><tr><td class="year"> <p>适龄'+order_obj.data.orderDataList.good.c+'</p></td>' +
+                        '</a></td></tr><tr><td class="price"> <h4>市场价 ¥'+Math.round(order_obj.data.orderDataList.good.d)+'</h4></td></tr><tr><td class="year"> <p>适龄'+order_obj.data.orderDataList.good.c+'</p></td>' +
                         '</tr></table><div class="num">x'+order_obj.data.orderDataList.good.num+'</div>';
                     $(".order-detail .detail-list .good_show").html(orderGoodData);
 
@@ -527,24 +527,24 @@
                     if(order_obj.data.orderDataList.yajin.discount>0){
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part1").hide();
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part2").show();
-                        $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .origin s").text('¥'+order_obj.data.orderDataList.yajin.money);
-                        $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .actual").text('¥'+(order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount));
+                        $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .origin s").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money));
+                        $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .actual").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount));
                         $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").hide();
                         order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount;
                     }else{
                         if(order_obj.data.orderDataList.yajin.authorization){
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();
-                            $(".submit-order-wrap .yajin-item-list ul li .fr .part1 span").text('¥'+order_obj.data.orderDataList.yajin.money);
+                            $(".submit-order-wrap .yajin-item-list ul li .fr .part1 span").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money));
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part2").hide();
                             $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('您已有订单正在享受免押，本次无法减免').removeClass('active');
-                            order_obj.data.actural_data.yajin =order_obj.data.orderDataList.yajin.money;
+                            order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money;
                         }else{
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();
-                            $(".submit-order-wrap .yajin-item-list ul li .fr .part1 span").text('¥'+order_obj.data.orderDataList.yajin.money);
+                            $(".submit-order-wrap .yajin-item-list ul li .fr .part1 span").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money));
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part2").hide();
 
                             $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('授权芝麻信用分，减免押金 >').addClass('active');
-                            order_obj.data.actural_data.yajin =order_obj.data.orderDataList.yajin.money;
+                            order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money;
                         }
                     }
 
@@ -618,12 +618,12 @@
                         //租金赋值
                         $(".rent-item-list ul li:eq(0) .fr span").text('¥'+ order_obj.data.actural_data.rent);
                         //邮费赋值
-                        $(".rent-item-list ul li:eq(1) .fl span.tips").text('（含往返，租金满'+order_obj.data.orderDataList.logistics.can_free+'元可免除）');
+                        $(".rent-item-list ul li:eq(1) .fl span.tips").text('（含往返，租金满'+Math.round(order_obj.data.orderDataList.logistics.can_free)+'元可免除）');
                         if(order_obj.data.actural_data.rent>=order_obj.data.orderDataList.logistics.can_free){
                             $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
                             order_obj.data.actural_data.post =0
                         }else{
-                            $(".rent-item-list ul li:eq(1) .fr span").text('¥'+order_obj.data.orderDataList.logistics.money);
+                            $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
                             order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
                         }
                         //优惠券赋值
@@ -642,7 +642,7 @@
 
                         //押金说明
                         if(order_obj.data.actural_data.yajin>0){
-                            $(".submit-order-wrap .submit-order-footer .fl p").text('其中押金¥'+order_obj.data.actural_data.yajin+'可退还');
+                            $(".submit-order-wrap .submit-order-footer .fl p").text('其中押金¥'+Math.round(order_obj.data.actural_data.yajin)+'可退还');
                         }else{
                             $(".submit-order-wrap .submit-order-footer .fl p").text('押金已全免');
                         }

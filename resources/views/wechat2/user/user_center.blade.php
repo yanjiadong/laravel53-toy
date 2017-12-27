@@ -156,7 +156,7 @@
         },
         //优惠抵用券
         goChooseVoucher:function () {
-            location.href="{{ route('wechat.user.user_coupon') }}";
+            location.href="{{ route('wechat2.user.user_coupon') }}";
         },
         //芝麻信用认证
         zmxy:function () {

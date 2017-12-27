@@ -205,9 +205,12 @@ class OrderController extends BaseController
 
         $price = round($total_price+$express_price+$money,2);
 
+        $plan_send_time = date('Y-m-d',strtotime("+{$good->days} days",$this->time));
+
         $order_data['code'] = get_order_code();
         $order_data['user_id'] = $user_id;
         $order_data['good_id'] = $good_id;
+        $order_data['plan_send_time'] = $plan_send_time;
         $order_data['good_title'] = $good->title;
         $order_data['good_picture'] = $good->picture;
         $order_data['good_price'] = $good->price;
@@ -275,9 +278,11 @@ class OrderController extends BaseController
         $id = $request->get('id');
 
         $order = Order::find($id);
-        $end_time = date('Y-m-d H:i:s',strtotime("+{$order->days} days",$this->time));
 
-        $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$this->datetime,'end_time'=>$end_time]);
+        $start_time = date('Y-m-d 00:00:01',$this->time);
+        $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
+
+        $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
         return $this->ret;
     }
 

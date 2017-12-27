@@ -59,7 +59,8 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     //提现成功页面
     Route::get('/user/cash_success/{order_code}','UserController@cash_success')->name('wechat2.user.cash_success');
 
-
+    //优惠券
+    Route::get('/user/user_coupon','UserController@user_coupon')->name('wechat2.user.user_coupon');
     //分享页面
     Route::get('/user/share','UserController@share')->name('wechat2.user.share');
     //分享后打开的页面

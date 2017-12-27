@@ -321,9 +321,9 @@
                 $(".order-detail-wrap .order-detail .list ul li .fr:eq(1) span").text(order_detail.data.logistics_state.logistics.name);
                 //租金 邮费 优惠券 押金
                 $(".order-detail-wrap .detail-list ul li .fr:eq(0) span").text('¥'+order_detail.data.logistics_state.good.rent);
-                $(".order-detail-wrap .detail-list ul li .fr:eq(1) span").text('¥'+order_detail.data.logistics_state.good.postage);
-                $(".order-detail-wrap .detail-list ul li .fr:eq(2) span").text('-¥'+order_detail.data.logistics_state.good.discount);
-                $(".order-detail-wrap .detail-list ul li .fr:eq(3) span").text('¥'+order_detail.data.logistics_state.good.yajin);
+                $(".order-detail-wrap .detail-list ul li .fr:eq(1) span").text('¥'+Math.round(order_detail.data.logistics_state.good.postage));
+                $(".order-detail-wrap .detail-list ul li .fr:eq(2) span").text('-¥'+Math.round(order_detail.data.logistics_state.good.discount));
+                $(".order-detail-wrap .detail-list ul li .fr:eq(3) span").text('¥'+Math.round(order_detail.data.logistics_state.good.yajin));
                 //共计
                 $(".order-detail-wrap .detail-list .total span").text('¥'+order_detail.data.logistics_state.good.allPrice);
 

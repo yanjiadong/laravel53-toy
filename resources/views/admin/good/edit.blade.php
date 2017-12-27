@@ -226,7 +226,7 @@
                                 <img src="{{ !empty($good->new_picture)?$good->new_picture:'/admin/assets/img/default.png' }}" style="margin-top: 10px;height: 218px;width:345px;" class="showimg" id="showPic4"/>
                                 <img src="/admin/assets/img/loading.gif"  id="loading4" style="display:none;margin-top:10px;height: 150px;width:150px;" />
                                 <br/>
-                                <span>建议图片尺寸标准为690x435</span>
+                                <span>建议图片尺寸标准为765x480</span>
                             </div>
                         </div>
                         <div class="row-form clearfix">
@@ -420,7 +420,7 @@
 
             $("#newUpload").uniform();
             $("#newUpload").ajaxfileupload({
-                'action': '{{ url('admin/upload',['size'=>'690,435']) }}',
+                'action': '{{ url('admin/upload',['size'=>'765,480']) }}',
                 'params': {
                     '_token': Laravel.csrfToken
                 },

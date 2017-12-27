@@ -29,7 +29,7 @@
     <div class="detail">
         <div class="part1">
             <h3>什么是芝麻信用分</h3>
-            <p>芝麻信用分是由芝麻信用提供，面向社会的信用服务体系，提供方方面面的信用状况，运用大数据及云计算客观呈现个人的信用状况，通过连接各种服务，让每个人都是体验信用带来的价值。</p>
+            <p>芝麻信用分是由芝麻信用提供，面向社会的信用服务体系，提供方方面面的信用状况，运用大数据及云计算客观呈现个人的信用状况，通过连接各种服务，让每个人都能体验信用带来的价值。</p>
         </div>
         <div class="part2">
             <h3>如何获得芝麻信用免押金额度</h3>
@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>最高可获得1000元的免押金额度</td>
+                    <td>最高可获得900元的免押金额度</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>最高可获得1500元的免押金额度</td>
+                    <td>最高可获得1700元的免押金额度</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>最高可获得2000元的免押金额度</td>
+                    <td>最高可获得2500元的免押金额度</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -160,21 +160,15 @@
     var name,num,flag1=false,flag2=false;  //填写姓名 证件号  姓名验证标记   证件号验证标记
     var zmxy ={
         data:{
-            state:2,   //1为可以芝麻信用未认证  2为已认证
+            state:2,   //1为可以芝麻信用未认证  2为已认证  3重新授权
             creditData:{}
         },
         init:function () {
             //获取授权状态
             common.httpRequest("{{ url('api/user/zhima_info') }}",'post',{user_id:'{{ $user_id }}'},function (res) {
+                console.log(res.info);
+                zmxy.data.state = res.info.state;
 
-                if(res.info.is_zhima == 0)
-                {
-                    zmxy.data.state = 1;
-                }
-                else
-                {
-                    zmxy.data.state = 2;
-                }
                 //zmxy.data.state=res.info.is_zhima;
                 zmxy.data.creditData.count=res.info.zhima_score;
                 var $submit  =  $(".authorization-info .submit");
@@ -190,6 +184,30 @@
                         $submit_btn.text("立即授权");
                         break;
                     case 2:
+                        if(zmxy.data.creditData.count>=350&&zmxy.data.creditData.count<550){
+                            $(".authorization-info .top .state2 p").text('信用较差');
+                        }else if(zmxy.data.creditData.count>=550&&zmxy.data.creditData.count<600){
+                            $(".authorization-info .top .state2 p").text('信用中等');
+                        }else if(zmxy.data.creditData.count>=600&&zmxy.data.creditData.count<650){
+                            $(".authorization-info .top .state2 p").text('信用良好');
+                        }else if(zmxy.data.creditData.count>=650&&zmxy.data.creditData.count<700){
+                            $(".authorization-info .top .state2 p").text('信用优秀');
+                        }else if(zmxy.data.creditData.count>=700&&zmxy.data.creditData.count<950){
+                            $(".authorization-info .top .state2 p").text('信用极好');
+                        }else{
+                            $(".authorization-info .top .state2 p").text('');
+                        }
+                        $(".authorization-info .top .state2").show();
+                        $(".authorization-info .top .state2 h2").text(zmxy.data.creditData.count);
+                        $(".authorization-info .top .state1").hide();
+                        $(".authorization-info .detail").hide();
+                        $(".authorization-info .detail1").show();
+                        $(".authorization-info .count").show();
+                        $(".authorization-info .count span").text(zmxy.quota(zmxy.data.creditData.count));
+                        //$submit.show();
+                        //$submit_btn.text("重新授权");
+                        break;
+                    case 3:
                         if(zmxy.data.creditData.count>=350&&zmxy.data.creditData.count<550){
                             $(".authorization-info .top .state2 p").text('信用较差');
                         }else if(zmxy.data.creditData.count>=550&&zmxy.data.creditData.count<600){
