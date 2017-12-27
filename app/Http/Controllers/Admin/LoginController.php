@@ -77,7 +77,7 @@ class LoginController extends Controller
     {
         $phrase = new PhraseBuilder;
         // 设置验证码位数
-        $code = $phrase->build(4);
+        $code = $phrase->build(4,'0123456789');
 
         $builder = new CaptchaBuilder($code, $phrase);
         $builder->build(100,30);
