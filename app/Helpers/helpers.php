@@ -765,35 +765,35 @@ if(!function_exists('getMoneyByZhimaScore'))
         }
         elseif($score > 670 && $score <= 690)
         {
-            $money = 600;
+            $money = 700;
         }
         elseif($score > 690 && $score <= 700)
         {
-            $money = 800;
+            $money = 900;
         }
         elseif($score > 700 && $score <= 720)
         {
-            $money = 1000;
+            $money = 1100;
         }
         elseif($score > 720 && $score <= 740)
         {
-            $money = 1200;
+            $money = 1500;
         }
         elseif($score > 740 && $score <= 750)
         {
-            $money = 1400;
+            $money = 1700;
         }
         elseif($score > 750 && $score <= 770)
         {
-            $money = 1500;
+            $money = 1900;
         }
         elseif($score > 770 && $score <= 790)
         {
-            $money = 1700;
+            $money = 2200;
         }
         elseif($score > 790 && $score <= 800)
         {
-            $money = 2000;
+            $money = 2500;
         }
         elseif($score > 800)
         {
