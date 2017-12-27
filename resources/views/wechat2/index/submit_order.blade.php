@@ -195,7 +195,7 @@
         <div class="fr">
             <button onclick="order_obj.submitOrder(this)">微信支付</button>
 
-            <input type="text" id="jsApiParameters" value="">
+            <input type="hidden" id="jsApiParameters" value="">
             <input type="hidden" id="address_id" value="">
             <input type="hidden" id="receiver" value="">
             <input type="hidden" id="receiver_telephone" value="">

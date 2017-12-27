@@ -20,7 +20,7 @@ class AddFieldsToOrdersTable extends Migration
             $table->dateTime('start_time')->nullable()->comment('租用开始时间');
             $table->dateTime('end_time')->nullable()->comment('租用结束时间');
             $table->tinyInteger('is_use_zhima')->default(0)->comment('是否使用芝麻减免');
-            $table->tinyInteger('coupon_id')->default(0)->comment('优惠券id');
+            $table->integer('coupon_id')->default(0)->comment('优惠券id');
             $table->decimal('coupon_price',10,2)->default(0.00)->comment('优惠券减免金额');
             $table->decimal('zhima_price',10,2)->default(0.00)->comment('芝麻分减免的押金金额');
             $table->tinyInteger('money_status')->default(0)->comment('押金状态 0=未申请 1=申请中 2=提现成功');
