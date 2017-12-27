@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Express;
 use App\Good;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Overtrue\EasySms\EasySms;
@@ -89,7 +90,12 @@ class OrderController extends BaseController
     {
         $id = $request->get('id');
 
+        $order = Order::select('user_id')->where('id',$id)->first();
+
         Order::where('id', $id)->update(['money_status' => Order::MONEY_STATUS_DONE]);
+
+        $user = User::select('telephone','name')->where('id',$order->user_id)->first();
+        sms_send('SMS_119092355',$user->telephone,$user->name);
         alert('', 1);
     }
 
@@ -155,7 +161,7 @@ class OrderController extends BaseController
         weixinCurl(url('api/express_info/index'), 'post', $param);
 
         if ($type == 1) {
-            sms_send('SMS_109405330', $order->receiver_telephone, $order->receiver);
+            sms_send('SMS_119077480', $order->receiver_telephone, $order->receiver);
             //$this->send_sms($order->receiver_telephone,$order->receiver);
             Order::where('id', $id)->update(['send_time' => $this->datetime, 'send_time2' => $this->datetime, 'status' => Order::STATUS_SEND, 'express_no' => $express_no, 'express_title' => $express->title, 'express_com' => $express->com]);
         } else {
@@ -173,6 +179,9 @@ class OrderController extends BaseController
 
         if ($order->back_status == '待验证' && $order->status == '已归还') {
             Order::where('id', $id)->update(['back_status' => Order::BACK_STATUS_DOING]);
+
+            $user = User::select('telephone','name')->where('id',$order->user_id)->first();
+            sms_send('SMS_119087517',$user->telephone,$user->name);
             alert('', 1);
         }
         alert('验证寄回失败');

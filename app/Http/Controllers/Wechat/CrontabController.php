@@ -21,6 +21,7 @@ class CrontabController extends BaseController
     public function index()
     {
         $this->check_order_new();
+        $this->check_order();
         Crontab::create();
     }
 
@@ -76,6 +77,28 @@ class CrontabController extends BaseController
     }
 
     /**
+     * 检测租期还有一天到期
+     */
+    private function check_order()
+    {
+        $orders = Order::where('status',Order::STATUS_DOING)->get();
+        if(count($orders) > 0)
+        {
+            foreach ($orders as $order)
+            {
+                $time = strtotime($order->end_time) - $this->time;
+                if($time > 0 && $time <= 86400 && !empty($order->end_time))
+                {
+                    $user = User::select('telephone','name')->where('id',$order->user_id)->first();
+                    if(!empty($user))
+                    {
+                        sms_send('SMS_119092348',$user->telephone,$user->name);
+                    }
+                }
+            }
+        }
+    }
+    /**
      * 脚本 每天跑
      */
     /*public function index()
@@ -90,7 +113,7 @@ class CrontabController extends BaseController
     /**
      * 物流已经签收的订单 签收24小时后自动变为确认收货
      */
-    private function check_order()
+    /*private function check_order()
     {
         $orders = Order::whereIn('status',[Order::STATUS_SEND])->get();
         if(count($orders) > 0)
@@ -120,7 +143,7 @@ class CrontabController extends BaseController
             }
         }
 
-    }
+    }*/
 
     /**
      * 根据订单计算使用的会员天数的

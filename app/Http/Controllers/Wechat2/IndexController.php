@@ -104,7 +104,7 @@ class IndexController extends BaseController
                 $user_info = DB::table('users')->where('id',$order->user_id)->first();
                 if(!empty($user_info->telephone) && $order->price > 0)
                 {
-                    sms_send('SMS_103795027',$user_info->telephone,$user_info->name);
+                    sms_send('SMS_119082485',$user_info->telephone,$user_info->name);
 
                     //短信通知后台管理员
                     sms_send('SMS_109345328','13366556200');

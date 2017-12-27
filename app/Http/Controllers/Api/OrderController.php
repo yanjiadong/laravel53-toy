@@ -870,8 +870,7 @@ class OrderController extends BaseController
 
             Order::where('id',$order_id)->update($data);
 
-            //$this->send_sms($user->telephone,$user->name);
-            sms_send('SMS_109410296',$user->telephone,$user->name);
+            sms_send('SMS_119077485',$user->telephone,$user->name);
 
             return $this->ret;
         }

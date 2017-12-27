@@ -282,7 +282,7 @@ if(!function_exists('sms_send'))
                 'aliyun' => [
                     'access_key_id' => config('app.ali_sms_access_key_id'),
                     'access_key_secret' => config('app.ali_sms_access_key_secret'),
-                    'sign_name' => '玩玩具趣编程',
+                    'sign_name' => '小Q编程',
                 ],
             ],
         ];
