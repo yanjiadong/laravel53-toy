@@ -287,15 +287,19 @@ if(!function_exists('sms_send'))
             ],
         ];
 
-        $easySms = new \Overtrue\EasySms\EasySms($config);
+        try {
+            $easySms = new \Overtrue\EasySms\EasySms($config);
 
-        $easySms->send($telephone, [
-            'content'  => '您的验证码为: 6379',
-            'template' => $template,
-            'data' => [
-                'name'=>$name
-            ],
-        ]);
+            $easySms->send($telephone, [
+                'content'  => '您的验证码为: 6379',
+                'template' => $template,
+                'data' => [
+                    'name'=>$name
+                ],
+            ]);
+        } catch (\Exception $e){
+
+        }
     }
 }
 
