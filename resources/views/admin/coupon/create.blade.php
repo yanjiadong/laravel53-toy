@@ -45,7 +45,13 @@
                                 <input type="text" value="0" class="validate[required,custom[stock]]" id="condition" name="condition"/>
                             </div>
                         </div>
-                        <div class="row-form clearfix">
+                        <div class="row-form clearfix condition">
+                            <div class="span3">有效天数：</div>
+                            <div class="span9">
+                                <input type="text" value="0" class="validate[required,custom[stock]]" id="days" name="days"/>
+                            </div>
+                        </div>
+                        {{--<div class="row-form clearfix">
                             <div class="span3">开始时间：</div>
                             <div class="span9">
                                 <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',errDealMode:2})" placeholder="开始时间" class="form-control validate[required,custom[date]]" id="start_time" name="start_time"  value="">
@@ -56,7 +62,7 @@
                             <div class="span9">
                                 <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',errDealMode:2})" placeholder="结束时间" class="form-control validate[required,custom[date]]" id="end_time" name="end_time"  value="">
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -87,12 +93,13 @@
                     var title = $("#title").val();
                     var price = $("#price").val();
                     var type = $("#type").val();
-                    var start_time = $("#start_time").val();
-                    var end_time = $("#end_time").val();
+                    //var start_time = $("#start_time").val();
+                    //var end_time = $("#end_time").val();
                     var condition = $("#condition").val();
+                    var days = $("#days").val();
 
                     $.post("{{ route('coupons.store') }}",
-                        {title:title,price:price,type:type,start_time:start_time,end_time:end_time,condition:condition},
+                        {title:title,price:price,type:type,days:days,condition:condition},
                         function(data){
                             cTip(data);
                         }, "json");

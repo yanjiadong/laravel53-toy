@@ -1382,22 +1382,22 @@
                             /*-----之前选中优惠券再进入默认是选中------*/
                             if(vip_voucher.data.discount_car_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.discount_car_id){
                                 console.log(vip_voucher.data.discount_car_id);
-                                cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
-                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].coupon_price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].coupon_title+'</h3>' +
                                     '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                             }else{
-                                cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
-                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                                cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].coupon_price+'</span>'
+                                    +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].coupon_title+'</h3>' +
                                     '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                             }
                             //筛选最大金额
-                            if(max<vip_voucher.data.list[i].price){
-                                max = vip_voucher.data.list[i].price;
+                            if(max<vip_voucher.data.list[i].coupon_price){
+                                max = vip_voucher.data.list[i].coupon_price;
                                 max_index = i;
                             }
                         }else{
-                            cont+='<li class="clear disable"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].price+'</span>'
-                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].title+'</h3>' +
+                            cont+='<li class="clear disable"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].coupon_price+'</span>'
+                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].coupon_title+'</h3>' +
                                 '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                         }
                     }

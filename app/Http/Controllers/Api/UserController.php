@@ -343,32 +343,22 @@ class UserController extends BaseController
     {
         $user_id = $request->get('user_id');
 
-        $user = User::find($user_id);
-        $coupons = $user->coupons()->get()->toArray();
-
-        $result = [];
-        if(!empty($coupons))
+        $coupons = UserCoupon::where('status',0)->where('user_id',$user_id)->get();
+        if(count($coupons) > 0)
         {
-            foreach ($coupons as &$v)
+            foreach ($coupons as $coupon)
             {
-                $info = UserCoupon::where('user_id',$user_id)->where('coupon_id',$v['id'])->first();
-                if($info->status == 1)
+                $coupon->can_use = 1;
+                if($this->time >= strtotime($coupon->end_time))
                 {
-                    continue;
+                    $coupon->can_use = 0;
                 }
 
-                $v['can_use'] = 1;
-                if($this->time >= strtotime($v['end_time']))
-                {
-                    $v['can_use'] = 0;
-                }
-                $v['new_start_time'] = date('Y.m.d',strtotime($v['start_time']));
-                $v['new_end_time'] = date('Y.m.d',strtotime($v['end_time']));
-                $v['time'] = $v['new_start_time'].'-'.$v['new_end_time'];
-                $result[] = $v;
+                $coupon->time = date('Y.m.d',strtotime($coupon->start_time)).'-'.date('Y.m.d',strtotime($coupon->end_time));
             }
         }
-        $this->ret['info'] = ['coupons'=>$result];
+
+        $this->ret['info'] = ['coupons'=>$coupons];
         return $this->ret;
     }
 

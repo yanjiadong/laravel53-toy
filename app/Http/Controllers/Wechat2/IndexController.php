@@ -98,7 +98,7 @@ class IndexController extends BaseController
 
                 if(!empty($order->coupon_id))
                 {
-                    DB::table('user_coupons')->where('user_id',$order->user_id)->where('coupon_id',$order->coupon_id)->update(['status'=>1]);
+                    DB::table('user_coupons')->where('user_id',$order->user_id)->where('id',$order->coupon_id)->update(['status'=>1]);
                 }
 
                 $user_info = DB::table('users')->where('id',$order->user_id)->first();
@@ -135,6 +135,7 @@ class IndexController extends BaseController
      */
     public function index()
     {
+
         if(config('app.env')=='local')
         {
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
@@ -161,7 +162,7 @@ class IndexController extends BaseController
             {
                 foreach ($coupon_info as $coupon)
                 {
-                    UserCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon->id]);
+                    UserCoupon::create(['user_id'=>$user_id,'coupon_id'=>$coupon->id,'coupon_type'=>$coupon->type,'coupon_price'=>$coupon->price,'coupon_days'=>$coupon->days,'coupon_title'=>$coupon->title,'start_time'=>date('Y-m-d'),'condition'=>$coupon->condition,'end_time'=>date('Y-m-d',strtotime("+{$coupon->days} days"))]);
                 }
             }
         }

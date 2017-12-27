@@ -196,10 +196,10 @@ class OrderController extends BaseController
         $coupon_price = 0;
         if($coupon_id)
         {
-            $coupon = Coupon::where('id',$coupon_id)->first();
+            $coupon = UserCoupon::where('id',$coupon_id)->first();
             if($total_price >= $coupon->condition)
             {
-                $total_price = $total_price - $coupon->price;
+                $total_price = $total_price - $coupon->coupon_price;
             }
         }
 
@@ -857,7 +857,8 @@ class OrderController extends BaseController
             $coupon = Coupon::where('type',2)->orderBy('id','desc')->first();
             if(!empty($coupon))
             {
-                UserCoupon::create(['user_id'=>$order->user_id,'coupon_id'=>$coupon->id]);
+                UserCoupon::create(['user_id'=>$order->user_id,'coupon_id'=>$coupon->id,'coupon_type'=>$coupon->type,'coupon_price'=>$coupon->price,'coupon_days'=>$coupon->days,'coupon_title'=>$coupon->title,'start_time'=>date('Y-m-d'),'condition'=>$coupon->condition,'end_time'=>date('Y-m-d',strtotime("+{$coupon->days} days"))]);
+                //UserCoupon::create(['user_id'=>$order->user_id,'coupon_id'=>$coupon->id]);
             }
 
             $data['back_express_title'] = $back_express_title;

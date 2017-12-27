@@ -31,7 +31,7 @@
                                 <th>序号</th>
                                 <th>优惠券名称</th>
                                 <th>金额</th>
-                                <th>有效期</th>
+                                <th>有效天数</th>
                                 <th>类型</th>
                                 <th>满多少可用</th>
                                 <th>操作</th>
@@ -43,7 +43,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $coupon->title }}</td>
                                     <td>{{ $coupon->price }}</td>
-                                    <td>{{ $coupon->start_time }} - {{ $coupon->end_time }}</td>
+                                    <td>{{ $coupon->days }}</td>
                                     <td>
                                         @if($coupon->type==2)
                                             满减优惠券

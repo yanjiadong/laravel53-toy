@@ -54,9 +54,10 @@ class CouponController extends BaseController
         $data['title'] = $request->get('title');
         $data['type'] = $request->get('type');
         $data['price'] = $request->get('price');
-        $data['start_time'] = $request->get('start_time');
-        $data['end_time'] = $request->get('end_time');
+        //$data['start_time'] = $request->get('start_time');
+        //$data['end_time'] = $request->get('end_time');
         $data['condition'] = $request->get('condition');
+        $data['days'] = $request->get('days');
 
         Coupon::create($data);
         return alert(route('coupons.index'),1);
@@ -101,9 +102,10 @@ class CouponController extends BaseController
         $data['title'] = $request->get('title');
         $data['type'] = $request->get('type');
         $data['price'] = $request->get('price');
-        $data['start_time'] = $request->get('start_time');
-        $data['end_time'] = $request->get('end_time');
+        //$data['start_time'] = $request->get('start_time');
+        //$data['end_time'] = $request->get('end_time');
         $data['condition'] = $request->get('condition');
+        $data['days'] = $request->get('days');
 
         Coupon::where('id',$id)->update($data);
         return alert(route('coupons.index'),1);
