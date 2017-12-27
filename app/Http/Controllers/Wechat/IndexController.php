@@ -469,12 +469,12 @@ class IndexController extends BaseController
             {
                 "name":"我要租",
                 "type":"view",
-                "url":"http://toy.yanjiadong.net/wechat/index/index"
+                "url":"http://toy.yanjiadong.net/wechat2/index/index"
             },
           {
                "name":"我的订单",
                 "type":"view",
-                "url":"http://toy.yanjiadong.net/wechat/index/order_list"
+                "url":"http://toy.yanjiadong.net/wechat2/index/order_list"
            },
            {
                 "name":"更多",
@@ -487,12 +487,12 @@ class IndexController extends BaseController
                      {
                        "type":"view",
                        "name":"新手指南",
-                       "url":"http://toy.yanjiadong.net/wechat/user/help"
+                       "url":"http://toy.yanjiadong.net/wechat2/user/help"
                     }, 
                     {
                        "type":"view",
                        "name":"我的账户",
-                       "url":"http://toy.yanjiadong.net/wechat/user/center"
+                       "url":"http://toy.yanjiadong.net/wechat2/user/user_center"
                     },
                     {
                        "type":"click",

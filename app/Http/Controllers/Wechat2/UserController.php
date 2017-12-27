@@ -88,6 +88,10 @@ class UserController extends BaseController
         return view('wechat2.user.share_open');
     }
 
+    /**
+     * 帮助页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function help()
     {
         if(config('app.env')=='local')
@@ -97,10 +101,10 @@ class UserController extends BaseController
         }
         else
         {
-            $this->check_user();
+            $this->check_oauth();
         }
 
-        return view('wechat.user.help');
+        return view('wechat2.user.help');
     }
 
     /**

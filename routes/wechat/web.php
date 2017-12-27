@@ -65,6 +65,8 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::get('/user/share','UserController@share')->name('wechat2.user.share');
     //分享后打开的页面
     Route::get('/user/share_open','UserController@share_open')->name('wechat2.user.share_open');
+    //帮助页面
+    Route::get('/user/help','UserController@help')->name('wechat2.user.help');
 
     //微信授权 采用easywechat扩展包
     Route::any('/index/oauth','IndexController@oauth')->name('wechat2.index.oauth');
