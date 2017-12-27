@@ -1418,7 +1418,7 @@
                 $(this).addClass('active');
                 var index = $(this).index(".submit-voucher-wrap  .list ul li");
                 //提交选择
-                order_obj.data.actural_data.discount =vip_voucher.data.list[index].price;
+                order_obj.data.actural_data.discount =vip_voucher.data.list[index].coupon_price;
                 $(".rent-item-list ul li:eq(2) .fr .discount-fee").html('<span class="red">-¥'+order_obj.data.actural_data.discount+'</span>');
                 //总计
                 $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
