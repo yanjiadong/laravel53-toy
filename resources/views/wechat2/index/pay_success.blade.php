@@ -12,16 +12,21 @@
 </head>
 <body>
 <div class="pay-success bg-white">
+    <!-- <div class="tips-top">
+         <i>!</i>物品在邮寄途中时，会员有效期计时自动暂停
+     </div>-->
     <div class="sign">
-        <i class="icon-big icon-big-paySuccess"></i>
+        <img src="/wechat2/image/common/no-good5.png">
     </div>
     <div class="money">¥{{$order->price}}</div>
-    <p>平台将尽快安排发货，请耐心等待</p>
+    <p>已支付成功，我们会尽快安排发货。<br>
+        在您收到货的第二天才开始计算租期哦！</p>
     <div class="btn">
         <button class="fl" onclick="goIndex()">返回首页</button>
         <button class="fr" onclick="goodDetail()">查看订单</button>
     </div>
 </div>
+
 <script src="{{ asset('wechat2/js/jquery-1.11.1.min.js') }}"></script>
 <script src="{{ asset('wechat2/js/main.js') }}"></script>
 <script src="{{ asset('wechat2/js/common.js') }}"></script>
@@ -41,7 +46,7 @@
         $(".toys-car").height($(window).height());
         pushHistory();
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            location.href='{{url('/wechat/index/index')}}';  //在这里指定其返回的地址
+            location.href='{{url('/wechat2/index/index')}}';  //在这里指定其返回的地址
         }, false);
     })
     function pushHistory() {

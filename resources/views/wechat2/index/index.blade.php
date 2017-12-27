@@ -79,7 +79,7 @@
                 <div class="top-title">
                     <table>
                         <tr>
-                            <td><i class="icon-big icon-big-home-label"></i></td>
+                            <td><i class="icon-big-home-label"></i></td>
                             <td><span class="dot"></span></td>
                             <td>可编程机器人</td>
                             <td><span class="dot"></span></td>
@@ -282,11 +282,11 @@
                         if(res.info.goods[i].store <= 0){
                             hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}v" data-original="'+res.info.goods[i].picture+'"><span class="active">'+
                                 '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
-                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'/</span><span class="unit">元</span></div></li>';
+                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'</span><span class="unit">/元</span></div></li>';
                         }else{
                             hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'">'+'<h3>'
                                 +res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
-                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'/</span><span class="unit">元</span></div></li>';
+                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'</span><span class="unit">/元</span></div></li>';
                         }
                     }
                     $(".hot-list ul").html(hotData);

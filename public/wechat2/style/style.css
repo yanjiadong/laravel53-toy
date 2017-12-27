@@ -617,6 +617,7 @@
 .sort-detail .content .grow-up .list ul li .fl{
     width:102px;
     position: relative;
+    font-size: 0;
 }
 .sort-detail .content .grow-up .list ul li .fl img{
     width: 100%;
@@ -695,11 +696,11 @@
     color:#f00;
 }
 .good-detail-wrap .good-detail-content .top .rent span:first-child{
-    font-size:24px;
+    font-size:18px;
     color:#f00;
 }
 .good-detail-wrap .good-detail-content .top .rent span:last-child{
-    font-size:18px;
+    font-size:10px;
     color:#f00;
 }
 .good-detail-wrap .good-detail-content .top .lunbo {
@@ -1449,7 +1450,7 @@
     color: #fff;
     font-size: 16px;
     border-radius: 4px;
-    background-color: #6885EA;
+    background-color: #ffaa00;
 }
 /*---------------------------------订单详情---------------------------*/
 .lease-order nav {
@@ -2249,11 +2250,13 @@
     margin-right: 5px;
 }
 .toys-car .list {
-    background-color: #fff;
     margin-bottom: 115px;
     height: 300px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+}
+.toys-car .list ul{
+    background-color: #fff;
 }
 .toys-car .list ul li {
     padding: 10px;
@@ -2315,6 +2318,7 @@
 .toys-car .list ul li .fl:nth-child(3) {
     width: 60%;
     padding: 0 10px;
+    position: relative;
 }
 .toys-car .list ul li .fl:nth-child(3) h3 {
     width: 100%;
@@ -2337,11 +2341,28 @@
 .toys-car .list ul li .fl:nth-child(3) h4 {
     color: #8d8d8d;
     font-size: 12px;
-    margin-top: 2px;
+    margin-top: 10px;
+    height: 14px
 }
 .toys-car .list ul li .fl:nth-child(3) p {
     color: #8d8d8d;
-    font-size: 13px;
+    font-size: 12px;
+    height: 14px;
+}
+.toys-car .list ul li .fl:nth-child(3) .rent{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
+    color: #f00;
+}
+.toys-car .list ul li .fl:nth-child(3) .rent .money{
+    font-size: 18px;
+    color: #f00;
+}
+.toys-car .list ul li .fl:nth-child(3) .rent .unit{
+    font-size: 10px;
+    color: #f00;
 }
 .toys-car .list ul li .fr {
     width: 10%;
@@ -4881,7 +4902,7 @@ textarea {
 .my-deposit-wrap .list ul li .operate button.applied {
     font-size: 13px;
     color: #adadad;
-    padding: 3px 6px;
+    padding: 6px;
     border-radius: 5px;
     background: #e1e1e1;
     margin-left: 5px;
@@ -5644,8 +5665,8 @@ textarea {
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .money {
     font-size: 14px;
     color: #f00;
-    height: 26px;
-    line-height: 26px;
+    height: 22px;
+    line-height: 22px;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .set-time {
     font-size: 13px;
@@ -5947,4 +5968,13 @@ textarea {
     margin-top: 12px;
     font-size:12px;
     color:#909090;
+    padding-bottom: 10px;
+}
+.return-success-wrap .return-success-main .return-cont .bottom-pic{
+    background-color: #f7f7f7;
+    font-size: 0;
+}
+.return-success-wrap .return-success-main .return-cont .bottom-pic img{
+    width: 100%;
+    margin-top: 10px;
 }

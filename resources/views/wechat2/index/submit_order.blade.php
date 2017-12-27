@@ -1486,7 +1486,11 @@
             bool=true;
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            if(bool) {
+            if($(".submit-voucher-wrap").css('display')=="block"){
+                $(".submit-voucher-wrap").hide();
+                $(".submit-order-wrap").show();
+                pushHistory();
+            }else{
                 if(bool) {
                     location.href=sessionStorage.getItem('submit_order_url')?sessionStorage.getItem('submit_order_url'):document.referrer;  //在这里指定其返回的地址
                 }

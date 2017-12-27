@@ -278,7 +278,7 @@
                             if(goodDetail_obj .data.detail_data.lunbo[0].poster){
                                 goodDetail_obj.join_pic = goodDetail_obj .data.detail_data.lunbo[0].poster;
                             }else{
-                                goodDetail_obj.join_pic = goodDetail_obj .data.detail_data.lunbo2[1].url;
+                                goodDetail_obj.join_pic = goodDetail_obj .data.detail_data.lunbo2[1].picture;
                             }
                         }
 
@@ -295,7 +295,7 @@
                         $(".lunbo .swiper-wrapper").html("");
 
                         for(var i=0;i<goodDetail_obj.data.detail_data.lunbo2.length;i++){
-                            lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj.data.detail_data.lunbo[i].picture+'"></div>';
+                            lunbo_content +='<div class="swiper-slide"><img class="banner-img" src="'+ goodDetail_obj.data.detail_data.lunbo2[i].picture+'"></div>';
                             $(".lunbo .swiper-wrapper").append(lunbo_content);
                             lunbo_content="";
                         }
@@ -317,9 +317,9 @@
 
                 //标题
                 $(".good-detail-content>.top>h3").text(goodDetail_obj .data.detail_data.title);
-                $(".good-detail-content>.top>p").text("市场价￥"+goodDetail_obj.data.detail_data.money);
+                $(".good-detail-content>.top>p").text("市场价￥"+Math.round(goodDetail_obj.data.detail_data.money));
                 $(".good-detail-content>.top>h4").text("适龄"+goodDetail_obj.data.detail_data.year);
-                $(".good-detail-content>.top>.rent").html("¥<span>"+goodDetail_obj.data.detail_data.rent+"/</span><span>天</span>");
+                $(".good-detail-content>.top>.rent").html("<span>"+goodDetail_obj.data.detail_data.rent+"</span><span>/天</span>");
 
                 //商品参数
                 if(goodDetail_obj .data.detail_data.params.length>0){
@@ -682,7 +682,7 @@
         var bool=false;
         setTimeout(function(){
             bool=true;
-        },1500);
+        },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool&&window.location.href.indexOf("#")==-1) {
                 location.href = document.referrer;  //在这里指定其返回的地址  订单列表页面

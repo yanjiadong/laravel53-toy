@@ -28,6 +28,9 @@
                 在平台收货并确认后，才可以申请押金提现哦<br>
                 < 如物品有损坏需提前联系客服沟通 >
             </div>
+            <div class="bottom-pic">
+                <img src="/wechat2/image/common/return_success1.png" >
+            </div>
         </div>
     </div>
 </div>

@@ -27,7 +27,7 @@ class CartController extends BaseController
         {
             foreach ($carts as $cart)
             {
-                $result[] = Good::select('id','title','picture','store','price','old')->where('id',$cart->good_id)->first()->toArray();
+                $result[] = Good::select('id','title','picture','store','price','old','day_price')->where('id',$cart->good_id)->first()->toArray();
             }
         }
 
