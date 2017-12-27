@@ -97,7 +97,7 @@
                                     {{--<td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>--}}
                                     <td>
                                         <?php
-                                            if(isset($status) && $status==1)
+                                            if(isset($status) && $status==1 && !empty($order->plan_send_time))
                                                 {
                                                     $weekarray = array("日","一","二","三","四","五","六");
                                                     $send_week = $weekarray[date("w",strtotime($order->plan_send_time))];
