@@ -95,9 +95,10 @@
                                     <td>{{ $order->user->telephone }}</td>
                                     <td>{{ $order->user->wechat_nickname }}</td>
                                     {{--<td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>--}}
+                                    @if(isset($status) && $status==1)
                                     <td>
                                         <?php
-                                            if(isset($status) && $status==1 && !empty($order->plan_send_time))
+                                            if(!empty($order->plan_send_time))
                                                 {
                                                     $weekarray = array("日","一","二","三","四","五","六");
                                                     $send_week = $weekarray[date("w",strtotime($order->plan_send_time))];
@@ -105,6 +106,7 @@
                                                 }
                                         ?>
                                     </td>
+                                    @endif
                                     <td>{{ $order->created_at }}</td>
                                     <td>
                                         <a href="{{route('admin.order.show',['id'=>$order->id])}}" title="查看" class="tip"><span class="btn btn-mini">查看</span></a>
