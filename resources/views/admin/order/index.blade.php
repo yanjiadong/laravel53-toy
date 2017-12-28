@@ -79,6 +79,9 @@
                                 @if(isset($status) && $status==1)
                                     <th>预计发货时间</th>
                                 @endif
+                                @if(isset($status) && ($status==4 || $status==5))
+                                    <th>逾期天数</th>
+                                @endif
                                 <th>下单时间</th>
                                 <th>操作</th>
                             </tr>
@@ -106,6 +109,9 @@
                                                 }
                                         ?>
                                     </td>
+                                    @endif
+                                    @if(isset($status) && ($status==4 || $status==5))
+                                        <td>{{ $order->over_days }}</td>
                                     @endif
                                     <td>{{ $order->created_at }}</td>
                                     <td>
