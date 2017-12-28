@@ -186,7 +186,7 @@
                         <div class="row-form clearfix">
                             <div class="span3">运费：</div>
                             <div class="span9">
-                                <input type="text" value="" class="validate[required,custom[number]]" id="express_price"/>
+                                <input type="text" value="" class="validate[required,custom[stock]]" id="express_price"/>
                                 <span>单位：(元) </span>
                             </div>
                         </div>

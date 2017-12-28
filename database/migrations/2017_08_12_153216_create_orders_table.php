@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('category_id')->default(0)->comment('商品分类id');
             $table->tinyInteger('category_tag_id')->default(0)->comment('商品分类id');
             $table->tinyInteger('good_brand_id')->default(0)->comment('商品品牌id');
-            $table->decimal('express_price',10,2)->default(0.00)->comment('邮费');
+            $table->integer('express_price')->default(0)->comment('邮费');
             $table->decimal('clean_price',10,2)->default(0.00)->comment('包装清理费');
             $table->decimal('price',10,2)->default(0.00)->comment('订单合计');
             $table->decimal('money',10,2)->default(0.00)->comment('押金');

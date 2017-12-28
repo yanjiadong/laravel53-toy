@@ -16,7 +16,7 @@ class AddFieldsToGoodsTable extends Migration
         Schema::table('goods', function (Blueprint $table) {
             $table->string('express',64)->default('')->comment('配送方式');
             $table->tinyInteger('days')->default(0)->comment('几天后发货');
-            $table->decimal('express_price',10,2)->default(0.00)->comment('运费');
+            $table->integer('express_price')->default(0)->comment('运费');
             $table->decimal('free_price',10,2)->default(0.00)->comment('满多少减免来回运费');
         });
     }
