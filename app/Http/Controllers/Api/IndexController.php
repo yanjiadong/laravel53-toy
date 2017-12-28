@@ -184,13 +184,14 @@ class IndexController extends BaseController
         $data['is_used'] = 1;
         TelephoneCode::create($data);
 
-        $this->send_sms($telephone,$data['code']);
+        //$this->send_sms($telephone,$data['code']);
 
+        sms_send('SMS_85380002',$telephone,'',$data['code']);
         $this->ret['msg'] = '验证码发送成功';
         return $this->ret;
     }
 
-    private function send_sms($telephone,$code)
+    /*private function send_sms($telephone,$code)
     {
         $config = [
             // HTTP 请求的超时时间（秒）
@@ -228,7 +229,7 @@ class IndexController extends BaseController
                 'number' => $code
             ],
         ]);
-    }
+    }*/
 
     public function bind_telephone(Request $request)
     {

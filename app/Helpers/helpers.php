@@ -258,7 +258,7 @@ if(!function_exists('WxJsPayCallback'))
  */
 if(!function_exists('sms_send'))
 {
-    function sms_send($template,$telephone,$name = '')
+    function sms_send($template,$telephone,$name = '',$code = '')
     {
         $config = [
             // HTTP 请求的超时时间（秒）
@@ -294,7 +294,8 @@ if(!function_exists('sms_send'))
                 'content'  => '您的验证码为: 6379',
                 'template' => $template,
                 'data' => [
-                    'name'=>$name
+                    'name'=>$name,
+                    'number'=>$code
                 ],
             ]);
         } catch (\Exception $e){
