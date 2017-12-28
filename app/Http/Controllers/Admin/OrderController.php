@@ -159,7 +159,7 @@ class OrderController extends BaseController
             'company' => $express->com
         ];
         $result = weixinCurl(url('api/express_info/index'), 'post', $param);
-        var_dump($result);
+        //var_dump($result);
         if ($type == 1) {
             sms_send('SMS_119077480', $order->receiver_telephone, $order->receiver);
             //$this->send_sms($order->receiver_telephone,$order->receiver);
