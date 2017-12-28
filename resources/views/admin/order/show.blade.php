@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <td>租用天数：</td>
-                            <td>{{$order->days}}</td>
+                            <td>{{$order->days}}(¥{{ $order->good_day_price }}/天)</td>
                         </tr>
                         <tr>
                             <td>玩具名称：</td>
