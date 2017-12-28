@@ -240,7 +240,8 @@
                 switch (order_detail.data.logistics_state.state) {  //state 1为待发货 2 已发货 3租用中 4已寄回  5归还成功
                     case '待发货':
                         logistics_cont ='<div class="stay"><i class="icon-order-detail send"></i><h2>待发货</h2><h4>租期从您收到器具后的第二天才开始计算</h4></div>';
-                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天');
+                        //$(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天');
+                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天(<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天)');
                         //物流信息
                         $(".logistics .logistics-info").hide();
                         //订单信息标题
