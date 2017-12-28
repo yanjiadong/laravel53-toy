@@ -473,7 +473,8 @@
                         yajin:{
                             money:res.info.good.good_money,
                             discount:res.info.good.good_money_discount,
-                            authorization:res.info.good.can_use_zhima  //是否授权认证
+                            authorization:res.info.good.can_use_zhima,  //是否授权认证
+                            actual_money:res.info.money
                         }
                     };
 
@@ -526,12 +527,17 @@
                     //押金赋值
                     console.log(order_obj.data.orderDataList.yajin);
                     if(order_obj.data.orderDataList.yajin.discount>0){
+                        //order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount;
+                        order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.actual_money;
+
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part1").hide();
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part2").show();
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .origin s").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money));
-                        $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .actual").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount));
+                        //$(".submit-order-wrap .yajin-item-list ul li .fr .part2 .actual").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount));
+                        $(".submit-order-wrap .yajin-item-list ul li .fr .part2 .actual").text('¥'+Math.round(order_obj.data.actural_data.yajin));
                         $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").hide();
-                        order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money-order_obj.data.orderDataList.yajin.discount;
+
+
                     }else{
                         if(order_obj.data.orderDataList.yajin.authorization){
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();

@@ -73,7 +73,7 @@ class OrderController extends BaseController
             $info['can_use_zhima'] = 1;
             if($user->zhima_money >= $info['good_money'])
             {
-                $money = '0.00';
+                $money = 0;
                 $info['good_money_discount'] = $info['good_money'];
             }
             else
@@ -83,6 +83,10 @@ class OrderController extends BaseController
             }
         }
 
+        if($money <= 99)
+        {
+            $money = 99;
+        }
 
         $total_price = round($info['good_day_price']*21,2);  //租金
 
@@ -183,6 +187,11 @@ class OrderController extends BaseController
             {
                 $is_use_zhima = 0;
             }
+        }
+
+        if($money <= 99)
+        {
+            $money = 99;
         }
 
         //计算运费
