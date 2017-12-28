@@ -125,12 +125,12 @@
                                 list +='<li class="clear"><div class="fl"><div class="radio" onclick="toys_car.choose('+i+')"><input type="radio" name="toys"></div></div><div class="fl">' +
                                     '<a href="'+url+'"><img src="'+toys_car.data.info.list[i].picture+'"><span>暂无库存</span></a></div>'+'<div class="fl"><a href="'+url+'"><h3>'+
                                     toys_car.data.info.list[i].title+'</h3> <h4>市场价¥'+Math.round(toys_car.data.info.list[i].price)+'</h4><p>适龄'+
-                                    toys_car.data.info.list[i].old+'</p>' + '<div class="rent"><span class="money">'+toys_car.data.info.list[i].day_price+'天</span><span class="unit">/天</span></div></a></div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
+                                    toys_car.data.info.list[i].old+'</p>' + '<div class="rent"><span class="money">'+toys_car.data.info.list[i].day_price+'元</span><span class="unit">/天</span></div></a></div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
                             }else{
                                 list +='<li class="clear"><div class="fl"><div class="radio" onclick="toys_car.choose('+i+')"><input type="radio" name="toys"></div></div><div class="fl">' +
                                     '<a href="'+url+'"><img src="'+toys_car.data.info.list[i].picture+'"></a></div>'+'<div class="fl"><a href="'+url+'"><h3>'+
                                     toys_car.data.info.list[i].title+'</h3><h4>市场价¥'+Math.round(toys_car.data.info.list[i].price)+'</h4>' +
-                                    '<p>适龄'+toys_car.data.info.list[i].old+'</p>' + '<div class="rent"><span class="money">'+toys_car.data.info.list[i].day_price+'天</span><span class="unit">/天</span></div></a></div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
+                                    '<p>适龄'+toys_car.data.info.list[i].old+'</p>' + '<div class="rent"><span class="money">'+toys_car.data.info.list[i].day_price+'元</span><span class="unit">/天</span></div></a></div><div class="fr"><i class="icon icon_del" onclick="toys_car.delGood('+i+')"></i></div></li>';
                             }
                         }
                         $(".toys-car ul").html(list);
