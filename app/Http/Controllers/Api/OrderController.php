@@ -385,7 +385,7 @@ class OrderController extends BaseController
                     }
                     else
                     {
-                        $v['days2'] = floor((strtotime($v['end_time']) - $this->time)/86400) - 1;
+                        $v['days2'] = floor((strtotime($v['end_time']) - $this->time)/86400);
                     }
                 }
 
@@ -490,7 +490,7 @@ class OrderController extends BaseController
             }
             else
             {
-                $info['days2'] = floor((strtotime($info['end_time']) - $this->time)/86400) - 1;
+                $info['days2'] = floor((strtotime($info['end_time']) - $this->time)/86400);
             }
         }
 

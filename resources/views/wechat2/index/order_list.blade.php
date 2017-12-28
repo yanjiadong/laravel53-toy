@@ -226,7 +226,7 @@
                                 //var nowTime = new Date().getTime();
 
                                 if(orderDtail.data.list[i].over_days <= 0){
-                                    if(orderDtail.data.list[i].days2 < 0)
+                                    if(orderDtail.data.list[i].days2 <= 0)
                                     {
                                         var content = '今天到期';
                                     }

@@ -276,7 +276,7 @@
                         }
                         else
                         {
-                            if(order_detail.data.logistics_state.good.days2 < 0)
+                            if(order_detail.data.logistics_state.good.days2 <= 0)
                             {
                                 var content = '今天到期';
                             }
