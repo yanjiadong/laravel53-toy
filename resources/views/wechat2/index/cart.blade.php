@@ -174,7 +174,7 @@
         goSubmitOrder:function () {
             if($(".toys-car .btn button").hasClass('active')){
                 var good_id = $("#good_id").val();
-                location.href="{{url('wechat/index/submit_order')}}"+'/'+good_id;
+                location.href="{{url('wechat2/index/submit_order')}}"+'/'+good_id;
                 /*if(toys_car.data.info.state==1){
                     location.href="/view/choose_vip.html";
                 }else{

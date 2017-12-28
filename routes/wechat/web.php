@@ -9,7 +9,7 @@ Route::any('wechat/index/menu','Wechat\IndexController@menu');
 Route::any('wechat2/index/pay_test','Wechat2\IndexController@pay_test')->name('wechat2.index.pay_test');
 
 //提交订单页面
-Route::get('wechat/index/submit_order/{good_id}','Wechat2\IndexController@submit_order')->name('wechat2.index.submit_order');
+Route::get('wechat2/index/submit_order/{good_id}','Wechat2\IndexController@submit_order')->name('wechat2.index.submit_order');
 
 //每日运行的脚本
 Route::any('wechat/crontab/index','Wechat\CrontabController@index');

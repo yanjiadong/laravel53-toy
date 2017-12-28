@@ -436,7 +436,7 @@
             console.log(goodDetail_obj .data.detail_data.vipState);
             if(goodDetail_obj .data.detail_data.vipState){
                 var good_id = "{{ $good_id }}";
-                location.href="{{url('wechat/index/submit_order')}}"+'/'+good_id;
+                location.href="{{url('wechat2/index/submit_order')}}"+'/'+good_id;
                 //location.href="/view/submit_order2.html";
             }else{
                 //location.href="/view/choose_vip.html";

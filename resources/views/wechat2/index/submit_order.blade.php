@@ -1258,7 +1258,11 @@
                     if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
                         $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
                         order_obj.data.actural_data.post =0
+                    }else{
+                        $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
+                        order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
                     }
+
                     //优惠券赋值
                     order_obj.discountCarShow();
 
@@ -1302,10 +1306,14 @@
                     //租金赋值
                     $(".rent-item-list ul li:eq(0) .fr span").text('¥'+ order_obj.data.actural_data.rent);
                     //邮费赋值
-                    if(order_obj.data.actural_data.rent>=order_obj.data.orderDataList.logistics.can_free){
+                    if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
                         $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
                         order_obj.data.actural_data.post =0
+                    }else{
+                        $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
+                        order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
                     }
+                    
                     //优惠券赋值
                     order_obj.discountCarShow();
 
