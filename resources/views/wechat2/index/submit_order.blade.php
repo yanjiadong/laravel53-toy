@@ -1504,8 +1504,8 @@
                     common.getCarAndOrder(get_url,'{{$user_id}}'); //获取订单数量和购物车数量
 
                     //支付成功
-                    alert(url);
                     var url = '{{url('wechat2/index/pay_success')}}'+'/'+order_obj.data.order_code;
+                    alert(url);
                     location.href=url;
                 }
                 else if(res.err_msg === "get_brand_wcpay_request:cancel")
