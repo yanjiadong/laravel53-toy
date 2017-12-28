@@ -14,7 +14,7 @@
 <div class="share-wrap">
     <div class="share-main">
         <div class="share-main">
-            <img class="share-img" src="/wechat2/image/common/help.jpg">
+            <img class="share-img" src="http://ougu95ew5.bkt.clouddn.com/help.jpg">
         </div>
     </div>
 </div>

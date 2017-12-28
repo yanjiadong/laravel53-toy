@@ -144,7 +144,7 @@
         //正在租玩具
         exchangeToy:function () {
             if(user_center.data.userInfo.num==0){
-                common.alert_tip1("暂时没有可归还的玩具");
+                common.alert_tip1("您当前没有租用中的器具");
                 return false;
             }else{
                 location.href="{{ route('wechat2.index.order_list') }}";
