@@ -357,7 +357,14 @@
                 //$(".return-info .order-info-cont ul li:eq(2) span").text('平台收货确认时间：'+common.dateFormat1(order_detail.data.logistics_state.return_logistics.d,true));
                 $(".return-info .order-info-cont ul li:eq(2) span").text('平台收货确认时间：'+order_detail.data.logistics_state.return_logistics.d);
                 //$(".return-info .order-info-cont ul li .delay-time span").text('逾期'+(order_detail.timeGap(order_detail.data.logistics_state.address.k,order_detail.data.logistics_state.address.l)-order_detail.data.logistics_state.good.item4)+'天');
-                $(".return-info .order-info-cont ul li .delay-time span").text('逾期'+(order_detail.data.logistics_state.good.over_days)+'天');
+                if(order_detail.data.logistics_state.good.over_days > 0)
+                {
+                    $(".return-info .order-info-cont ul li .delay-time span").text('逾期'+(order_detail.data.logistics_state.good.over_days)+'天');
+                }
+                else
+                {
+                    $(".return-info .order-info-cont ul li .delay-time").hide();
+                }
                 order_detail.copy()
             })
         },
