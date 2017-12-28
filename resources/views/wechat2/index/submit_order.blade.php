@@ -1313,7 +1313,7 @@
                         $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
                         order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
                     }
-                    
+
                     //优惠券赋值
                     order_obj.discountCarShow();
 
