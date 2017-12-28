@@ -276,7 +276,15 @@
                         }
                         else
                         {
-                            logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>租用中</h2><button class="rest">'+order_detail.data.logistics_state.good.days2+'天后到期</button><h4 style="margin-top: 5px">如逾期归还，将收取逾期费（逾期天数*日租金）</h4></div>';
+                            if(order_detail.data.logistics_state.good.days2 < 0)
+                            {
+                                var content = '今天到期';
+                            }
+                            else
+                            {
+                                var content = order_detail.data.logistics_state.good.days2+'天后到期';
+                            }
+                            logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>租用中</h2><button class="rest">'+content+'</button><h4 style="margin-top: 5px">如逾期归还，将收取逾期费（逾期天数*日租金）</h4></div>';
                         }
 
                         logistics_info ='<div class="fl"><i class="icon icon_state_car"></i></div><div class="fl"><h3>'+order_detail.data.logistics_state.logistics.cont+'</h3><p>'+order_detail.data.logistics_state.logistics.time+'</p></div><div class="fr"><i class="icon icon_arrowRight_bold"></i></div>';
