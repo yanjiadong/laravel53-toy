@@ -91,7 +91,7 @@ class CrontabController extends BaseController
                 {
                     $time = strtotime($order->end_time) - $this->time;
                     $day = floor($time/86400);
-                    if($day == 0)
+                    if($day == 1)
                     {
                         $user = User::select('telephone','name')->where('id',$order->user_id)->first();
                         if(!empty($user))
