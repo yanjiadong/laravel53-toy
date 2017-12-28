@@ -676,8 +676,12 @@ if(!function_exists('getGoodPriceInfo'))
         {
             if(!empty($good) && $is_discount)
             {
-                $result = $good->discount1;
                 $isDiscount = true;
+                if(getGoodPriceByDays($good->price,7) == $good->discount1)
+                {
+                    $isDiscount = false;
+                }
+                $result = $good->discount1;
             }
             if($result <= 0)
             {
@@ -688,8 +692,13 @@ if(!function_exists('getGoodPriceInfo'))
         {
             if(!empty($good) && $is_discount)
             {
-                $result = $good->discount2;
                 $isDiscount = true;
+                if(getGoodPriceByDays($good->price,14) == $good->discount2)
+                {
+                    $isDiscount = false;
+                }
+
+                $result = $good->discount2;
             }
             if($result <= 0)
             {
@@ -700,8 +709,13 @@ if(!function_exists('getGoodPriceInfo'))
         {
             if(!empty($good) && $is_discount)
             {
-                $result = $good->discount3;
                 $isDiscount = true;
+                if(getGoodPriceByDays($good->price,21) == $good->discount3)
+                {
+                    $isDiscount = false;
+                }
+
+                $result = $good->discount3;
             }
             if($result <= 0)
             {
@@ -712,8 +726,13 @@ if(!function_exists('getGoodPriceInfo'))
         {
             if(!empty($good) && $is_discount)
             {
-                $result = $good->discount4;
                 $isDiscount = true;
+                if(getGoodPriceByDays($good->price,30) == $good->discount4)
+                {
+                    $isDiscount = false;
+                }
+
+                $result = $good->discount4;
             }
             if($result <= 0)
             {
@@ -724,8 +743,12 @@ if(!function_exists('getGoodPriceInfo'))
         {
             if(!empty($good) && $is_discount)
             {
-                $result = $good->discount5;
                 $isDiscount = true;
+                if(getGoodPriceByDays($good->price,45) == $good->discount5)
+                {
+                    $isDiscount = false;
+                }
+                $result = $good->discount5;
             }
             if($result <= 0)
             {
@@ -736,8 +759,13 @@ if(!function_exists('getGoodPriceInfo'))
         {
             if(!empty($good) && $is_discount)
             {
-                $result = $good->discount6;
                 $isDiscount = true;
+                if(getGoodPriceByDays($good->price,60) == $good->discount6)
+                {
+                    $isDiscount = false;
+                }
+
+                $result = $good->discount6;
             }
             if($result <= 0)
             {
