@@ -117,6 +117,8 @@ class IndexController extends BaseController
                 //去库存
                 DB::table('goods')->where('id',$order->good_id)->decrement('store');
 
+                //押金作为充值记录
+                DB::table('user_pay_records')->insert(['user_id'=>$order->user_id,'type'=>1,'pay_type'=>1,'price'=>$order->money,'created_at'=>date('Y-m-d H:i:s')]);
             } else { // 用户支付失败
                 //$order->status = 'paid_fail';
             }
