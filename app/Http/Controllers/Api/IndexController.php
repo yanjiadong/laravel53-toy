@@ -28,7 +28,7 @@ class IndexController extends BaseController
     {
         $categorys = Category::all();
         //$banners = Banner::all();
-        $new_goods = Good::select('id','new_picture','picture','day_price','old','title','price')->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->limit(3)->get();
+        $new_goods = Good::select('id','new_picture','picture','day_price','old','title','price')->where(['is_new'=>1,'status'=>Good::STATUS_ON_SALE])->limit(3)->orderBy('sort','asc')->get();
 
         $goods = Good::select('id','new_picture','picture','day_price','old','title','price')->where(['is_hot'=>1,'status'=>Good::STATUS_ON_SALE])->orderBy('sort','asc')->get();
         $activities = Activity::select('url','picture','title')->where('type',1)->get();
