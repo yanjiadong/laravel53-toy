@@ -319,7 +319,7 @@
                 $(".good-detail-content>.top>h3").text(goodDetail_obj .data.detail_data.title);
                 $(".good-detail-content>.top>p").text("市场价￥"+Math.round(goodDetail_obj.data.detail_data.money));
                 $(".good-detail-content>.top>h4").text("适龄"+goodDetail_obj.data.detail_data.year);
-                $(".good-detail-content>.top>.rent").html("<span>"+goodDetail_obj.data.detail_data.rent+"</span><span>/天</span>");
+                $(".good-detail-content>.top>.rent").html("<span>"+goodDetail_obj.data.detail_data.rent+"元</span><span>/天</span>");
 
                 //商品参数
                 if(goodDetail_obj .data.detail_data.params.length>0){

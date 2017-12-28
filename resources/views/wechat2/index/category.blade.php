@@ -150,14 +150,14 @@
                             '"><span class="active">暂无库存</span></div> <div class="fr"><h3>'
                             +sort_detail.data.grown_up_list.list[i].title+'</h3><p>市场价¥'+
                             sort_detail.data.grown_up_list.list[i].price+'</p><h4>适龄'+
-                            sort_detail.data.grown_up_list.list[i].old+'</h4><div class="rent"><span class="money">'+sort_detail.data.grown_up_list.list[i].day_price+'</span><span class="unit">/元</span></div></div></a></li>';
+                            sort_detail.data.grown_up_list.list[i].old+'</h4><div class="rent"><span class="money">'+sort_detail.data.grown_up_list.list[i].day_price+'元</span><span class="unit">/天</span></div></div></a></li>';
                     }else{
                         shopList +='<li class="clear"><a href="'+href +'"><div class="fl">' +
                             '<img class="lazy" src="/wechat2/image/common/default_pic.png" data-original="'+ sort_detail.data.grown_up_list.list[i].picture+
                             '"></div> <div class="fr"><h3>'
                             +sort_detail.data.grown_up_list.list[i].title+'</h3><p>市场价¥'+
                             sort_detail.data.grown_up_list.list[i].price+'</p><h4>适龄'+
-                            sort_detail.data.grown_up_list.list[i].old+'</h4><div class="rent"><span class="money">'+sort_detail.data.grown_up_list.list[i].day_price+'</span><span class="unit">/元</span></div></div></a></li>';
+                            sort_detail.data.grown_up_list.list[i].old+'</h4><div class="rent"><span class="money">'+sort_detail.data.grown_up_list.list[i].day_price+'元</span><span class="unit">/天</span></div></div></a></li>';
                     }
                 }
                 $(".grow-up .list ul").html(shopList);
