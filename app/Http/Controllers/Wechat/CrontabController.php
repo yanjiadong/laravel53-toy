@@ -21,7 +21,6 @@ class CrontabController extends BaseController
     public function index()
     {
         $this->check_order_new();
-        $this->check_order();
         Crontab::create();
     }
 
@@ -81,24 +80,30 @@ class CrontabController extends BaseController
     /**
      * 检测租期还有一天到期
      */
-    private function check_order()
+    public function check_order()
     {
         $orders = Order::where('status',Order::STATUS_DOING)->get();
         if(count($orders) > 0)
         {
             foreach ($orders as $order)
             {
-                $time = strtotime($order->end_time) - $this->time;
-                if($time > 0 && $time <= 86400 && !empty($order->end_time))
+                if(!empty($order->end_time))
                 {
-                    $user = User::select('telephone','name')->where('id',$order->user_id)->first();
-                    if(!empty($user))
+                    $time = strtotime($order->end_time) - $this->time;
+                    $day = floor($time/86400);
+                    if($day == 0)
                     {
-                        sms_send('SMS_119092348',$user->telephone,$user->name);
+                        $user = User::select('telephone','name')->where('id',$order->user_id)->first();
+                        if(!empty($user))
+                        {
+                            sms_send('SMS_119092348',$user->telephone,$user->name);
+                        }
                     }
                 }
             }
         }
+
+        Crontab::create();
     }
     /**
      * 脚本 每天跑
