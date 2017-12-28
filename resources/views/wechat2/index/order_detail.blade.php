@@ -190,7 +190,9 @@
                     address: {
                         a: res.info.order.receiver,
                         b: res.info.order.receiver_telephone,
-                        c: res.info.order.address,
+                        c: res.info.order.receiver_province,
+                        c1:res.info.order.receiver_city,
+                        c2:res.info.order.address,
                         g: res.info.order.code,   //订单编号
                         h: res.info.order.pay_success_time,  //付款时间
                         j: res.info.order.send_time,  //平台发货时间
@@ -305,6 +307,8 @@
                 }
                 //收货人信息
                 logistics_address ='<table><tr><td></td><td>'+order_detail.data.logistics_state.address.a+'</td><td>'+order_detail.data.logistics_state.address.b+'</td></tr><tr><td><i class="icon-order-detail local"></i></td><td colspan="2">'+order_detail.data.logistics_state.address.c+'</td></tr></table>';
+                logistics_address ='<table><tr><td></td><td>'+order_detail.data.logistics_state.address.a+'</td><td>'+order_detail.data.logistics_state.address.b+'</td></tr><tr><td><i class="icon-order-detail local"></i></td>' +
+                    '<td colspan="2"><span>'+order_detail.data.logistics_state.address.c+'</span><span>'+order_detail.data.logistics_state.address.c1+'</span><span>'+order_detail.data.logistics_state.address.c2+'</span></td></tr></table>';
                 $(".top-states").html(logistics_cont);
                 //物流信息
                 $('.order-detail-wrap .logistics .logistics-info').html(logistics_info);
@@ -401,11 +405,11 @@
             sessionStorage.setItem("order_detail_back_url",document.referrer)
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/
-        pushHistory();
         var bool=false;
         setTimeout(function(){
+            pushHistory();
             bool=true;
-        },500);
+        },1000);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
                 if(sessionStorage.getItem('order_detail_back_url')){

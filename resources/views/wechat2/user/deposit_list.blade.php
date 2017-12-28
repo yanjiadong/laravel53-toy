@@ -49,14 +49,14 @@
                             //充值
                             cont +=' <li class="clear"> <div class="fl"> <h3 class="item-name">'+deposit_list.data.list[i].pay_type_status+'</h3>'
                                 +'<div class="means">微信|'+deposit_list.data.list[i].created_at+'</div></div><div class="fr">'+
-                                '<span>-￥'+deposit_list.data.list[i].price+'</span></div></li>';
+                                '<span>+￥'+deposit_list.data.list[i].price+'</span></div></li>';
                         }
                         else if(deposit_list.data.list[i].pay_type==2 && deposit_list.data.list[i].price>0)
                         {
                             //提现
                             cont +=' <li class="clear"> <div class="fl"> <h3 class="item-name">'+deposit_list.data.list[i].pay_type_status+'</h3>'
                                 +'<div class="means">微信|'+deposit_list.data.list[i].created_at+'</div></div><div class="fr">'+
-                                '<span>+￥'+deposit_list.data.list[i].price+'</span></div></li>';
+                                '<span class="active">-￥'+deposit_list.data.list[i].price+'</span></div></li>';
                         }
                     }
                     $(".deposit-list-wrap ul").html(cont);

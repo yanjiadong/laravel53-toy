@@ -165,7 +165,7 @@
         <ul>
             <li class="clear">
                 <div class="fl">
-                    <i class="icon-order-detail i-yajin"></i><span>押金</span><span class="tips active">授权芝麻信用分，减免押金 ></span><!--<span class="tips">您已有订单正在享受免押，本次无法减免</span>-->
+                    <i class="icon-order-detail i-yajin"></i><span>押金</span><span class="tips active" onclick="order_obj.goAutorization()">授权芝麻信用分，减免押金 ></span><!--<span class="tips">您已有订单正在享受免押，本次无法减免</span>-->
                 </div>
                 <div class="fr">
                     <div class="part1"><span>¥300</span></div>
@@ -524,6 +524,7 @@
 
 
                     //押金赋值
+                    console.log(order_obj.data.orderDataList.yajin);
                     if(order_obj.data.orderDataList.yajin.discount>0){
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part1").hide();
                         $(".submit-order-wrap .yajin-item-list ul li .fr .part2").show();
@@ -1018,6 +1019,10 @@
 
         submitOrder:function (goal) {
             console.log(order_obj.data.vip_state);
+            if(!$(".address_detail .name-phone table tr td.address-detail span:last-child").text()){
+                common.alert_tip1("请添加收货地址！");
+                return false;
+            }
             if(!$(goal).hasClass("disable")){
                 if(order_obj.data.vip_state == '0'){
                     order_obj.submitConfirm();
@@ -1082,40 +1087,6 @@
                     return false;
                 }
             });
-            //alert("微信支付流程");
-
-            /*if(parseFloat($(".detail-list .total .money").text().substr(2))>0){
-                //微信支付流程
-                $(".cover-phone-bind").hide();
-
-                common.httpRequest('{{url('api/order/submit_order_new')}}','post',submit_data,function (res) {
-                    if(res.code==200){
-
-                    }
-                    else
-                    {
-                        common.success_tip(res.msg);
-                        return false;
-                    }
-                });
-
-                var get_url = "{{url('api/user/get_cart_order_num')}}";
-                common.getCarAndOrder(get_url,'{{$user_id}}'); //获取订单数量和购物车数量
-                location.href = "/view/pay_success.html";
-
-            }else{
-                common.confirm_tip('提交订单','提交后订单信息将无法更改，确定提交吗？',null,function () {
-                    order_obj.data.submitOrderData = order_obj.data.address[order_obj.data.addressIndex];
-                    order_obj.data.submitOrderData.orderList = order_obj.data.orderDataList;
-                    /!*common.httpRequest('../js/test.json','post',order_obj.data.submitOrderData,function (res) {
-                     if(res.state){
-                     alert("保存成功")
-                     }
-                     })*!/
-                    $(".confirm-alert-wrap").remove();
-                    location.href = "/view/pay_success.html";
-                })
-            }*/
         },
         //发送手机验证码
         sendCode:function () {
@@ -1276,7 +1247,8 @@
 
                     order_obj.data.actural_data.rent =Math.round(days*res.data.money*10)/10;
                     $(".rent-time .cont .set-time").text(days+'天').show();
-                    $(".rent-time .cont .setting").text('¥'+res.data.money+'/天').css({'line-height':'26px','color':'#f00'});
+                    $(".rent-time .cont .setting").text('¥'+res.data.money+'/天').css({'color':'#f00'});
+                    //$(".rent-time .cont .setting").text('¥'+res.data.money+'/天').css({'line-height':'26px','color':'#f00'});
                     $(".rent-time .rent-time-item .fl").removeClass('active');
                     $(".rent-time .rent-time-item .fl:last").addClass('active');
                     //租金赋值
@@ -1301,6 +1273,8 @@
         //选择租期项
         chooseRentTimeItem:function () {
             $(".rent-time .rent-time-item .fl").click(function () {
+                $(".rent-time .rent-time-item .fl:last .set-time").hide();
+                $(".rent-time .rent-time-item .fl:last .setting").text("自定义天数").css({'margin-top':'7px','color':'#797979'});
                 if($(this).find(".setting").length==0){
                     $(".rent-time .rent-time-item .fl").removeClass('active');
                     $(this).addClass('active');
@@ -1343,6 +1317,7 @@
         goVipVoucher:function () {
             $(".submit-voucher-wrap").show();
             $(".submit-order-wrap").hide();
+            $("title").text("优惠券");
             //优惠券列表
             vip_voucher.init();
         }
@@ -1427,6 +1402,7 @@
                 $("#coupon_id").val(vip_voucher.data.list[index].id);
                 $(".submit-voucher-wrap").hide();
                 $(".submit-order-wrap").show();
+                $("title").text("提交订单");
             })
         },
         //不使用优惠劵
@@ -1437,6 +1413,13 @@
             $("#coupon_id").val(0);
             $(".submit-voucher-wrap").hide();
             $(".submit-order-wrap").show();
+            $("title").text("提交订单");
+        },
+        //跳转认证页面
+        goAutorization:function () {
+            if($(".submit-order-wrap .yajin-item-list ul li .fl span.tips").hasClass("active")){
+                location.href="{{ url('wechat2/index/zmxy/index') }}";
+            }
         }
     };
 
@@ -1489,6 +1472,7 @@
             if($(".submit-voucher-wrap").css('display')=="block"){
                 $(".submit-voucher-wrap").hide();
                 $(".submit-order-wrap").show();
+                $("title").text("提交订单");
                 pushHistory();
             }else{
                 if(bool) {

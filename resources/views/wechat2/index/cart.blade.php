@@ -189,6 +189,9 @@
 </script>
 <script>
     $(function () {
+        if(document.referrer.indexOf("index/submit_order")==-1){
+            sessionStorage.setItem("toys_car_url",document.referrer)
+        }
         pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
         var bool=false;
@@ -197,7 +200,7 @@
         },1500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                location.href = document.referrer;  //在这里指定其返回的地址  订单列表页面
+                location.href=sessionStorage.getItem('toys_car_url')?sessionStorage.getItem('toys_car_url'):document.referrer;  //在这里指定其返回的地址
             }
         }, false);
     });

@@ -1570,7 +1570,7 @@
 .lease-order .order-detail-main  .detail-cont .detail-list li .good-detail .fr .num{
     position: absolute;
     bottom:0;
-    right: 10px;
+    right: 0;
     font-size:13px;
     color:#8c8c8c;
 }
@@ -1714,6 +1714,7 @@
 .lease-order .order-detail-main  .return .no-good .tips h4{
     font-size:14px;
     color:#4c3a30;
+    margin-top: 18px;
 }
 .lease-order .order-detail-main  .return .no-good .tips img{
     width: 100px;
@@ -5043,11 +5044,15 @@ textarea {
     color: #353535;
     line-height: 20px;
 }
+.order-detail-wrap .logistics .address .name-phone table{
+    table-layout: auto;
+}
 .order-detail-wrap .logistics .address .name-phone table tr:first-child{
     height: 32px;
 }
 .order-detail-wrap .logistics .address .name-phone table tr td:first-child {
     width: 15px;
+    padding-right: 10px;
 }
 .order-detail-wrap .logistics .address .name-phone table tr td:first-child .local {
     width: 10px;
@@ -5056,7 +5061,13 @@ textarea {
     vertical-align: middle;
 }
 .order-detail-wrap .logistics .address .name-phone table tr td:nth-child(2) {
-    width: 30%;
+    width: 20%;
+}
+.order-detail-wrap .logistics .address .name-phone table tr td:nth-child(2) span{
+    margin-right: 7px;
+}
+.order-detail-wrap .logistics .address .name-phone table tr td:nth-child(2) span:last-child{
+    margin-right: 0;
 }
 .order-detail-wrap .logistics .separate {
     width: 100%;
@@ -5437,9 +5448,9 @@ textarea {
     height: 100%;
     width: 100%;
     border-radius: 4px;
-    border: 1px solid #6885EA;
+    border: 1px solid #ffaa00;
     font-size: 16px;
-    color: #6885EA;
+    color: #ffaa00;
 }
 .submit-voucher-wrap .no-good{
     background-color: rgb(255, 255, 255);
@@ -5488,17 +5499,17 @@ textarea {
 .submit-order-wrap .address .address_detail .name-phone table tr td {
     font-size: 14px;
     color: #454545;
-    height: 32px;
-    line-height: 20px;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td.icon-right {
     vertical-align: top;
     text-align: right;
+    padding-top: 15px;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td:first-child {
     width: 15px;
     vertical-align: top;
-    padding-right: 5px;
+    padding-right: 10px;
+    padding-top: 15px;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td:first-child .local {
     width: 10px;
@@ -5508,7 +5519,16 @@ textarea {
     margin-bottom: 4px;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td:nth-child(2) {
-    width: 30%;
+    width: 20%;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td[colspan="2"]{
+    padding-top: 15px;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td.address-detail span{
+    margin-right:7px;
+}
+.submit-order-wrap .address .address_detail .name-phone table tr td.address-detail span:last-child{
+    margin-right:0;
 }
 .submit-order-wrap .detail-list {
     background-color: #fff;
@@ -5573,7 +5593,6 @@ textarea {
 .submit-order-wrap .detail-list .rent-time {
     border-top: 1px solid #efefef;
     border-bottom: 1px solid #efefef;
-    margin-top: 10px;
     padding: 0 10px 0 0;
 }
 .submit-order-wrap .detail-list .rent-time .title {
@@ -5639,16 +5658,18 @@ textarea {
     text-align: center;
     height: 50px;
     overflow: hidden;
+    padding: 7px 0;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .time {
-    font-size: 13px;
     color: #757575;
-    height: 24px;
-    line-height: 24px;
+    height: 13px;
+    line-height: 13px;
+    font-size: 0;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .time span {
     display: inline-block;
     vertical-align: middle;
+    font-size: 13px;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .time span.discount-flag {
     display: none;
@@ -5659,27 +5680,32 @@ textarea {
     color: #fff;
     text-align: center;
     line-height: 12px;
-    margin-left: 5px;
+    margin-left: 3px;
     border-radius: 2px;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .money {
-    font-size: 14px;
+    font-size: 15px;
+    color: #000;
+    margin-top: 7px;
+    height: 15px;
+    line-height: 15px;
+}
+.submit-order-wrap .detail-list .rent-time .rent-time-item .fl.active .cont .money{
     color: #f00;
-    height: 22px;
-    line-height: 22px;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .set-time {
     font-size: 13px;
     color: #757575;
-    height: 24px;
-    line-height: 24px;
+    height: 13px;
+    line-height: 13px;
     display: none;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .setting {
-    font-size: 14px;
+    font-size: 15px;
     color: #797979;
-    height: 26px;
-    line-height: 50px;
+    height: 15px;
+    line-height: 15px;
+    margin-top:10px;
 }
 .submit-order-wrap .detail-list .rent-time .rent-time-item .fl .cont .checked {
     display: none;
@@ -5722,7 +5748,7 @@ textarea {
 .submit-order-wrap .rent-item-list ul li .fl i.i-rent {
     width: 20px;
     height: 17px;
-    background-position: -46px -397px;
+    background-position: -47px -397px;
     margin-right: 5px;
 }
 .submit-order-wrap .rent-item-list ul li .fl i.i-logistics {
@@ -5825,48 +5851,51 @@ textarea {
 .submit-order-wrap .yajin-item-list ul li .fr .part2 .right {
     display: inline-block;
     vertical-align: middle;
+    text-align: right;
 }
 .submit-order-wrap .submit-order-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 68px;
-    padding: 0 10px;
-    display: table;
+    height: 58px;
+    box-shadow: 0 -1px 10px #dddddd;
+    padding: 5px 10px;
 }
 .submit-order-wrap .submit-order-footer .fl {
     height: 100%;
-    width: 40%;
+    width: 35%;
     vertical-align: middle;
-    display: table-cell;
-    float: none;
 }
 .submit-order-wrap .submit-order-footer .fl span:first-child {
     font-size: 14px;
     color: #f00;
+    display: inline-block;
+    margin-top: 7px;
 }
 .submit-order-wrap .submit-order-footer .fl span:nth-child(2) {
     font-size: 16px;
     color: #f00;
+    display: inline-block;
+    margin-top: 5px;
 }
 .submit-order-wrap .submit-order-footer .fl p {
     font-size: 12px;
     color: #8d8d8d;
+    margin-top: 2px;
 }
 .submit-order-wrap .submit-order-footer .fr {
-    display: table-cell;
-    vertical-align: middle;
-    float: none;
-    width: 60%;
+    width: 65%;
     padding-left: 10px;
+    height: 100%;
+    font-size: 0;
 }
 .submit-order-wrap .submit-order-footer .fr button {
     width: 100%;
-    height: 44px;
     color: #fff;
     font-size: 16px;
     border-radius: 4px;
     background-color: #ffaa00;
+    height: 100%;
 }
 .cover-rent-time-choose {
     position: fixed;

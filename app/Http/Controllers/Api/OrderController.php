@@ -241,8 +241,15 @@ class OrderController extends BaseController
 
         $order = Order::create($order_data);
 
-        //$total_fee = $order->price*100;  //订单需要支付的金额
-        $total_fee = 0.01*100;  //订单需要支付的金额
+        if($user->wechat_openid == 'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI' || $user->wechat_openid  == 'o2xFAw1y8Qlz5jQvcMwEzWXHB3bg')
+        {
+            $total_fee = 0.01*100;  //订单需要支付的金额
+        }
+        else
+        {
+            $total_fee = $order->price*100;  //订单需要支付的金额
+        }
+
         //生成支付信息
         $options = config('wechat.payment');
         $app = Factory::payment($options);
@@ -467,7 +474,8 @@ class OrderController extends BaseController
             //print_r($content);
         }
 
-        $info['address'] = $info['receiver_province'].$info['receiver_city'].$info['receiver_area'].$info['receiver_address'];
+        //$info['address'] = $info['receiver_province'].$info['receiver_city'].$info['receiver_area'].$info['receiver_address'];
+        $info['address'] = $info['receiver_area'].$info['receiver_address'];
 
         //dd($info);
 

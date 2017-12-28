@@ -230,7 +230,9 @@ class OrderController extends BaseController
         $start_time = $request->get('start_time');
         $end_time = $request->get('end_time');
 
-        $order = Order::find($id);
+        //$order = Order::find($id);
+        $start_time = date('Y-m-d 00:00:01',strtotime($start_time));
+        $end_time = date('Y-m-d 23:59:59',strtotime($end_time));
 
         Order::where('id', $id)->update(['start_time' => $start_time,'end_time'=>$end_time]);
         alert('', 1);

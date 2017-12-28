@@ -105,13 +105,13 @@
                         <tr>
                             <td>租期开始时间：</td>
                             <td>
-                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2})" placeholder="开始时间" class="form-control validate[required,custom[date]]" id="start_time" name="start_time"  value="{{$order->start_time?$order->start_time:''}}">
+                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',errDealMode:2})" placeholder="开始时间" class="form-control validate[required,custom[date]]" id="start_time" name="start_time"  value="{{$order->start_time?$order->start_time:''}}">
                             </td>
                         </tr>
                         <tr>
                             <td>租期结束时间：</td>
                             <td>
-                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2})" placeholder="结束时间" class="form-control validate[required,custom[date]]" id="end_time" name="end_time"  value="{{$order->end_time?$order->end_time:''}}">
+                                <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',errDealMode:2})" placeholder="结束时间" class="form-control validate[required,custom[date]]" id="end_time" name="end_time"  value="{{$order->end_time?$order->end_time:''}}">
                             </td>
                         </tr>
                         </tbody>

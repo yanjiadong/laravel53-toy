@@ -6,7 +6,7 @@ Route::any('wechat/index/valid','Wechat\IndexController@valid');
 Route::any('wechat/index/menu','Wechat\IndexController@menu');
 
 //测试新版支付
-Route::any('wechat/index/pay_test','Wechat2\IndexController@pay_test')->name('wechat2.index.pay_test');
+Route::any('wechat2/index/pay_test','Wechat2\IndexController@pay_test')->name('wechat2.index.pay_test');
 
 //提交订单页面
 Route::get('wechat/index/submit_order/{good_id}','Wechat2\IndexController@submit_order')->name('wechat2.index.submit_order');
