@@ -40,6 +40,7 @@ class ExpressInfoController extends BaseController
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
         $result = curl_exec($ch);		//返回提交结果，格式与指定的格式一致（result=true代表成功）
+        return $result;
     }
 
     public function callback()
