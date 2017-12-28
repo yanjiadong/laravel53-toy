@@ -196,8 +196,8 @@
                         g: res.info.order.code,   //订单编号
                         h: res.info.order.pay_success_time,  //付款时间
                         j: res.info.order.send_time,  //平台发货时间
-                        k: res.info.order.start_time_int,   //租期开始时间
-                        l: res.info.order.end_time_int,   //租期结束时间
+                        k: res.info.order.start_time_new,   //租期开始时间
+                        l: res.info.order.end_time_new,   //租期结束时间
                         order_id:res.info.order.id
                     },
                     logistics:{cont:res.info.logistics.context,time:res.info.logistics.time,item3:res.info.order.send_time,name:res.info.order.express_title},//time为物流时间 item3是发货时间
@@ -347,8 +347,8 @@
                 $(".order-detail-wrap .order-info .order-info-cont ul li:eq(0) span").text('租赁订单编号：'+order_detail.data.logistics_state.address.g);
                 $(".order-detail-wrap .order-info .order-info-cont ul li:eq(1) span").text('付款时间：'+order_detail.data.logistics_state.address.h);
                 $(".order-detail-wrap .order-info .order-info-cont ul li:eq(2) span").text('平台发货时间：'+order_detail.data.logistics_state.address.j);
-                $(".order-detail-wrap .order-info .order-info-cont ul li:eq(3) span").text('租期开始时间：'+common.dateFormat1(order_detail.data.logistics_state.address.k,false)+'（您确认收货的第二天）');
-                $(".order-detail-wrap .order-info .order-info-cont ul li:eq(4) span").text('租期结束时间：'+common.dateFormat1(order_detail.data.logistics_state.address.l,false));
+                $(".order-detail-wrap .order-info .order-info-cont ul li:eq(3) span").text('租期开始时间：'+order_detail.data.logistics_state.address.k+'（物流被签收的第二天）');
+                $(".order-detail-wrap .order-info .order-info-cont ul li:eq(4) span").text('租期结束时间：'+order_detail.data.logistics_state.address.l);
 
                 //归还信息
                 $(".return-info .order-info-cont ul li:eq(0) span").text('寄回物流信息：'+order_detail.data.logistics_state.return_logistics.a+'（'+order_detail.data.logistics_state.return_logistics.b+'）');

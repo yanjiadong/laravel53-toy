@@ -506,20 +506,20 @@ class OrderController extends BaseController
             $info['send_time_int'] = strtotime($info['send_time']);
         }
 
-        $info['start_time_int'] = $this->time;
+        $info['start_time_new'] = '';
         $info['has_days'] = 0;
         if(!empty($info['start_time']))
         {
-            $info['start_time_int'] = strtotime($info['start_time']);
+            $info['start_time_new'] = date('Y.m.d',strtotime($info['start_time']));
 
             //计算已经租用天数
             $info['has_days'] = ceil(($this->time - strtotime($info['start_time']))/86400);
         }
 
-        $info['end_time_int'] = $this->time;
+        $info['end_time_new'] = '';
         if(!empty($info['end_time']))
         {
-            $info['end_time_int'] = strtotime($info['end_time']);
+            $info['end_time_new'] = date('Y.m.d',strtotime($info['end_time']));
         }
 
         $tel = get_tel();
