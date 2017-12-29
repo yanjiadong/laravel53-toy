@@ -58,6 +58,7 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
+                                <th>用户昵称</th>
                                 <th>支付订单号</th>
                                 <th>押金金额</th>
                                 <th>逾期天数</th>
@@ -72,6 +73,7 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $order->user->name }}</td>
                                     <td>{{ $order->out_trade_no }}</td>
                                     <td>{{ $order->money }}</td>
                                     <td>{{ $order->over_days }}(逾期金额:{{ number_format($order->over_days*$order->good_day_price,2,".",'') }})</td>
