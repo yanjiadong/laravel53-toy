@@ -134,7 +134,7 @@
         <div class="pic">
             <table>
                 <tr>
-                    <td><i class="icon-logo-big"></i></td>
+                    <td><i class="icon-logo-big-1"></i></td>
                     <td><i class="icon-return"></i></td>
                     <td><i class="icon-zmxy"></i></td>
                 </tr>
@@ -315,7 +315,7 @@
 <!--微信返回键跳转调整-->
 <script>
     $(function () {
-        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("index/choose_vip")>-1||document.referrer.indexOf("user/user_center")>-1){
+        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("user/user_center")>-1){
             sessionStorage.setItem("authorization_back_url",document.referrer)
         }
 
