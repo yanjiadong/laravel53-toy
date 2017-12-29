@@ -102,7 +102,15 @@
                                         <td>{{ $order->express_price }}</td>
                                     @endif
                                     @if(isset($status) && $status==3)
-                                        <td>{{ date('Y-m-d',strtotime($order->end_time)) }}({{ $order->days>0?$order->days.'天到期':'今日到期' }})</td>
+                                        <td>{{ date('Y-m-d',strtotime($order->end_time)) }}
+                                            @if($order->over_days>0)
+                                                    (已逾期{{$order->over_days}}天)
+                                                @elseif($order->days>0)
+                                                    ({{$order->days}}到期)
+                                                @else
+                                                    (今日到期)
+                                                @endif;
+                                        </td>
                                     @endif
                                     {{--<td>{{ $order->express_title }}</td>--}}
                                     <td>{{ $order->user->telephone }}</td>

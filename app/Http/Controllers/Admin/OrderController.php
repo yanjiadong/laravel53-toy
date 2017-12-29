@@ -136,8 +136,17 @@ class OrderController extends BaseController
             {
                 foreach ($orders as $order)
                 {
-                    //还剩几天到期
-                    $order->days2 = floor((strtotime($order['end_time']) - $this->time)/86400);
+                    $time = $this->time - strtotime($order->end_time);
+                    if($time > 0)
+                    {
+                        //还剩几天到期
+                        $order->over_days = ceil($time/86400);
+
+                    }
+                    else
+                    {
+                        $order->days2 = floor((strtotime($order->end_time) - $this->time)/86400);
+                    }
                 }
             }
         }
