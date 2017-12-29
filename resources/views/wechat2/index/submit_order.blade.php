@@ -84,14 +84,14 @@
                             <span class="checked"><i class="icon-right"></i></span>
                         </div>
                     </div>
-                    <div class="fl active">
+                    <div class="fl">
                         <div class="cont">
                             <div class="time"><span class="time-text">3周</span><span class="discount-flag">惠</span></div>
                             <div class="money">¥/天</div>
                             <span class="checked"><i class="icon-right"></i></span>
                         </div>
                     </div>
-                    <div class="fl">
+                    <div class="fl active">
                         <div class="cont">
                             <div class="time"><span class="time-text">1个月</span><span class="discount-flag">惠</span></div>
                             <div class="money">¥/天</div>
@@ -480,7 +480,7 @@
 
                     $("#is_use_zhima").val(res.info.good.can_use_zhima);
                     $("#coupon_id").val(order_obj.data.actural_data.coupon_id);
-                    $("#days").val(21);
+                    $("#days").val(30);
 
                     //商品赋值
                     var orderGoodData =' <table><tr><td rowspan="3"><a href="'+order_obj.data.orderDataList.good.e+'"><img src="'+order_obj.data.orderDataList.good.a+'"></a>' +
@@ -583,11 +583,12 @@
                                     case '3周':
                                         $(".rent-time .rent-time-item .fl:eq(2) .money").text('¥'+order_obj.data.rent_time_list[i].money+'/天');
                                         $(".rent-time .rent-time-item .fl:eq(2) .discount-flag").css({'display':'inline-block'});
-                                        order_obj.data.actural_data.rent = Math.round(21*order_obj.data.rent_time_list[i].money*10)/10;
+                                        //order_obj.data.actural_data.rent = Math.round(21*order_obj.data.rent_time_list[i].money*10)/10;
                                         break;
                                     case '1个月':
                                         $(".rent-time .rent-time-item .fl:eq(3) .money").text('¥'+order_obj.data.rent_time_list[i].money+'/天');
                                         $(".rent-time .rent-time-item .fl:eq(3) .discount-flag").css({'display':'inline-block'});
+                                        order_obj.data.actural_data.rent = Math.round(30*order_obj.data.rent_time_list[i].money*10)/10;
                                         break;
                                     case '2个月':
                                         $(".rent-time .rent-time-item .fl:eq(4) .money").text('¥'+order_obj.data.rent_time_list[i].money+'/天');
@@ -608,11 +609,12 @@
                                         $(".rent-time .rent-time-item .fl:eq(2) .money").text('¥'+order_obj.data.rent_time_list[i].money+'/天');
                                         $(".rent-time .rent-time-item .fl:eq(2) .discount-flag").hide();
                                         //  order_obj.data.rent_data ={time:'21',per_money:order_obj.data.rent_time_list[i].money,rent_money:Math.round(21*order_obj.data.rent_time_list[i].money*10)/10}; //初始默认三周为选中
-                                        order_obj.data.actural_data.rent = Math.round(21*order_obj.data.rent_time_list[i].money*10)/10;
+                                        //order_obj.data.actural_data.rent = Math.round(21*order_obj.data.rent_time_list[i].money*10)/10;
                                         break;
                                     case '1个月':
                                         $(".rent-time .rent-time-item .fl:eq(3) .money").text('¥'+order_obj.data.rent_time_list[i].money+'/天');
                                         $(".rent-time .rent-time-item .fl:eq(3) .discount-flag").hide();
+                                        order_obj.data.actural_data.rent = Math.round(30*order_obj.data.rent_time_list[i].money*10)/10;
                                         break;
                                     case '2个月':
                                         $(".rent-time .rent-time-item .fl:eq(4) .money").text('¥'+order_obj.data.rent_time_list[i].money+'/天');

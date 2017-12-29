@@ -166,7 +166,7 @@
         },
         //押金申请提现
         applyCash:function (code) {
-            common.confirm_tip("确认提现","确认申请押金的提现吗？",null,function () {
+            common.confirm_tip("提现说明","如有逾期或赔偿相关费用，将会优先从押金中扣除，如没有则会全额返回！",null,function () {
                 common.httpRequest("{{ url('api/order/apply_money') }}",'post',{user_id:'{{ $user_id }}',code:code},function (res) {
                     //res={success:true,error:'操作超时，请稍后重试！'};
                     if(res.code == 200){
@@ -175,7 +175,7 @@
                         common.alert_tip(res.msg);
                     }
                 })
-            });
+            },'确认提现');
         }
     };
     $(function () {

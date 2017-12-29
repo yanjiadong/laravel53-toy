@@ -62,7 +62,7 @@
                     <div class="logistics-info">
                         <div class="title bg-white">
                             <i class="return-logistics3"></i>
-                            <span>玩具寄回的物流信息</span>
+                            <span>寄回的物流信息</span>
                         </div>
                         <div class="number clear">
                             <div class="fl">

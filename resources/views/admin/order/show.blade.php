@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <td>收货人电话：</td>
-                            <td>{{$order->receiver_telephone}}</td>
+                            <td>{{ !empty($order->receiver_telephone)?substr($order->receiver_telephone,0,3).' '.substr($order->receiver_telephone,3,3).' '.substr($order->receiver_telephone,4,5):'' }}(该用户绑定的手机号：{{$order->user->telephone}})</td>
                         </tr>
                         <tr>
                             <td>收货地址：</td>
