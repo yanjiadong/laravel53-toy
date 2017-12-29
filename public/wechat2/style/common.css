@@ -87,7 +87,7 @@ i.icon-order-detail{
 .icon_proDetail_label3{width:23px;height: 23px;background-position: -47px -65px;}
 .icon_proDetail_label4{width:21px;height: 21px;background-position: -48px -91px;}
 .icon_share{width:17px;height: 19px;background-position: -48px -118px;}
-.icon_state_car{width:27px;height: 23px;background-position: -48px -140px;}
+.icon_state_car{width:27px;height: 23px;background-position: -48px -141px;}
 .icon_state_delivery{width:16px;height: 14px;background-position: -47px -167px;}
 .icon_state_qianshou{width:24px;height: 27px;background-position: -48px -186px;}
 .icon_tip{width:17px;height: 17px;background-position: -47px -219px;}
@@ -352,6 +352,17 @@ i.icon-order-detail{
 .icon-logo-big{
     display: inline-block;
     background-image: url(../image/common/icon_logo.png);
+    background-size: 48px 48px;
+    background-position: 0 0;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+.icon-logo-big-1{
+    display: inline-block;
+    background-image: url(../image/common/order-list-logo.png);
     background-size: 48px 48px;
     background-position: 0 0;
     width: 48px;

@@ -66,7 +66,8 @@
     text-align: center;
 }
 .index-wrap .content .recommend .top-cont .top-title table td:first-child{
-    width:43px;
+    width:33px;
+    text-align: left;
 }
 .index-wrap .content .recommend .top-cont .top-title table td:nth-child(2n){
     width: 5%;
@@ -99,6 +100,7 @@
     color: #323232 ;
     font-size: 15px;
     text-align: center;
+    margin-top: 5px;
 }
 .index-wrap .content .recommend .new-arrivals .top-left-title .lip{
     display: inline-block;
@@ -135,7 +137,7 @@
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont {
     padding-left: 10px;
-    margin-top: 10px;
+    margin-top: 5px;
     overflow: hidden;
     height: 220px;
 }
@@ -147,41 +149,51 @@
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul{
     width: 100%;
+    margin-top: 8px;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li{
     font-size: 0;
-    width: 230px;
-    position: relative;
+    width: 240px;
     margin-right: 16px;
+    position: relative;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent{
-    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 2px;
+  /*  position: absolute;
     bottom:5px;
     right: 0;
     font-size: 10px;
     color: #fff;
     padding: 6px;
     border-radius: 5px;
-    background-image:linear-gradient(90deg, #ff9374 5%, #ff5a40 100%);
+    background-image:linear-gradient(90deg, #ff9374 5%, #ff5a40 100%);*/
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent span{
-    display: inline-block;
-    vertical-align: middle;
+    color: #f00;
     font-size: 10px;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent span.money{
-   font-size:14px;
+   font-size:18px;
+    color: #f00;
 }
-.index-wrap .content .recommend .new-arrivals .recommend-cont ul li .rent .icon_arrowRight_white{
-    background-position: -6px -71px;
-    width: 6px;
-    height: 11px;
+.index-wrap .content .recommend .new-arrivals .recommend-cont ul li .flag{
+    display: inline-block;
+    font-size: 0;
+    vertical-align: middle;
+}
+.index-wrap .content .recommend .new-arrivals .recommend-cont ul li .flag .item{
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    width: 54px;
+    height: 20px;
+    line-height: 20px;
+    background:#ff6d50;
+    margin-left: 10px;
     display: inline-block;
     vertical-align: middle;
-    overflow: hidden;
-    background-image: url(../image/common/css.png);
-    background-size: 120px 500px;
-    margin-left: 3px;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li img{
     width: 100%;
@@ -195,6 +207,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.index-wrap .content .recommend .new-arrivals .recommend-cont ul li h3{
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 .index-wrap .content .recommend .new-arrivals .recommend-cont ul li p{
     color: #8D8D8D;
@@ -321,6 +337,7 @@
     color: #323232 ;
     font-size: 15px;
     text-align: center;
+    margin-top: 5px;
 }
 
 .index-wrap .content .recommend .hot .top-left-title .lip{
@@ -358,7 +375,7 @@
 }
 .index-wrap .content .recommend .hot .hot-list {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .index-wrap .content .recommend .hot .hot-list ul li {
     width: 50%;
@@ -480,7 +497,7 @@
     display: block;
     margin: 20px auto;
 }
-.index-wrap-cover1{
+.index-wrap-cover1,.index-wrap-cover2{
     position: fixed;
     background-color: rgba(0,0,0,0.48);
     top:0;
@@ -490,7 +507,7 @@
     z-index: 999;
     display: none;
 }
-.index-wrap-cover1 .index-main-cover1{
+.index-wrap-cover1 .index-main-cover1,.index-wrap-cover2 .index-main-cover2{
     width: 90%;
     overflow: hidden;
     border-radius: 4px;
@@ -500,11 +517,14 @@
     background-color: transparent;
     transform: translate(-50%,-50%);
 }
-.index-wrap-cover1 .index-main-cover1 .pic{
+.index-wrap-cover1 .index-main-cover1 .pic,.index-wrap-cover2 .index-main-cover2 .pic{
     text-align: center;
 }
 .index-wrap-cover1 .index-main-cover1 img{
     width: 90%;
+}
+.index-wrap-cover2 .index-main-cover2 img{
+    width: 100%;
 }
 .index-wrap-cover1 .index-main-cover1 .close-btn{
     background: url("../image/common/icon_dialog_close_bottom.png") no-repeat center;
@@ -515,6 +535,27 @@
     position: absolute;
     top:0;
     right:10%;
+}
+.index-wrap-cover2 .index-main-cover2 .close-btn{
+    background: url(../image/common/icon_dialog_close_bottom.png) no-repeat center;
+    background-position: 0;
+    width: 50px;
+    height: 50px;
+    background-size: 24px 24px;
+    position: absolute;
+    top: 18px;
+    right: 5%;
+     opacity: 0;
+}
+.index-wrap-cover2 .index-main-cover2 .pic button{
+    width: 45%;
+    height: 40px;
+    border: 1px solid red;
+    position: absolute;
+    bottom: 16%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
 }
 
 /*---------------------------分类详情页-----------------------------------*/
@@ -779,13 +820,12 @@
     color: #8D8D8D;
     font-size: 15px;
     padding: 0 12px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .good-detail-wrap .good-detail-content .top h4 {
     color: #8D8D8D;
     font-size: 15px;
     padding: 0 12px;
-    margin-top: 5px;
 }
 .good-detail-wrap .good-detail-content .good-tips {
     background-color: #fff;
@@ -806,10 +846,15 @@
     display: inline-block;
     width: 100%;
     margin-top: 5px;
-    height: 20px;
+    height: 23px;
+    text-align: left;
+    text-indent: 1.25em;
 }
 .good-detail-wrap .good-detail-content .good-tips table tr td .font {
     color: #8D8D8D;
+    margin-top: 3px;
+    text-align: left;
+    text-indent: 0
 }
 .good-detail-wrap .good-detail-content .good-tips table tr td .caret {
     display: inline-block;
@@ -1538,7 +1583,7 @@
     margin-right: 10px;
     background: url("../image/common/order-list-logo.png");
     background-size: 26px 26px;
-
+    border-radius: 5px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .top .fl span{
     font-size: 14px;
@@ -1613,6 +1658,11 @@
     height: 40px;
     line-height: 40px;
     border-bottom: 1px solid #f6f6f6;
+}
+.lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .delay{
+    font-size: 12px;
+    color: #808080;
+    text-align: right;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .i-return-show{
     height: 23px;
@@ -1869,6 +1919,12 @@
     display: inline-block;
     vertical-align: middle;
     letter-spacing: -0.6px;
+}
+.lease-order .order-detail-main  .return .detail-list li .delay{
+    font-size: 12px;
+    color: #808080;
+    text-align: right;
+    padding:10px;
 }
 .lease-order .order-detail-main  .return .detail-list li .total {
     padding: 10px;
@@ -3030,6 +3086,16 @@
     text-align: center;
     margin-top: 20px;
 }
+.cash-success .bottom-tips{
+    background:#ffeac6;
+    border: 1px solid #fcba4a;
+    font-size:12px ;
+    color: #a37529;
+    padding: 10px 5px;
+    width: 90%;
+    margin: 50px auto 0;
+    text-align: center;
+}
 /*---------------------------------------------------------儿童趣编程--------------------------------*/
 .child-interesting-wrap .child-interesting-main .top {
     padding: 10px 20px;
@@ -3510,13 +3576,13 @@
 .pay-success .money {
     font-size:24px;
     color:#4c3a30;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
 }
 .pay-success p {
     font-size:12px;
     color:#909090;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     line-height: 20px;
 }
@@ -3539,7 +3605,7 @@
     margin-right: 10px;
 }
 .pay-success .btn {
-    margin: 20px auto;
+    margin: 50px auto 0;
     width: 60%;
 }
 .pay-success .btn button:first-child {
@@ -3547,7 +3613,7 @@
       height: 34px;
       border-radius: 4px;
       background-color: transparent;
-      font-size: 16px;
+      font-size: 14px;
       color: #ffaa00;
       margin-bottom: 15px;
       border: 1px solid #ffaa00;
@@ -3557,7 +3623,7 @@
     height: 34px;
     border-radius: 4px;
     background-color: #ffaa00;
-    font-size: 16px;
+    font-size: 14px;
     color: #fff;
     margin-bottom: 15px;
     border: 1px solid #ffaa00;
@@ -3787,16 +3853,44 @@ textarea {
 }
 .logistics-info-wrap .logistics-info-main .detail-cont .top-tips{
     width: 100%;
-    background-color: #ffedc9;
-    color: #896825;
-    line-height: 18px;
-    padding:5px 10px;
-    font-size: 13px;
-    position: fixed;
-    top: 0;
+    font-size:0;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .top-tips img{
+    width: 100%;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address{
+     padding: 10px;
+ }
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont{
+    border-radius: 5px;
+    background-color: #fff5e5;
+    padding: 10px;
+    color: #808080;
+    font-size: 14px;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont .title{
+    text-align: center;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont .title .lip{
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #cbcaca;
+    height: 1px;
+    width: 13px
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont table{
+    margin-top: 5px;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont table tr td{
+    height: 20px;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont table tr:first-child td.name{
+    width: 20%;
+}
+.logistics-info-wrap .logistics-info-main .detail-cont .return-address .cont .title span{
+    margin: 0 8px;
 }
 .logistics-info-wrap .logistics-info-main .detail-cont .detail-cont-main{
-    padding-top: 42px;
     margin-bottom: 64px;
 }
 .logistics-info-wrap .detail-cont-main .cont .top,
@@ -3815,15 +3909,14 @@ textarea {
     font-size: 14px;
     display: inline-block;
     vertical-align: middle;
+    color: #000;
 }
 .logistics-info-wrap .detail-cont-main .cont .top .return-logistics1{
     display: inline-block;
     vertical-align: middle;
-    width: 17px;
-    height: 17px;
-    background: url(../image/common/return_logistics.png);
-    background-size: 18px 60px;
-    background-position: 0 -20px;
+    width: 4px;
+    height: 18px;
+    background:#bbb;
     margin-right: 5px;
 }
 .logistics-info-wrap .detail-cont-main .cont .return-info .title .return-logistics2{
@@ -3839,11 +3932,9 @@ textarea {
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .title .return-logistics3{
     display: inline-block;
     vertical-align: middle;
-    width: 17px;
-    height: 11px;
-    background: url(../image/common/return_logistics.png);
-    background-size: 18px 60px;
-    background-position: 0 -39px;
+    width: 4px;
+    height: 18px;
+    background: #bbb;
     margin-right: 5px;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail {
@@ -3852,7 +3943,7 @@ textarea {
     margin-bottom: 5px;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fl {
-    width: 25%;
+    width:60px;
     height: 100%;
     padding: 0 10px 0 0;
 }
@@ -3863,7 +3954,7 @@ textarea {
     vertical-align: middle;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr {
-    width: 75%;
+    width: calc(100% - 60px);
     position: relative;
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr .num{
@@ -4667,11 +4758,12 @@ textarea {
     font-size: 14px;
 }
 .authorization-info .count{
-    font-size:18px;
-    color:#444444;
+    font-size: 18px;
+    color: #444444;
     text-align: center;
-    line-height: 33px;
-    height: 33px;
+    line-height: 44px;
+    height: 44px;
+    border-bottom: 1px solid #efefef;
 }
 .authorization-info .count span{
     color: #f00;
@@ -4889,13 +4981,13 @@ textarea {
 }
 .my-deposit-wrap .list ul li .operate .tips {
     font-size: 13px;
-    color: #808080;
+    color: #000;
     display: inline-block;
 }
 .my-deposit-wrap .list ul li .operate button.apply {
     font-size: 13px;
     color: #fff;
-    padding: 3px 6px;
+    padding:6px;
     border-radius: 5px;
     margin-left: 5px;
     background-color: #ffaa00;
@@ -4936,6 +5028,7 @@ textarea {
     text-align: center;
     color: #C9C8DA;
     font-size: 15px;
+    width: 100%;
 }
 .my-deposit-wrap-no-good .tips h3{
     font-size:14px;
@@ -5048,7 +5141,7 @@ textarea {
     table-layout: auto;
 }
 .order-detail-wrap .logistics .address .name-phone table tr:first-child{
-    height: 32px;
+    height: 25px;
 }
 .order-detail-wrap .logistics .address .name-phone table tr td:first-child {
     width: 15px;
@@ -5057,7 +5150,7 @@ textarea {
 .order-detail-wrap .logistics .address .name-phone table tr td:first-child .local {
     width: 10px;
     height: 16px;
-    background-position: -14px -94px;
+    background-position: -15px -94px;
     vertical-align: middle;
 }
 .order-detail-wrap .logistics .address .name-phone table tr td:nth-child(2) {
@@ -5137,7 +5230,9 @@ textarea {
 }
 .order-detail-wrap .order-detail .list ul li .fr{
     text-align: right;
-    letter-spacing: -0.9px;
+}
+.order-detail-wrap .order-detail .list ul li:first-child .fr span{
+
 }
 .order-detail-wrap .detail-list {
     margin-top: 8px;
@@ -5155,7 +5250,7 @@ textarea {
     vertical-align: middle;
 }
 .order-detail-wrap .detail-list ul li .fl i.i-rent {
-    width: 20px;
+    width: 21px;
     height: 17px;
     background-position: -46px -397px;
     margin-right: 5px;
