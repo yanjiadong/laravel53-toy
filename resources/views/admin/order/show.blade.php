@@ -28,6 +28,10 @@
                             <td>{{$order->price}}元</td>
                         </tr>
                         <tr>
+                            <td>订单押金：</td>
+                            <td>{{$order->money}}元</td>
+                        </tr>
+                        <tr>
                             <td>订单状态：</td>
                             <td>{{$order->status}}</td>
                         </tr>
