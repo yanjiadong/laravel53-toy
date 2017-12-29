@@ -130,6 +130,17 @@ class OrderController extends BaseController
             }
             $orders = Order::with(['user'])->where($where)->orderBy('id', 'desc')->paginate(20);
         }
+        if($status == 3)
+        {
+            if(count($orders) > 0)
+            {
+                foreach ($orders as $order)
+                {
+                    //还剩几天到期
+                    $order->days2 = floor((strtotime($order['end_time']) - $this->time)/86400);
+                }
+            }
+        }
         $menu = 'order';
         //print_r($orders);
 

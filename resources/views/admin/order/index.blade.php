@@ -74,6 +74,9 @@
                                 @if(isset($status) && $status!=3)
                                     <th>邮费</th>
                                 @endif
+                                @if(isset($status) && $status==3)
+                                    <th>到期时间</th>
+                                @endif
                                 {{--<th>发货物流</th>--}}
                                 <th>会员手机号</th>
                                 <th>会员微信昵称</th>
@@ -97,6 +100,9 @@
                                     <td>{{ $order->good_title }}</td>
                                     @if(isset($status) && $status!=3)
                                         <td>{{ $order->express_price }}</td>
+                                    @endif
+                                    @if(isset($status) && $status==3)
+                                        <td>{{ date('Y-m-d',strtotime($order->end_time)) }}({{ $order->days>0?$order->days.'天到期':'今日到期' }})</td>
                                     @endif
                                     {{--<td>{{ $order->express_title }}</td>--}}
                                     <td>{{ $order->user->telephone }}</td>
