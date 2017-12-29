@@ -21,9 +21,9 @@
     <div class="money">¥{{$order->price}}</div>
     <p>已支付成功，我们会尽快安排发货。<br>
         在您收到货的第二天才开始计算租期哦！</p>
-    <div class="btn">
-        <button class="fl" onclick="goIndex()">返回首页</button>
-        <button class="fr" onclick="goodDetail()">查看订单</button>
+    <div class="btn clear">
+        <button class="fl" onclick="goodDetail()">查看订单</button>
+        <button class="fr" onclick="goIndex()">返回首页</button>
     </div>
 </div>
 

@@ -88,6 +88,14 @@
             <table>
                 <tr>
                     <td class="dot-box"><div class="dot"></div></td>
+                    <td>使用芝麻信用减免押金最多可减免至99元</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="dot-box"><div class="dot"></div></td>
                     <td>您免押金租赁时的信用行为会同步给芝麻信用</td>
                 </tr>
                 <tr>

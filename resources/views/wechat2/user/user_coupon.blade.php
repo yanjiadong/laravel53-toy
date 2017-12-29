@@ -20,30 +20,7 @@
     </div>--}}
     <div class="list">
         <ul>
-            <!-- <li class="clear active">
-                 <div class="fl">
-                     <i class="icon-wave-left "></i>
-                     <span>¥100</span>
-                 </div>
-                 <div class="fr">
-                     <i class="icon-wave-right"></i>
-                     <h3>新手专享优惠卷</h3>
-                     <p>有效期：<span>2017.2.3-2017.3.3</span></p>
-                     <h5>任意金额可用</h5>
-                 </div>
-             </li>
-             <li class="clear">
-                 <div class="fl">
-                     <i class="icon-wave-left "></i>
-                     <span>¥100</span>
-                 </div>
-                 <div class="fr">
-                     <i class="icon-wave-right"></i>
-                     <h3>新手专享优惠卷</h3>
-                     <p>有效期：<span>2017.2.3-2017.3.3</span></p>
-                     <h5>任意金额可用</h5>
-                 </div>
-             </li>-->
+
         </ul>
     </div>
     {{--<div class="footer bg-white">
@@ -51,8 +28,8 @@
     </div>--}}
     <div class="no-good">
         <div class="tips">
-            <i class="icon-no-goods2"></i>
-            <h4>您还没有可用的会员抵用券</h4>
+            <img src="/wechat2/image/common/no-good3.png">
+            <h4>您还没有可用的优惠券</h4>
         </div>
     </div>
 </div>

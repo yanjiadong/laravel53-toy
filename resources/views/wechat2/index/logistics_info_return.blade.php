@@ -46,7 +46,7 @@
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
-                location.href="{{ route('wechat2.index.order_list') }}";
+                location.href="{{ route('wechat2.index.order_list') }}"+'?page=1';
             }
         }, false);
     });

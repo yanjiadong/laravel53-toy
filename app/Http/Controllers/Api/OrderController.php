@@ -209,6 +209,7 @@ class OrderController extends BaseController
             if($total_price >= $coupon->condition)
             {
                 $total_price = $total_price - $coupon->coupon_price;
+                $coupon_price = $coupon->coupon_price;
             }
         }
 

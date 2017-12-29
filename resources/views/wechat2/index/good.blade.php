@@ -82,7 +82,7 @@
                         </td>
                         <td>
                             <div class="img"><i class="icon icon_proDetail_label2"></i></div>
-                            <div class="font">往返包邮</div>
+                            <div class="font">邮费减免</div>
                         </td>
                         <td>
                             <div class="img"><i class="icon icon_proDetail_label3"></i></div>
@@ -104,8 +104,8 @@
                     <p>品牌正品保障，让您租的更省心，孩子玩的放心！</p>
                 </li>
                 <li>
-                    <h3>往返包邮</h3>
-                    <p>每个自然月内提供2次往返免邮费服务</p>
+                    <h3>邮费减免</h3>
+                    <p>租期满一定金额即可享受往返邮费减免</p>
                 </li>
                 <li>
                     <h3>微损免赔</h3>
@@ -354,7 +354,8 @@
                     $(".footer ul li:last .join-car").addClass('active');
                     $(".footer ul li:last .join-car span").hide();
                 }else{
-                    $(".footer ul li:last .join-car").css({'width':'100%'}).removeClass('active');
+                    //$(".footer ul li:last .join-car").css({'width':'100%'}).removeClass('active');
+                    $(".footer ul li:last .join-car").css({'width':'100%'}).addClass('active');
                     $(".footer ul li:last .join-car span").show();
                     $(".good-detail-wrap .footer ul li .btn-rent").hide();
                 }
@@ -676,23 +677,24 @@
     })
 </script>
 <script>
-    $(function () {
+    if(document.referrer.indexOf("submit_order")!=-1&&document.referrer.indexOf("index/cart")!=-1){
+        sessionStorage.setItem("good_detail_back_url",document.referrer)
+    }
+    /*----------避免下一页返回这一页调用这个函数-------------*/
+    var bool=false;
+    setTimeout(function(){
         pushHistory();
-        /*----------避免下一页返回这一页调用这个函数-------------*/
-        var bool=false;
-        setTimeout(function(){
-            bool=true;
-        },500);
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            if(bool&&window.location.href.indexOf("#")==-1) {
-                location.href = document.referrer;  //在这里指定其返回的地址  订单列表页面
-            }
-        }, false);
-    });
+        bool=true;
+    },1000);
+    window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+        if(bool) {
+            location.href = sessionStorage.getItem('order_detail_back_url')?sessionStorage.getItem('order_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
+        }
+    }, false);
     function pushHistory() {
         var state = {
             title: "title",
-            url: "#"
+            url: ''
         };
         window.history.pushState(state, state.title, state.url);
     }

@@ -18,7 +18,27 @@
     <div class="logistics-info-main">
         <div class="detail-cont">
             <div class="top-tips">
-                归还时优先使用顺丰将器具寄回，记得选择货到付款哦！
+                <img src="/wechat2/image/common/submit-return.png" alt="">
+            </div>
+            <div class="return-address  bg-white">
+                <div class="cont">
+                    <div class="title">
+                        <i class="lip"></i>
+                        <span>寄回地址</span>
+                        <i class="lip"></i>
+                    </div>
+                    <div class="info">
+                        <table>
+                            <tr>
+                                <td class="name"></td>
+                                <td class="cell"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="address"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="detail-cont-main">
                 <div class="cont">
@@ -124,10 +144,15 @@
                     d:res.info.address,
                     h:res.info.telephone
                 };
-                $(".logistics-info-wrap .return-info .info table tr td.name").text(logisticsInfo.returnInfo.c);
-                $(".logistics-info-wrap .return-info  .info table tr td.cell").text(logisticsInfo.returnInfo.h.slice(0,3)+'-'
-                    +logisticsInfo.returnInfo.h.slice(3,7)+'-'+logisticsInfo.returnInfo.h.slice(7));
-                $(".logistics-info-wrap .return-info .info table tr td.address").text(logisticsInfo.returnInfo.d);
+
+                $(".logistics-info-wrap .return-address table tr td.name").text(logisticsInfo.returnInfo.c);
+                $(".logistics-info-wrap .return-address table tr td.cell").text(logisticsInfo.returnInfo.h);
+                $(".logistics-info-wrap .return-address table tr td.address").text(logisticsInfo.returnInfo.d);
+
+                //$(".logistics-info-wrap .return-info .info table tr td.name").text(logisticsInfo.returnInfo.c);
+                //$(".logistics-info-wrap .return-info  .info table tr td.cell").text(logisticsInfo.returnInfo.h.slice(0,3)+'-'
+                    //+logisticsInfo.returnInfo.h.slice(3,7)+'-'+logisticsInfo.returnInfo.h.slice(7));
+                //$(".logistics-info-wrap .return-info .info table tr td.address").text(logisticsInfo.returnInfo.d);
             });
             //列表
             //  res.length=0;
@@ -156,9 +181,13 @@
                     var href = "{{url('wechat2/index/good')}}"+'/'+logisticsInfo.data.goodData.id;
 
                     var cont ='<a href="'+href+'"><div class="fl"><img src="'+logisticsInfo.data.goodData.good_picture+'"></div>' +
+                        '<div class="fr"><h3>'+logisticsInfo.data.goodData.good_title+'</h3>' +'<div class="num">x'+'1'+'</div></div></a>';
+                    $(".detail-cont-main .good-detail").html(cont);
+
+                    /*var cont ='<a href="'+href+'"><div class="fl"><img src="'+logisticsInfo.data.goodData.good_picture+'"></div>' +
                         '<div class="fr"><h3>'+logisticsInfo.data.goodData.good_title+'</h3>' +
                         '<p>市场价¥'+logisticsInfo.data.goodData.good_price+'</p><h4>适龄'+logisticsInfo.data.goodData.good_old+'岁</h4><div class="num">x'+1+'</div></div></a>';
-                    $(".detail-cont-main .good-detail").html(cont);
+                    $(".detail-cont-main .good-detail").html(cont);*/
 
                 }else{
                     $(".logistics-info-main .detail-cont").hide();

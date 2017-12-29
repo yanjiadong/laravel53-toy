@@ -1285,7 +1285,7 @@
         chooseRentTimeItem:function () {
             $(".rent-time .rent-time-item .fl").click(function () {
                 $(".rent-time .rent-time-item .fl:last .set-time").hide();
-                $(".rent-time .rent-time-item .fl:last .setting").text("自定义天数").css({'margin-top':'7px','color':'#797979'});
+                $(".rent-time .rent-time-item .fl:last .setting").text("自定义天数").css({'margin-top':'9px','color':'#797979'});
                 if($(this).find(".setting").length==0){
                     $(".rent-time .rent-time-item .fl").removeClass('active');
                     $(this).addClass('active');
@@ -1335,6 +1335,12 @@
             $("title").text("优惠券");
             //优惠券列表
             vip_voucher.init();
+        },
+        //跳转认证页面
+        goAutorization:function () {
+            if($(".submit-order-wrap .yajin-item-list ul li .fl span.tips").hasClass("active")){
+                location.href="{{ url('wechat2/index/zmxy/index') }}";
+            }
         }
     };
 
@@ -1368,9 +1374,10 @@
                             var fanwei = '租金满'+vip_voucher.data.list[i].condition+'元可用';
                         }
 
+
                         if(vip_voucher.data.list[i].condition <= vip_voucher.data.rentMoney && vip_voucher.data.list[i].can_use){
                             /*-----之前选中优惠券再进入默认是选中------*/
-                            if(vip_voucher.data.discount_car_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.discount_car_id){
+                            /*if(vip_voucher.data.discount_car_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.discount_car_id){
                                 console.log(vip_voucher.data.discount_car_id);
                                 cont+='<li class="clear active"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].coupon_price+'</span>'
                                     +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].coupon_title+'</h3>' +
@@ -1379,7 +1386,10 @@
                                 cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].coupon_price+'</span>'
                                     +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].coupon_title+'</h3>' +
                                     '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
-                            }
+                            }*/
+                            cont+='<li class="clear"><div class="fl"><i class="icon-wave-left "></i><span>¥'+vip_voucher.data.list[i].coupon_price+'</span>'
+                                +'</div><div class="fr"><i class="icon-wave-right"></i><h3>'+vip_voucher.data.list[i].coupon_title+'</h3>' +
+                                '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                             //筛选最大金额
                             if(max<vip_voucher.data.list[i].coupon_price){
                                 max = vip_voucher.data.list[i].coupon_price;
@@ -1429,12 +1439,6 @@
             $(".submit-voucher-wrap").hide();
             $(".submit-order-wrap").show();
             $("title").text("提交订单");
-        },
-        //跳转认证页面
-        goAutorization:function () {
-            if($(".submit-order-wrap .yajin-item-list ul li .fl span.tips").hasClass("active")){
-                location.href="{{ url('wechat2/index/zmxy/index') }}";
-            }
         }
     };
 

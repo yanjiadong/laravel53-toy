@@ -209,14 +209,14 @@
                         var href = "{{url('wechat2/index/order_detail')}}"+'/'+orderDtail.data.list[i].code;
                         switch (orderDtail.data.list[i].status) {
                             case "待发货":
-                                dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>玩玩具趣编程</span>' +
+                                dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>小Q编程</span>' +
                                     '</div><div class="fr">待发货</div></div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'</h3><p>市场价¥'+Math.round(orderDtail.data.list[i].good_price)+'</p>' +
                                     '<h4>适龄'+orderDtail.data.list[i].good_old+'</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line"><div class="info1"><span class="rent-time">租期'+orderDtail.data.list[i].days+'天</span>实付款：¥'+orderDtail.data.list[i].price+'（含押金¥'+Math.round(orderDtail.data.list[i].money)+'）</div></div></div><div class="total clear">' +
                                     '<a href="tel:'+res.info.phone+'"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a></div></li>';
                                 break;
                             case "已发货":
-                                dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>玩玩具趣编程</span>' +
+                                dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>小Q编程</span>' +
                                     '</div><div class="fr">已发货</div></div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'</h3><p>市场价¥'+Math.round(orderDtail.data.list[i].good_price)+'</p>' +
                                     '<h4>适龄'+orderDtail.data.list[i].good_old+'</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line"><div class="info1"><span class="rent-time">租期'+orderDtail.data.list[i].days+'天</span>实付款：¥'+orderDtail.data.list[i].price+'（含押金¥'+Math.round(orderDtail.data.list[i].money)+'）</div></div></div><div class="total clear">' +
@@ -234,16 +234,23 @@
                                     {
                                         var content = orderDtail.data.list[i].days2+'天后到期';
                                     }
-                                    dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>玩玩具趣编程</span>' +
+                                    dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>小Q编程</span>' +
                                         '</div><div class="fr">租用中</div></div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'">' +
                                         '</div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'</h3><p>市场价¥'+Math.round(orderDtail.data.list[i].good_price)+'</p>' +
                                         '<h4>适龄'+orderDtail.data.list[i].good_old+'</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line"><div class="info1">'+'实付款：¥'+orderDtail.data.list[i].price+'（含押金¥'+Math.round(orderDtail.data.list[i].money)+'）</div><div class="i-return-show red"><div class="cont">'+content+'</div></div><div class="info2">租期'+orderDtail.data.list[i].days+'天（'+orderDtail.data.list[i].start_time_new+'-'+orderDtail.data.list[i].end_time_new+')</div></div></div><div class="total clear">' +
                                         '<a href="tel:'+res.info.phone+'"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button><button class="confirm-btn" onclick="orderDtail.goReturn(\''+orderDtail.data.list[i].code+'\')">归还器具</button></div></li>';
                                 }else{
-                                    dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>玩玩具趣编程</span>' +
+                                    /*dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>小Q编程</span>' +
                                         '</div><div class="fr">租用中</div></div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'">' +
                                         '</div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'</h3><p>市场价¥'+Math.round(orderDtail.data.list[i].good_price)+'</p>' +
                                         '<h4>适龄'+orderDtail.data.list[i].good_old+'</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line"><div class="info1">'+'实付款：¥'+orderDtail.data.list[i].price+'（含押金¥'+Math.round(orderDtail.data.list[i].money)+'）</div><div class="i-return-show red"><div class="cont">已逾期'+orderDtail.data.list[i].over_days+'天</div></div><div class="info2">租期'+orderDtail.data.list[i].days+'天（'+orderDtail.data.list[i].start_time_new+'-'+orderDtail.data.list[i].end_time_new+')</div></div></div><div class="total clear">' +
+                                        '<a href="tel:'+res.info.phone+'"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button><button class="confirm-btn" onclick="orderDtail.goReturn(\''+orderDtail.data.list[i].code+'\')">归还器具</button></div></li>';*/
+
+                                    dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>小Q编程</span>' +
+                                        '</div><div class="fr">租用中</div></div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'">' +
+                                        '</div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'</h3><p>市场价¥'+Math.round(orderDtail.data.list[i].good_price)+'</p>' +
+                                        '<h4>适龄'+orderDtail.data.list[i].good_old+'岁</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line"><div class="info1">'+'实付款：¥'+Math.round(orderDtail.data.list[i].price*10)/10+'（含押金¥'+Math.round(orderDtail.data.list[i].money)+'）</div><div class="i-return-show red"><div class="cont">逾期'+orderDtail.data.list[i].over_days+'天</div></div><div class="info2">租期'+orderDtail.data.list[i].days+'天（'+orderDtail.data.list[i].start_time_new+'-'+orderDtail.data.list[i].end_time_new+'）</div>' +
+                                        '<div class="delay">已逾期'+orderDtail.data.list[i].over_days+'天，将产生'+(orderDtail.data.list[i].over_days*orderDtail.data.list[i].good_day_price)+'元延期费用，在订单结束后统一结算</div></div></div><div class="total clear">' +
                                         '<a href="tel:'+res.info.phone+'"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a><button class="logistics-btn" onclick="orderDtail.goLogisticsDetail(\''+orderDtail.data.list[i].code+'\')">查看物流</button><button class="confirm-btn" onclick="orderDtail.goReturn(\''+orderDtail.data.list[i].code+'\')">归还器具</button></div></li>';
                                 }
                                 break;
@@ -305,15 +312,15 @@
                         if(orderDtail.data.returnList[i].status=='已归还' && orderDtail.data.returnList[i].back_status=='已验证'){   //平台确认归还了
                             if(orderDtail.data.returnList[i].over_days > 0){   //逾期
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i>' +
-                                    '<span>玩玩具趣编程</span></div><div class="fr">归还成功</div></div>' +
+                                    '<span>小Q编程</span></div><div class="fr">归还成功</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
                                     '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
                                     '<div class="pay">实付款： ¥'+orderDtail.data.returnList[i].price+'（含押金¥'+Math.round(orderDtail.data.returnList[i].money)+')</div><div class="order-number"><div class="top-line">' +
-                                    '<div class="i-return-show red"><div class="cont">逾期'+ orderDtail.data.returnList[i].over_days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
+                                    '<div class="i-return-show red"><div class="cont">逾期'+ orderDtail.data.returnList[i].over_days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div>'+'<div class="delay">共'+(orderDtail.data.returnList[i].over_days*orderDtail.data.returnList[i].good_day_price)+'元逾期费，有押金会从押金中扣除，无押金需要单独缴纳</div></li>';
                             }else{ //未逾期
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i>' +
-                                    '<span>玩玩具趣编程</span></div><div class="fr">归还成功</div></div>' +
+                                    '<span>小Q编程</span></div><div class="fr">归还成功</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
                                     '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
@@ -323,15 +330,15 @@
                         }else{
                             if(orderDtail.data.returnList[i].over_days>0){   //逾期
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i>' +
-                                    '<span>玩玩具趣编程</span></div><div class="fr red">已寄回，待平台收货确认</div></div>' +
+                                    '<span>小Q编程</span></div><div class="fr red">已寄回，待平台收货确认</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
                                     '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +
                                     '<div class="pay">实付款： ¥'+orderDtail.data.returnList[i].price+'（含押金¥'+Math.round(orderDtail.data.returnList[i].money)+')</div><div class="order-number"><div class="top-line">' +
-                                    '<div class="i-return-show red"><div class="cont">逾期'+orderDtail.data.returnList[i].over_days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div></li>';
+                                    '<div class="i-return-show red"><div class="cont">逾期'+orderDtail.data.returnList[i].over_days+'天</div></div><span>租期'+orderDtail.data.returnList[i].days+'天（'+orderDtail.data.returnList[i].start_time_new+'-'+orderDtail.data.returnList[i].end_time_new+')</span></div></div>'+'<div class="delay">已逾期'+orderDtail.data.returnList[i].over_days+'天，将产生'+(orderDtail.data.returnList[i].over_days*orderDtail.data.returnList[i].good_day_price)+'元延期费用，在订单结束后统一结算</div></li>';;
                             }else{ //未逾期
                                 dataList +='<li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i>' +
-                                    '<span>玩玩具趣编程</span></div><div class="fr red">已寄回，待平台收货确认</div></div>' +
+                                    '<span>小Q编程</span></div><div class="fr red">已寄回，待平台收货确认</div></div>' +
                                     '<div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.returnList[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.returnList[i].good_title+'</h3>' +
                                     '<p>市场价¥'+Math.round(orderDtail.data.returnList[i].good_price)+'</p><h4>适龄'+orderDtail.data.returnList[i].good_old+'</h4><span class="num">×1</span></div></a></div>' +

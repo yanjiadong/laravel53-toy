@@ -83,11 +83,11 @@
                             <td><span class="dot"></span></td>
                             <td>可编程机器人</td>
                             <td><span class="dot"></span></td>
-                            <td>无限次更换</td>
+                            <td>品牌正品</td>
+                            <td><span class="dot"></span></td>
+                            <td>灵活租用</td>
                             <td><span class="dot"></span></td>
                             <td>医疗消毒</td>
-                            <td><span class="dot"></span></td>
-                            <td>往返包邮</td>
                         </tr>
                     </table>
                 </div>
@@ -201,12 +201,22 @@
     </div>
 
 </div>
-<div class="index-wrap-cover1">
+{{--<div class="index-wrap-cover1">
     <div class="index-main-cover1">
         <div class="close-btn"></div>
         <div class="pic">
             <img src="{{ asset('wechat2/image/common/index_cover_1.png') }}">
         </div>
+    </div>
+</div>--}}
+<div class="index-wrap-cover2">
+    <div class="index-main-cover2">
+        <div class="close-btn" onclick="index_obj.alertCover2Hide()"></div>
+        <div class="pic">
+            <img src="/wechat2/image/common/index_cover_main.png">
+            <button onclick="index_obj.alertCover2Hide()"></button>
+        </div>
+
     </div>
 </div>
 
@@ -223,9 +233,13 @@
         //首页 - 是否首次打开
         isfirst:function () {
             if(index_obj.data.first_open == '1'){
-                $(".index-wrap-cover").fadeIn(500);
+                setTimeout(function () {
+                    $(".index-wrap-cover2").fadeIn(500);
+                },2000);
+
+                //$(".index-wrap-cover").fadeIn(500);
                 //弹框轮播
-                index_obj.cover_banner();
+                //index_obj.cover_banner();
             }
         },
         //首页-轮播数据获取
@@ -239,9 +253,11 @@
                     }
                     $(".lunbo .swiper-wrapper").html(lunbo_content);
                 }
-                if(res.length>1){
+                if(res.info.banners.length>1){
                     //轮播图
-                    index_obj.banner();
+                    $(".lunbo .swiper-wrapper img").load(function () {
+                        index_obj.banner();
+                    });
                 }
                 index_obj.hot_new();    //首页 - 新品推荐初始化
             })
@@ -261,12 +277,14 @@
                             newData+='<li class="fl"><span class="no-good-state">暂无库存</span><div>' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先租</span><i class="icon_arrowRight_white"></i></div></li>';
+                                '<div class="rent"><span class="money">'+Math.round(res.info.new_goods[i].price)+'元</span><span class="text">/天</span></div>' +
+                                '<div class="flag"><div class="item">新品尝鲜</div><div class="item">限时优惠</div></div></li>';
                         }else{
-                            newData+='<li class="fl">' +
+                            newData+='<li class="fl"><div>' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<p>市场价¥'+Math.round(res.info.new_goods[i].price)+'</p><h4>适龄'+res.info.new_goods[i].old+'</h4><div class="rent"><span class="text">¥</span><span class="money">'+res.info.new_goods[i].day_price+'/天 | 抢先租</span><i class="icon icon_arrowRight_white"></i></div></li>';
+                                '<div class="rent"><span class="money">'+Math.round(res.info.new_goods[i].price)+'元</span><span class="text">/天</span></div>' +
+                                '<div class="flag"><div class="item">新品尝鲜</div><div class="item">限时优惠</div></div></li>';
                         }
                     }
                     $(".recommend-cont ul").html(newData).css('width', ($(".recommend-cont ul li").width()+16)*res.info.new_goods.length);
@@ -280,9 +298,9 @@
                         var href = "{{url('wechat2/index/good')}}"+'/'+res.info.goods[i].id
 
                         if(res.info.goods[i].store <= 0){
-                            hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}v" data-original="'+res.info.goods[i].picture+'"><span class="active">'+
+                            hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'"><span class="active">'+
                                 '暂无库存</span><h3>'+res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
-                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'元</span><span class="unit">/天</span></div></li>';
+                                '</h4><div class="rent"><span class="money">'+res.info.goods[i].day_price+'元</span><span class="unit">/元</span></div></li>';
                         }else{
                             hotData +='<li class="fl"><a href="'+href+'"><img class="lazy" src="{{ asset('wechat2/image/common/default_pic.png') }}" data-original="'+res.info.goods[i].picture+'">'+'<h3>'
                                 +res.info.goods[i].title+'</h3><p>市场价¥'+Math.round(res.info.goods[i].price)+'</p><h4>适龄'+res.info.goods[i].old+
@@ -400,6 +418,10 @@
             $(".hot-list ul").click(function () {
                 sessionStorage.setItem("index_scrollTop",$("#content").scrollTop());
             })
+        },
+
+        alertCover2Hide:function () {
+            $(".index-wrap-cover2").fadeOut(500);
         }
     };
 

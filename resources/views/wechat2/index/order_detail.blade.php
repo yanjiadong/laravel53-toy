@@ -145,6 +145,7 @@
                 <li><span>平台发货时间：</span></li>
                 <li><span>租期开始时间：</span></li>
                 <li><span>租期结束时间：</span></li>
+                <li><span>逾期费用：</span></li>
             </ul>
             <div id="copy_btn" data-clipboard-text="">复制</div>
         </div>
@@ -258,7 +259,7 @@
                         logistics_info ='<div class="fl"><i class="icon icon_state_car"></i></div><div class="fl"><h3>'+order_detail.data.logistics_state.logistics.cont+'</h3><p>'+order_detail.data.logistics_state.logistics.time+'</p></div><div class="fr"><i class="icon icon_arrowRight_bold"></i></div>';
 
                         //物流信息
-                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天(<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天)');
+                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天(<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天</span><span>)</span>');
                         //订单信息标题
                         $(".order-detail-wrap .order-info .title").hide();
                         //订单信息内容项
@@ -289,9 +290,18 @@
 
                         logistics_info ='<div class="fl"><i class="icon icon_state_car"></i></div><div class="fl"><h3>'+order_detail.data.logistics_state.logistics.cont+'</h3><p>'+order_detail.data.logistics_state.logistics.time+'</p></div><div class="fr"><i class="icon icon_arrowRight_bold"></i></div>';
                         //物流信息
-                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天）');
+                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天</span><span>)</span>');
                         //订单信息标题
                         $(".order-detail-wrap .order-info .title").hide();
+
+                        if(order_detail.data.logistics_state.good.over_days > 0)
+                        {
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期已延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
+                        }
+                        else
+                        {
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").hide();
+                        }
                         //归还信息隐藏
                         $(".order-detail-wrap .return-info").hide();
                         //确认收货按钮显示
@@ -301,15 +311,33 @@
                         logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>已寄回，待平台收货确认</h2><h4>在平台收货并确认后，才可以申请押金提现哦！</h4></div>';
                         logistics_info ='<div class="fl"><i class="icon icon_state_car"></i></div><div class="fl"><h3>'+order_detail.data.logistics_state.logistics.cont+'</h3><p>'+order_detail.data.logistics_state.logistics.time+'</p></div><div class="fr"><i class="icon icon_arrowRight_bold"></i></div>';
                         //物租期
-                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天）');
+                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天</span><span>)</span>');
                         //物流信息
                         $(".return-info .order-info-cont ul li:eq(2)").hide();
+
+                        if(order_detail.data.logistics_state.good.over_days > 0)
+                        {
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期已延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
+                        }
+                        else
+                        {
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").hide();
+                        }
                         break;
                     case '归还成功':
                         logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>归还成功</h2><h4>您归还的器具平台已收货并确认，感谢您的使用！</h4></div>';
                         logistics_info ='<div class="fl"><i class="icon icon_state_car"></i></div><div class="fl"><h3>'+order_detail.data.logistics_state.logistics.cont+'</h3><p>'+order_detail.data.logistics_state.logistics.time+'</p></div><div class="fr"><i class="icon icon_arrowRight_bold"></i></div>';
                         //物流信息
-                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天）');
+                        $(".order-detail-wrap .order-detail .list ul li .fr:first span").html(order_detail.data.logistics_state.good.item4+'天（<small>¥</small>'+order_detail.data.logistics_state.good.per_price+'/天</span><span>)</span>');
+
+                        if(order_detail.data.logistics_state.good.over_days > 0)
+                        {
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期已延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
+                        }
+                        else
+                        {
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").hide();
+                        }
                         break;
                     default:
                         break;
@@ -321,6 +349,11 @@
                 $(".top-states").html(logistics_cont);
                 //物流信息
                 $('.order-detail-wrap .logistics .logistics-info').html(logistics_info);
+                if(!$.trim($('.order-detail-wrap .logistics .logistics-info .fl p').text())){
+                    $('.order-detail-wrap .logistics .logistics-info .fl p').hide();
+                    $('.order-detail-wrap .logistics .logistics-info .fl h3').css({'margin-top':'10px'});
+                }
+
                 //收件人地址详细
                 $(".logistics .address .name-phone").html(logistics_address);
 
