@@ -71,7 +71,9 @@
                                 <th>订单编号</th>
                                 <th>订单状态</th>
                                 <th width="160px">玩具名称</th>
-                                <th>邮费</th>
+                                @if(isset($status) && $status!=3)
+                                    <th>邮费</th>
+                                @endif
                                 {{--<th>发货物流</th>--}}
                                 <th>会员手机号</th>
                                 <th>会员微信昵称</th>
@@ -93,7 +95,9 @@
                                     <td>{{ $order->code }}</td>
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->good_title }}</td>
-                                    <td>{{ $order->express_price }}</td>
+                                    @if(isset($status) && $status!=3)
+                                        <td>{{ $order->express_price }}</td>
+                                    @endif
                                     {{--<td>{{ $order->express_title }}</td>--}}
                                     <td>{{ $order->user->telephone }}</td>
                                     <td>{{ $order->user->wechat_nickname }}</td>
