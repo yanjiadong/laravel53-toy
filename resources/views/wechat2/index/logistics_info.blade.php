@@ -58,28 +58,7 @@
                               </div>
                           </a>-->
                     </div>
-                    <div class="return-info">
-                        <div class="title bg-white">
-                            <i class="return-logistics2"></i>
-                            <span>寄回地址</span>
-                        </div>
-                        <div class="info clear bg-white">
-                            <table>
-                                <tr>
-                                    <td>收件人：</td>
-                                    <td class="name"></td>
-                                </tr>
-                                <tr>
-                                    <td>电&nbsp;&nbsp;&nbsp;&nbsp;话：</td>
-                                    <td class="cell"></td>
-                                </tr>
-                                <tr>
-                                    <td>地&nbsp;&nbsp;&nbsp;&nbsp;址：</td>
-                                    <td class="address"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                    
                     <div class="logistics-info">
                         <div class="title bg-white">
                             <i class="return-logistics3"></i>
