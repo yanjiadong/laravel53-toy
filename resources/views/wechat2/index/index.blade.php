@@ -277,13 +277,13 @@
                             newData+='<li class="fl"><span class="no-good-state">暂无库存</span><div>' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<div class="rent"><span class="money">'+Math.round(res.info.new_goods[i].day_price)+'元</span><span class="text">/天</span></div>' +
+                                '<div class="rent"><span class="money">'+res.info.new_goods[i].day_price+'元</span><span class="text">/天</span></div>' +
                                 '<div class="flag"><div class="item">新品尝鲜</div><div class="item">限时优惠</div></div></li>';
                         }else{
                             newData+='<li class="fl"><div>' +
                                 '<a href="'+href+'"><img src="'+res.info.new_goods[i].new_picture+'"></a></div>' +
                                 '<a href="'+href+'"><h3>'+res.info.new_goods[i].title+'</h3></a>' +
-                                '<div class="rent"><span class="money">'+Math.round(res.info.new_goods[i].day_price)+'元</span><span class="text">/天</span></div>' +
+                                '<div class="rent"><span class="money">'+res.info.new_goods[i].day_price+'元</span><span class="text">/天</span></div>' +
                                 '<div class="flag"><div class="item">新品尝鲜</div><div class="item">限时优惠</div></div></li>';
                         }
                     }
