@@ -1478,7 +1478,7 @@
 </script>
 <script>
     $(function () {
-        if(document.referrer.indexOf("index/submit_order")==-1){
+        if(document.referrer.indexOf("index/good") > -1 || document.referrer.indexOf("index/cart") > -1){
             sessionStorage.setItem("submit_order_url",document.referrer)
         }
 
