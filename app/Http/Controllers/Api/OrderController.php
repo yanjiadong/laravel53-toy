@@ -162,7 +162,15 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
-        $good_day_price = round(getGoodPriceByDays($good->price,$days),2);
+        if($good->is_discount == 1)
+        {
+            $good_day_price = round(getGoodPriceByDays($good->price,$days,$good->is_discount,$good->id),2);
+        }
+        else
+        {
+            $good_day_price = round(getGoodPriceByDays($good->price,$days),2);
+        }
+
         $total_price = round($days*$good_day_price,2);
 
         $money = $good->money;
