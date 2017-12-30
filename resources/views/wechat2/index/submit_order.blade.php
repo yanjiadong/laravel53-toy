@@ -1522,6 +1522,7 @@
         window.history.pushState(state, state.title, state.url);
     }
 
+    alert(1111);
     //调用微信JS api 支付
     function jsApiCall()
     {
