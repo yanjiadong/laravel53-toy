@@ -695,11 +695,15 @@
     }
 
     window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-        if(bool) {
-            location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
-            bool=false;
+        if($(".pswp__bg").css('opacity')!=1){
+            if(bool) {
+                location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
+                bool=false;
+            }
         }
+
     }, false);
+    
     function pushHistory() {
         var state = {
             title: "title",
