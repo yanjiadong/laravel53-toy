@@ -4988,7 +4988,7 @@ textarea {
 }
 .my-deposit-wrap .list ul li .good .fr h3 {
     font-size: 14px;
-    color: #323232;
+    color: #757575;
     text-align: justify;
     margin-top: 5px;
 }
@@ -5697,6 +5697,7 @@ textarea {
 .submit-order-wrap .detail-list .good_show table tr td.title {
     vertical-align: top;
     line-height: 21px;
+    padding-bottom: 18px;
 }
 .submit-order-wrap .detail-list .good_show table tr td.price {
     height: 12px;
@@ -6017,6 +6018,33 @@ textarea {
     border-radius: 4px;
     background-color: #ffaa00;
     height: 100%;
+}
+.submit-order-wrap-success-cover{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+.submit-order-wrap-success-cover .success-cont{
+    width: 80%;
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.submit-order-wrap-success-cover .success-cont button{
+    position: absolute;
+    bottom: 5%;
+    width: 200px;
+    height: 50px;
+    left:17%;
+    opacity: 0;
+}
+.submit-order-wrap-success-cover .success-cont img{
+    width: 100%;
 }
 .cover-rent-time-choose {
     position: fixed;
