@@ -691,6 +691,7 @@
             });
         },
         addAddress:function () {
+            $(".submit-order-wrap").css({'height':$(window).height(),'overflow':'hidden'});
             $(".order-cover-wrap").fadeIn(500);
             var cont ="";
             for(var i=0;i<order_obj.data.address.length;i++){
@@ -707,11 +708,13 @@
 
         },
         closeAddress:function () {
+            $(".submit-order-wrap").css({'height':'auto','overflow':'visible'});
             $(".order-cover-wrap").hide();
             $(".order-cover-main").hide();
         },
         newAddress:function () {
             order_obj.resetAddress();
+            $(".submit-order-wrap").css({'height':$(window).height(),'overflow':'hidden'});
             $(".order-cover-wrap").fadeIn(500);
             $(".order-cover-wrap .order-edit-address-main").fadeIn(500);
             $(".order-cover-wrap .btn .del").hide();
@@ -729,6 +732,7 @@
                 $(".order-cover-wrap .order-edit-address-main .edit-cont  .city").text(order_obj.data.address[index].d);
                 $(".order-cover-wrap .order-edit-address-main  .edit-cont .area").text(order_obj.data.address[index].e);
                 $(".order-cover-wrap .order-edit-address-main .edit-cont .address").val(order_obj.data.address[index].f);
+                $(".submit-order-wrap").css({'height':$(window).height(),'overflow':'hidden'});
                 $(".order-cover-wrap").fadeIn(500);
                 $(".order-cover-wrap .order-edit-address-main").fadeIn(500);
                 $(".order-cover-wrap .btn .del").fadeIn(500);
@@ -944,9 +948,10 @@
                 var index = $(this).index(".order-cover-main .address-list ul li") ;
                 order_obj.data.addressIndex =index;
                 order_obj.address_rander(index);
+                $(".submit-order-wrap").css({'height':'auto','overflow':'visible'});
                 $(".order-cover-wrap").hide();
 
-                console.log(order_obj.data.address[index]);
+                //console.log(order_obj.data.address[index]);
                 $("#address_id").val(order_obj.data.address[index].g);
                 $("#receiver").val(order_obj.data.address[index].a);
                 $("#receiver_telephone").val(order_obj.data.address[index].b);
@@ -1013,8 +1018,8 @@
                         order_obj.address_rander();
                         order_obj.addAddress();
                         if(state==0){
+                            $(".submit-order-wrap").css({'height':'auto','overflow':'visible'});
                             $(".order-cover-wrap").hide();
-
                         }
                         $(".order-cover-wrap .order-edit-address-main").hide();
                     })
@@ -1440,11 +1445,10 @@
         },
         //不使用优惠劵
         noUser:function () {
-            var submitData ="";
             sessionStorage.discount_money="";
             sessionStorage.discount_car_id = "";
-            $("#coupon_id").val(0);
-            order_obj.data.actural_data.discount = 0;
+            
+            order_obj.discountCarShow();
             $(".submit-voucher-wrap").hide();
             $(".submit-order-wrap").show();
             $("title").text("提交订单");

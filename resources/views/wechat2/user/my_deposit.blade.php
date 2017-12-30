@@ -195,6 +195,7 @@
         },1000);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
+                bool=false;
                 location.href=sessionStorage.getItem('my_deposit_url')?sessionStorage.getItem('my_deposit_url'):document.referrer;  //在这里指定其返回的地址
             }
         }, false);

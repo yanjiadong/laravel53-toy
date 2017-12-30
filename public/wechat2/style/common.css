@@ -527,7 +527,7 @@ footer table td a .icon-footer-home {
     vertical-align: middle;
     background: url(../image/common/wx_footer.png) 0px 0px no-repeat;
     background-size: 117px 48px;
-    width: 23px;
+    width: 24px;
     height: 24px;
     position: relative;
 }
@@ -553,8 +553,8 @@ footer table td a .icon-footer-user-center {
     display: inline-block;
     vertical-align: middle;
     background: url(../image/common/wx_footer.png) -96px 0 no-repeat;
-    background-size: 118px 48px;
-    width: 23px;
+    background-size: 120px 48px;
+    width: 24px;
     height: 24px;
     position: relative;
 }

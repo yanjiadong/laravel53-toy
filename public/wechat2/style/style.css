@@ -857,7 +857,7 @@
     margin-top: 5px;
     height: 23px;
     text-align: left;
-    text-indent: 1.25em;
+    text-indent: 1.20em;
 }
 .good-detail-wrap .good-detail-content .good-tips table tr td .font {
     color: #8D8D8D;
@@ -1658,6 +1658,9 @@
     text-align: right;
     padding: 0 10px;
 }
+.lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line{
+    border-bottom: 1px solid #f6f6f6;
+}
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .info1{
     height: 40px;
     line-height: 40px;
@@ -1671,7 +1674,6 @@
     font-size: 12px;
     color: #808080;
     text-align: right;
-    border-bottom: 1px solid #f6f6f6;
     height: 30px;
     line-height: 20px;
 }
@@ -4049,14 +4051,15 @@ textarea {
 }
 
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr {
-    text-align: right;
-    width: 20%;
+    text-align: center;
     padding-top: 10px;
+    width: 33px;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr p {
     color: #8D8D8D ;
     font-size: 11px;
     margin-top: 5px;
+    text-align: right;
 }
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .company {
     padding: 10px;
@@ -5610,9 +5613,10 @@ textarea {
     color: #454545;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td.icon-right {
-    vertical-align: top;
+    vertical-align: middle;
     text-align: right;
-    padding-top: 15px;
+    padding-top: 10px;
+    font-size: 0;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td:first-child {
     width: 15px;
@@ -5657,6 +5661,7 @@ textarea {
 .submit-order-wrap .detail-list .good_show table tr td[rowspan="3"] {
     width: 25%;
     font-size: 0;
+    padding: 0 10px 0 0;
 }
 .submit-order-wrap .detail-list .good_show table tr td[rowspan="3"] img {
     width: 100%;
@@ -5664,6 +5669,7 @@ textarea {
 }
 .submit-order-wrap .detail-list .good_show table tr td a h3 {
     font-size: 14px;
+    height: 34px;
     color: #323232;
     word-break: break-all;
     display: -webkit-box;
@@ -5671,7 +5677,6 @@ textarea {
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 16px;
-    height: 33px;
 }
 .submit-order-wrap .detail-list .good_show table tr td p {
     font-size: 12px;
@@ -5685,15 +5690,11 @@ textarea {
 .submit-order-wrap .detail-list .good_show table tr td.title {
     vertical-align: top;
     line-height: 21px;
-    padding-left: 10px;
-    padding-bottom: 30px;
 }
 .submit-order-wrap .detail-list .good_show table tr td.price {
-    padding-left: 10px;
     height: 12px;
 }
 .submit-order-wrap .detail-list .good_show table tr td.year {
-    padding-left: 10px;
     height: 12px;
 }
 .submit-order-wrap .detail-list .good_show .num {
