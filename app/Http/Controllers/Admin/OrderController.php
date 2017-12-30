@@ -207,6 +207,18 @@ class OrderController extends BaseController
         alert('验证寄回失败');
     }
 
+    public function confirm(Request $request)
+    {
+        $id = $request->get('id');
+        $order = Order::find($id);
+
+        $start_time = date('Y-m-d 00:00:01',$this->time);
+        $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
+
+        $ret = Order::where('id',$id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
+        alert('', 1);
+    }
+
     public function action(Request $request)
     {
         $id = $request->get('id');

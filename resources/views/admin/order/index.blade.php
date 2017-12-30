@@ -139,6 +139,9 @@
                                             <a href="javascript:;" data-id="{{$order->id}}" title="取消订单" class="tip cancelAction"><span class="btn btn-mini btn-danger">取消订单</span></a>
                                         @endif
 
+                                        @if($order->status=='已发货')
+                                            <a href="javascript:;" data-id="{{$order->id}}" title="确认收货" class="tip confirmOrder"><span class="btn btn-mini btn-warning">确认收货</span></a>
+                                        @endif
                                         @if($order->status=='已归还' && $order->back_status=='待验证')
                                                 <a href="javascript:;" data-id="{{$order->id}}" title="验证寄回" class="tip verifyAction"><span class="btn btn-mini">验证寄回</span></a>
                                         @endif
@@ -224,6 +227,20 @@
                     text: "确认寄回？",
                     confirm: function(button) {
                         $.post("{{route('admin.order.verify')}}",{id:id},function(data){
+                            cTip(data);
+                        }, "json");
+                    },
+                    confirmButton: "确认",
+                    cancelButton: "取消"
+                });
+            });
+
+            $('.confirmOrder').click(function(){
+                var id = $(this).attr('data-id');
+                $.confirm({
+                    text: "确认收货？",
+                    confirm: function(button) {
+                        $.post("{{route('admin.order.confirm')}}",{id:id},function(data){
                             cTip(data);
                         }, "json");
                     },
