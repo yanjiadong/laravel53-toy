@@ -203,6 +203,7 @@
 
 
 <script>
+    var look_detail = false;
     var goodDetail_obj = {
         data:{
             detail_data:{},           //商品详情数据
@@ -513,6 +514,7 @@
 
                 // 当用户点击缩略图触发
                 var onThumbnailsClick = function(e) {
+                    look_detail =true;
                     e = e || window.event;
                     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
@@ -695,11 +697,10 @@
     }
 
     window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-        if($(".pswp__bg").css('opacity')!=1||document.referrer.indexOf('/index/good')==-1){
-            if(bool) {
-                location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
-                bool=false;
-            }
+        if(bool&&!look_detail) {
+            look_detail = false;
+            location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
+            bool=false;
         }
     }, false);
 

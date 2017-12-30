@@ -364,8 +364,8 @@
                 $(".order-detail .good_show a").attr('href', order_detail.data.logistics_state.good.h);
                 $(".order-detail .good_show table td[rowspan='3'] img").attr('src', order_detail.data.logistics_state.good.a);
                 $(".order-detail .good_show table td.title").text(order_detail.data.logistics_state.good.b);
-                $(".order-detail .good_show td.price h4").text('市场参考价¥' + Math.round(order_detail.data.logistics_state.good.d));
-                $(".order-detail .good_show td.year p").text('适用年龄' + order_detail.data.logistics_state.good.c);
+                $(".order-detail .good_show td.price h4").text('市场价¥' + Math.round(order_detail.data.logistics_state.good.d));
+                $(".order-detail .good_show td.year p").text('适龄' + order_detail.data.logistics_state.good.c);
                 $(".order-detail .good_show .num").text('x' +order_detail.data.logistics_state.good.total_num);
                 $(".order-detail-wrap .order-detail .list ul li .fr:eq(1) span").text(order_detail.data.logistics_state.logistics.name);
                 //租金 邮费 优惠券 押金
