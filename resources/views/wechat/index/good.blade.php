@@ -662,7 +662,7 @@
         var bool=false;
         setTimeout(function(){
             bool=true;
-        },500);
+        },700);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool&&window.location.href.indexOf("#")==-1) {
                 location.href = document.referrer;  //在这里指定其返回的地址  订单列表页面
