@@ -589,20 +589,12 @@ if(!function_exists('getGoodPriceByDays'))
             {
                 $result = $good->discount1;
             }
-            if($result <= 0)
-            {
-                $result = round($price/98,1);
-            }
         }
         elseif($days > 7 && $days <= 14)
         {
             if(!empty($good) && $is_discount)
             {
                 $result = $good->discount2;
-            }
-            if($result <= 0)
-            {
-                $result = round($price/128,1);
             }
         }
         elseif($days > 14 && $days <= 21)
@@ -611,10 +603,7 @@ if(!function_exists('getGoodPriceByDays'))
             {
                 $result = $good->discount3;
             }
-            if($result <= 0)
-            {
-                $result = round($price/153,1);
-            }
+
         }
         elseif($days > 21 && $days <= 30)
         {
@@ -622,20 +611,13 @@ if(!function_exists('getGoodPriceByDays'))
             {
                 $result = $good->discount4;
             }
-            if($result <= 0)
-            {
-                $result = round($price/165,1);
-            }
+
         }
         elseif($days > 30 && $days <= 45)
         {
             if(!empty($good) && $is_discount)
             {
                 $result = $good->discount5;
-            }
-            if($result <= 0)
-            {
-                $result = round($price/175,1);
             }
         }
         elseif($days > 45 && $days <= 60)
@@ -644,14 +626,19 @@ if(!function_exists('getGoodPriceByDays'))
             {
                 $result = $good->discount6;
             }
-            if($result <= 0)
-            {
-                $result = round($price/185,1);
-            }
         }
-        else
+
+        if($result<=0)
         {
-            $result = round($price,1);
+            if($days>=7 && $days<=25)
+            {
+                $result = $price/(100+$days*1.8);
+            }
+
+            if($days>25 && $days<=60)
+            {
+                $result = $price/(100+$days*2.8);
+            }
         }
 
 
@@ -683,10 +670,6 @@ if(!function_exists('getGoodPriceInfo'))
                 }
                 $result = $good->discount1;
             }
-            if($result <= 0)
-            {
-                $result = round($price/98,1);
-            }
         }
         elseif($days > 7 && $days <= 14)
         {
@@ -699,10 +682,6 @@ if(!function_exists('getGoodPriceInfo'))
                 }
 
                 $result = $good->discount2;
-            }
-            if($result <= 0)
-            {
-                $result = round($price/128,1);
             }
         }
         elseif($days > 14 && $days <= 21)
@@ -717,10 +696,6 @@ if(!function_exists('getGoodPriceInfo'))
 
                 $result = $good->discount3;
             }
-            if($result <= 0)
-            {
-                $result = round($price/153,1);
-            }
         }
         elseif($days > 21 && $days <= 30)
         {
@@ -734,10 +709,6 @@ if(!function_exists('getGoodPriceInfo'))
 
                 $result = $good->discount4;
             }
-            if($result <= 0)
-            {
-                $result = round($price/165,1);
-            }
         }
         elseif($days > 30 && $days <= 45)
         {
@@ -749,10 +720,6 @@ if(!function_exists('getGoodPriceInfo'))
                     $isDiscount = false;
                 }
                 $result = $good->discount5;
-            }
-            if($result <= 0)
-            {
-                $result = round($price/175,1);
             }
         }
         elseif($days > 45 && $days <= 60)
@@ -767,14 +734,19 @@ if(!function_exists('getGoodPriceInfo'))
 
                 $result = $good->discount6;
             }
-            if($result <= 0)
-            {
-                $result = round($price/185,1);
-            }
         }
-        else
+
+        if($result<=0)
         {
-            $result = round($price,1);
+            if($days>=7 && $days<=25)
+            {
+                $result = $price/(100+$days*1.8);
+            }
+
+            if($days>25 && $days<=60)
+            {
+                $result = $price/(100+$days*2.8);
+            }
         }
 
 

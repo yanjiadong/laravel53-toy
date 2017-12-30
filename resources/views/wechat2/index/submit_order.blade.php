@@ -1533,7 +1533,7 @@
 
                     //支付成功
                     var url = '{{url('wechat2/index/pay_success')}}'+'/'+order_obj.data.order_code;
-                    //alert(url);
+                    alert(url);
                     location.href=url;
                 }
                 else if(res.err_msg === "get_brand_wcpay_request:cancel")
