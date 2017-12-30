@@ -105,7 +105,7 @@ class GoodController extends BaseController
             //促销
             if($data['discount3'] > 0)
             {
-                $data['day_price'] = $data['discount3'];
+                $data['day_price'] = $data['discount4'];
             }
             else
             {
@@ -140,7 +140,7 @@ class GoodController extends BaseController
 
         if($data['day_price']<=0)
         {
-            $data['day_price'] = getGoodPriceByDays($data['price'],21);
+            $data['day_price'] = getGoodPriceByDays($data['price'],30);
         }
 
 
@@ -244,7 +244,7 @@ class GoodController extends BaseController
             //促销
             if($data['discount3'] > 0)
             {
-                $data['day_price'] = $data['discount3'];
+                $data['day_price'] = $data['discount4'];
             }
             else
             {
@@ -288,7 +288,7 @@ class GoodController extends BaseController
 
         if($data['day_price']<=0)
         {
-            $data['day_price'] = getGoodPriceByDays($data['price'],21);
+            $data['day_price'] = getGoodPriceByDays($data['price'],30);
         }
 
         $good = Good::where('id',$id)->update($data);
