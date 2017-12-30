@@ -82,13 +82,12 @@
                                 <th>排序</th>
                                 <th width="200px">玩具名称</th>
                                 <th>分类名称</th>
-                                <th>所属品牌</th>
                                 <th>库存</th>
                                 <th>新品抢先</th>
                                 <th>热门推荐</th>
                                 <th>是否促销</th>
                                 <th>状态</th>
-                                <th>添加时间</th>
+                                {{--<th>添加时间</th>--}}
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -99,13 +98,12 @@
                                     <td width="80px"><input style="width: 30%;" type="text" value="{{ $good->sort }}" class="validate[required,custom[number]] sortAction" data-id="{{$good->id}}"></td>
                                     <td>{{ $good->title }}</td>
                                     <td>{{ $good->category->title }}</td>
-                                    <td>{{ $good->brand->title }}</td>
-                                    <td width="100px"><input style="width: 40%;" type="text" value="{{ $good->store }}" class="validate[required,custom[number]] storeAction" data-id="{{$good->id}}"></td>
+                                    <td width="80px"><input style="width: 40%;" type="text" value="{{ $good->store }}" class="validate[required,custom[number]] storeAction" data-id="{{$good->id}}"></td>
                                     <td>{{ $good->is_new==1?'是':'否' }}</td>
                                     <td>{{ $good->is_hot==1?'是':'否' }}</td>
                                     <td>{{ $good->is_discount==1?'是':'否' }}</td>
                                     <td>{{ $good->status==\App\Good::STATUS_ON_SALE?'上架':'下架' }}</td>
-                                    <td>{{ $good->created_at }}</td>
+                                    {{--<td>{{ $good->created_at }}</td>--}}
                                     <td>
                                         <a href="{{ url("admin/goods/$good->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini btn-inverse">修改</span></a>
                                         @if($good->status==\App\Good::STATUS_ON_SALE)
