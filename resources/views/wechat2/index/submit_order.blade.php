@@ -1184,7 +1184,7 @@
         chooseRentTimeOperate:function () {
             //赋值
             var li_cont='';
-            for(var i=8;i<=60;i++){
+            for(var i=12;i<=60;i++){
                 li_cont +='<li class="active">'+i+'</li>';
             }
             $(".choose-box .choose-ul").html(li_cont);

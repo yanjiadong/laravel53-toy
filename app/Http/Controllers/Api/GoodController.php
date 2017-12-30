@@ -88,7 +88,7 @@ class GoodController extends BaseController
             return $this->ret;
         }
 
-        $price = sprintf("%.2f", $price);
+        $price = sprintf("%.1f", $price);
         $this->ret['info'] = ['price'=>$price,'days'=>$days];
         return $this->ret;
     }
