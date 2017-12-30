@@ -1184,7 +1184,7 @@
         chooseRentTimeOperate:function () {
             //赋值
             var li_cont='';
-            for(var i=12;i<=60;i++){
+            for(var i=8;i<=60;i++){
                 li_cont +='<li class="active">'+i+'</li>';
             }
             $(".choose-box .choose-ul").html(li_cont);
@@ -1444,6 +1444,7 @@
             sessionStorage.discount_money="";
             sessionStorage.discount_car_id = "";
             $("#coupon_id").val(0);
+            order_obj.data.actural_data.discount = 0;
             $(".submit-voucher-wrap").hide();
             $(".submit-order-wrap").show();
             $("title").text("提交订单");

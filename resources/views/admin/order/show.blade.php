@@ -32,6 +32,10 @@
                             <td>{{$order->money}}元</td>
                         </tr>
                         <tr>
+                            <td>订单优惠金额：</td>
+                            <td>{{$order->coupon_price}}元</td>
+                        </tr>
+                        <tr>
                             <td>订单状态：</td>
                             <td>{{$order->status}}</td>
                         </tr>
