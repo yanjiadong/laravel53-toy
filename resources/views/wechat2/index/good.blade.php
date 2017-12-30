@@ -703,7 +703,7 @@
         }
 
     }, false);
-    
+
     function pushHistory() {
         var state = {
             title: "title",
