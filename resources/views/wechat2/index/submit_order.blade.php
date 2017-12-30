@@ -1036,6 +1036,7 @@
                 if(order_obj.data.vip_state == '0'){
                     order_obj.submitConfirm();
                 }else{
+                    $(".submit-order-wrap").css({'height':$(window).height(),'overflow':"hidden"});
                     $(".cover-phone-bind").fadeIn(500);
                     $(".phone-bind-main .tip").html('<div class="tip1">为了更好的为您服务，请绑定手机号码</div>')
 
@@ -1050,6 +1051,7 @@
         },
         submitConfirm:function () {
             //微信支付流程
+            $(".submit-order-wrap").css({'height':'auto','overflow':"visible"});
             $(".cover-phone-bind").hide();
 
             var user_id = '{{$user_id}}';
@@ -1135,6 +1137,7 @@
             }
         },
         closeBind:function () {
+            $(".submit-order-wrap").css({'height':'auto','overflow':"visible"});
             $(".cover-phone-bind").fadeOut(500);
         },
         //绑定会员
@@ -1164,6 +1167,7 @@
                     return false;
                 }
                 order_obj.data.vip_state = '0';
+                $(".submit-order-wrap").css({'height':'auto','overflow':"visible"});
                 $(".cover-phone-bind").hide();
                 common.success_tip('手机号绑定成功！');
             })
@@ -1480,7 +1484,7 @@
 </script>
 <script>
     $(function () {
-        if(document.referrer.indexOf("index/submit_order") == -1){
+        if(document.referrer.indexOf("index/good")>-1||document.referrer.indexOf("index/cart")>-1){
             sessionStorage.setItem("submit_order_url",document.referrer)
         }
 

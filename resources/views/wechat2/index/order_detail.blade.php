@@ -251,6 +251,7 @@
                         $(".order-detail-wrap .order-info .order-info-cont ul li:eq(2) span").hide();
                         $(".order-detail-wrap .order-info .order-info-cont ul li:eq(3) span").hide();
                         $(".order-detail-wrap .order-info .order-info-cont ul li:eq(4) span").hide();
+                        $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").hide();
                         //归还信息隐藏
                         $(".order-detail-wrap .return-info").hide();
                         break;
@@ -265,6 +266,7 @@
                         //订单信息内容项
                         $(".order-detail-wrap .order-info .order-info-cont ul li:eq(3) span").hide();
                         $(".order-detail-wrap .order-info .order-info-cont ul li:eq(4) span").hide();
+                        $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").hide();
                         //归还信息隐藏
                         $(".order-detail-wrap .return-info").hide();
                         //确认收货按钮显示

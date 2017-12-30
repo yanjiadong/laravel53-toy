@@ -677,7 +677,7 @@
     })
 </script>
 <script>
-    if(document.referrer.indexOf("submit_order")!=-1&&document.referrer.indexOf("index/cart")!=-1){
+    if(document.referrer.indexOf("submit_order")==-1&&document.referrer.indexOf("toys_car")==-1){
         sessionStorage.setItem("good_detail_back_url",document.referrer)
     }
     /*----------避免下一页返回这一页调用这个函数-------------*/

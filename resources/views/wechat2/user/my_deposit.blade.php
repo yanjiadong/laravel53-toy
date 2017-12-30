@@ -184,7 +184,7 @@
 </script>
 <script>
     $(function () {
-        if(document.referrer.indexOf("order_list")!='cash_success'){
+        if(document.referrer.indexOf("cash_success")==-1){
             sessionStorage.setItem("my_deposit_url",document.referrer)
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/

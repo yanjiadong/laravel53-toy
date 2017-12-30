@@ -315,7 +315,7 @@
 <!--微信返回键跳转调整-->
 <script>
     $(function () {
-        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("user/user_center")>-1){
+        if(document.referrer.indexOf("index/index")>-1||document.referrer.indexOf("user/user_center")>-1||document.referrer.indexOf("index/submit_order")>-1){
             sessionStorage.setItem("authorization_back_url",document.referrer)
         }
 

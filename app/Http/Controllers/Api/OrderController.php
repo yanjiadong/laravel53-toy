@@ -327,7 +327,8 @@ class OrderController extends BaseController
             Order::where('code',$code)->update(['money_status'=>1,'apply_money_time'=>$this->datetime]);
 
             //押金提现记录
-            $price = $order->money - $order->over_days*$order->good_day_price;
+            //$price = $order->money - $order->over_days*$order->good_day_price;
+            $price = $order->money;
             DB::table('user_pay_records')->insert(['user_id'=>$user_id,'type'=>1,'pay_type'=>2,'price'=>$price,'created_at'=>date('Y-m-d H:i:s')]);
             return $this->ret;
         }
@@ -441,7 +442,7 @@ class OrderController extends BaseController
             $image = $content[9];
         }
 
-        $orders = Order::where('user_id',$user_id)->where('money','>','0')->orderBy('pay_success_time','desc')->get()->toArray();
+        $orders = Order::where('user_id',$user_id)->where('money','>','0')->orderBy('id','desc')->get()->toArray();
         if(!empty($orders))
         {
             foreach ($orders as &$v)

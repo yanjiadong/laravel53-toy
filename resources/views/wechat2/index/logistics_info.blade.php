@@ -44,7 +44,7 @@
                 <div class="cont">
                     <div class="top">
                         <i class="return-logistics1"></i>
-                        <span>归还的玩具</span>
+                        <span>寄回的器具</span>
                     </div>
                     <div class="good-detail clear">
                         <!--  <a href="">

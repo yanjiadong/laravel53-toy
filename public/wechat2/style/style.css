@@ -36,7 +36,6 @@
 
 .index-wrap .content .recommend .lunbo .swiper-container .banner-img {
     width: 100%;
-    overflow: hidden;
     position: relative;
     border-radius: 5px;
     display: block;
@@ -385,7 +384,7 @@
 .index-wrap .content .recommend .hot .hot-list ul li:nth-child(2n+1) {
     padding-right: 2%;
 }
-.index-wrap .content .recommend .hot .hot-list ul li:nth-child(2n+1)>a>span{
+.index-wrap .content .recommend .hot .hot-list ul li>a>span{
     background-color: #D1D1D1;
     text-align: center;
     width: 50px;
@@ -507,8 +506,18 @@
     z-index: 999;
     display: none;
 }
-.index-wrap-cover1 .index-main-cover1,.index-wrap-cover2 .index-main-cover2{
+.index-wrap-cover1 .index-main-cover1{
     width: 90%;
+    overflow: hidden;
+    border-radius: 4px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    background-color: transparent;
+    transform: translate(-50%,-50%);
+}
+.index-wrap-cover2 .index-main-cover2{
+    width: 100%;
     overflow: hidden;
     border-radius: 4px;
     position: absolute;
@@ -1376,7 +1385,7 @@
 }
 .cover-phone-bind{
     display: none;
-    position: fixed;
+    position: absolute;
     height: 100%;
     width: 100%;
     left: 0;
@@ -1655,14 +1664,16 @@
     border-bottom: 1px solid #f6f6f6;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .info2{
-    height: 40px;
-    line-height: 40px;
-    border-bottom: 1px solid #f6f6f6;
+    height: 26px;
+    line-height: 26px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .delay{
     font-size: 12px;
     color: #808080;
     text-align: right;
+    border-bottom: 1px solid #f6f6f6;
+    height: 30px;
+    line-height: 20px;
 }
 .lease-order .order-detail-main  .detail-cont .detail-list li .order-number .top-line .i-return-show{
     height: 23px;
@@ -1795,6 +1806,7 @@
     margin-right: 10px;
     background: url(../image/common/order-list-logo.png);
     background-size: 26px 26px;
+    border-radius: 5px;
 }
 .lease-order .order-detail-main  .return .detail-list li .top .fr{
     color:#0ac443;
@@ -1828,7 +1840,7 @@
 .lease-order .order-detail-main  .return .detail-list li .good-detail .fr .num{
     position: absolute;
     bottom:0;
-    right: 10px;
+    right: 0;
     font-size:13px;
     color:#8c8c8c;
 }
@@ -1868,16 +1880,16 @@
     line-height: 40px;
 }
 .lease-order .order-detail-main  .return .detail-list li .order-number {
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
     font-size:14px;
     color:#515151;
-    border-bottom: 1px solid #f6f6f6;
     text-align: right;
     padding: 0 10px;
 }
 .lease-order .order-detail-main  .return .detail-list li .order-number .top-line{
     border-top: 1px solid #f6f6f6;
+    padding-top: 5px;
 }
 .lease-order .order-detail-main  .return .detail-list li .order-number .top-line .i-return-show{
     height: 23px;
@@ -3959,7 +3971,7 @@ textarea {
 }
 .logistics-info-wrap .detail-cont-main .cont .good-detail .fr .num{
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
     right: 0;
     font-size:13px;
     color:#8c8c8c;
@@ -4037,7 +4049,7 @@ textarea {
 }
 
 .logistics-info-wrap .detail-cont-main .cont .logistics-info .number .fr {
-    text-align: center;
+    text-align: right;
     width: 20%;
     padding-top: 10px;
 }
@@ -4972,8 +4984,10 @@ textarea {
 }
 .my-deposit-wrap .list ul li .good .fr .num {
     position: absolute;
-    bottom: 15px;
+    bottom: 12px;
     right: 13px;
+    font-size: 13px;
+    color: #8c8c8c;
 }
 .my-deposit-wrap .list ul li .operate {
     padding: 15px 13px;
@@ -5604,7 +5618,7 @@ textarea {
     width: 15px;
     vertical-align: top;
     padding-right: 10px;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td:first-child .local {
     width: 10px;
@@ -5617,7 +5631,7 @@ textarea {
     width: 20%;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td[colspan="2"]{
-    padding-top: 15px;
+    padding-top: 10px;
 }
 .submit-order-wrap .address .address_detail .name-phone table tr td.address-detail span{
     margin-right:7px;
@@ -5633,6 +5647,9 @@ textarea {
     position: relative;
     padding: 10px;
 }
+/*.submit-order-wrap .detail-list .good_show table tr:first-child{
+    height: 50px;
+}*/
 .submit-order-wrap .detail-list .good_show table tr td {
     vertical-align: middle;
     padding: 0;
@@ -5663,20 +5680,21 @@ textarea {
 .submit-order-wrap .detail-list .good_show table tr td h4 {
     font-size: 12px;
     color: #8c8c8c;
+    height: 14px;
 }
 .submit-order-wrap .detail-list .good_show table tr td.title {
     vertical-align: top;
     line-height: 21px;
     padding-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 30px;
 }
 .submit-order-wrap .detail-list .good_show table tr td.price {
     padding-left: 10px;
-    height: 18px;
+    height: 12px;
 }
 .submit-order-wrap .detail-list .good_show table tr td.year {
     padding-left: 10px;
-    height: 18px;
+    height: 12px;
 }
 .submit-order-wrap .detail-list .good_show .num {
     position: absolute;
@@ -5813,8 +5831,8 @@ textarea {
     color: #303030;
     text-align: right;
     vertical-align: middle;
-    height: 20px;
-    line-height: 20px;
+    height: 24px;
+    line-height: 24px;
 }
 .submit-order-wrap .detail-list .distribution table tr td.name {
     font-size: 14px;
