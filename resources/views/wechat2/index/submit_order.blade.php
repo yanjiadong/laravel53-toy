@@ -1529,7 +1529,7 @@
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', jsApiParameters,
             function(res){
-                console.log(res.err_msg);
+                alert(res.err_msg);
                 //WeixinJSBridge.log(res.err_msg);
                 //alert(res.err_msg);
                 //alert(res.err_code+res.err_desc+res.err_msg);
