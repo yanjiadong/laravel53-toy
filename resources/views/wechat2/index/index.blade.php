@@ -248,16 +248,22 @@
                 var lunbo_content="";
                 if(res.info.banners.length>0){
                     index_obj.data.lunboData = res.info.banners;
-                    for(var i=0;i<res.info.banners.length;i++){
+
+                    if(index_obj.data.lunboData.length>1){
+                        for(var i=0;i<index_obj.data.lunboData.length;i++){
+                            lunbo_content +='<div class="swiper-slide"><a href="'+index_obj.data.lunboData[i].url +'">' +
+                                '<img class="banner-img" src="'+ index_obj.data.lunboData[i].picture+'"></a></div>';
+                        }
+                        $(".lunbo .swiper-wrapper").html(lunbo_content);
+                        index_obj.banner();
+                    }else{
+                        $(".lunbo").html('<a href="'+index_obj.data.lunboData[0].url +'"><img class="banner-img" src="'+ index_obj.data.lunboData[0].picture+'"></a>');
+                    }
+
+                    /*for(var i=0;i<res.info.banners.length;i++){
                         lunbo_content +='<div class="swiper-slide"><a href="'+index_obj.data.lunboData[i].url +'"><img class="banner-img" src="'+ index_obj.data.lunboData[i].picture+'"></a></div>';
                     }
-                    $(".lunbo .swiper-wrapper").html(lunbo_content);
-                }
-                if(res.info.banners.length>1){
-                    //轮播图
-                    $(".lunbo .swiper-wrapper img").load(function () {
-                        index_obj.banner();
-                    });
+                    $(".lunbo .swiper-wrapper").html(lunbo_content);*/
                 }
                 index_obj.hot_new();    //首页 - 新品推荐初始化
             })
