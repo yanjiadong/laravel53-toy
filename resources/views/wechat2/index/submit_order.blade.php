@@ -668,7 +668,7 @@
         //优惠券显示
         discountCarShow :function(){
             $("#coupon_id").val(0);
-            //order_obj.data.actural_data.discount = 0;
+            order_obj.data.actural_data.discount = 0;
             common.httpRequest("{{ url('api/user/user_coupon_list') }}",'post',{user_id:'{{ $user_id }}'},function (res) {
                 //res=[{can_use_money:100},{can_use_money:200},{can_use_money:300},{can_use_money:500}];
                 order_obj.data.actural_data.discount =0;
@@ -689,6 +689,7 @@
                     $(".rent-item-list ul li:eq(2) .fr .discount-fee").html('<span>无可用优惠券</span>');
                 }
             });
+            console.log('优惠券金额'+order_obj.data.actural_data.discount);
         },
         addAddress:function () {
             $(".submit-order-wrap").css({'height':$(window).height(),'overflow':'hidden'});

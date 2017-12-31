@@ -691,7 +691,7 @@
             pushHistory();
             //alert(111);
             bool=true;
-        },1500);
+        },3000);
     }else{
         setTimeout(function(){
             pushHistory();
