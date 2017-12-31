@@ -684,12 +684,12 @@
     }
     /*----------避免下一页返回这一页调用这个函数-------------*/
     var bool=false;
-    alert(document.referrer.indexOf("index/cart"));
+    //alert(document.referrer.indexOf("index/cart"));
     if(document.referrer.indexOf("index/cart")>-1){
         bool=false;
         setTimeout(function(){
             pushHistory();
-            alert(111);
+            //alert(111);
             bool=true;
         },1500);
     }else{
@@ -702,7 +702,7 @@
         if(look_detail){
             look_detail = false;
         }else{
-            alert(bool);
+            //alert(bool);
             if(bool) {
                 bool=false;
                 location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面

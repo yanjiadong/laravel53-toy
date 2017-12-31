@@ -199,7 +199,7 @@
             bool=true;
         },1500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            alert(bool);
+            //alert(bool);
             if(bool) {
                 location.href=sessionStorage.getItem('toys_car_url')?sessionStorage.getItem('toys_car_url'):document.referrer;  //在这里指定其返回的地址
             }
