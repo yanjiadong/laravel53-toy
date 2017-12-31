@@ -184,7 +184,7 @@
 </script>
 <script>
     $(function () {
-        if(document.referrer.indexOf("user/cash_success")==-1&&document.referrer.indexOf("user/my_deposit")==-1){
+        if(document.referrer.indexOf("user/cash_success")==-1&&document.referrer.indexOf("user/deposit_list")==-1){
             sessionStorage.setItem("my_deposit_url",document.referrer)
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/
@@ -192,7 +192,7 @@
         pushHistory();
         setTimeout(function(){
             bool=true;
-        },1500);
+        },2000);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {
                 bool=false;

@@ -28,7 +28,7 @@ class UserController extends BaseController
         $is_vip = $request->get('is_vip');
         if(empty($is_vip))
         {
-            $users = User::paginate(30);
+            $users = User::orderBy('id','desc')->paginate(30);
         }
         else
         {
@@ -36,7 +36,7 @@ class UserController extends BaseController
             {
                 $where['is_vip'] = $is_vip - 1;
             }
-            $users = User::where($where)->paginate(30);
+            $users = User::where($where)->orderBy('id','desc')->paginate(30);
         }
 
         //分页需要的参数
