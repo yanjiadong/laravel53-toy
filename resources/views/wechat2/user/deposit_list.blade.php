@@ -6,13 +6,17 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>押金明细</title>
-    <link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('wechat2/style/reset.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('wechat2/style/common.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('wechat2/style/style.css') }}" rel="stylesheet" type="text/css">
+
+    {{--<link href="/wechat/style/reset.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/common.css" rel="stylesheet" type="text/css">
     <link href="/wechat/style/style.css" rel="stylesheet" type="text/css">
 
     <script src="/wechat/js/jquery-1.11.1.min.js"></script>
     <script src="/wechat/js/main.js"></script>
-    <script src="/wechat/js/common.js"></script>
+    <script src="/wechat/js/common.js"></script>--}}
 </head>
 <body>
 <div class="deposit-list-wrap bg-white">
@@ -21,7 +25,9 @@
     </ul>
 </div>
 
-
+<script src="{{ asset('wechat2/js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ asset('wechat2/js/main.js') }}"></script>
+<script src="{{ asset('wechat2/js/common.js') }}"></script>
 <script>
     var deposit_list ={
         data:{
