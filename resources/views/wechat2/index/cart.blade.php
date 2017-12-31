@@ -192,14 +192,14 @@
         if(document.referrer.indexOf("index/submit_order")==-1){
             sessionStorage.setItem("toys_car_url",document.referrer)
         }
-        pushHistory();
         /*----------避免下一页返回这一页调用这个函数-------------*/
-        var bool=false;
+        var bool=false;
         setTimeout(function(){
+            pushHistory();
             bool=true;
         },1500);
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能al
-            alert(222);
+        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            alert(bool);
             if(bool) {
                 location.href=sessionStorage.getItem('toys_car_url')?sessionStorage.getItem('toys_car_url'):document.referrer;  //在这里指定其返回的地址
             }
@@ -208,7 +208,7 @@
     function pushHistory() {
         var state = {
             title: "title",
-            url: "#"
+            url: ""
         };
         window.history.pushState(state, state.title, state.url);
     }

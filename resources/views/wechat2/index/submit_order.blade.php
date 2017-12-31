@@ -668,7 +668,7 @@
         //优惠券显示
         discountCarShow :function(){
             $("#coupon_id").val(0);
-            order_obj.data.actural_data.discount = 0;
+            //order_obj.data.actural_data.discount = 0;
             common.httpRequest("{{ url('api/user/user_coupon_list') }}",'post',{user_id:'{{ $user_id }}'},function (res) {
                 //res=[{can_use_money:100},{can_use_money:200},{can_use_money:300},{can_use_money:500}];
                 order_obj.data.actural_data.discount =0;
@@ -1452,6 +1452,7 @@
             $(".submit-voucher-wrap").hide();
             $(".submit-order-wrap").show();
             $("title").text("提交订单");
+            $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
         }
     };
 
