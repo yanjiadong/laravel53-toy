@@ -189,9 +189,9 @@
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/
         var bool=false;
-        pushHistory();
         setTimeout(function(){
             bool=true;
+            pushHistory();
         },2000);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
             if(bool) {

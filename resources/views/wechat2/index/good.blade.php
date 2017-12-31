@@ -691,7 +691,7 @@
     if(document.referrer.indexOf("index/cart")>-1){
         bool=false;
         setTimeout(function(){
-            pushHistory();
+            //pushHistory();
             bool=true;
         },500);
     }
