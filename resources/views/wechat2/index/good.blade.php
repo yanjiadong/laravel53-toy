@@ -704,6 +704,7 @@
         if(look_detail){
             look_detail = false;
         }else{
+            alert(bool);
             if(bool) {
                 bool=false;
                 location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
