@@ -684,23 +684,19 @@
     }
     /*----------避免下一页返回这一页调用这个函数-------------*/
     var bool=false;
-    setTimeout(function(){
-        pushHistory();
-        bool=true;
-    },500);
     if(document.referrer.indexOf("index/cart")>-1){
         bool=false;
         setTimeout(function(){
-            //pushHistory();
+            pushHistory();
             bool=true;
-        },1000);
+        },1500);
+    }else{
+        setTimeout(function(){
+            pushHistory();
+            bool=true;
+        },500);
     }
-
     window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-        //console.log($(".pswp_bg")[0]);
-        /*  if(==1){
-
-          }*/
         if(look_detail){
             look_detail = false;
         }else{
@@ -711,7 +707,6 @@
             }
         }
     }, false);
-
     function pushHistory() {
         var state = {
             title: "title",
