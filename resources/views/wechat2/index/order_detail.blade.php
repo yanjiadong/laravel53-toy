@@ -320,7 +320,7 @@
 
                         if(order_detail.data.logistics_state.good.over_days > 0)
                         {
-                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期已延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期共延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
                         }
                         else
                         {
@@ -335,7 +335,7 @@
 
                         if(order_detail.data.logistics_state.good.over_days > 0)
                         {
-                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期已延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
+                            $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").text('逾期费用：'+order_detail.data.logistics_state.good.over_days*order_detail.data.logistics_state.good.per_price+'元(租期共延期'+order_detail.data.logistics_state.good.over_days+'天)').show();
                         }
                         else
                         {
