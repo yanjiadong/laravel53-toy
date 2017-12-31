@@ -684,10 +684,12 @@
     }
     /*----------避免下一页返回这一页调用这个函数-------------*/
     var bool=false;
+    alert(document.referrer.indexOf("index/cart"));
     if(document.referrer.indexOf("index/cart")>-1){
         bool=false;
         setTimeout(function(){
             pushHistory();
+            alert(111);
             bool=true;
         },1500);
     }else{
