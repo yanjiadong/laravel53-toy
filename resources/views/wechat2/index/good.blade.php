@@ -693,7 +693,7 @@
         setTimeout(function(){
             //pushHistory();
             bool=true;
-        },500);
+        },1000);
     }
 
     window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
