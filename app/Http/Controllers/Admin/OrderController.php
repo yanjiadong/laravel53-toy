@@ -136,6 +136,8 @@ class OrderController extends BaseController
             {
                 foreach ($orders as $order)
                 {
+                    $order->over_days = 0;  //逾期天数
+                    $order->days2 = 0;  //还剩多少天
                     $time = $this->time - strtotime($order->end_time);
                     if($time > 0)
                     {

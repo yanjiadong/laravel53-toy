@@ -109,7 +109,7 @@
                                                     ({{$order->days2}}天后到期)
                                                 @else
                                                     (今天到期)
-                                                @endif;
+                                                @endif
                                         </td>
                                     @endif
                                     {{--<td>{{ $order->express_title }}</td>--}}
