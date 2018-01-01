@@ -27,6 +27,7 @@
     width: 100%;
     background-color: #fff;
     padding: 10px 10px 0 10px;
+    font-size: 0;
 }
 .index-wrap .content .recommend .lunbo .swiper-container {
     width: 100%;
@@ -60,11 +61,11 @@
 }
 .index-wrap .content .recommend .top-cont {
     background-color: #fff;
-    height: 50px;
+    height: 46px;
     padding: 0 10px;
     color: #939393;
     font-size: 12px;
-    line-height: 50px;
+    line-height: 46px;
 }
 .index-wrap .content .recommend .top-cont .top-title table{
     width: 100%;
@@ -442,7 +443,7 @@
     color: #8D8D8D;
     font-size: 13px;
     margin-top: 8px;
-    height: 18px;
+    height: 20px;
 }
 .index-wrap .content .recommend .hot .hot-list ul li h4 {
     color: #8D8D8D;

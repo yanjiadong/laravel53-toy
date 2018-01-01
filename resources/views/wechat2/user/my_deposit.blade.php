@@ -192,11 +192,17 @@
         setTimeout(function(){
             bool=true;
             pushHistory();
-        },2000);
+        },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
+            if(document.referrer.indexOf("user/deposit_list")>-1){
+                bool=false;
+                setTimeout(function(){
+                    bool=true;
+                },1500);
+            }
             if(bool) {
                 bool=false;
-                location.href=sessionStorage.getItem('my_deposit_url')?sessionStorage.getItem('my_deposit_url'):document.referrer;  //在这里指定其返回的地址
+                location.href=sessionStorage.getItem('my_deposit_url')?sessionStorage.getItem('my_deposit_url'):document.referrer;   //在这里指定其返回的地址
             }
         }, false);
     });

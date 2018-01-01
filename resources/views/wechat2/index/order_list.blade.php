@@ -212,7 +212,7 @@
                                 dataList += ' <li class="bg-white"><div class="top clear"><div class="fl"><i class="order-list-logo"></i><span>小Q编程</span>' +
                                     '</div><div class="fr">待发货</div></div><div class="good-detail clear"><a href="'+href+'"><div class="fl"><img src="'+orderDtail.data.list[i].good_picture+'">' +
                                     '</div><div class="fr"><h3>'+orderDtail.data.list[i].good_title+'</h3><p>市场价¥'+Math.round(orderDtail.data.list[i].good_price)+'</p>' +
-                                    '<h4>适龄'+orderDtail.data.list[i].good_old+'</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line"><div class="info1"><span class="rent-time">租期'+orderDtail.data.list[i].days+'天</span>实付款：¥'+orderDtail.data.list[i].price+'(含押金¥'+Math.round(orderDtail.data.list[i].money)+')</div></div></div><div class="total clear">' +
+                                    '<h4>适龄'+orderDtail.data.list[i].good_old+'</h4><span class="num">×'+orderDtail.data.list[i].good_num+'</span></div></a></div><div class="order-number"><div class="top-line" style="border-bottom:none"><div class="info1"><span class="rent-time">租期'+orderDtail.data.list[i].days+'天</span>实付款：¥'+orderDtail.data.list[i].price+'(含押金¥'+Math.round(orderDtail.data.list[i].money)+')</div></div></div><div class="total clear">' +
                                     '<a href="tel:'+res.info.phone+'"><div class="contact"><i class="icon-phone"></i><span>联系客服</span></div></a></div></li>';
                                 break;
                             case "已发货":
