@@ -317,7 +317,7 @@ class IndexController extends BaseController
         }
         else
         {
-            $this->check_user();
+            $this->check_oauth();
         }
 
         $user_id = session('user_id');
