@@ -104,11 +104,11 @@
                                     @if(isset($status) && $status==3)
                                         <td>{{ date('Y-m-d',strtotime($order->end_time)) }}
                                             @if($order->over_days>0)
-                                                    (已逾期{{$order->over_days}}天)
-                                                @elseif($order->days>0)
-                                                    ({{$order->days}}到期)
+                                                    (逾期{{$order->over_days}}天)
+                                                @elseif($order->days2>0)
+                                                    ({{$order->days2}}天后到期)
                                                 @else
-                                                    (今日到期)
+                                                    (今天到期)
                                                 @endif;
                                         </td>
                                     @endif

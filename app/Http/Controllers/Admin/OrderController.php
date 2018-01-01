@@ -139,7 +139,6 @@ class OrderController extends BaseController
                     $time = $this->time - strtotime($order->end_time);
                     if($time > 0)
                     {
-                        //还剩几天到期
                         $order->over_days = ceil($time/86400);
 
                     }
