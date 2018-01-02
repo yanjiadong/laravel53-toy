@@ -184,7 +184,7 @@
 </script>
 <script>
     $(function () {
-        if(document.referrer.indexOf("user/cash_success")==-1&&document.referrer.indexOf("user/deposit_list")==-1){
+        if(document.referrer.indexOf("cash_success")==-1&&document.referrer.indexOf("deposit_list")==-1){
             sessionStorage.setItem("my_deposit_url",document.referrer)
         }
         /*----------避免下一页返回这一页调用这个函数-------------*/
@@ -194,12 +194,6 @@
             pushHistory();
         },500);
         window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            if(document.referrer.indexOf("user/deposit_list")>-1){
-                bool=false;
-                setTimeout(function(){
-                    bool=true;
-                },1500);
-            }
             if(bool) {
                 bool=false;
                 location.href=sessionStorage.getItem('my_deposit_url')?sessionStorage.getItem('my_deposit_url'):document.referrer;   //在这里指定其返回的地址

@@ -172,7 +172,7 @@ class UserController extends BaseController
     public function deposit_list(Request $request)
     {
         $user_id = $request->get('user_id');
-        $list = UserPayRecord::where(['user_id'=>$user_id,'type'=>1])->get()->toArray();
+        $list = UserPayRecord::where(['user_id'=>$user_id,'type'=>1])->orderBy('id','desc')->get()->toArray();
         if(!empty($list))
         {
             foreach ($list as &$v)
