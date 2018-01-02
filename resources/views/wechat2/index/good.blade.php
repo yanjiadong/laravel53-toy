@@ -682,14 +682,15 @@
     if(document.referrer.indexOf("index/submit_order")==-1&&document.referrer.indexOf("index/cart")==-1){
         sessionStorage.setItem("good_detail_back_url",document.referrer)
     }
+    if(sessionStorage.toys_car_last_page.indexOf("good_detail")==-1){
+        sessionStorage.setItem("good_detail_back_url",sessionStorage.toys_car_last_page)
+    }
     /*----------避免下一页返回这一页调用这个函数-------------*/
     var bool=false;
-    //alert(document.referrer.indexOf("index/cart"));
     if(document.referrer.indexOf("index/cart")>-1){
         bool=false;
         setTimeout(function(){
             pushHistory();
-            //alert(111);
             bool=true;
         },3000);
     }else{
@@ -698,11 +699,11 @@
             bool=true;
         },500);
     }
+
     window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
         if(look_detail){
             look_detail = false;
         }else{
-            //alert(bool);
             if(bool) {
                 bool=false;
                 location.href = sessionStorage.getItem('good_detail_back_url')?sessionStorage.getItem('good_detail_back_url'):document.referrer;  //在这里指定其返回的地址  订单列表页面
