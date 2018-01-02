@@ -210,7 +210,7 @@
                         e: 100.00,
                         f: 100.00,
                         g: 100.00,
-                        h: '{{url('wechat/index/good')}}'+'/'+res.info.order.good_id,
+                        h: '{{url('wechat2/index/good')}}'+'/'+res.info.order.good_id,
                         total_num: 1,
                         allPrice: res.info.order.price,
                         rent:res.info.order.total_price,   //租金
