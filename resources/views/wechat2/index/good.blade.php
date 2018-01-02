@@ -678,27 +678,21 @@
         goodDetail_obj.detail_describe_toggle();
     })
 </script>
+
 <script>
-    if(document.referrer.indexOf("index/submit_order")==-1&&document.referrer.indexOf("index/cart")==-1){
-        sessionStorage.setItem("good_detail_back_url",document.referrer)
+    if(document.referrer.indexOf("index/submit_order")==-1){
+        if(document.referrer.indexOf("index/cart")>-1&&sessionStorage.toys_car_last_page.indexOf("good_detail")==-1){
+            sessionStorage.setItem("good_detail_back_url",document.referrer)
+        }else if(document.referrer.indexOf("index/cart")==-1){
+            sessionStorage.setItem("good_detail_back_url",document.referrer)
+        }
     }
-    if(sessionStorage.toys_car_last_page.indexOf("good_detail")==-1){
-        sessionStorage.setItem("good_detail_back_url",sessionStorage.toys_car_last_page)
-    }
-    /*----------避免下一页返回这一页调用这个函数-------------*/
+    pushHistory();
     var bool=false;
-    if(document.referrer.indexOf("index/cart")>-1){
-        bool=false;
-        setTimeout(function(){
-            pushHistory();
-            bool=true;
-        },3000);
-    }else{
-        setTimeout(function(){
-            pushHistory();
-            bool=true;
-        },500);
-    }
+    setTimeout(function(){
+        pushHistory();
+        bool=true;
+    },500);
 
     window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
         if(look_detail){
