@@ -393,7 +393,21 @@
 .index-wrap .content .recommend .hot .hot-list ul li:nth-child(2n+1) {
     padding-right: 2%;
 }
-.index-wrap .content .recommend .hot .hot-list ul li>a>span{
+.index-wrap .content .recommend .hot .hot-list ul li:nth-child(2n)>a>span{
+    background-color: #D1D1D1;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    line-height: 21px;
+    border-radius: 3px;
+    font-size: 9px;
+    color: #8D8D8D;
+    position: absolute;
+    top: 0;
+    left: 4%;
+    display: inline-block;
+}
+.index-wrap .content .recommend .hot .hot-list ul li:nth-child(2n+1)>a>span{
     background-color: #D1D1D1;
     text-align: center;
     width: 50px;
@@ -526,7 +540,7 @@
     transform: translate(-50%,-50%);
 }
 .index-wrap-cover2 .index-main-cover2{
-    width: 100%;
+    width: 90%;
     overflow: hidden;
     border-radius: 4px;
     position: absolute;
