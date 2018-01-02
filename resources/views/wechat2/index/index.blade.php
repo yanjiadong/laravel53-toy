@@ -213,7 +213,7 @@
     <div class="index-main-cover2">
         <div class="close-btn" onclick="index_obj.alertCover2Hide()"></div>
         <div class="pic">
-            <img src="http://ougu95ew5.bkt.clouddn.com/index_cover_main.png">
+            <img src="{{ asset('wechat2/image/common/index_cover_main.png') }}">
             <button onclick="index_obj.alertCover2Hide()"></button>
         </div>
 
