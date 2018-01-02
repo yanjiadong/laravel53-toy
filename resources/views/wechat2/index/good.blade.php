@@ -681,7 +681,7 @@
 
 <script>
     if(document.referrer.indexOf("index/submit_order")==-1){
-        if(document.referrer.indexOf("index/cart")>-1&&sessionStorage.toys_car_last_page.indexOf("good_detail")==-1){
+        if(document.referrer.indexOf("index/cart")>-1&&sessionStorage.toys_car_last_page.indexOf("index/good")==-1){
             sessionStorage.setItem("good_detail_back_url",document.referrer)
         }else if(document.referrer.indexOf("index/cart")==-1){
             sessionStorage.setItem("good_detail_back_url",document.referrer)
