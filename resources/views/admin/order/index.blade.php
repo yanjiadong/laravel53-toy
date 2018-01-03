@@ -71,7 +71,7 @@
                                 <th>订单编号</th>
                                 <th>订单状态</th>
                                 <th width="160px">玩具名称</th>
-                                @if(isset($status) && $status!=3)
+                                @if(isset($status) && $status!=3 && $status!=1)
                                     <th>邮费</th>
                                 @endif
                                 @if(isset($status) && $status==3)
@@ -83,10 +83,13 @@
                                 {{--<th>回寄状态</th>--}}
                                 @if(isset($status) && $status==1)
                                     <th>预计发货时间</th>
+                                    <th>备注</th>
                                 @endif
                                 @if(isset($status) && ($status==4 || $status==5))
                                     <th>逾期天数</th>
                                 @endif
+
+
                                 <th>下单时间</th>
                                 <th>操作</th>
                             </tr>
@@ -98,7 +101,7 @@
                                     <td>{{ $order->code }}</td>
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->good_title }}</td>
-                                    @if(isset($status) && $status!=3)
+                                    @if(isset($status) && $status!=3 && $status!=1)
                                         <td>{{ $order->express_price }}</td>
                                     @endif
                                     @if(isset($status) && $status==3)
@@ -117,16 +120,19 @@
                                     <td>{{ $order->user->wechat_nickname }}</td>
                                     {{--<td>{{ $order->status=='已归还'?$order->back_status:'' }}</td>--}}
                                     @if(isset($status) && $status==1)
-                                    <td>
-                                        <?php
-                                            if(!empty($order->plan_send_time))
-                                                {
-                                                    $weekarray = array("日","一","二","三","四","五","六");
-                                                    $send_week = $weekarray[date("w",strtotime($order->plan_send_time))];
-                                                    echo $order->plan_send_time.'(周'.$send_week.')';
-                                                }
-                                        ?>
-                                    </td>
+                                        <td>
+                                            <?php
+                                                if(!empty($order->plan_send_time))
+                                                    {
+                                                        $weekarray = array("日","一","二","三","四","五","六");
+                                                        $send_week = $weekarray[date("w",strtotime($order->plan_send_time))];
+                                                        echo $order->plan_send_time.'(周'.$send_week.')';
+                                                    }
+                                            ?>
+                                        </td>
+                                        <td width="120px">
+                                            <input style="width: 90%" type="text" value="{{ $order->remark }}" class="remarkAction" data-id="{{$order->id}}">
+                                        </td>
                                     @endif
                                     @if(isset($status) && ($status==4 || $status==5))
                                         <td>{{ $order->over_days }}</td>
@@ -261,6 +267,15 @@
                     confirmButton: "确认",
                     cancelButton: "取消"
                 });
+            });
+
+            $('.remarkAction').blur(function () {
+                var remark = $(this).val();
+                var order_id = $(this).attr('data-id');
+
+                $.post("{{route('admin.order.remark')}}",{id:order_id,remark:remark},function(data){
+
+                }, "json");
             });
         });
     </script>

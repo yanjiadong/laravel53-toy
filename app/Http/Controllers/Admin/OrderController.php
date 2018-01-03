@@ -99,6 +99,14 @@ class OrderController extends BaseController
         alert('', 1);
     }
 
+    public function remark(Request $request)
+    {
+        $id = $request->get('id');
+        $remark = $request->get('remark');
+        Order::where('id', $id)->update(['remark' => $remark]);
+        alert('', 1);
+    }
+
     public function index(Request $request)
     {
         $admin_info = $this->get_session_info();
