@@ -326,6 +326,9 @@ class OrderController extends BaseController
         {
             Order::where('code',$code)->update(['money_status'=>1,'apply_money_time'=>$this->datetime]);
 
+            //发送短信给管理员
+            sms_send('SMS_120120285','13366556200');
+
             //押金提现记录
             //$price = $order->money - $order->over_days*$order->good_day_price;
             $price = $order->money;
