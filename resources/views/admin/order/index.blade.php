@@ -131,7 +131,7 @@
                                             ?>
                                         </td>
                                         <td width="120px">
-                                            <input style="width: 90%" type="text" value="{{ $order->remark }}" class="remarkAction" data-id="{{$order->id}}">
+                                            <input style="width: 90%;color: red;" type="text" value="{{ $order->remark }}" class="remarkAction" data-id="{{$order->id}}">
                                         </td>
                                     @endif
                                     @if(isset($status) && ($status==4 || $status==5))
