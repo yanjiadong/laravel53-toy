@@ -198,13 +198,13 @@ class UserController extends BaseController
         $city = $request->get('d');
         $area = $request->get('e');
 
-        $province_info = Area::where('name',$province)->first();
+        $province_info = Area::where('name',$province)->where('area',2)->first();
         $data['province_id'] = $province_info->id;
 
-        $city_info = Area::where('name',$city)->first();
+        $city_info = Area::where('name',$city)->where('area',3)->first();
         $data['city_id'] = $city_info->id;
 
-        $area_info = Area::where('name',$area)->first();
+        $area_info = Area::where('name',$area)->where('area',4)->first();
         $data['area_id'] = $area_info->id;
 
         $data['address'] = $request->get('f');

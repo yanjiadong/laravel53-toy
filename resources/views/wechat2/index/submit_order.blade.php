@@ -191,7 +191,7 @@
             <span>租客留言：</span>
         </div>
         <div class="fr">
-            <textarea id="remark" maxlength="40" onfocus="order_obj.delBtnShow()"  placeholder="如对发货或收货日期有特殊需求，在此留言"></textarea>
+            <textarea id="remark" maxlength="40"  placeholder="如对发货或收货日期有特殊需求，在此留言"></textarea>
             <div class="leave-msg-del">×</div>
         </div>
     </div>
@@ -409,17 +409,33 @@
             order_obj.address();
             order_obj.orderList();
         },
-        //留言
-        delBtnShow:function () {
-            $(".leave-msg-del").show();
-            $(".leave-msg-del").click(function () {
+        delLeaveMsg:function () {
+            $(".leave-msg-del").click(function (e) {
+                e.preventDefault();
                 $("#remark").val("");
             });
-            $(document).click(function (e) {
-                if(e.target!=$("#remark")[0]&&e.target!=$(".leave-msg-del")[0]){
+            $("#remark")[0].onblur = function(e){
+                setTimeout(function () {
                     $(".leave-msg-del").hide();
+                },100);
+
+            };
+            $("#remark")[0].onfocus = function () {
+                if(!$("#remark").val()){
+                    $(".leave-msg-del").hide();
+                }else{
+                    $(".leave-msg-del").show();
+
                 }
-            })
+            };
+            $("#remark")[0].onkeydown = function(e){
+                if(!$("#remark").val()){
+                    $(".leave-msg-del").hide();
+                }else{
+                    $(".leave-msg-del").show();
+
+                }
+            };
         },
         //用户地址
         address:function () {
@@ -676,19 +692,17 @@
         //用户地址赋值
         address_rander:function (index) {
             if(order_obj.data.address.length){
-                alert(index);
                 common.httpRequest('/wechat2/js/test.json','get',null,function (res) {
                     $(".address .add").hide();
                     $(".address .separate").fadeIn(500);
                     if(index){
-                        alert(order_obj.data.address[index]);
                         $(".name-phone table tr td.name").text(order_obj.data.address[index].a);
                         $(".name-phone table tr td.phone").text(order_obj.data.address[index].b);
                         $(".name-phone table tr td.address-detail span:eq(0)").text(order_obj.data.address[index].c);
                         $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[index].d);
                         $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[index].e);
                         $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[index].f);
-                        console.log(order_obj.data.address[index]);
+                        //console.log(order_obj.data.address[index]);
                         order_obj.data.orderDataList.logistics.money = order_obj.data.address[index].express_price;
                         //邮费赋值
                         if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
@@ -708,7 +722,7 @@
                         $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[0].e);
                         $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[0].f);
 
-                        console.log(order_obj.data.address[0]);
+                        //console.log(order_obj.data.address[0]);
                         $("#address_id").val(order_obj.data.address[0].g);
                         $("#receiver").val(order_obj.data.address[0].a);
                         $("#receiver_telephone").val(order_obj.data.address[0].b);

@@ -6017,7 +6017,7 @@ textarea {
     position: relative;
 }
 .submit-order-wrap .leave-msg .fr textarea{
-    width: 100%;
+    width: calc(100% - 30px);
     height: 18px;
     font-size: 14px;
     color: #2d2d2d;
@@ -6030,9 +6030,9 @@ textarea {
     height: 15px;
     color: #fff;
     text-align: center;
-    line-height: 12px;
-    background-color: rgba(0,0,0,0.5);
-    top: 22px;
+    line-height: 15px;
+    background-color: #bbb;
+    top: 20px;
     right: 10px;
     border-radius: 50%;
     display: none;
