@@ -676,11 +676,12 @@
         //用户地址赋值
         address_rander:function (index) {
             if(order_obj.data.address.length){
-                console.log(index);
+                alert(index);
                 common.httpRequest('/wechat2/js/test.json','get',null,function (res) {
                     $(".address .add").hide();
                     $(".address .separate").fadeIn(500);
                     if(index){
+                        alert(order_obj.data.address[index]);
                         $(".name-phone table tr td.name").text(order_obj.data.address[index].a);
                         $(".name-phone table tr td.phone").text(order_obj.data.address[index].b);
                         $(".name-phone table tr td.address-detail span:eq(0)").text(order_obj.data.address[index].c);
