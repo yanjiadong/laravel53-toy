@@ -571,6 +571,33 @@ if(!function_exists('get_level_by_score'))
     }
 }
 
+//计算租金公式
+if(!function_exists('getGoodDayPrice'))
+{
+    function getGoodDayPrice($price, $days)
+    {
+        $day_price = 0;
+        if($days>=7 && $days<=13)
+        {
+            $day_price = $price/(85+1*$days);
+        }
+        elseif($days>13 && $days<=29)
+        {
+            $day_price = $price/(97+1.6*$days);
+        }
+        elseif($days>29 && $days<=44)
+        {
+            $day_price = $price/(102+2.3*$days);
+        }
+        elseif($days>44 && $days<=60)
+        {
+            $day_price = $price/(100+2.7*$days);
+        }
+
+        return number_format($day_price,1,".","");
+    }
+}
+
 //根据商品租用天数来计算每日的租金
 if(!function_exists('getGoodPriceByDays'))
 {
@@ -630,15 +657,7 @@ if(!function_exists('getGoodPriceByDays'))
 
         if($result<=0)
         {
-            if($days>=7 && $days<=25)
-            {
-                $result = $price/(100+$days*1.8);
-            }
-
-            if($days>25 && $days<=60)
-            {
-                $result = $price/(100+$days*2.8);
-            }
+            $result = getGoodDayPrice($price,$days);
         }
 
 
@@ -646,7 +665,7 @@ if(!function_exists('getGoodPriceByDays'))
     }
 }
 
-//根据商品租用天数来计算每日的租金
+//根据商品租用天数来计算每日的租金以及是否是优惠价格
 if(!function_exists('getGoodPriceInfo'))
 {
     function getGoodPriceInfo($price, $days, $is_discount = 0, $good_id = 0)
@@ -664,7 +683,7 @@ if(!function_exists('getGoodPriceInfo'))
             if(!empty($good) && $is_discount)
             {
                 $isDiscount = true;
-                if(getGoodPriceByDays($good->price,7) == $good->discount1)
+                if(getGoodDayPrice($good->price,7) == $good->discount1)
                 {
                     $isDiscount = false;
                 }
@@ -676,7 +695,7 @@ if(!function_exists('getGoodPriceInfo'))
             if(!empty($good) && $is_discount)
             {
                 $isDiscount = true;
-                if(getGoodPriceByDays($good->price,14) == $good->discount2)
+                if(getGoodDayPrice($good->price,14) == $good->discount2)
                 {
                     $isDiscount = false;
                 }
@@ -689,7 +708,7 @@ if(!function_exists('getGoodPriceInfo'))
             if(!empty($good) && $is_discount)
             {
                 $isDiscount = true;
-                if(getGoodPriceByDays($good->price,21) == $good->discount3)
+                if(getGoodDayPrice($good->price,21) == $good->discount3)
                 {
                     $isDiscount = false;
                 }
@@ -702,7 +721,7 @@ if(!function_exists('getGoodPriceInfo'))
             if(!empty($good) && $is_discount)
             {
                 $isDiscount = true;
-                if(getGoodPriceByDays($good->price,30) == $good->discount4)
+                if(getGoodDayPrice($good->price,30) == $good->discount4)
                 {
                     $isDiscount = false;
                 }
@@ -715,7 +734,7 @@ if(!function_exists('getGoodPriceInfo'))
             if(!empty($good) && $is_discount)
             {
                 $isDiscount = true;
-                if(getGoodPriceByDays($good->price,45) == $good->discount5)
+                if(getGoodDayPrice($good->price,45) == $good->discount5)
                 {
                     $isDiscount = false;
                 }
@@ -727,7 +746,7 @@ if(!function_exists('getGoodPriceInfo'))
             if(!empty($good) && $is_discount)
             {
                 $isDiscount = true;
-                if(getGoodPriceByDays($good->price,60) == $good->discount6)
+                if(getGoodDayPrice($good->price,60) == $good->discount6)
                 {
                     $isDiscount = false;
                 }
@@ -738,15 +757,7 @@ if(!function_exists('getGoodPriceInfo'))
 
         if($result<=0)
         {
-            if($days>=7 && $days<=25)
-            {
-                $result = $price/(100+$days*1.8);
-            }
-
-            if($days>25 && $days<=60)
-            {
-                $result = $price/(100+$days*2.8);
-            }
+            $result = getGoodDayPrice($price,$days);
         }
 
 
