@@ -292,7 +292,7 @@ class UserController extends BaseController
         $user_id = $request->get('user_id');
 
         $address = DB::table('user_addresses')
-            ->select('user_addresses.receiver as a','user_addresses.receiver_telephone as b','p.name as c','c.name as d','a.name as e','user_addresses.address as f','user_addresses.id as g','user_addresses.province_id','user_addresses.city_id','user_addresses.area_id')
+            ->select('user_addresses.receiver as a','user_addresses.receiver_telephone as b','p.name as c','c.name as d','a.name as e','user_addresses.address as f','user_addresses.id as g','user_addresses.province_id','user_addresses.city_id','user_addresses.area_id','p.express_price')
             ->leftJoin('areas as p', 'p.id', '=', 'user_addresses.province_id')
             ->leftJoin('areas as c', 'c.id', '=', 'user_addresses.city_id')
             ->leftJoin('areas as a', 'a.id', '=', 'user_addresses.area_id')

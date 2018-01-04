@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Area;
 use App\Cart;
 use App\Coupon;
 use App\Express;
@@ -10,6 +11,7 @@ use App\Good;
 use App\Order;
 use App\SystemConfig;
 use App\User;
+use App\UserAddress;
 use App\UserCoupon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,6 +33,20 @@ class OrderController extends BaseController
         $user = User::find($user_id);
         $good = Good::with(['category_tag','brand'])->find($good_id);
 
+        //获取默认收货地址的运费
+        $address = UserAddress::where('user_id',$user_id)->first();
+        if($address)
+        {
+            $province = Area::find($address->province_id);
+
+        }
+        else
+        {
+            //没有收货地址的时候获取北京的即可
+            $province = Area::find(1);
+        }
+        $good_express_price = $province->express_price;
+
         $info['good_title'] = $good->title;
         $info['good_picture'] = $good->picture;
         $info['good_price'] = $good->price;
@@ -38,7 +54,8 @@ class OrderController extends BaseController
         $info['good_old'] = $good->old;
         $info['good_day_price'] = $good->day_price;
         $info['good_days'] = $good->days;
-        $info['good_express_price'] = $good->express_price;
+        //$info['good_express_price'] = $good->express_price;
+        $info['good_express_price'] = $good_express_price;
         $info['good_free_price'] = $good->free_price;
         $info['good_express'] = $good->express;
         $info['good_money'] = $good->money;
@@ -163,6 +180,13 @@ class OrderController extends BaseController
             return $this->ret;
         }
 
+        if(empty($address_id))
+        {
+            $this->ret['code'] = 300;
+            $this->ret['msg'] = '收货地址不能为空';
+            return $this->ret;
+        }
+
         if($good->is_discount == 1)
         {
             $good_day_price = round(getGoodPriceByDays($good->price,$days,$good->is_discount,$good->id),2);
@@ -204,7 +228,13 @@ class OrderController extends BaseController
         }
 
         //计算运费
-        $express_price = $good->express_price;
+        //获取默认收货地址的运费
+        $address = UserAddress::where('id',$address_id)->first();
+        $province = Area::find($address->province_id);
+
+        $express_price = $province->express_price;
+
+        //$express_price = $good->express_price;
         if($total_price >= $good->free_price)
         {
             $express_price = 0;

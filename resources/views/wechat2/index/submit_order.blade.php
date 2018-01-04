@@ -191,7 +191,8 @@
             <span>租客留言：</span>
         </div>
         <div class="fr">
-            <textarea id="remark" maxlength="40" placeholder="如对发货或收货日期有特殊需求，在此留言"></textarea>
+            <textarea id="remark" maxlength="40" onfocus="order_obj.delBtnShow()"  placeholder="如对发货或收货日期有特殊需求，在此留言"></textarea>
+            <div class="leave-msg-del">×</div>
         </div>
     </div>
     <div class="submit-order-footer clear bg-white">
@@ -408,6 +409,18 @@
             order_obj.address();
             order_obj.orderList();
         },
+        //留言
+        delBtnShow:function () {
+            $(".leave-msg-del").show();
+            $(".leave-msg-del").click(function () {
+                $("#remark").val("");
+            });
+            $(document).click(function (e) {
+                if(e.target!=$("#remark")[0]&&e.target!=$(".leave-msg-del")[0]){
+                    $(".leave-msg-del").hide();
+                }
+            })
+        },
         //用户地址
         address:function () {
             common.httpRequest("{{url('api/address/index')}}",'post',{user_id:'{{ $user_id }}'},function (res) {
@@ -415,51 +428,12 @@
                 order_obj.address_rander();
             })
         },
-        //用户地址赋值
-        address_rander:function (index) {
-            if(order_obj.data.address.length){
-                common.httpRequest('/wechat2/js/test.json','get',null,function (res) {
-                    $(".address .add").hide();
-                    $(".address .separate").fadeIn(500);
-                    if(index){
-                        $(".name-phone table tr td.name").text(order_obj.data.address[index].a);
-                        $(".name-phone table tr td.phone").text(order_obj.data.address[index].b);
-                        $(".name-phone table tr td.address-detail span:eq(0)").text(order_obj.data.address[index].c);
-                        $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[index].d);
-                        $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[index].e);
-                        $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[index].f);
-                    }else{
-                        $(".name-phone table tr td.name").text(order_obj.data.address[0].a);
-                        $(".name-phone table tr td.phone").text(order_obj.data.address[0].b);
-                        $(".name-phone table tr td.address-detail span:eq(0)").text(order_obj.data.address[0].c);
-                        $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[0].d);
-                        $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[0].e);
-                        $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[0].f);
-
-                        console.log(order_obj.data.address[0]);
-                        $("#address_id").val(order_obj.data.address[0].g);
-                        $("#receiver").val(order_obj.data.address[0].a);
-                        $("#receiver_telephone").val(order_obj.data.address[0].b);
-                        $("#receiver_address").val(order_obj.data.address[0].f);
-                        $("#receiver_province").val(order_obj.data.address[0].c);
-                        $("#receiver_city").val(order_obj.data.address[0].d);
-                        $("#receiver_area").val(order_obj.data.address[0].e);
-                    }
-                    $(".address .address_detail").fadeIn(500);
-                    $(".footer button").removeClass("disable");
-                });
-            }else{
-                $(".address .add").fadeIn(500);
-                $(".address .address_detail").hide();
-                $(".footer button").addClass("disable");
-            }
-        },
         //商品初始化数据
         orderList:function () {
             var good_id = '{{$good_id}}';
             var user_id = '{{$user_id}}';
             common.httpRequest("{{url('api/order/add_order_new')}}",'post',{user_id:user_id,good_id:good_id},function (res) {
-                console.log(res);
+                //console.log(res);
                 if(true){
                     //order_obj.data.orderDataList = res;
                     //假数据
@@ -698,6 +672,72 @@
                 }
             });
             console.log('优惠券金额'+order_obj.data.actural_data.discount);
+        },
+        //用户地址赋值
+        address_rander:function (index) {
+            if(order_obj.data.address.length){
+                common.httpRequest('/wechat2/js/test.json','get',null,function (res) {
+                    $(".address .add").hide();
+                    $(".address .separate").fadeIn(500);
+                    if(index){
+                        $(".name-phone table tr td.name").text(order_obj.data.address[index].a);
+                        $(".name-phone table tr td.phone").text(order_obj.data.address[index].b);
+                        $(".name-phone table tr td.address-detail span:eq(0)").text(order_obj.data.address[index].c);
+                        $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[index].d);
+                        $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[index].e);
+                        $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[index].f);
+
+                        order_obj.data.orderDataList.logistics.money = order_obj.data.address[index].express_price;
+                        //邮费赋值
+                        if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
+                            $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
+                            order_obj.data.actural_data.post =0
+                        }else{
+                            $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
+                            order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
+                        }
+                        //总计
+                        $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                    }else{
+                        $(".name-phone table tr td.name").text(order_obj.data.address[0].a);
+                        $(".name-phone table tr td.phone").text(order_obj.data.address[0].b);
+                        $(".name-phone table tr td.address-detail span:eq(0)").text(order_obj.data.address[0].c);
+                        $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[0].d);
+                        $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[0].e);
+                        $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[0].f);
+
+                        console.log(order_obj.data.address[0]);
+                        $("#address_id").val(order_obj.data.address[0].g);
+                        $("#receiver").val(order_obj.data.address[0].a);
+                        $("#receiver_telephone").val(order_obj.data.address[0].b);
+                        $("#receiver_address").val(order_obj.data.address[0].f);
+                        $("#receiver_province").val(order_obj.data.address[0].c);
+                        $("#receiver_city").val(order_obj.data.address[0].d);
+                        $("#receiver_area").val(order_obj.data.address[0].e);
+
+                        if(index == 0)
+                        {
+                            order_obj.data.orderDataList.logistics.money = order_obj.data.address[0].express_price;
+                            //邮费赋值
+                            if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
+                                $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
+                                order_obj.data.actural_data.post =0
+                            }else{
+                                $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
+                                order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
+                            }
+                            //总计
+                            $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                        }
+                    }
+                    $(".address .address_detail").fadeIn(500);
+                    $(".footer button").removeClass("disable");
+                });
+            }else{
+                $(".address .add").fadeIn(500);
+                $(".address .address_detail").hide();
+                $(".footer button").addClass("disable");
+            }
         },
         addAddress:function () {
             $(".submit-order-wrap").css({'height':$(window).height(),'overflow':'hidden'});
