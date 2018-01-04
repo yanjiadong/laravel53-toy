@@ -896,6 +896,8 @@
                     $(".name-phone table tr td.address-detail span:eq(1)").text("");
                     $(".name-phone table tr td.address-detail span:eq(2)").text("");
                     $(".name-phone table tr td.address-detail span:eq(3)").text("");
+
+                    $("#address_id").val(0);
                 }
 
             })
@@ -1160,7 +1162,7 @@
             var is_use_zhima = $("#is_use_zhima").val();
             var coupon_id = $("#coupon_id").val();
             var user_remark = $("#remark").val();
-
+            
             var submit_data = {
                 user_id:user_id,
                 good_id:good_id,
