@@ -676,6 +676,7 @@
         //用户地址赋值
         address_rander:function (index) {
             if(order_obj.data.address.length){
+                console.log(index);
                 common.httpRequest('/wechat2/js/test.json','get',null,function (res) {
                     $(".address .add").hide();
                     $(".address .separate").fadeIn(500);
@@ -686,7 +687,7 @@
                         $(".name-phone table tr td.address-detail span:eq(1)").text(order_obj.data.address[index].d);
                         $(".name-phone table tr td.address-detail span:eq(2)").text(order_obj.data.address[index].e);
                         $(".name-phone table tr td.address-detail span:eq(3)").text(order_obj.data.address[index].f);
-
+                        console.log(order_obj.data.address[index]);
                         order_obj.data.orderDataList.logistics.money = order_obj.data.address[index].express_price;
                         //邮费赋值
                         if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
