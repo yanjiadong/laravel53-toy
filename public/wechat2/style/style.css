@@ -5269,8 +5269,15 @@ textarea {
 .order-detail-wrap .order-detail .list ul li .fr{
     text-align: right;
 }
-.order-detail-wrap .order-detail .list ul li:first-child .fr span{
-
+.order-detail-wrap .order-detail .list ul li.leave-msg{
+    display: none;
+}
+.order-detail-wrap .order-detail .list ul li.leave-msg .fr{
+    width: calc(100% - 70px );
+    text-align: left;
+    color: #8c8c8c;
+    line-height: 20px;
+    font-size: 12px;
 }
 .order-detail-wrap .detail-list {
     margin-top: 8px;
@@ -5925,7 +5932,6 @@ textarea {
     margin-top: 10px;
     background-color: #fff;
     padding: 0 10px;
-    margin-bottom: 80px;
 }
 .submit-order-wrap .yajin-item-list ul li {
     height: 50px;
@@ -5988,6 +5994,31 @@ textarea {
     display: inline-block;
     vertical-align: middle;
     text-align: right;
+}
+.submit-order-wrap .leave-msg{
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 0 10px;
+    margin-bottom: 80px;
+}
+.submit-order-wrap .leave-msg .fl{
+    font-size: 14px;
+    color: #2d2d2d;
+    padding: 10px 0;
+    width: 70px;
+}
+.submit-order-wrap .leave-msg .fr{
+    font-size: 12px;
+    color: #2d2d2d;
+    padding: 10px 0;
+    width: calc(100% - 70px);
+}
+.submit-order-wrap .leave-msg .fr textarea{
+    width: 100%;
+    height: 44px;
+    font-size: 12px;
+    color: #2d2d2d;
+    line-height: 20px;
 }
 .submit-order-wrap .submit-order-footer {
     position: fixed;

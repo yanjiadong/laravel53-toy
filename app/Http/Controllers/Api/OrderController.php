@@ -139,6 +139,7 @@ class OrderController extends BaseController
         $is_use_zhima = $request->get('is_use_zhima');
         $days = $request->get('days');
         $coupon_id = $request->get('coupon_id');
+        $user_remark = $request->get('user_remark');
 
         $user = User::find($user_id);
         if(empty($user->telephone))
@@ -256,6 +257,7 @@ class OrderController extends BaseController
         $order_data['coupon_id'] = $coupon_id;
         $order_data['coupon_price'] = $coupon_price;
         $order_data['zhima_price'] = $zhima_price;
+        $order_data['user_remark'] = $user_remark;
 
         $order = Order::create($order_data);
 

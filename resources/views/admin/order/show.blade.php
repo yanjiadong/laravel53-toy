@@ -122,6 +122,10 @@
                                 <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',errDealMode:2})" placeholder="结束时间" class="form-control validate[required,custom[date]]" id="end_time" name="end_time"  value="{{$order->end_time?$order->end_time:''}}">
                             </td>
                         </tr>
+                        <tr>
+                            <td>租客留言：</td>
+                            <td>{{ $order->user_remark }}</td>
+                        </tr>
                         </tbody>
                     </table>
 

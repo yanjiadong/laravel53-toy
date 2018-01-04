@@ -79,7 +79,6 @@ class GoodController extends BaseController
         $price = $good->day_price;
         if($days >= 1 && $days <= 60)
         {
-
             $price = getGoodPriceByDays($good->price,$days,$good->is_discount,$good_id);
         }
         else

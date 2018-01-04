@@ -91,6 +91,14 @@
                         <span></span>
                     </div>
                 </li>
+                <li class="clear leave-msg">
+                    <div class="fl">
+                        <span>租客留言</span>
+                    </div>
+                    <div class="fr">
+                        <span id="remark"></span>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -188,6 +196,7 @@
                 //state 1为待发货 2 已发货 3租用中 4已寄回  5归还成功
                 order_detail.data.logistics_state = {
                     state: res.info.order.status,
+                    remark:res.info.order.user_remark,  //用户留言
                     address: {
                         a: res.info.order.receiver,
                         b: res.info.order.receiver_telephone,
@@ -237,6 +246,11 @@
                     order_detail.data.logistics_state.state = '归还成功';
                 }
                 var logistics_cont = "", logistics_info = "",logistics_address="";
+                if(order_detail.data.logistics_state.remark!=""){
+                    $("#remark").text(order_detail.data.logistics_state.remark);
+                    $(".leave-msg").show();
+                }
+
                 console.log(order_detail.data.logistics_state.state);
                 switch (order_detail.data.logistics_state.state) {  //state 1为待发货 2 已发货 3租用中 4已寄回  5归还成功
                     case '待发货':

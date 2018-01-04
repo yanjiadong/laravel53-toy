@@ -186,6 +186,14 @@
             </li>
         </ul>
     </div>
+    <div class="leave-msg clear">
+        <div class="fl">
+            <span>租客留言：</span>
+        </div>
+        <div class="fr">
+            <textarea id="remark" maxlength="40" placeholder="如对发货或收货日期有特殊需求，在此留言"></textarea>
+        </div>
+    </div>
     <div class="submit-order-footer clear bg-white">
         <div class="fl">
             <span>总计：</span>
@@ -1074,6 +1082,7 @@
             var days = $("#days").val();
             var is_use_zhima = $("#is_use_zhima").val();
             var coupon_id = $("#coupon_id").val();
+            var user_remark = $("#remark").val();
 
             var submit_data = {
                 user_id:user_id,
@@ -1087,7 +1096,8 @@
                 receiver_area:receiver_area,
                 days:days,
                 is_use_zhima:is_use_zhima,
-                coupon_id:coupon_id
+                coupon_id:coupon_id,
+                user_remark:user_remark
             };
 
             console.log(submit_data);

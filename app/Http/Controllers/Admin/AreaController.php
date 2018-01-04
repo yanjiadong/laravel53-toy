@@ -34,7 +34,7 @@ class AreaController extends BaseController
 
     public function store_province(Request $request)
     {
-        Area::create(['name'=>$request->get('name'),'area'=>Area::TYPE_AREA_PROVINCE,'fid'=>0,'first'=>strtoupper($request->get('first'))]);
+        Area::create(['name'=>$request->get('name'),'area'=>Area::TYPE_AREA_PROVINCE,'fid'=>0,'first'=>strtoupper($request->get('first')),'express_price'=>$request->get('express_price')]);
         return alert(route('admin.areas.province'),1);
     }
 
@@ -51,7 +51,7 @@ class AreaController extends BaseController
 
     public function update_province(Request $request)
     {
-        Area::where('id',$request->get('id'))->update(['name'=>$request->get('name'),'first'=>strtoupper($request->get('first'))]);
+        Area::where('id',$request->get('id'))->update(['name'=>$request->get('name'),'first'=>strtoupper($request->get('first')),'express_price'=>$request->get('express_price')]);
         return alert(route('admin.areas.province'),1);
     }
 

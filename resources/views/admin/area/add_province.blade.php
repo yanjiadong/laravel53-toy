@@ -28,6 +28,11 @@
                             <div class="span9"><input type="text" value="" class="validate[required]" id="first"/></div>
                         </div>
 
+                        <div class="row-form clearfix">
+                            <div class="span3">邮费：</div>
+                            <div class="span9"><input type="text" value="" class="validate[required,custom[stock]]" id="express_price"/></div>
+                        </div>
+
                         <div class="footer tar">
                             <button class="btn" id="submit">保 存</button>
                         </div>
@@ -44,9 +49,10 @@
                 if ($("#validation").validationEngine('validate')) {
                     var name = $("#name").val();
                     var first = $("#first").val();
+                    var express_price = $("#express_price").val();
 
                     $.post("{{route('admin.areas.store_province')}}",
-                        {name:name,first:first},
+                        {name:name,first:first,express_price:express_price},
                         function(data){
                             cTip(data);
                         }, "json");
