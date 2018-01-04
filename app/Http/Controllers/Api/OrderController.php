@@ -43,8 +43,9 @@ class OrderController extends BaseController
         else
         {
             //没有收货地址的时候获取北京的即可
-            $province = Area::find(1);
+            $province = Area::where('name','北京')->where('area',2)->first();
         }
+
         $good_express_price = $province->express_price;
 
         $info['good_title'] = $good->title;

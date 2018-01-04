@@ -191,7 +191,7 @@
             <span>租客留言：</span>
         </div>
         <div class="fr">
-            <textarea id="remark" maxlength="40"  placeholder="如对发货或收货日期有特殊需求，在此留言"></textarea>
+            <textarea id="remark" maxlength="40"  placeholder="如对发货日期有特殊需求，请在此留言"></textarea>
             <div class="leave-msg-del">×</div>
         </div>
     </div>
@@ -541,7 +541,7 @@
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1 span").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money));
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part2").hide();
-                            $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('您已有订单正在享受免押，本次无法减免').removeClass('active');
+                            $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('您有订单正在享受免押，本次无法减免').removeClass('active');
                             order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money;
                         }else{
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();
@@ -865,18 +865,39 @@
                 var address_id = $(".edit_address_id").val();
                 //删除地址
                 common.httpRequest('{{url('api/address/delete')}}','post',{address_id:address_id},function (res) {
-
+                    //没有收货地址
+                    if(res.info.count == 0)
+                    {
+                        order_obj.data.orderDataList.logistics.money = res.info.good_express_price;
+                        //邮费赋值
+                        if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
+                            $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
+                            order_obj.data.actural_data.post =0
+                        }else{
+                            $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
+                            order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
+                        }
+                        //总计
+                        $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                    }
                 });
-                //删除地址
-                /*common.httpRequest('../js/test.json','post',data,function (res) {
-                 if(res.state){
-                 common.success("删除成功!");
-                 }
-                 })*/
+
                 order_obj.data.address.splice(order_obj.data.addressIndex,1);
                 order_obj.addAddress();
                 $(".order-cover-wrap .order-edit-address-main").hide();
                 $(".confirm-alert-wrap").remove();
+
+                if( order_obj.data.address.length==0){
+                    $(".address .address_detail").hide();
+                    $(".address .add").show();
+                    $(".name-phone table tr td.name").text("");
+                    $(".name-phone table tr td.phone").text("");
+                    $(".name-phone table tr td.address-detail span:eq(0)").text("");
+                    $(".name-phone table tr td.address-detail span:eq(1)").text("");
+                    $(".name-phone table tr td.address-detail span:eq(2)").text("");
+                    $(".name-phone table tr td.address-detail span:eq(3)").text("");
+                }
+
             })
 
         },

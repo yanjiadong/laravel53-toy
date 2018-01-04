@@ -305,8 +305,20 @@ class UserController extends BaseController
 
     public function delete_address(Request $request)
     {
-        UserAddress::destroy($request->get('address_id'));
+        $address_id = $request->get('address_id');
+
+        $address = UserAddress::find($address_id);
+
+        UserAddress::destroy($address_id);
+
+        //判断是否还有地址
+        $list = UserAddress::where('user_id',$address->user_id)->get();
+
+        $province = Area::where('name','北京')->where('area',2)->first();
+        $good_express_price = $province->express_price;
+
         $this->ret['msg'] = '删除成功';
+        $this->ret['info'] = ['count'=>count($list),'good_express_price'=>$good_express_price];
         return $this->ret;
     }
 
