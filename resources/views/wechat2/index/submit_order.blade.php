@@ -188,7 +188,7 @@
     </div>
     <div class="leave-msg">
         <span class="flag">租客留言:</span>
-        <textarea id="remark" maxlength="40"  placeholder="如对发货日期有特殊需求，请在此留言"></textarea>
+        <textarea id="remark" maxlength="38"  placeholder="如对发货日期有特殊要求，请在此处备注"></textarea>
     </div>
     <div class="submit-order-footer clear bg-white">
         <div class="fl">
