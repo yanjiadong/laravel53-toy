@@ -1103,7 +1103,7 @@
                         /*order_obj.data.address =[
                             {a:"张三丰",b:"1804544654",c:"江苏省",d:"苏州市",e:"工业园区",f:'启月街1号工寓启月街1号工寓启月街1号工寓启月街1号工寓启月街1号工寓启月街1号工寓'}
                         ];*/
-                        order_obj.address_rander();
+                        order_obj.address_rander(0);
                         order_obj.addAddress();
                         if(state==0){
                             $(".submit-order-wrap").css({'height':'auto','overflow':'visible'});
@@ -1162,7 +1162,7 @@
             var is_use_zhima = $("#is_use_zhima").val();
             var coupon_id = $("#coupon_id").val();
             var user_remark = $("#remark").val();
-            
+
             var submit_data = {
                 user_id:user_id,
                 good_id:good_id,
