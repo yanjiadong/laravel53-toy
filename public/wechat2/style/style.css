@@ -5266,6 +5266,12 @@ textarea {
     color: #2d2d2d;
     border-top: 1px solid #efefef;
 }
+.order-detail-wrap .order-detail .list ul li:first-child .send-time{
+    width: 100%;
+    text-align: right;
+    display: none;
+    color: #ffaa00;
+}
 .order-detail-wrap .order-detail .list ul li .fr{
     text-align: right;
 }
@@ -6001,7 +6007,7 @@ textarea {
 .submit-order-wrap .leave-msg{
     margin-top: 10px;
     background-color: #fff;
-    padding: 5px 10px;
+    padding: 5px 5px 5px 10px;
     margin-bottom: 70px;
     position: relative;
 }

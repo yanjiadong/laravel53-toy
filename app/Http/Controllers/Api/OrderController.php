@@ -533,7 +533,15 @@ class OrderController extends BaseController
         $info['address'] = $info['receiver_area'].$info['receiver_address'];
 
         //dd($info);
+        //待发货状态 预计发货时间
+        $info['plan_send_time_str'] = '';
+        if($info['status'] == Order::STATUS_WAITING_SEND_STR)
+        {
+            $weekarray = array("日","一","二","三","四","五","六");
+            $send_week = $weekarray[date("w",strtotime($info->plan_send_time))];
 
+            $info['plan_send_time_str'] = '发货时间：预计'.date('m月d日',strtotime($info->plan_send_time)).'(周'.$send_week.')发货';
+        }
 
         //剩余天数
         $info['days2'] = 0;

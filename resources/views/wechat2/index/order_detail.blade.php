@@ -82,6 +82,7 @@
                     <div class="fr">
                         <span>天</span>
                     </div>
+                    <div class="send-time fl"></div>
                 </li>
                 <li class="clear">
                     <div class="fl">
@@ -268,6 +269,8 @@
                         $(".order-detail-wrap .order-info .order-info-cont ul li:eq(5) span").hide();
                         //归还信息隐藏
                         $(".order-detail-wrap .return-info").hide();
+
+                        $(".send-time").text(res.info.order.plan_send_time_str).show();
                         break;
                     case '已发货':
                         logistics_cont ='<div class="stay"><i class="icon-order-detail return"></i><h2>已发货</h2><h4>租期从您收到器具后的第二天才开始计算</h4></div>';
