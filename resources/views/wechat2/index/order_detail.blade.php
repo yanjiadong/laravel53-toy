@@ -82,7 +82,7 @@
                     <div class="fr">
                         <span>天</span>
                     </div>
-                    <div class="send-time fl"></div>
+                    <div class="send-time fl" style="margin-top: 3px;"></div>
                 </li>
                 <li class="clear">
                     <div class="fl">
