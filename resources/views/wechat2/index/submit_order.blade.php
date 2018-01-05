@@ -186,14 +186,9 @@
             </li>
         </ul>
     </div>
-    <div class="leave-msg clear">
-        <div class="fl">
-            <span>租客留言：</span>
-        </div>
-        <div class="fr">
-            <textarea id="remark" maxlength="40"  placeholder="如对发货日期有特殊需求，请在此留言"></textarea>
-            <div class="leave-msg-del">×</div>
-        </div>
+    <div class="fr">
+        <input type="text" id="remark" maxlength="40"  placeholder="如对发货日期有特殊需求，请在此留言">
+        <div class="leave-msg-del">×</div>
     </div>
     <div class="submit-order-footer clear bg-white">
         <div class="fl">

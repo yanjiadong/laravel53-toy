@@ -5279,6 +5279,13 @@ textarea {
     line-height: 20px;
     font-size: 14px;
 }
+.order-detail-wrap .order-detail .list ul li.leave-msg .fr span{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .order-detail-wrap .detail-list {
     margin-top: 8px;
     background-color: #fff;
@@ -6016,7 +6023,7 @@ textarea {
     width: calc(100% - 70px);
     position: relative;
 }
-.submit-order-wrap .leave-msg .fr textarea{
+.submit-order-wrap .leave-msg .fr input{
     width: calc(100% - 30px);
     height: 18px;
     font-size: 14px;
