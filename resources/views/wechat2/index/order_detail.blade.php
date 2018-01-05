@@ -93,7 +93,7 @@
                 </li>
                 <li class="clear leave-msg">
                     <div class="fl">
-                        <span>租客留言</span>
+                        <span>租客留言:</span>
                     </div>
                     <div class="fr">
                         <span id="remark"></span>
