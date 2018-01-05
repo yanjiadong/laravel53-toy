@@ -5239,6 +5239,7 @@ textarea {
     vertical-align: top;
     line-height: 21px;
     padding-left: 10px;
+    height: 50px;
     padding-bottom: 5px;
     text-align: justify;
 }

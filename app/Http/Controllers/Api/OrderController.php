@@ -541,6 +541,7 @@ class OrderController extends BaseController
             $send_week = $weekarray[date("w",strtotime($info->plan_send_time))];
 
             $info['plan_send_time_str'] = '发货时间：预计'.date('m月d日',strtotime($info->plan_send_time)).'(周'.$send_week.')发货';
+            $info->express_title = '未发货';
         }
 
         //剩余天数
