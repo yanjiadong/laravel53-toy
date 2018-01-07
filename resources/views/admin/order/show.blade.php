@@ -32,6 +32,14 @@
                             <td>{{$order->money}}元</td>
                         </tr>
                         <tr>
+                            <td>租金：</td>
+                            <td>{{ $order->total_price }}元</td>
+                        </tr>
+                        <tr>
+                            <td>邮费：</td>
+                            <td>{{$order->express_price}}元</td>
+                        </tr>
+                        <tr>
                             <td>订单优惠金额：</td>
                             <td>{{$order->coupon_price}}元</td>
                         </tr>
@@ -101,11 +109,6 @@
                                 <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2})" placeholder="发货时间" class="form-control validate[required,custom[date]]" id="send_time" name="send_time"  value="{{$order->send_time?$order->send_time:''}}">
                             </td>
                         </tr>
-                        <tr>
-                            <td>邮费：</td>
-                            <td>{{$order->express_price}}元</td>
-                        </tr>
-
                         <tr>
                             <td>会员手机号：</td>
                             <td>{{$order->user->telephone}}</td>

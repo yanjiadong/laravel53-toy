@@ -230,6 +230,14 @@
                                     {
                                         var content = '今天到期';
                                     }
+                                    else if(orderDtail.data.list[i].days2 == 1)
+                                    {
+                                        var content = '明天到期';
+                                    }
+                                    else if(orderDtail.data.list[i].days2 == 2)
+                                    {
+                                        var content = '后天到期';
+                                    }
                                     else
                                     {
                                         var content = orderDtail.data.list[i].days2+'天后到期';
