@@ -300,6 +300,14 @@
                             {
                                 var content = '今天到期';
                             }
+                            else if(order_detail.data.logistics_state.good.days2 == 1)
+                            {
+                                var content = '明天到期';
+                            }
+                            else if(order_detail.data.logistics_state.good.days2 == 2)
+                            {
+                                var content = '后天到期';
+                            }
                             else
                             {
                                 var content = order_detail.data.logistics_state.good.days2+'天后到期';
