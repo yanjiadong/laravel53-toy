@@ -34,7 +34,7 @@ class UserController extends BaseController
         $order_num = Order::where('user_id',$user_id)->whereIn('status',[Order::STATUS_WAITING_SEND,Order::STATUS_SEND,Order::STATUS_DOING])->count();
 
         //优惠券数量
-        $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->count();
+        $coupon_nums = UserCoupon::where('user_id',$user_id)->where('status',0)->where('end_time','>',$this->datetime)->count();
 
         //押金总额
         $money = Order::where('user_id',$user_id)->whereIn('money_status',[Order::MONEY_STATUS_UN])->where('status','>',Order::STATUS_UNPAY)->sum('money');
