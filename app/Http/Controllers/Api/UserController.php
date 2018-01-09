@@ -368,7 +368,7 @@ class UserController extends BaseController
     {
         $user_id = $request->get('user_id');
 
-        $coupons = UserCoupon::where('status',0)->where('user_id',$user_id)->get();
+        $coupons = UserCoupon::where('status',0)->where('user_id',$user_id)->where('end_time','>',$this->datetime)->get();
         if(count($coupons) > 0)
         {
             foreach ($coupons as $coupon)

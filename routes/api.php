@@ -148,6 +148,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/express_info/callback','ExpressInfoController@callback')->name('api.express_info.callback');
     //根据单号查询物流公司
     Route::post('/express_info/com','ExpressInfoController@com');
+    //根据快递单号主动获取物流信息
+    Route::post('/express_info/get_info','ExpressInfoController@get_info');
 
     //获取物流公司
     Route::post('/index/get_express_list','IndexController@get_express_list');

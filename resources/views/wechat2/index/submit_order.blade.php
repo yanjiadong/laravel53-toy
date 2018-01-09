@@ -1472,7 +1472,6 @@
                             var fanwei = '租金满'+vip_voucher.data.list[i].condition+'元可用';
                         }
 
-
                         if(vip_voucher.data.list[i].condition <= vip_voucher.data.rentMoney && vip_voucher.data.list[i].can_use){
                             /*-----之前选中优惠券再进入默认是选中------*/
                             /*if(vip_voucher.data.discount_car_id!=""&&vip_voucher.data.list[i].id==vip_voucher.data.discount_car_id){
