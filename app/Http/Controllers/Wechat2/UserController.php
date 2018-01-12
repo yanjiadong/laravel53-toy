@@ -10,6 +10,7 @@ use App\VipCardPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Factory;
+use DB;
 
 class UserController extends BaseController
 {
