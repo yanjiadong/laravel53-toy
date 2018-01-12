@@ -90,7 +90,12 @@ class UserController extends BaseController
         session(['from_user_id'=>$from_user_id]);
 
         $openid = session('open_id');
-        if(empty($openid))
+        if(!empty($openid))
+        {
+            $info = User::where('wechat_openid',$openid)->first();
+        }
+
+        if(empty($openid) || empty($info))
         {
             $config = [
                 'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxdd1dd7306d6662cf'),         // AppID
