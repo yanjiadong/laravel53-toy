@@ -30,6 +30,7 @@
                                 <select name="select" class="validate[required]" id="type">
                                     <option value="1">新手优惠券</option>
                                     <option value="2">满减优惠券</option>
+                                    <option value="3">租金折扣券</option>
                                 </select>
                             </div>
                         </div>
@@ -45,10 +46,16 @@
                                 <input type="text" value="0" class="validate[required,custom[stock]]" id="condition" name="condition"/>
                             </div>
                         </div>
-                        <div class="row-form clearfix condition">
+                        <div class="row-form clearfix">
                             <div class="span3">有效天数：</div>
                             <div class="span9">
                                 <input type="text" value="0" class="validate[required,custom[stock]]" id="days" name="days"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix" id="award" style="display: none;">
+                            <div class="span3">奖励名额数量：</div>
+                            <div class="span9">
+                                <input type="text" value="0" class="validate[required,custom[stock]]" id="need_award_num" name="need_award_num"/>
                             </div>
                         </div>
                         {{--<div class="row-form clearfix">
@@ -74,17 +81,17 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            /*$("#type").change(function(){
+            $("#type").change(function(){
                 var type = $(this).val();
-                if(type == 2)
+                if(type == 3)
                 {
-                    $(".condition").show();
+                    $("#award").show();
                 }
                 else
                 {
-                    $(".condition").hide();
+                    $("#award").hide();
                 }
-            });*/
+            });
 
             $('#submit').click(function(e) {
                 e.preventDefault();
@@ -97,9 +104,10 @@
                     //var end_time = $("#end_time").val();
                     var condition = $("#condition").val();
                     var days = $("#days").val();
+                    var need_award_num = $("#need_award_num").val();
 
                     $.post("{{ route('coupons.store') }}",
-                        {title:title,price:price,type:type,days:days,condition:condition},
+                        {title:title,price:price,type:type,days:days,condition:condition,need_award_num:need_award_num},
                         function(data){
                             cTip(data);
                         }, "json");

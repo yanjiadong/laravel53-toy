@@ -119,6 +119,14 @@ class IndexController extends BaseController
 
                 //押金作为充值记录
                 DB::table('user_pay_records')->insert(['user_id'=>$order->user_id,'type'=>1,'pay_type'=>1,'price'=>$order->money,'created_at'=>date('Y-m-d H:i:s')]);
+
+                //判断自己是否是第一次下单 和 是别人推荐来的
+                $recommend = DB::table('user_recommends')->where('to_user_id',$order->user_id)->where('is_order',0)->first();
+                if($recommend)
+                {
+                    DB::table('user_recommends')->where('to_user_id',$order->user_id)->where('is_order',0)->update(['is_order'=>1]);
+                    DB::table('users')->where('id',$recommend->from_user_id)->increment('award_num');
+                }
             } else { // 用户支付失败
                 //$order->status = 'paid_fail';
             }

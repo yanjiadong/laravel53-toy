@@ -34,6 +34,7 @@
                                 <th>有效天数</th>
                                 <th>类型</th>
                                 <th>满多少可用</th>
+                                <th>奖励名额数量</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -47,13 +48,16 @@
                                     <td>
                                         @if($coupon->type==2)
                                             满减优惠券
-                                        @else
+                                        @elseif($coupon->type==1)
                                             新手优惠券
+                                        @else
+                                            租金折扣券
                                         @endif
                                     </td>
                                     <td>
                                         {{$coupon->condition}}
                                     </td>
+                                    <td>{{ $coupon->need_award_num }}</td>
                                     <td>
                                         <a href="{{ url("admin/coupons/$coupon->id/edit") }}" title="修改" class="tip"><span class="btn btn-mini">修改</span></a>
                                         <a href="javascript:;" data-id="{{ $coupon->id }}" title="删除" class="tip del"><span class="btn btn-mini btn-danger">删除</span></a>

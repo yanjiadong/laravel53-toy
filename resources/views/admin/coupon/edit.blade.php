@@ -30,6 +30,7 @@
                                 <select name="select" class="validate[required]" id="type">
                                     <option value="1" {{ $coupon->type==1?'selected':'' }}>新手优惠券</option>
                                     <option value="2" {{ $coupon->type==2?'selected':'' }}>满减优惠券</option>
+                                    <option value="3" {{ $coupon->type==3?'selected':'' }}>租金折扣券</option>
                                 </select>
                             </div>
                         </div>
@@ -45,10 +46,16 @@
                                 <input type="text" value="{{ $coupon->condition }}" class="validate[required,custom[stock]]" id="condition" name="condition"/>
                             </div>
                         </div>
-                        <div class="row-form clearfix condition">
+                        <div class="row-form clearfix">
                             <div class="span3">有效天数：</div>
                             <div class="span9">
                                 <input type="text" value="{{ $coupon->days }}" class="validate[required,custom[stock]]" id="days" name="days"/>
+                            </div>
+                        </div>
+                        <div class="row-form clearfix" id="award" style="{{ $coupon->type==3?'':'display:none' }}">
+                            <div class="span3">奖励名额数量：</div>
+                            <div class="span9">
+                                <input type="text" value="{{ $coupon->need_award_num }}" class="validate[required,custom[stock]]" id="need_award_num" name="need_award_num"/>
                             </div>
                         </div>
                         {{--<div class="row-form clearfix">
@@ -74,17 +81,17 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            /*$("#type").change(function(){
+            $("#type").change(function(){
                 var type = $(this).val();
-                if(type == 2)
+                if(type == 3)
                 {
-                    $(".condition").show();
+                    $("#award").show();
                 }
                 else
                 {
-                    $(".condition").hide();
+                    $("#award").hide();
                 }
-            });*/
+            });
 
             $('#submit').click(function(e) {
                 e.preventDefault();
@@ -98,10 +105,11 @@
                     //var end_time = $("#end_time").val();
                     var condition = $("#condition").val();
                     var days = $("#days").val();
+                    var need_award_num = $("#need_award_num").val();
                     var _method = 'PUT';
 
                     $.post(url,
-                        {_method:_method,title:title,price:price,type:type,condition:condition,days:days},
+                        {_method:_method,title:title,price:price,type:type,condition:condition,days:days,need_award_num:need_award_num},
                         function(data){
                             cTip(data);
                         }, "json");

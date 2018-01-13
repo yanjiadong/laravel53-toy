@@ -58,6 +58,7 @@ class CouponController extends BaseController
         //$data['end_time'] = $request->get('end_time');
         $data['condition'] = $request->get('condition');
         $data['days'] = $request->get('days');
+        $data['need_award_num'] = $request->get('need_award_num');
 
         Coupon::create($data);
         return alert(route('coupons.index'),1);
@@ -106,6 +107,7 @@ class CouponController extends BaseController
         //$data['end_time'] = $request->get('end_time');
         $data['condition'] = $request->get('condition');
         $data['days'] = $request->get('days');
+        $data['need_award_num'] = $request->get('need_award_num');
 
         Coupon::where('id',$id)->update($data);
         return alert(route('coupons.index'),1);
