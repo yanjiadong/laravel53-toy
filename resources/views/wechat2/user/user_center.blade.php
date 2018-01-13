@@ -58,10 +58,10 @@
                 </li>
                 <li class="clear" onclick="user_center.share()">
                     <div class="fl">
-                        <span>我要分享</span>
+                        <span>邀请好友</span>
                     </div>
                     <div class="fr">
-                        <span>领取20元现金红包</span>
+                        <span>邀请好友,最近最高可减320元</span>
                         <i class="icon icon_arrowRight_bold"></i>
                     </div>
                 </li>
@@ -122,7 +122,7 @@
         },
         //分享给朋友
         share:function () {
-            location.href="{{ route('wechat2.user.share') }}";
+            location.href="{{ route('wechat2.user.my_recommend') }}";
         },
         //判断是否绑定手机号
         loadWeixin:function(){

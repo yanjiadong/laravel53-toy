@@ -51,6 +51,20 @@ class UserController extends BaseController
     }
 
     /**
+     * 我的邀请
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function my_recommend()
+    {
+        $user_id = session('user_id');
+        $openid = session('open_id');
+
+        $signPackage = getJssdk();
+
+        return view('wechat2.user.my_recommend',compact('user_id','openid','signPackage'));
+    }
+
+    /**
      * 押金明细
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

@@ -69,7 +69,7 @@ class UserController extends BaseController
     public function my_recommend(Request $request)
     {
         $user_id = $request->get('user_id');
-        $info = User::select('award_num')->where('id',$user_id)->first();
+        $info = User::select('award_num','wechat_avatar')->where('id',$user_id)->first();
 
         //我邀请好友数量
         $user_recommends_count = DB::table('user_recommends')->where('from_user_id',$user_id)->count();

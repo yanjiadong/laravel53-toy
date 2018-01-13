@@ -1,0 +1,250 @@
+.my-invite-wrap {
+    background-color: #fbd350;
+    padding: 60px 15px 12px;
+}
+.my-invite-wrap .my-invite-main {
+    width: 100%;
+}
+.my-invite-wrap .my-invite-main .white-back {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 50px 0 12px;
+    width: 100%;
+    position: relative;
+}
+.my-invite-wrap .my-invite-main .white-back .photo {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    font-size: 0;
+}
+.my-invite-wrap .my-invite-main .white-back .photo img {
+    width: 100%;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list ul {
+    border-bottom: 1px solid #eee;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list ul li {
+    width: calc(31.333333333333336%);
+    text-align: center;
+    border-right: 1px solid #eeeeee;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list ul li p {
+    font-size: 14px;
+    color: #737373;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list ul li h6 {
+    font-size: 18px;
+    color: #000000;
+    margin: 8px 0;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list ul li:first-child h6 {
+    color: #f68376;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list ul li:last-child {
+    border-right: none;
+}
+.my-invite-wrap .my-invite-main .white-back .tips {
+    padding: 0 12px;
+    font-size: 12px;
+    color: #919191;
+    margin-top: 5px;
+}
+.my-invite-wrap .my-invite-main .white-back .invite-btn {
+    margin-top: 20px;
+    padding: 0 12px;
+}
+.my-invite-wrap .my-invite-main .white-back .invite-btn button {
+    width: 100%;
+    border: 1px solid #fa837a;
+    height: 44px;
+    border-radius: 22px;
+    font-size: 18px;
+    color: #fd817e;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher {
+    margin-top: 20px;
+    padding: 0 12px;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher .title {
+    text-align: center;
+    font-size: 18px;
+    color: #454545;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul {
+    margin-top: 10px;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li {
+    width: 100%;
+    height: 75px;
+    background-color: #000000;
+    color: #f3e316;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li:last-child {
+    margin-bottom: 0;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fl {
+    width: 65%;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fl h3 {
+    font-size: 24px;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fl p {
+    font-size: 12px;
+    margin-top: 3px;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fr {
+    width: 35%;
+    text-align: right;
+}
+.my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fr button {
+    padding: 0 10px;
+    height: 30px;
+    margin-top: 13px;
+    border-radius: 15px;
+    border: 1px solid #ffffff;
+    color: #fff;
+}
+.my-invite-wrap .my-invite-main .invite-list {
+    margin-top: 30px;
+    display: none;
+}
+.my-invite-wrap .my-invite-main .invite-list .invite-title {
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+.my-invite-wrap .my-invite-main .invite-list .invite-title .lip {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #fff;
+    height: 1px;
+    width: 33px;
+}
+.my-invite-wrap .my-invite-main .invite-list .invite-title .title {
+    display: inline-block;
+    vertical-align: middle;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li {
+    margin-top: 20px;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li .fl {
+    width: 60%;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li .fl img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li .fl span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 14px;
+    color: #0a0a0a;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li .fl button {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #a4a4a4;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 5px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #a2a2a2;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li .fl button.active {
+    border: 1px solid transparent;
+    background: #fff;
+    color: #ffaa00;
+}
+.my-invite-wrap .my-invite-main .invite-list .cont ul li .fr {
+    width: 40%;
+    font-size: 14px;
+    color: #535353;
+    text-align: right;
+    height: 34px;
+    line-height: 34px;
+}
+.share-wrap-cover-wrap {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.48);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.share-wrap-cover-wrap .share-wrap-cover-main {
+    width: 90%;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    padding: 10px;
+    position: absolute;
+    top: 107px;
+    left: 50%;
+    transform: translatex(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.share-wrap-cover-wrap .share-wrap-cover-main .tips {
+    font-size: 16px;
+    color: #fff;
+    line-height: 30px;
+    word-break: break-all;
+}
+.share-wrap-cover-wrap .share-wrap-cover-main .share-img {
+    margin-top: 20px;
+}
+.share-wrap-cover-wrap .share-wrap-cover-main .share-img .icon-big {
+    margin-right: 30px;
+}
+.share-wrap-cover-wrap .icon-big-share {
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+.exchange-success-wrap {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.48);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+}
+.exchange-success-wrap .exchange-success-main {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: transparent;
+    transform: translate(-50%, -50%);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+.exchange-success-wrap .exchange-success-main img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+.exchange-success-wrap .exchange-success-main button {
+    width: 55%;
+    height: 50px;
+    border: 1px solid red;
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translatex(-50%);
+    opacity: 0;
+}

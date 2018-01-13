@@ -55,6 +55,8 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::get('/user/user_center','UserController@user_center')->name('wechat2.user.user_center');
     //我的押金
     Route::get('/user/my_deposit','UserController@my_deposit')->name('wechat2.user.my_deposit');
+    //我的邀请
+    Route::get('/user/my_recommend','UserController@my_recommend')->name('wechat2.user.my_recommend');
     //押金明细
     Route::get('/user/deposit_list','UserController@deposit_list')->name('wechat2.user.deposit_list');
     //提现成功页面
