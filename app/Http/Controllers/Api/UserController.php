@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Activity;
 use App\Area;
 use App\Cart;
+use App\Coupon;
 use App\Order;
 use App\SystemConfig;
 use App\User;
@@ -62,6 +63,34 @@ class UserController extends BaseController
         }
 
         $this->ret['info'] = ['user'=>$user,'activity'=>$activity,'coupon_nums'=>$coupon_nums,'order_num'=>$order_num,'money'=>$money,'tel'=>$tel,'service_time'=>$service_time];
+        return $this->ret;
+    }
+
+    public function my_recommend(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $info = User::select('award_num')->where('id',$user_id)->first();
+
+        //我邀请好友数量
+        $user_recommends_count = DB::table('user_recommends')->where('from_user_id',$user_id)->count();
+        $user_recommends_order_count = DB::table('user_recommends')->where('from_user_id',$user_id)->where('is_order',1)->count();
+
+        //优惠券列表
+        $coupons = Coupon::where('type',3)->get();
+
+        //我的邀请列表
+        $recommends = DB::table('user_recommends')->where('from_user_id',$user_id)->get();
+        if(count($recommends)>0)
+        {
+            foreach ($recommends as $recommend)
+            {
+                $recommend->created_time = date('Y.m.d',strtotime($recommend->created_at));
+                $user = User::select('name','wechat_avatar')->where('id',$recommend->to_user_id)->first();
+                $recommend->user = $user;
+            }
+        }
+
+        $this->ret['info'] = ['info'=>$info,'coupons'=>$coupons,'recommends'=>$recommends,'user_recommends_count'=>$user_recommends_count,'user_recommends_order_count'=>$user_recommends_order_count];
         return $this->ret;
     }
 
@@ -356,6 +385,42 @@ class UserController extends BaseController
 
 
         $this->ret['info'] = ['list'=>$list,'user'=>$user];
+        return $this->ret;
+    }
+
+    /**
+     * 用金币兑换优惠券
+     * @param Request $request
+     */
+    public function user_coupon_exchange(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $coupon_id = $request->get('coupon_id');
+
+        $coupon = Coupon::where('id',$coupon_id)->first();
+        if(empty($coupon))
+        {
+            $this->ret = ['code'=>300,'msg'=>'兑换失败'];
+            return $this->ret;
+        }
+
+        $user = User::find($user_id);
+        if(empty($user))
+        {
+            $this->ret = ['code'=>300,'msg'=>'用户不存在'];
+            return $this->ret;
+        }
+
+        if($coupon->need_award_num > $user->award_num)
+        {
+            $this->ret = ['code'=>300,'msg'=>'账户金币不足'];
+            return $this->ret;
+        }
+
+        UserCoupon::create(['user_id'=>$user_id,'coupon_need_award_num'=>$coupon->need_award_num,'coupon_id'=>$coupon->id,'coupon_type'=>$coupon->type,'coupon_price'=>$coupon->price,'coupon_days'=>$coupon->days,'coupon_title'=>$coupon->title,'start_time'=>date('Y-m-d'),'condition'=>$coupon->condition,'end_time'=>date('Y-m-d',strtotime("+{$coupon->days} days"))]);
+
+        User::where('id',$user_id)->decrement('award_num',$coupon->need_award_num);
+
         return $this->ret;
     }
 

@@ -117,6 +117,11 @@ Route::group(['namespace' => 'Api'], function () {
     //获取用户优惠券列表
     Route::post('/user/coupon_list','UserController@coupon_list');
     Route::post('/user/user_coupon_list','UserController@user_coupon_list');
+    //金币兑换优惠券
+    Route::post('/user/user_coupon_exchange','UserController@user_coupon_exchange');
+
+    //我的推荐
+    Route::post('/user/my_recommend','UserController@my_recommend');
 
     Route::post('/user/choose_coupon','UserController@choose_coupon');
     Route::post('/user/del_choose_coupon','UserController@del_choose_coupon');

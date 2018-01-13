@@ -18,8 +18,8 @@ class CreateCouponsTable extends Migration
             $table->tinyInteger('type')->default(0)->comment('类型 1=任意金额 2=满减');
             $table->integer('price')->default(0)->comment('优惠金额');
             $table->string('title',64)->default('')->comment('名称');
-            $table->date('start_time')->comment('开始时间');
-            $table->date('end_time')->comment('结束时间');
+            $table->date('start_time')->comment('开始时间')->nullable();
+            $table->date('end_time')->comment('结束时间')->nullable();
             $table->integer('condition')->default(0)->comment('满多少');
             $table->timestamps();
         });
