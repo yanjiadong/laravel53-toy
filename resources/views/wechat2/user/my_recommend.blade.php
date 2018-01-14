@@ -140,7 +140,7 @@
                     console.log(invite_obj.data.invite_list.voucher_list[i]);
                     voucher_list_cont+=' <li class="clear"><div class="fl"><h3>'+invite_obj.data.invite_list.voucher_list[i].price+'元租金减免券</h3>' +
                         '<p>任意租金可用，兑换后有效期'+invite_obj.data.invite_list.voucher_list[i].days+'天</p>' +
-                        '</div><div class="fr"><button onclick="invite_obj.invite_friend('+invite_obj.data.invite_list.voucher_list[i].id+','+invite_obj.data.invite_list.voucher_list[i].need_award_num+')">'+invite_obj.data.invite_list.voucher_list[i].need_award_num+'金币兑换</button></div></li>'
+                        '</div><div class="fr"><button onclick="invite_obj.invite_friend('+invite_obj.data.invite_list.voucher_list[i].id+','+invite_obj.data.invite_list.voucher_list[i].need_award_num+','+invite_obj.data.invite_list.voucher_list[i].price+')">'+invite_obj.data.invite_list.voucher_list[i].need_award_num+'金币兑换</button></div></li>'
                 }
                 $(".my-invite-wrap .my-invite-main .white-back .rent-voucher ul").html(voucher_list_cont);
 
@@ -172,12 +172,12 @@
                 }
             })
         },
-        invite_friend:function (id,money){
+        invite_friend:function (id,money,price){
             if(invite_obj.data.invite_list.amount.gold < money){
                 common.alert_tip1('金币数量不足');
                 return false;
             }
-            common.confirm_tip('确认兑换','确认消耗'+money+'金币兑换一张租金减免券？',null,function () {
+            common.confirm_tip('确认兑换','确认消耗'+money+'金币兑换一张'+price+'元租金减免券？',null,function () {
                 common.httpRequest("{{ url('api/user/user_coupon_exchange') }}",'post',{user_id:'{{ $user_id }}',coupon_id:id},function (res) {
                     $(".confirm-alert-wrap").remove();
                     $(".exchange-success-wrap").fadeIn(500);
