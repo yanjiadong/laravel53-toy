@@ -21,15 +21,19 @@
     height: 74px;
     border-radius: 50%;
     font-size: 0;
+    overflow: hidden;
 }
 .my-invite-wrap .my-invite-main .white-back .photo img {
     width: 100%;
+}
+.my-invite-wrap .my-invite-main .white-back .total-list{
+    margin-top: 10px;
 }
 .my-invite-wrap .my-invite-main .white-back .total-list ul {
     border-bottom: 1px solid #eee;
 }
 .my-invite-wrap .my-invite-main .white-back .total-list ul li {
-    width: calc(31.333333333333336%);
+    width: calc((100% - 2px) / 3);
     text-align: center;
     border-right: 1px solid #eeeeee;
 }
@@ -94,7 +98,7 @@
     width: 65%;
 }
 .my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fl h3 {
-    font-size: 24px;
+    font-size: 18px;
 }
 .my-invite-wrap .my-invite-main .white-back .rent-voucher ul li .fl p {
     font-size: 12px;

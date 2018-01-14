@@ -1465,7 +1465,7 @@
                     for(var i=0;i<vip_voucher.data.list.length;i++){
                         if(vip_voucher.data.list[i].condition == 0)
                         {
-                            var fanwei = '任意金额可用';
+                            var fanwei = '任意租金可用';
                         }
                         else
                         {
