@@ -292,7 +292,7 @@ class OrderController extends BaseController
 
         $order = Order::create($order_data);
 
-        if($user->wechat_openid == 'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI' || $user->wechat_openid  == 'o2xFAw1y8Qlz5jQvcMwEzWXHB3bg' || $user->wechat_openid == 'o2xFAw_Nkx7In3f84SDJ0o2pp130')
+        if($user->wechat_openid == 'o2xFAwxEAUOs6wDaUt07BH2C8Fbs' || $user->wechat_openid == 'o2xFAw0CyeI2Z5mSUXeWg13RCvz4' || $user->wechat_openid == 'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI' || $user->wechat_openid  == 'o2xFAw1y8Qlz5jQvcMwEzWXHB3bg' || $user->wechat_openid == 'o2xFAw_Nkx7In3f84SDJ0o2pp130')
         {
             $total_fee = 0.01*100;  //订单需要支付的金额
         }

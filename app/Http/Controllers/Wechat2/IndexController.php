@@ -125,7 +125,7 @@ class IndexController extends BaseController
                 if($recommend)
                 {
                     DB::table('user_recommends')->where('to_user_id',$order->user_id)->where('is_order',0)->update(['is_order'=>1]);
-                    DB::table('users')->where('id',$recommend->from_user_id)->increment('award_num');
+                    //DB::table('users')->where('id',$recommend->from_user_id)->increment('award_num');
                 }
             } else { // 用户支付失败
                 //$order->status = 'paid_fail';

@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="tips">
-                金币用于兑换租金减免券，通过您分享链接进来的用户首次下单后，您都会获得1个金币。
+                金币用于兑换租金减免券，通过您分享链接邀请的用户首次下单成功后，您都会获得1个金币。
             </div>
             <div class="invite-btn">
                 <button onclick="invite_obj.share_friend()">邀请好友赚金币</button>
@@ -138,7 +138,7 @@
                 var voucher_list_cont = "";
                 for(var i=0;i<invite_obj.data.invite_list.voucher_list.length;i++){
                     console.log(invite_obj.data.invite_list.voucher_list[i]);
-                    voucher_list_cont+=' <li class="clear"><div class="fl"><h3>¥'+invite_obj.data.invite_list.voucher_list[i].price+'</h3>' +
+                    voucher_list_cont+=' <li class="clear"><div class="fl"><h3>'+invite_obj.data.invite_list.voucher_list[i].price+'元租金减免券</h3>' +
                         '<p>任意租金可用，兑换后有效期'+invite_obj.data.invite_list.voucher_list[i].days+'天</p>' +
                         '</div><div class="fr"><button onclick="invite_obj.invite_friend('+invite_obj.data.invite_list.voucher_list[i].id+','+invite_obj.data.invite_list.voucher_list[i].need_award_num+')">'+invite_obj.data.invite_list.voucher_list[i].need_award_num+'金币兑换</button></div></li>'
                 }
@@ -173,7 +173,7 @@
             })
         },
         invite_friend:function (id,money){
-            if(invite_obj.data.invite_list.amount.gold <= money){
+            if(invite_obj.data.invite_list.amount.gold < money){
                 common.alert_tip1('金币数量不足');
                 return false;
             }
