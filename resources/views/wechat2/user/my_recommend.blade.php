@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="tips">
-                金币用于兑换租金减免券，通过您分享链接邀请的用户首次下单成功后，您都会获得1个金币。
+                金币可用于兑换租金减免券，每次邀请的好友首次下单后，您都会获得一个金币。（别人点击你分享的链接，就会成为你邀请的好友）
             </div>
             <div class="invite-btn">
                 <button onclick="invite_obj.share_friend()">邀请好友赚金币</button>
