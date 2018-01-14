@@ -194,14 +194,12 @@ class OrderController extends BaseController
             //$this->send_sms($order->receiver_telephone,$order->receiver);
             Order::where('id', $id)->update(['send_time' => $this->datetime, 'send_time2' => $this->datetime, 'status' => Order::STATUS_SEND, 'express_no' => $express_no, 'express_title' => $express->title, 'express_com' => $express->com]);
 
-            $recommend = DB::table('user_recommends')->where('to_user_id',$order->user_id)->first();
-            if(!empty($recommend))
+            //判断自己是否是第一次下单 和 是别人推荐来的
+            $recommend = DB::table('user_recommends')->where('to_user_id',$order->user_id)->where('is_order',0)->first();
+            if($recommend)
             {
-                $order_count = Order::where('status','>',Order::STATUS_WAITING_SEND)->where('user_id',$order->user_id)->count();
-                if($order_count < 1)
-                {
-                    DB::table('users')->where('id',$recommend->from_user_id)->increment('award_num');
-                }
+                DB::table('user_recommends')->where('to_user_id',$order->user_id)->where('is_order',0)->update(['is_order'=>1]);
+                DB::table('users')->where('id',$recommend->from_user_id)->increment('award_num');
             }
         } else {
             Order::where('id', $id)->update(['send_time2' => $send_time, 'express_no' => $express_no, 'express_title' => $express->title, 'express_com' => $express->com]);
