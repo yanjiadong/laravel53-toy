@@ -82,6 +82,7 @@ class UserController extends BaseController
         UserAddress::where('user_id',$id)->delete();
         UserPayRecord::where('user_id',$id)->delete();
         UserOpenTime::where('user_id',$id)->delete();
+        DB::table('user_recommends')->where('to_user_id',$id)->delete();
         alert('',1);
     }
 }
