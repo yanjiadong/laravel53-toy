@@ -61,7 +61,7 @@
                         <span>邀请好友</span>
                     </div>
                     <div class="fr">
-                        <span>邀请好友,最近最高可减320元</span>
+                        <span>邀请好友,租金最高可减320元</span>
                         <i class="icon icon_arrowRight_bold"></i>
                     </div>
                 </li>
