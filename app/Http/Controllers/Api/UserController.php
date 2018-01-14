@@ -79,7 +79,7 @@ class UserController extends BaseController
         $coupons = Coupon::where('type',3)->get();
 
         //我的邀请列表
-        $recommends = DB::table('user_recommends')->where('from_user_id',$user_id)->get();
+        $recommends = DB::table('user_recommends')->where('from_user_id',$user_id)->orderBy('id','desc')->get();
         if(count($recommends)>0)
         {
             foreach ($recommends as $recommend)
