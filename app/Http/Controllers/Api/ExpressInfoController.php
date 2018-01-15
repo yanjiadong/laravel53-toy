@@ -119,12 +119,12 @@ class ExpressInfoController extends BaseController
         $exp = new JuheExp($params['key']);
         $result = $exp->query($params['com'],$params['no']); //执行查询
 
-        /*$juhe_content_list = '';
+        $juhe_content_list = '';
         if(!empty($result['result']['list']))
         {
             $juhe_content_list = json_encode(array_reverse($result['result']['list']));
-        }*/
-        //ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$result['result']['status']]);
+        }
+        ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$result['result']['status']]);
 
         return $result;
     }

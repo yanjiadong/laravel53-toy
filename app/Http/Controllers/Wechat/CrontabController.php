@@ -59,7 +59,9 @@ class CrontabController extends BaseController
                     {
                         $juhe_content_list = json_encode(array_reverse($result['result']['list']));
                     }
-                    ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$result['result']['status']]);
+
+                    $juhe_status = isset($result['result']['status'])?$result['result']['status']:0;
+                    ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$juhe_status]);
 
                     if($result['result']['status'] == 1 && !empty($juhe_content_list))
                     {
