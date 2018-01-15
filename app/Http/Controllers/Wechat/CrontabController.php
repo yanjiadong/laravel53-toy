@@ -63,6 +63,8 @@ class CrontabController extends BaseController
                 }
             }
         }
+
+        Crontab::create();
     }
 
     private function check_order_new()
