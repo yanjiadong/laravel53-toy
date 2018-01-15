@@ -171,27 +171,5 @@
         user_center.init();
     })
 </script>
-<script>
-    $(function () {
-        pushHistory();
-        /*----------避免下一页返回这一页调用这个函数-------------*/
-        var bool=false;
-        setTimeout(function(){
-            bool=true;
-        },500);
-        window.addEventListener("popstate", function(e) {  //回调函数中实现需要的功能
-            if(bool) {
-                history.back()
-            }
-        }, false);
-    });
-    function pushHistory() {
-        var state = {
-            title: "title",
-            url: ""
-        };
-        window.history.pushState(state, state.title, state.url);
-    }
-</script>
 </body>
 </html>
