@@ -748,7 +748,7 @@
                             //邮费赋值
                             if(order_obj.data.actural_data.rent >= order_obj.data.orderDataList.logistics.can_free){
                                 $(".rent-item-list ul li:eq(1) .fr span").text('¥0');
-                                order_obj.data.actural_data.post =0
+                                order_obj.data.actural_data.post = 0
                             }else{
                                 $(".rent-item-list ul li:eq(1) .fr span").text('¥'+Math.round(order_obj.data.orderDataList.logistics.money));
                                 order_obj.data.actural_data.post = order_obj.data.orderDataList.logistics.money;
@@ -1571,31 +1571,6 @@
         //自定义天数
         order_obj.chooseRentTimeOperate();
         order_obj.chooseRentTimeItem();
-        /*(function () {
-            $province = $(".select-address-wrap .province ul:first");
-            common.httpRequest('../js/test.json','get',null,function (res){
-                var height = $province.height();
-                /!*省*!/
-                var $first  = $(".select-address-wrap .province ul:eq(0) li");
-                $first.removeClass('active').removeClass('show');
-                if(height/35>1){
-                    $first.first().addClass('active');
-                    $first.eq(1).addClass('show');
-                }else if(height/35==1){
-                    $first.first().addClass('active');
-                }
-            });
-            /!*选择省*!/$province
-            var startY;
-            $province[0].addEventListener('touchstart',function (event) {
-                startY = event.targetTouches[0].clientY;
-            });
-            $province[0].addEventListener('touchmove',function (event) {
-                var gap = event.targetTouches[0].clientY-startY;
-               console.log(Math.floor(gap/35));
-                $province.css({top:Math.floor(gap/35)*35+35+'px'});
-            });
-        })()*/
     })
 </script>
 <script>

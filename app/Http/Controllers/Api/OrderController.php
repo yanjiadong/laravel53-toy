@@ -205,8 +205,16 @@ class OrderController extends BaseController
             $coupon = UserCoupon::where('id',$coupon_id)->first();
             if($total_price >= $coupon->condition)
             {
-                $total_price = $total_price - $coupon->coupon_price;
-                $coupon_price = $coupon->coupon_price;
+                if($total_price >= $coupon->coupon_price)
+                {
+                    $total_price = $total_price - $coupon->coupon_price;
+                    $coupon_price = $coupon->coupon_price;
+                }
+                else
+                {
+                    $coupon_price = $total_price;
+                    $total_price = 0;
+                }
             }
         }
 
