@@ -155,6 +155,11 @@
                             <span class="icon-th-list"></span><span class="text">用户列表</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.user.recommend') }}">
+                            <span class="icon-th-list"></span><span class="text">邀请用户列表</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

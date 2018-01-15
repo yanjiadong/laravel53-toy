@@ -123,7 +123,7 @@
             </li>
             <li class="clear">
                 <div class="fl">
-                    <i class="icon-order-detail i-discount"></i><span>优惠券</span>
+                    <i class="icon-order-detail i-discount"></i><span>租金减免券</span>
                 </div>
                 <div class="fr">
                     <span>-¥</span>
@@ -223,7 +223,7 @@
                         h: '{{url('wechat2/index/good')}}'+'/'+res.info.order.good_id,
                         total_num: 1,
                         allPrice: res.info.order.price,
-                        rent:res.info.order.total_price,   //租金
+                        rent:res.info.order.total_price*1+res.info.order.coupon_price*1,   //租金
                         postage:res.info.order.express_price,  //邮费
                         discount:res.info.order.coupon_price,   //优惠券
                         yajin:res.info.order.money,

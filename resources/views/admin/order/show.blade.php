@@ -40,7 +40,7 @@
                             <td>{{$order->express_price}}元</td>
                         </tr>
                         <tr>
-                            <td>订单优惠金额：</td>
+                            <td>租金减免金额：</td>
                             <td>{{$order->coupon_price}}元</td>
                         </tr>
                         <tr>

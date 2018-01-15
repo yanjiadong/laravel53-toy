@@ -50,6 +50,40 @@ class UserController extends BaseController
         return view('admin.user.index',compact('users','username','menu','is_vip'));
     }
 
+    public function recommend(Request $request)
+    {
+        $admin_info = $this->get_session_info();
+        $username = $admin_info['username'];
+
+
+
+        $from_users = DB::table('user_recommends')
+            ->select("user_recommends.from_user_id")
+            //->leftJoin('users', 'users.id', '=', 'user_recommends.from_user_id')
+            ->groupBy('from_user_id')
+            ->paginate(30);
+
+        //print_r($from_users);
+        $users = [];
+        if(!empty($from_users))
+        {
+            foreach ($from_users as $from)
+            {
+                //print_r($from);
+                $user = DB::table('users')->select('name','award_num','telephone')->where('id',$from->from_user_id)->first();
+
+                //print_r($user);
+                $user->user_recommends_count = DB::table('user_recommends')->where('from_user_id',$from->from_user_id)->count();
+                $user->user_recommends_order_count = DB::table('user_recommends')->where('from_user_id',$from->from_user_id)->where('is_order',1)->count();
+                $user->exchange_coupon_count = DB::table('user_coupons')->where('coupon_type',3)->where('user_id',$from->from_user_id)->count();
+
+                $users[] = $user;
+            }
+        }
+        $menu = 'user';
+        return view('admin.user.recommend',compact('users','username','menu','from_users'));
+    }
+
     public function get_user_open_times()
     {
         $admin_info = $this->get_session_info();

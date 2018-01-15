@@ -162,6 +162,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
 
     //用户管理
     Route::get('user/index','UserController@index')->name('admin.user.index');
+    Route::get('user/recommend','UserController@recommend')->name('admin.user.recommend');
     Route::post('user/action','UserController@action')->name('admin.user.action');
     //删除用户
     Route::post('user/destroy','UserController@destroy')->name('admin.user.destroy');

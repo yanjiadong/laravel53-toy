@@ -150,7 +150,7 @@
             </li>
             <li class="clear"  onclick="order_obj.goVipVoucher()">
                 <div class="fl">
-                    <i class="icon-order-detail i-discount"></i><span>优惠券</span>
+                    <i class="icon-order-detail i-discount"></i><span>租金减免券</span>
                 </div>
                 <div class="fr">
                     <div class="discount-fee">
