@@ -3751,6 +3751,7 @@ textarea {
 .vip-voucher-wrap .list {
     margin-top: 20px;
     padding: 0 12px;
+    padding-bottom: 68px;
 }
 .vip-voucher-wrap .list ul li {
     width: 100%;
