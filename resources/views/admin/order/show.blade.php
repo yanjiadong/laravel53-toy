@@ -133,8 +133,9 @@
                     </table>
 
                     <div class="footer tar">
+                        <a href="javascript:;" title="修改物流" class="tip sendEdit"><span class="btn btn-warning">修改物流</span></a>
                         @if($order->status == '已发货')
-                            <a href="javascript:;" title="修改物流" class="tip sendEdit"><span class="btn btn-warning">修改物流</span></a>
+
                         @endif
 
                         @if($order->status == '租用中')
