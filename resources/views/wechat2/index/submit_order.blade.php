@@ -617,6 +617,15 @@
                             }
                         }
 
+                        /*if(order_obj.data.actural_data.rent*1 < order_obj.data.actural_data.discount*1)
+                        {
+                            order_obj.data.actural_data.rent = 0;
+                        }
+                        else
+                        {
+                            order_obj.data.actural_data.rent = order_obj.data.actural_data.rent*1 - order_obj.data.actural_data.discount*1;
+                        }*/
+
                         //租金赋值
                         $(".rent-item-list ul li:eq(0) .fr span").text('¥'+ order_obj.data.actural_data.rent);
                         //邮费赋值
@@ -641,7 +650,14 @@
                         console.log('优惠券减免金额:'+order_obj.data.actural_data.discount);
                         console.log('押金:'+order_obj.data.actural_data.yajin);
 
-                        $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                        if(order_obj.data.actural_data.rent*1 >= order_obj.data.actural_data.discount*1)
+                        {
+                            $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                        }
+                        else
+                        {
+                            $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.post*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                        }
 
                         //押金说明
                         if(order_obj.data.actural_data.yajin>0){
@@ -1515,10 +1531,18 @@
                 $(this).addClass('active');
                 var index = $(this).index(".submit-voucher-wrap  .list ul li");
                 //提交选择
-                order_obj.data.actural_data.discount =vip_voucher.data.list[index].coupon_price;
+                order_obj.data.actural_data.discount = vip_voucher.data.list[index].coupon_price;
                 $(".rent-item-list ul li:eq(2) .fr .discount-fee").html('<span class="red">-¥'+order_obj.data.actural_data.discount+'</span>');
+
                 //总计
-                $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                if(order_obj.data.actural_data.rent*1 >= order_obj.data.actural_data.discount*1)
+                {
+                    $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.rent*1+order_obj.data.actural_data.post*1-order_obj.data.actural_data.discount*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                }
+                else
+                {
+                    $(".submit-order-wrap .submit-order-footer .fl span:nth-child(2)").text('¥'+Math.round((order_obj.data.actural_data.post*1+order_obj.data.actural_data.yajin*1)*10)/10);
+                }
 
                 sessionStorage.discount_car_id = vip_voucher.data.list[index].id;
                 $("#coupon_id").val(vip_voucher.data.list[index].id);

@@ -198,6 +198,22 @@ class OrderController extends BaseController
         }
 
         $total_price = round($days*$good_day_price,2);
+        //计算优惠券优惠金额
+        $coupon_price = 0;
+        if($coupon_id)
+        {
+            $coupon = UserCoupon::where('id',$coupon_id)->first();
+            if($total_price >= $coupon->condition)
+            {
+                $total_price = $total_price - $coupon->coupon_price;
+                $coupon_price = $coupon->coupon_price;
+            }
+        }
+
+        if($total_price <= 0)
+        {
+            $total_price = 0;
+        }
 
         $money = $good->money;
         $zhima_price = 0;
@@ -241,17 +257,6 @@ class OrderController extends BaseController
             $express_price = 0;
         }
 
-        //计算优惠券优惠金额
-        $coupon_price = 0;
-        if($coupon_id)
-        {
-            $coupon = UserCoupon::where('id',$coupon_id)->first();
-            if($total_price >= $coupon->condition)
-            {
-                $total_price = $total_price - $coupon->coupon_price;
-                $coupon_price = $coupon->coupon_price;
-            }
-        }
 
         $price = round($total_price+$express_price+$money,2);
 
@@ -478,7 +483,7 @@ class OrderController extends BaseController
             $image = $content[9];
         }
 
-        $orders = Order::where('user_id',$user_id)->where('money','>','0')->orderBy('id','desc')->get()->toArray();
+        $orders = Order::where('user_id',$user_id)->where('money','>','0')->where('status','>',Order::STATUS_UNPAY)->orderBy('id','desc')->get()->toArray();
         if(!empty($orders))
         {
             foreach ($orders as &$v)

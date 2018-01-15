@@ -248,6 +248,9 @@ class OrderController extends BaseController
         if ($status == -1) {
             //返还库存
             DB::table('goods')->where('id', $order->good_id)->increment('store');
+
+            //取消充值记录
+            DB::table('user_pay_records')->where(['user_id'=>$order->user_id,'type'=>1,'pay_type'=>1,'price'=>$order->money])->delete();
         }
 
         alert('', 1);
