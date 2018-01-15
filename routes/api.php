@@ -158,4 +158,8 @@ Route::group(['namespace' => 'Api'], function () {
 
     //获取物流公司
     Route::post('/index/get_express_list','IndexController@get_express_list');
+
+    //获取聚合数据快递公司编码接口  仅供后台快递公司信息中的编码
+    Route::get('/express_info/get_juhe_coms','ExpressInfoController@get_juhe_coms');
+
 });

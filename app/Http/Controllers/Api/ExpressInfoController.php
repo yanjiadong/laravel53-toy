@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Express;
 use App\ExpressInfo;
+use App\Utility\JuheExp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -99,8 +100,36 @@ class ExpressInfoController extends BaseController
 
     }
 
+    public function get_juhe_coms()
+    {
+        $params = array(
+            'key' => '50699e84ef775876e51cf65f2dca7ebd', //您申请的快递appkey
+        );
+        $exp = new JuheExp($params['key']);
+        $result = $exp->getComs();
+        print_r($result);
+    }
+
     public function get_info(Request $request)
     {
+        $params = array(
+            'key' => '50699e84ef775876e51cf65f2dca7ebd', //您申请的快递appkey
+            'com' => 'sf', //快递公司编码，可以通过$exp->getComs()获取支持的公司列表
+            'no'  => '240239532696' //快递编号
+        );
+
+        $exp = new JuheExp($params['key']);
+        $result = $exp->query($params['com'],$params['no']); //执行查询
+
+        print_r($result);
+        if($result['error_code'] == 0){//查询成功
+            $list = $result['result']['list'];
+            print_r($list);
+        }else{
+            echo "获取失败，原因：".$result['reason'];
+        }
+
+        die;
         $param = [
             'com'=>'shunfeng',
             'num'=>'240239532641'

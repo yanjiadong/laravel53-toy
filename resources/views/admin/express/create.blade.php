@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="row-form clearfix">
-                            <div class="span3">快递100编码：</div>
+                            <div class="span3">快递公司编码：</div>
                             <div class="span9">
                                 <input type="text" value="" class="validate[required]" id="com" name="com"/>
                             </div>
