@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Wechat;
 
 use App\Crontab;
+use App\Express;
 use App\ExpressInfo;
 use App\Order;
 use App\User;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Overtrue\EasySms\EasySms;
 use DB;
+use App\Utility\JuheExp;
 
 class CrontabController extends BaseController
 {
@@ -33,8 +35,61 @@ class CrontabController extends BaseController
         {
             foreach ($orders as $order)
             {
-                $express = ExpressInfo::where('nu',$order->express_no)->orderBy('id','desc')->first();
-                if(isset($express->state) && $express->state==3)
+                $express = ExpressInfo::where('nu',$order->express_no)->where('type',1)->orderBy('id','desc')->first();
+                if(empty($express) || $express->juhe_status == 0)
+                {
+                    $express_info = Express::where('title',$order->express_title)->first();
+                    $express_com = $order->express_com;
+
+                    if($express_info && $express_info->com != $order->express_com)
+                    {
+                        $express_com = $express_info->com;
+                    }
+                    //需要获取物流信息
+                    $params = array(
+                        'key' => '50699e84ef775876e51cf65f2dca7ebd', //您申请的快递appkey
+                        'com' => $express_com, //快递公司编码，可以通过$exp->getComs()获取支持的公司列表
+                        'no'  => $order->express_no //快递编号
+                    );
+                    $exp = new JuheExp($params['key']);
+                    $result = $exp->query($params['com'],$params['no']); //执行查询
+
+                    $juhe_content_list = '';
+                    if(!empty($result['result']['list']))
+                    {
+                        $juhe_content_list = json_encode(array_reverse($result['result']['list']));
+                    }
+                    ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$result['result']['status']]);
+
+                    if($result['result']['status'] == 1 && !empty($juhe_content_list))
+                    {
+                        //已签收
+                        $last_info_array = json_decode($juhe_content_list,true);
+
+                        $time = $last_info_array[0]['datetime'];
+                        if( ($this->time - strtotime($time)) >= 3600)
+                        {
+                            $start_time = date('Y-m-d 00:00:01',$this->time);
+                            $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
+                            Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
+                        }
+                    }
+                }
+                else
+                {
+                    //已签收
+                    $last_info_array = json_decode($express->juhe_content_list,true);
+
+                    $time = $last_info_array[0]['datetime'];
+                    if( ($this->time - strtotime($time)) >= 3600)
+                    {
+                        $start_time = date('Y-m-d 00:00:01',$this->time);
+                        $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
+                        Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
+                    }
+                }
+
+                /*if(isset($express->state) && $express->state==3)
                 {
                     //已签收
                     if(isset($express->content) && !empty($express->content))
@@ -50,10 +105,9 @@ class CrontabController extends BaseController
                                 $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
                                 Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
                             }
-                            //print_r($logistics);
                         }
                     }
-                }
+                }*/
 
             }
         }

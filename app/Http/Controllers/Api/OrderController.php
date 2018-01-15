@@ -528,19 +528,25 @@ class OrderController extends BaseController
         $code = $request->get('code');
         $info = Order::with(['user','category','good_brand'])->where('code',$code)->first();
 
-        $express_info = ExpressInfo::where('nu',$info->express_no)->orderBy('id','desc')->first();
-
+        $express_info = ExpressInfo::where('nu',$info->express_no)->where('type',1)->orderBy('id','desc')->first();
         $logistics = array('time'=>'','context'=>'暂无物流信息');
+        if(!empty($express_info->juhe_content_list))
+        {
+            $content = json_decode($express_info->juhe_content_list,true);
+
+            $logistics['time'] = $content[0]['datetime'];
+            $logistics['context'] = $content[0]['remark'];
+        }
+
+        /*$logistics = array('time'=>'','context'=>'暂无物流信息');
         if(isset($express_info->content) && !empty($express_info->content))
         {
             $content = json_decode($express_info->content,true);
             if(isset($content['lastResult']['data'][0]))
             {
                 $logistics = $content['lastResult']['data'][0];
-                //print_r($logistics);
             }
-            //print_r($content);
-        }
+        }*/
 
         //$info['address'] = $info['receiver_province'].$info['receiver_city'].$info['receiver_area'].$info['receiver_address'];
         $info['address'] = $info['receiver_area'].$info['receiver_address'];
@@ -834,17 +840,29 @@ class OrderController extends BaseController
         $code = $request->get('code');
         $info = Order::with(['user','category','good_brand'])->where('code',$code)->first();
 
-        $express_info = ExpressInfo::where('nu',$info->express_no)->orderBy('id','desc')->first();
+        /*$express_info = ExpressInfo::where('nu',$nu)->where('type',1)->orderBy('id','desc')->first();
 
-        $logistics = array('time'=>'','context'=>'暂无物流信息');
-        if(isset($express_info->content) && !empty($express_info->content))
+        $logistics = array();
+        if(!empty($express_info) && !empty($express_info->juhe_content_list))
         {
-            $content = json_decode($express_info->content,true);
-            if(isset($content['lastResult']['data'][0]))
+            $logistics = json_decode($express_info->juhe_content_list,true);
+        }*/
+
+        $express_info = ExpressInfo::where('nu',$info->express_no)->where('type',1)->orderBy('id','desc')->first();
+
+        //print_r($express_info);
+        $logistics = array('time'=>'','context'=>'暂无物流信息');
+        if(!empty($express_info->juhe_content_list))
+        {
+            $content = json_decode($express_info->juhe_content_list,true);
+
+            $logistics['time'] = $content[0]['datetime'];
+            $logistics['context'] = $content[0]['remark'];
+            /*if(isset($content['lastResult']['data'][0]))
             {
                 $logistics = $content['lastResult']['data'][0];
                 //print_r($logistics);
-            }
+            }*/
             //print_r($content);
         }
 
@@ -870,9 +888,15 @@ class OrderController extends BaseController
     {
         $nu = $request->get('nu');
 
-        $express_info = ExpressInfo::where('nu',$nu)->orderBy('id','desc')->first();
+        $express_info = ExpressInfo::where('nu',$nu)->where('type',1)->orderBy('id','desc')->first();
 
         $logistics = array();
+        if(!empty($express_info) && !empty($express_info->juhe_content_list))
+        {
+            $logistics = json_decode($express_info->juhe_content_list,true);
+        }
+
+        /*$logistics = array();
         if(isset($express_info->content) && !empty($express_info->content))
         {
             $content = json_decode($express_info->content,true);
@@ -882,7 +906,7 @@ class OrderController extends BaseController
                 //print_r($logistics);
             }
             //print_r($content);
-        }
+        }*/
 
         $this->ret['info'] = ['logistics'=>$logistics];
         return $this->ret;

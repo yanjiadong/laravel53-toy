@@ -161,5 +161,6 @@ Route::group(['namespace' => 'Api'], function () {
 
     //获取聚合数据快递公司编码接口  仅供后台快递公司信息中的编码
     Route::get('/express_info/get_juhe_coms','ExpressInfoController@get_juhe_coms');
-
+    //获取聚合数据快递信息
+    Route::post('/express_info/get_juhe_info','ExpressInfoController@get_juhe_info');
 });

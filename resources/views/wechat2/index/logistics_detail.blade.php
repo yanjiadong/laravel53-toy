@@ -118,27 +118,27 @@
                     for(var i=0;i<logistics_detail.data.logisticsList.length;i++){
                         if(i==0){
                             cont ='<li class="active"><div class="line1 clear"><div class="top-line fl"></div><h3 class="fl">' +
-                                logistics_detail.data.logisticsList[i].context+ ' 已发出</h3></div><div class="line2 clear"><div class="fl">' +
+                                logistics_detail.data.logisticsList[i].remark+ ' 已发出</h3></div><div class="line2 clear"><div class="fl">' +
                                 '<div class="img"><i class="icon icon_circle_done"></i></div></div><div class="fl space"></div></div>' +
                                 '<div class="line3 clear"><div class="fl"><div class="bottom-line"></div></div><p class="fl">'+
-                                logistics_detail.data.logisticsList[i].time+ '</p></div></li>';
+                                logistics_detail.data.logisticsList[i].datetime+ '</p></div></li>';
                             $('.logistics-cont .list ul').append(cont);
                             cont='';
                             $('.logistics-cont .list ul li.active .line1 .top-line').height($('.logistics-cont .list ul li:eq('+i+') .line1 h3').height()+'px');
                         }else if(i==(logistics_detail.data.logisticsList.length-1)){
                             cont ='<li class="last"><div class="line1 clear"><div class="fl"><div class="top-line"></div></div><h3 class="fl">'
-                                +logistics_detail.data.logisticsList[i].context+ '</h3></div><div class="line2 clear"><div class="fl">' +
+                                +logistics_detail.data.logisticsList[i].remark+ '</h3></div><div class="line2 clear"><div class="fl">' +
                                 '<div class="circle-grey"></div></div><div class="fl space"></div></div><div class="line3 clear">' +
-                                '<div class="fl"></div><p class="fl">'+logistics_detail.data.logisticsList[i].time+'</p></div></li>';
+                                '<div class="fl"></div><p class="fl">'+logistics_detail.data.logisticsList[i].datetime+'</p></div></li>';
                             $('.logistics-cont .list ul').append(cont);
                             cont='';
                             $('.logistics-cont .list ul li.last .line1 .top-line').height($('.logistics-cont .list ul li.last .line1 h3').height()+'px');
                         }else{
                             cont='<li class="normal"><div class="line1 clear"><div class="fl"><div class="top-line"></div></div>' +
-                                '<h3 class="fl">'+logistics_detail.data.logisticsList[i].context+'</h3></div><div class="line2 clear">' +
+                                '<h3 class="fl">'+logistics_detail.data.logisticsList[i].remark+'</h3></div><div class="line2 clear">' +
                                 '<div class="fl"><div class="circle-grey"></div></div><div class="fl space"></div></div>' +
                                 '<div class="line3 clear"><div class="fl"><div class="bottom-line"></div></div> <p class="fl">' +
-                                '2017-4-21 12:21:21</p></div></li>';
+                                logistics_detail.data.logisticsList[i].datetime +'</p></div></li>';
                             $('.logistics-cont .list ul').append(cont);
                             cont='';
                             $('.logistics-cont .list ul li.normal:first .line1 .top-line').height($('.logistics-cont .list ul li.normal:first .line1 h3').height()+'px');
