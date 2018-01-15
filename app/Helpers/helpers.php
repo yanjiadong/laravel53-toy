@@ -579,19 +579,23 @@ if(!function_exists('getGoodDayPrice'))
         $day_price = 0;
         if($days>=7 && $days<=13)
         {
-            $day_price = $price/(85+1*$days);
+            $day_price = $price/(70+1*$days);
         }
-        elseif($days>13 && $days<=29)
+        elseif($days>13 && $days<=20)
         {
-            $day_price = $price/(97+1.6*$days);
+            $day_price = $price/(75+1.2*$days);
+        }
+        elseif($days > 20 && $days <= 29)
+        {
+            $day_price = $price/(80+1.4*$days);
         }
         elseif($days>29 && $days<=44)
         {
-            $day_price = $price/(102+2.3*$days);
+            $day_price = $price/(95+2.0*$days);
         }
         elseif($days>44 && $days<=60)
         {
-            $day_price = $price/(100+2.7*$days);
+            $day_price = $price/(95+2.4*$days);
         }
 
         return number_format($day_price,1,".","");
