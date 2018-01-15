@@ -26,6 +26,44 @@ class CrontabController extends BaseController
         Crontab::create();
     }
 
+    public function check_order_express()
+    {
+        $orders = Order::whereIn('status',[Order::STATUS_SEND])->get();
+        if(count($orders) > 0)
+        {
+            foreach ($orders as $order)
+            {
+                $express = ExpressInfo::where('nu',$order->express_no)->where('type',1)->orderBy('id','desc')->first();
+                if(empty($express) || $express->juhe_status == 0)
+                {
+                    $express_info = Express::where('title',$order->express_title)->first();
+                    $express_com = $order->express_com;
+
+                    if($express_info && $express_info->com != $order->express_com)
+                    {
+                        $express_com = $express_info->com;
+                    }
+                    //需要获取物流信息
+                    $params = array(
+                        'key' => '50699e84ef775876e51cf65f2dca7ebd', //您申请的快递appkey
+                        'com' => $express_com, //快递公司编码，可以通过$exp->getComs()获取支持的公司列表
+                        'no'  => $order->express_no //快递编号
+                    );
+                    $exp = new JuheExp($params['key']);
+                    $result = $exp->query($params['com'],$params['no']); //执行查询
+
+                    $juhe_content_list = '';
+                    if(!empty($result['result']['list']))
+                    {
+                        $juhe_content_list = json_encode(array_reverse($result['result']['list']));
+                    }
+
+                    $juhe_status = isset($result['result']['status'])?$result['result']['status']:0;
+                    ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$juhe_status]);
+                }
+            }
+        }
+    }
 
     private function check_order_new()
     {
