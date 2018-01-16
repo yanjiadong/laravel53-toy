@@ -216,6 +216,7 @@
                 pagination: '.swiper-pagination',
                 paginationClickable: true,
                 loop:true,
+                speed:500
                 //autoplay:3000
             });
         },
