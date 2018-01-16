@@ -1514,7 +1514,7 @@
                                 '<p>有效期：<span>'+vip_voucher.data.list[i].time+'</span></p><h5>'+fanwei+'</h5></div></li>';
                         }
                     }
-                    $(".vip-voucher-wrap .list").css({'height':$(window).height()-88});
+                    $(".submit-voucher-wrap  .list").css({'height':$(window).height()-88});
                     $(".submit-voucher-wrap  .list ul").html(cont);
                     vip_voucher.choose();
                 }else{

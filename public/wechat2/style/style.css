@@ -5492,7 +5492,10 @@ textarea {
 .submit-voucher-wrap .list {
     margin-top: 20px;
     padding: 0 12px;
-    padding-bottom:78px;
+    height: calc(100% - 68px);
+    padding-bottom: 10px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 .submit-voucher-wrap .list ul li {
     width: 100%;
