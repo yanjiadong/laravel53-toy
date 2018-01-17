@@ -54,8 +54,9 @@ class ExpressInfoController extends BaseController
 
         //"state":"0", /*快递单当前签收状态，包括0在途中、1已揽收、2疑难、3已签收、4退签、5同城派送中、6退回、7转单等7个状态，其中4-7需要另外开通才有效，详见章2.3.3 */
         $nu = isset($param_arr['lastResult']['nu'])?$param_arr['lastResult']['nu']:'';
-        $state = isset($param_arr['lastResult']['state'])?$param_arr['lastResult']['state']:'';
-        ExpressInfo::create(['nu'=>$nu,'content'=>$param,'state'=>$state]);
+        $state = isset($param_arr['lastResult']['state'])?$param_arr['lastResult']['state']:0;
+        $content_list = isset($param_arr['lastResult']['data']) && !empty($param_arr['lastResult']['data'])?json_encode($param_arr['lastResult']['data']):'';
+        ExpressInfo::create(['nu'=>$nu,'content'=>$param,'state'=>$state,'type'=>0,'content_list'=>$content_list,'juhe_content_list'=>'','juhe_content'=>'','juhe_status'=>0]);
 
         try{
             //$param包含了文档指定的信息，...这里保存您的快递信息,$param的格式与订阅时指定的格式一致
@@ -119,19 +120,19 @@ class ExpressInfoController extends BaseController
         $exp = new JuheExp($params['key']);
         $result = $exp->query($params['com'],$params['no']); //执行查询
 
-        $juhe_content_list = '';
+        /*$juhe_content_list = '';
         if(!empty($result['result']['list']))
         {
             $juhe_content_list = json_encode(array_reverse($result['result']['list']));
         }
-        ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$result['result']['status']]);
+        ExpressInfo::create(['content'=>'','nu'=>$params['no'],'juhe_content_list'=>$juhe_content_list,'juhe_content'=>json_encode($result),'type'=>1,'juhe_status'=>$result['result']['status']]);*/
 
         return $result;
     }
 
     public function get_info(Request $request)
     {
-        $params = array(
+        /*$params = array(
             'key' => '50699e84ef775876e51cf65f2dca7ebd', //您申请的快递appkey
             'com' => 'sf', //快递公司编码，可以通过$exp->getComs()获取支持的公司列表
             'no'  => '240239532696' //快递编号
@@ -148,11 +149,10 @@ class ExpressInfoController extends BaseController
             echo "获取失败，原因：".$result['reason'];
         }
 
-        die;
-        $param = [
-            'com'=>'shunfeng',
-            'num'=>'240239532641'
-        ];
+        die;*/
+        $param['num'] = $request->get('number');
+        $param['com'] = 'shunfeng';
+
         $post_data = array();
         $post_data["customer"] = '564B05790C18B954AC4D4198B54B4948';
         $key= 'dLSbEmyh1644' ;

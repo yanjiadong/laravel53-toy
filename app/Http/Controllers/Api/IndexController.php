@@ -302,8 +302,9 @@ class IndexController extends BaseController
 
     public function test()
     {
-
-        $result = getGoodPriceByDays(156,1);
-        echo $result;
+        $test = '{"status":"abort","billstatus":"","message":"3天查询无记录","lastResult":{"message":"","nu":"5d4fsfdsfdsf565","ischeck":"0","condition":"","com":"yuantong","status":"200","state":"0","data":[]}}';
+        $param_arr = json_decode($test,true);
+        $content_list = isset($param_arr['lastResult']['data'])&&!empty($param_arr['lastResult']['data'])?json_encode($param_arr['lastResult']['data']):'';
+        print_r($content_list);
     }
 }

@@ -51,9 +51,10 @@ if(!function_exists('isMobile'))
     }
 }
 
+//主动去查询快递100物流信息
 if(!function_exists('get_express_info'))
 {
-    function get_express_info($com, $num)
+    function get_express_info($num, $com = 'shunfeng')
     {
         $post_data = array();
         $post_data["customer"] = '564B05790C18B954AC4D4198B54B4948';
@@ -80,7 +81,7 @@ if(!function_exists('get_express_info'))
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
         $result = curl_exec($ch);
         $data = str_replace("\&quot;",'"',$result );
-        $data = json_decode($data,true);
+        //$data = json_decode($data,true);
         //return $data;
     }
 }

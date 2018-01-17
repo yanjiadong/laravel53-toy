@@ -26,7 +26,7 @@ class CrontabController extends BaseController
         Crontab::create();
     }
 
-    public function check_order_express()
+    /*public function check_order_express()
     {
         $orders = Order::whereIn('status',[Order::STATUS_SEND])->get();
         if(count($orders) > 0)
@@ -65,7 +65,7 @@ class CrontabController extends BaseController
         }
 
         Crontab::create();
-    }
+    }*/
 
     private function check_order_new()
     {
@@ -75,8 +75,28 @@ class CrontabController extends BaseController
         {
             foreach ($orders as $order)
             {
-                $express = ExpressInfo::where('nu',$order->express_no)->where('type',1)->orderBy('id','desc')->first();
-                if(empty($express) || $express->juhe_status == 0)
+                $express = ExpressInfo::where('nu',$order->express_no)->where('type',0)->orderBy('id','desc')->first();
+
+                if(isset($express->state) && $express->state==3)
+                {
+                    //已签收
+                    if(isset($express->content) && !empty($express->content))
+                    {
+                        $content = json_decode($express->content,true);
+                        if(isset($content['lastResult']['data']))
+                        {
+                            $logistics = $content['lastResult']['data'];
+                            $time = $logistics[0]['time'];  //签收时间
+                            if( ($this->time - strtotime($time)) >= 3600)
+                            {
+                                $start_time = date('Y-m-d 00:00:01',$this->time);
+                                $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
+                                Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
+                            }
+                        }
+                    }
+                }
+                /*if(empty($express) || $express->juhe_status == 0)
                 {
                     $express_info = Express::where('title',$order->express_title)->first();
                     $express_com = $order->express_com;
@@ -128,26 +148,6 @@ class CrontabController extends BaseController
                         $start_time = date('Y-m-d 00:00:01',$this->time);
                         $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
                         Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
-                    }
-                }
-
-                /*if(isset($express->state) && $express->state==3)
-                {
-                    //已签收
-                    if(isset($express->content) && !empty($express->content))
-                    {
-                        $content = json_decode($express->content,true);
-                        if(isset($content['lastResult']['data']))
-                        {
-                            $logistics = $content['lastResult']['data'];
-                            $time = $logistics[0]['time'];  //签收时间
-                            if( ($this->time - strtotime($time)) >= 3600)
-                            {
-                                $start_time = date('Y-m-d 00:00:01',$this->time);
-                                $end_time = date('Y-m-d 23:59:59',strtotime("+{$order->days} days",$this->time));
-                                Order::where('id',$order->id)->update(['status'=>Order::STATUS_DOING,'confirm_time'=>$this->datetime,'start_time'=>$start_time,'end_time'=>$end_time]);
-                            }
-                        }
                     }
                 }*/
 

@@ -14,7 +14,7 @@ Route::get('wechat2/index/submit_order/{good_id}','Wechat2\IndexController@submi
 //每日运行的脚本
 Route::any('wechat/crontab/index','Wechat\CrontabController@index');
 Route::any('wechat/crontab/check_order','Wechat\CrontabController@check_order');
-Route::any('wechat/crontab/check_order_express','Wechat\CrontabController@check_order_express');
+//Route::any('wechat/crontab/check_order_express','Wechat\CrontabController@check_order_express');
 
 //新版微信路由管理
 Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
