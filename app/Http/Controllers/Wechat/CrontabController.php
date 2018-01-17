@@ -86,7 +86,7 @@ class CrontabController extends BaseController
                         if(isset($content['lastResult']['data']))
                         {
                             $logistics = $content['lastResult']['data'];
-                            $time = $logistics[0]['time'];  //签收时间
+                            $time = $logistics[0]['ftime'];  //签收时间
                             if( ($this->time - strtotime($time)) >= 3600)
                             {
                                 $start_time = date('Y-m-d 00:00:01',$this->time);
