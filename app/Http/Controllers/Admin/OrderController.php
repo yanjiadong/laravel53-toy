@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Express;
+use App\ExpressInfo;
 use App\Good;
 use App\Order;
 use App\User;
@@ -188,6 +189,7 @@ class OrderController extends BaseController
             'company' => $express->com
         ];
         $result = weixinCurl(url('api/express_info/index'), 'post', $param);
+        $result = json_encode($result);
         //var_dump($result);
         if ($type == 1) {
             sms_send('SMS_119077480', $order->receiver_telephone, $order->receiver);
@@ -280,6 +282,19 @@ class OrderController extends BaseController
         $end_time = date('Y-m-d 23:59:59',strtotime($end_time));
 
         Order::where('id', $id)->update(['start_time' => $start_time,'end_time'=>$end_time]);
+        alert('', 1);
+    }
+
+    public function update_express(Request $request)
+    {
+        $id = $request->get('id');
+        $order = Order::find($id);
+        $result = get_express_info($order->express_no,$order->express_com);
+        $result_arr = json_decode($result,true);
+
+        $state = isset($result_arr['state'])?$result_arr['state']:0;
+        $content_list = isset($result_arr['data']) && !empty($result_arr['data'])?json_encode($result_arr['data']):'';
+        ExpressInfo::create(['nu'=>$order->express_no,'content'=>'','state'=>$state,'type'=>0,'content_list'=>$content_list,'juhe_content_list'=>'','juhe_content'=>'','juhe_status'=>0]);
         alert('', 1);
     }
 }

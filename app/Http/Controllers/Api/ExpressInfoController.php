@@ -40,6 +40,7 @@ class ExpressInfoController extends BaseController
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);		//返回提交结果，格式与指定的格式一致（result=true代表成功）
         return $result;
     }
@@ -153,6 +154,9 @@ class ExpressInfoController extends BaseController
         $param['num'] = $request->get('number');
         $param['com'] = 'shunfeng';
 
+        echo get_express_info($param['num'],$param['com']);
+
+        die;
         $post_data = array();
         $post_data["customer"] = '564B05790C18B954AC4D4198B54B4948';
         $key= 'dLSbEmyh1644' ;
@@ -170,11 +174,12 @@ class ExpressInfoController extends BaseController
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
         $result = curl_exec($ch);
         $data = str_replace("\&quot;",'"',$result );
-        //echo $data;
+        echo $data;
         //$data = json_decode($data,true);
         //echo $data;
     }

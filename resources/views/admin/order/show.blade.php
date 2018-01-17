@@ -135,6 +135,7 @@
                     <div class="footer tar">
                         @if($order->status == '已发货')
                             <a href="javascript:;" title="修改物流" class="tip sendEdit"><span class="btn btn-warning">修改物流</span></a>
+                            <a href="javascript:;" title="更新物流" class="tip updateExpress"><span class="btn">更新物流</span></a>
                         @endif
 
                         @if($order->status == '租用中')
@@ -228,6 +229,14 @@
                 var end_time = $("#end_time").val();
 
                 $.post("{{route('admin.order.update')}}", {id:id,start_time:start_time,end_time:end_time}, function(data){
+                    cTip(data);
+                }, "json");
+            });
+
+            $(".updateExpress").click(function(){
+                var id = '{{$order->id}}';
+
+                $.post("{{route('admin.order.update_express')}}", {id:id}, function(data){
                     cTip(data);
                 }, "json");
             });

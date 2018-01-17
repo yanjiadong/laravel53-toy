@@ -146,6 +146,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'], function () {
     Route::post('order/action','OrderController@action')->name('admin.order.action');
     Route::post('order/confirm','OrderController@confirm')->name('admin.order.confirm');
     Route::post('order/remark','OrderController@remark')->name('admin.order.remark');
+    Route::post('order/update_express','OrderController@update_express')->name('admin.order.update_express');
     Route::get('order/show/{id}','OrderController@show')->name('admin.order.show');
 
     //修改订单

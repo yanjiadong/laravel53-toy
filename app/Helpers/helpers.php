@@ -79,10 +79,11 @@ if(!function_exists('get_express_info'))
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);
         $data = str_replace("\&quot;",'"',$result );
         //$data = json_decode($data,true);
-        //return $data;
+        return $data;
     }
 }
 
