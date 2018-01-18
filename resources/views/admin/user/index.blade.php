@@ -77,7 +77,7 @@
                                     <td>{{$user->real_cert_no}}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
-                                        <a href="javascript:;" data-id="{{$user->id}}" title="删除用户" class="tip delAction"><span class="btn btn-mini btn-warning">删除用户</span></a>
+                                        {{--<a href="javascript:;" data-id="{{$user->id}}" title="删除用户" class="tip delAction"><span class="btn btn-mini btn-warning">删除用户</span></a>--}}
                                         {{--@if($user->is_vip==1)
                                             <a href="javascript:;" data-id="{{$user->id}}" title="关闭会员" class="tip doAction" data-status="0"><span class="btn btn-mini btn-warning">关闭会员</span></a>
                                         @else
