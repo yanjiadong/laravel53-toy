@@ -56,6 +56,7 @@ if(!function_exists('get_express_info'))
 {
     function get_express_info($num, $com = 'shunfeng')
     {
+        header('Content-Type: application/json');
         $post_data = array();
         $post_data["customer"] = '564B05790C18B954AC4D4198B54B4948';
         $key= 'dLSbEmyh1644' ;

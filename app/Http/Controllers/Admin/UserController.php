@@ -26,28 +26,28 @@ class UserController extends BaseController
         $admin_info = $this->get_session_info();
         $username = $admin_info['username'];
 
-        $is_vip = $request->get('is_vip');
-        if(empty($is_vip))
+        $is_zhima = $request->get('is_zhima');
+        if(empty($is_zhima))
         {
             $users = User::orderBy('id','desc')->paginate(30);
         }
         else
         {
-            if(!empty($is_vip))
+            if(!empty($is_zhima))
             {
-                $where['is_vip'] = $is_vip - 1;
+                $where['is_zhima'] = $is_zhima - 1;
             }
             $users = User::where($where)->orderBy('id','desc')->paginate(30);
         }
 
         //分页需要的参数
         $users->appends([
-            'is_vip'=>$is_vip
+            'is_zhima'=>$is_zhima
         ]);
         $menu = 'user';
         //print_r($orders);
 
-        return view('admin.user.index',compact('users','username','menu','is_vip'));
+        return view('admin.user.index',compact('users','username','menu','is_zhima'));
     }
 
     public function recommend(Request $request)

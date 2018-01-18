@@ -20,10 +20,10 @@
 
                         <div class="body search row-form">
                             <span>是否会员</span>
-                            <select name="is_vip">
-                                <option value="0" <?php echo (isset($is_vip)&&$is_vip==0)?'selected':'';?>>全部</option>
-                                <option value="1" <?php echo (isset($is_vip)&&$is_vip==1)?'selected':'';?>>非会员</option>
-                                <option value="2" <?php echo (isset($is_vip)&&$is_vip==2)?'selected':'';?>>会员</option>
+                            <select name="is_zhima">
+                                <option value="0" <?php echo (isset($is_zhima)&&$is_zhima==0)?'selected':'';?>>全部</option>
+                                <option value="1" <?php echo (isset($is_zhima)&&$is_zhima==1)?'selected':'';?>>未认证用户</option>
+                                <option value="2" <?php echo (isset($is_zhima)&&$is_zhima==2)?'selected':'';?>>认证用户</option>
 
                             </select>
                         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Express;
 use App\ExpressInfo;
+use App\Order;
 use App\Utility\JuheExp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -151,6 +152,15 @@ class ExpressInfoController extends BaseController
         }
 
         die;*/
+        $order = Order::find(454);
+        $result = get_express_info($order->express_no,$order->express_com);
+        $result_arr = json_decode($result,true);
+
+        $state = isset($result_arr['state'])?$result_arr['state']:0;
+        $content_list = isset($result_arr['data']) && !empty($result_arr['data'])?json_encode($result_arr['data']):'';
+        ExpressInfo::create(['nu'=>$order->express_no,'content'=>'','state'=>$state,'type'=>0,'content_list'=>$content_list,'juhe_content_list'=>'','juhe_content'=>'','juhe_status'=>0]);
+
+        die;
         $param['num'] = $request->get('number');
         $param['com'] = 'shunfeng';
 
