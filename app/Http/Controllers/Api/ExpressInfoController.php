@@ -78,25 +78,20 @@ class ExpressInfoController extends BaseController
         $num = $request->get('num');
         $url = "http://www.kuaidi100.com/autonumber/auto?num={$num}&key=dLSbEmyh1644";
         $result = weixinCurl($url);
-
-        $com = '';
+        //var_dump($result);
+        $com = 'shunfeng';
         $title = '';
-        if(!empty($request) && !empty($result[0]))
+        if(!empty($result) && !empty($result[0]))
         {
             $com = $result[0]['comCode'];
-            $express = Express::where('com',$com)->first();
-            if(!empty($express))
-            {
-                $title = $express->title;
-            }
         }
 
-        if(empty($title) || empty($com))
+        $express = Express::where('com',$com)->first();
+        if(!empty($express))
         {
-            $this->ret['code'] = 300;
-            $this->ret['msg'] = '';
-            return $this->ret;
+            $title = $express->title;
         }
+
         //print_r($result);
         $this->ret['info'] = ['com'=>$com,'title'=>$title];
         return $this->ret;
