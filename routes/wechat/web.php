@@ -25,7 +25,7 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::get('/index/category/{category_id?}/{brand_id?}','IndexController@category')->name('wechat2.index.category');
 
     //商品详情
-    Route::get('/index/good/{good_id}','IndexController@good')->name('wechat2.index.good');
+    Route::any('/index/good/{good_id}','IndexController@good')->name('wechat2.index.good');
 
     //查看购物车
     Route::get('/index/cart','IndexController@cart')->name('wechat2.index.cart');
