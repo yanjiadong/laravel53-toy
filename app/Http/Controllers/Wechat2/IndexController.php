@@ -135,9 +135,9 @@ class IndexController extends BaseController
      * 首页页面
      * time 2017-12-20
      */
-    public function index()
+    public function index(Request $request)
     {
-        session(['target_url',Request::url()]);
+        session(['target_url'=>$request->url()]);
 
         if(config('app.env')=='local')
         {
@@ -309,9 +309,9 @@ class IndexController extends BaseController
      * 订单列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function order_list()
+    public function order_list(Request $request)
     {
-        session(['target_url'=>Request::url()]);
+        session(['target_url'=>$request->url()]);
         if(config('app.env')=='local')
         {
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
