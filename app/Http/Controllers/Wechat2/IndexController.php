@@ -137,6 +137,7 @@ class IndexController extends BaseController
      */
     public function index()
     {
+        session(['target_url',Request::url()]);
 
         if(config('app.env')=='local')
         {
@@ -310,6 +311,7 @@ class IndexController extends BaseController
      */
     public function order_list()
     {
+        session(['target_url'=>Request::url()]);
         if(config('app.env')=='local')
         {
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
