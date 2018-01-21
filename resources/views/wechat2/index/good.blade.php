@@ -201,6 +201,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 
 <script>
     var look_detail = false;
@@ -677,6 +678,52 @@
     $(function () {
         goodDetail_obj.init();
         goodDetail_obj.detail_describe_toggle();
+
+        //通过config接口注入权限验证配置
+        wx.config({
+            debug: false,
+            appId: '{{$signPackage["appId"]}}',
+            timestamp: '{{$signPackage["timestamp"]}}',
+            nonceStr: '{{$signPackage["nonceStr"]}}',
+            signature: '{{$signPackage["signature"]}}',
+            jsApiList: [
+                'onMenuShareAppMessage',
+                'onMenuShareTimeline',
+                'scanQRCode'
+            ]
+        });
+
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: '{{ $good->title }}', // 分享标题
+                //link:"{{ route('wechat2.user.share_open',['user_id'=>$user_id]) }}",
+                link: '{{url('wechat2/index/good')}}'+'/'+'{{$good_id}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '{{ $good->picture }}', // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: '{{ $good->title }}', // 分享标题
+                desc: '机器人教育一站式服务平台，培养未来的创造者！', // 分享描述
+                //link:"{{ route('wechat2.user.share_open',['user_id'=>$user_id]) }}",
+                link: '{{url('wechat2/index/good')}}'+'/'+'{{$good_id}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '{{ $good->picture }}', // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
     })
 </script>
 

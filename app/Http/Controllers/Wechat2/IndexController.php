@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wechat2;
 
 use App\Cart;
 use App\Coupon;
+use App\Good;
 use App\Order;
 use App\SystemConfig;
 use App\User;
@@ -236,7 +237,11 @@ class IndexController extends BaseController
 
         //购物车数量
         $cart_num = Cart::where('user_id',$user_id)->count();
-        return view('wechat2.index.good',compact('good_id','user_id','cart_num'));
+
+        $signPackage = getJssdk();
+
+        $good = Good::find($good_id);
+        return view('wechat2.index.good',compact('good_id','user_id','cart_num','signPackage','good'));
     }
 
     /**
