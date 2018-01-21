@@ -106,9 +106,7 @@ class BaseController extends Controller
             User::where('id',$info->id)->update($data);
         }
 
-        $target_url = session('target_url');
-        Header("Location: $target_url");
-        //return redirect($target_url);
+        return redirect()->route('wechat2.index.index');
     }
 
     /**

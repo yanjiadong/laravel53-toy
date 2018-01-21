@@ -77,6 +77,7 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::any('/index/oauth_callback','IndexController@oauth_callback')->name('wechat2.index.oauth_callback');
 
     Route::any('/index/share_open_oauth_callback','UserController@share_open_oauth_callback')->name('wechat2.index.share_open_oauth_callback');
+    Route::any('/index/good_oauth_callback','IndexController@good_oauth_callback')->name('wechat2.index.good_oauth_callback');
 
     //支付回调函数
     Route::any('/pay_notify','IndexController@pay_notify');

@@ -232,10 +232,10 @@ class IndexController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @time 2017-12-22
      */
-    public function good($good_id,Request $request)
+    public function good($good_id)
     {
         //$request = new Request();
-        session(['target_url'=>$request->url()]);
+        //session(['target_url'=>$request->url()]);
         //print_r(session('target_url'));
         if(config('app.env')=='local')
         {
@@ -250,6 +250,25 @@ class IndexController extends BaseController
         }
 
         $user_id = session('user_id');
+        $openid = session('open_id');
+
+        //session()
+        /*if(!empty($openid))
+        {
+            $info = User::where('wechat_openid',$openid)->first();
+        }
+
+        if(empty($openid) || empty($info))
+        {
+            $config = [
+                'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxdd1dd7306d6662cf'),         // AppID
+                'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'a16015c011af53215d2a885d1c1400af'),    // AppSecret
+                'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'ZuZhUsk6zE3cjNdwXRP6t1bKogOa5WGh'),           // Token
+            ];
+            $app = Factory::officialAccount($config);
+            $response = $app->oauth->scopes(['snsapi_userinfo'])->redirect(route('wechat2.index.good_oauth_callback'));
+            return $response;
+        }*/
 
         //购物车数量
         $cart_num = Cart::where('user_id',$user_id)->count();
@@ -258,6 +277,61 @@ class IndexController extends BaseController
 
         $good = Good::find($good_id);
         return view('wechat2.index.good',compact('good_id','user_id','cart_num','signPackage','good'));
+    }
+
+    public function good_oauth_callback()
+    {
+        $config = [
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxdd1dd7306d6662cf'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'a16015c011af53215d2a885d1c1400af'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'ZuZhUsk6zE3cjNdwXRP6t1bKogOa5WGh'),           // Token
+        ];
+        $app = Factory::officialAccount($config);
+        $oauth = $app->oauth;
+
+        // 获取 OAuth 授权结果用户信息
+        $user = $oauth->user();
+
+        $openid = $user->getId();
+
+        session(['open_id'=>$openid]);
+
+        $info = User::where('wechat_openid',$openid)->first();
+
+        if(empty($info))
+        {
+            $data = array(
+                'name'=>filterEmoji($user->getNickname()),
+                'email'=>'',
+                'password'=>'',
+                'wechat_openid'=>$openid,
+                'wechat_original'=>json_encode($user->toArray()),
+                'wechat_nickname'=>filterEmoji($user->getNickname()),
+                'wechat_avatar'=>$user->getAvatar(),
+                'open_num'=>0
+            );
+
+            $success = User::create($data);
+            //echo $success->id;
+            //dd($success);
+            session(['user_id'=>$success->id]);
+        }
+        else
+        {
+            session(['user_id'=>$info->id]);
+
+            $data = array(
+                'name'=>filterEmoji($user->getNickname()),
+                'wechat_openid'=>$openid,
+                'wechat_original'=>json_encode($user->toArray()),
+                'wechat_nickname'=>filterEmoji($user->getNickname()),
+                'wechat_avatar'=>$user->getAvatar(),
+            );
+
+            User::where('id',$info->id)->update($data);
+        }
+
+        return redirect()->route('wechat2.index.index');
     }
 
     /**
