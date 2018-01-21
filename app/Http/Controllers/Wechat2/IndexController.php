@@ -232,11 +232,11 @@ class IndexController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @time 2017-12-22
      */
-    public function good($good_id)
+    public function good($good_id,Request $request)
     {
-        $request = new Request();
+        //$request = new Request();
         session(['target_url'=>$request->url()]);
-
+        //print_r(session('target_url'));
         if(config('app.env')=='local')
         {
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
