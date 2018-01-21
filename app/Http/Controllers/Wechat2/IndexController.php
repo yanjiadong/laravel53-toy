@@ -312,8 +312,7 @@ class IndexController extends BaseController
     public function order_list(Request $request)
     {
         session(['target_url'=>$request->url()]);
-
-        print_r(session('target_url'));
+        //print_r(session('target_url'));
         if(config('app.env')=='local')
         {
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
