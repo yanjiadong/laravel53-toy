@@ -73,8 +73,8 @@ Route::group(['prefix' => 'wechat2','namespace' => 'Wechat2'], function () {
     Route::get('/user/help','UserController@help')->name('wechat2.user.help');
 
     //微信授权 采用easywechat扩展包
-    Route::any('/index/oauth','IndexController@oauth')->name('wechat2.index.oauth');
-    Route::any('/index/oauth_callback','IndexController@oauth_callback')->name('wechat2.index.oauth_callback');
+    Route::any('/index/oauth','BaseController@oauth')->name('wechat2.index.oauth');
+    Route::any('/index/oauth_callback','BaseController@oauth_callback')->name('wechat2.index.oauth_callback');
 
     Route::any('/index/share_open_oauth_callback','UserController@share_open_oauth_callback')->name('wechat2.index.share_open_oauth_callback');
 
