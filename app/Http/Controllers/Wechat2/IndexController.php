@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use EasyWeChat\Factory;
 use DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Input;
 
 class IndexController extends BaseController
 {
@@ -231,8 +232,22 @@ class IndexController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @time 2017-12-22
      */
-    public function good($good_id)
+    public function good($good_id,Request $request)
     {
+        session(['target_url'=>$request->url()]);
+
+        if(config('app.env')=='local')
+        {
+            session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
+            session(['user_id'=>29]);
+        }
+        else
+        {
+            //$this->check_user();
+            //采用easywechat扩展包 检查是否授权登录
+            $this->check_oauth();
+        }
+
         $user_id = session('user_id');
 
         //购物车数量
