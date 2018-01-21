@@ -242,18 +242,13 @@ class IndexController extends BaseController
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
             session(['user_id'=>29]);
         }
-        else
-        {
-            //$this->check_user();
-            //采用easywechat扩展包 检查是否授权登录
-            $this->check_oauth();
-        }
 
         $user_id = session('user_id');
         $openid = session('open_id');
 
-        //session()
-        /*if(!empty($openid))
+        session(['good_id'=>$good_id]);
+
+        if(!empty($openid))
         {
             $info = User::where('wechat_openid',$openid)->first();
         }
@@ -268,7 +263,7 @@ class IndexController extends BaseController
             $app = Factory::officialAccount($config);
             $response = $app->oauth->scopes(['snsapi_userinfo'])->redirect(route('wechat2.index.good_oauth_callback'));
             return $response;
-        }*/
+        }
 
         //购物车数量
         $cart_num = Cart::where('user_id',$user_id)->count();
@@ -331,7 +326,8 @@ class IndexController extends BaseController
             User::where('id',$info->id)->update($data);
         }
 
-        return redirect()->route('wechat2.index.index');
+        return redirect('/wechat2/index/good/'.session('good_id'));
+        //return redirect()->route('wechat2.index.index');
     }
 
     /**
@@ -406,23 +402,87 @@ class IndexController extends BaseController
      */
     public function order_list(Request $request)
     {
-        session(['target_url'=>$request->url()]);
+        //session(['target_url'=>$request->url()]);
         //print_r(session('target_url'));
         if(config('app.env')=='local')
         {
             session(['open_id'=>'o2xFAw7K6g1yHtZ-MvYFX2gYRzpI']);
             session(['user_id'=>29]);
         }
-        else
+
+        $openid = session('open_id');
+        $user_id = session('user_id');
+        if(!empty($openid))
         {
-            $this->check_oauth();
+            $info = User::where('wechat_openid',$openid)->first();
         }
 
-        $user_id = session('user_id');
-        $openid = session('open_id');
+        if(empty($openid) || empty($info))
+        {
+            $config = [
+                'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxdd1dd7306d6662cf'),         // AppID
+                'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'a16015c011af53215d2a885d1c1400af'),    // AppSecret
+                'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'ZuZhUsk6zE3cjNdwXRP6t1bKogOa5WGh'),           // Token
+            ];
+            $app = Factory::officialAccount($config);
+            $response = $app->oauth->scopes(['snsapi_userinfo'])->redirect(route('wechat2.index.order_list_oauth_callback'));
+            return $response;
+        }
+
+
         $menu = 'order_list';
 
         return view('wechat2.index.order_list',compact('user_id','openid','menu','phone'));
+    }
+
+    public function order_list_oauth_callback()
+    {
+        $config = [
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxdd1dd7306d6662cf'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'a16015c011af53215d2a885d1c1400af'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'ZuZhUsk6zE3cjNdwXRP6t1bKogOa5WGh'),           // Token
+        ];
+        $app = Factory::officialAccount($config);
+        $oauth = $app->oauth;
+        // 获取 OAuth 授权结果用户信息
+        $user = $oauth->user();
+
+        $openid = $user->getId();
+        session(['open_id'=>$openid]);
+
+        $info = User::where('wechat_openid',$openid)->first();
+        if(empty($info))
+        {
+            $data = array(
+                'name'=>filterEmoji($user->getNickname()),
+                'email'=>'',
+                'password'=>'',
+                'wechat_openid'=>$openid,
+                'wechat_original'=>json_encode($user->toArray()),
+                'wechat_nickname'=>filterEmoji($user->getNickname()),
+                'wechat_avatar'=>$user->getAvatar(),
+                'open_num'=>0
+            );
+
+            $success = User::create($data);
+            session(['user_id'=>$success->id]);
+        }
+        else
+        {
+            session(['user_id'=>$info->id]);
+
+            $data = array(
+                'name'=>filterEmoji($user->getNickname()),
+                'wechat_openid'=>$openid,
+                'wechat_original'=>json_encode($user->toArray()),
+                'wechat_nickname'=>filterEmoji($user->getNickname()),
+                'wechat_avatar'=>$user->getAvatar(),
+            );
+
+            User::where('id',$info->id)->update($data);
+        }
+
+        return redirect()->route('wechat2.index.order_list');
     }
 
     public function pay_success($order_code)
