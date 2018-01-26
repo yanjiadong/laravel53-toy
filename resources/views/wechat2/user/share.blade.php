@@ -77,7 +77,7 @@
 
         wx.ready(function(){
             wx.onMenuShareTimeline({
-                title: '小Q编程', // 分享标题
+                title: '小Q编程-机器人教育一站式服务平台，培养未来的创造者', // 分享标题
                 link:"{{ route('wechat2.user.share_open',['user_id'=>$user_id]) }}",
                 //link: '{{url('wechat2/user/share_open')}}'+'/'+'{{$user_id}}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'http://toy.yanjiadong.net/wechat2/image/common/order-list-logo.png', // 分享图标
