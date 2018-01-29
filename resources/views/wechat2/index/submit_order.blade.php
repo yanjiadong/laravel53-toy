@@ -536,7 +536,16 @@
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1 span").text('¥'+Math.round(order_obj.data.orderDataList.yajin.money));
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part2").hide();
-                            $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('(您有订单正在享受免押，本次无法减免)').removeClass('active');
+                            
+                            if(order_obj.data.orderDataList.yajin.authorization == 4)
+                            {
+                                $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('(芝麻信用分达到650分才能享受押金减免)').removeClass('active');
+                            }
+                            else
+                            {
+                                $(".submit-order-wrap .yajin-item-list ul li .fl span.tips").text('(您有订单正在享受免押，本次无法减免)').removeClass('active');
+                            }
+
                             order_obj.data.actural_data.yajin = order_obj.data.orderDataList.yajin.money;
                         }else{
                             $(".submit-order-wrap .yajin-item-list ul li .fr .part1").show();

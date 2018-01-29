@@ -89,6 +89,11 @@ class OrderController extends BaseController
         {
             //本次能够使用认证减免
             $info['can_use_zhima'] = 1;
+            if($user->zhima_score < 650)
+            {
+                $info['can_use_zhima'] = 4;  //分数未达到650分没有减免金额情况
+            }
+
             if($user->zhima_money >= $info['good_money'])
             {
                 $money = 0;
@@ -100,6 +105,7 @@ class OrderController extends BaseController
                 $info['good_money_discount'] = $user->zhima_money;
             }
         }
+
 
         if($money <= 99)
         {
