@@ -110,10 +110,16 @@ EOT;
         switch($postObj->Event)
         {
             case 'subscribe':
+                //关注
                 //$contentStr .= "hi,欢迎关注趣编程,这里有全球最潮流的益智类编程教育玩具，让孩子在玩乐中培养创造与逻辑分析能力，学会未来用编程与世界沟通。每月租金只需299，快来体验吧！";
                 $contentStr .= $auto_reply;
                 break;
             case 'unsubscribe':
+                //取消关注
+                break;
+            case 'SCAN':
+                //已关注扫码
+                $contentStr .= "欢迎回来！\n玩的开心！";
                 break;
             case 'CLICK':
                 if($postObj->EventKey == 'BACK_ADDRESS')
