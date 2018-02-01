@@ -191,6 +191,6 @@ class ExpressInfoController extends BaseController
 
     public function shunfeng_back(Request $request)
     {
-        print_r($request);
+        echo 111;
     }
 }
