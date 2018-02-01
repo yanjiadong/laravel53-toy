@@ -163,4 +163,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/express_info/get_juhe_coms','ExpressInfoController@get_juhe_coms');
     //获取聚合数据快递信息
     Route::post('/express_info/get_juhe_info','ExpressInfoController@get_juhe_info');
+
+    //暂时测试使用 顺丰下单回调接口
+    Route::any('/express_info/shunfeng_back','ExpressInfoController@shunfeng_back');
 });

@@ -188,4 +188,9 @@ class ExpressInfoController extends BaseController
         //$data = json_decode($data,true);
         //echo $data;
     }
+
+    public function shunfeng_back(Request $request)
+    {
+        print_r($request);
+    }
 }
