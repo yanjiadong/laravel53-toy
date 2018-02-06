@@ -80,7 +80,7 @@ class ExpressInfoController extends BaseController
         $result = weixinCurl($url);
         //var_dump($result);
         $com = 'shunfeng';
-        $title = '';
+        $title = '顺丰速递';
         if(!empty($result) && !empty($result[0]))
         {
             $com = $result[0]['comCode'];
