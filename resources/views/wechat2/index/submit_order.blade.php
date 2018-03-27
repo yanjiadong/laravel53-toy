@@ -105,7 +105,7 @@
                             <span class="checked"><i class="icon-right"></i></span>
                         </div>
                     </div>
-                    <div class="fl" onclick="order_obj.chooseRentTimeShow()">
+                    {{--<div class="fl" onclick="order_obj.chooseRentTimeShow()">
                         <div class="cont">
                             <div class="set-time"></div>
                             <div class="setting">
@@ -113,7 +113,7 @@
                             </div>
                             <span class="checked"><i class="icon-pencil"></i></span> <!---->
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
             <div class="distribution">
